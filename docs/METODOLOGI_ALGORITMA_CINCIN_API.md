@@ -718,6 +718,434 @@ Dengan kombinasi 4 pendekatan ini, sistem mampu:
 
 ---
 
+# 🎚️ PENDEKATAN 5: Sistem Preset Konfigurasi
+
+## Ikhtisar
+
+Meskipun keempat pendekatan di atas sudah optimal, masih ada satu tantangan:
+**Bagaimana jika kondisi kebun atau prioritas manajemen berbeda-beda?**
+
+Untuk itu, kami menambahkan **Pendekatan ke-5: Sistem Preset Konfigurasi** yang memungkinkan 
+penyesuaian parameter sesuai situasi dan prioritas operasional.
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                    FILOSOFI SISTEM PRESET                        │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                  │
+│   🎯 KONSERVATIF          📊 STANDAR           🔥 AGRESIF       │
+│   ┌───────────┐          ┌───────────┐        ┌───────────┐     │
+│   │ Presisi   │          │ Balanced  │        │ Recall    │     │
+│   │ Tinggi    │          │           │        │ Tinggi    │     │
+│   │           │          │           │        │           │     │
+│   │ Threshold │          │ Threshold │        │ Threshold │     │
+│   │   Ketat   │          │  Moderate │        │   Longgar │     │
+│   │   (50%)   │          │   (30%)   │        │   (20%)   │     │
+│   └───────────┘          └───────────┘        └───────────┘     │
+│                                                                  │
+│   "Lebih baik            "Seimbang           "Lebih baik        │
+│    terlewat daripada      antara keduanya"    salah target      │
+│    salah target"                              daripada terlewat" │
+│                                                                  │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 5W1H: Sistem Preset Konfigurasi
+
+### ❓ WHAT - Apa itu Sistem Preset?
+
+**Definisi:**
+Sistem Preset adalah kumpulan konfigurasi parameter yang sudah di-optimize untuk 
+skenario penggunaan tertentu. User dapat memilih preset tanpa perlu memahami 
+detail teknis setiap parameter.
+
+**Tiga Preset Tersedia:**
+
+| Preset | Threshold Range | Min Neighbors | Filosofi |
+|--------|----------------|---------------|----------|
+| **Konservatif** | 40-60% | 4 | Presisi tinggi, false positive minimal |
+| **Standar** | 20-50% | 3 | Seimbang antara presisi dan recall |
+| **Agresif** | 10-40% | 2 | Recall tinggi, deteksi maksimal |
+
+### ❓ WHY - Mengapa Perlu Sistem Preset?
+
+**Masalah yang Dipecahkan:**
+
+1. **Variasi Kondisi Kebun**
+   - Kebun tua vs kebun muda memiliki pola serangan berbeda
+   - Kebun dengan sejarah Ganoderma tinggi vs rendah
+   - Kondisi tanah dan iklim yang berbeda
+
+2. **Perbedaan Prioritas Manajemen**
+   - Budget terbatas → perlu fokus pada target pasti (Konservatif)
+   - Budget cukup → ingin deteksi menyeluruh (Agresif)
+   - Kondisi normal → keseimbangan optimal (Standar)
+
+3. **Fase Penanganan**
+   - Survei awal → butuh gambaran luas (Agresif)
+   - Validasi lapangan → perlu akurasi tinggi (Konservatif)
+   - Monitoring rutin → keseimbangan (Standar)
+
+**Analogi Sederhana:**
+
+```
+Bayangkan Anda mencari kunci yang hilang di rumah:
+
+🎯 KONSERVATIF (Pencarian Fokus):
+   "Saya yakin kunci ada di meja kerja"
+   → Hanya cari di area yang sangat mungkin
+   → Hemat waktu, tapi bisa terlewat jika asumsi salah
+
+📊 STANDAR (Pencarian Seimbang):
+   "Cari di semua tempat yang biasa saya taruh kunci"
+   → Cari di meja, laci, kantong baju kemarin
+   → Keseimbangan antara efisiensi dan cakupan
+
+🔥 AGRESIF (Pencarian Menyeluruh):
+   "Cari di seluruh rumah!"
+   → Cari di semua sudut termasuk yang tidak biasa
+   → Pasti ketemu, tapi butuh waktu lebih lama
+```
+
+### ❓ WHEN - Kapan Menggunakan Setiap Preset?
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│                     PANDUAN PEMILIHAN PRESET                         │
+├─────────────────────────────────────────────────────────────────────┤
+│                                                                      │
+│  🎯 GUNAKAN KONSERVATIF KETIKA:                                      │
+│  ┌────────────────────────────────────────────────────────────────┐  │
+│  │ ✓ Budget penanganan sangat terbatas                            │  │
+│  │ ✓ Kesalahan target (false positive) sangat mahal               │  │
+│  │ ✓ Sudah ada data historis yang akurat                          │  │
+│  │ ✓ Fokus pada blok dengan serangan tinggi saja                  │  │
+│  │ ✓ Validasi hasil survei sebelumnya                             │  │
+│  └────────────────────────────────────────────────────────────────┘  │
+│                                                                      │
+│  📊 GUNAKAN STANDAR KETIKA:                                          │
+│  ┌────────────────────────────────────────────────────────────────┐  │
+│  │ ✓ Monitoring rutin bulanan/triwulanan                          │  │
+│  │ ✓ Tidak ada kondisi khusus                                     │  │
+│  │ ✓ Ingin keseimbangan antara akurasi dan cakupan                │  │
+│  │ ✓ Baru pertama kali menggunakan sistem                         │  │
+│  │ ✓ Sebagai baseline untuk perbandingan                          │  │
+│  └────────────────────────────────────────────────────────────────┘  │
+│                                                                      │
+│  🔥 GUNAKAN AGRESIF KETIKA:                                          │
+│  ┌────────────────────────────────────────────────────────────────┐  │
+│  │ ✓ Survei awal untuk pemetaan serangan                          │  │
+│  │ ✓ Ada indikasi outbreak/wabah                                  │  │
+│  │ ✓ Blok baru yang belum pernah disurvei                         │  │
+│  │ ✓ Ingin memastikan tidak ada yang terlewat                     │  │
+│  │ ✓ Budget penanganan mencukupi untuk cakupan luas               │  │
+│  └────────────────────────────────────────────────────────────────┘  │
+│                                                                      │
+└─────────────────────────────────────────────────────────────────────┘
+```
+
+### ❓ WHERE - Di Mana Parameter Dikonfigurasi?
+
+**Lokasi Konfigurasi:** `config.py`
+
+```python
+# Konfigurasi Utama
+CINCIN_API_CONFIG = {
+    "threshold_min": 10,        # Batas bawah simulasi threshold
+    "threshold_max": 60,        # Batas atas simulasi threshold
+    "threshold_step": 5,        # Step simulasi
+    "min_sick_neighbors": 3,    # Min tetangga sakit untuk kluster
+    "percentile_method": "rank" # Metode perhitungan percentile
+}
+
+# Preset yang Tersedia
+CINCIN_API_PRESETS = {
+    "konservatif": {
+        "threshold_min": 40,
+        "threshold_max": 60,
+        "threshold_step": 5,
+        "min_sick_neighbors": 4,
+        "description": "Deteksi ketat, prioritas presisi tinggi"
+    },
+    "standar": {
+        "threshold_min": 20,
+        "threshold_max": 50,
+        "threshold_step": 5,
+        "min_sick_neighbors": 3,
+        "description": "Keseimbangan antara presisi dan recall"
+    },
+    "agresif": {
+        "threshold_min": 10,
+        "threshold_max": 40,
+        "threshold_step": 5,
+        "min_sick_neighbors": 2,
+        "description": "Deteksi luas, prioritas recall tinggi"
+    }
+}
+```
+
+### ❓ WHO - Siapa yang Menentukan Preset?
+
+**Stakeholder dan Perannya:**
+
+| Stakeholder | Peran dalam Pemilihan Preset |
+|-------------|------------------------------|
+| **Estate Manager** | Keputusan akhir berdasarkan budget dan prioritas |
+| **Agronomist** | Rekomendasi teknis berdasarkan kondisi kebun |
+| **Data Analyst** | Analisis hasil dan perbandingan antar preset |
+| **Field Supervisor** | Feedback dari validasi lapangan |
+
+**Flow Keputusan:**
+
+```
+┌──────────────┐     ┌──────────────┐     ┌──────────────┐
+│  Agronomist  │────▶│   Estate     │────▶│   Eksekusi   │
+│  Rekomendasi │     │   Manager    │     │   dengan     │
+│   Teknis     │     │  Keputusan   │     │   Preset     │
+└──────────────┘     └──────────────┘     └──────────────┘
+       │                    │                     │
+       │                    │                     │
+       ▼                    ▼                     ▼
+   Kondisi            Budget &               Hasil &
+    Kebun            Prioritas              Validasi
+```
+
+### ❓ HOW - Bagaimana Cara Menggunakan Preset?
+
+**Langkah Penggunaan:**
+
+```bash
+# 1. Menggunakan preset Standar (default)
+python run_cincin_api.py
+
+# 2. Menggunakan preset Konservatif
+python run_cincin_api.py --preset konservatif
+
+# 3. Menggunakan preset Agresif
+python run_cincin_api.py --preset agresif
+```
+
+**Pengaruh Preset pada Hasil:**
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│              PERBANDINGAN HASIL ANTAR PRESET                         │
+│                   (Contoh: 95,030 pohon)                             │
+├─────────────────────────────────────────────────────────────────────┤
+│                                                                      │
+│  Preset        │ Threshold │ MERAH   │ KUNING  │ ORANYE │ HIJAU     │
+│  ──────────────┼───────────┼─────────┼─────────┼────────┼───────────│
+│  Konservatif   │    50%    │  5.2%   │   8.1%  │  2.1%  │  84.6%    │
+│  Standar       │    30%    │ 11.9%   │  14.8%  │  3.3%  │  70.0%    │
+│  Agresif       │    20%    │ 18.7%   │  21.3%  │  4.8%  │  55.2%    │
+│                                                                      │
+├─────────────────────────────────────────────────────────────────────┤
+│                                                                      │
+│  VISUALISASI DISTRIBUSI:                                             │
+│                                                                      │
+│  Konservatif: ████░░░░░░░░░░░░░░░░░░░░░░░░░░░░  (15.4% target)      │
+│  Standar:     ██████████░░░░░░░░░░░░░░░░░░░░░░  (30.0% target)      │
+│  Agresif:     ████████████████░░░░░░░░░░░░░░░░  (44.8% target)      │
+│               ▲                                                      │
+│               └── Persentase pohon yang perlu ditangani              │
+│                                                                      │
+└─────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 📊 Detail Parameter Setiap Preset
+
+### 🎯 Preset KONSERVATIF
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                    PRESET KONSERVATIF                            │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                  │
+│  Parameter          │ Nilai   │ Penjelasan                      │
+│  ───────────────────┼─────────┼─────────────────────────────────│
+│  threshold_min      │   40%   │ Mulai simulasi dari 40%         │
+│  threshold_max      │   60%   │ Maksimal simulasi 60%           │
+│  threshold_step     │    5%   │ Langkah per simulasi            │
+│  min_sick_neighbors │    4    │ Minimal 4 tetangga sakit        │
+│                                                                  │
+│  KARAKTERISTIK:                                                  │
+│  ✓ Threshold tinggi → hanya pohon dengan ranking sangat tinggi  │
+│  ✓ Min neighbors = 4 → kluster harus sangat solid               │
+│  ✓ Hasil: sedikit target tapi akurasi tinggi                    │
+│                                                                  │
+│  TRADE-OFF:                                                      │
+│  ⚠ Mungkin melewatkan kluster kecil atau baru terbentuk         │
+│  ⚠ Cocok untuk resource terbatas                                │
+│                                                                  │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+### 📊 Preset STANDAR
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                      PRESET STANDAR                              │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                  │
+│  Parameter          │ Nilai   │ Penjelasan                      │
+│  ───────────────────┼─────────┼─────────────────────────────────│
+│  threshold_min      │   20%   │ Mulai simulasi dari 20%         │
+│  threshold_max      │   50%   │ Maksimal simulasi 50%           │
+│  threshold_step     │    5%   │ Langkah per simulasi            │
+│  min_sick_neighbors │    3    │ Minimal 3 tetangga sakit        │
+│                                                                  │
+│  KARAKTERISTIK:                                                  │
+│  ✓ Range simulasi luas → Elbow method punya banyak opsi         │
+│  ✓ Min neighbors = 3 → standar untuk hexagonal grid             │
+│  ✓ Hasil: keseimbangan optimal                                  │
+│                                                                  │
+│  REKOMENDASI:                                                    │
+│  ★ Gunakan sebagai default untuk monitoring rutin               │
+│  ★ Jadikan baseline untuk perbandingan                          │
+│                                                                  │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+### 🔥 Preset AGRESIF
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                      PRESET AGRESIF                              │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                  │
+│  Parameter          │ Nilai   │ Penjelasan                      │
+│  ───────────────────┼─────────┼─────────────────────────────────│
+│  threshold_min      │   10%   │ Mulai simulasi dari 10%         │
+│  threshold_max      │   40%   │ Maksimal simulasi 40%           │
+│  threshold_step     │    5%   │ Langkah per simulasi            │
+│  min_sick_neighbors │    2    │ Minimal 2 tetangga sakit        │
+│                                                                  │
+│  KARAKTERISTIK:                                                  │
+│  ✓ Threshold rendah → deteksi lebih banyak pohon berisiko       │
+│  ✓ Min neighbors = 2 → kluster kecil juga terdeteksi            │
+│  ✓ Hasil: cakupan luas, false positive lebih tinggi             │
+│                                                                  │
+│  TRADE-OFF:                                                      │
+│  ⚠ Lebih banyak target yang perlu divalidasi lapangan           │
+│  ⚠ Cocok untuk survei awal atau kondisi outbreak                │
+│                                                                  │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 🔄 Alur Kerja dengan Sistem Preset
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│              ALUR KERJA LENGKAP DENGAN PRESET                        │
+└─────────────────────────────────────────────────────────────────────┘
+
+     ┌──────────────────┐
+     │  Analisis Kondisi │
+     │  & Prioritas      │
+     └────────┬─────────┘
+              │
+              ▼
+     ┌──────────────────┐
+     │  Pilih Preset    │
+     │  yang Sesuai     │
+     └────────┬─────────┘
+              │
+    ┌─────────┼─────────┐
+    │         │         │
+    ▼         ▼         ▼
+┌───────┐ ┌───────┐ ┌───────┐
+│Konser-│ │Standar│ │Agresif│
+│vatif  │ │       │ │       │
+└───┬───┘ └───┬───┘ └───┬───┘
+    │         │         │
+    └─────────┼─────────┘
+              │
+              ▼
+     ┌──────────────────┐
+     │  Load Parameter  │
+     │  dari Config     │
+     └────────┬─────────┘
+              │
+              ▼
+┌─────────────────────────────────────────────────────────────────────┐
+│                    EKSEKUSI 4 PENDEKATAN                             │
+│  ┌─────────┐  ┌─────────┐  ┌─────────┐  ┌─────────┐                 │
+│  │Percentile│─▶│ Elbow   │─▶│Neighbor │─▶│4-Tier   │                 │
+│  │  Rank   │  │ Method  │  │Analysis │  │Classify │                 │
+│  └─────────┘  └─────────┘  └─────────┘  └─────────┘                 │
+└────────────────────────────────┬────────────────────────────────────┘
+                                 │
+                                 ▼
+                    ┌──────────────────┐
+                    │  Output dengan   │
+                    │  Timestamp &     │
+                    │  Preset Label    │
+                    └────────┬─────────┘
+                             │
+         ┌───────────────────┼───────────────────┐
+         │                   │                   │
+         ▼                   ▼                   ▼
+   ┌──────────┐        ┌──────────┐        ┌──────────┐
+   │Dashboard │        │ README   │        │  HTML    │
+   │  PNG     │        │   .md    │        │ Report   │
+   └──────────┘        └──────────┘        └──────────┘
+```
+
+---
+
+## ❓ FAQ Sistem Preset
+
+### Q1: Bisakah saya membuat preset custom?
+
+**A:** Ya! Anda dapat mengedit `config.py` dan menambahkan preset baru:
+
+```python
+CINCIN_API_PRESETS["custom"] = {
+    "threshold_min": 25,
+    "threshold_max": 45,
+    "threshold_step": 5,
+    "min_sick_neighbors": 3,
+    "description": "Preset custom untuk kondisi khusus"
+}
+```
+
+### Q2: Bagaimana jika hasil preset tidak sesuai ekspektasi?
+
+**A:** Lakukan langkah berikut:
+1. Validasi sample di lapangan
+2. Analisis false positive/negative rate
+3. Sesuaikan parameter atau pilih preset lain
+4. Jalankan ulang dengan konfigurasi baru
+
+### Q3: Apakah boleh menjalankan semua preset untuk perbandingan?
+
+**A:** Sangat direkomendasikan! Jalankan ketiga preset dan bandingkan:
+
+```bash
+python run_cincin_api.py --preset konservatif
+python run_cincin_api.py --preset standar
+python run_cincin_api.py --preset agresif
+```
+
+Output akan tersimpan di folder berbeda dengan timestamp, sehingga mudah dibandingkan.
+
+### Q4: Preset mana yang paling akurat?
+
+**A:** Tidak ada yang "paling akurat" secara universal. Akurasi tergantung pada:
+- Kondisi spesifik kebun
+- Definisi "benar" yang digunakan
+- Prioritas antara presisi vs recall
+
+**Rekomendasi:** Mulai dengan `standar`, lalu sesuaikan berdasarkan hasil validasi lapangan.
+
+---
+
 ## 📚 Referensi
 
 1. Panduan Teknis Algoritma Cincin Api v1.0
