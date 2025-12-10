@@ -817,3 +817,534 @@ def get_interpretation_text(status: str) -> str:
         info = STATUS_DESCRIPTIONS[status]
         return f"{info['emoji']} {info['meaning']} - {info['action']}"
     return ""
+
+
+def generate_html_report_multi_divisi(
+    output_dir: Path,
+    results: dict,
+    preset: str = None
+) -> str:
+    """
+    Generate HTML Report interaktif dengan TABS per divisi.
+    
+    Args:
+        output_dir: Path folder output
+        results: Dictionary hasil per divisi {divisi_name: {"df": df, "metadata": metadata}}
+        preset: Nama preset yang digunakan
+        
+    Returns:
+        Path ke file report.html yang dibuat
+    """
+    output_dir = Path(output_dir)
+    html_path = output_dir / "report_multi_divisi.html"
+    
+    # Calculate totals
+    total_trees = sum(r['metadata']['total_trees'] for r in results.values())
+    total_merah = sum(r['metadata']['merah_count'] for r in results.values())
+    total_oranye = sum(r['metadata']['oranye_count'] for r in results.values())
+    total_kuning = sum(r['metadata']['kuning_count'] for r in results.values())
+    total_hijau = sum(r['metadata']['hijau_count'] for r in results.values())
+    total_asap_cair = sum(r['metadata']['asap_cair_liter'] for r in results.values())
+    total_trichoderma = sum(r['metadata']['trichoderma_liter'] for r in results.values())
+    
+    # Build HTML
+    html_content = f'''<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POAC v3.3 - Laporan Multi Divisi</title>
+    <style>
+        :root {{
+            --merah: #e74c3c;
+            --kuning: #f1c40f;
+            --oranye: #e67e22;
+            --hijau: #27ae60;
+            --biru: #3498db;
+            --dark: #2c3e50;
+            --light: #ecf0f1;
+            --ame2: #3498db;
+            --ame4: #9b59b6;
+        }}
+        
+        * {{ margin: 0; padding: 0; box-sizing: border-box; }}
+        
+        body {{
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }}
+        
+        .container {{
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }}
+        
+        header {{
+            background: var(--dark);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }}
+        
+        header h1 {{ font-size: 2.5em; margin-bottom: 10px; }}
+        header .subtitle {{ opacity: 0.8; font-size: 1.1em; }}
+        
+        .meta-info {{
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }}
+        
+        .meta-item {{
+            background: rgba(255,255,255,0.1);
+            padding: 10px 20px;
+            border-radius: 20px;
+        }}
+        
+        /* TABS */
+        .tabs {{
+            display: flex;
+            background: var(--dark);
+            border-bottom: 3px solid var(--biru);
+        }}
+        
+        .tab {{
+            padding: 15px 30px;
+            cursor: pointer;
+            color: white;
+            opacity: 0.7;
+            border: none;
+            background: transparent;
+            font-size: 1.1em;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            position: relative;
+        }}
+        
+        .tab:hover {{ opacity: 1; background: rgba(255,255,255,0.1); }}
+        
+        .tab.active {{
+            opacity: 1;
+            background: var(--biru);
+        }}
+        
+        .tab.active::after {{
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: white;
+        }}
+        
+        .tab.ame2 {{ border-left: 4px solid var(--ame2); }}
+        .tab.ame4 {{ border-left: 4px solid var(--ame4); }}
+        .tab.total {{ border-left: 4px solid var(--hijau); }}
+        
+        .tab-content {{ display: none; padding: 30px; }}
+        .tab-content.active {{ display: block; }}
+        
+        /* Cards */
+        .summary-cards {{
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }}
+        
+        .card {{
+            padding: 20px;
+            border-radius: 15px;
+            color: white;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }}
+        
+        .card:hover {{ transform: translateY(-5px); }}
+        .card.merah {{ background: linear-gradient(135deg, var(--merah), #c0392b); }}
+        .card.kuning {{ background: linear-gradient(135deg, var(--kuning), #f39c12); color: var(--dark); }}
+        .card.oranye {{ background: linear-gradient(135deg, var(--oranye), #d35400); }}
+        .card.hijau {{ background: linear-gradient(135deg, var(--hijau), #27ae60); }}
+        .card.biru {{ background: linear-gradient(135deg, var(--biru), #2980b9); }}
+        .card.purple {{ background: linear-gradient(135deg, var(--ame4), #8e44ad); }}
+        
+        .card .number {{ font-size: 2em; font-weight: bold; }}
+        .card .label {{ font-size: 0.85em; opacity: 0.9; margin-top: 5px; }}
+        
+        /* Comparison Table */
+        .comparison-table {{
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }}
+        
+        .comparison-table th, .comparison-table td {{
+            padding: 12px 15px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }}
+        
+        .comparison-table th {{
+            background: var(--dark);
+            color: white;
+        }}
+        
+        .comparison-table tr:nth-child(even) {{ background: #f9f9f9; }}
+        .comparison-table tr:hover {{ background: #f1f1f1; }}
+        
+        .comparison-table .ame2 {{ background: rgba(52, 152, 219, 0.1); }}
+        .comparison-table .ame4 {{ background: rgba(155, 89, 182, 0.1); }}
+        
+        /* Section */
+        .section {{ margin-bottom: 40px; }}
+        .section h2 {{
+            color: var(--dark);
+            border-bottom: 3px solid var(--biru);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }}
+        
+        /* Image Gallery */
+        .image-gallery {{
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 20px;
+        }}
+        
+        .image-container {{
+            background: var(--light);
+            border-radius: 15px;
+            overflow: hidden;
+        }}
+        
+        .image-container h3 {{
+            background: var(--dark);
+            color: white;
+            padding: 12px 15px;
+            font-size: 1em;
+        }}
+        
+        .image-container img {{
+            width: 100%;
+            height: auto;
+            cursor: zoom-in;
+        }}
+        
+        /* Footer */
+        footer {{
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }}
+        
+        /* Modal */
+        .modal {{
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            cursor: zoom-out;
+        }}
+        
+        .modal img {{
+            max-width: 95%;
+            max-height: 95%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }}
+        
+        .modal-close {{
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 40px;
+            cursor: pointer;
+        }}
+        
+        @media (max-width: 768px) {{
+            .tabs {{ flex-direction: column; }}
+            .image-gallery {{ grid-template-columns: 1fr; }}
+        }}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔥 POAC v3.3 - Algoritma Cincin Api</h1>
+            <p class="subtitle">Laporan Multi Divisi - AME II & AME IV</p>
+            <div class="meta-info">
+                <span class="meta-item">📅 {datetime.now().strftime("%Y-%m-%d %H:%M")}</span>
+                <span class="meta-item">📋 Preset: {preset or 'standar'}</span>
+                <span class="meta-item">🌳 Total: {total_trees:,} pohon</span>
+            </div>
+        </header>
+        
+        <!-- TABS NAVIGATION -->
+        <div class="tabs">
+            <button class="tab total active" onclick="showTab('total')">📊 TOTAL GABUNGAN</button>
+            <button class="tab ame2" onclick="showTab('ame2')">🏢 AME II</button>
+            <button class="tab ame4" onclick="showTab('ame4')">🏢 AME IV</button>
+        </div>
+        
+        <!-- TAB: TOTAL GABUNGAN -->
+        <div id="tab-total" class="tab-content active">
+            <div class="section">
+                <h2>📊 Ringkasan Total (AME II + AME IV)</h2>
+                <div class="summary-cards">
+                    <div class="card biru">
+                        <div class="number">{total_trees:,}</div>
+                        <div class="label">Total Pohon</div>
+                    </div>
+                    <div class="card merah">
+                        <div class="number">{total_merah:,}</div>
+                        <div class="label">🔴 MERAH<br>({total_merah/total_trees*100:.1f}%)</div>
+                    </div>
+                    <div class="card oranye">
+                        <div class="number">{total_oranye:,}</div>
+                        <div class="label">🟠 ORANYE<br>({total_oranye/total_trees*100:.1f}%)</div>
+                    </div>
+                    <div class="card kuning">
+                        <div class="number">{total_kuning:,}</div>
+                        <div class="label">🟡 KUNING<br>({total_kuning/total_trees*100:.1f}%)</div>
+                    </div>
+                    <div class="card hijau">
+                        <div class="number">{total_hijau:,}</div>
+                        <div class="label">🟢 HIJAU<br>({total_hijau/total_trees*100:.1f}%)</div>
+                    </div>
+                </div>
+                
+                <!-- Logistics Total -->
+                <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 15px; padding: 25px; color: white; margin: 20px 0;">
+                    <h3 style="margin-bottom: 15px;">📦 Total Kebutuhan Logistik</h3>
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; text-align: center;">
+                        <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px;">
+                            <div style="font-size: 2em; font-weight: bold;">{total_asap_cair:,.0f} L</div>
+                            <div>Asap Cair</div>
+                        </div>
+                        <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px;">
+                            <div style="font-size: 2em; font-weight: bold;">{total_trichoderma:,.0f} L</div>
+                            <div>Trichoderma</div>
+                        </div>
+                        <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 10px;">
+                            <div style="font-size: 2em; font-weight: bold;">{total_asap_cair + total_trichoderma:,.0f} L</div>
+                            <div>Total</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Comparison Table -->
+                <h3 style="margin: 30px 0 15px 0;">📈 Perbandingan Divisi</h3>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Metrik</th>
+                            <th style="background: var(--ame2);">AME II</th>
+                            <th style="background: var(--ame4);">AME IV</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Total Pohon</strong></td>
+                            <td class="ame2">{results['AME II']['metadata']['total_trees']:,}</td>
+                            <td class="ame4">{results['AME IV']['metadata']['total_trees']:,}</td>
+                            <td><strong>{total_trees:,}</strong></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Threshold</strong></td>
+                            <td class="ame2">{results['AME II']['metadata']['optimal_threshold_pct']}</td>
+                            <td class="ame4">{results['AME IV']['metadata']['optimal_threshold_pct']}</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>🔴 MERAH (Kluster)</td>
+                            <td class="ame2">{results['AME II']['metadata']['merah_count']:,} ({results['AME II']['metadata']['merah_count']/results['AME II']['metadata']['total_trees']*100:.1f}%)</td>
+                            <td class="ame4">{results['AME IV']['metadata']['merah_count']:,} ({results['AME IV']['metadata']['merah_count']/results['AME IV']['metadata']['total_trees']*100:.1f}%)</td>
+                            <td><strong>{total_merah:,}</strong></td>
+                        </tr>
+                        <tr>
+                            <td>🟠 ORANYE (Cincin Api)</td>
+                            <td class="ame2">{results['AME II']['metadata']['oranye_count']:,} ({results['AME II']['metadata']['oranye_count']/results['AME II']['metadata']['total_trees']*100:.1f}%)</td>
+                            <td class="ame4">{results['AME IV']['metadata']['oranye_count']:,} ({results['AME IV']['metadata']['oranye_count']/results['AME IV']['metadata']['total_trees']*100:.1f}%)</td>
+                            <td><strong>{total_oranye:,}</strong></td>
+                        </tr>
+                        <tr>
+                            <td>🟡 KUNING (Suspect)</td>
+                            <td class="ame2">{results['AME II']['metadata']['kuning_count']:,} ({results['AME II']['metadata']['kuning_count']/results['AME II']['metadata']['total_trees']*100:.1f}%)</td>
+                            <td class="ame4">{results['AME IV']['metadata']['kuning_count']:,} ({results['AME IV']['metadata']['kuning_count']/results['AME IV']['metadata']['total_trees']*100:.1f}%)</td>
+                            <td><strong>{total_kuning:,}</strong></td>
+                        </tr>
+                        <tr>
+                            <td>🟢 HIJAU (Sehat)</td>
+                            <td class="ame2">{results['AME II']['metadata']['hijau_count']:,} ({results['AME II']['metadata']['hijau_count']/results['AME II']['metadata']['total_trees']*100:.1f}%)</td>
+                            <td class="ame4">{results['AME IV']['metadata']['hijau_count']:,} ({results['AME IV']['metadata']['hijau_count']/results['AME IV']['metadata']['total_trees']*100:.1f}%)</td>
+                            <td><strong>{total_hijau:,}</strong></td>
+                        </tr>
+                        <tr style="background: #e8f4f8;">
+                            <td><strong>📦 Asap Cair (L)</strong></td>
+                            <td class="ame2">{results['AME II']['metadata']['asap_cair_liter']:,.0f}</td>
+                            <td class="ame4">{results['AME IV']['metadata']['asap_cair_liter']:,.0f}</td>
+                            <td><strong>{total_asap_cair:,.0f}</strong></td>
+                        </tr>
+                        <tr style="background: #e8f4f8;">
+                            <td><strong>📦 Trichoderma (L)</strong></td>
+                            <td class="ame2">{results['AME II']['metadata']['trichoderma_liter']:,.0f}</td>
+                            <td class="ame4">{results['AME IV']['metadata']['trichoderma_liter']:,.0f}</td>
+                            <td><strong>{total_trichoderma:,.0f}</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+'''
+    
+    # Generate content for each divisi tab
+    for divisi_key, divisi_name in [('ame2', 'AME II'), ('ame4', 'AME IV')]:
+        divisi_data = results[divisi_name]
+        metadata = divisi_data['metadata']
+        divisi_folder = divisi_name.replace(" ", "_")
+        
+        # Collect images for this divisi
+        divisi_dir = output_dir / divisi_folder
+        png_files = sorted([f for f in divisi_dir.iterdir() if f.suffix == '.png']) if divisi_dir.exists() else []
+        
+        html_content += f'''
+        <!-- TAB: {divisi_name} -->
+        <div id="tab-{divisi_key}" class="tab-content">
+            <div class="section">
+                <h2>📊 Hasil Analisis {divisi_name}</h2>
+                <div class="summary-cards">
+                    <div class="card biru">
+                        <div class="number">{metadata['total_trees']:,}</div>
+                        <div class="label">Total Pohon</div>
+                    </div>
+                    <div class="card merah">
+                        <div class="number">{metadata['merah_count']:,}</div>
+                        <div class="label">🔴 MERAH<br>→ Asap Cair</div>
+                    </div>
+                    <div class="card oranye">
+                        <div class="number">{metadata['oranye_count']:,}</div>
+                        <div class="label">🟠 ORANYE<br>→ Trichoderma</div>
+                    </div>
+                    <div class="card kuning">
+                        <div class="number">{metadata['kuning_count']:,}</div>
+                        <div class="label">🟡 KUNING<br>→ Investigasi</div>
+                    </div>
+                    <div class="card hijau">
+                        <div class="number">{metadata['hijau_count']:,}</div>
+                        <div class="label">🟢 HIJAU</div>
+                    </div>
+                </div>
+                
+                <!-- Logistics -->
+                <div style="background: linear-gradient(135deg, {'#3498db' if divisi_key == 'ame2' else '#9b59b6'} 0%, {'#2980b9' if divisi_key == 'ame2' else '#8e44ad'} 100%); border-radius: 15px; padding: 20px; color: white; margin: 20px 0;">
+                    <h3>📦 Kebutuhan Logistik {divisi_name}</h3>
+                    <div style="display: flex; justify-content: space-around; margin-top: 15px; text-align: center;">
+                        <div>
+                            <div style="font-size: 1.8em; font-weight: bold;">{metadata['asap_cair_liter']:,.0f} L</div>
+                            <div>Asap Cair</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 1.8em; font-weight: bold;">{metadata['trichoderma_liter']:,.0f} L</div>
+                            <div>Trichoderma</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 1.8em; font-weight: bold;">{metadata['asap_cair_liter'] + metadata['trichoderma_liter']:,.0f} L</div>
+                            <div>Total</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Visualizations -->
+            <div class="section">
+                <h2>📈 Visualisasi {divisi_name}</h2>
+                <div class="image-gallery">
+'''
+        
+        # Add images
+        for png_file in png_files[:12]:  # Limit to 12 images
+            # Convert to base64
+            import base64
+            with open(png_file, 'rb') as img_file:
+                img_data = base64.b64encode(img_file.read()).decode('utf-8')
+            
+            img_title = png_file.stem.replace('_', ' ').title()
+            html_content += f'''
+                    <div class="image-container">
+                        <h3>{img_title}</h3>
+                        <img src="data:image/png;base64,{img_data}" alt="{img_title}" onclick="openModal(this)">
+                    </div>
+'''
+        
+        html_content += '''
+                </div>
+            </div>
+        </div>
+'''
+    
+    # Close HTML
+    html_content += '''
+        <footer>
+            <p>POAC v3.3 - Algoritma Cincin Api | Multi-Divisi Analysis</p>
+            <p>Generated: ''' + datetime.now().strftime("%Y-%m-%d %H:%M:%S") + '''</p>
+        </footer>
+    </div>
+    
+    <!-- Modal for image zoom -->
+    <div id="imageModal" class="modal" onclick="closeModal()">
+        <span class="modal-close">&times;</span>
+        <img id="modalImg" src="">
+    </div>
+    
+    <script>
+        function showTab(tabId) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected tab
+            document.getElementById('tab-' + tabId).classList.add('active');
+            event.target.classList.add('active');
+        }
+        
+        function openModal(img) {
+            document.getElementById('imageModal').style.display = 'block';
+            document.getElementById('modalImg').src = img.src;
+        }
+        
+        function closeModal() {
+            document.getElementById('imageModal').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
+'''
+    
+    # Write HTML
+    with open(html_path, 'w', encoding='utf-8') as f:
+        f.write(html_content)
+    
+    logger.info(f"Multi-Divisi HTML Report generated: {html_path}")
+    return str(html_path)

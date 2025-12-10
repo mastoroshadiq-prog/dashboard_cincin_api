@@ -5,12 +5,15 @@ Implements FR-01: Data Ingestion & Cleaning
 FR-01.1: Sistem harus mampu membaca file format .csv
 FR-01.2: Sistem harus memvalidasi keberadaan kolom wajib
 FR-01.3: Data dengan koordinat null atau NDRE non-numerik harus dibuang
+
+Support untuk multiple divisi (AME II, AME IV)
 """
 
 import pandas as pd
 import logging
 from pathlib import Path
 import sys
+from typing import List, Dict, Optional
 
 # Setup logging
 logging.basicConfig(
@@ -25,6 +28,90 @@ if str(_parent_dir) not in sys.path:
     sys.path.insert(0, str(_parent_dir))
 
 from config import REQUIRED_COLUMNS, COLUMN_MAPPING
+
+
+def load_ame_iv_data(filepath: str) -> pd.DataFrame:
+    """
+    Load dan preprocess data AME IV yang memiliki format berbeda.
+    
+    AME IV memiliki kolom yang bergeser:
+    - DIVISI + Blok = "AME" + "IV" → gabung jadi "AME IV"
+    - BLOK_B = kode blok singkat (A12, A13, dll)
+    - T_TANAM = kode blok lengkap (A012A)
+    - N_BARIS = tahun tanam
+    - N_POKOK = nomor baris  
+    - OBJECTID = nomor pokok
+    - NDRE125 = object id
+    - KlassNDRE12025 = nilai NDRE (dengan koma desimal)
+    """
+    logger.info(f"Loading AME IV data from: {filepath}")
+    
+    filepath = Path(filepath)
+    if not filepath.exists():
+        raise FileNotFoundError(f"File tidak ditemukan: {filepath}")
+    
+    # Read with semicolon delimiter
+    df = pd.read_csv(filepath, sep=';')
+    initial_count = len(df)
+    logger.info(f"AME IV data loaded: {initial_count} rows")
+    
+    # Fix column mapping based on actual AME IV format
+    df_fixed = pd.DataFrame({
+        'divisi': 'AME IV',
+        'blok': df['BLOK_B'],  # A12, A13, dll
+        'blok_b': df['T_TANAM'],  # A012A, A012B, dll
+        't_tanam': df['N_BARIS'],  # Tahun tanam
+        'n_baris': df['N_POKOK'],  # Nomor baris
+        'n_pokok': df['OBJECTID'],  # Nomor pokok
+        'objectid': df['NDRE125'],  # Object ID
+        'ndre125': df['KlassNDRE12025'].str.replace(',', '.'),  # NDRE value
+        'klassndre12025': df['Ket'],  # Kelas stres
+        'ket': df['Unnamed: 10'].fillna('').astype(str) + ' ' + df['Unnamed: 11'].fillna('').astype(str)
+    })
+    
+    df_fixed['ket'] = df_fixed['ket'].str.strip()
+    
+    # Rename to standard names
+    rename_map = {k.lower(): v for k, v in COLUMN_MAPPING.items() if k.lower() in df_fixed.columns}
+    df_fixed = df_fixed.rename(columns=rename_map)
+    
+    logger.info(f"AME IV columns mapped: {df_fixed.columns.tolist()}")
+    
+    return df_fixed
+
+
+def load_multiple_divisi(file_paths: Dict[str, str]) -> pd.DataFrame:
+    """
+    Load dan gabungkan data dari multiple divisi.
+    
+    Args:
+        file_paths: Dictionary {divisi_name: file_path}
+                   Contoh: {"AME II": "data/input/tabelNDREnew.csv", 
+                           "AME IV": "data/input/AME_IV.csv"}
+    
+    Returns:
+        pd.DataFrame: Gabungan data dari semua divisi
+    """
+    all_data = []
+    
+    for divisi_name, filepath in file_paths.items():
+        logger.info(f"Loading {divisi_name} from {filepath}")
+        
+        if "AME_IV" in str(filepath) or "ame_iv" in str(filepath).lower():
+            # Special handling for AME IV format
+            df = load_ame_iv_data(filepath)
+        else:
+            # Standard format (AME II)
+            df = load_and_clean_data(filepath)
+        
+        all_data.append(df)
+        logger.info(f"{divisi_name}: {len(df)} rows loaded")
+    
+    # Concatenate all data
+    df_combined = pd.concat(all_data, ignore_index=True)
+    logger.info(f"Total combined: {len(df_combined)} rows from {len(file_paths)} divisi")
+    
+    return df_combined
 
 
 def load_and_clean_data(filepath: str) -> pd.DataFrame:
