@@ -1,0 +1,1350 @@
+"""
+POAC v3.3 - Report Generator
+Generate README.md dan HTML Report untuk hasil Algoritma Cincin Api
+
+Fitur:
+1. README.md - Panduan interpretasi dan deskripsi file
+2. HTML Report - Laporan interaktif dengan gambar embedded
+3. Legend/Footer di gambar visualisasi
+"""
+
+import pandas as pd
+from pathlib import Path
+from datetime import datetime
+import base64
+import logging
+import json
+
+logger = logging.getLogger(__name__)
+
+# =============================================================================
+# TEMPLATE CONSTANTS
+# =============================================================================
+
+STATUS_DESCRIPTIONS = {
+    "MERAH": {
+        "label": "MERAH (KLUSTER AKTIF)",
+        "color": "#e74c3c",
+        "emoji": "🔴",
+        "meaning": "Pohon terdeteksi dalam kluster aktif Ganoderma",
+        "criteria": "Persentil ≤ threshold DAN ≥3 tetangga sakit",
+        "action": "**PRIORITAS UTAMA** - Tim Sanitasi, aplikasi Asap Cair (3 liter/pohon)",
+        "urgency": "TINGGI",
+        "team": "Tim Sanitasi",
+        "treatment": "Asap Cair",
+        "liter_per_tree": 3.0
+    },
+    "ORANYE": {
+        "label": "ORANYE (CINCIN API)",
+        "color": "#e67e22",
+        "emoji": "🟠",
+        "meaning": "Pohon sehat yang bertetangga langsung dengan MERAH (Cincin Api)",
+        "criteria": "Tetangga langsung dari pohon MERAH (apapun nilai NDRE)",
+        "action": "**PRIORITAS KEDUA** - Tim APH, aplikasi Trichoderma (2 liter/pohon)",
+        "urgency": "TINGGI",
+        "team": "Tim APH",
+        "treatment": "Trichoderma",
+        "liter_per_tree": 2.0
+    },
+    "KUNING": {
+        "label": "KUNING (SUSPECT TERISOLASI)",
+        "color": "#f1c40f",
+        "emoji": "🟡",
+        "meaning": "Pohon suspect tapi terisolasi (tidak membentuk kluster)",
+        "criteria": "Persentil ≤ threshold DAN 0-2 tetangga sakit, bukan tetangga MERAH",
+        "action": "Investigasi lapangan untuk konfirmasi kondisi",
+        "urgency": "SEDANG",
+        "team": "Tim Investigasi",
+        "treatment": "-",
+        "liter_per_tree": 0
+    },
+    "HIJAU": {
+        "label": "HIJAU (SEHAT)",
+        "color": "#27ae60",
+        "emoji": "🟢",
+        "meaning": "Pohon dalam kondisi sehat/normal",
+        "criteria": "Persentil > threshold",
+        "action": "Tidak perlu tindakan, monitoring rutin",
+        "urgency": "TIDAK ADA",
+        "team": "-",
+        "treatment": "-",
+        "liter_per_tree": 0
+    }
+}
+
+FILE_DESCRIPTIONS = {
+    "dashboard_main.png": {
+        "title": "Dashboard Utama",
+        "description": "Ringkasan visual hasil analisis dengan 4 panel: distribusi status, top blok terparah, distribusi kepadatan kluster, dan statistik ringkasan."
+    },
+    "dashboard_block_heatmap.png": {
+        "title": "Heatmap per Blok",
+        "description": "Perbandingan jumlah pohon MERAH, KUNING, dan ORANYE untuk setiap blok. Blok diurutkan dari yang terparah."
+    },
+    "dashboard_elbow.png": {
+        "title": "Elbow Method Chart",
+        "description": "Visualisasi proses auto-tuning untuk menentukan threshold optimal. Titik merah menunjukkan threshold terpilih."
+    },
+    "hasil_klasifikasi_lengkap.csv": {
+        "title": "Data Klasifikasi Lengkap",
+        "description": "File CSV berisi semua data pohon dengan status risiko, skor kepadatan, dan jumlah tetangga sakit."
+    },
+    "target_prioritas.csv": {
+        "title": "Target Prioritas",
+        "description": "Daftar 1000 pohon prioritas tertinggi untuk intervensi, diurutkan berdasarkan status dan kepadatan kluster."
+    },
+    "ringkasan_per_blok.csv": {
+        "title": "Ringkasan per Blok",
+        "description": "Agregasi jumlah pohon per status untuk setiap blok."
+    },
+    "laporan_mandor.txt": {
+        "title": "Laporan untuk Mandor",
+        "description": "Laporan teks sederhana berisi daftar target dan instruksi untuk mandor di lapangan."
+    },
+    "run_config.json": {
+        "title": "Konfigurasi Run",
+        "description": "File JSON berisi parameter yang digunakan dalam analisis ini. Berguna untuk reproduksi hasil."
+    }
+}
+
+
+def generate_readme(
+    output_dir: Path,
+    metadata: dict,
+    config: dict = None,
+    preset: str = None
+) -> str:
+    """
+    Generate README.md untuk folder output.
+    
+    Args:
+        output_dir: Path folder output
+        metadata: Metadata hasil analisis
+        config: Konfigurasi yang digunakan
+        preset: Nama preset yang digunakan
+        
+    Returns:
+        Path ke file README.md yang dibuat
+    """
+    output_dir = Path(output_dir)
+    readme_path = output_dir / "README.md"
+    
+    # Get list of files in directory
+    files_in_dir = [f.name for f in output_dir.iterdir() if f.is_file()]
+    
+    # Build README content
+    logistik = metadata.get('logistik', {})
+    asap_cair = logistik.get('asap_cair_liter', 0)
+    trichoderma = logistik.get('trichoderma_liter', 0)
+    
+    # Get divisi info
+    divisi_list = metadata.get('divisi_list', [])
+    divisi_str = ', '.join(divisi_list) if divisi_list else 'N/A'
+    
+    content = f"""# 📊 Hasil Analisis Algoritma Cincin Api
+
+**Tanggal Generate:** {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}  
+**Divisi:** {divisi_str}  
+**Preset:** {preset or 'standar'}  
+**Folder:** `{output_dir.name}`
+
+---
+
+## 🎯 Ringkasan Hasil
+
+| Metrik | Nilai |
+|--------|-------|
+| **Divisi** | {divisi_str} |
+| **Threshold Optimal** | {metadata.get('optimal_threshold_pct', 'N/A')} |
+| **Total Pohon** | {metadata.get('total_trees', 0):,} |
+| 🔴 MERAH (Kluster Aktif) | {metadata.get('merah_count', 0):,} |
+| 🟠 ORANYE (Cincin Api) | {metadata.get('oranye_count', 0):,} |
+| 🟡 KUNING (Suspect Terisolasi) | {metadata.get('kuning_count', 0):,} |
+| 🟢 HIJAU (Sehat) | {metadata.get('hijau_count', 0):,} |
+| **Total Target Intervensi** | {metadata.get('merah_count', 0) + metadata.get('oranye_count', 0):,} |
+
+---
+
+## 📦 Kebutuhan Logistik
+
+| Kategori | Jumlah Pohon | Treatment | Kebutuhan |
+|----------|-------------|-----------|-----------|
+| 🔴 MERAH (Sanitasi) | {metadata.get('merah_count', 0):,} | Asap Cair (@3 L) | **{asap_cair:,.0f} liter** |
+| 🟠 ORANYE (APH) | {metadata.get('oranye_count', 0):,} | Trichoderma (@2 L) | **{trichoderma:,.0f} liter** |
+| **TOTAL** | {metadata.get('merah_count', 0) + metadata.get('oranye_count', 0):,} | - | **{asap_cair + trichoderma:,.0f} liter** |
+
+---
+
+## 🎨 Panduan Interpretasi Warna
+
+"""
+    
+    # Add status descriptions
+    for status_key, status_info in STATUS_DESCRIPTIONS.items():
+        content += f"""### {status_info['emoji']} {status_key} - {status_info['label']}
+
+- **Arti:** {status_info['meaning']}
+- **Kriteria:** {status_info['criteria']}
+- **Tindakan:** {status_info['action']}
+- **Urgensi:** {status_info['urgency']}
+
+"""
+    
+    # Add file descriptions
+    content += """---
+
+## 📁 Deskripsi File Output
+
+| File | Deskripsi |
+|------|-----------|
+"""
+    
+    for filename in sorted(files_in_dir):
+        if filename in FILE_DESCRIPTIONS:
+            desc = FILE_DESCRIPTIONS[filename]
+            content += f"| `{filename}` | **{desc['title']}** - {desc['description']} |\n"
+        elif filename.startswith("top10_"):
+            blok_name = filename.replace("top10_", "").replace("_blok_", " - Blok ").replace(".png", "")
+            content += f"| `{filename}` | **Detail Blok #{blok_name}** - Visualisasi detail pohon dalam blok terparah |\n"
+        elif filename != "README.md" and filename != "report.html":
+            content += f"| `{filename}` | File output tambahan |\n"
+    
+    # Add configuration section
+    content += f"""
+---
+
+## ⚙️ Konfigurasi yang Digunakan
+
+```json
+{json.dumps(config or {}, indent=2, default=str)}
+```
+
+---
+
+## 📋 Instruksi untuk Mandor
+
+### Prioritas Kerja:
+1. **UTAMA (Tim Sanitasi):** Fokus pada pohon 🔴 MERAH (Kluster Aktif) - Aplikasi Asap Cair
+2. **KEDUA (Tim APH):** Tangani pohon 🟠 ORANYE (Cincin Api) - Aplikasi Trichoderma
+3. Pohon 🟡 KUNING perlu investigasi lapangan (suspect terisolasi)
+4. Pohon 🟢 HIJAU tidak perlu tindakan khusus
+
+### Logika "Cincin Api":
+- **MERAH** = Pohon dengan NDRE rendah + membentuk kluster (≥3 tetangga sakit)
+- **ORANYE** = Pohon yang bertetangga langsung dengan MERAH (untuk proteksi)
+- **Tujuan:** Menghentikan penyebaran dengan mengobati "ring" di sekitar sumber
+
+### Tips Membaca Visualisasi:
+- **Titik besar** = Pohon dengan banyak tetangga sakit (kluster padat)
+- **Titik kecil** = Pohon dengan sedikit/tanpa tetangga sakit
+- **Warna merah** = Prioritas tertinggi untuk sanitasi
+- **Posisi X-Y** = Koordinat baris dan pokok di lapangan
+
+---
+
+## 🔄 Reproduksi Hasil
+
+Untuk menghasilkan analisis yang sama, jalankan:
+
+```bash
+python run_cincin_api.py --preset {preset or 'standar'}
+```
+
+Atau gunakan konfigurasi manual dari `run_config.json`.
+
+---
+
+*Generated by POAC v3.3 - Algoritma Cincin Api*
+"""
+    
+    # Write README
+    with open(readme_path, 'w', encoding='utf-8') as f:
+        f.write(content)
+    
+    logger.info(f"README.md generated: {readme_path}")
+    return str(readme_path)
+
+
+def generate_html_report(
+    output_dir: Path,
+    df_classified: pd.DataFrame,
+    metadata: dict,
+    config: dict = None,
+    preset: str = None
+) -> str:
+    """
+    Generate HTML Report interaktif dengan gambar embedded.
+    
+    Args:
+        output_dir: Path folder output
+        df_classified: DataFrame hasil klasifikasi
+        metadata: Metadata hasil analisis
+        config: Konfigurasi yang digunakan
+        preset: Nama preset yang digunakan
+        
+    Returns:
+        Path ke file report.html yang dibuat
+    """
+    output_dir = Path(output_dir)
+    html_path = output_dir / "report.html"
+    
+    # Collect all PNG files
+    png_files = sorted([f for f in output_dir.iterdir() if f.suffix == '.png'])
+    
+    # Build HTML content
+    html_content = f"""<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POAC v3.3 - Laporan Algoritma Cincin Api</title>
+    <style>
+        :root {{
+            --merah: #e74c3c;
+            --kuning: #f1c40f;
+            --oranye: #e67e22;
+            --hijau: #27ae60;
+            --biru: #3498db;
+            --dark: #2c3e50;
+            --light: #ecf0f1;
+        }}
+        
+        * {{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }}
+        
+        body {{
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }}
+        
+        .container {{
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }}
+        
+        header {{
+            background: var(--dark);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }}
+        
+        header h1 {{
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }}
+        
+        header .subtitle {{
+            opacity: 0.8;
+            font-size: 1.1em;
+        }}
+        
+        .meta-info {{
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }}
+        
+        .meta-item {{
+            background: rgba(255,255,255,0.1);
+            padding: 10px 20px;
+            border-radius: 20px;
+        }}
+        
+        main {{
+            padding: 30px;
+        }}
+        
+        .section {{
+            margin-bottom: 40px;
+        }}
+        
+        .section h2 {{
+            color: var(--dark);
+            border-bottom: 3px solid var(--biru);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }}
+        
+        /* Summary Cards */
+        .summary-cards {{
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }}
+        
+        .card {{
+            padding: 25px;
+            border-radius: 15px;
+            color: white;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }}
+        
+        .card:hover {{
+            transform: translateY(-5px);
+        }}
+        
+        .card.merah {{ background: linear-gradient(135deg, var(--merah), #c0392b); }}
+        .card.kuning {{ background: linear-gradient(135deg, var(--kuning), #f39c12); color: var(--dark); }}
+        .card.oranye {{ background: linear-gradient(135deg, var(--oranye), #d35400); }}
+        .card.hijau {{ background: linear-gradient(135deg, var(--hijau), #27ae60); }}
+        .card.biru {{ background: linear-gradient(135deg, var(--biru), #2980b9); }}
+        
+        .card .number {{
+            font-size: 2.5em;
+            font-weight: bold;
+        }}
+        
+        .card .label {{
+            font-size: 0.9em;
+            opacity: 0.9;
+            margin-top: 5px;
+        }}
+        
+        /* Status Guide */
+        .status-guide {{
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }}
+        
+        .status-item {{
+            border: 2px solid #eee;
+            border-radius: 15px;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }}
+        
+        .status-item:hover {{
+            border-color: var(--biru);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }}
+        
+        .status-item h3 {{
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }}
+        
+        .status-item .color-dot {{
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+        }}
+        
+        .status-item .criteria {{
+            background: var(--light);
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 0.9em;
+            margin: 10px 0;
+        }}
+        
+        .status-item .action {{
+            color: var(--dark);
+            font-weight: 500;
+        }}
+        
+        /* Image Gallery */
+        .image-gallery {{
+            display: grid;
+            gap: 30px;
+        }}
+        
+        .image-container {{
+            background: var(--light);
+            border-radius: 15px;
+            overflow: hidden;
+        }}
+        
+        .image-container h3 {{
+            background: var(--dark);
+            color: white;
+            padding: 15px 20px;
+            font-size: 1.1em;
+        }}
+        
+        .image-container p {{
+            padding: 15px 20px;
+            color: #666;
+            font-size: 0.95em;
+            border-bottom: 1px solid #ddd;
+        }}
+        
+        .image-container img {{
+            width: 100%;
+            height: auto;
+            display: block;
+            cursor: zoom-in;
+            transition: transform 0.3s ease;
+        }}
+        
+        .image-container img:hover {{
+            transform: scale(1.02);
+        }}
+        
+        /* Top 10 Section */
+        .top10-grid {{
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 20px;
+        }}
+        
+        .top10-item {{
+            border: 2px solid #eee;
+            border-radius: 15px;
+            overflow: hidden;
+        }}
+        
+        .top10-item h4 {{
+            background: var(--merah);
+            color: white;
+            padding: 10px 15px;
+        }}
+        
+        .top10-item img {{
+            width: 100%;
+            height: auto;
+        }}
+        
+        /* Footer */
+        footer {{
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9em;
+        }}
+        
+        /* Modal for zoom */
+        .modal {{
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            cursor: zoom-out;
+        }}
+        
+        .modal img {{
+            max-width: 95%;
+            max-height: 95%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }}
+        
+        .modal-close {{
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 40px;
+            cursor: pointer;
+        }}
+        
+        @media (max-width: 768px) {{
+            header h1 {{ font-size: 1.8em; }}
+            .meta-info {{ flex-direction: column; gap: 10px; }}
+            .top10-grid {{ grid-template-columns: 1fr; }}
+        }}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔥 POAC v3.3 - Algoritma Cincin Api</h1>
+            <p class="subtitle">Laporan Deteksi Kluster Ganoderma</p>
+            <div class="meta-info">
+                <span class="meta-item">🏢 Divisi: {', '.join(metadata.get('divisi_list', [])) or 'N/A'}</span>
+                <span class="meta-item">📅 {datetime.now().strftime("%Y-%m-%d %H:%M")}</span>
+                <span class="meta-item">📋 Preset: {preset or 'standar'}</span>
+                <span class="meta-item">🎯 Threshold: {metadata.get('optimal_threshold_pct', 'N/A')}</span>
+            </div>
+        </header>
+        
+        <main>
+            <!-- Summary Section -->
+            <section class="section">
+                <h2>📊 Ringkasan Hasil</h2>
+                <div class="summary-cards">
+                    <div class="card biru">
+                        <div class="number">{metadata.get('total_trees', 0):,}</div>
+                        <div class="label">Total Pohon</div>
+                    </div>
+                    <div class="card merah">
+                        <div class="number">{metadata.get('merah_count', 0):,}</div>
+                        <div class="label">🔴 MERAH (Kluster)<br>→ Asap Cair</div>
+                    </div>
+                    <div class="card oranye">
+                        <div class="number">{metadata.get('oranye_count', 0):,}</div>
+                        <div class="label">🟠 ORANYE (Cincin Api)<br>→ Trichoderma</div>
+                    </div>
+                    <div class="card kuning">
+                        <div class="number">{metadata.get('kuning_count', 0):,}</div>
+                        <div class="label">🟡 KUNING (Terisolasi)<br>→ Investigasi</div>
+                    </div>
+                    <div class="card hijau">
+                        <div class="number">{metadata.get('hijau_count', 0):,}</div>
+                        <div class="label">🟢 HIJAU (Sehat)</div>
+                    </div>
+                </div>
+                
+                <!-- Logistics Summary -->
+                <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 15px; padding: 25px; color: white; margin-top: 20px;">
+                    <h3 style="margin-bottom: 15px;">📦 Kebutuhan Logistik</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                        <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; text-align: center;">
+                            <div style="font-size: 1.8em; font-weight: bold;">{metadata.get('logistik', {}).get('asap_cair_liter', 0):,.0f} L</div>
+                            <div style="opacity: 0.8;">Asap Cair (MERAH)</div>
+                        </div>
+                        <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; text-align: center;">
+                            <div style="font-size: 1.8em; font-weight: bold;">{metadata.get('logistik', {}).get('trichoderma_liter', 0):,.0f} L</div>
+                            <div style="opacity: 0.8;">Trichoderma (ORANYE)</div>
+                        </div>
+                        <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 10px; text-align: center;">
+                            <div style="font-size: 1.8em; font-weight: bold;">{metadata.get('logistik', {}).get('asap_cair_liter', 0) + metadata.get('logistik', {}).get('trichoderma_liter', 0):,.0f} L</div>
+                            <div style="opacity: 0.8;">Total Kebutuhan</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Status Guide Section -->
+            <section class="section">
+                <h2>🎨 Panduan Interpretasi Warna</h2>
+                <div class="status-guide">
+"""
+    
+    # Add status guide items
+    for status_key, status_info in STATUS_DESCRIPTIONS.items():
+        html_content += f"""
+                    <div class="status-item">
+                        <h3>
+                            <span class="color-dot" style="background: {status_info['color']}"></span>
+                            {status_info['emoji']} {status_key}
+                        </h3>
+                        <p><strong>Arti:</strong> {status_info['meaning']}</p>
+                        <div class="criteria"><strong>Kriteria:</strong> {status_info['criteria']}</div>
+                        <p class="action"><strong>Tindakan:</strong> {status_info['action']}</p>
+                    </div>
+"""
+    
+    html_content += """
+                </div>
+            </section>
+            
+            <!-- Main Visualizations -->
+            <section class="section">
+                <h2>📈 Visualisasi Utama</h2>
+                <div class="image-gallery">
+"""
+    
+    # Add main visualizations
+    main_images = ['dashboard_main.png', 'dashboard_block_heatmap.png', 'dashboard_elbow.png']
+    for img_file in main_images:
+        img_path = output_dir / img_file
+        if img_path.exists():
+            desc = FILE_DESCRIPTIONS.get(img_file, {"title": img_file, "description": ""})
+            # Encode image to base64
+            with open(img_path, 'rb') as f:
+                img_base64 = base64.b64encode(f.read()).decode('utf-8')
+            
+            html_content += f"""
+                    <div class="image-container">
+                        <h3>{desc['title']}</h3>
+                        <p>{desc['description']}</p>
+                        <img src="data:image/png;base64,{img_base64}" alt="{desc['title']}" onclick="openModal(this)">
+                    </div>
+"""
+    
+    html_content += """
+                </div>
+            </section>
+            
+            <!-- Top 10 Blocks Section -->
+            <section class="section">
+                <h2>🏆 Top 10 Blok Terparah</h2>
+                <p style="margin-bottom: 20px; color: #666;">Klik gambar untuk memperbesar. Blok diurutkan berdasarkan jumlah pohon MERAH (kluster aktif).</p>
+                <div class="top10-grid">
+"""
+    
+    # Add Top 10 block images
+    top10_images = sorted([f for f in png_files if f.name.startswith('top10_')])
+    for img_path in top10_images:
+        # Extract rank and block name from filename
+        filename = img_path.name
+        parts = filename.replace('.png', '').split('_')
+        if len(parts) >= 3:
+            rank = parts[1]
+            blok = parts[-1]
+            
+            with open(img_path, 'rb') as f:
+                img_base64 = base64.b64encode(f.read()).decode('utf-8')
+            
+            html_content += f"""
+                    <div class="top10-item">
+                        <h4>#{rank} - Blok {blok}</h4>
+                        <img src="data:image/png;base64,{img_base64}" alt="Blok {blok}" onclick="openModal(this)">
+                    </div>
+"""
+    
+    html_content += f"""
+                </div>
+            </section>
+            
+            <!-- Instructions Section -->
+            <section class="section">
+                <h2>📋 Instruksi untuk Tim Lapangan</h2>
+                <div style="background: var(--light); padding: 25px; border-radius: 15px;">
+                    <h3 style="color: var(--merah); margin-bottom: 15px;">🎯 Prioritas Kerja:</h3>
+                    <ol style="line-height: 2; padding-left: 20px;">
+                        <li><strong>TIM SANITASI (🔴 MERAH):</strong> Aplikasi Asap Cair - Total: <strong>{metadata.get('merah_count', 0):,}</strong> pohon × 3 liter = <strong>{metadata.get('merah_count', 0) * 3:,}</strong> liter</li>
+                        <li><strong>TIM APH (🟠 ORANYE - Cincin Api):</strong> Aplikasi Trichoderma - Total: <strong>{metadata.get('oranye_count', 0):,}</strong> pohon × 2 liter = <strong>{metadata.get('oranye_count', 0) * 2:,}</strong> liter</li>
+                        <li><strong>TIM INVESTIGASI (🟡 KUNING):</strong> Validasi lapangan untuk pohon suspect terisolasi</li>
+                        <li>Pohon 🟢 HIJAU tidak perlu tindakan khusus</li>
+                    </ol>
+                    
+                    <h3 style="color: var(--oranye); margin: 20px 0 15px 0;">🔥 Logika "Cincin Api":</h3>
+                    <ul style="line-height: 2; padding-left: 20px;">
+                        <li><strong>MERAH</strong> = Pohon dengan NDRE rendah + membentuk kluster (≥3 tetangga sakit)</li>
+                        <li><strong>ORANYE</strong> = Pohon yang bertetangga langsung dengan MERAH (untuk proteksi)</li>
+                        <li><strong>Tujuan:</strong> Menghentikan penyebaran dengan mengobati "ring" di sekitar sumber infeksi</li>
+                    </ul>
+                </div>
+                    
+                    <h3 style="color: var(--biru); margin: 25px 0 15px;">💡 Tips Membaca Visualisasi:</h3>
+                    <ul style="line-height: 2; padding-left: 20px;">
+                        <li><strong>Titik besar</strong> = Pohon dengan banyak tetangga sakit (kluster padat)</li>
+                        <li><strong>Titik kecil</strong> = Pohon dengan sedikit/tanpa tetangga sakit</li>
+                        <li><strong>Warna merah</strong> = Prioritas tertinggi untuk sanitasi</li>
+                        <li><strong>Posisi X-Y</strong> = Koordinat baris dan pokok di lapangan</li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+        
+        <footer>
+            <p>Generated by <strong>POAC v3.3 - Algoritma Cincin Api</strong></p>
+            <p style="margin-top: 5px; opacity: 0.7;">© 2025 - Precision Oil Palm Agriculture Control</p>
+        </footer>
+    </div>
+    
+    <!-- Modal for image zoom -->
+    <div id="imageModal" class="modal" onclick="closeModal()">
+        <span class="modal-close">&times;</span>
+        <img id="modalImage" src="" alt="Zoomed Image">
+    </div>
+    
+    <script>
+        function openModal(img) {{
+            document.getElementById('imageModal').style.display = 'block';
+            document.getElementById('modalImage').src = img.src;
+        }}
+        
+        function closeModal() {{
+            document.getElementById('imageModal').style.display = 'none';
+        }}
+        
+        // Close modal on Escape key
+        document.addEventListener('keydown', function(e) {{
+            if (e.key === 'Escape') closeModal();
+        }});
+    </script>
+</body>
+</html>
+"""
+    
+    # Write HTML file
+    with open(html_path, 'w', encoding='utf-8') as f:
+        f.write(html_content)
+    
+    logger.info(f"HTML Report generated: {html_path}")
+    return str(html_path)
+
+
+def add_legend_to_figure(fig, metadata: dict, position: str = 'bottom'):
+    """
+    Menambahkan legend/footer informatif ke figure matplotlib.
+    
+    Args:
+        fig: matplotlib Figure object
+        metadata: Metadata hasil analisis
+        position: 'bottom' atau 'right'
+    """
+    legend_text = (
+        f"PANDUAN WARNA: 🔴 MERAH = Kluster Aktif (Sanitasi) | "
+        f"🟠 ORANYE = Cincin Api (APH/Trichoderma) | "
+        f"🟡 KUNING = Suspect Terisolasi (Investigasi) | "
+        f"🟢 HIJAU = Sehat\n"
+        f"Threshold: {metadata.get('optimal_threshold_pct', 'N/A')} | "
+        f"Total: {metadata.get('total_trees', 0):,} pohon | "
+        f"Target Intervensi: {metadata.get('merah_count', 0) + metadata.get('oranye_count', 0):,} pohon"
+    )
+    
+    if position == 'bottom':
+        fig.text(0.5, 0.01, legend_text, ha='center', va='bottom', 
+                fontsize=9, style='italic',
+                bbox=dict(boxstyle='round', facecolor='wheat', alpha=0.8))
+    
+    return fig
+
+
+def get_interpretation_text(status: str) -> str:
+    """
+    Mendapatkan teks interpretasi untuk status tertentu.
+    """
+    if status in STATUS_DESCRIPTIONS:
+        info = STATUS_DESCRIPTIONS[status]
+        return f"{info['emoji']} {info['meaning']} - {info['action']}"
+    return ""
+
+
+def generate_html_report_multi_divisi(
+    output_dir: Path,
+    results: dict,
+    preset: str = None
+) -> str:
+    """
+    Generate HTML Report interaktif dengan TABS per divisi.
+    
+    Args:
+        output_dir: Path folder output
+        results: Dictionary hasil per divisi {divisi_name: {"df": df, "metadata": metadata}}
+        preset: Nama preset yang digunakan
+        
+    Returns:
+        Path ke file report.html yang dibuat
+    """
+    output_dir = Path(output_dir)
+    html_path = output_dir / "report_multi_divisi.html"
+    
+    # Calculate totals
+    total_trees = sum(r['metadata']['total_trees'] for r in results.values())
+    total_merah = sum(r['metadata']['merah_count'] for r in results.values())
+    total_oranye = sum(r['metadata']['oranye_count'] for r in results.values())
+    total_kuning = sum(r['metadata']['kuning_count'] for r in results.values())
+    total_hijau = sum(r['metadata']['hijau_count'] for r in results.values())
+    total_asap_cair = sum(r['metadata']['asap_cair_liter'] for r in results.values())
+    total_trichoderma = sum(r['metadata']['trichoderma_liter'] for r in results.values())
+    
+    # Build HTML
+    html_content = f'''<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POAC v3.3 - Laporan Multi Divisi</title>
+    <style>
+        :root {{
+            --merah: #e74c3c;
+            --kuning: #f1c40f;
+            --oranye: #e67e22;
+            --hijau: #27ae60;
+            --biru: #3498db;
+            --dark: #2c3e50;
+            --light: #ecf0f1;
+            --ame2: #3498db;
+            --ame4: #9b59b6;
+        }}
+        
+        * {{ margin: 0; padding: 0; box-sizing: border-box; }}
+        
+        body {{
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }}
+        
+        .container {{
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }}
+        
+        header {{
+            background: var(--dark);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }}
+        
+        header h1 {{ font-size: 2.5em; margin-bottom: 10px; }}
+        header .subtitle {{ opacity: 0.8; font-size: 1.1em; }}
+        
+        .meta-info {{
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }}
+        
+        .meta-item {{
+            background: rgba(255,255,255,0.1);
+            padding: 10px 20px;
+            border-radius: 20px;
+        }}
+        
+        /* TABS */
+        .tabs {{
+            display: flex;
+            background: var(--dark);
+            border-bottom: 3px solid var(--biru);
+        }}
+        
+        .tab {{
+            padding: 15px 30px;
+            cursor: pointer;
+            color: white;
+            opacity: 0.7;
+            border: none;
+            background: transparent;
+            font-size: 1.1em;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            position: relative;
+        }}
+        
+        .tab:hover {{ opacity: 1; background: rgba(255,255,255,0.1); }}
+        
+        .tab.active {{
+            opacity: 1;
+            background: var(--biru);
+        }}
+        
+        .tab.active::after {{
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: white;
+        }}
+        
+        .tab.ame2 {{ border-left: 4px solid var(--ame2); }}
+        .tab.ame4 {{ border-left: 4px solid var(--ame4); }}
+        .tab.total {{ border-left: 4px solid var(--hijau); }}
+        
+        .tab-content {{ display: none; padding: 30px; }}
+        .tab-content.active {{ display: block; }}
+        
+        /* Cards */
+        .summary-cards {{
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }}
+        
+        .card {{
+            padding: 20px;
+            border-radius: 15px;
+            color: white;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }}
+        
+        .card:hover {{ transform: translateY(-5px); }}
+        .card.merah {{ background: linear-gradient(135deg, var(--merah), #c0392b); }}
+        .card.kuning {{ background: linear-gradient(135deg, var(--kuning), #f39c12); color: var(--dark); }}
+        .card.oranye {{ background: linear-gradient(135deg, var(--oranye), #d35400); }}
+        .card.hijau {{ background: linear-gradient(135deg, var(--hijau), #27ae60); }}
+        .card.biru {{ background: linear-gradient(135deg, var(--biru), #2980b9); }}
+        .card.purple {{ background: linear-gradient(135deg, var(--ame4), #8e44ad); }}
+        
+        .card .number {{ font-size: 2em; font-weight: bold; }}
+        .card .label {{ font-size: 0.85em; opacity: 0.9; margin-top: 5px; }}
+        
+        /* Comparison Table */
+        .comparison-table {{
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }}
+        
+        .comparison-table th, .comparison-table td {{
+            padding: 12px 15px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }}
+        
+        .comparison-table th {{
+            background: var(--dark);
+            color: white;
+        }}
+        
+        .comparison-table tr:nth-child(even) {{ background: #f9f9f9; }}
+        .comparison-table tr:hover {{ background: #f1f1f1; }}
+        
+        .comparison-table .ame2 {{ background: rgba(52, 152, 219, 0.1); }}
+        .comparison-table .ame4 {{ background: rgba(155, 89, 182, 0.1); }}
+        
+        /* Section */
+        .section {{ margin-bottom: 40px; }}
+        .section h2 {{
+            color: var(--dark);
+            border-bottom: 3px solid var(--biru);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }}
+        
+        /* Image Gallery */
+        .image-gallery {{
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 20px;
+        }}
+        
+        .image-container {{
+            background: var(--light);
+            border-radius: 15px;
+            overflow: hidden;
+        }}
+        
+        .image-container h3 {{
+            background: var(--dark);
+            color: white;
+            padding: 12px 15px;
+            font-size: 1em;
+        }}
+        
+        .image-container img {{
+            width: 100%;
+            height: auto;
+            cursor: zoom-in;
+        }}
+        
+        /* Footer */
+        footer {{
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }}
+        
+        /* Modal */
+        .modal {{
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            cursor: zoom-out;
+        }}
+        
+        .modal img {{
+            max-width: 95%;
+            max-height: 95%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }}
+        
+        .modal-close {{
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 40px;
+            cursor: pointer;
+        }}
+        
+        @media (max-width: 768px) {{
+            .tabs {{ flex-direction: column; }}
+            .image-gallery {{ grid-template-columns: 1fr; }}
+        }}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔥 POAC v3.3 - Algoritma Cincin Api</h1>
+            <p class="subtitle">Laporan Multi Divisi - AME II & AME IV</p>
+            <div class="meta-info">
+                <span class="meta-item">📅 {datetime.now().strftime("%Y-%m-%d %H:%M")}</span>
+                <span class="meta-item">📋 Preset: {preset or 'standar'}</span>
+                <span class="meta-item">🌳 Total: {total_trees:,} pohon</span>
+            </div>
+        </header>
+        
+        <!-- TABS NAVIGATION -->
+        <div class="tabs">
+            <button class="tab total active" onclick="showTab('total')">📊 TOTAL GABUNGAN</button>
+            <button class="tab ame2" onclick="showTab('ame2')">🏢 AME II</button>
+            <button class="tab ame4" onclick="showTab('ame4')">🏢 AME IV</button>
+        </div>
+        
+        <!-- TAB: TOTAL GABUNGAN -->
+        <div id="tab-total" class="tab-content active">
+            <div class="section">
+                <h2>📊 Ringkasan Total (AME II + AME IV)</h2>
+                <div class="summary-cards">
+                    <div class="card biru">
+                        <div class="number">{total_trees:,}</div>
+                        <div class="label">Total Pohon</div>
+                    </div>
+                    <div class="card merah">
+                        <div class="number">{total_merah:,}</div>
+                        <div class="label">🔴 MERAH<br>({total_merah/total_trees*100:.1f}%)</div>
+                    </div>
+                    <div class="card oranye">
+                        <div class="number">{total_oranye:,}</div>
+                        <div class="label">🟠 ORANYE<br>({total_oranye/total_trees*100:.1f}%)</div>
+                    </div>
+                    <div class="card kuning">
+                        <div class="number">{total_kuning:,}</div>
+                        <div class="label">🟡 KUNING<br>({total_kuning/total_trees*100:.1f}%)</div>
+                    </div>
+                    <div class="card hijau">
+                        <div class="number">{total_hijau:,}</div>
+                        <div class="label">🟢 HIJAU<br>({total_hijau/total_trees*100:.1f}%)</div>
+                    </div>
+                </div>
+                
+                <!-- Logistics Total -->
+                <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 15px; padding: 25px; color: white; margin: 20px 0;">
+                    <h3 style="margin-bottom: 15px;">📦 Total Kebutuhan Logistik</h3>
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; text-align: center;">
+                        <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px;">
+                            <div style="font-size: 2em; font-weight: bold;">{total_asap_cair:,.0f} L</div>
+                            <div>Asap Cair</div>
+                        </div>
+                        <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px;">
+                            <div style="font-size: 2em; font-weight: bold;">{total_trichoderma:,.0f} L</div>
+                            <div>Trichoderma</div>
+                        </div>
+                        <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 10px;">
+                            <div style="font-size: 2em; font-weight: bold;">{total_asap_cair + total_trichoderma:,.0f} L</div>
+                            <div>Total</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Comparison Table -->
+                <h3 style="margin: 30px 0 15px 0;">📈 Perbandingan Divisi</h3>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Metrik</th>
+                            <th style="background: var(--ame2);">AME II</th>
+                            <th style="background: var(--ame4);">AME IV</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Total Pohon</strong></td>
+                            <td class="ame2">{results['AME II']['metadata']['total_trees']:,}</td>
+                            <td class="ame4">{results['AME IV']['metadata']['total_trees']:,}</td>
+                            <td><strong>{total_trees:,}</strong></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Threshold</strong></td>
+                            <td class="ame2">{results['AME II']['metadata']['optimal_threshold_pct']}</td>
+                            <td class="ame4">{results['AME IV']['metadata']['optimal_threshold_pct']}</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>🔴 MERAH (Kluster)</td>
+                            <td class="ame2">{results['AME II']['metadata']['merah_count']:,} ({results['AME II']['metadata']['merah_count']/results['AME II']['metadata']['total_trees']*100:.1f}%)</td>
+                            <td class="ame4">{results['AME IV']['metadata']['merah_count']:,} ({results['AME IV']['metadata']['merah_count']/results['AME IV']['metadata']['total_trees']*100:.1f}%)</td>
+                            <td><strong>{total_merah:,}</strong></td>
+                        </tr>
+                        <tr>
+                            <td>🟠 ORANYE (Cincin Api)</td>
+                            <td class="ame2">{results['AME II']['metadata']['oranye_count']:,} ({results['AME II']['metadata']['oranye_count']/results['AME II']['metadata']['total_trees']*100:.1f}%)</td>
+                            <td class="ame4">{results['AME IV']['metadata']['oranye_count']:,} ({results['AME IV']['metadata']['oranye_count']/results['AME IV']['metadata']['total_trees']*100:.1f}%)</td>
+                            <td><strong>{total_oranye:,}</strong></td>
+                        </tr>
+                        <tr>
+                            <td>🟡 KUNING (Suspect)</td>
+                            <td class="ame2">{results['AME II']['metadata']['kuning_count']:,} ({results['AME II']['metadata']['kuning_count']/results['AME II']['metadata']['total_trees']*100:.1f}%)</td>
+                            <td class="ame4">{results['AME IV']['metadata']['kuning_count']:,} ({results['AME IV']['metadata']['kuning_count']/results['AME IV']['metadata']['total_trees']*100:.1f}%)</td>
+                            <td><strong>{total_kuning:,}</strong></td>
+                        </tr>
+                        <tr>
+                            <td>🟢 HIJAU (Sehat)</td>
+                            <td class="ame2">{results['AME II']['metadata']['hijau_count']:,} ({results['AME II']['metadata']['hijau_count']/results['AME II']['metadata']['total_trees']*100:.1f}%)</td>
+                            <td class="ame4">{results['AME IV']['metadata']['hijau_count']:,} ({results['AME IV']['metadata']['hijau_count']/results['AME IV']['metadata']['total_trees']*100:.1f}%)</td>
+                            <td><strong>{total_hijau:,}</strong></td>
+                        </tr>
+                        <tr style="background: #e8f4f8;">
+                            <td><strong>📦 Asap Cair (L)</strong></td>
+                            <td class="ame2">{results['AME II']['metadata']['asap_cair_liter']:,.0f}</td>
+                            <td class="ame4">{results['AME IV']['metadata']['asap_cair_liter']:,.0f}</td>
+                            <td><strong>{total_asap_cair:,.0f}</strong></td>
+                        </tr>
+                        <tr style="background: #e8f4f8;">
+                            <td><strong>📦 Trichoderma (L)</strong></td>
+                            <td class="ame2">{results['AME II']['metadata']['trichoderma_liter']:,.0f}</td>
+                            <td class="ame4">{results['AME IV']['metadata']['trichoderma_liter']:,.0f}</td>
+                            <td><strong>{total_trichoderma:,.0f}</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+'''
+    
+    # Generate content for each divisi tab
+    for divisi_key, divisi_name in [('ame2', 'AME II'), ('ame4', 'AME IV')]:
+        divisi_data = results[divisi_name]
+        metadata = divisi_data['metadata']
+        divisi_folder = divisi_name.replace(" ", "_")
+        
+        # Collect images for this divisi
+        divisi_dir = output_dir / divisi_folder
+        png_files = sorted([f for f in divisi_dir.iterdir() if f.suffix == '.png']) if divisi_dir.exists() else []
+        
+        html_content += f'''
+        <!-- TAB: {divisi_name} -->
+        <div id="tab-{divisi_key}" class="tab-content">
+            <div class="section">
+                <h2>📊 Hasil Analisis {divisi_name}</h2>
+                <div class="summary-cards">
+                    <div class="card biru">
+                        <div class="number">{metadata['total_trees']:,}</div>
+                        <div class="label">Total Pohon</div>
+                    </div>
+                    <div class="card merah">
+                        <div class="number">{metadata['merah_count']:,}</div>
+                        <div class="label">🔴 MERAH<br>→ Asap Cair</div>
+                    </div>
+                    <div class="card oranye">
+                        <div class="number">{metadata['oranye_count']:,}</div>
+                        <div class="label">🟠 ORANYE<br>→ Trichoderma</div>
+                    </div>
+                    <div class="card kuning">
+                        <div class="number">{metadata['kuning_count']:,}</div>
+                        <div class="label">🟡 KUNING<br>→ Investigasi</div>
+                    </div>
+                    <div class="card hijau">
+                        <div class="number">{metadata['hijau_count']:,}</div>
+                        <div class="label">🟢 HIJAU</div>
+                    </div>
+                </div>
+                
+                <!-- Logistics -->
+                <div style="background: linear-gradient(135deg, {'#3498db' if divisi_key == 'ame2' else '#9b59b6'} 0%, {'#2980b9' if divisi_key == 'ame2' else '#8e44ad'} 100%); border-radius: 15px; padding: 20px; color: white; margin: 20px 0;">
+                    <h3>📦 Kebutuhan Logistik {divisi_name}</h3>
+                    <div style="display: flex; justify-content: space-around; margin-top: 15px; text-align: center;">
+                        <div>
+                            <div style="font-size: 1.8em; font-weight: bold;">{metadata['asap_cair_liter']:,.0f} L</div>
+                            <div>Asap Cair</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 1.8em; font-weight: bold;">{metadata['trichoderma_liter']:,.0f} L</div>
+                            <div>Trichoderma</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 1.8em; font-weight: bold;">{metadata['asap_cair_liter'] + metadata['trichoderma_liter']:,.0f} L</div>
+                            <div>Total</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Visualizations -->
+            <div class="section">
+                <h2>📈 Visualisasi {divisi_name}</h2>
+                <div class="image-gallery">
+'''
+        
+        # Add images
+        for png_file in png_files[:12]:  # Limit to 12 images
+            # Convert to base64
+            import base64
+            with open(png_file, 'rb') as img_file:
+                img_data = base64.b64encode(img_file.read()).decode('utf-8')
+            
+            img_title = png_file.stem.replace('_', ' ').title()
+            html_content += f'''
+                    <div class="image-container">
+                        <h3>{img_title}</h3>
+                        <img src="data:image/png;base64,{img_data}" alt="{img_title}" onclick="openModal(this)">
+                    </div>
+'''
+        
+        html_content += '''
+                </div>
+            </div>
+        </div>
+'''
+    
+    # Close HTML
+    html_content += '''
+        <footer>
+            <p>POAC v3.3 - Algoritma Cincin Api | Multi-Divisi Analysis</p>
+            <p>Generated: ''' + datetime.now().strftime("%Y-%m-%d %H:%M:%S") + '''</p>
+        </footer>
+    </div>
+    
+    <!-- Modal for image zoom -->
+    <div id="imageModal" class="modal" onclick="closeModal()">
+        <span class="modal-close">&times;</span>
+        <img id="modalImg" src="">
+    </div>
+    
+    <script>
+        function showTab(tabId) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected tab
+            document.getElementById('tab-' + tabId).classList.add('active');
+            event.target.classList.add('active');
+        }
+        
+        function openModal(img) {
+            document.getElementById('imageModal').style.display = 'block';
+            document.getElementById('modalImg').src = img.src;
+        }
+        
+        function closeModal() {
+            document.getElementById('imageModal').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
+'''
+    
+    # Write HTML
+    with open(html_path, 'w', encoding='utf-8') as f:
+        f.write(html_content)
+    
+    logger.info(f"Multi-Divisi HTML Report generated: {html_path}")
+    return str(html_path)
