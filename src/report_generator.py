@@ -28,26 +28,35 @@ STATUS_DESCRIPTIONS = {
         "emoji": "🔴",
         "meaning": "Pohon terdeteksi dalam kluster aktif Ganoderma",
         "criteria": "Persentil ≤ threshold DAN ≥3 tetangga sakit",
-        "action": "**PRIORITAS UTAMA** - Segera lakukan sanitasi sesuai SOP",
-        "urgency": "TINGGI"
-    },
-    "KUNING": {
-        "label": "KUNING (RISIKO TINGGI)",
-        "color": "#f1c40f",
-        "emoji": "🟡",
-        "meaning": "Pohon berisiko tinggi, berpotensi menjadi kluster",
-        "criteria": "Persentil ≤ threshold DAN 1-2 tetangga sakit",
-        "action": "Monitoring ketat, periksa perkembangan setiap 2 minggu",
-        "urgency": "SEDANG"
+        "action": "**PRIORITAS UTAMA** - Tim Sanitasi, aplikasi Asap Cair (3 liter/pohon)",
+        "urgency": "TINGGI",
+        "team": "Tim Sanitasi",
+        "treatment": "Asap Cair",
+        "liter_per_tree": 3.0
     },
     "ORANYE": {
-        "label": "ORANYE (NOISE/KENTOSAN)",
+        "label": "ORANYE (CINCIN API)",
         "color": "#e67e22",
         "emoji": "🟠",
+        "meaning": "Pohon sehat yang bertetangga langsung dengan MERAH (Cincin Api)",
+        "criteria": "Tetangga langsung dari pohon MERAH (apapun nilai NDRE)",
+        "action": "**PRIORITAS KEDUA** - Tim APH, aplikasi Trichoderma (2 liter/pohon)",
+        "urgency": "TINGGI",
+        "team": "Tim APH",
+        "treatment": "Trichoderma",
+        "liter_per_tree": 2.0
+    },
+    "KUNING": {
+        "label": "KUNING (SUSPECT TERISOLASI)",
+        "color": "#f1c40f",
+        "emoji": "🟡",
         "meaning": "Pohon suspect tapi terisolasi (tidak membentuk kluster)",
-        "criteria": "Persentil ≤ threshold DAN 0 tetangga sakit",
+        "criteria": "Persentil ≤ threshold DAN 0-2 tetangga sakit, bukan tetangga MERAH",
         "action": "Investigasi lapangan untuk konfirmasi kondisi",
-        "urgency": "RENDAH"
+        "urgency": "SEDANG",
+        "team": "Tim Investigasi",
+        "treatment": "-",
+        "liter_per_tree": 0
     },
     "HIJAU": {
         "label": "HIJAU (SEHAT)",
@@ -56,7 +65,10 @@ STATUS_DESCRIPTIONS = {
         "meaning": "Pohon dalam kondisi sehat/normal",
         "criteria": "Persentil > threshold",
         "action": "Tidak perlu tindakan, monitoring rutin",
-        "urgency": "TIDAK ADA"
+        "urgency": "TIDAK ADA",
+        "team": "-",
+        "treatment": "-",
+        "liter_per_tree": 0
     }
 }
 
@@ -121,6 +133,10 @@ def generate_readme(
     files_in_dir = [f.name for f in output_dir.iterdir() if f.is_file()]
     
     # Build README content
+    logistik = metadata.get('logistik', {})
+    asap_cair = logistik.get('asap_cair_liter', 0)
+    trichoderma = logistik.get('trichoderma_liter', 0)
+    
     content = f"""# 📊 Hasil Analisis Algoritma Cincin Api
 
 **Tanggal Generate:** {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}  
@@ -136,10 +152,20 @@ def generate_readme(
 | **Threshold Optimal** | {metadata.get('optimal_threshold_pct', 'N/A')} |
 | **Total Pohon** | {metadata.get('total_trees', 0):,} |
 | 🔴 MERAH (Kluster Aktif) | {metadata.get('merah_count', 0):,} |
-| 🟡 KUNING (Risiko Tinggi) | {metadata.get('kuning_count', 0):,} |
-| 🟠 ORANYE (Noise) | {metadata.get('oranye_count', 0):,} |
+| 🟠 ORANYE (Cincin Api) | {metadata.get('oranye_count', 0):,} |
+| 🟡 KUNING (Suspect Terisolasi) | {metadata.get('kuning_count', 0):,} |
 | 🟢 HIJAU (Sehat) | {metadata.get('hijau_count', 0):,} |
-| **Total Target Intervensi** | {metadata.get('merah_count', 0) + metadata.get('kuning_count', 0):,} |
+| **Total Target Intervensi** | {metadata.get('merah_count', 0) + metadata.get('oranye_count', 0):,} |
+
+---
+
+## 📦 Kebutuhan Logistik
+
+| Kategori | Jumlah Pohon | Treatment | Kebutuhan |
+|----------|-------------|-----------|-----------|
+| 🔴 MERAH (Sanitasi) | {metadata.get('merah_count', 0):,} | Asap Cair (@3 L) | **{asap_cair:,.0f} liter** |
+| 🟠 ORANYE (APH) | {metadata.get('oranye_count', 0):,} | Trichoderma (@2 L) | **{trichoderma:,.0f} liter** |
+| **TOTAL** | {metadata.get('merah_count', 0) + metadata.get('oranye_count', 0):,} | - | **{asap_cair + trichoderma:,.0f} liter** |
 
 ---
 
@@ -192,11 +218,15 @@ def generate_readme(
 ## 📋 Instruksi untuk Mandor
 
 ### Prioritas Kerja:
-1. **UTAMA:** Fokus pada pohon 🔴 MERAH (Kluster Aktif)
-2. Lakukan validasi lapangan untuk konfirmasi serangan Ganoderma
-3. Jika terkonfirmasi, lakukan sanitasi sesuai SOP perusahaan
-4. Pohon 🟡 KUNING perlu monitoring berkala (setiap 2 minggu)
-5. Pohon 🟠 ORANYE bisa diabaikan kecuali ada indikasi lain di lapangan
+1. **UTAMA (Tim Sanitasi):** Fokus pada pohon 🔴 MERAH (Kluster Aktif) - Aplikasi Asap Cair
+2. **KEDUA (Tim APH):** Tangani pohon 🟠 ORANYE (Cincin Api) - Aplikasi Trichoderma
+3. Pohon 🟡 KUNING perlu investigasi lapangan (suspect terisolasi)
+4. Pohon 🟢 HIJAU tidak perlu tindakan khusus
+
+### Logika "Cincin Api":
+- **MERAH** = Pohon dengan NDRE rendah + membentuk kluster (≥3 tetangga sakit)
+- **ORANYE** = Pohon yang bertetangga langsung dengan MERAH (untuk proteksi)
+- **Tujuan:** Menghentikan penyebaran dengan mengobati "ring" di sekitar sumber
 
 ### Tips Membaca Visualisasi:
 - **Titik besar** = Pohon dengan banyak tetangga sakit (kluster padat)
@@ -556,19 +586,38 @@ def generate_html_report(
                     </div>
                     <div class="card merah">
                         <div class="number">{metadata.get('merah_count', 0):,}</div>
-                        <div class="label">🔴 MERAH (Kluster)</div>
-                    </div>
-                    <div class="card kuning">
-                        <div class="number">{metadata.get('kuning_count', 0):,}</div>
-                        <div class="label">🟡 KUNING (Risiko)</div>
+                        <div class="label">🔴 MERAH (Kluster)<br>→ Asap Cair</div>
                     </div>
                     <div class="card oranye">
                         <div class="number">{metadata.get('oranye_count', 0):,}</div>
-                        <div class="label">🟠 ORANYE (Noise)</div>
+                        <div class="label">🟠 ORANYE (Cincin Api)<br>→ Trichoderma</div>
+                    </div>
+                    <div class="card kuning">
+                        <div class="number">{metadata.get('kuning_count', 0):,}</div>
+                        <div class="label">🟡 KUNING (Terisolasi)<br>→ Investigasi</div>
                     </div>
                     <div class="card hijau">
                         <div class="number">{metadata.get('hijau_count', 0):,}</div>
                         <div class="label">🟢 HIJAU (Sehat)</div>
+                    </div>
+                </div>
+                
+                <!-- Logistics Summary -->
+                <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 15px; padding: 25px; color: white; margin-top: 20px;">
+                    <h3 style="margin-bottom: 15px;">📦 Kebutuhan Logistik</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                        <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; text-align: center;">
+                            <div style="font-size: 1.8em; font-weight: bold;">{metadata.get('logistik', {}).get('asap_cair_liter', 0):,.0f} L</div>
+                            <div style="opacity: 0.8;">Asap Cair (MERAH)</div>
+                        </div>
+                        <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; text-align: center;">
+                            <div style="font-size: 1.8em; font-weight: bold;">{metadata.get('logistik', {}).get('trichoderma_liter', 0):,.0f} L</div>
+                            <div style="opacity: 0.8;">Trichoderma (ORANYE)</div>
+                        </div>
+                        <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 10px; text-align: center;">
+                            <div style="font-size: 1.8em; font-weight: bold;">{metadata.get('logistik', {}).get('asap_cair_liter', 0) + metadata.get('logistik', {}).get('trichoderma_liter', 0):,.0f} L</div>
+                            <div style="opacity: 0.8;">Total Kebutuhan</div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -658,16 +707,23 @@ def generate_html_report(
             
             <!-- Instructions Section -->
             <section class="section">
-                <h2>📋 Instruksi untuk Mandor</h2>
+                <h2>📋 Instruksi untuk Tim Lapangan</h2>
                 <div style="background: var(--light); padding: 25px; border-radius: 15px;">
                     <h3 style="color: var(--merah); margin-bottom: 15px;">🎯 Prioritas Kerja:</h3>
                     <ol style="line-height: 2; padding-left: 20px;">
-                        <li><strong>UTAMA:</strong> Fokus pada pohon 🔴 MERAH (Kluster Aktif) - Total: <strong>{metadata.get('merah_count', 0):,}</strong> pohon</li>
-                        <li>Lakukan validasi lapangan untuk konfirmasi serangan Ganoderma</li>
-                        <li>Jika terkonfirmasi, lakukan sanitasi sesuai SOP perusahaan</li>
-                        <li>Pohon 🟡 KUNING perlu monitoring berkala (setiap 2 minggu)</li>
-                        <li>Pohon 🟠 ORANYE bisa diabaikan kecuali ada indikasi lain di lapangan</li>
+                        <li><strong>TIM SANITASI (🔴 MERAH):</strong> Aplikasi Asap Cair - Total: <strong>{metadata.get('merah_count', 0):,}</strong> pohon × 3 liter = <strong>{metadata.get('merah_count', 0) * 3:,}</strong> liter</li>
+                        <li><strong>TIM APH (🟠 ORANYE - Cincin Api):</strong> Aplikasi Trichoderma - Total: <strong>{metadata.get('oranye_count', 0):,}</strong> pohon × 2 liter = <strong>{metadata.get('oranye_count', 0) * 2:,}</strong> liter</li>
+                        <li><strong>TIM INVESTIGASI (🟡 KUNING):</strong> Validasi lapangan untuk pohon suspect terisolasi</li>
+                        <li>Pohon 🟢 HIJAU tidak perlu tindakan khusus</li>
                     </ol>
+                    
+                    <h3 style="color: var(--oranye); margin: 20px 0 15px 0;">🔥 Logika "Cincin Api":</h3>
+                    <ul style="line-height: 2; padding-left: 20px;">
+                        <li><strong>MERAH</strong> = Pohon dengan NDRE rendah + membentuk kluster (≥3 tetangga sakit)</li>
+                        <li><strong>ORANYE</strong> = Pohon yang bertetangga langsung dengan MERAH (untuk proteksi)</li>
+                        <li><strong>Tujuan:</strong> Menghentikan penyebaran dengan mengobati "ring" di sekitar sumber infeksi</li>
+                    </ul>
+                </div>
                     
                     <h3 style="color: var(--biru); margin: 25px 0 15px;">💡 Tips Membaca Visualisasi:</h3>
                     <ul style="line-height: 2; padding-left: 20px;">

@@ -30,18 +30,18 @@ if str(_parent_dir) not in sys.path:
 
 from config import CINCIN_API_CONFIG
 
-# Status colors
+# Status colors (UPDATED: ORANYE = Cincin Api, KUNING = Suspect Terisolasi)
 STATUS_COLORS = {
-    "MERAH (KLUSTER AKTIF)": "#e74c3c",
-    "KUNING (RISIKO TINGGI)": "#f1c40f", 
-    "ORANYE (NOISE/KENTOSAN)": "#e67e22",
-    "HIJAU (SEHAT)": "#27ae60"
+    "MERAH (KLUSTER AKTIF)": "#e74c3c",       # Merah - Target Sanitasi
+    "ORANYE (CINCIN API)": "#e67e22",         # Oranye - Target APH (Trichoderma)
+    "KUNING (SUSPECT TERISOLASI)": "#f1c40f", # Kuning - Investigasi
+    "HIJAU (SEHAT)": "#27ae60"                # Hijau - Normal
 }
 
 STATUS_SHORT = {
     "MERAH (KLUSTER AKTIF)": "MERAH",
-    "KUNING (RISIKO TINGGI)": "KUNING",
-    "ORANYE (NOISE/KENTOSAN)": "ORANYE",
+    "ORANYE (CINCIN API)": "ORANYE",
+    "KUNING (SUSPECT TERISOLASI)": "KUNING",
     "HIJAU (SEHAT)": "HIJAU"
 }
 
@@ -118,7 +118,12 @@ def create_dashboard(
 
 
 def _print_summary(df: pd.DataFrame, metadata: dict):
-    """Print summary statistics."""
+    """Print summary statistics with logistics."""
+    # Get logistics data
+    logistik = metadata.get('logistik', {})
+    asap_cair = logistik.get('asap_cair_liter', 0)
+    trichoderma = logistik.get('trichoderma_liter', 0)
+    
     print(f"""
 ┌─────────────────────────────────────────────────────────────────────┐
 │                    RINGKASAN ALGORITMA CINCIN API                    │
@@ -126,12 +131,17 @@ def _print_summary(df: pd.DataFrame, metadata: dict):
 │  Threshold Optimal (Auto-Tuning): {metadata['optimal_threshold_pct']:>10}                        │
 │  Total Pohon Dianalisis:          {metadata['total_trees']:>10,}                        │
 ├─────────────────────────────────────────────────────────────────────┤
-│  🔴 MERAH (Kluster Aktif):        {metadata['merah_count']:>10,}  → TARGET SANITASI     │
-│  🟡 KUNING (Risiko Tinggi):       {metadata['kuning_count']:>10,}  → MONITORING KETAT   │
-│  🟠 ORANYE (Noise/Kentosan):      {metadata['oranye_count']:>10,}  → INVESTIGASI        │
+│  🔴 MERAH (Kluster Aktif):        {metadata['merah_count']:>10,}  → SANITASI (Asap Cair)│
+│  🟠 ORANYE (Cincin Api):          {metadata['oranye_count']:>10,}  → APH (Trichoderma)  │
+│  🟡 KUNING (Suspect Terisolasi):  {metadata['kuning_count']:>10,}  → INVESTIGASI        │
 │  🟢 HIJAU (Sehat):                {metadata['hijau_count']:>10,}  → NORMAL             │
 ├─────────────────────────────────────────────────────────────────────┤
-│  Total Target Intervensi (MERAH+KUNING): {metadata['merah_count'] + metadata['kuning_count']:>10,}                   │
+│  📦 KEBUTUHAN LOGISTIK:                                              │
+│     • Asap Cair (MERAH):          {asap_cair:>10,.0f} liter           │
+│     • Trichoderma (ORANYE):       {trichoderma:>10,.0f} liter           │
+│     • Total:                      {asap_cair + trichoderma:>10,.0f} liter           │
+├─────────────────────────────────────────────────────────────────────┤
+│  Total Target Intervensi (MERAH+ORANYE): {metadata['merah_count'] + metadata['oranye_count']:>10,}                   │
 └─────────────────────────────────────────────────────────────────────┘
 """)
 

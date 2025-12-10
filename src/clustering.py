@@ -6,7 +6,12 @@ Fitur:
 1. Ranking Relatif (Percentile Rank per Blok)
 2. Elbow Method Auto-Tuning
 3. Deteksi Kluster dengan analisis tetangga (min 3 tetangga sakit)
-4. Klasifikasi: MERAH (Kluster Aktif), KUNING (Risiko Tinggi), ORANYE (Noise), HIJAU (Sehat)
+4. Klasifikasi Baru:
+   - MERAH: Kluster Aktif (persentil rendah + ≥3 tetangga sakit) → Tim Sanitasi
+   - ORANYE: Cincin Api (tetangga langsung dari MERAH) → Tim APH
+   - KUNING: Suspect Terisolasi (persentil rendah + 0-2 tetangga) → Investigasi
+   - HIJAU: Sehat (persentil di atas threshold)
+5. Kalkulasi Logistik (Asap Cair & Trichoderma)
 """
 
 import pandas as pd
@@ -27,11 +32,15 @@ if str(_parent_dir) not in sys.path:
 from src.spatial import get_hex_neighbors
 from config import CINCIN_API_CONFIG
 
-# Status Labels
+# Status Labels (Updated - ORANYE sekarang Cincin Api, KUNING untuk noise)
 STATUS_MERAH = "MERAH (KLUSTER AKTIF)"
-STATUS_KUNING = "KUNING (RISIKO TINGGI)"
-STATUS_ORANYE = "ORANYE (NOISE/KENTOSAN)"
+STATUS_ORANYE = "ORANYE (CINCIN API)"      # BARU: Tetangga dari MERAH
+STATUS_KUNING = "KUNING (SUSPECT TERISOLASI)"  # BARU: Noise/terisolasi
 STATUS_HIJAU = "HIJAU (SEHAT)"
+
+# Konstanta Logistik (liter per pohon)
+ASAP_CAIR_PER_POHON = 3.0    # Untuk MERAH (Sanitasi)
+TRICHODERMA_PER_POHON = 2.0  # Untuk ORANYE (APH/Proteksi)
 
 # Load config values (can be overridden at runtime)
 DEFAULT_MIN_SICK_NEIGHBORS = CINCIN_API_CONFIG.get("min_sick_neighbors", 3)
@@ -225,16 +234,18 @@ def classify_trees_with_clustering(
     min_sick_neighbors: int = None
 ) -> pd.DataFrame:
     """
-    LANGKAH 6: KLASIFIKASI AKHIR
+    LANGKAH 6: KLASIFIKASI AKHIR (LOGIKA BARU)
     
-    Mengklasifikasikan setiap pohon berdasarkan threshold optimal
-    dan jumlah tetangga sakit.
+    Mengklasifikasikan setiap pohon dengan logika 2-tahap:
     
-    Status:
+    TAHAP 1 - Dari Analisis NDRE:
     - HIJAU (SEHAT): Persentil > threshold
     - MERAH (KLUSTER AKTIF): Persentil <= threshold DAN >= min_sick_neighbors tetangga sakit
-    - KUNING (RISIKO TINGGI): Persentil <= threshold DAN 1 s/d (min_sick_neighbors-1) tetangga sakit
-    - ORANYE (NOISE/KENTOSAN): Persentil <= threshold DAN 0 tetangga sakit
+    - KUNING (SUSPECT TERISOLASI): Persentil <= threshold DAN 0 s/d (min_sick_neighbors-1) tetangga sakit
+    
+    TAHAP 2 - Dari Posisi Fisik (Cincin Api):
+    - ORANYE (CINCIN API): Pohon yang BERTETANGGA LANGSUNG dengan MERAH
+                          (apapun nilai NDRE-nya, KECUALI sudah MERAH)
     
     Args:
         df: DataFrame dengan Ranking_Persentil
@@ -256,8 +267,11 @@ def classify_trees_with_clustering(
     df_result['Jumlah_Tetangga_Sakit'] = 0
     df_result['Status_Risiko'] = STATUS_HIJAU
     df_result['Skor_Kepadatan_Kluster'] = 0
+    df_result['Is_Cincin_Api'] = False  # Flag untuk ORANYE (Cincin Api)
     
-    # Get suspects
+    # =========================================================================
+    # TAHAP 1: Klasifikasi berdasarkan NDRE (MERAH dan KUNING)
+    # =========================================================================
     suspect_mask = df_result['Ranking_Persentil'] <= threshold
     suspect_indices = df_result[suspect_mask].index
     
@@ -269,13 +283,51 @@ def classify_trees_with_clustering(
         df_result.loc[idx, 'Jumlah_Tetangga_Sakit'] = sick_neighbors
         df_result.loc[idx, 'Skor_Kepadatan_Kluster'] = sick_neighbors
         
-        # Classify based on neighbor count (using configurable threshold)
+        # Classify based on neighbor count
         if sick_neighbors >= min_sick_neighbors:
             df_result.loc[idx, 'Status_Risiko'] = STATUS_MERAH
-        elif sick_neighbors >= 1:
-            df_result.loc[idx, 'Status_Risiko'] = STATUS_KUNING
         else:
-            df_result.loc[idx, 'Status_Risiko'] = STATUS_ORANYE
+            # KUNING untuk suspect terisolasi (0 s/d min_sick_neighbors-1 tetangga)
+            df_result.loc[idx, 'Status_Risiko'] = STATUS_KUNING
+    
+    # =========================================================================
+    # TAHAP 2: Identifikasi CINCIN API (ORANYE) - Tetangga dari MERAH
+    # =========================================================================
+    # Dapatkan semua pohon MERAH
+    merah_indices = df_result[df_result['Status_Risiko'] == STATUS_MERAH].index
+    merah_coords = set()
+    
+    for idx in merah_indices:
+        row = df_result.loc[idx]
+        merah_coords.add((row['Blok'], int(row['N_BARIS']), int(row['N_POKOK'])))
+    
+    logger.info(f"Finding Cincin Api neighbors for {len(merah_indices)} MERAH trees")
+    
+    # Untuk setiap pohon MERAH, tandai tetangganya sebagai ORANYE (Cincin Api)
+    cincin_api_count = 0
+    for idx in merah_indices:
+        row = df_result.loc[idx]
+        blok = row['Blok']
+        baris = int(row['N_BARIS'])
+        pokok = int(row['N_POKOK'])
+        
+        # Get hexagonal neighbors
+        neighbors = get_hex_neighbors(baris, pokok)
+        
+        for n_baris, n_pokok in neighbors:
+            neighbor_key = (blok, n_baris, n_pokok)
+            if neighbor_key in coord_lookup:
+                neighbor_idx = coord_lookup[neighbor_key]
+                current_status = df_result.loc[neighbor_idx, 'Status_Risiko']
+                
+                # Hanya ubah ke ORANYE jika BUKAN MERAH
+                # (bisa mengubah HIJAU atau KUNING menjadi ORANYE)
+                if current_status != STATUS_MERAH:
+                    df_result.loc[neighbor_idx, 'Status_Risiko'] = STATUS_ORANYE
+                    df_result.loc[neighbor_idx, 'Is_Cincin_Api'] = True
+                    cincin_api_count += 1
+    
+    logger.info(f"Cincin Api (ORANYE) identified: {cincin_api_count} trees (may include duplicates)")
     
     # Log statistics
     status_counts = df_result['Status_Risiko'].value_counts()
@@ -354,23 +406,65 @@ def run_cincin_api_algorithm(
     # Prepare metadata
     status_counts = df_classified['Status_Risiko'].value_counts().to_dict()
     
+    # Hitung kebutuhan logistik
+    merah_count = status_counts.get(STATUS_MERAH, 0)
+    oranye_count = status_counts.get(STATUS_ORANYE, 0)
+    kuning_count = status_counts.get(STATUS_KUNING, 0)
+    hijau_count = status_counts.get(STATUS_HIJAU, 0)
+    
+    logistik = calculate_logistics(merah_count, oranye_count)
+    
     metadata = {
         'optimal_threshold': optimal_threshold,
         'optimal_threshold_pct': f"{optimal_threshold*100:.0f}%",
         'total_trees': len(df_classified),
         'status_counts': status_counts,
-        'merah_count': status_counts.get(STATUS_MERAH, 0),
-        'kuning_count': status_counts.get(STATUS_KUNING, 0),
-        'oranye_count': status_counts.get(STATUS_ORANYE, 0),
-        'hijau_count': status_counts.get(STATUS_HIJAU, 0),
-        'simulation_data': simulation_df
+        'merah_count': merah_count,
+        'oranye_count': oranye_count,
+        'kuning_count': kuning_count,
+        'hijau_count': hijau_count,
+        'simulation_data': simulation_df,
+        # Logistik
+        'logistik': logistik,
+        'asap_cair_liter': logistik['asap_cair_liter'],
+        'trichoderma_liter': logistik['trichoderma_liter']
     }
     
     logger.info(f"Threshold Optimal: {metadata['optimal_threshold_pct']}")
-    logger.info(f"MERAH (Kluster Aktif): {metadata['merah_count']}")
-    logger.info(f"KUNING (Risiko Tinggi): {metadata['kuning_count']}")
-    logger.info(f"ORANYE (Noise): {metadata['oranye_count']}")
+    logger.info(f"MERAH (Kluster Aktif): {metadata['merah_count']} → Asap Cair: {logistik['asap_cair_liter']:.0f} liter")
+    logger.info(f"ORANYE (Cincin Api): {metadata['oranye_count']} → Trichoderma: {logistik['trichoderma_liter']:.0f} liter")
+    logger.info(f"KUNING (Suspect Terisolasi): {metadata['kuning_count']}")
     logger.info(f"HIJAU (Sehat): {metadata['hijau_count']}")
+    
+    return df_classified, metadata
+
+
+def calculate_logistics(merah_count: int, oranye_count: int) -> Dict:
+    """
+    Menghitung kebutuhan logistik berdasarkan jumlah pohon per kategori.
+    
+    MERAH → Asap Cair (3 liter/pohon) - Tim Sanitasi
+    ORANYE → Trichoderma (2 liter/pohon) - Tim APH
+    
+    Args:
+        merah_count: Jumlah pohon MERAH (Kluster Aktif)
+        oranye_count: Jumlah pohon ORANYE (Cincin Api)
+        
+    Returns:
+        Dict dengan estimasi kebutuhan logistik
+    """
+    asap_cair_liter = merah_count * ASAP_CAIR_PER_POHON
+    trichoderma_liter = oranye_count * TRICHODERMA_PER_POHON
+    
+    return {
+        'merah_count': merah_count,
+        'oranye_count': oranye_count,
+        'asap_cair_per_pohon': ASAP_CAIR_PER_POHON,
+        'trichoderma_per_pohon': TRICHODERMA_PER_POHON,
+        'asap_cair_liter': asap_cair_liter,
+        'trichoderma_liter': trichoderma_liter,
+        'total_liter': asap_cair_liter + trichoderma_liter
+    }
     
     return df_classified, metadata
 
@@ -379,15 +473,19 @@ def get_priority_targets(df: pd.DataFrame, top_n: int = 100) -> pd.DataFrame:
     """
     Mendapatkan daftar target prioritas untuk Mandor.
     
+    Prioritas:
+    1. MERAH (Kluster Aktif) - Target Sanitasi (Asap Cair)
+    2. ORANYE (Cincin Api) - Target APH (Trichoderma)
+    
     Diurutkan berdasarkan:
-    1. Status (MERAH lebih prioritas)
+    1. Status (MERAH > ORANYE)
     2. Skor Kepadatan Kluster (lebih tinggi = lebih prioritas)
     """
-    # Filter MERAH dan KUNING saja
-    priority_df = df[df['Status_Risiko'].isin([STATUS_MERAH, STATUS_KUNING])].copy()
+    # Filter MERAH dan ORANYE (target intervensi utama)
+    priority_df = df[df['Status_Risiko'].isin([STATUS_MERAH, STATUS_ORANYE])].copy()
     
-    # Sort by status (MERAH first) then by density score
-    status_order = {STATUS_MERAH: 0, STATUS_KUNING: 1}
+    # Sort by status (MERAH first, then ORANYE) then by density score
+    status_order = {STATUS_MERAH: 0, STATUS_ORANYE: 1}
     priority_df['_status_order'] = priority_df['Status_Risiko'].map(status_order)
     priority_df = priority_df.sort_values(
         ['_status_order', 'Skor_Kepadatan_Kluster'], 
@@ -396,3 +494,24 @@ def get_priority_targets(df: pd.DataFrame, top_n: int = 100) -> pd.DataFrame:
     priority_df = priority_df.drop('_status_order', axis=1)
     
     return priority_df.head(top_n)
+
+
+def get_sanitasi_targets(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Mendapatkan daftar target untuk Tim Sanitasi (MERAH).
+    
+    Returns:
+        DataFrame pohon MERAH untuk Asap Cair
+    """
+    return df[df['Status_Risiko'] == STATUS_MERAH].copy()
+
+
+def get_aph_targets(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Mendapatkan daftar target untuk Tim APH (ORANYE - Cincin Api).
+    
+    Returns:
+        DataFrame pohon ORANYE untuk Trichoderma
+    """
+    return df[df['Status_Risiko'] == STATUS_ORANYE].copy()
+
