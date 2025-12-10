@@ -786,12 +786,12 @@ def add_legend_to_figure(fig, metadata: dict, position: str = 'bottom'):
     """
     legend_text = (
         f"PANDUAN WARNA: 🔴 MERAH = Kluster Aktif (Sanitasi) | "
-        f"🟡 KUNING = Risiko Tinggi (Monitoring) | "
-        f"🟠 ORANYE = Noise (Investigasi) | "
+        f"🟠 ORANYE = Cincin Api (APH/Trichoderma) | "
+        f"🟡 KUNING = Suspect Terisolasi (Investigasi) | "
         f"🟢 HIJAU = Sehat\n"
         f"Threshold: {metadata.get('optimal_threshold_pct', 'N/A')} | "
         f"Total: {metadata.get('total_trees', 0):,} pohon | "
-        f"Target Intervensi: {metadata.get('merah_count', 0) + metadata.get('kuning_count', 0):,} pohon"
+        f"Target Intervensi: {metadata.get('merah_count', 0) + metadata.get('oranye_count', 0):,} pohon"
     )
     
     if position == 'bottom':

@@ -219,8 +219,8 @@ def _create_main_dashboard(df: pd.DataFrame, metadata: dict):
         ['Threshold Optimal', metadata['optimal_threshold_pct']],
         ['', ''],
         ['MERAH (Kluster)', f"{metadata['merah_count']:,} ({pct_merah:.2f}%)"],
-        ['KUNING (Risiko)', f"{metadata['kuning_count']:,}"],
-        ['ORANYE (Noise)', f"{metadata['oranye_count']:,}"],
+        ['ORANYE (Cincin Api)', f"{metadata['oranye_count']:,}"],
+        ['KUNING (Suspect)', f"{metadata['kuning_count']:,}"],
         ['HIJAU (Sehat)', f"{metadata['hijau_count']:,}"],
         ['', ''],
         ['Total Intervensi', f"{total_intervensi:,} ({pct_intervensi:.2f}%)"],
@@ -254,9 +254,9 @@ def _create_main_dashboard(df: pd.DataFrame, metadata: dict):
 def _add_legend_footer(fig, metadata: dict):
     """Add informative legend footer to figure."""
     legend_text = (
-        "PANDUAN: 🔴 MERAH = Kluster Aktif (→ Sanitasi) │ "
-        "🟡 KUNING = Risiko Tinggi (→ Monitoring) │ "
-        "🟠 ORANYE = Noise (→ Investigasi) │ "
+        "PANDUAN: 🔴 MERAH = Kluster Aktif (→ Sanitasi/Asap Cair) │ "
+        "🟠 ORANYE = Cincin Api (→ APH/Trichoderma) │ "
+        "🟡 KUNING = Suspect Terisolasi (→ Investigasi) │ "
         "🟢 HIJAU = Sehat"
     )
     
@@ -285,20 +285,20 @@ def _create_block_heatmap(df: pd.DataFrame):
     block_stats = df.groupby('Blok').agg({
         'Status_Risiko': [
             lambda x: (x == 'MERAH (KLUSTER AKTIF)').sum(),
-            lambda x: (x == 'KUNING (RISIKO TINGGI)').sum(),
-            lambda x: (x == 'ORANYE (NOISE/KENTOSAN)').sum(),
+            lambda x: (x == 'ORANYE (CINCIN API)').sum(),
+            lambda x: (x == 'KUNING (SUSPECT TERISOLASI)').sum(),
             'count'
         ]
     }).reset_index()
-    block_stats.columns = ['Blok', 'MERAH', 'KUNING', 'ORANYE', 'TOTAL']
+    block_stats.columns = ['Blok', 'MERAH', 'ORANYE', 'KUNING', 'TOTAL']
     block_stats = block_stats.sort_values('MERAH', ascending=False)
     
     x = np.arange(len(block_stats))
     width = 0.25
     
     bars1 = ax.bar(x - width, block_stats['MERAH'], width, label='MERAH (Kluster)', color='#e74c3c')
-    bars2 = ax.bar(x, block_stats['KUNING'], width, label='KUNING (Risiko)', color='#f1c40f')
-    bars3 = ax.bar(x + width, block_stats['ORANYE'], width, label='ORANYE (Noise)', color='#e67e22')
+    bars2 = ax.bar(x, block_stats['ORANYE'], width, label='ORANYE (Cincin Api)', color='#e67e22')
+    bars3 = ax.bar(x + width, block_stats['KUNING'], width, label='KUNING (Suspect)', color='#f1c40f')
     
     ax.set_xlabel('Blok', fontsize=12)
     ax.set_ylabel('Jumlah Pohon', fontsize=12)
@@ -396,14 +396,14 @@ def _create_block_detail(df: pd.DataFrame):
             sizes.append(200)
             edge_colors.append('darkred')
             edge_widths.append(2)
-        elif status == 'KUNING (RISIKO TINGGI)':
-            sizes.append(150)
+        elif status == 'ORANYE (CINCIN API)':
+            sizes.append(180)
             edge_colors.append('darkorange')
+            edge_widths.append(2)
+        elif status == 'KUNING (SUSPECT TERISOLASI)':
+            sizes.append(140)
+            edge_colors.append('olive')
             edge_widths.append(1.5)
-        elif status == 'ORANYE (NOISE/KENTOSAN)':
-            sizes.append(120)
-            edge_colors.append('black')
-            edge_widths.append(1)
         else:  # HIJAU
             sizes.append(60)
             edge_colors.append('darkgreen')
@@ -419,8 +419,8 @@ def _create_block_detail(df: pd.DataFrame):
         x_coords.append(pokok + x_offset)
         y_coords.append(baris)
     
-    # Plot in layers: HIJAU first, then ORANYE, KUNING, MERAH on top
-    status_order = ['HIJAU (SEHAT)', 'ORANYE (NOISE/KENTOSAN)', 'KUNING (RISIKO TINGGI)', 'MERAH (KLUSTER AKTIF)']
+    # Plot in layers: HIJAU first, then KUNING, ORANYE, MERAH on top
+    status_order = ['HIJAU (SEHAT)', 'KUNING (SUSPECT TERISOLASI)', 'ORANYE (CINCIN API)', 'MERAH (KLUSTER AKTIF)']
     
     for status in status_order:
         mask = df_block['Status_Risiko'] == status
@@ -438,15 +438,15 @@ def _create_block_detail(df: pd.DataFrame):
     
     # Count statistics
     merah_count = len(df_block[df_block["Status_Risiko"]=="MERAH (KLUSTER AKTIF)"])
-    kuning_count = len(df_block[df_block["Status_Risiko"]=="KUNING (RISIKO TINGGI)"])
-    oranye_count = len(df_block[df_block["Status_Risiko"]=="ORANYE (NOISE/KENTOSAN)"])
+    oranye_count = len(df_block[df_block["Status_Risiko"]=="ORANYE (CINCIN API)"])
+    kuning_count = len(df_block[df_block["Status_Risiko"]=="KUNING (SUSPECT TERISOLASI)"])
     hijau_count = len(df_block[df_block["Status_Risiko"]=="HIJAU (SEHAT)"])
     
     # Create legend with larger markers
     legend_elements = [
         mpatches.Patch(color='#e74c3c', label=f'MERAH - Kluster Aktif ({merah_count})', linewidth=2, edgecolor='darkred'),
-        mpatches.Patch(color='#f1c40f', label=f'KUNING - Risiko Tinggi ({kuning_count})'),
-        mpatches.Patch(color='#e67e22', label=f'ORANYE - Noise ({oranye_count})'),
+        mpatches.Patch(color='#e67e22', label=f'ORANYE - Cincin Api ({oranye_count})'),
+        mpatches.Patch(color='#f1c40f', label=f'KUNING - Suspect ({kuning_count})'),
         mpatches.Patch(color='#27ae60', label=f'HIJAU - Sehat ({hijau_count})')
     ]
     ax.legend(handles=legend_elements, loc='upper right', fontsize=12, 
@@ -455,7 +455,7 @@ def _create_block_detail(df: pd.DataFrame):
     ax.set_xlabel('Nomor Pokok (N_POKOK)', fontsize=14)
     ax.set_ylabel('Nomor Baris (N_BARIS)', fontsize=14)
     ax.set_title(f'Peta Detail Blok {top_block} - KLUSTER GANODERMA\n'
-                f'(Total: {len(df_block)} pohon | MERAH: {merah_count} | KUNING: {kuning_count})', 
+                f'(Total: {len(df_block)} pohon | MERAH: {merah_count} | ORANYE: {oranye_count} | KUNING: {kuning_count})', 
                 fontsize=16, fontweight='bold')
     ax.invert_yaxis()
     ax.grid(True, alpha=0.3, linestyle='--')
@@ -538,14 +538,14 @@ def _create_single_block_detail(df: pd.DataFrame, block_name: str, rank: int, me
             sizes.append(200)
             edge_colors.append('darkred')
             edge_widths.append(2)
-        elif status == 'KUNING (RISIKO TINGGI)':
-            sizes.append(150)
+        elif status == 'ORANYE (CINCIN API)':
+            sizes.append(180)
             edge_colors.append('darkorange')
+            edge_widths.append(2)
+        elif status == 'KUNING (SUSPECT TERISOLASI)':
+            sizes.append(140)
+            edge_colors.append('olive')
             edge_widths.append(1.5)
-        elif status == 'ORANYE (NOISE/KENTOSAN)':
-            sizes.append(120)
-            edge_colors.append('black')
-            edge_widths.append(1)
         else:
             sizes.append(60)
             edge_colors.append('darkgreen')
@@ -562,7 +562,7 @@ def _create_single_block_detail(df: pd.DataFrame, block_name: str, rank: int, me
         y_coords.append(baris)
     
     # Plot in layers
-    status_order = ['HIJAU (SEHAT)', 'ORANYE (NOISE/KENTOSAN)', 'KUNING (RISIKO TINGGI)', 'MERAH (KLUSTER AKTIF)']
+    status_order = ['HIJAU (SEHAT)', 'KUNING (SUSPECT TERISOLASI)', 'ORANYE (CINCIN API)', 'MERAH (KLUSTER AKTIF)']
     
     for status in status_order:
         mask = df_block['Status_Risiko'] == status
@@ -580,16 +580,16 @@ def _create_single_block_detail(df: pd.DataFrame, block_name: str, rank: int, me
     
     # Count statistics
     merah_count = len(df_block[df_block["Status_Risiko"]=="MERAH (KLUSTER AKTIF)"])
-    kuning_count = len(df_block[df_block["Status_Risiko"]=="KUNING (RISIKO TINGGI)"])
-    oranye_count = len(df_block[df_block["Status_Risiko"]=="ORANYE (NOISE/KENTOSAN)"])
+    oranye_count = len(df_block[df_block["Status_Risiko"]=="ORANYE (CINCIN API)"])
+    kuning_count = len(df_block[df_block["Status_Risiko"]=="KUNING (SUSPECT TERISOLASI)"])
     hijau_count = len(df_block[df_block["Status_Risiko"]=="HIJAU (SEHAT)"])
     total_count = len(df_block)
     
     # Create legend
     legend_elements = [
         mpatches.Patch(color='#e74c3c', label=f'MERAH - Kluster Aktif ({merah_count})'),
-        mpatches.Patch(color='#f1c40f', label=f'KUNING - Risiko Tinggi ({kuning_count})'),
-        mpatches.Patch(color='#e67e22', label=f'ORANYE - Noise ({oranye_count})'),
+        mpatches.Patch(color='#e67e22', label=f'ORANYE - Cincin Api ({oranye_count})'),
+        mpatches.Patch(color='#f1c40f', label=f'KUNING - Suspect ({kuning_count})'),
         mpatches.Patch(color='#27ae60', label=f'HIJAU - Sehat ({hijau_count})')
     ]
     ax.legend(handles=legend_elements, loc='upper right', fontsize=12, 
@@ -600,7 +600,7 @@ def _create_single_block_detail(df: pd.DataFrame, block_name: str, rank: int, me
     
     # Title with rank number
     ax.set_title(f'#{rank:02d} - BLOK {block_name} - PETA KLUSTER GANODERMA\n'
-                f'Total Pohon: {total_count} | MERAH: {merah_count} | KUNING: {kuning_count} | ORANYE: {oranye_count}', 
+                f'Total Pohon: {total_count} | MERAH: {merah_count} | ORANYE: {oranye_count} | KUNING: {kuning_count}', 
                 fontsize=16, fontweight='bold', color='darkred' if rank <= 3 else 'black')
     
     ax.invert_yaxis()
