@@ -407,7 +407,8 @@ def generate_block_cluster_maps(all_results: Dict, output_dir: Path, top_n: int 
             if len(df_block) == 0:
                 continue
             
-            fig, ax = plt.subplots(figsize=(12, 10))
+            # Larger figure size for clearer visualization
+            fig, ax = plt.subplots(figsize=(20, 16))
             
             # Define colors for each status
             status_colors = {
@@ -417,7 +418,7 @@ def generate_block_cluster_maps(all_results: Dict, output_dir: Path, top_n: int 
                 'HIJAU (SEHAT)': '#27ae60'
             }
             
-            # Plot each status group
+            # Plot each status group with larger markers
             for status, color in status_colors.items():
                 mask = df_block['Status_Risiko'] == status
                 if mask.sum() > 0:
@@ -425,40 +426,58 @@ def generate_block_cluster_maps(all_results: Dict, output_dir: Path, top_n: int 
                         df_block.loc[mask, 'N_BARIS'],
                         df_block.loc[mask, 'N_POKOK'],
                         c=color,
-                        s=50,
-                        alpha=0.7,
-                        label=status.split('(')[0].strip()
+                        s=120,  # Larger marker size
+                        alpha=0.75,
+                        label=status.split('(')[0].strip(),
+                        edgecolors='white',
+                        linewidths=0.5
                     )
             
-            # Add title and labels
+            # Add title and labels with larger fonts
             merah_count = (df_block['Status_Risiko'] == 'MERAH (KLUSTER AKTIF)').sum()
             oranye_count = (df_block['Status_Risiko'] == 'ORANYE (CINCIN API)').sum()
+            kuning_count = (df_block['Status_Risiko'] == 'KUNING (SUSPECT TERISOLASI)').sum()
+            hijau_count = (df_block['Status_Risiko'] == 'HIJAU (SEHAT)').sum()
             
             ax.set_title(
-                f"BLOK {blok} - {preset_info['display_name'].upper()}\n"
-                f"MERAH: {merah_count} | ORANYE: {oranye_count}",
-                fontsize=14, fontweight='bold', color=preset_info['color']
+                f"🗺️ PETA KLUSTER GANODERMA - BLOK {blok}\n"
+                f"{preset_info['icon']} Preset: {preset_info['display_name'].upper()} | "
+                f"Threshold: {result['metadata']['optimal_threshold_pct']}\n"
+                f"🔴 MERAH: {merah_count} | 🟠 ORANYE: {oranye_count} | "
+                f"🟡 KUNING: {kuning_count} | 🟢 HIJAU: {hijau_count}",
+                fontsize=18, fontweight='bold', color=preset_info['color'], pad=20
             )
-            ax.set_xlabel('Baris', fontsize=11)
-            ax.set_ylabel('Pokok', fontsize=11)
-            ax.legend(loc='upper right', fontsize=9)
-            ax.grid(True, alpha=0.3)
+            ax.set_xlabel('Baris (N_BARIS)', fontsize=14, fontweight='bold')
+            ax.set_ylabel('Pokok (N_POKOK)', fontsize=14, fontweight='bold')
+            ax.legend(loc='upper right', fontsize=12, framealpha=0.9)
+            ax.grid(True, alpha=0.3, linestyle='--')
             ax.set_facecolor('#f8f9fa')
+            ax.tick_params(axis='both', labelsize=12)
             
-            # Add preset indicator
+            # Add preset indicator box
             ax.text(
                 0.02, 0.98, f"{preset_info['icon']} {preset_info['display_name']}",
-                transform=ax.transAxes, fontsize=12, fontweight='bold',
+                transform=ax.transAxes, fontsize=14, fontweight='bold',
                 verticalalignment='top', color=preset_info['color'],
-                bbox=dict(boxstyle='round', facecolor='white', alpha=0.8)
+                bbox=dict(boxstyle='round,pad=0.5', facecolor='white', alpha=0.9, edgecolor=preset_info['color'])
+            )
+            
+            # Add total trees info
+            total_trees = len(df_block)
+            infected_pct = (merah_count + oranye_count) / total_trees * 100
+            ax.text(
+                0.98, 0.02, f"Total: {total_trees:,} pohon | Intervensi: {merah_count + oranye_count:,} ({infected_pct:.1f}%)",
+                transform=ax.transAxes, fontsize=12,
+                verticalalignment='bottom', horizontalalignment='right',
+                bbox=dict(boxstyle='round,pad=0.3', facecolor='lightyellow', alpha=0.9)
             )
             
             plt.tight_layout()
             
-            # Save
+            # Save with higher DPI for better quality
             filename = f"cluster_map_{preset_name}_{idx:02d}_{blok}.png"
             filepath = output_dir / filename
-            fig.savefig(filepath, dpi=120, bbox_inches='tight', facecolor='white')
+            fig.savefig(filepath, dpi=150, bbox_inches='tight', facecolor='white')
             plt.close(fig)
             
             block_maps[preset_name].append({
