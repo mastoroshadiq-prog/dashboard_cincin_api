@@ -168,6 +168,8 @@ def main(
     print(f"\n📊 Data Statistics:")
     print(f"   Total Pohon: {stats['total_rows']:,}")
     print(f"   Total Blok: {stats['total_blocks']}")
+    if 'divisi_list' in stats:
+        print(f"   Divisi: {', '.join(stats['divisi_list'])}")
     
     # =========================================================================
     # STEP 2: Run Cincin Api Algorithm
@@ -184,6 +186,10 @@ def main(
         manual_threshold=threshold,
         config_override=final_config
     )
+    
+    # Add stats info to metadata
+    metadata['divisi_list'] = stats.get('divisi_list', [])
+    metadata['tahun_tanam'] = stats.get('tahun_tanam', [])
     
     # =========================================================================
     # STEP 3: Generate Dashboard

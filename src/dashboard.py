@@ -124,10 +124,15 @@ def _print_summary(df: pd.DataFrame, metadata: dict):
     asap_cair = logistik.get('asap_cair_liter', 0)
     trichoderma = logistik.get('trichoderma_liter', 0)
     
+    # Get divisi info
+    divisi_list = metadata.get('divisi_list', [])
+    divisi_str = ', '.join(divisi_list) if divisi_list else 'N/A'
+    
     print(f"""
 ┌─────────────────────────────────────────────────────────────────────┐
 │                    RINGKASAN ALGORITMA CINCIN API                    │
 ├─────────────────────────────────────────────────────────────────────┤
+│  Divisi:                          {divisi_str:>20}                   │
 │  Threshold Optimal (Auto-Tuning): {metadata['optimal_threshold_pct']:>10}                        │
 │  Total Pohon Dianalisis:          {metadata['total_trees']:>10,}                        │
 ├─────────────────────────────────────────────────────────────────────┤

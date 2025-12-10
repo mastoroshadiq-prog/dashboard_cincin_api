@@ -137,9 +137,14 @@ def generate_readme(
     asap_cair = logistik.get('asap_cair_liter', 0)
     trichoderma = logistik.get('trichoderma_liter', 0)
     
+    # Get divisi info
+    divisi_list = metadata.get('divisi_list', [])
+    divisi_str = ', '.join(divisi_list) if divisi_list else 'N/A'
+    
     content = f"""# 📊 Hasil Analisis Algoritma Cincin Api
 
 **Tanggal Generate:** {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}  
+**Divisi:** {divisi_str}  
 **Preset:** {preset or 'standar'}  
 **Folder:** `{output_dir.name}`
 
@@ -149,6 +154,7 @@ def generate_readme(
 
 | Metrik | Nilai |
 |--------|-------|
+| **Divisi** | {divisi_str} |
 | **Threshold Optimal** | {metadata.get('optimal_threshold_pct', 'N/A')} |
 | **Total Pohon** | {metadata.get('total_trees', 0):,} |
 | 🔴 MERAH (Kluster Aktif) | {metadata.get('merah_count', 0):,} |
@@ -569,6 +575,7 @@ def generate_html_report(
             <h1>🔥 POAC v3.3 - Algoritma Cincin Api</h1>
             <p class="subtitle">Laporan Deteksi Kluster Ganoderma</p>
             <div class="meta-info">
+                <span class="meta-item">🏢 Divisi: {', '.join(metadata.get('divisi_list', [])) or 'N/A'}</span>
                 <span class="meta-item">📅 {datetime.now().strftime("%Y-%m-%d %H:%M")}</span>
                 <span class="meta-item">📋 Preset: {preset or 'standar'}</span>
                 <span class="meta-item">🎯 Threshold: {metadata.get('optimal_threshold_pct', 'N/A')}</span>

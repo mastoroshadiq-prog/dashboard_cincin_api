@@ -91,8 +91,17 @@ def _clean_data(df: pd.DataFrame) -> pd.DataFrame:
     - Rows with null N_BARIS (koordinat baris)
     - Rows with null N_POKOK (koordinat pokok)
     - Rows with non-numeric NDRE125
+    - Rows with Divisi = "AME II Total" or "Grand Total" (summary rows)
     """
     df_clean = df.copy()
+    
+    # Filter out summary rows (AME II Total, Grand Total)
+    if 'Divisi' in df_clean.columns:
+        summary_rows = df_clean['Divisi'].isin(['AME II Total', 'Grand Total', 'AME IV Total'])
+        summary_count = summary_rows.sum()
+        if summary_count > 0:
+            logger.info(f"Menghapus {summary_count} baris summary (Total rows)")
+            df_clean = df_clean[~summary_rows]
     
     # Check for null coordinates
     null_baris = df_clean['N_BARIS'].isnull().sum()
@@ -153,6 +162,22 @@ def validate_data_integrity(df: pd.DataFrame) -> dict:
         }
     }
     
+    # Add divisi info if available
+    if 'Divisi' in df.columns:
+        stats["divisi_list"] = df['Divisi'].dropna().unique().tolist()
+        stats["total_divisi"] = len(stats["divisi_list"])
+        stats["divisi_counts"] = df['Divisi'].value_counts().to_dict()
+    
+    # Add tahun tanam info if available
+    if 'T_Tanam' in df.columns:
+        stats["tahun_tanam"] = df['T_Tanam'].dropna().unique().tolist()
+    
+    # Add keterangan info if available
+    if 'Keterangan' in df.columns:
+        stats["keterangan_counts"] = df['Keterangan'].value_counts().to_dict()
+    
     logger.info(f"Data integrity validated: {stats['total_rows']} trees in {stats['total_blocks']} blocks")
+    if 'divisi_list' in stats:
+        logger.info(f"Divisi: {stats['divisi_list']}")
     
     return stats
