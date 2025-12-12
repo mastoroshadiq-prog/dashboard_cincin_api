@@ -9,14 +9,18 @@
 
 ## 🎯 EXECUTIVE SUMMARY
 
-Project ini mengembangkan **Sistem Deteksi Ganoderma Berbasis NDRE** menggunakan **Algoritma Cincin Api** untuk analisis kesehatan tanaman kelapa sawit. Sistem menganalisis data NDRE (Normalized Difference Red Edge) dari citra satelit/drone untuk mengidentifikasi area dengan stress vegetasi yang berpotensi terinfeksi Ganoderma.
+Project ini mengembangkan **Sistem Prioritisasi Survey Ganoderma Berbasis NDRE** menggunakan **Algoritma Cincin Api** untuk analisis kesehatan tanaman kelapa sawit. Sistem menganalisis data NDRE (Normalized Difference Red Edge) dari citra satelit/drone untuk mengidentifikasi area dengan stress vegetasi yang perlu divalidasi di lapangan.
+
+> **⚠️ PENTING**: Berdasarkan hasil validasi, algoritma telah di-reposisi dari "Sistem Deteksi Ganoderma" menjadi **"Tool Prioritisasi Survey Lapangan"**. Output algoritma adalah kandidat untuk validasi, bukan diagnosis pasti.
 
 ### Key Deliverables:
 1. ✅ Multi-divisi analysis dashboard (AME II & AME IV)
 2. ✅ 3 preset deteksi (Konservatif, Standar, Agresif)
-3. ✅ Interactive HTML dashboard dengan lightbox zoom
-4. ✅ Validasi algoritma vs data sensus lapangan
-5. ✅ Laporan akurasi per preset
+3. ✅ 3 metode adaptif (Age-Based, Ensemble+Age, Ensemble Pure) **← BARU**
+4. ✅ Interactive HTML dashboard dengan lightbox zoom
+5. ✅ Validasi algoritma vs data sensus lapangan
+6. ✅ Dokumen kesimpulan & repositioning **← BARU**
+
 
 ---
 
@@ -175,10 +179,52 @@ Algoritma mendeteksi pola **spreading** infeksi Ganoderma dengan menganalisis ni
 **📌 Temuan AME IV**: Algoritma **OVER-DETECT**. Preset Konservatif paling akurat (satu-satunya signifikan!).
 
 ### Kesimpulan Validasi
+
 1. **NDRE stress ≠ Ganoderma langsung** - korelasi rendah/tidak signifikan
 2. **Dua divisi berperilaku berbeda** - perlu kalibrasi per lokasi
-3. **Rekomendasi**: Gunakan hasil sebagai **"Area Prioritas Survey"**, bukan diagnosis pasti
-4. **Preset optimal**: Konservatif untuk AME IV, Agresif untuk AME II
+3. **Keterbatasan data** - NDRE saja tidak cukup spesifik untuk Ganoderma
+4. **Rekomendasi**: Gunakan hasil sebagai **"Daftar Prioritas Survey"**, bukan diagnosis pasti
+5. **Preset optimal**: Konservatif untuk AME IV, Agresif untuk AME II
+
+> 📋 **Lihat dokumen lengkap**: `context/KESIMPULAN_ANALISIS_POAC_v3.3.md`
+
+---
+
+## 🎯 METODE DETEKSI ADAPTIF (BARU)
+
+### 3 Metode yang Diimplementasikan
+
+| # | Metode | Deskripsi | Output |
+|---|--------|-----------|--------|
+| 1 | **📅 Age-Based Selection** | Otomatis pilih preset berdasarkan umur blok | Klasifikasi per preset |
+| 2 | **⚖️ Ensemble + Age Weight** | Kombinasi 3 preset dengan bobot umur | Confidence Level |
+| 3 | **🗳️ Ensemble Pure** | Voting murni dari 3 preset | Votes 0-3 |
+
+### Konfigurasi Age-Based
+
+| Umur Blok | Preset Terpilih | Alasan |
+|-----------|-----------------|--------|
+| >12 tahun | Agresif | Risiko tinggi, perlu deteksi luas |
+| 8-12 tahun | Standar | Risiko sedang, keseimbangan |
+| <8 tahun | Konservatif | Risiko rendah, hindari false positive |
+
+### Penggunaan Confidence Level untuk Prioritisasi Survey
+
+| Confidence | Prioritas | Aksi |
+|------------|-----------|------|
+| **HIGH** (3/3 votes) | 🔴 P1 | Survey segera |
+| **MEDIUM** (2/3 votes) | 🟠 P2 | Survey dalam 1 minggu |
+| **LOW** (1/3 votes) | 🟡 P3 | Sampling / next cycle |
+| **NONE** (0/3 votes) | 🟢 Skip | Fokus area lain |
+
+### File Terkait
+
+| File | Deskripsi |
+|------|-----------|
+| `src/adaptive_detection.py` | Modul implementasi 3 metode adaptif |
+| `validation_adaptive_methods.py` | Script validasi metode adaptif |
+| `data/output/validation_adaptive/` | Hasil validasi (HTML, CSV, PNG) |
+
 
 ---
 
@@ -297,20 +343,37 @@ git push origin main
 
 ## 🔮 RENCANA PENGEMBANGAN SELANJUTNYA
 
-### Short-term
-1. [ ] Kalibrasi NDRE threshold per divisi/lokasi
-2. [ ] Tambahkan data historis untuk trend analysis
-3. [ ] Export ke format GIS (GeoJSON, Shapefile)
+### Short-term (Implementasi Segera)
+1. [x] **3 Metode deteksi adaptif** - Age-Based, Ensemble+Age, Ensemble Pure ✅
+2. [x] **Dokumen kesimpulan & repositioning** ✅
+3. [ ] Training tim survey tentang interpretasi output
+4. [ ] Setup feedback loop untuk validasi lapangan
 
-### Medium-term
-1. [ ] Machine Learning model untuk prediksi lebih akurat
-2. [ ] Integrasi dengan data cuaca/iklim
+### Medium-term (3-6 bulan)
+1. [ ] **Integrasi data gambut** - Kedalaman gambut dari survey tanah/GIS
+2. [ ] **Integrasi data drainase** - Kondisi genangan dari observasi
+3. [ ] **Riwayat serangan blok** - Data sensus historis per blok
+4. [ ] Kalibrasi threshold per divisi berdasarkan feedback lapangan
+5. [ ] Export ke format GIS (GeoJSON, Shapefile)
+
+### Long-term (6-12 bulan)
+1. [ ] **Multi-source fusion model** - ML dengan data lengkap
+2. [ ] Continuous learning dari validasi lapangan
 3. [ ] Mobile app untuk field verification
+4. [ ] Real-time monitoring system
+5. [ ] Multi-estate dashboard
 
-### Long-term
-1. [ ] Real-time monitoring system
-2. [ ] Multi-estate dashboard
-3. [ ] Integration dengan drone survey
+### Data Tambahan yang Diprioritaskan
+
+| Prioritas | Data | Sumber | Status |
+|-----------|------|--------|--------|
+| ⭐⭐⭐ | Kedalaman gambut | Survey tanah / GIS | Belum tersedia |
+| ⭐⭐⭐ | Kondisi drainase | Observasi lapangan | Belum tersedia |
+| ⭐⭐⭐ | Riwayat serangan | Sensus historis | Perlu dikompilasi |
+| ⭐⭐ | Curah hujan | Stasiun cuaca | Dapat diperoleh |
+| ⭐⭐ | Data hara tanah | Soil test | Perlu survey |
+| ⭐ | Topografi/DEM | GIS | Dapat diperoleh |
+
 
 ---
 
@@ -325,18 +388,20 @@ git push origin main
 
 ### File Penting untuk Dibaca
 1. `context/SOFTWARE REQUIREMENTS SPECIFICATION (SRS).md` - Requirements lengkap
-2. `poac_sim/docs/METODOLOGI_ALGORITMA_CINCIN_API.md` - Metodologi teknis
-3. `poac_sim/run_all_presets.py` - Main entry point (~3000 baris)
-4. `poac_sim/validation_all_presets.py` - Validasi terbaru
+2. `context/KESIMPULAN_ANALISIS_POAC_v3.3.md` - **Kesimpulan & repositioning** ← BARU
+3. `poac_sim/docs/METODOLOGI_ALGORITMA_CINCIN_API.md` - Metodologi teknis
+4. `poac_sim/src/adaptive_detection.py` - Modul metode adaptif ← BARU
+5. `poac_sim/run_all_presets.py` - Main entry point (~3300 baris)
+6. `poac_sim/validation_adaptive_methods.py` - Validasi metode adaptif ← BARU
 
 ### Quick Commands
 ```powershell
-# Jalankan dashboard
+# Jalankan dashboard (termasuk metode adaptif)
 cd d:\PythonProjects\simulasi_poac\poac_sim
 python run_all_presets.py --divisi MULTI
 
-# Jalankan validasi
-python validation_all_presets.py
+# Jalankan validasi metode adaptif
+python validation_adaptive_methods.py
 
 # Git status
 cd d:\PythonProjects\simulasi_poac
@@ -346,6 +411,7 @@ git log --oneline -5
 
 ---
 
-**📅 Last Updated**: 10 Desember 2025  
-**✍️ Updated By**: GitHub Copilot (Claude Opus 4.5)  
-**🔄 Session**: Validation All Presets vs Census Data
+**📅 Last Updated**: 11 Desember 2025  
+**✍️ Updated By**: Gemini 2.5 Pro (Antigravity)  
+**🔄 Session**: Implementasi Metode Adaptif + Kesimpulan + Repositioning Algoritma
+

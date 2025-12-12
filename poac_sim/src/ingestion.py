@@ -46,7 +46,7 @@ def load_ame_iv_data(filepath: str) -> pd.DataFrame:
     - KlassNDRE12025 = nilai NDRE dengan koma desimal (0,351342266)
     - Ket = kelas stres (Stres)
     - Unnamed:10 = severity (Berat, Sedang, Ringan)
-    - Unnamed:11 = tipe (Pokok)
+    - Unnamed:11 = tipe (Pokok, Sisip)
     - Unnamed:12 = status (Utama)
     """
     logger.info(f"Loading AME IV data from: {filepath}")
@@ -68,6 +68,27 @@ def load_ame_iv_data(filepath: str) -> pd.DataFrame:
     # OBJECTID = actual n_pokok
     # NDRE125 = object id
     # KlassNDRE12025 = actual NDRE value (dengan koma desimal)
+    # Unnamed:11 = tipe pohon (Pokok/Sisip)
+    # Unnamed:12 = status (Utama)
+    
+    # Build Keterangan column from Unnamed:11 and Unnamed:12
+    # Format: "Pokok Utama" atau "Sisip" 
+    def build_keterangan(row):
+        tipe = str(row.get('Unnamed: 11', '')).strip() if pd.notna(row.get('Unnamed: 11')) else ''
+        status = str(row.get('Unnamed: 12', '')).strip() if pd.notna(row.get('Unnamed: 12')) else ''
+        
+        if tipe.lower() == 'pokok' and status.lower() == 'utama':
+            return 'Pokok Utama'
+        elif 'sisip' in tipe.lower():
+            return 'Sisip'
+        elif 'mati' in tipe.lower() or 'mati' in status.lower():
+            return 'Mati'
+        elif tipe:
+            return f"{tipe} {status}".strip()
+        else:
+            return ''
+    
+    df['Keterangan'] = df.apply(build_keterangan, axis=1)
     
     df_fixed = pd.DataFrame({
         'Divisi': 'AME IV',
@@ -75,6 +96,7 @@ def load_ame_iv_data(filepath: str) -> pd.DataFrame:
         'N_BARIS': pd.to_numeric(df['N_POKOK'], errors='coerce'),  # nomor baris
         'N_POKOK': pd.to_numeric(df['OBJECTID'], errors='coerce'),  # nomor pokok
         'NDRE125': df['KlassNDRE12025'].astype(str).str.replace(',', '.'),  # NDRE value
+        'Keterangan': df['Keterangan'],  # Tipe pohon (Pokok Utama/Sisip)
     })
     
     # Convert NDRE to numeric
@@ -90,6 +112,10 @@ def load_ame_iv_data(filepath: str) -> pd.DataFrame:
     # Convert to int for N_BARIS and N_POKOK
     df_fixed['N_BARIS'] = df_fixed['N_BARIS'].astype(int)
     df_fixed['N_POKOK'] = df_fixed['N_POKOK'].astype(int)
+    
+    # Log keterangan distribution
+    ket_counts = df_fixed['Keterangan'].value_counts()
+    logger.info(f"AME IV Keterangan distribution: {ket_counts.head().to_dict()}")
     
     logger.info(f"AME IV columns mapped: {df_fixed.columns.tolist()}")
     logger.info(f"Sample NDRE125: {df_fixed['NDRE125'].head()}")

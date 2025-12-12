@@ -1,21 +1,34 @@
 # 📚 Metodologi Algoritma Cincin Api
-## Panduan Lengkap 4 Pendekatan Deteksi Kluster Ganoderma
+## Panduan Lengkap 4 Pendekatan Prioritisasi Survey Ganoderma
 
-**Versi:** 1.0  
+**Versi:** 2.0 (Updated)  
 **Tanggal:** Desember 2025  
 **Penulis:** Tim POAC v3.3
+
+---
+
+> [!IMPORTANT]
+> **REPOSITIONING ALGORITMA (Desember 2025)**  
+> Berdasarkan hasil validasi vs data sensus, Algoritma Cincin Api telah di-reposisi dari "Sistem Deteksi Ganoderma" menjadi **"Tool Prioritisasi Survey Lapangan"**.
+> 
+> - ❌ **BUKAN**: Diagnosis pasti infeksi Ganoderma
+> - ✅ **ADALAH**: Tool untuk menghasilkan daftar prioritas survey
+> 
+> Lihat dokumen: `context/KESIMPULAN_ANALISIS_POAC_v3.3.md`
 
 ---
 
 ## 📋 Daftar Isi
 
 1. [Pendahuluan](#1-pendahuluan)
-2. [Pendekatan 1: Ranking Relatif (Percentile Rank)](#2-pendekatan-1-ranking-relatif-percentile-rank)
-3. [Pendekatan 2: Elbow Method Auto-Tuning](#3-pendekatan-2-elbow-method-auto-tuning)
-4. [Pendekatan 3: Analisis Tetangga Hexagonal](#4-pendekatan-3-analisis-tetangga-hexagonal)
-5. [Pendekatan 4: Klasifikasi 4-Tier](#5-pendekatan-4-klasifikasi-4-tier)
-6. [Alur Kerja Terintegrasi](#6-alur-kerja-terintegrasi)
-7. [Kesimpulan](#7-kesimpulan)
+2. [Framework 5W1H Sistem](#1-1-framework-5w1h-sistem)
+3. [Pendekatan 1: Ranking Relatif (Percentile Rank)](#2-pendekatan-1-ranking-relatif-percentile-rank)
+4. [Pendekatan 2: Elbow Method Auto-Tuning](#3-pendekatan-2-elbow-method-auto-tuning)
+5. [Pendekatan 3: Analisis Tetangga Hexagonal](#4-pendekatan-3-analisis-tetangga-hexagonal)
+6. [Pendekatan 4: Klasifikasi 4-Tier](#5-pendekatan-4-klasifikasi-4-tier)
+7. [Alur Kerja Terintegrasi](#6-alur-kerja-terintegrasi)
+8. [Keterbatasan dan Rekomendasi](#7-keterbatasan-dan-rekomendasi)
+9. [Kesimpulan](#8-kesimpulan)
 
 ---
 
@@ -23,7 +36,18 @@
 
 ### 🎯 Tujuan Dokumen
 
-Dokumen ini menjelaskan **mengapa** dan **bagaimana** Algoritma Cincin Api menggunakan 4 pendekatan utama untuk mendeteksi kluster serangan Ganoderma pada perkebunan kelapa sawit.
+Dokumen ini menjelaskan **mengapa** dan **bagaimana** Algoritma Cincin Api menggunakan 4 pendekatan utama untuk **memprioritaskan survey lapangan** pada area yang berpotensi terinfeksi Ganoderma pada perkebunan kelapa sawit.
+
+### 1.1 Framework 5W1H Sistem
+
+| Aspek | Deskripsi |
+|-------|-----------|
+| **WHAT** | Tool prioritisasi survey berbasis analisis NDRE dan spatial clustering |
+| **WHY** | Mengefisienkan survey lapangan dengan fokus pada area berisiko tinggi |
+| **WHO** | Tim survey lapangan, agronomist, dan management kebun |
+| **WHEN** | Pra-survey untuk menghasilkan daftar kandidat pohon |
+| **WHERE** | Per divisi/blok kebun, dengan input data NDRE dari drone/satelit |
+| **HOW** | 4 pendekatan terintegrasi: Ranking → Threshold → Clustering → Klasifikasi |
 
 ### 🌴 Konteks Masalah
 
@@ -1973,14 +1997,75 @@ Output akan tersimpan di folder berbeda dengan timestamp, sehingga mudah dibandi
 
 ---
 
+---
+
 ## 📚 Referensi
 
 1. Panduan Teknis Algoritma Cincin Api v1.0
 2. Software Requirements Specification POAC v3.3
 3. BACKEND_TUNABLE_PARAMS_V3.3.md
+4. **KESIMPULAN_ANALISIS_POAC_v3.3.md** - Dokumen kesimpulan & repositioning
+
+---
+
+## ⚠️ Keterbatasan dan Rekomendasi Penggunaan
+
+### Keterbatasan Metodologi NDRE
+
+> [!WARNING]
+> **NDRE tidak cukup spesifik untuk mendeteksi Ganoderma secara pasti.**
+
+NDRE (Normalized Difference Red Edge Index) mengukur **kesehatan klorofil umum**, bukan spesifik infeksi jamur. Faktor-faktor berikut juga dapat menurunkan nilai NDRE:
+
+| Faktor | Pengaruh ke NDRE | Bukan Ganoderma |
+|--------|------------------|-----------------|
+| Kekeringan / Water stress | ⬇️ Turun | ✅ |
+| Defisiensi nutrisi (N, K, Mg) | ⬇️ Turun | ✅ |
+| Hama / penyakit lain | ⬇️ Turun | ✅ |
+| Kerusakan fisik akar | ⬇️ Turun | ✅ |
+| Kondisi tanah buruk | ⬇️ Turun | ✅ |
+
+### Data Tambahan yang Dibutuhkan
+
+Untuk meningkatkan akurasi, diperlukan data tambahan:
+- **Kedalaman gambut** (Prioritas tinggi)
+- **Kondisi drainase/genangan** (Prioritas tinggi)
+- **Riwayat serangan per blok** (Prioritas tinggi)
+- **Data unsur hara tanah** (Prioritas sedang)
+- **Data curah hujan** (Prioritas sedang)
+
+### Cara Penggunaan yang Tepat
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│  ✅ CARA PENGGUNAAN YANG BENAR                                      │
+├─────────────────────────────────────────────────────────────────────┤
+│                                                                     │
+│  1. Jalankan algoritma Cincin Api                                   │
+│  2. Dapatkan daftar pohon dengan confidence HIGH/MEDIUM/LOW         │
+│  3. Prioritaskan survey lapangan berdasarkan confidence             │
+│  4. Tim lapangan melakukan verifikasi visual                        │
+│  5. Konfirmasi diagnosis Ganoderma oleh ahli                        │
+│  6. Catat hasil untuk kalibrasi algoritma                           │
+│                                                                     │
+│  ❌ BUKAN: Gunakan output algoritma sebagai diagnosis pasti         │
+│                                                                     │
+└─────────────────────────────────────────────────────────────────────┘
+```
+
+### Prioritas Survey Berdasarkan Confidence
+
+| Confidence Level | Prioritas | Rekomendasi Aksi |
+|------------------|-----------|------------------|
+| **HIGH** (3/3 preset) | 🔴 P1 | Survey segera, kemungkinan tinggi |
+| **MEDIUM** (2/3 preset) | 🟠 P2 | Survey dalam 1 minggu |
+| **LOW** (1/3 preset) | 🟡 P3 | Sampling atau next cycle |
+| **NONE** (0/3 preset) | 🟢 Skip | Fokus ke area lain |
 
 ---
 
 *Dokumen ini adalah bagian dari dokumentasi POAC v3.3 - Precision Oil Palm Agriculture Control*
 
-**Terakhir diperbarui:** Desember 2025
+**Terakhir diperbarui:** Desember 2025  
+**Versi:** 2.0 (Updated dengan Repositioning)
+

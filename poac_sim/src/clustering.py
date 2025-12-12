@@ -75,6 +75,132 @@ def calculate_percentile_rank(df: pd.DataFrame) -> pd.DataFrame:
     return df_result
 
 
+def calculate_percentile_rank_split_merge(
+    df: pd.DataFrame, 
+    replant_ratios: Dict[str, float] = None,
+    threshold_ratio: float = 0.20,
+    ket_column: str = 'Keterangan'
+) -> pd.DataFrame:
+    """
+    LANGKAH 1 ALTERNATIF: NORMALISASI DATA DENGAN SPLIT-MERGE
+    
+    Menggunakan kolom 'ket' (Keterangan) untuk membedakan pohon utama vs sisipan.
+    Ranking persentil dihitung TERPISAH untuk masing-masing grup.
+    
+    Nilai 'ket':
+    - "Pokok Utama" → Grup UTAMA (pohon induk)
+    - "Tamb", "Sisip*" → Grup SISIPAN (pohon pengganti)
+    - "Mati*", "Kosong*" → EXCLUDED (tidak dihitung)
+    
+    Args:
+        df: DataFrame dengan kolom Blok, NDRE125, dan Keterangan
+        replant_ratios: (Optional) Dict rasio sisipan per blok - tidak diperlukan jika ada kolom ket
+        threshold_ratio: (Optional) Threshold untuk fallback mode
+        ket_column: Nama kolom keterangan (default 'Keterangan')
+        
+    Returns:
+        DataFrame dengan Ranking_Persentil, Tree_Type, dan Split_Merge_Applied
+    """
+    df_result = df.copy()
+    
+    # Initialize columns
+    df_result['Ranking_Persentil'] = 0.0
+    df_result['Tree_Type'] = 'UNKNOWN'
+    df_result['Split_Merge_Applied'] = False
+    
+    # Check for ket column (might be 'Keterangan' or 'ket' depending on ingestion)
+    ket_col = None
+    for possible_col in [ket_column, 'ket', 'Ket', 'KET']:
+        if possible_col in df_result.columns:
+            ket_col = possible_col
+            break
+    
+    if ket_col is None:
+        logger.warning("No 'ket' column found. Falling back to normal percentile ranking.")
+        return calculate_percentile_rank(df)
+    
+    logger.info(f"Using column '{ket_col}' for Split-Merge classification")
+    
+    # Classify tree types based on 'ket' column
+    def classify_tree_type(ket_value):
+        if pd.isna(ket_value):
+            return 'UNKNOWN'
+        ket = str(ket_value).strip().lower()
+        
+        if 'pokok utama' in ket or 'utama' in ket:
+            return 'UTAMA'
+        elif 'tamb' in ket or 'sisip' in ket:
+            return 'SISIPAN'
+        elif 'mati' in ket or 'kosong' in ket:
+            return 'EXCLUDED'
+        else:
+            return 'UNKNOWN'
+    
+    df_result['Tree_Type'] = df_result[ket_col].apply(classify_tree_type)
+    
+    # Log distribution
+    type_counts = df_result['Tree_Type'].value_counts()
+    logger.info(f"Tree type distribution: {type_counts.to_dict()}")
+    
+    # Process each block
+    split_count = 0
+    normal_count = 0
+    
+    for blok, grup in df_result.groupby('Blok'):
+        blok_indices = grup.index
+        
+        # Get UTAMA and SISIPAN indices
+        utama_mask = grup['Tree_Type'] == 'UTAMA'
+        sisipan_mask = grup['Tree_Type'] == 'SISIPAN'
+        unknown_mask = grup['Tree_Type'] == 'UNKNOWN'
+        excluded_mask = grup['Tree_Type'] == 'EXCLUDED'
+        
+        utama_indices = grup[utama_mask].index
+        sisipan_indices = grup[sisipan_mask].index
+        unknown_indices = grup[unknown_mask].index
+        
+        # Decide if split-merge should be applied
+        has_both = len(utama_indices) > 0 and len(sisipan_indices) > 0
+        sisipan_ratio = len(sisipan_indices) / (len(utama_indices) + len(sisipan_indices)) if (len(utama_indices) + len(sisipan_indices)) > 0 else 0
+        
+        if has_both and sisipan_ratio > 0.01:  # At least 1% sisipan to justify split
+            # SPLIT-MERGE: Calculate percentile separately for each group
+            
+            # Grup UTAMA
+            if len(utama_indices) > 0:
+                utama_percentile = df_result.loc[utama_indices, 'NDRE125'].rank(pct=True, method='average')
+                df_result.loc[utama_indices, 'Ranking_Persentil'] = 1 - utama_percentile
+            
+            # Grup SISIPAN
+            if len(sisipan_indices) > 0:
+                sisipan_percentile = df_result.loc[sisipan_indices, 'NDRE125'].rank(pct=True, method='average')
+                df_result.loc[sisipan_indices, 'Ranking_Persentil'] = 1 - sisipan_percentile
+            
+            # Grup UNKNOWN - use block-level ranking
+            if len(unknown_indices) > 0:
+                unknown_percentile = df_result.loc[unknown_indices, 'NDRE125'].rank(pct=True, method='average')
+                df_result.loc[unknown_indices, 'Ranking_Persentil'] = 1 - unknown_percentile
+            
+            # Mark as split-merge applied (except excluded)
+            non_excluded = ~excluded_mask
+            df_result.loc[grup[non_excluded].index, 'Split_Merge_Applied'] = True
+            split_count += 1
+            
+        else:
+            # NORMAL: No split, rank all trees together
+            valid_indices = grup[~excluded_mask].index
+            if len(valid_indices) > 0:
+                percentile = df_result.loc[valid_indices, 'NDRE125'].rank(pct=True, method='average')
+                df_result.loc[valid_indices, 'Ranking_Persentil'] = 1 - percentile
+            normal_count += 1
+    
+    logger.info(f"Split-merge completed: {split_count} blocks with split-merge, {normal_count} blocks normal")
+    
+    return df_result
+
+
+
+
 def count_sick_neighbors(
     df: pd.DataFrame, 
     row_idx: int, 

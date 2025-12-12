@@ -1,0 +1,32 @@
+﻿
+======================================================================
+HASIL VALIDASI METODE ADAPTIF vs DATA SENSUS
+======================================================================
+
+AME II (Avg Sensus: 6.3%):
+----------------------------------------------------------------------
+Metode                             r      MAE   Match      OD   Sig
+----------------------------------------------------------------------
+Konservatif                   -0.527     9.9%     17%   2.56x    Ya
+Standar                       -0.579    37.9%      0%   7.00x    Ya
+Agresif                        0.039    77.4%      0%  13.24x     -
+Age-Based Selection            0.039    77.4%      0%  13.24x     -
+Ensemble + Age Weight          0.039    77.4%      0%  13.24x     -
+Ensemble Pure (Voting)         0.039    77.4%      0%  13.24x     -
+
+  * Best Korelasi: Agresif (r=0.039)
+  * Lowest Error: Konservatif (MAE=9.9%)
+
+AME IV (Avg Sensus: 1.9%):
+----------------------------------------------------------------------
+Metode                             r      MAE   Match      OD   Sig
+----------------------------------------------------------------------
+Konservatif                   -0.235    15.5%      2%   9.20x     -
+Standar                        0.326    42.1%      0%  23.24x    Ya
+Agresif                        0.248    77.2%      0%  41.81x    Ya
+Age-Based Selection            0.326    42.1%      0%  23.24x    Ya
+Ensemble + Age Weight          0.248    77.2%      0%  41.81x    Ya
+Ensemble Pure (Voting)         0.248    77.2%      0%  41.81x    Ya
+
+  * Best Korelasi: Standar (r=0.326)
+  * Lowest Error: Konservatif (MAE=15.5%)

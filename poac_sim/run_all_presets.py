@@ -32,6 +32,7 @@ from config import CINCIN_API_CONFIG, CINCIN_API_PRESETS
 from src.ingestion import load_and_clean_data, load_ame_iv_data, validate_data_integrity, _clean_data
 from src.clustering import run_cincin_api_algorithm, get_priority_targets
 from src.dashboard import create_dashboard, create_mandor_report
+from src.adaptive_detection import run_all_adaptive_methods
 
 # Configure logging
 logging.basicConfig(
@@ -118,7 +119,10 @@ def create_superimpose_visualization(all_results: Dict, output_dir: Path):
     # Get all blocks and their MERAH counts per preset
     block_merah_counts = {}
     
-    for preset_name, result in all_results.items():
+    # Filter out 'adaptive' key as it has different structure
+    preset_results = {k: v for k, v in all_results.items() if k in PRESET_INFO}
+    
+    for preset_name, result in preset_results.items():
         df_classified = result['df']
         merah_per_block = df_classified[
             df_classified['Status_Risiko'] == 'MERAH (KLUSTER AKTIF)'
@@ -131,8 +135,9 @@ def create_superimpose_visualization(all_results: Dict, output_dir: Path):
     
     # Get union of top 10 blocks from all presets
     all_top_blocks = set()
-    for preset_name, result in all_results.items():
+    for preset_name, result in preset_results.items():
         df_classified = result['df']
+
         merah_per_block = df_classified[
             df_classified['Status_Risiko'] == 'MERAH (KLUSTER AKTIF)'
         ].groupby('Blok').size().sort_values(ascending=False)
@@ -1886,6 +1891,11 @@ def run_multi_divisi_analysis():
     print(f"\n📸 Generating cluster maps for AME II...")
     all_block_maps['AME II'] = generate_block_cluster_maps(all_divisi_results['AME II'], output_dir / "AME_II", top_n=5)
     
+    # Run adaptive methods for AME II
+    print(f"\n🎯 Running Adaptive Detection Methods for AME II...")
+    adaptive_results_ii = run_all_adaptive_methods(all_divisi_results['AME II'], df_ame_ii)
+    all_divisi_results['AME II']['adaptive'] = adaptive_results_ii
+    
     # Analyze AME IV
     print("\n" + "=" * 70)
     print("🔄 ANALYZING AME IV")
@@ -1909,6 +1919,11 @@ def run_multi_divisi_analysis():
     # Generate block maps for AME IV
     print(f"\n📸 Generating cluster maps for AME IV...")
     all_block_maps['AME IV'] = generate_block_cluster_maps(all_divisi_results['AME IV'], output_dir / "AME_IV", top_n=5)
+    
+    # Run adaptive methods for AME IV
+    print(f"\n🎯 Running Adaptive Detection Methods for AME IV...")
+    adaptive_results_iv = run_all_adaptive_methods(all_divisi_results['AME IV'], df_ame_iv)
+    all_divisi_results['AME IV']['adaptive'] = adaptive_results_iv
     
     # Print comparison tables
     print("\n" + "=" * 70)
@@ -2090,7 +2105,83 @@ def generate_multi_divisi_html_report(output_dir: Path, all_divisi_results: Dict
             </div>
             '''
         
+        # Build adaptive methods cards for this divisi
+        adaptive_cards_html = ""
+        if 'adaptive' in results:
+            adaptive = results['adaptive']
+            
+            # Age-Based card
+            if 'age_based' in adaptive:
+                meta_ab = adaptive['age_based']['metadata']
+                preset_dist = meta_ab.get('preset_distribution', {})
+                adaptive_cards_html += f'''
+                <div class="adaptive-card age-based">
+                    <div class="adaptive-header" style="background: linear-gradient(135deg, #9b59b6, #8e44ad);">
+                        <span class="adaptive-icon">📅</span>
+                        <span class="adaptive-name">Age-Based Selection</span>
+                    </div>
+                    <div class="adaptive-body">
+                        <p class="adaptive-desc">Otomatis pilih preset berdasarkan umur tanaman per blok.</p>
+                        <div class="adaptive-stats">
+                            <div class="stat-item"><span>🔴 MERAH:</span><strong>{meta_ab.get('merah_count', 0):,}</strong></div>
+                            <div class="stat-item"><span>🟠 ORANYE:</span><strong>{meta_ab.get('oranye_count', 0):,}</strong></div>
+                            <div class="stat-item"><span>🟡 KUNING:</span><strong>{meta_ab.get('kuning_count', 0):,}</strong></div>
+                        </div>
+                        <div class="preset-dist">
+                            <small>Distribusi Preset: Kon={preset_dist.get('konservatif', 0)}, Std={preset_dist.get('standar', 0)}, Agr={preset_dist.get('agresif', 0)}</small>
+                        </div>
+                    </div>
+                </div>
+                '''
+            
+            # Ensemble + Age card
+            if 'ensemble_age' in adaptive:
+                meta_ea = adaptive['ensemble_age']['metadata']
+                adaptive_cards_html += f'''
+                <div class="adaptive-card ensemble-age">
+                    <div class="adaptive-header" style="background: linear-gradient(135deg, #e67e22, #d35400);">
+                        <span class="adaptive-icon">⚖️</span>
+                        <span class="adaptive-name">Ensemble + Age Weight</span>
+                    </div>
+                    <div class="adaptive-body">
+                        <p class="adaptive-desc">Kombinasi 3 preset dengan bobot berdasarkan umur tanaman.</p>
+                        <div class="confidence-stats">
+                            <div class="conf-item high"><span>HIGH:</span><strong>{meta_ea.get('high_confidence', 0):,}</strong></div>
+                            <div class="conf-item medium"><span>MEDIUM:</span><strong>{meta_ea.get('medium_confidence', 0):,}</strong></div>
+                            <div class="conf-item low"><span>LOW:</span><strong>{meta_ea.get('low_confidence', 0):,}</strong></div>
+                        </div>
+                        <div class="avg-score">
+                            <small>Avg Score: {meta_ea.get('avg_ensemble_score', 0):.3f}</small>
+                        </div>
+                    </div>
+                </div>
+                '''
+            
+            # Ensemble Pure card
+            if 'ensemble_pure' in adaptive:
+                meta_ep = adaptive['ensemble_pure']['metadata']
+                adaptive_cards_html += f'''
+                <div class="adaptive-card ensemble-pure">
+                    <div class="adaptive-header" style="background: linear-gradient(135deg, #1abc9c, #16a085);">
+                        <span class="adaptive-icon">🗳️</span>
+                        <span class="adaptive-name">Ensemble Pure (Voting)</span>
+                    </div>
+                    <div class="adaptive-body">
+                        <p class="adaptive-desc">Voting murni dari 3 preset tanpa faktor umur.</p>
+                        <div class="voting-stats">
+                            <div class="vote-item v3"><span>3/3 Preset:</span><strong>{meta_ep.get('votes_3', 0):,}</strong></div>
+                            <div class="vote-item v2"><span>2/3 Preset:</span><strong>{meta_ep.get('votes_2', 0):,}</strong></div>
+                            <div class="vote-item v1"><span>1/3 Preset:</span><strong>{meta_ep.get('votes_1', 0):,}</strong></div>
+                            <div class="vote-item v0"><span>0/3 Preset:</span><strong>{meta_ep.get('votes_0', 0):,}</strong></div>
+                        </div>
+                    </div>
+                </div>
+                '''
+        else:
+            adaptive_cards_html = '<p class="no-adaptive">Metode adaptif tidak tersedia untuk divisi ini.</p>'
+        
         # Content for this divisi
+
         divisi_content_html += f'''
         <div class="divisi-content {active_class}" id="content-{divisi_id}" data-divisi="{divisi_id}">
             <div class="divisi-header">
@@ -2150,8 +2241,15 @@ def generate_multi_divisi_html_report(output_dir: Path, all_divisi_results: Dict
                 <h3>🗺️ Peta Kluster per Blok</h3>
                 {block_maps_html}
             </section>
+            
+            <section class="adaptive-section">
+                <h3>🎯 Metode Deteksi Adaptif</h3>
+                <p class="section-description">Hasil dari 3 metode adaptif yang menggabungkan kekuatan 3 preset berdasarkan karakteristik blok.</p>
+                {adaptive_cards_html}
+            </section>
         </div>
         '''
+
     
     # Build combined summary
     total_trees_all = sum(r['standar']['metadata']['total_trees'] for r in all_divisi_results.values())
@@ -2537,7 +2635,103 @@ def generate_multi_divisi_html_report(output_dir: Path, all_divisi_results: Dict
             background: var(--bg-content);
         }}
         
+        /* Adaptive Methods Section */
+        .adaptive-section {{
+            background: var(--bg-card);
+            padding: 25px;
+            border-radius: 15px;
+            margin-top: 30px;
+        }}
+        
+        .section-description {{
+            color: #aaa;
+            margin-bottom: 20px;
+            font-size: 0.95em;
+        }}
+        
+        .adaptive-section {{
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }}
+        
+        .adaptive-card {{
+            background: var(--bg-content);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }}
+        
+        .adaptive-card:hover {{
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }}
+        
+        .adaptive-header {{
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: white;
+        }}
+        
+        .adaptive-icon {{
+            font-size: 1.8em;
+        }}
+        
+        .adaptive-name {{
+            font-weight: bold;
+            font-size: 1.1em;
+        }}
+        
+        .adaptive-body {{
+            padding: 20px;
+        }}
+        
+        .adaptive-desc {{
+            color: #bbb;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+        }}
+        
+        .adaptive-stats, .confidence-stats, .voting-stats {{
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }}
+        
+        .stat-item, .conf-item, .vote-item {{
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 12px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 8px;
+        }}
+        
+        .conf-item.high {{ border-left: 3px solid #27ae60; }}
+        .conf-item.medium {{ border-left: 3px solid #f39c12; }}
+        .conf-item.low {{ border-left: 3px solid #e74c3c; }}
+        
+        .vote-item.v3 {{ border-left: 3px solid #27ae60; }}
+        .vote-item.v2 {{ border-left: 3px solid #3498db; }}
+        .vote-item.v1 {{ border-left: 3px solid #f39c12; }}
+        .vote-item.v0 {{ border-left: 3px solid #95a5a6; }}
+        
+        .preset-dist, .avg-score {{
+            margin-top: 12px;
+            text-align: center;
+            color: #888;
+        }}
+        
+        .no-adaptive {{
+            color: #888;
+            font-style: italic;
+            text-align: center;
+            padding: 20px;
+        }}
+        
         /* Lightbox with Zoom Controls */
+
         .lightbox {{
             display: none;
             position: fixed;
