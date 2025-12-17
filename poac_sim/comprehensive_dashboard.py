@@ -50,6 +50,29 @@ CURRENT_YEAR = 2024
 AGE_GROUPS = [(0, 5, "0-5 tahun"), (5, 10, "5-10 tahun"), (10, 15, "10-15 tahun"), (15, 100, "15+ tahun")]
 RISK_WEIGHTS = {"sick_pct": 0.4, "cincin_count": 0.3, "gt_gano_pct": 0.3}
 
+# Financial Parameters (from Consultant's Gap Analysis)
+FINANCIAL_PARAMS = {
+    "valuasi_pohon": 1_500_000,      # Rp per pohon produktif
+    "cost_sanitasi": 50_000,          # Rp per pokok (treatment G3/G4)
+    "cost_proteksi": 15_000,          # Rp per pokok (preventive - Trichoderma)
+}
+
+# Dashboard Disclaimer (from Consultant's Doc)
+DISCLAIMER_TEXT = """Analisis ini menggunakan pendekatan spektral (NDRE) dan spasial (Cincin Api). 
+Akurasi prediksi dipengaruhi oleh faktor lingkungan (banjir/hara) yang belum terpetakan. 
+Nilai kerugian finansial adalah estimasi berdasarkan asumsi standar perusahaan."""
+
+# Business Context (WHY)
+BUSINESS_CONTEXT = {
+    "why": "Deteksi dini Ganoderma penting untuk mencegah penyebaran dan melindungi aset produktif senilai miliaran Rupiah.",
+    "data_gaps": [
+        "Peta Genangan/Banjir (MISSING)",
+        "Defisiensi Hara/Nutrisi (MISSING)", 
+        "Ground Truth Feedback Loop (PARTIAL)",
+        "Parameter Finansial Real-time (PARTIAL)"
+    ]
+}
+
 # =============================================================================
 # DATA LOADING
 # =============================================================================
@@ -617,6 +640,49 @@ def generate_html_dashboard(summaries: dict, df_metrics: pd.DataFrame, charts: d
             </div>
         </div>
         
+        <!-- 💰 FINANCIAL IMPACT ESTIMATOR (NEW) -->
+        <div class="section" style="background: linear-gradient(135deg, rgba(231,76,60,0.2) 0%, rgba(192,57,43,0.2) 100%); border: 2px solid #e74c3c;">
+            <h2>💰 Estimasi Potensi Kerugian Finansial</h2>
+            <div class="grid-4">
+                <div class="kpi-card" style="background: rgba(231,76,60,0.3);">
+                    <div class="kpi-value" style="color: #fff;">Rp {(summaries['AME002']['det_sick'] + summaries['AME004']['det_sick']) * FINANCIAL_PARAMS['valuasi_pohon'] / 1_000_000_000:.1f} M</div>
+                    <div class="kpi-label">Nilai Aset Berisiko</div>
+                    <div style="font-size: 0.7em; color: #aaa; margin-top: 5px;">SICK × Rp 1.5 juta/pohon</div>
+                </div>
+                <div class="kpi-card" style="background: rgba(243,156,18,0.3);">
+                    <div class="kpi-value" style="color: #f39c12;">Rp {(summaries['AME002']['det_sick'] + summaries['AME004']['det_sick']) * FINANCIAL_PARAMS['cost_sanitasi'] / 1_000_000:.0f} jt</div>
+                    <div class="kpi-label">Est. Biaya Sanitasi</div>
+                    <div style="font-size: 0.7em; color: #aaa; margin-top: 5px;">SICK × Rp 50rb/pokok</div>
+                </div>
+                <div class="kpi-card" style="background: rgba(39,174,96,0.3);">
+                    <div class="kpi-value" style="color: #27ae60;">Rp {(summaries['AME002']['det_warning'] + summaries['AME004']['det_warning']) * FINANCIAL_PARAMS['cost_proteksi'] / 1_000_000:.0f} jt</div>
+                    <div class="kpi-label">Est. Biaya Proteksi</div>
+                    <div style="font-size: 0.7em; color: #aaa; margin-top: 5px;">WARNING × Rp 15rb/pokok</div>
+                </div>
+                <div class="kpi-card" style="background: rgba(155,89,182,0.3);">
+                    <div class="kpi-value" style="color: #9b59b6;">Rp {((summaries['AME002']['det_sick'] + summaries['AME004']['det_sick']) * FINANCIAL_PARAMS['valuasi_pohon'] + (summaries['AME002']['det_sick'] + summaries['AME004']['det_sick']) * FINANCIAL_PARAMS['cost_sanitasi'] + (summaries['AME002']['det_warning'] + summaries['AME004']['det_warning']) * FINANCIAL_PARAMS['cost_proteksi']) / 1_000_000_000:.2f} M</div>
+                    <div class="kpi-label">Total Exposure</div>
+                    <div style="font-size: 0.7em; color: #aaa; margin-top: 5px;">Aset + Treatment</div>
+                </div>
+            </div>
+            <div class="metric-desc" style="margin-top: 15px; border-left: 3px solid #f39c12;">
+                <strong>⚠️ Formula Asumsi:</strong> Valuasi = Rp 1.500.000/pohon | Sanitasi = Rp 50.000/pokok | Proteksi = Rp 15.000/pokok<br>
+                <em>Nilai riil dapat berbeda berdasarkan tahun tanam, lokasi, dan harga bahan hayati terkini.</em>
+            </div>
+        </div>
+        
+        <!-- 📋 BUSINESS CONTEXT (WHY) -->
+        <div class="section" style="border-left: 4px solid #3498db;">
+            <h2>📋 Business Context (WHY)</h2>
+            <p style="font-size: 1.1em; line-height: 1.6;">{BUSINESS_CONTEXT['why']}</p>
+            <div class="metric-desc" style="margin-top: 15px;">
+                <strong>⚠️ Data Gaps yang Mempengaruhi Akurasi:</strong>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    {''.join(f'<li>{gap}</li>' for gap in BUSINESS_CONTEXT['data_gaps'])}
+                </ul>
+            </div>
+        </div>
+        
         <div class="insights-box">
             <h3>🎯 Top 3 Actionable Insights</h3>
             <ul>
@@ -907,11 +973,18 @@ def generate_html_dashboard(summaries: dict, df_metrics: pd.DataFrame, charts: d
         </div>
 """
     
-    # Footer
-    html += """
+    # Footer with Disclaimer (from Consultant's Doc)
+    html += f"""
+        <!-- DISCLAIMER -->
+        <div style="background: rgba(243,156,18,0.1); border: 1px solid #f39c12; border-radius: 12px; padding: 20px; margin-top: 25px;">
+            <h4 style="color: #f39c12; margin-bottom: 10px;">⚠️ Disclaimer</h4>
+            <p style="font-size: 0.9em; line-height: 1.6; color: #ccc;">{DISCLAIMER_TEXT}</p>
+        </div>
+        
         <div style="text-align: center; padding: 20px; color: #666; font-size: 0.9em;">
-            <p>🌴 POAC Simulation Engine | Comprehensive Ganoderma Analysis Dashboard</p>
+            <p>🌴 POAC Simulation Engine v3.3 | Comprehensive Ganoderma Analysis Dashboard</p>
             <p>Data sources: Drone NDRE + Ground Truth Census</p>
+            <p style="margin-top: 10px;">Framework: Value-Driven Analytics (WIWSNS) | Powered by Consultant's Gap Analysis</p>
         </div>
     </div>
 </body>
