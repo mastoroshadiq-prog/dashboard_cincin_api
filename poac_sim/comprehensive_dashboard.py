@@ -861,18 +861,6 @@ def generate_html_dashboard(summaries: dict, df_metrics: pd.DataFrame, charts: d
             </div>
         </div>
         
-        <!-- 📋 BUSINESS CONTEXT (WHY) -->
-        <div class="section" style="border-left: 4px solid #3498db;">
-            <h2>📋 Business Context (WHY)</h2>
-            <p style="font-size: 1.1em; line-height: 1.6;">{WIWSNS_CONTENT['executive_summary']['why']}</p>
-            <div class="metric-desc" style="margin-top: 15px;">
-                <strong>⚠️ Data Gaps yang Mempengaruhi Akurasi:</strong>
-                <ul style="margin-left: 20px; margin-top: 10px;">
-                    {''.join(f'<li>{gap}</li>' for gap in DATA_GAPS['environmental'] + DATA_GAPS['operational'][:2])}
-                </ul>
-            </div>
-        </div>
-        
         <div class="insights-box">
             <h3>🎯 Top 3 Actionable Insights</h3>
             <ul>
@@ -952,10 +940,6 @@ def generate_html_dashboard(summaries: dict, df_metrics: pd.DataFrame, charts: d
                     <p style="color: #a0a0a0;">Calibrated threshold for SICK detection</p>
                     <p style="margin-top: 10px;">MAE: <strong style="color: #2ecc71;">{summaries['AME004']['mae']:.2f}%</strong></p>
                 </div>
-            </div>
-            <div class="metric-desc">
-                <strong>MAE (Mean Absolute Error):</strong> Rata-rata selisih absolut antara detection rate algoritma dengan ground truth. Semakin rendah semakin akurat.<br>
-                <strong>Correlation:</strong> Korelasi antara pola deteksi algoritma dengan ground truth. Nilai positif menunjukkan kesesuaian pola.
             </div>
 """
     html += generate_wiwsns_panel("threshold")
