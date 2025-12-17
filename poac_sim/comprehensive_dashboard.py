@@ -62,15 +62,92 @@ DISCLAIMER_TEXT = """Analisis ini menggunakan pendekatan spektral (NDRE) dan spa
 Akurasi prediksi dipengaruhi oleh faktor lingkungan (banjir/hara) yang belum terpetakan. 
 Nilai kerugian finansial adalah estimasi berdasarkan asumsi standar perusahaan."""
 
-# Business Context (WHY)
-BUSINESS_CONTEXT = {
-    "why": "Deteksi dini Ganoderma penting untuk mencegah penyebaran dan melindungi aset produktif senilai miliaran Rupiah.",
-    "data_gaps": [
-        "Peta Genangan/Banjir (MISSING)",
-        "Defisiensi Hara/Nutrisi (MISSING)", 
-        "Ground Truth Feedback Loop (PARTIAL)",
-        "Parameter Finansial Real-time (PARTIAL)"
-    ]
+# WIWSNS Content for ALL Sections
+WIWSNS_CONTENT = {
+    "executive_summary": {
+        "why": "Dashboard ini adalah single source of truth untuk status kesehatan tanaman dan alokasi budget treatment Ganoderma.",
+        "what": "Total 162K pohon terdeteksi, 6.7K SICK, 1.5K+ Cincin Api clusters teridentifikasi.",
+        "so_what": "Potensi kerugian Rp 10+ Milyar jika tidak ditangani. Data quality 89% - acceptable untuk decision making.",
+        "now_what": ["Fokus pada 10 blok high-risk untuk survey minggu ini", "Review Cincin Api clusters prioritas"],
+        "solutions": {"short": "Prioritaskan survey blok high-risk", "mid": "Implement feedback loop", "long": "Integrasi mobile app"}
+    },
+    "data_sources": {
+        "why": "Validasi data drone terhadap ground truth untuk memastikan reliability sebelum keputusan dibuat.",
+        "what": "AME II: 94K drone vs 100K GT (-6%). AME IV: 68K vs 78K (-13%). SISIP mismatch 97%.",
+        "so_what": "SISIP gap besar = analisis YOUNG trees tidak reliable. Keputusan replanting bisa salah.",
+        "now_what": ["Jangan gunakan data SISIP drone untuk keputusan replanting", "Gunakan GT sebagai acuan SISIP"],
+        "solutions": {"short": "Gunakan GT untuk SISIP", "mid": "Audit label drone", "long": "Standardisasi taxonomy"}
+    },
+    "population": {
+        "why": "Segmentasi MATURE/YOUNG/DEAD/EMPTY penting untuk prioritisasi treatment. Pohon produktif (MATURE) lebih bernilai.",
+        "what": "MATURE dominan (95%+). YOUNG under-detected. DEAD/EMPTY minimal.",
+        "so_what": "Fokus treatment pada MATURE sudah tepat. Namun risiko miss deteksi YOUNG yang sakit.",
+        "now_what": ["Gunakan Option A (MATURE only) untuk deteksi", "Monitor YOUNG secara terpisah"],
+        "solutions": {"short": "Fokus MATURE", "mid": "Improve YOUNG detection", "long": "Threshold terpisah per kategori"}
+    },
+    "threshold": {
+        "why": "Threshold Z-Score yang tepat menentukan akurasi deteksi. Terlalu sensitif = false alarm. Terlalu strict = miss detection.",
+        "what": "AME II: Z < -1.5 (MAE 2.93%). AME IV: Z < -4.0 (MAE 1.79%). Kalibrasi berhasil.",
+        "so_what": "Kalibrasi berhasil menurunkan over-detection dari 21% ke ~6%. Hemat biaya survey lapangan.",
+        "now_what": ["Gunakan threshold ini untuk operational", "Review quarterly berdasarkan feedback"],
+        "solutions": {"short": "Pakai threshold saat ini", "mid": "Implement feedback loop mandor", "long": "Auto-calibration system"}
+    },
+    "detection": {
+        "why": "Deteksi dini Ganoderma mencegah penyebaran ke pohon sehat. Setiap pohon terinfeksi = Rp 1.5 juta loss.",
+        "what": "SEHAT: 87%. WARNING: 9%. SICK: 4%. Cincin Api: 1,500+ clusters identified.",
+        "so_what": "6,700+ pohon SICK = Rp 10 Milyar aset berisiko. WARNING perlu proteksi preventif.",
+        "now_what": ["Sanitasi SICK segera", "Aplikasi Trichoderma ke WARNING", "Monitoring Cincin Api intensif"],
+        "solutions": {"short": "Sanitasi SICK", "mid": "Proteksi ring WARNING", "long": "Replanting area cleared"}
+    },
+    "sph": {
+        "why": "SPH validasi akurasi jumlah pohon. Jika SPH salah, semua kalkulasi per-hektar bias.",
+        "what": "AME II: 0% variance ✅ Excellent. AME IV: 343% variance ❌ Critical issue.",
+        "so_what": "AME IV: Semua metric per-hektar TIDAK VALID. Budget allocation bisa salah 4x lipat.",
+        "now_what": ["STOP menggunakan SPH drone AME IV", "Gunakan SPH dari GT sebagai baseline"],
+        "solutions": {"short": "Pakai SPH GT", "mid": "Audit luas 5 blok sample", "long": "Integrasi data GIS"}
+    },
+    "ghost_tree": {
+        "why": "Ghost trees = perbedaan jumlah drone vs GT. Menunjukkan data quality dan coverage issues.",
+        "what": "AME II: -5,799 (under-count 6%). AME IV: -9,628 (under-count 12%).",
+        "so_what": "Under-count = drone mungkin miss area atau pohon. Risiko pohon sakit tidak terdeteksi.",
+        "now_what": ["Identifikasi blok dengan ghost > 500", "Verifikasi coverage GPS drone"],
+        "solutions": {"short": "Flag blok anomali", "mid": "Re-flight area missing", "long": "Quarterly reconciliation SOP"}
+    },
+    "age_analysis": {
+        "why": "Umur tanaman mempengaruhi susceptibility terhadap Ganoderma. Tanaman tua lebih rentan.",
+        "what": "Ganoderma rate meningkat seiring umur: 0-5 thn (2%), 5-10 (4%), 10-15 (6%), 15+ (8%).",
+        "so_what": "Blok dengan tanaman > 15 tahun memiliki risk lebih tinggi. Prioritaskan monitoring.",
+        "now_what": ["Alokasikan budget proteksi lebih besar untuk blok tua", "Intensifkan monitoring blok 15+ tahun"],
+        "solutions": {"short": "Proteksi blok tua", "mid": "Rencana replanting bertahap", "long": "Rejuvenation program"}
+    },
+    "risk_scoring": {
+        "why": "Prioritisasi survey dan treatment berdasarkan risk score untuk efisiensi alokasi resource.",
+        "what": "Top 10 high-risk blocks identified. Risk Score range 25-85 dari 100.",
+        "so_what": "Fokuskan 80% effort pada 20% blok high-risk. Return on investment lebih tinggi.",
+        "now_what": ["Deploy tim survey ke Top 5 blok minggu ini", "Siapkan material treatment"],
+        "solutions": {"short": "Triage: High → immediate", "mid": "Medium → scheduled", "long": "Low → monitoring only"}
+    },
+    "drilldown": {
+        "why": "Detail per-blok untuk operational decision making di level afdeling/mandor.",
+        "what": "105 blok dengan semua metrics: count, detection, SPH, ghost, risk score.",
+        "so_what": "Data operasional untuk weekly planning. Export CSV untuk tim lapangan.",
+        "now_what": ["Mandor review blok masing-masing", "Prioritaskan berdasarkan risk"],
+        "solutions": {"short": "Weekly review dashboard", "mid": "Export ke spreadsheet mandor", "long": "Mobile app integration"}
+    },
+    "insights": {
+        "why": "Ringkasan eksekutif untuk decision makers. Actionable, bukan hanya informational.",
+        "what": "3 critical issues identified. 4 recommended actions. Survey workload estimated.",
+        "so_what": "Clear prioritization untuk management attention dan resource allocation.",
+        "now_what": ["Execute recommendations dalam 1-2 minggu", "Weekly progress review"],
+        "solutions": {"short": "Execute top priorities", "mid": "Track progress metrics", "long": "Continuous improvement cycle"}
+    }
+}
+
+# Data Gaps (Environmental, Operational, Financial)
+DATA_GAPS = {
+    "environmental": ["Peta Genangan/Banjir (MISSING)", "Defisiensi Hara/Nutrisi (MISSING)", "Topografi Mikro (MISSING)", "Kedalaman Gambut (MISSING)"],
+    "operational": ["Ground Truth Feedback (PARTIAL)", "Riwayat Census Historis (MISSING)", "Kapasitas Harian Tim (MISSING)"],
+    "financial": ["Valuasi Pohon per Tahun Tanam (PARTIAL)", "Cost Treatment Real-time (PARTIAL)"]
 }
 
 # =============================================================================
@@ -470,6 +547,58 @@ def generate_risk_chart(df_metrics: pd.DataFrame, n_top: int = 10) -> str:
 
 
 # =============================================================================
+# WIWSNS PANEL GENERATOR
+# =============================================================================
+
+def generate_wiwsns_panel(section_key: str) -> str:
+    """Generate WIWSNS Business Intelligence panel HTML for a section."""
+    content = WIWSNS_CONTENT.get(section_key, {})
+    if not content:
+        return ""
+    
+    panel_id = f"wiwsns_{section_key}"
+    
+    html = f"""
+        <div class="wiwsns-panel" id="{panel_id}">
+            <div class="wiwsns-header" onclick="toggleWiwsns('{panel_id}')">
+                📘 Business Intelligence (WIWSNS) <span class="toggle-icon">▼</span>
+            </div>
+            <div class="wiwsns-content">
+                <div class="wiwsns-grid">
+                    <div class="wiwsns-item why">
+                        <div class="wiwsns-label">🟦 WHY</div>
+                        <div class="wiwsns-text">{content.get('why', '-')}</div>
+                    </div>
+                    <div class="wiwsns-item what">
+                        <div class="wiwsns-label">🟩 WHAT</div>
+                        <div class="wiwsns-text">{content.get('what', '-')}</div>
+                    </div>
+                    <div class="wiwsns-item so-what">
+                        <div class="wiwsns-label">🟨 SO WHAT (Business Impact)</div>
+                        <div class="wiwsns-text">{content.get('so_what', '-')}</div>
+                    </div>
+                    <div class="wiwsns-item now-what">
+                        <div class="wiwsns-label">🟧 NOW WHAT (Action Required)</div>
+                        <div class="wiwsns-text">
+                            <ul>{''.join(f'<li>{item}</li>' for item in content.get('now_what', []))}</ul>
+                        </div>
+                    </div>
+                    <div class="wiwsns-item solutions">
+                        <div class="wiwsns-label">🟪 SOLUTIONS</div>
+                        <div class="wiwsns-text">
+                            <div class="solution-row"><span class="sol-term">Short-term:</span> {content.get('solutions', {}).get('short', '-')}</div>
+                            <div class="solution-row"><span class="sol-mid">Mid-term:</span> {content.get('solutions', {}).get('mid', '-')}</div>
+                            <div class="solution-row"><span class="sol-long">Long-term:</span> {content.get('solutions', {}).get('long', '-')}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    """
+    return html
+
+
+# =============================================================================
 # HTML GENERATION
 # =============================================================================
 
@@ -603,10 +732,71 @@ def generate_html_dashboard(summaries: dict, df_metrics: pd.DataFrame, charts: d
         .risk-medium {{ color: #f39c12; }}
         .risk-low {{ color: #27ae60; }}
         
+        /* WIWSNS Panel Styles */
+        .wiwsns-panel {{
+            background: rgba(102, 126, 234, 0.05);
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            border-radius: 12px;
+            margin-top: 20px;
+            overflow: hidden;
+        }}
+        .wiwsns-header {{
+            background: rgba(102, 126, 234, 0.15);
+            padding: 12px 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+            color: #667eea;
+        }}
+        .wiwsns-header:hover {{ background: rgba(102, 126, 234, 0.25); }}
+        .toggle-icon {{ transition: transform 0.3s; }}
+        .wiwsns-panel.collapsed .wiwsns-content {{ display: none; }}
+        .wiwsns-panel.collapsed .toggle-icon {{ transform: rotate(-90deg); }}
+        
+        .wiwsns-content {{ padding: 15px 20px; }}
+        .wiwsns-grid {{
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+        }}
+        .wiwsns-item {{
+            padding: 15px;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.03);
+        }}
+        .wiwsns-item.why {{ border-left: 4px solid #3498db; }}
+        .wiwsns-item.what {{ border-left: 4px solid #27ae60; }}
+        .wiwsns-item.so-what {{ border-left: 4px solid #f39c12; }}
+        .wiwsns-item.now-what {{ border-left: 4px solid #e67e22; }}
+        .wiwsns-item.solutions {{ border-left: 4px solid #9b59b6; grid-column: span 2; }}
+        
+        .wiwsns-label {{
+            font-weight: bold;
+            margin-bottom: 8px;
+            font-size: 0.85em;
+        }}
+        .wiwsns-text {{ font-size: 0.9em; line-height: 1.5; color: #ccc; }}
+        .wiwsns-text ul {{ list-style: disc; margin-left: 20px; }}
+        .wiwsns-text li {{ margin: 5px 0; }}
+        
+        .solution-row {{ margin: 5px 0; }}
+        .sol-term {{ color: #e74c3c; font-weight: bold; }}
+        .sol-mid {{ color: #f39c12; font-weight: bold; }}
+        .sol-long {{ color: #27ae60; font-weight: bold; }}
+        
         @media (max-width: 1200px) {{
             .grid-2, .grid-3, .grid-4 {{ grid-template-columns: 1fr; }}
+            .wiwsns-item.solutions {{ grid-column: span 1; }}
         }}
     </style>
+    <script>
+        function toggleWiwsns(panelId) {{
+            const panel = document.getElementById(panelId);
+            panel.classList.toggle('collapsed');
+        }}
+    </script>
 </head>
 <body>
     <div class="container">
@@ -674,11 +864,11 @@ def generate_html_dashboard(summaries: dict, df_metrics: pd.DataFrame, charts: d
         <!-- 📋 BUSINESS CONTEXT (WHY) -->
         <div class="section" style="border-left: 4px solid #3498db;">
             <h2>📋 Business Context (WHY)</h2>
-            <p style="font-size: 1.1em; line-height: 1.6;">{BUSINESS_CONTEXT['why']}</p>
+            <p style="font-size: 1.1em; line-height: 1.6;">{WIWSNS_CONTENT['executive_summary']['why']}</p>
             <div class="metric-desc" style="margin-top: 15px;">
                 <strong>⚠️ Data Gaps yang Mempengaruhi Akurasi:</strong>
                 <ul style="margin-left: 20px; margin-top: 10px;">
-                    {''.join(f'<li>{gap}</li>' for gap in BUSINESS_CONTEXT['data_gaps'])}
+                    {''.join(f'<li>{gap}</li>' for gap in DATA_GAPS['environmental'] + DATA_GAPS['operational'][:2])}
                 </ul>
             </div>
         </div>
@@ -718,6 +908,9 @@ def generate_html_dashboard(summaries: dict, df_metrics: pd.DataFrame, charts: d
     
     html += """
             </div>
+"""
+    html += generate_wiwsns_panel("data_sources")
+    html += """
         </div>
 """
     
@@ -733,6 +926,9 @@ def generate_html_dashboard(summaries: dict, df_metrics: pd.DataFrame, charts: d
                     <img src="data:image/png;base64,{charts['pop_ame4']}" alt="AME IV Population">
                 </div>
             </div>
+"""
+    html += generate_wiwsns_panel("population")
+    html += """
         </div>
 """
     
@@ -761,6 +957,9 @@ def generate_html_dashboard(summaries: dict, df_metrics: pd.DataFrame, charts: d
                 <strong>MAE (Mean Absolute Error):</strong> Rata-rata selisih absolut antara detection rate algoritma dengan ground truth. Semakin rendah semakin akurat.<br>
                 <strong>Correlation:</strong> Korelasi antara pola deteksi algoritma dengan ground truth. Nilai positif menunjukkan kesesuaian pola.
             </div>
+"""
+    html += generate_wiwsns_panel("threshold")
+    html += """
         </div>
 """
     
@@ -808,6 +1007,9 @@ def generate_html_dashboard(summaries: dict, df_metrics: pd.DataFrame, charts: d
     
     html += """
             </div>
+"""
+    html += generate_wiwsns_panel("detection")
+    html += """
         </div>
 """
     
@@ -827,6 +1029,9 @@ def generate_html_dashboard(summaries: dict, df_metrics: pd.DataFrame, charts: d
                 <strong>SPH (Stand Per Hectare):</strong> Jumlah pohon per hektar. Scatter plot menunjukkan perbandingan SPH dari drone vs ground truth.<br>
                 <strong>Diagonal line:</strong> Garis perfect match. Titik yang jauh dari garis menunjukkan variance tinggi yang perlu diinvestigasi.
             </div>
+"""
+    html += generate_wiwsns_panel("sph")
+    html += """
         </div>
 """
     
@@ -856,6 +1061,9 @@ def generate_html_dashboard(summaries: dict, df_metrics: pd.DataFrame, charts: d
                     </div>
                 </div>
             </div>
+"""
+    html += generate_wiwsns_panel("ghost_tree")
+    html += """
         </div>
 """
     
@@ -869,6 +1077,9 @@ def generate_html_dashboard(summaries: dict, df_metrics: pd.DataFrame, charts: d
             <div class="metric-desc">
                 <strong>Insight:</strong> Grafik menunjukkan hubungan antara umur tanaman dengan tingkat Ganoderma. Tanaman lebih tua cenderung memiliki tingkat serangan lebih tinggi karena exposure time yang lebih lama.
             </div>
+"""
+    html += generate_wiwsns_panel("age_analysis")
+    html += """
         </div>
 """
     
@@ -883,6 +1094,9 @@ def generate_html_dashboard(summaries: dict, df_metrics: pd.DataFrame, charts: d
             <div class="metric-desc">
                 <strong>Prioritas Survey:</strong> Blok dengan Risk Score tinggi perlu diprioritaskan untuk verifikasi lapangan dan penanganan Ganoderma.
             </div>
+"""
+    html += generate_wiwsns_panel("risk_scoring")
+    html += """
         </div>
 """
     
@@ -937,6 +1151,9 @@ def generate_html_dashboard(summaries: dict, df_metrics: pd.DataFrame, charts: d
                 </tbody>
             </table>
             </div>
+"""
+    html += generate_wiwsns_panel("drilldown")
+    html += """
         </div>
 """
     
