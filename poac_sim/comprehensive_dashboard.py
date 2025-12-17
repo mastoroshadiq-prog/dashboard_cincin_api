@@ -550,11 +550,41 @@ def generate_risk_chart(df_metrics: pd.DataFrame, n_top: int = 10) -> str:
 # WIWSNS PANEL GENERATOR
 # =============================================================================
 
-def generate_wiwsns_panel(section_key: str) -> str:
+def generate_wiwsns_panel(section_key: str, summaries: dict = None) -> str:
     """Generate WIWSNS Business Intelligence panel HTML for a section."""
-    content = WIWSNS_CONTENT.get(section_key, {})
+    content = WIWSNS_CONTENT.get(section_key, {}).copy()
     if not content:
         return ""
+    
+    # Override WHAT with dynamic content based on actual data
+    if summaries and section_key == "data_sources":
+        ame2_drone = summaries['AME002']['drone_total']
+        ame2_gt = summaries['AME002']['gt_total']
+        ame4_drone = summaries['AME004']['drone_total']
+        ame4_gt = summaries['AME004']['gt_total']
+        ame2_pct = ((ame2_drone - ame2_gt) / ame2_gt * 100) if ame2_gt > 0 else 0
+        ame4_pct = ((ame4_drone - ame4_gt) / ame4_gt * 100) if ame4_gt > 0 else 0
+        sisip_drone = summaries['AME002']['drone_young'] + summaries['AME004']['drone_young']
+        sisip_gt = summaries['AME002']['gt_sisip'] + summaries['AME004']['gt_sisip']
+        sisip_gap_pct = abs(sisip_drone - sisip_gt) / sisip_gt * 100 if sisip_gt > 0 else 0
+        content['what'] = f"AME II: {ame2_drone:,} drone vs {ame2_gt:,} GT ({ame2_pct:+.1f}%). AME IV: {ame4_drone:,} vs {ame4_gt:,} ({ame4_pct:+.1f}%). SISIP gap {sisip_gap_pct:.0f}%."
+    
+    elif summaries and section_key == "detection":
+        total_sick = summaries['AME002']['det_sick'] + summaries['AME004']['det_sick']
+        total_warning = summaries['AME002']['det_warning'] + summaries['AME004']['det_warning']
+        total_cincin = summaries['AME002']['det_cincin'] + summaries['AME004']['det_cincin']
+        content['what'] = f"SICK: {total_sick:,} pohon. WARNING: {total_warning:,} pohon. Cincin Api: {total_cincin:,} clusters."
+        content['so_what'] = f"{total_sick:,} pohon SICK = Rp {total_sick * FINANCIAL_PARAMS['valuasi_pohon'] / 1_000_000_000:.1f} Milyar aset berisiko."
+    
+    elif summaries and section_key == "sph":
+        sph_var_ame2 = summaries['AME002']['avg_sph_drone'] - summaries['AME002']['avg_sph_gt']
+        sph_var_ame4 = summaries['AME004']['avg_sph_drone'] - summaries['AME004']['avg_sph_gt']
+        content['what'] = f"AME II: SPH Drone {summaries['AME002']['avg_sph_drone']:.0f} vs GT {summaries['AME002']['avg_sph_gt']:.0f} ({sph_var_ame2:+.0f}). AME IV: {summaries['AME004']['avg_sph_drone']:.0f} vs {summaries['AME004']['avg_sph_gt']:.0f} ({sph_var_ame4:+.0f})."
+    
+    elif summaries and section_key == "ghost_tree":
+        ghost_ame2 = summaries['AME002']['total_ghost_trees']
+        ghost_ame4 = summaries['AME004']['total_ghost_trees']
+        content['what'] = f"AME II: {ghost_ame2:+,} ({ghost_ame2/summaries['AME002']['gt_total']*100:.1f}%). AME IV: {ghost_ame4:+,} ({ghost_ame4/summaries['AME004']['gt_total']*100:.1f}%)."
     
     panel_id = f"wiwsns_{section_key}"
     
@@ -897,7 +927,7 @@ def generate_html_dashboard(summaries: dict, df_metrics: pd.DataFrame, charts: d
     html += """
             </div>
 """
-    html += generate_wiwsns_panel("data_sources")
+    html += generate_wiwsns_panel("data_sources", summaries)
     html += """
         </div>
 """
@@ -941,9 +971,6 @@ def generate_html_dashboard(summaries: dict, df_metrics: pd.DataFrame, charts: d
                     <p style="margin-top: 10px;">MAE: <strong style="color: #2ecc71;">{summaries['AME004']['mae']:.2f}%</strong></p>
                 </div>
             </div>
-"""
-    html += generate_wiwsns_panel("threshold")
-    html += """
         </div>
 """
     
@@ -992,7 +1019,7 @@ def generate_html_dashboard(summaries: dict, df_metrics: pd.DataFrame, charts: d
     html += """
             </div>
 """
-    html += generate_wiwsns_panel("detection")
+    html += generate_wiwsns_panel("detection", summaries)
     html += """
         </div>
 """
@@ -1014,7 +1041,7 @@ def generate_html_dashboard(summaries: dict, df_metrics: pd.DataFrame, charts: d
                 <strong>Diagonal line:</strong> Garis perfect match. Titik yang jauh dari garis menunjukkan variance tinggi yang perlu diinvestigasi.
             </div>
 """
-    html += generate_wiwsns_panel("sph")
+    html += generate_wiwsns_panel("sph", summaries)
     html += """
         </div>
 """
@@ -1046,7 +1073,7 @@ def generate_html_dashboard(summaries: dict, df_metrics: pd.DataFrame, charts: d
                 </div>
             </div>
 """
-    html += generate_wiwsns_panel("ghost_tree")
+    html += generate_wiwsns_panel("ghost_tree", summaries)
     html += """
         </div>
 """
