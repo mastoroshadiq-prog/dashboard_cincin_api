@@ -434,27 +434,54 @@ def generate_detection_chart(summary: dict, divisi: str) -> str:
     return img
 
 
-def generate_sph_scatter(df_metrics: pd.DataFrame, divisi: str) -> str:
-    """Generate SPH scatter plot."""
-    df = df_metrics[(df_metrics['divisi'] == divisi) & (df_metrics['sph_gt'] > 0)]
-    
-    fig, ax = plt.subplots(figsize=(8, 6))
+def generate_sph_comparison_chart(summaries: dict) -> str:
+    """Generate SPH comparison bar chart for both divisions."""
+    fig, ax = plt.subplots(figsize=(12, 7))
     plt.style.use('dark_background')
     
-    scatter = ax.scatter(df['sph_gt'], df['sph_drone'], c=df['sph_variance_pct'], 
-                        cmap='RdYlGn_r', s=50, alpha=0.7)
+    # Data for chart
+    divisions = ['AME II', 'AME IV']
+    sph_drone = [summaries['AME002']['avg_sph_drone'], summaries['AME004']['avg_sph_drone']]
+    sph_gt = [summaries['AME002']['avg_sph_gt'], summaries['AME004']['avg_sph_gt']]
     
-    # Diagonal line
-    max_sph = max(df['sph_gt'].max(), df['sph_drone'].max()) * 1.1
-    ax.plot([0, max_sph], [0, max_sph], '--', color='white', alpha=0.5, label='Perfect Match')
+    x = np.arange(len(divisions))
+    width = 0.35
     
-    ax.set_xlabel('SPH Ground Truth', fontsize=12)
-    ax.set_ylabel('SPH Drone', fontsize=12)
-    ax.set_title(f'{divisi} - SPH Comparison', fontsize=14, fontweight='bold')
+    # Create bars
+    bars1 = ax.bar(x - width/2, sph_drone, width, label='SPH Drone', color='#3498db', alpha=0.9)
+    bars2 = ax.bar(x + width/2, sph_gt, width, label='SPH Ground Truth', color='#e74c3c', alpha=0.9)
     
-    plt.colorbar(scatter, label='Variance %')
-    ax.legend()
-    ax.grid(True, alpha=0.2)
+    ax.set_ylabel('SPH (Stand Per Hectare)', fontsize=14)
+    ax.set_title('SPH Comparison: Drone vs Ground Truth', fontsize=16, fontweight='bold')
+    ax.set_xticks(x)
+    ax.set_xticklabels(divisions, fontsize=14)
+    ax.legend(fontsize=12)
+    ax.grid(True, alpha=0.2, axis='y')
+    
+    # Add value labels on bars
+    for bar in bars1:
+        height = bar.get_height()
+        ax.text(bar.get_x() + bar.get_width()/2., height,
+                f'{height:.0f}', ha='center', va='bottom', fontsize=14, fontweight='bold')
+    
+    for bar in bars2:
+        height = bar.get_height()
+        ax.text(bar.get_x() + bar.get_width()/2., height,
+                f'{height:.0f}', ha='center', va='bottom', fontsize=14, fontweight='bold')
+    
+    # Add variance annotation
+    for i, div in enumerate(divisions):
+        drone_val = sph_drone[i]
+        gt_val = sph_gt[i]
+        variance = drone_val - gt_val
+        variance_pct = (variance / gt_val * 100) if gt_val > 0 else 0
+        color = '#e74c3c' if abs(variance_pct) > 50 else '#f39c12' if abs(variance_pct) > 15 else '#27ae60'
+        ax.annotate(f'Gap: {variance:+.0f} ({variance_pct:+.0f}%)', 
+                   xy=(i, max(drone_val, gt_val) + 20),
+                   ha='center', fontsize=12, color=color, fontweight='bold')
+    
+    # Set y limit to accommodate labels
+    ax.set_ylim(0, max(max(sph_drone), max(sph_gt)) * 1.25)
     
     plt.tight_layout()
     buf = BytesIO()
@@ -1004,17 +1031,8 @@ def generate_html_dashboard(summaries: dict, df_metrics: pd.DataFrame, charts: d
     html += f"""
         <div class="section">
             <h2>📈 SPH (Stand Per Hectare) Analysis</h2>
-            <div class="grid-2">
-                <div class="chart-card">
-                    <img src="data:image/png;base64,{charts['sph_ame2']}" alt="AME II SPH">
-                </div>
-                <div class="chart-card">
-                    <img src="data:image/png;base64,{charts['sph_ame4']}" alt="AME IV SPH">
-                </div>
-            </div>
-            <div class="metric-desc">
-                <strong>SPH (Stand Per Hectare):</strong> Jumlah pohon per hektar. Scatter plot menunjukkan perbandingan SPH dari drone vs ground truth.<br>
-                <strong>Diagonal line:</strong> Garis perfect match. Titik yang jauh dari garis menunjukkan variance tinggi yang perlu diinvestigasi.
+            <div class="chart-card">
+                <img src="data:image/png;base64,{charts['sph_comparison']}" alt="SPH Comparison">
             </div>
 """
     html += generate_wiwsns_panel("sph", summaries)
@@ -1246,8 +1264,7 @@ def main():
         'pop_ame4': generate_population_chart(summaries['AME004'], 'AME IV'),
         'det_ame2': generate_detection_chart(summaries['AME002'], 'AME II'),
         'det_ame4': generate_detection_chart(summaries['AME004'], 'AME IV'),
-        'sph_ame2': generate_sph_scatter(df_metrics, 'AME002'),
-        'sph_ame4': generate_sph_scatter(df_metrics, 'AME004'),
+        'sph_comparison': generate_sph_comparison_chart(summaries),
         'age_ganoderma': generate_age_ganoderma_chart(df_metrics),
         'risk_chart': generate_risk_chart(df_metrics)
     }
