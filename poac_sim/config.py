@@ -209,30 +209,30 @@ CINCIN_API_CONFIG = {
 CINCIN_API_PRESETS = {
     "konservatif": {
         # Untuk kebun dengan infeksi rendah - deteksi ketat
-        # UPDATED: Range disesuaikan per Technical Guideline (CAP 10%)
-        "threshold_min": 0.01,  # 1%
-        "threshold_max": 0.10,  # 10% (CAP)
+        # v3.4: WIDENED - Lepaskan hard cap, biarkan Kneedle mencari knee point
+        "threshold_min": 0.05,  # 5% (was 1%)
+        "threshold_max": 0.20,  # 20% (was 10%)
         "threshold_step": 0.01,  # 1% step untuk presisi
         "min_sick_neighbors": 4,  # Lebih ketat
-        "description": "Deteksi ketat untuk kebun sehat. Hanya kluster padat terdeteksi."
+        "description": "v3.4: Widened range untuk Kneedle. Deteksi ketat."
     },
     "standar": {
         # Setting default - seimbang
-        # UPDATED: Range disesuaikan per Technical Guideline (CAP 20%)
+        # v3.4: WIDENED - Buka sampai 40%
         "threshold_min": 0.10,  # 10%
-        "threshold_max": 0.20,  # 20% (CAP)
+        "threshold_max": 0.40,  # 40% (was 20%)
         "threshold_step": 0.01,  # 1% step untuk presisi
         "min_sick_neighbors": 3,
-        "description": "Setting standar untuk kebun dengan infeksi sedang."
+        "description": "v3.4: Widened range untuk Kneedle. Setting standar."
     },
     "agresif": {
         # Untuk kebun dengan infeksi tinggi - deteksi luas
-        # UPDATED: Range disesuaikan per Technical Guideline (CAP 30%, was 50%)
-        "threshold_min": 0.15,  # 15%
-        "threshold_max": 0.30,  # 30% (CAP - mencegah over-detection)
+        # v3.4: WIDENED - Buka sampai 60%, biarkan Kneedle mencari batas alami
+        "threshold_min": 0.20,  # 20% (was 15%)
+        "threshold_max": 0.60,  # 60% (was 30%)
         "threshold_step": 0.01,  # 1% step untuk presisi
         "min_sick_neighbors": 2,  # Lebih longgar
-        "description": "Deteksi luas untuk kebun dengan infeksi tinggi. CAP di 30%."
+        "description": "v3.4: Widened range untuk Kneedle. Deteksi luas."
     }
 }
 
