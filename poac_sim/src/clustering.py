@@ -317,8 +317,9 @@ def find_optimal_threshold(
     """
     LANGKAH 5: MEMILIH THRESHOLD PEMENANG (AUTO-TUNING)
     
-    Memilih threshold dengan rasio efisiensi tertinggi,
-    dengan syarat minimal memiliki min_clusters kluster valid.
+    Memilih threshold optimal menggunakan salah satu metode:
+    - "efficiency": Pilih threshold dengan rasio efisiensi tertinggi (OLD - prone to over-detect)
+    - "gradient": Pilih threshold di knee point menggunakan Kneedle algorithm (NEW - recommended)
     
     Args:
         simulation_df: DataFrame hasil simulasi threshold
@@ -330,7 +331,7 @@ def find_optimal_threshold(
     method = method if method is not None else CINCIN_API_CONFIG.get("elbow_method", "efficiency")
     
     # Filter by minimum clusters
-    valid_df = simulation_df[simulation_df['Kluster_Valid'] >= min_clusters]
+    valid_df = simulation_df[simulation_df['Kluster_Valid'] >= min_clusters].copy()
     
     if valid_df.empty:
         # Fallback: use threshold with most clusters
@@ -338,18 +339,49 @@ def find_optimal_threshold(
         optimal_idx = simulation_df['Kluster_Valid'].idxmax()
         optimal_threshold = simulation_df.loc[optimal_idx, 'Batas_Ambang']
     elif method == "gradient":
-        # Gradient-based elbow detection
-        valid_df = valid_df.copy()
-        valid_df['Gradient'] = valid_df['Rasio_Efisiensi'].diff().abs()
-        sensitivity = CINCIN_API_CONFIG.get("gradient_sensitivity", 0.1)
-        optimal_idx = valid_df['Gradient'].idxmax()
-        optimal_threshold = valid_df.loc[optimal_idx, 'Batas_Ambang']
+        # =========================================================================
+        # KNEEDLE ALGORITHM (Mencari Titik Siku / Knee Point)
+        # =========================================================================
+        # Konsep: Mencari titik di mana penambahan threshold tidak lagi memberikan
+        # penambahan jumlah klaster yang signifikan (diminishing returns).
+        # =========================================================================
+        
+        # Extract X (Threshold) dan Y (Kluster_Valid)
+        x = valid_df['Batas_Ambang'].values
+        y = valid_df['Kluster_Valid'].values
+        
+        if len(x) < 2:
+            # Not enough points, use first valid threshold
+            optimal_threshold = x[0]
+        else:
+            # Normalize X dan Y ke scale 0-1 agar sebanding
+            x_min, x_max = x.min(), x.max()
+            y_min, y_max = y.min(), y.max()
+            
+            # Avoid division by zero
+            x_range = x_max - x_min if x_max > x_min else 1
+            y_range = y_max - y_min if y_max > y_min else 1
+            
+            x_norm = (x - x_min) / x_range
+            y_norm = (y - y_min) / y_range
+            
+            # Hitung jarak tegak lurus ke garis diagonal (dari titik pertama ke terakhir)
+            # Untuk kurva yang naik, knee point adalah titik terjauh DI ATAS diagonal
+            # Rumus sederhana: distance = y_norm - x_norm (untuk kurva concave)
+            distances = y_norm - x_norm
+            
+            # Cari index dengan jarak maksimum (The Knee)
+            optimal_idx = np.argmax(distances)
+            optimal_threshold = x[optimal_idx]
+            
+            logger.info(f"Kneedle: Found knee at index {optimal_idx}, threshold {optimal_threshold*100:.0f}%")
+            logger.info(f"Kneedle: Distances = {[f'{d:.3f}' for d in distances]}")
     else:
-        # Default: efficiency-based selection
+        # Default: efficiency-based selection (OLD method)
         optimal_idx = valid_df['Rasio_Efisiensi'].idxmax()
         optimal_threshold = valid_df.loc[optimal_idx, 'Batas_Ambang']
     
-    logger.info(f"Optimal threshold found: {optimal_threshold*100:.0f}%")
+    logger.info(f"Optimal threshold found ({method}): {optimal_threshold*100:.0f}%")
     
     return optimal_threshold
 
@@ -641,3 +673,88 @@ def get_aph_targets(df: pd.DataFrame) -> pd.DataFrame:
     """
     return df[df['Status_Risiko'] == STATUS_ORANYE].copy()
 
+
+# =============================================================================
+# CONSENSUS VOTING (Filter Akhir Multi-Preset)
+# =============================================================================
+
+def apply_consensus_voting(
+    results_dict: Dict[str, pd.DataFrame],
+    min_votes: int = None,
+    status_column: str = 'Status_Risiko'
+) -> pd.DataFrame:
+    """
+    CONSENSUS VOTING: Filter hasil dari multiple preset.
+    
+    Sebuah pohon hanya divonis sebagai target (G3/MERAH) jika disepakati 
+    oleh minimal min_votes preset.
+    
+    Args:
+        results_dict: Dictionary dengan key=preset_name, value=DataFrame hasil klasifikasi
+                     Contoh: {'konservatif': df1, 'standar': df2, 'agresif': df3}
+        min_votes: Minimum jumlah preset yang harus setuju (default: 2)
+        status_column: Nama kolom status (default: 'Status_Risiko')
+        
+    Returns:
+        DataFrame dengan kolom tambahan:
+        - 'vote_count': Jumlah preset yang menandai pohon sebagai MERAH
+        - 'consensus_status': Status akhir setelah voting (APPROVED/REJECTED)
+        - 'voting_presets': List preset yang menandai MERAH
+    """
+    min_votes = min_votes if min_votes is not None else CINCIN_API_CONFIG.get("min_votes", 2)
+    
+    logger.info(f"Applying Consensus Voting with min_votes={min_votes}")
+    
+    # Collect all unique tree IDs across all presets
+    all_trees = set()
+    preset_results = {}
+    
+    for preset_name, df in results_dict.items():
+        # Create unique tree key
+        df = df.copy()
+        df['tree_key'] = df['Blok'].astype(str) + '_' + df['N_BARIS'].astype(str) + '_' + df['N_POKOK'].astype(str)
+        
+        # Get MERAH trees
+        merah_trees = set(df[df[status_column].str.contains('MERAH', na=False)]['tree_key'].tolist())
+        preset_results[preset_name] = merah_trees
+        all_trees.update(df['tree_key'].tolist())
+        
+        logger.info(f"  {preset_name}: {len(merah_trees)} MERAH trees")
+    
+    # Count votes for each tree
+    vote_counter = {}
+    voting_presets = {}
+    
+    for preset_name, merah_trees in preset_results.items():
+        for tid in merah_trees:
+            if tid not in vote_counter:
+                vote_counter[tid] = 0
+                voting_presets[tid] = []
+            vote_counter[tid] += 1
+            voting_presets[tid].append(preset_name)
+    
+    # Use first preset's DataFrame as base
+    first_preset = list(results_dict.keys())[0]
+    base_df = results_dict[first_preset].copy()
+    base_df['tree_key'] = base_df['Blok'].astype(str) + '_' + base_df['N_BARIS'].astype(str) + '_' + base_df['N_POKOK'].astype(str)
+    
+    # Add voting results
+    base_df['vote_count'] = base_df['tree_key'].map(lambda x: vote_counter.get(x, 0))
+    base_df['voting_presets'] = base_df['tree_key'].map(lambda x: ','.join(voting_presets.get(x, [])))
+    base_df['consensus_status'] = base_df['vote_count'].apply(
+        lambda v: 'APPROVED' if v >= min_votes else 'REJECTED'
+    )
+    
+    # Count results
+    approved_count = len(base_df[base_df['consensus_status'] == 'APPROVED'])
+    
+    logger.info(f"Consensus Voting Results:")
+    logger.info(f"  Total trees: {len(base_df)}")
+    logger.info(f"  Votes >= {min_votes}: {approved_count} APPROVED")
+    
+    # Log vote distribution
+    for v in range(len(results_dict) + 1):
+        count = len(base_df[base_df['vote_count'] == v])
+        logger.info(f"  {v} votes: {count} trees")
+    
+    return base_df

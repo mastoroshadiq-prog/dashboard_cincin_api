@@ -168,13 +168,21 @@ CINCIN_API_CONFIG = {
     # ELBOW METHOD TUNING
     # --------------------------------------------------------------------------
     # Metode pemilihan threshold optimal:
-    # "efficiency" = Pilih berdasarkan rasio efisiensi tertinggi (default)
-    # "gradient" = Pilih berdasarkan perubahan gradient terbesar
-    "elbow_method": "efficiency",
+    # "efficiency" = Pilih berdasarkan rasio efisiensi tertinggi (OLD - prone to over-detect)
+    # "gradient" = Pilih berdasarkan Kneedle algorithm (NEW - recommended)
+    "elbow_method": "gradient",  # CHANGED: from efficiency to gradient
     
-    # Sensitivitas gradient (hanya untuk elbow_method="gradient")
-    # Nilai lebih tinggi = lebih sensitif terhadap perubahan
+    # Sensitivitas gradient (deprecated, kept for backward compatibility)
     "gradient_sensitivity": 0.1,
+    
+    # --------------------------------------------------------------------------
+    # CONSENSUS VOTING (Multi-Preset Filter)
+    # --------------------------------------------------------------------------
+    # Gunakan consensus voting untuk filter hasil dari multiple preset
+    "use_consensus": True,
+    
+    # Minimum preset yang harus setuju untuk pohon dianggap target
+    "min_votes": 2,  # 2 dari 3 preset harus setuju
     
     # --------------------------------------------------------------------------
     # OUTPUT & VISUALIZATION OPTIONS
@@ -201,27 +209,30 @@ CINCIN_API_CONFIG = {
 CINCIN_API_PRESETS = {
     "konservatif": {
         # Untuk kebun dengan infeksi rendah - deteksi ketat
-        "threshold_min": 0.03,
-        "threshold_max": 0.15,
-        "threshold_step": 0.02,
+        # UPDATED: Range disesuaikan per Technical Guideline (CAP 10%)
+        "threshold_min": 0.01,  # 1%
+        "threshold_max": 0.10,  # 10% (CAP)
+        "threshold_step": 0.01,  # 1% step untuk presisi
         "min_sick_neighbors": 4,  # Lebih ketat
         "description": "Deteksi ketat untuk kebun sehat. Hanya kluster padat terdeteksi."
     },
     "standar": {
         # Setting default - seimbang
-        "threshold_min": 0.05,
-        "threshold_max": 0.30,
-        "threshold_step": 0.05,
+        # UPDATED: Range disesuaikan per Technical Guideline (CAP 20%)
+        "threshold_min": 0.10,  # 10%
+        "threshold_max": 0.20,  # 20% (CAP)
+        "threshold_step": 0.01,  # 1% step untuk presisi
         "min_sick_neighbors": 3,
         "description": "Setting standar untuk kebun dengan infeksi sedang."
     },
     "agresif": {
         # Untuk kebun dengan infeksi tinggi - deteksi luas
-        "threshold_min": 0.10,
-        "threshold_max": 0.50,
-        "threshold_step": 0.05,
+        # UPDATED: Range disesuaikan per Technical Guideline (CAP 30%, was 50%)
+        "threshold_min": 0.15,  # 15%
+        "threshold_max": 0.30,  # 30% (CAP - mencegah over-detection)
+        "threshold_step": 0.01,  # 1% step untuk presisi
         "min_sick_neighbors": 2,  # Lebih longgar
-        "description": "Deteksi luas untuk kebun dengan infeksi tinggi."
+        "description": "Deteksi luas untuk kebun dengan infeksi tinggi. CAP di 30%."
     }
 }
 
