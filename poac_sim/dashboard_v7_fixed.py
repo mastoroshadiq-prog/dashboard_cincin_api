@@ -340,19 +340,20 @@ def generate_html(output_dir, all_results, all_maps, prod_df):
             umur_str = f"{umur_val} th" if pd.notna(umur_val) else "N/A"
             gano_rows += f'<tr><td>{i}</td><td><b>{r["Blok"]}</b></td><td>{r["Total"]:,}</td><td style="color:#e74c3c">{r["MERAH"]}</td><td style="color:#e67e22">{r["ORANYE"]}</td><td><b>{r["Attack_Pct"]:.1f}%</b></td><td>{yield_str}</td><td>{umur_str}</td></tr>'
         
-        # Low yield blocks
+        # Low yield blocks (PRODUCTIVE PLANTS ONLY - Age > 5 years)
         yield_rows = ""
         if not prod_df.empty:
-            low_yield = prod_df.nsmallest(10, 'Yield_TonHa')
-            for i, (_, r) in enumerate(low_yield.iterrows(), 1):
-                # FIXED: Convert A012A → A12 for matching
-                gano_pattern = convert_prod_to_gano_pattern(r['Blok_Prod'])
-                blok_match = block_stats[block_stats['Blok'].str.contains(gano_pattern, na=False, regex=False)]
-                attack = blok_match['Attack_Pct'].mean() if not blok_match.empty else 0
-                umur = int(r['Umur_Tahun']) if pd.notna(r['Umur_Tahun']) else 0
-                # Color code by age: red if mature (>5 years), orange if young
-                age_color = 'color:#e74c3c' if umur > 5 else 'color:#f39c12'
-                yield_rows += f'<tr><td>{i}</td><td><b>{r["Blok_Prod"]}</b></td><td style="{age_color}">{umur} th</td><td>{r["Yield_TonHa"]:.3f}</td><td>{r["Luas_Ha"]:.1f}</td><td>{attack:.1f}%</td></tr>'
+            # Filter only mature/productive plants
+            productive_df = prod_df[prod_df['Umur_Tahun'] > 5]
+            if not productive_df.empty:
+                low_yield = productive_df.nsmallest(10, 'Yield_TonHa')
+                for i, (_, r) in enumerate(low_yield.iterrows(), 1):
+                    # FIXED: Convert A012A → A12 for matching
+                    gano_pattern = convert_prod_to_gano_pattern(r['Blok_Prod'])
+                    blok_match = block_stats[block_stats['Blok'].str.contains(gano_pattern, na=False, regex=False)]
+                    attack = blok_match['Attack_Pct'].mean() if not blok_match.empty else 0
+                    umur = int(r['Umur_Tahun']) if pd.notna(r['Umur_Tahun']) else 0
+                    yield_rows += f'<tr><td>{i}</td><td><b>{r["Blok_Prod"]}</b></td><td>{umur} th</td><td>{r["Yield_TonHa"]:.3f}</td><td>{r["Luas_Ha"]:.1f}</td><td>{attack:.1f}%</td></tr>'
         
         divisi_tabs += f'<button class="tab {active}" onclick="switchTab(\'{divisi_id}\')" data-div="{divisi_id}">{divisi}</button>'
         
@@ -380,7 +381,7 @@ def generate_html(output_dir, all_results, all_maps, prod_df):
             
             <section class="pov-section">
                 <h3>📉 POV 2: Produktivitas → Ganoderma</h3>
-                <p>Top 10 blok dengan yield terendah dan breakdown serangannya<br><span style="color:#e74c3c">● Merah</span> = Tanaman produktif (>5 th) | <span style="color:#f39c12">● Oranye</span> = Tanaman muda (≤5 th)</p>
+                <p>Top 10 blok dengan yield terendah (tanaman produktif >5 tahun) dan breakdown serangannya<br><span style="color:#999; font-size:0.9em">📌 Hanya menampilkan tanaman dewasa/produktif - tanaman muda (<5 th) di-exclude</span></p>
                 <table><thead><tr><th>#</th><th>Blok</th><th>Umur</th><th>Yield</th><th>Luas</th><th>% Attack</th></tr></thead>
                 <tbody>{yield_rows if yield_rows else "<tr><td colspan='5'>Data produktivitas tidak tersedia</td></tr>"}</tbody></table>
             </section>
