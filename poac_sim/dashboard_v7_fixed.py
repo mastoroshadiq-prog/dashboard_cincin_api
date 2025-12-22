@@ -291,6 +291,24 @@ def generate_html(output_dir, all_results, all_maps, prod_df):
     """Generate HTML with both POVs."""
     presets_json = json.dumps(ZSCORE_PRESETS)
     
+    # Prepare data for JavaScript real-time recalculation
+    js_divisi_data = {}
+    for divisi, data in all_results.items():
+        divisi_id = divisi.replace(' ', '_')
+        results = data['results']
+        df_full = results['standar']['df']
+        
+        # Extract essential tree data for JS
+        tree_data = df_full[['Blok', 'N_BARIS', 'N_POKOK', 'ZScore', 'Mean_NDRE', 'SD_NDRE']].to_dict('records')
+        
+        js_divisi_data[divisi_id] = {
+            'trees': tree_data,
+            'total_trees': len(df_full),
+            'total_blocks': df_full['Blok'].nunique()
+        }
+    
+    js_data_json = json.dumps(js_divisi_data)
+    
     divisi_tabs = ""
     divisi_content = ""
     
@@ -422,6 +440,36 @@ section h3 {{ color:#00d9ff; margin-bottom:15px; padding-bottom:10px; border-bot
 .map-item img {{ width:100%; }}
 .map-label {{ padding:10px; text-align:center; background:rgba(0,0,0,0.5); }}
 .pov-section p {{ color:#aaa; margin-bottom:15px; }}
+
+/* Config Panel Styles */
+.config-panel {{ background:rgba(255,107,107,0.1); border:2px solid rgba(255,107,107,0.3); border-radius:20px; padding:25px; margin:20px 0; }}
+.config-header {{ display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; }}
+.config-header h3 {{ color:#00d9ff; display:flex; align-items:center; gap:10px; margin:0; }}
+.info-btn {{ background:#3498db; color:#fff; border:none; border-radius:50%; width:35px; height:35px; font-size:18px; cursor:pointer; transition:0.3s; box-shadow:0 2px 10px rgba(52,152,219,0.3); }}
+.info-btn:hover {{ background:#2980b9; transform:scale(1.1); }}
+.config-grid {{ display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px; }}
+.config-item {{ background:rgba(0,0,0,0.3); padding:20px; border-radius:15px; border:1px solid rgba(0,217,255,0.2); }}
+.config-item label {{ display:block; color:#00d9ff; margin-bottom:10px; font-weight:600; font-size:0.95rem; }}
+.config-item select {{ width:100%; padding:12px; border-radius:8px; border:2px solid rgba(0,217,255,0.3); background:rgba(255,255,255,0.1); color:#fff; font-size:16px; cursor:pointer; }}
+.config-item input[type="range"] {{ width:100%; height:8px; border-radius:5px; background:linear-gradient(to right,#e74c3c,#f39c12,#27ae60); outline:none; }}
+.config-item input[type="range"]::-webkit-slider-thumb {{ width:20px; height:20px; border-radius:50%; background:#00d9ff; cursor:pointer; box-shadow:0 0 10px rgba(0,217,255,0.5); }}
+.value-display {{ display:flex; justify-content:space-between; margin-top:8px; color:#aaa; font-size:14px; }}
+.value-display span:last-child {{ color:#00d9ff; font-weight:bold; }}
+.impact {{ margin-top:12px; padding:12px; background:rgba(0,0,0,0.4); border-radius:8px; border-left:3px solid #ffd700; font-size:13px; color:#ffd700; line-height:1.5; }}
+
+/* Info Modal Styles */
+.modal {{ display:none; position:fixed; z-index:9999; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.85); }}
+.modal.active {{ display:flex; justify-content:center; align-items:center; }}
+.modal-content {{ background:linear-gradient(135deg,#1e3c72,#2a5298); margin:5% auto; padding:35px; border-radius:20px; max-width:850px; max-height:85vh; overflow-y:auto; box-shadow:0 10px 50px rgba(0,0,0,0.7); border:2px solid #00d9ff; }}
+.close {{ color:#fff; float:right; font-size:35px; font-weight:bold; cursor:pointer; line-height:25px; transition:0.3s; }}
+.close:hover {{ color:#ff6b6b; transform:rotate(90deg); }}
+.modal-content h2 {{ color:#00d9ff; margin-bottom:25px; padding-bottom:15px; border-bottom:2px solid rgba(0,217,255,0.3); }}
+.modal-content h3 {{ color:#ffa500; margin-top:25px; margin-bottom:15px; }}
+.modal-content p {{ line-height:1.8; margin-bottom:15px; color:#ddd; }}
+.modal-content ul {{ margin-left:25px; margin-bottom:20px; }}
+.modal-content li {{ margin-bottom:10px; line-height:1.6; }}
+.modal-content strong {{ color:#00d9ff; }}
+
 table {{ width:100%; border-collapse:collapse; }}
 th,td {{ padding:12px; text-align:left; border-bottom:1px solid rgba(255,255,255,0.1); }}
 th {{ background:rgba(0,0,0,0.3); color:#00d9ff; }}
@@ -432,16 +480,266 @@ tr:hover {{ background:rgba(255,255,255,0.05); }}
 <body>
 <div class="header"><h1>🔥 DASHBOARD Z-SCORE + CINCIN API v7.0 FIXED</h1><p>Hybrid Detection • Korelasi Produktivitas DIPERBAIKI</p></div>
 <div class="container">
+    <!-- Configuration Panel -->
+    <div class="config-panel">
+        <div class="config-header">
+            <h3>⚙️ KONFIGURASI THRESHOLD Z-SCORE</h3>
+            <button class="info-btn" onclick="openInfoModal()" title="Bantuan">❓</button>
+        </div>
+        <div class="config-grid">
+            <div class="config-item">
+                <label>📋 Preset Strategi:</label>
+                <select id="preset-select" onchange="applyPreset()">
+                    <option value="konservatif">Konservatif (Lebih Banyak MERAH)</option>
+                    <option value="standar" selected>Standar (Balanced)</option>
+                    <option value="agresif">Agresif (Lebih Selektif)</option>
+                    <option value="custom">Custom (Manual)</option>
+                </select>
+            </div>
+            
+            <div class="config-item">
+                <label>🎯 Z-Score Core (Kluster Aktif):</label>
+                <input type="range" id="z-core" min="-3" max="0" step="0.1" value="-1.5" oninput="updateConfig()">
+                <div class="value-display">
+                    <span>Z-Score:</span>
+                    <span id="z-core-val">-1.5</span>
+                </div>
+                <div class="impact">💡 Semakin tinggi → Lebih banyak pohon dianggap MERAH</div>
+            </div>
+            
+            <div class="config-item">
+                <label>🔗 Z-Score Neighbor (Tetangga Terpengaruh):</label>
+                <input type="range" id="z-neighbor" min="-2" max="0" step="0.1" value="-0.5" oninput="updateConfig()">
+                <div class="value-display">
+                    <span>Z-Score:</span>
+                    <span id="z-neighbor-val">-0.5</span>
+                </div>
+                <div class="impact">💡 Semakin tinggi → ORANYE (Cincin Api) lebih luas</div>
+            </div>
+            
+            <div class="config-item">
+                <label>👥 Min Neighbors (Tetangga Minimum):</label>
+                <input type="range" id="min-neighbors" min="1" max="6" step="1" value="2" oninput="updateConfig()">
+                <div class="value-display">
+                    <span>Jumlah:</span>
+                    <span id="min-neighbors-val">2</span>
+                </div>
+                <div class="impact">💡 Semakin rendah → Lebih sensitif deteksi kluster</div>
+            </div>
+        </div>
+    </div>
+    
 <div class="tabs">{divisi_tabs}</div>
 {divisi_content}
 <div class="footer">Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}</div>
 </div>
+
+<!-- Info Modal -->
+<div id="infoModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeInfoModal()">&times;</span>
+        <h2>📖 Panduan Konfigurasi Z-Score + Cincin Api</h2>
+        
+        <h3>📊 Preset Strategi</h3>
+        <p><strong>Konservatif:</strong> Deteksi lebih banyak pohon berisiko (cocok untuk pencegahan dini dan treatment agresif)</p>
+        <p><strong>Standar:</strong> Balanced detection (rekomendasi umum untuk monitoring rutin)</p>
+        <p><strong>Agresif:</strong> Hanya deteksi kluster yang sangat jelas (hemat biaya sanitasi, fokus pada kasus parah)</p>
+        
+        <h3>🎯 Z-Score Core (Threshold Kluster Aktif)</h3>
+        <p><strong>Makna:</strong> Threshold untuk mengidentifikasi pohon dengan NDVI rendah (stressed/terinfeksi)</p>
+        <p><strong>Satuan:</strong> Standar deviasi dari rata-rata blok</p>
+        <p><strong>Range:</strong> -3.0 sampai 0.0</p>
+        <p><strong>Dampak:</strong> Semakin tinggi (mendekati 0), semakin banyak pohon masuk kategori suspect (MERAH/KUNING)</p>
+        
+        <h3>🔗 Z-Score Neighbor (Threshold Tetangga)</h3>
+        <p><strong>Makna:</strong> Threshold untuk menghitung tetangga yang terpengaruh di sekitar pohon suspect</p>
+        <p><strong>Satuan:</strong> Standar deviasi dari rata-rata blok</p>
+        <p><strong>Range:</strong> -2.0 sampai 0.0</p>
+        <p><strong>Dampak:</strong> Semakin tinggi, semakin luas area Cincin Api (ORANYE)</p>
+        
+        <h3>👥 Min Neighbors (Tetangga Minimum)</h3>
+        <p><strong>Makna:</strong> Jumlah minimum tetangga sakit untuk membentuk kluster MERAH (infected cluster)</p>
+        <p><strong>Satuan:</strong> Jumlah pohon (1-6)</p>
+        <p><strong>Range:</strong> 1 sampai 6 pohon</p>
+        <p><strong>Dampak:</strong> Semakin rendah, semakin sensitif deteksi kluster kecil (isolated cases juga terdeteksi)</p>
+        
+        <h3>🔬 Bagaimana Algoritma Hybrid Bekerja?</h3>
+        <ul>
+            <li><strong>Step 1 (Z-Score Detection):</strong> Hitung Z-Score untuk setiap pohon (NDVI vs rata-rata blok)</li>
+            <li><strong>Step 2 (Suspect Identification):</strong> Identifikasi pohon suspect (Z-Score &lt; Z-Core)</li>
+            <li><strong>Step 3 (Neighbor Count):</strong> Hitung tetangga sakit (Z-Score &lt; Z-Neighbor) di sekitar setiap suspect</li>
+            <li><strong>Step 4 (Cluster Classification):</strong> Jika ≥ Min Neighbors → MERAH, jika tidak → KUNING</li>
+            <li><strong>Step 5 (Cincin Api):</strong> Semua tetangga pohon MERAH → ORANYE (ring of fire effect)</li>
+        </ul>
+        
+        <p style="margin-top:20px; padding:15px; background:rgba(0,217,255,0.1); border-radius:10px; border-left:4px solid #00d9ff;">
+            <strong>💡 Tips:</strong> Mulai dengan preset Standar, lalu adjust berdasarkan kondisi lapangan. 
+            Gunakan Konservatif jika ingin deteksi dini maksimal, atau Agresif jika budget treatment terbatas.
+        </p>
+    </div>
+</div>
+
 <script>
+// Global data
+const PRESETS = {presets_json};
+const DIVISI_DATA = {js_data_json};
+let currentDivisi = '{list(all_results.keys())[0].replace(" ", "_")}';
+
+// Preset management
+function applyPreset() {{
+    const preset = document.getElementById('preset-select').value;
+    if (preset === 'custom') return;
+    
+    const config = PRESETS[preset];
+    document.getElementById('z-core').value = config.z_threshold_core;
+    document.getElementById('z-neighbor').value = config.z_threshold_neighbor;
+    document.getElementById('min-neighbors').value = config.min_stressed_neighbors;
+    updateConfig();
+}}
+
+function updateConfig() {{
+    const zCore = parseFloat(document.getElementById('z-core').value);
+    const zNeighbor = parseFloat(document.getElementById('z-neighbor').value);
+    const minNeighbors = parseInt(document.getElementById('min-neighbors').value);
+    
+    // Update displays
+    document.getElementById('z-core-val').textContent = zCore.toFixed(1);
+    document.getElementById('z-neighbor-val').textContent = zNeighbor.toFixed(1);
+    document.getElementById('min-neighbors-val').textContent = minNeighbors;
+    
+    // Auto-detect preset match
+    let matchedPreset = null;
+    for (const [name, config] of Object.entries(PRESETS)) {{
+        if (Math.abs(config.z_threshold_core - zCore) < 0.01 && 
+            Math.abs(config.z_threshold_neighbor - zNeighbor) < 0.01 && 
+            config.min_stressed_neighbors === minNeighbors) {{
+            matchedPreset = name;
+            break;
+        }}
+    }}
+    document.getElementById('preset-select').value = matchedPreset || 'custom';
+    
+    // Recalculate for current divisi
+    recalculateStats(currentDivisi, zCore, zNeighbor, minNeighbors);
+}}
+
+function recalculateStats(divisiId, zCore, zNeighbor, minNeighbors) {{
+    const data = DIVISI_DATA[divisiId];
+    if (!data) return;
+    
+    let merah = 0, oranye = 0, kuning = 0, hijau = 0;
+    const statusMap = new Map();
+    const coordLookup = new Map();
+    
+    // Build coordinate lookup
+    for (const tree of data.trees) {{
+        const key = `${{tree.Blok}}_${{tree.N_BARIS}}_${{tree.N_POKOK}}`;
+        coordLookup.set(key, tree);
+    }}
+    
+    // Step 1 & 2: Identify suspects based on Z-Score
+    const suspects = [];
+    for (const tree of data.trees) {{
+        const key = `${{tree.Blok}}_${{tree.N_BARIS}}_${{tree.N_POKOK}}`;
+        
+        if (tree.ZScore < zCore) {{
+            suspects.push(tree);
+            statusMap.set(key, 'SUSPECT');
+        }} else {{
+            statusMap.set(key, 'HIJAU');
+            hijau++;
+        }}
+    }}
+    
+    // Step 3 & 4: Count neighbors and classify MERAH/KUNING
+    for (const tree of suspects) {{
+        const key = `${{tree.Blok}}_${{tree.N_BARIS}}_${{tree.N_POKOK}}`;
+        const neighbors = getHexNeighbors(tree.N_BARIS, tree.N_POKOK);
+        
+        let sickCount = 0;
+        for (const [nb, np] of neighbors) {{
+            const nKey = `${{tree.Blok}}_${{nb}}_${{np}}`;
+            const neighbor = coordLookup.get(nKey);
+            if (neighbor && neighbor.ZScore < zNeighbor) {{
+                sickCount++;
+            }}
+        }}
+        
+        if (sickCount >= minNeighbors) {{
+            statusMap.set(key, 'MERAH');
+            merah++;
+        }} else {{
+            statusMap.set(key, 'KUNING');
+            kuning++;
+        }}
+    }}
+    
+    // Step 5: Create Cincin Api (ORANYE)
+    const merahTrees = [];
+    for (const [key, status] of statusMap.entries()) {{
+        if (status === 'MERAH') {{
+            const [blok, baris, pokok] = key.split('_');
+            merahTrees.push({{ blok, baris: parseInt(baris), pokok: parseInt(pokok) }});
+        }}
+    }}
+    
+    for (const tree of merahTrees) {{
+        const neighbors = getHexNeighbors(tree.baris, tree.pokok);
+        for (const [nb, np] of neighbors) {{
+            const nKey = `${{tree.blok}}_${{nb}}_${{np}}`;
+            if (statusMap.has(nKey) && statusMap.get(nKey) !== 'MERAH') {{
+                const oldStatus = statusMap.get(nKey);
+                statusMap.set(nKey, 'ORANYE');
+                
+                if (oldStatus === 'HIJAU') hijau--;
+                else if (oldStatus === 'KUNING') kuning--;
+                oranye++;
+            }}
+        }}
+    }}
+    
+    // Update UI
+    document.getElementById(`merah-${{divisiId}}`).textContent = merah.toLocaleString();
+    document.getElementById(`oranye-${{divisiId}}`).textContent = oranye.toLocaleString();
+    document.getElementById(`kuning-${{divisiId}}`).textContent = kuning.toLocaleString();
+    document.getElementById(`hijau-${{divisiId}}`).textContent = hijau.toLocaleString();
+}}
+
+function getHexNeighbors(baris, pokok) {{
+    if (baris % 2 === 0) {{
+        return [
+            [baris-1, pokok-1], [baris-1, pokok], [baris, pokok-1],
+            [baris, pokok+1], [baris+1, pokok-1], [baris+1, pokok]
+        ];
+    }} else {{
+        return [
+            [baris-1, pokok], [baris-1, pokok+1], [baris, pokok-1],
+            [baris, pokok+1], [baris+1, pokok], [baris+1, pokok+1]
+        ];
+    }}
+}}
+
 function switchTab(id) {{
     document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
     document.querySelectorAll('.content').forEach(c => c.classList.remove('active'));
     document.querySelector(`[data-div="${{id}}"]`).classList.add('active');
     document.getElementById(id).classList.add('active');
+    currentDivisi = id;
+}}
+
+function openInfoModal() {{
+    document.getElementById('infoModal').classList.add('active');
+}}
+
+function closeInfoModal() {{
+    document.getElementById('infoModal').classList.remove('active');
+}}
+
+window.onclick = function(event) {{
+    const modal = document.getElementById('infoModal');
+    if (event.target === modal) {{
+        modal.classList.remove('active');  
+    }}
 }}
 </script>
 </body></html>'''
