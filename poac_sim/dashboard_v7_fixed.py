@@ -64,12 +64,18 @@ def load_productivity_data():
     })
     
     df['Luas_Ha'] = pd.to_numeric(df['Luas_Ha'], errors='coerce')
+    df['Tahun_Tanam'] = pd.to_numeric(df['Tahun_Tanam'], errors='coerce')
     df['Produksi_Ton'] = pd.to_numeric(df['Produksi_Ton'], errors='coerce')
     df['Yield_TonHa'] = df['Produksi_Ton'] / df['Luas_Ha']
     df['Yield_TonHa'] = df['Yield_TonHa'].replace([np.inf, -np.inf], np.nan)
     
+    # Calculate plant age (current year - planting year)
+    from datetime import datetime
+    current_year = datetime.now().year
+    df['Umur_Tahun'] = current_year - df['Tahun_Tanam']
+    
     # Filter only productive blocks (exclude Produksi_Ton = 0 or Yield = 0)
-    df_clean = df[['Blok_Prod', 'Divisi_Prod', 'Luas_Ha', 'Produksi_Ton', 'Yield_TonHa']].dropna()
+    df_clean = df[['Blok_Prod', 'Divisi_Prod', 'Tahun_Tanam', 'Umur_Tahun', 'Luas_Ha', 'Produksi_Ton', 'Yield_TonHa']].dropna()
     df_clean = df_clean[(df_clean['Produksi_Ton'] > 0) & (df_clean['Yield_TonHa'] > 0)]
     
     return df_clean
@@ -329,8 +335,10 @@ def generate_html(output_dir, all_results, all_maps, prod_df):
             prod_pattern = convert_gano_to_prod_pattern(r['Blok'])
             yield_matches = prod_df[prod_df['Blok_Prod'].str.contains(prod_pattern, na=False, regex=False)]
             yield_val = yield_matches['Yield_TonHa'].mean() if not yield_matches.empty else None
+            umur_val = int(yield_matches['Umur_Tahun'].mean()) if not yield_matches.empty else None
             yield_str = f"{yield_val:.2f}" if pd.notna(yield_val) else "N/A"
-            gano_rows += f'<tr><td>{i}</td><td><b>{r["Blok"]}</b></td><td>{r["Total"]:,}</td><td style="color:#e74c3c">{r["MERAH"]}</td><td style="color:#e67e22">{r["ORANYE"]}</td><td><b>{r["Attack_Pct"]:.1f}%</b></td><td>{yield_str}</td></tr>'
+            umur_str = f"{umur_val} th" if pd.notna(umur_val) else "N/A"
+            gano_rows += f'<tr><td>{i}</td><td><b>{r["Blok"]}</b></td><td>{r["Total"]:,}</td><td style="color:#e74c3c">{r["MERAH"]}</td><td style="color:#e67e22">{r["ORANYE"]}</td><td><b>{r["Attack_Pct"]:.1f}%</b></td><td>{yield_str}</td><td>{umur_str}</td></tr>'
         
         # Low yield blocks
         yield_rows = ""
@@ -341,7 +349,10 @@ def generate_html(output_dir, all_results, all_maps, prod_df):
                 gano_pattern = convert_prod_to_gano_pattern(r['Blok_Prod'])
                 blok_match = block_stats[block_stats['Blok'].str.contains(gano_pattern, na=False, regex=False)]
                 attack = blok_match['Attack_Pct'].mean() if not blok_match.empty else 0
-                yield_rows += f'<tr><td>{i}</td><td><b>{r["Blok_Prod"]}</b></td><td>{r["Yield_TonHa"]:.3f}</td><td>{r["Luas_Ha"]:.1f}</td><td>{attack:.1f}%</td></tr>'
+                umur = int(r['Umur_Tahun']) if pd.notna(r['Umur_Tahun']) else 0
+                # Color code by age: red if mature (>5 years), orange if young
+                age_color = 'color:#e74c3c' if umur > 5 else 'color:#f39c12'
+                yield_rows += f'<tr><td>{i}</td><td><b>{r["Blok_Prod"]}</b></td><td style="{age_color}">{umur} th</td><td>{r["Yield_TonHa"]:.3f}</td><td>{r["Luas_Ha"]:.1f}</td><td>{attack:.1f}%</td></tr>'
         
         divisi_tabs += f'<button class="tab {active}" onclick="switchTab(\'{divisi_id}\')" data-div="{divisi_id}">{divisi}</button>'
         
@@ -363,14 +374,14 @@ def generate_html(output_dir, all_results, all_maps, prod_df):
             <section class="pov-section">
                 <h3>🔥 POV 1: Ganoderma → Produktivitas</h3>
                 <p>Top 10 blok dengan serangan tertinggi dan dampak yield-nya</p>
-                <table><thead><tr><th>#</th><th>Blok</th><th>Total</th><th>MERAH</th><th>ORANYE</th><th>% Attack</th><th>Yield</th></tr></thead>
+                <table><thead><tr><th>#</th><th>Blok</th><th>Total</th><th>MERAH</th><th>ORANYE</th><th>% Attack</th><th>Yield</th><th>Umur</th></tr></thead>
                 <tbody>{gano_rows}</tbody></table>
             </section>
             
             <section class="pov-section">
                 <h3>📉 POV 2: Produktivitas → Ganoderma</h3>
-                <p>Top 10 blok dengan yield terendah dan breakdown serangannya</p>
-                <table><thead><tr><th>#</th><th>Blok</th><th>Yield</th><th>Luas</th><th>% Attack</th></tr></thead>
+                <p>Top 10 blok dengan yield terendah dan breakdown serangannya<br><span style="color:#e74c3c">● Merah</span> = Tanaman produktif (>5 th) | <span style="color:#f39c12">● Oranye</span> = Tanaman muda (≤5 th)</p>
+                <table><thead><tr><th>#</th><th>Blok</th><th>Umur</th><th>Yield</th><th>Luas</th><th>% Attack</th></tr></thead>
                 <tbody>{yield_rows if yield_rows else "<tr><td colspan='5'>Data produktivitas tidak tersedia</td></tr>"}</tbody></table>
             </section>
         </div>'''
