@@ -68,7 +68,11 @@ def load_productivity_data():
     df['Yield_TonHa'] = df['Produksi_Ton'] / df['Luas_Ha']
     df['Yield_TonHa'] = df['Yield_TonHa'].replace([np.inf, -np.inf], np.nan)
     
-    return df[['Blok_Prod', 'Divisi_Prod', 'Luas_Ha', 'Produksi_Ton', 'Yield_TonHa']].dropna()
+    # Filter only productive blocks (exclude Produksi_Ton = 0 or Yield = 0)
+    df_clean = df[['Blok_Prod', 'Divisi_Prod', 'Luas_Ha', 'Produksi_Ton', 'Yield_TonHa']].dropna()
+    df_clean = df_clean[(df_clean['Produksi_Ton'] > 0) & (df_clean['Yield_TonHa'] > 0)]
+    
+    return df_clean
 
 def get_hex_neighbors(baris, pokok):
     """Get hexagonal neighbors (mata lima pattern)."""
