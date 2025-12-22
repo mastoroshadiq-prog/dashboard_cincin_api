@@ -356,22 +356,66 @@ def generate_html(output_dir, all_results, all_maps, prod_df):
             umur_val = int(yield_matches['Umur_Tahun'].mean()) if not yield_matches.empty else None
             yield_str = f"{yield_val:.2f}" if pd.notna(yield_val) else "N/A"
             umur_str = f"{umur_val} th" if pd.notna(umur_val) else "N/A"
-            gano_rows += f'<tr><td>{i}</td><td><b>{r["Blok"]}</b></td><td>{r["Total"]:,}</td><td style="color:#e74c3c">{r["MERAH"]}</td><td style="color:#e67e22">{r["ORANYE"]}</td><td><b>{r["Attack_Pct"]:.1f}%</b></td><td>{yield_str}</td><td>{umur_str}</td></tr>'
+            
+            # Calculate impact/relevance indicator
+            attack_pct = r["Attack_Pct"]
+            if pd.notna(yield_val):
+                # Define impact based on attack severity and yield level
+                if attack_pct >= 50 and yield_val < 15:
+                    impact = "🔴 TINGGI"
+                    impact_color = "#e74c3c"
+                elif attack_pct >= 20 and yield_val < 18:
+                    impact = "🟠 SEDANG"
+                    impact_color = "#e67e22"
+                else:
+                    impact = "🟡 RENDAH"
+                    impact_color = "#f1c40f"
+            else:
+                impact = "❓ N/A"
+                impact_color = "#999"
+            
+            gano_rows += f'<tr><td>{i}</td><td><b>{r["Blok"]}</b></td><td>{r["Total"]:,} pohon</td><td style="color:#e74c3c">{r["MERAH"]}</td><td style="color:#e67e22">{r["ORANYE"]}</td><td><b>{r["Attack_Pct"]:.1f}%</b></td><td>{yield_str}</td><td>{umur_str}</td><td style="color:{impact_color}"><b>{impact}</b></td></tr>'
         
-        # Low yield blocks (PRODUCTIVE PLANTS ONLY - Age > 5 years)
+        # POV 2: Low yield blocks WITH RELEVANT Ganoderma attack (PRODUCTIVE PLANTS ONLY)
         yield_rows = ""
         if not prod_df.empty:
             # Filter only mature/productive plants
             productive_df = prod_df[prod_df['Umur_Tahun'] > 5]
             if not productive_df.empty:
-                low_yield = productive_df.nsmallest(10, 'Yield_TonHa')
-                for i, (_, r) in enumerate(low_yield.iterrows(), 1):
+                low_yield = productive_df.nsmallest(20, 'Yield_TonHa')  # Get top 20 candidates
+                
+                # Filter for relevance: only show if attack % > 10% (Ganoderma-related)  
+                relevant_blocks = []
+                for _, r in low_yield.iterrows():
                     # FIXED: Convert A012A → A12 for matching
                     gano_pattern = convert_prod_to_gano_pattern(r['Blok_Prod'])
                     blok_match = block_stats[block_stats['Blok'].str.contains(gano_pattern, na=False, regex=False)]
                     attack = blok_match['Attack_Pct'].mean() if not blok_match.empty else 0
-                    umur = int(r['Umur_Tahun']) if pd.notna(r['Umur_Tahun']) else 0
-                    yield_rows += f'<tr><td>{i}</td><td><b>{r["Blok_Prod"]}</b></td><td>{umur} th</td><td>{r["Yield_TonHa"]:.3f}</td><td>{r["Luas_Ha"]:.1f}</td><td>{attack:.1f}%</td></tr>'
+                    
+                    # Only include if attack > 10% (relevant to Ganoderma)
+                    if attack >= 10:
+                        relevant_blocks.append({
+                            'blok': r['Blok_Prod'],
+                            'umur': int(r['Umur_Tahun']) if pd.notna(r['Umur_Tahun']) else 0,
+                            'yield': r['Yield_TonHa'],
+                            'luas': r['Luas_Ha'],
+                            'attack': attack
+                        })
+                
+                # Display top 10 relevant blocks
+                for i, block in enumerate(relevant_blocks[:10], 1):
+                    # Determine relevance strength
+                    if block['attack'] >= 40:
+                        relevance = "🔴 KUAT"
+                        rel_color = "#e74c3c"
+                    elif block['attack'] >= 20:
+                        relevance = "🟠 SEDANG"
+                        rel_color = "#e67e22"
+                    else:
+                        relevance = "🟡 LEMAH"
+                        rel_color = "#f1c40f"
+                    
+                    yield_rows += f'<tr><td>{i}</td><td><b>{block["blok"]}</b></td><td>{block["umur"]} th</td><td>{block["yield"]:.3f}</td><td>{block["luas"]:.1f}</td><td><b>{block["attack"]:.1f}%</b></td><td style="color:{rel_color}"><b>{relevance}</b></td></tr>'
         
         divisi_tabs += f'<button class="tab {active}" onclick="switchTab(\'{divisi_id}\')" data-div="{divisi_id}">{divisi}</button>'
         
@@ -392,16 +436,16 @@ def generate_html(output_dir, all_results, all_maps, prod_df):
             
             <section class="pov-section">
                 <h3>🔥 POV 1: Ganoderma → Produktivitas</h3>
-                <p>Top 10 blok dengan serangan tertinggi dan dampak yield-nya</p>
-                <table><thead><tr><th>#</th><th>Blok</th><th>Total</th><th>MERAH</th><th>ORANYE</th><th>% Attack</th><th>Yield</th><th>Umur</th></tr></thead>
+                <p>Top 10 blok dengan serangan tertinggi dan dampak yield-nya<br><span style="color:#999; font-size:0.9em">📍 <b>Total</b> = Jumlah pohon dalam blok | <b>Dampak</b> = Relevansi serangan terhadap yield</span></p>
+                <table><thead><tr><th>#</th><th>Blok</th><th>Total</th><th>MERAH</th><th>ORANYE</th><th>% Attack</th><th>Yield</th><th>Umur</th><th>Dampak</th></tr></thead>
                 <tbody>{gano_rows}</tbody></table>
             </section>
             
             <section class="pov-section">
                 <h3>📉 POV 2: Produktivitas → Ganoderma</h3>
-                <p>Top 10 blok dengan yield terendah (tanaman produktif >5 tahun) dan breakdown serangannya<br><span style="color:#999; font-size:0.9em">📌 Hanya menampilkan tanaman dewasa/produktif - tanaman muda (<5 th) di-exclude</span></p>
-                <table><thead><tr><th>#</th><th>Blok</th><th>Umur</th><th>Yield</th><th>Luas</th><th>% Attack</th></tr></thead>
-                <tbody>{yield_rows if yield_rows else "<tr><td colspan='5'>Data produktivitas tidak tersedia</td></tr>"}</tbody></table>
+                <p>Blok yield terendah DENGAN serangan Ganoderma signifikan (attack >10%)<br><span style="color:#999; font-size:0.9em">📌 Filter: Tanaman >5th + Attack >10% | <b>Relevansi</b> = Kekuatan korelasi serangan dengan yield rendah</span></p>
+                <table><thead><tr><th>#</th><th>Blok</th><th>Umur</th><th>Yield</th><th>Luas</th><th>% Attack</th><th>Relevansi</th></tr></thead>
+                <tbody>{yield_rows if yield_rows else "<tr><td colspan='7'>Tidak ada blok dengan yield rendah + serangan signifikan</td></tr>"}</tbody></table>
             </section>
         </div>'''
     
