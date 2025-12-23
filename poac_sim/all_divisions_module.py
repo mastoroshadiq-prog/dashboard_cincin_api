@@ -8,32 +8,37 @@ import numpy as np
 from pathlib import Path
 
 def load_ganoderma_block_stats():
-    """Try to load Ganoderma data from AME II and AME IV if available."""
+    """Load Ganoderma attack % from data_gabungan.xlsx - available for ALL divisions."""
     try:
-        from src.ingestion import load_and_clean_data
+        # Load data_gabungan.xlsx
+        file_path = Path('data/input/data_gabungan.xlsx')
+        df_raw = pd.read_excel(file_path, header=None)
+        df = df_raw.iloc[8:].copy().reset_index(drop=True)
+        df.columns = [f'col_{i}' for i in range(df.shape[1])]
         
-        # Load AME II data
-        df_ii = load_and_clean_data(Path('data/input/tabelNDREnew.csv'))
+        # col_55: STADIUM 1&2
+        # col_56: STADIUM 3&4  
+        # col_58: %SERANGAN
+        block_stats = df[['col_0', 'col_55', 'col_56', 'col_58']].copy()
+        block_stats.columns = ['Blok', 'Stadium_12', 'Stadium_34', 'Attack_Pct']
         
-        # Load AME IV data  
-        from dashboard_v7_fixed import load_ame_iv_data
-        df_iv = load_ame_iv_data(Path('data/input/AME_IV.csv'))
+        # Convert to numeric
+        block_stats['Stadium_12'] = pd.to_numeric(block_stats['Stadium_12'], errors='coerce').fillna(0)
+        block_stats['Stadium_34'] = pd.to_numeric(block_stats['Stadium_34'], errors='coerce').fillna(0)
+        block_stats['Attack_Pct'] = pd.to_numeric(block_stats['Attack_Pct'], errors='coerce').fillna(0)
         
-        # Combine
-        df_all = pd.concat([df_ii, df_iv], ignore_index=True)
+        # Set block as index
+        block_stats = block_stats.set_index('Blok')
         
-        # Aggregate by block
-        block_stats = df_all.groupby('Blok').agg({
-            'Status': lambda x: (x == 'STRESSED').sum(),
-            'Blok': 'count'
-        }).rename(columns={'Status': 'Stressed', 'Blok': 'Total'})
-        
-        block_stats['Attack_Pct'] = (block_stats['Stressed'] / block_stats['Total'] * 100).round(1)
+        # Remove blocks with no attack data
+        block_stats = block_stats[block_stats['Attack_Pct'] > 0]
         
         return block_stats
         
     except Exception as e:
         print(f"  ⚠️ Could not load Ganoderma data: {e}")
+        import traceback
+        traceback.print_exc()
         return pd.DataFrame()
 
 
@@ -59,15 +64,9 @@ def generate_all_divisions_tab(prod_df, output_dir):
     def get_attack_pct(blok):
         if not has_gano:
             return None
-        # Try direct match
+        # Direct match (data_gabungan uses same block names)
         if blok in gano_stats.index:
             return gano_stats.loc[blok, 'Attack_Pct']
-        # Try shortened pattern (E011A -> E11)
-        from dashboard_v7_fixed import convert_prod_to_gano_pattern
-        pattern = convert_prod_to_gano_pattern(blok)
-        matches = gano_stats[gano_stats.index.str.contains(pattern, na=False, regex=False)]
-        if not matches.empty:
-            return matches['Attack_Pct'].mean()
         return None
     
     def get_relevance(attack_pct):
