@@ -60,23 +60,40 @@ def load_productivity_data():
     
     df = df.rename(columns={
         'col_0': 'Blok_Prod', 'col_1': 'Tahun_Tanam', 'col_3': 'Divisi_Prod',
-        'col_11': 'Luas_Ha', 'col_170': 'Produksi_Ton'
+        'col_11': 'Luas_Ha', 'col_170': 'Produksi_Ton', 
+        'col_171': 'Yield_Realisasi', 'col_172': 'Potensi_Prod_Kg'
     })
     
     df['Luas_Ha'] = pd.to_numeric(df['Luas_Ha'], errors='coerce')
     df['Tahun_Tanam'] = pd.to_numeric(df['Tahun_Tanam'], errors='coerce')
     df['Produksi_Ton'] = pd.to_numeric(df['Produksi_Ton'], errors='coerce')
-    df['Yield_TonHa'] = df['Produksi_Ton'] / df['Luas_Ha']
-    df['Yield_TonHa'] = df['Yield_TonHa'].replace([np.inf, -np.inf], np.nan)
+    df['Yield_Realisasi'] = pd.to_numeric(df['Yield_Realisasi'], errors='coerce')
+    df['Potensi_Prod_Kg'] = pd.to_numeric(df['Potensi_Prod_Kg'], errors='coerce')
     
-    # Calculate plant age (current year - planting year)
+    # Calculate actual Luas from Produksi / Yield (more accurate than col_11)
+    df['Luas_Actual'] = df['Produksi_Ton'] / df['Yield_Realisasi']
+    
+    # Calculate Potensi Yield = Potensi Prod (Ton) / Luas Actual
+    df['Potensi_Yield'] = (df['Potensi_Prod_Kg'] / 1000) / df['Luas_Actual']
+    
+    # Calculate Gap = Potensi - Realisasi
+    df['Gap_Yield'] = df['Potensi_Yield'] - df['Yield_Realisasi']
+    
+    # Use Yield_Realisasi as main Yield column for compatibility
+    df['Yield_TonHa'] = df['Yield_Realisasi']
+    
+    # Calculate plant age
     from datetime import datetime
     current_year = datetime.now().year
     df['Umur_Tahun'] = current_year - df['Tahun_Tanam']
     
-    # Filter only productive blocks (exclude Produksi_Ton = 0 or Yield = 0)
-    df_clean = df[['Blok_Prod', 'Divisi_Prod', 'Tahun_Tanam', 'Umur_Tahun', 'Luas_Ha', 'Produksi_Ton', 'Yield_TonHa']].dropna()
+    # Filter only productive blocks
+    df_clean = df[['Blok_Prod', 'Divisi_Prod', 'Tahun_Tanam', 'Umur_Tahun', 'Luas_Actual', 
+                   'Produksi_Ton', 'Yield_TonHa', 'Yield_Realisasi', 'Potensi_Yield', 'Gap_Yield']].dropna()
     df_clean = df_clean[(df_clean['Produksi_Ton'] > 0) & (df_clean['Yield_TonHa'] > 0)]
+    
+    # Rename Luas_Actual back to Luas_Ha for compatibility
+    df_clean = df_clean.rename(columns={'Luas_Actual': 'Luas_Ha'})
     
     return df_clean
 
@@ -352,10 +369,29 @@ def generate_html(output_dir, all_results, all_maps, prod_df):
             # FIXED: Convert B16 → B016 for matching
             prod_pattern = convert_gano_to_prod_pattern(r['Blok'])
             yield_matches = prod_df[prod_df['Blok_Prod'].str.contains(prod_pattern, na=False, regex=False)]
+            
+            # Get yield metrics
             yield_val = yield_matches['Yield_TonHa'].mean() if not yield_matches.empty else None
+            potensi_val = yield_matches['Potensi_Yield'].mean() if not yield_matches.empty else None
+            gap_val = yield_matches['Gap_Yield'].mean() if not yield_matches.empty else None
             umur_val = int(yield_matches['Umur_Tahun'].mean()) if not yield_matches.empty else None
+            
+            # Format values
             yield_str = f"{yield_val:.2f}" if pd.notna(yield_val) else "N/A"
+            potensi_str = f"{potensi_val:.2f}" if pd.notna(potensi_val) else "N/A"
+            gap_str = f"{gap_val:.2f}" if pd.notna(gap_val) else "N/A"
             umur_str = f"{umur_val} th" if pd.notna(umur_val) else "N/A"
+            
+            # Color code gap (red if big gap, green if small)
+            if pd.notna(gap_val):
+                if gap_val > 5:
+                    gap_color = "#e74c3c"  # Red - big gap
+                elif gap_val > 2:
+                    gap_color = "#f39c12"  # Orange - medium gap
+                else:
+                    gap_color = "#27ae60"  # Green - small gap
+            else:
+                gap_color = "#999"
             
             # Calculate impact/relevance indicator
             attack_pct = r["Attack_Pct"]
@@ -374,7 +410,7 @@ def generate_html(output_dir, all_results, all_maps, prod_df):
                 impact = "❓ N/A"
                 impact_color = "#999"
             
-            gano_rows += f'<tr><td>{i}</td><td><b>{r["Blok"]}</b></td><td>{r["Total"]:,} pohon</td><td style="color:#e74c3c">{r["MERAH"]}</td><td style="color:#e67e22">{r["ORANYE"]}</td><td><b>{r["Attack_Pct"]:.1f}%</b></td><td>{yield_str}</td><td>{umur_str}</td><td style="color:{impact_color}"><b>{impact}</b></td></tr>'
+            gano_rows += f'<tr><td>{i}</td><td><b>{r["Blok"]}</b></td><td>{r["Total"]:,} pohon</td><td style="color:#e74c3c">{r["MERAH"]}</td><td style="color:#e67e22">{r["ORANYE"]}</td><td><b>{r["Attack_Pct"]:.1f}%</b></td><td>{yield_str}</td><td>{potensi_str}</td><td style="color:{gap_color}"><b>{gap_str}</b></td><td>{umur_str}</td><td style="color:{impact_color}"><b>{impact}</b></td></tr>'
         
         # POV 2: Low yield blocks WITH RELEVANT Ganoderma attack (PRODUCTIVE PLANTS ONLY)
         yield_rows = ""
@@ -437,8 +473,8 @@ def generate_html(output_dir, all_results, all_maps, prod_df):
             
             <section class="pov-section">
                 <h3>🔥 POV 1: Ganoderma → Produktivitas</h3>
-                <p>Top 10 blok dengan serangan tertinggi dan dampak yield-nya<br><span style="color:#999; font-size:0.9em">📍 <b>Total</b> = Jumlah pohon dalam blok | <b>Dampak</b> = Relevansi serangan terhadap yield</span></p>
-                <table><thead><tr><th>#</th><th>Blok</th><th>Total</th><th>MERAH</th><th>ORANYE</th><th>% Attack</th><th>Yield</th><th>Umur</th><th>Dampak</th></tr></thead>
+                <p>Top 10 blok dengan serangan tertinggi dan analisis produktivitas<br><span style="color:#999; font-size:0.9em">📍 <b>Realisasi</b> = Yield aktual | <b>Potensi</b> = Yield optimal | <b>Gap</b> = Selisih Potensi-Realisasi (🔴>5, 🟠2-5, 🟢<2 Ton/Ha)</span></p>
+                <table><thead><tr><th>#</th><th>Blok</th><th>Total</th><th>MERAH</th><th>ORANYE</th><th>% Attack</th><th>Realisasi</th><th>Potensi</th><th>Gap</th><th>Umur</th><th>Dampak</th></tr></thead>
                 <tbody>{gano_rows}</tbody></table>
             </section>
             
