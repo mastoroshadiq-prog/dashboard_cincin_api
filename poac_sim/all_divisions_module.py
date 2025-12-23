@@ -142,6 +142,8 @@ def generate_all_divisions_tab(prod_df, output_dir):
             <td>{i}</td>
             <td><b>{row['Blok_Prod']}</b></td>
             <td>{row['Divisi_Prod']}</td>
+            <td>{row['Luas_Ha']:.1f}</td>
+            <td>{row['Produksi_Ton']:.2f}</td>
             <td style="color:#27ae60"><b>{row['Yield_TonHa']:.2f}</b></td>
             <td>{row['Potensi_Yield']:.2f}</td>
             <td>{row['Gap_Yield']:.2f}</td>
@@ -162,6 +164,8 @@ def generate_all_divisions_tab(prod_df, output_dir):
             <td>{i}</td>
             <td><b>{row['Blok_Prod']}</b></td>
             <td>{row['Divisi_Prod']}</td>
+            <td>{row['Luas_Ha']:.1f}</td>
+            <td>{row['Produksi_Ton']:.2f}</td>
             <td style="color:#e74c3c"><b>{row['Yield_TonHa']:.2f}</b></td>
             <td>{row['Potensi_Yield']:.2f}</td>
             <td>{row['Gap_Yield']:.2f}</td>
@@ -193,7 +197,7 @@ def generate_all_divisions_tab(prod_df, output_dir):
         <h3>🏆 Top 10 Best Performers</h3>
         <table>
             <thead>
-                <tr><th>#</th><th>Blok</th><th>Divisi</th><th>Yield Real</th><th>Yield Pot</th><th>Gap</th><th>Umur</th><th>% Attack</th><th>Relevansi</th></tr>
+                <tr><th>#</th><th>Blok</th><th>Divisi</th><th>Luas (Ha)</th><th>Produksi (Ton)</th><th>Yield Real</th><th>Yield Pot</th><th>Gap</th><th>Umur</th><th>% Attack</th><th>Relevansi</th></tr>
             </thead>
             <tbody>{top_rows}</tbody>
         </table>
@@ -203,7 +207,7 @@ def generate_all_divisions_tab(prod_df, output_dir):
         <h3>⚠️ Top 10 Lowest Performers</h3>
         <table>
             <thead>
-                <tr><th>#</th><th>Blok</th><th>Divisi</th><th>Yield Real</th><th>Yield Pot</th><th>Gap</th><th>Umur</th><th>% Attack</th><th>Relevansi</th></tr>
+                <tr><th>#</th><th>Blok</th><th>Divisi</th><th>Luas (Ha)</th><th>Produksi (Ton)</th><th>Yield Real</th><th>Yield Pot</th><th>Gap</th><th>Umur</th><th>% Attack</th><th>Relevansi</th></tr>
             </thead>
             <tbody>{bottom_rows}</tbody>
         </table>
