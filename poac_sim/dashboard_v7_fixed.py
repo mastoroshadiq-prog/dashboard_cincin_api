@@ -29,22 +29,44 @@ output_dir = Path(f'data/output/dashboard_v7_fixed_{timestamp}')
 output_dir.mkdir(parents=True, exist_ok=True)
 
 def load_ame_iv_data(file_path):
-    """Load AME IV data."""
+    """Load AME IV data with corrected column mapping due to shifted header."""
     df = pd.read_csv(file_path, sep=';')
     
-    # CRITICAL FIX: Use BLOK_B for actual block names (Blok column only contains 'IV')
-    if 'BLOK_B' in df.columns:
-        df['Blok'] = df['BLOK_B']
+    # PROBLEM: AME;IV separator shifts columns.
+    # Raw data: AME;IV;A12;A012A;2016;1;4;...
+    # Header: DIVISI;Blok;BLOK_B;T_TANAM;N_BARIS;N_POKOK;OBJECTID...
+    
+    # Correct mapping based on manual inspection:
+    # 'T_TANAM' value is 'A012A' -> This is BLOK
+    # 'N_BARIS' value is '2016' -> This is TAHUN TANAM
+    # 'N_POKOK' value is '1' -> This is N_BARIS
+    # 'OBJECTID' value is '4' -> This is N_POKOK
+    
+    if 'T_TANAM' in df.columns:
+        df['Blok'] = df['T_TANAM'] # A012A
+        
+    if 'N_BARIS' in df.columns:
+        df['Tahun'] = pd.to_numeric(df['N_BARIS'], errors='coerce')
+        
+    if 'N_POKOK' in df.columns:
+        df['N_BARIS_REAL'] = pd.to_numeric(df['N_POKOK'], errors='coerce')
+        
+    if 'OBJECTID' in df.columns:
+        df['N_POKOK_REAL'] = pd.to_numeric(df['OBJECTID'], errors='coerce')
+        
+    # Replace columns with corrected values
+    df['N_BARIS'] = df['N_BARIS_REAL']
+    df['N_POKOK'] = df['N_POKOK_REAL']
     
     # Handle comma decimal separator in NDRE125
     if 'NDRE125' in df.columns:
         df['NDRE125'] = df['NDRE125'].astype(str).str.replace(',', '.').astype(float)
     
-    for col in ['N_BARIS', 'N_POKOK']:
-        if col in df.columns:
-            df[col] = pd.to_numeric(df[col], errors='coerce')
-    
     df = df.dropna(subset=['Blok', 'N_BARIS', 'N_POKOK', 'NDRE125'])
+    
+    # Log correction
+    print(f"  🔧 Corrected AME IV columns. Sample Baris: {df['N_BARIS'].unique()[:5]}")
+    
     return df
 
 def load_productivity_data():
