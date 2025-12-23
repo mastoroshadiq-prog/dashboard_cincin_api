@@ -61,22 +61,23 @@ def load_productivity_data():
     df = df.rename(columns={
         'col_0': 'Blok_Prod', 'col_1': 'Tahun_Tanam', 'col_3': 'Divisi_Prod',
         'col_11': 'Luas_Ha', 'col_170': 'Produksi_Ton', 
-        'col_171': 'Yield_Realisasi', 'col_172': 'Potensi_Prod_Kg'
+        'col_171': 'Yield_Realisasi', 'col_173': 'Potensi_Prod_Ton'  # FIXED: col_173 is Potensi 2025 in Ton
     })
     
     df['Luas_Ha'] = pd.to_numeric(df['Luas_Ha'], errors='coerce')
     df['Tahun_Tanam'] = pd.to_numeric(df['Tahun_Tanam'], errors='coerce')
     df['Produksi_Ton'] = pd.to_numeric(df['Produksi_Ton'], errors='coerce')
     df['Yield_Realisasi'] = pd.to_numeric(df['Yield_Realisasi'], errors='coerce')
-    df['Potensi_Prod_Kg'] = pd.to_numeric(df['Potensi_Prod_Kg'], errors='coerce')
+    df['Potensi_Prod_Ton'] = pd.to_numeric(df['Potensi_Prod_Ton'], errors='coerce')
     
-    # Calculate actual Luas from Produksi / Yield (more accurate than col_11)
+    # Calculate actual Luas from Produksi / Yield (more accurate than col_11 for yield calculation)
     df['Luas_Actual'] = df['Produksi_Ton'] / df['Yield_Realisasi']
     
-    # Calculate Potensi Yield = Potensi Prod (Ton) / Luas Actual
-    df['Potensi_Yield'] = (df['Potensi_Prod_Kg'] / 1000) / df['Luas_Actual']
+    # Calculate Potensi Yield = Potensi Prod (Ton) / Luas Ha (use col_11 for consistency)
+    # User confirmed: Potensi col_173 is in TON, Luas col_11 is in Ha
+    df['Potensi_Yield'] = df['Potensi_Prod_Ton'] / df['Luas_Ha']
     
-    # Calculate Gap = Potensi - Realisasi
+    # Calculate Gap = Potensi - Realisasi (in yield)
     df['Gap_Yield'] = df['Potensi_Yield'] - df['Yield_Realisasi']
     
     # Use Yield_Realisasi as main Yield column for compatibility
@@ -88,12 +89,9 @@ def load_productivity_data():
     df['Umur_Tahun'] = current_year - df['Tahun_Tanam']
     
     # Filter only productive blocks
-    df_clean = df[['Blok_Prod', 'Divisi_Prod', 'Tahun_Tanam', 'Umur_Tahun', 'Luas_Actual', 
-                   'Produksi_Ton', 'Yield_TonHa', 'Yield_Realisasi', 'Potensi_Yield', 'Gap_Yield']].dropna()
+    df_clean = df[['Blok_Prod', 'Divisi_Prod', 'Tahun_Tanam', 'Umur_Tahun', 'Luas_Ha',
+                   'Produksi_Ton', 'Potensi_Prod_Ton', 'Yield_TonHa', 'Yield_Realisasi', 'Potensi_Yield', 'Gap_Yield']].dropna()
     df_clean = df_clean[(df_clean['Produksi_Ton'] > 0) & (df_clean['Yield_TonHa'] > 0)]
-    
-    # Rename Luas_Actual back to Luas_Ha for compatibility
-    df_clean = df_clean.rename(columns={'Luas_Actual': 'Luas_Ha'})
     
     return df_clean
 
@@ -370,26 +368,32 @@ def generate_html(output_dir, all_results, all_maps, prod_df):
             prod_pattern = convert_gano_to_prod_pattern(r['Blok'])
             yield_matches = prod_df[prod_df['Blok_Prod'].str.contains(prod_pattern, na=False, regex=False)]
             
-            # Get yield metrics
+            # Get block names and metrics
+            blok_prod_name = yield_matches['Blok_Prod'].iloc[0] if not yield_matches.empty else r['Blok']
+            luas_ha = yield_matches['Luas_Ha'].mean() if not yield_matches.empty else None
+            produksi_real = yield_matches['Produksi_Ton'].mean() if not yield_matches.empty else None
+            produksi_pot = yield_matches['Potensi_Prod_Ton'].mean() if not yield_matches.empty else None
             yield_val = yield_matches['Yield_TonHa'].mean() if not yield_matches.empty else None
-            potensi_val = yield_matches['Potensi_Yield'].mean() if not yield_matches.empty else None
-            gap_val = yield_matches['Gap_Yield'].mean() if not yield_matches.empty else None
+            potensi_yield = yield_matches['Potensi_Yield'].mean() if not yield_matches.empty else None
+            gap_yield = yield_matches['Gap_Yield'].mean() if not yield_matches.empty else None
             umur_val = int(yield_matches['Umur_Tahun'].mean()) if not yield_matches.empty else None
             
             # Format values
-            yield_str = f"{yield_val:.2f}" if pd.notna(yield_val) else "N/A"
-            potensi_str = f"{potensi_val:.2f}" if pd.notna(potensi_val) else "N/A"
-            gap_str = f"{gap_val:.2f}" if pd.notna(gap_val) else "N/A"
+            luas_str = f"{luas_ha:.1f}" if pd.notna(luas_ha) else "N/A"
+            real_str = f"{produksi_real:.2f}" if pd.notna(produksi_real) else "N/A"
+            pot_str = f"{produksi_pot:.2f}" if pd.notna(produksi_pot) else "N/A"
+            gap_prod = (produksi_pot - produksi_real) if (pd.notna(produksi_pot) and pd.notna(produksi_real)) else None
+            gap_prod_str = f"{gap_prod:.2f}" if pd.notna(gap_prod) else "N/A"
             umur_str = f"{umur_val} th" if pd.notna(umur_val) else "N/A"
             
-            # Color code gap (red if big gap, green if small)
-            if pd.notna(gap_val):
-                if gap_val > 5:
-                    gap_color = "#e74c3c"  # Red - big gap
-                elif gap_val > 2:
-                    gap_color = "#f39c12"  # Orange - medium gap
+            # Color code gap production (red if big gap, green if small)
+            if pd.notna(gap_prod):
+                if gap_prod > 30:
+                    gap_color = "#e74c3c"  # Red - big gap (>30 Ton)
+                elif gap_prod > 10:
+                    gap_color = "#f39c12"  # Orange - medium gap (10-30 Ton)
                 else:
-                    gap_color = "#27ae60"  # Green - small gap
+                    gap_color = "#27ae60"  # Green - small gap (<10 Ton)
             else:
                 gap_color = "#999"
             
@@ -410,7 +414,7 @@ def generate_html(output_dir, all_results, all_maps, prod_df):
                 impact = "❓ N/A"
                 impact_color = "#999"
             
-            gano_rows += f'<tr><td>{i}</td><td><b>{r["Blok"]}</b></td><td>{r["Total"]:,} pohon</td><td style="color:#e74c3c">{r["MERAH"]}</td><td style="color:#e67e22">{r["ORANYE"]}</td><td><b>{r["Attack_Pct"]:.1f}%</b></td><td>{yield_str}</td><td>{potensi_str}</td><td style="color:{gap_color}"><b>{gap_str}</b></td><td>{umur_str}</td><td style="color:{impact_color}"><b>{impact}</b></td></tr>'
+            gano_rows += f'<tr><td>{i}</td><td><b>{blok_prod_name}</b></td><td>{r["Total"]:,} pohon</td><td style="color:#e74c3c">{r["MERAH"]}</td><td style="color:#e67e22">{r["ORANYE"]}</td><td><b>{r["Attack_Pct"]:.1f}%</b></td><td>{luas_str}</td><td>{real_str}</td><td>{pot_str}</td><td style="color:{gap_color}"><b>{gap_prod_str}</b></td><td>{umur_str}</td><td style="color:{impact_color}"><b>{impact}</b></td></tr>'
         
         # POV 2: Low yield blocks WITH RELEVANT Ganoderma attack (PRODUCTIVE PLANTS ONLY)
         yield_rows = ""
@@ -473,8 +477,8 @@ def generate_html(output_dir, all_results, all_maps, prod_df):
             
             <section class="pov-section">
                 <h3>🔥 POV 1: Ganoderma → Produktivitas</h3>
-                <p>Top 10 blok dengan serangan tertinggi dan analisis produktivitas<br><span style="color:#999; font-size:0.9em">📍 <b>Realisasi</b> = Yield aktual | <b>Potensi</b> = Yield optimal | <b>Gap</b> = Selisih Potensi-Realisasi (🔴>5, 🟠2-5, 🟢<2 Ton/Ha)</span></p>
-                <table><thead><tr><th>#</th><th>Blok</th><th>Total</th><th>MERAH</th><th>ORANYE</th><th>% Attack</th><th>Realisasi</th><th>Potensi</th><th>Gap</th><th>Umur</th><th>Dampak</th></tr></thead>
+                <p>Top 10 blok dengan serangan tertinggi dan analisis produktivitas<br><span style="color:#999; font-size:0.9em">📍 <b>Realisasi/Potensi</b> = Produksi total dalam Ton | <b>Gap</b> = Selisih Potensi-Realisasi (🔴>30, 🟠10-30, 🟢<10 Ton)</span></p>
+                <table><thead><tr><th>#</th><th>Blok</th><th>Total Pohon</th><th>MERAH</th><th>ORANYE</th><th>% Attack</th><th>Luas (Ha)</th><th>Realisasi (Ton)</th><th>Potensi (Ton)</th><th>Gap (Ton)</th><th>Umur</th><th>Dampak</th></tr></thead>
                 <tbody>{gano_rows}</tbody></table>
             </section>
             
