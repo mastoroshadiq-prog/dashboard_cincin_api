@@ -1,16 +1,41 @@
 """
-Add "All Divisions" overview tab to dashboard_v7_fixed.py
-This provides production analysis for divisions without tree-level NDVI data
+Add "All Divisions" overview tab - UPDATED without charts
+Focuses on tables with Ganoderma attack % if available
 """
 
 import pandas as pd
 import numpy as np
 from pathlib import Path
-import matplotlib
-matplotlib.use('Agg')
-import matplotlib.pyplot as plt
-import io
-import base64
+
+def load_ganoderma_block_stats():
+    """Try to load Ganoderma data from AME II and AME IV if available."""
+    try:
+        from src.ingestion import load_and_clean_data
+        
+        # Load AME II data
+        df_ii = load_and_clean_data(Path('data/input/tabelNDREnew.csv'))
+        
+        # Load AME IV data  
+        from dashboard_v7_fixed import load_ame_iv_data
+        df_iv = load_ame_iv_data(Path('data/input/AME_IV.csv'))
+        
+        # Combine
+        df_all = pd.concat([df_ii, df_iv], ignore_index=True)
+        
+        # Aggregate by block
+        block_stats = df_all.groupby('Blok').agg({
+            'Status': lambda x: (x == 'STRESSED').sum(),
+            'Blok': 'count'
+        }).rename(columns={'Status': 'Stressed', 'Blok': 'Total'})
+        
+        block_stats['Attack_Pct'] = (block_stats['Stressed'] / block_stats['Total'] * 100).round(1)
+        
+        return block_stats
+        
+    except Exception as e:
+        print(f"  ⚠️ Could not load Ganoderma data: {e}")
+        return pd.DataFrame()
+
 
 def generate_all_divisions_tab(prod_df, output_dir):
     """
@@ -21,8 +46,42 @@ def generate_all_divisions_tab(prod_df, output_dir):
         output_dir: Path to output directory
         
     Returns:
-        dict with HTML content and charts
+        dict with HTML content
     """
+    
+    # Try to load Ganoderma data
+    print('  📊 Loading Ganoderma data (if available)...')
+    gano_stats = load_ganoderma_block_stats()
+    has_gano = not gano_stats.empty
+    print(f'  {"✅" if has_gano else "❌"} Ganoderma data: {len(gano_stats)} blocks')
+    
+    # Helper function to get attack % for a block
+    def get_attack_pct(blok):
+        if not has_gano:
+            return None
+        # Try direct match
+        if blok in gano_stats.index:
+            return gano_stats.loc[blok, 'Attack_Pct']
+        # Try shortened pattern (E011A -> E11)
+        from dashboard_v7_fixed import convert_prod_to_gano_pattern
+        pattern = convert_prod_to_gano_pattern(blok)
+        matches = gano_stats[gano_stats.index.str.contains(pattern, na=False, regex=False)]
+        if not matches.empty:
+            return matches['Attack_Pct'].mean()
+        return None
+    
+    def get_relevance(attack_pct):
+        """Get relevance indicator based on attack %"""
+        if attack_pct is None or pd.isna(attack_pct):
+            return "❓ N/A", "#999"
+        if attack_pct >= 40:
+            return "🔴 KUAT", "#e74c3c"
+        elif attack_pct >= 20:
+            return "🟠 SEDANG", "#e67e22"
+        elif attack_pct >= 2:
+            return "🟡 LEMAH", "#f1c40f"
+        else:
+            return "⚪ MINIMAL", "#bdc3c7"
     
     # Group by division
     div_summary = prod_df.groupby('Divisi_Prod').agg({
@@ -45,84 +104,7 @@ def generate_all_divisions_tab(prod_df, output_dir):
     # Sort by total production
     div_summary = div_summary.sort_values('Total_Produksi', ascending=False)
     
-    # Create visualizations
-    charts = {}
-    
-    # 1. Bar Chart - Yield Comparison per Division
-    fig, ax = plt.subplots(figsize=(12, 6))
-    divisions = div_summary.index[:10]  # Top 10
-    x = np.arange(len(divisions))
-    width = 0.35
-    
-    bars1 = ax.bar(x - width/2, div_summary.loc[divisions, 'Avg_Yield'], 
-                   width, label='Realisasi', color='#3498db', alpha=0.8)
-    bars2 = ax.bar(x + width/2, div_summary.loc[divisions, 'Avg_Potensi_Yield'], 
-                   width, label='Potensi', color='#2ecc71', alpha=0.8)
-    
-    ax.set_xlabel('Divisi', fontsize=12, weight='bold')
-    ax.set_ylabel('Yield (Ton/Ha)', fontsize=12, weight='bold')
-    ax.set_title('Perbandingan Yield Realisasi vs Potensi (Top 10 Divisi)', 
-                 fontsize=14, weight='bold', pad=20)
-    ax.set_xticks(x)
-    ax.set_xticklabels(divisions, rotation=45, ha='right')
-    ax.legend()
-    ax.grid(axis='y', alpha=0.3)
-    
-    # Add value labels
-    for bars in [bars1, bars2]:
-        for bar in bars:
-            height = bar.get_height()
-            ax.text(bar.get_x() + bar.get_width()/2., height,
-                   f'{height:.1f}', ha='center', va='bottom', fontsize=9)
-    
-    plt.tight_layout()
-    buf = io.BytesIO()
-    plt.savefig(buf, format='png', dpi=100, bbox_inches='tight')
-    buf.seek(0)
-    charts['yield_comparison'] = base64.b64encode(buf.read()).decode()
-    plt.close()
-    
-    # 2. Scatter Plot - Production vs Potential
-    fig, ax = plt.subplots(figsize=(10, 8))
-    
-    scatter = ax.scatter(div_summary['Total_Produksi'], 
-                        div_summary['Total_Potensi'],
-                        s=div_summary['Jumlah_Blok']*10,  # Size by block count
-                        c=div_summary['Efficiency_%'], 
-                        cmap='RdYlGn', 
-                        alpha=0.6,
-                        edgecolors='black',
-                        linewidth=1)
-    
-    # Add diagonal line (perfect efficiency)
-    max_val = max(div_summary['Total_Potensi'].max(), div_summary['Total_Produksi'].max())
-    ax.plot([0, max_val], [0, max_val], 'k--', alpha=0.3, label='100% Efficiency')
-    
-    # Label points
-    for idx, row in div_summary.iterrows():
-        if row['Jumlah_Blok'] > 10:  # Only label major divisions
-            ax.annotate(idx, 
-                       (row['Total_Produksi'], row['Total_Potensi']),
-                       fontsize=8, alpha=0.7)
-    
-    ax.set_xlabel('Produksi Realisasi (Ton)', fontsize=12, weight='bold')
-    ax.set_ylabel('Produksi Potensi (Ton)', fontsize=12, weight='bold')
-    ax.set_title('Analisis Gap Produksi per Divisi\\n(Ukuran lingkaran = Jumlah blok)', 
-                 fontsize=14, weight='bold', pad=20)
-    
-    cbar = plt.colorbar(scatter, ax=ax)
-    cbar.set_label('Efficiency (%)', rotation=270, labelpad=20)
-    ax.legend()
-    ax.grid(alpha=0.3)
-    
-    plt.tight_layout()
-    buf = io.BytesIO()
-    plt.savefig(buf, format='png', dpi=100, bbox_inches='tight')
-    buf.seek(0)
-    charts['production_scatter'] = base64.b64encode(buf.read()).decode()
-    plt.close()
-    
-    # 3. Generate summary table HTML
+    # Generate summary table HTML
     summary_rows = ""
     for i, (div, row) in enumerate(div_summary.iterrows(), 1):
         eff_color = "#27ae60" if row['Efficiency_%'] >= 90 else "#f39c12" if row['Efficiency_%'] >= 80 else "#e74c3c"
@@ -143,12 +125,16 @@ def generate_all_divisions_tab(prod_df, output_dir):
         </tr>
         '''
     
-    # 4. Top/Bottom performers
-    top_5 = prod_df.nlargest(10, 'Yield_TonHa')[['Blok_Prod', 'Divisi_Prod', 'Yield_TonHa', 'Potensi_Yield', 'Gap_Yield', 'Umur_Tahun']]
-    bottom_5 = prod_df.nsmallest(10, 'Yield_TonHa')[['Blok_Prod', 'Divisi_Prod', 'Yield_TonHa', 'Potensi_Yield', 'Gap_Yield', 'Umur_Tahun']]
+    # Top/Bottom performers WITH Ganoderma data
+    top_10 = prod_df.nlargest(10, 'Yield_TonHa')
+    bottom_10 = prod_df.nsmallest(10, 'Yield_TonHa')
     
     top_rows = ""
-    for i, (_, row) in enumerate(top_5.iterrows(), 1):
+    for i, (_, row) in enumerate(top_10.iterrows(), 1):
+        attack = get_attack_pct(row['Blok_Prod'])
+        relevance, rel_color = get_relevance(attack)
+        attack_str = f"{attack:.1f}%" if attack is not None else "N/A"
+        
         top_rows += f'''
         <tr>
             <td>{i}</td>
@@ -158,11 +144,17 @@ def generate_all_divisions_tab(prod_df, output_dir):
             <td>{row['Potensi_Yield']:.2f}</td>
             <td>{row['Gap_Yield']:.2f}</td>
             <td>{row['Umur_Tahun']:.0f} th</td>
+            <td>{attack_str}</td>
+            <td style="color:{rel_color}"><b>{relevance}</b></td>
         </tr>
         '''
     
     bottom_rows = ""
-    for i, (_, row) in enumerate(bottom_5.iterrows(), 1):
+    for i, (_, row) in enumerate(bottom_10.iterrows(), 1):
+        attack = get_attack_pct(row['Blok_Prod'])
+        relevance, rel_color = get_relevance(attack)
+        attack_str = f"{attack:.1f}%" if attack is not None else "N/A"
+        
         bottom_rows += f'''
         <tr>
             <td>{i}</td>
@@ -172,13 +164,15 @@ def generate_all_divisions_tab(prod_df, output_dir):
             <td>{row['Potensi_Yield']:.2f}</td>
             <td>{row['Gap_Yield']:.2f}</td>
             <td>{row['Umur_Tahun']:.0f} th</td>
+            <td><b>{attack_str}</b></td>
+            <td style="color:{rel_color}"><b>{relevance}</b></td>
         </tr>
         '''
     
     html_content = f'''
     <section>
         <h3>📊 Overview Semua Divisi</h3>
-        <p>Analisis produktivitas seluruh divisi tanpa data detil Ganoderma</p>
+        <p>Analisis produktivitas seluruh divisi {f"dengan data Ganoderma untuk AME II/IV" if has_gano else "tanpa data Ganoderma"}</p>
         
         <table>
             <thead>
@@ -194,21 +188,10 @@ def generate_all_divisions_tab(prod_df, output_dir):
     </section>
     
     <section>
-        <h3>📈 Visualisasi Perbandingan Divisi</h3>
-        <div style="margin: 20px 0;">
-            <img src="data:image/png;base64,{charts['yield_comparison']}" style="max-width:100%; height:auto;">
-        </div>
-        
-        <div style="margin: 20px 0;">
-            <img src="data:image/png;base64,{charts['production_scatter']}" style="max-width:100%; height:auto;">
-        </div>
-    </section>
-    
-    <section>
         <h3>🏆 Top 10 Best Performers</h3>
         <table>
             <thead>
-                <tr><th>#</th><th>Blok</th><th>Divisi</th><th>Yield Real</th><th>Yield Pot</th><th>Gap</th><th>Umur</th></tr>
+                <tr><th>#</th><th>Blok</th><th>Divisi</th><th>Yield Real</th><th>Yield Pot</th><th>Gap</th><th>Umur</th><th>% Attack</th><th>Relevansi</th></tr>
             </thead>
             <tbody>{top_rows}</tbody>
         </table>
@@ -218,7 +201,7 @@ def generate_all_divisions_tab(prod_df, output_dir):
         <h3>⚠️ Top 10 Lowest Performers</h3>
         <table>
             <thead>
-                <tr><th>#</th><th>Blok</th><th>Divisi</th><th>Yield Real</th><th>Yield Pot</th><th>Gap</th><th>Umur</th></tr>
+                <tr><th>#</th><th>Blok</th><th>Divisi</th><th>Yield Real</th><th>Yield Pot</th><th>Gap</th><th>Umur</th><th>% Attack</th><th>Relevansi</th></tr>
             </thead>
             <tbody>{bottom_rows}</tbody>
         </table>
@@ -227,7 +210,7 @@ def generate_all_divisions_tab(prod_df, output_dir):
     
     return {
         'html': html_content,
-        'charts': charts
+        'charts': {}  # No charts
     }
 
 # Test
@@ -239,4 +222,4 @@ if __name__ == '__main__':
     prod_df = load_productivity_data()
     result = generate_all_divisions_tab(prod_df, Path('data/output/test'))
     print('✅ All Divisions tab generated successfully')
-    print(f'Charts created: {list(result["charts"].keys())}')
+    print(f'Has Ganoderma data: {len(result.get("charts", {})) == 0}')
