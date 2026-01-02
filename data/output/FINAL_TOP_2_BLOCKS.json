@@ -1,0 +1,30 @@
+{
+  "Blok #1": {
+    "code_full": "F008A",
+    "code_short": "F 08",
+    "tt": "2008",
+    "luas": 29.6,
+    "total_trees": 3770,
+    "merah": 1,
+    "oranye": 1104,
+    "kuning": 2663,
+    "hijau": 2,
+    "spread_ratio": 1104.0,
+    "infection_pct": 29.310344827586203,
+    "severity_score": 10279.224137931034
+  },
+  "Blok #2": {
+    "code_full": "D001A",
+    "code_short": "D 01",
+    "tt": "2009",
+    "luas": 25.8,
+    "total_trees": 3486,
+    "merah": 1,
+    "oranye": 887,
+    "kuning": 2586,
+    "hijau": 12,
+    "spread_ratio": 887.0,
+    "infection_pct": 25.47332185886403,
+    "severity_score": 8259.589328743547
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "F008A": {
+    "blok_code": "F08",
+    "total_trees": 3770,
+    "merah": 90,
+    "oranye": 369,
+    "kuning": 141,
+    "hijau": 3170,
+    "attack_rate": 12.2,
+    "mean_ndre": 0.415,
+    "std_ndre": 0.03
+  },
+  "D001A": {
+    "blok_code": "D01",
+    "total_trees": 3486,
+    "merah": 87,
+    "oranye": 362,
+    "kuning": 127,
+    "hijau": 2910,
+    "attack_rate": 12.9,
+    "mean_ndre": 0.42,
+    "std_ndre": 0.031
+  }
+}

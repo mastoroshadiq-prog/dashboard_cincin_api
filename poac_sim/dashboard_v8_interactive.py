@@ -9,8 +9,6 @@ Features:
 """
 
 import sys
-sys.path.insert(0, '.')
-
 import pandas as pd
 import numpy as np
 from pathlib import Path
@@ -22,13 +20,19 @@ import re
 # Configure Logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
+# Configure path to allow importing local modules
+current_dir = Path(__file__).resolve().parent
+if str(current_dir) not in sys.path:
+    sys.path.insert(0, str(current_dir))
+
 # Import modules
+from src.ingestion import load_and_clean_data
+from config import ZSCORE_PRESETS
 try:
-    from src.ingestion import load_and_clean_data
-    from config import ZSCORE_PRESETS
     from dashboard_v7_fixed import load_ame_iv_data, load_productivity_data, convert_gano_to_prod_pattern
 except ImportError:
-    pass
+    # If failed, try relative import if run from root
+    from poac_sim.dashboard_v7_fixed import load_ame_iv_data, load_productivity_data, convert_gano_to_prod_pattern
 
 # -----------------------------------------------------------------------------
 # 1. DATA PREPARATION ENGINE
@@ -340,40 +344,11 @@ def generate_v8_dashboard(all_data):
 
     # --- JAVASCRIPT LOGIC ---
     js_logic = r"""
-// GLOBAL ERROR HANDLER
-window.onerror = function(message, source, lineno, colno, error) {
-    const loader = document.getElementById('loader');
-    if(loader) {
-        loader.innerHTML = `
-            <div style="padding:20px; text-align:center; color:#c0392b">
-                <h2>⚠️ System Error</h2>
-                <p><strong>${message}</strong></p>
-                <code style="background:#eee; padding:5px; display:block; margin:10px auto; max-width:800px; text-align:left">
-                    Line: ${lineno}:${colno}<br>
-                    ${error ? error.stack : ''}
-                </code>
-            </div>
-        `;
-        loader.style.background = '#fff';
-    }
-};
-
 if(typeof DATA === 'undefined' || !DATA) throw new Error("DATA missing");
 
 /* State */
 let currentDiv = null;
 let currentBlockId = null;
-
-let currentConfig = new Object();
-currentConfig.z_core = -1.5;
-currentConfig.z_neighbor = -1.0;
-currentConfig.min = 3;
-
-// Financial Config
-let financial = {
-    cost_per_tree: 50000,
-    asset_value: 1000000
-};
 
 let transform = new Object();
 transform.x = 20; transform.y = 20; transform.k = 1;
@@ -382,14 +357,29 @@ let isDragging = false;
 let startPos = new Object(); 
 startPos.x = 0; startPos.y = 0;
 
+let financial = {
+    cost_per_tree: 50000,   // Biaya rawat per pohon (Rp)
+    asset_value: 1500000,   // Nilai aset per pohon (Rp) - 1.5 Juta
+    trench_cost: 15000      // Biaya gali parit per meter (Rp)
+};
+
+const PRESETS = {
+    'konservatif': { z_core: -1.2, z_neighbor: -0.8, min: 2 },
+    'standar':     { z_core: -1.5, z_neighbor: -1.0, min: 3 },
+    'agresif':     { z_core: -1.8, z_neighbor: -1.2, min: 4 }
+};
+
+let currentConfig = { ...PRESETS['standar'] };
+let currentBlockData = null;
 let computedTrees = [];
-let blockDimensions = new Object();
+let treeMap = new Map(); // GLOBAL NOW
 let hoveredTree = null;
 
-const PRESETS = new Object();
-PRESETS['konservatif'] = { z_core: -1.2, z_neighbor: -0.8, min: 2 };
-PRESETS['standar'] = { z_core: -1.5, z_neighbor: -1.0, min: 3 };
-PRESETS['agresif'] = { z_core: -1.8, z_neighbor: -1.2, min: 4 };
+// VIEW STATES
+let isGradientMode = false;
+let isTrenchMode = false;
+
+let blockDimensions = new Object();
 
 /* HELP TIPS LOGIC */
 function setupHelpTips() {
@@ -415,26 +405,49 @@ function setupHelpTips() {
     panel.innerHTML = defaultText;
 }
 
+// DEBUG: ERROR HANDLER
+function showError(msg, stack) {
+    const el = document.createElement('div');
+    el.style.cssText = "position:fixed; top:10px; left:10px; right:10px; background:#e74c3c; color:white; padding:20px; z-index:9999; font-family:monospace; white-space:pre-wrap; border-radius:8px; box-shadow:0 5px 15px rgba(0,0,0,0.5)";
+    el.innerHTML = `<h3>⚠️ DASHBOARD ERROR</h3><strong>${msg}</strong><br><br><small>${stack || ''}</small><br><button onclick="this.parentElement.remove()" style="margin-top:10px; padding:5px 10px; cursor:pointer">DISMISS</button>`;
+    document.body.appendChild(el);
+    console.error(msg, stack);
+}
+
 window.onload = () => {
-    // Populate Division
-    const divSelect = document.getElementById('divSelect');
-    divSelect.innerHTML = '';
-    const divKeys = Object.keys(DATA);
-    
-    if(divKeys.length > 0) {
-        divKeys.forEach(key => {
-            const opt = document.createElement('option');
-            opt.value = key;
-            opt.textContent = key.replace(/_/g, " ");
-            divSelect.appendChild(opt);
-        });
-        divSelect.value = divKeys[0];
-        loadDivision();
-    } else {
-        alert("No Data Found");
+    try {
+        console.log("🚀 Init: Start");
+        // Populate Division
+        const divSelect = document.getElementById('divSelect');
+        divSelect.innerHTML = '';
+        const divKeys = Object.keys(DATA);
+        
+        if(divKeys.length > 0) {
+            divKeys.forEach(key => {
+                const opt = document.createElement('option');
+                opt.value = key;
+                opt.textContent = key.replace(/_/g, " ");
+                divSelect.appendChild(opt);
+            });
+            divSelect.value = divKeys[0];
+            loadDivision();
+        } else {
+            document.querySelector('.loading-overlay').innerHTML = "<h3>NO DATA FOUND</h3>";
+        }
+        setupHelpTips();
+    } catch (e) {
+        showError("Init Error: " + e.message, e.stack);
+        document.querySelector('.loading-overlay').style.display = 'none';
     }
     
-    setupHelpTips();
+    // Check if initial load failed to render anything
+    /*
+    setTimeout(() => {
+        if(document.querySelector('.loading-overlay').style.display !== 'none') {
+             console.warn("Loading stuck?");
+        }
+    }, 5000);
+    */
     
     // Events
     const canvas = document.getElementById('mainCanvas');
@@ -605,30 +618,30 @@ function adjustZoom(factor) {
 
 function calculateAlgorithm() {
     currentBlockId = document.getElementById('blockSelect').value;
-    const blockData = DATA[currentDiv][currentBlockId];
-    if(!blockData) return;
+    currentBlockData = DATA[currentDiv][currentBlockId]; // Update currentBlockData
+    if(!currentBlockData) return;
     
     // UPDATE BLOCK INFO OVERLAY
     document.getElementById('blockInfoOverlay').innerHTML = 
         `<h4 style="margin:0 0 5px 0; color:#2c3e50">Block ${currentBlockId}</h4>` +
         `<div style="font-size:0.85rem; color:#555">` + 
-        `Trees Analysed: <b>${blockData.stats.count}</b><br>` +
-        `Avg NDRE: <b>${blockData.stats.mean_ndvi}</b><br>` +
-        `<span style="color:#888; font-size:0.8rem">Grid: ${blockData.width} x ${blockData.height}</span>` +
+        `Trees Analysed: <b>${currentBlockData.stats.count}</b><br>` +
+        `Avg NDRE: <b>${currentBlockData.stats.mean_ndvi}</b><br>` +
+        `<span style="color:#888; font-size:0.8rem">Grid: ${currentBlockData.width} x ${currentBlockData.height}</span>` +
         `</div>`;
     
-    blockDimensions.w = blockData.width;
-    blockDimensions.h = blockData.height;
+    blockDimensions.w = currentBlockData.width;
+    blockDimensions.h = currentBlockData.height;
     
-    const treeMap = new Map();
+    treeMap.clear(); // Clear global map
     const trees = [];
     
-    blockData.trees.forEach(t => {
+    currentBlockData.trees.forEach(t => {
         const tree = { 
             x: t[0], y: t[1], z: t[2], 
             is_sisip: t[3] === 1,
-            orig_x: t[0] + (blockData.min_x || 0), 
-            orig_y: t[1] + (blockData.min_y || 0), 
+            orig_x: t[0] + (currentBlockData.min_x || 0), 
+            orig_y: t[1] + (currentBlockData.min_y || 0), 
             status: 'HIJAU' 
         };
         const key = t[0] + ',' + t[1];
@@ -696,8 +709,8 @@ function calculateAlgorithm() {
     document.getElementById('attack_rate').innerText = attack_rate + '%';
     
     // --- FINANCIAL INSIGHTS LOGIC ---
-    const totalBuku = blockData.stats.total_buku || 0;
-    const sensusPct = blockData.stats.sensus_pct || 0;
+    const totalBuku = currentBlockData.stats.total_buku || 0;
+    const sensusPct = currentBlockData.stats.sensus_pct || 0;
     const totalDrone = trees.length;
     
     // 1. Ghost Trees (Asset Audit)
@@ -784,12 +797,55 @@ function drawCanvas() {
     }
     
     ctx.restore();
+    
+    // DRAW TRENCH OVERLAY
+    if (isTrenchMode && trenchClusters.length > 0) {
+        ctx.save();
+        ctx.translate(transform.x, transform.y);
+        ctx.scale(transform.k, transform.k);
+        
+        ctx.lineWidth = 0.15;
+        ctx.setLineDash([0.2, 0.2]); // Dashed line
+        
+        trenchClusters.forEach(c => {
+             let minX=Infinity, maxX=-Infinity, minY=Infinity, maxY=-Infinity;
+            c.forEach(n => {
+                minX = Math.min(minX, n.x);
+                maxX = Math.max(maxX, n.x);
+                minY = Math.min(minY, n.y);
+                maxY = Math.max(maxY, n.y);
+            });
+            
+            // Draw Box with buffer
+            // Buffer 0.6 unit around the extremes
+            const bx = minX - 0.6;
+            const by = minY - 0.6;
+            const bw = (maxX - minX) + 1.2;
+            const bh = (maxY - minY) + 1.2;
+            
+            // Black bg line for contrast
+            ctx.strokeStyle = '#000000';
+            ctx.strokeRect(bx, by, bw, bh);
+            
+            // Yellow fg line
+            ctx.strokeStyle = '#f1c40f';
+            ctx.lineDashOffset = 0.2;
+            ctx.strokeRect(bx, by, bw, bh);
+            
+            // Label
+            ctx.fillStyle = 'black';
+            ctx.font = '0.3px Arial';
+            ctx.fillText("TRENCH", bx, by - 0.1);
+        });
+        
+        ctx.restore();
+    }
 }
 
 function handleTooltip(e) {
     const rect = document.getElementById('mainCanvas').getBoundingClientRect();
     const worldX = (e.clientX - rect.left - transform.x) / transform.k;
-    const worldY = (e.clientY - rect.top - transform.y) / transform.k;
+    const worldY = (e.clientY - rect.top - transform.k) / transform.k;
     
     const gridX = Math.floor(worldX);
     const gridY = Math.floor(worldY);
@@ -890,6 +946,91 @@ function showDrilldown(status) {
     pop.style.right = '340px'; 
 }
 
+let trenchClusters = [];
+
+function toggleTrenchMode() {
+    isTrenchMode = document.getElementById('trenchToggle').checked;
+    document.getElementById('trenchStats').style.display = isTrenchMode ? 'block' : 'none';
+    if (isTrenchMode) {
+        calculateTrenchClusters();
+    }
+    drawCanvas();
+}
+
+function calculateTrenchClusters() {
+    if (!currentBlockData) return;
+    
+    // 1. Identify Target Trees (Red/Orange/Yellow? Usually Red+Orange need isolation)
+    // Let's stick to Red (Merah) and Orange (Cluster) as targets
+    const targets = computedTrees.filter(t => t.status === 'MERAH' || t.status === 'ORANYE');
+    
+    // 2. Clustering (Connected Components using Spatial Lookup)
+    // Optimized: Use treeMap for O(1) neighbor check instead of O(N^2) loop
+    const visited = new Set();
+    const clusters = [];
+    // Neighbors: 8 directions
+    const offsets = [[0,1], [0,-1], [1,0], [-1,0], [1,1], [1,-1], [-1,1], [-1,-1]];
+    
+    targets.forEach(t => {
+        if(visited.has(t)) return;
+        
+        const cluster = [];
+        const queue = [t];
+        visited.add(t);
+        cluster.push(t);
+        
+        while(queue.length > 0) {
+            const curr = queue.pop();
+            
+            offsets.forEach(o => {
+                const nx = curr.x + o[0];
+                const ny = curr.y + o[1];
+                const key = nx + ',' + ny;
+                const neighbor = treeMap.get(key);
+                
+                // If neighbor exists, is Red/Orange, and not visited
+                if(neighbor && (neighbor.status === 'MERAH' || neighbor.status === 'ORANYE') && !visited.has(neighbor)) {
+                    visited.add(neighbor);
+                    cluster.push(neighbor);
+                    queue.push(neighbor);
+                }
+            });
+        }
+        clusters.push(cluster);
+    });
+    
+    trenchClusters = clusters;
+    
+    // 3. Calculate Cost
+    // Assumption: Trench is a box around the cluster + 1 unit buffer
+    // 1 Grid Unit approx 9 meters in real life
+    const GRID_SCALE_M = 9; 
+    let totalPerimeterM = 0;
+    
+    clusters.forEach(c => {
+        let minX=Infinity, maxX=-Infinity, minY=Infinity, maxY=-Infinity;
+        c.forEach(n => {
+            minX = Math.min(minX, n.x);
+            maxX = Math.max(maxX, n.x);
+            minY = Math.min(minY, n.y);
+            maxY = Math.max(maxY, n.y);
+        });
+        
+        // Add buffer 1 unit
+        const width = (maxX - minX + 2) * GRID_SCALE_M;
+        const height = (maxY - minY + 2) * GRID_SCALE_M;
+        
+        const perimeter = 2 * (width + height);
+        totalPerimeterM += perimeter;
+    });
+    
+    const estCost = totalPerimeterM * financial.trench_cost;
+    
+    document.getElementById('val_trench_len').innerText = `${totalPerimeterM.toLocaleString()} m`;
+    document.getElementById('val_trench_cost').innerText = `Rp ${estCost.toLocaleString('id-ID')}`;
+}
+
+
 /* SORT TABLE LOGIC */
 function sortTable(n, isNumeric=false) {
   var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
@@ -934,9 +1075,15 @@ function sortTable(n, isNumeric=false) {
 }
 """
 
-    # --- MAIN HTML FOO---
-    html = f"""
-<!DOCTYPE html>
+    # --- WRITE HTML SAFELY (Avoid f-string for large JS/CSS blocks) ---
+    try:
+        # Create Output Path
+        output_path = Path(f'data/output/dashboard_v8_interactive_{timestamp.replace(":", "").replace(" ", "_")}.html')
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        
+        with open(output_path, 'w', encoding='utf-8') as f:
+            # 1. HEADER & CSS
+            f.write(f"""<!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -944,71 +1091,86 @@ function sortTable(n, isNumeric=false) {
     <style>
         body {{ font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; background: #f4f6f9; display: flex; flex-direction: column; height: 100vh; }}
         header {{ background: #2c3e50; color: white; padding: 15px 20px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }}
-        .header-title {{ font-size: 1.2rem; font-weight: 500; display:flex; align-items:center; gap:10px; }}
+        h1 {{ margin: 0; font-size: 1.2rem; font-weight: 600; letter-spacing: 0.5px; }}
+        .header-controls {{ display: flex; gap: 15px; align-items: center; }}
         
-        .layout {{ display: flex; flex: 1; overflow: hidden; }}
+        /* LAYOUT */
+        .main-container {{ display: flex; flex: 1; overflow: hidden; }}
         
-        .sidebar {{ width: 340px; background: white; border-right: 1px solid #ddd; display: flex; flex-direction: column; z-index:10; box-shadow: 2px 0 5px rgba(0,0,0,0.05); }}
-        .sidebar-scroll {{ flex:1; overflow-y:auto; }}
+        /* SIDEBAR (Controls) */
+        .sidebar {{ width: 320px; background: white; border-right: 1px solid #ddd; display: flex; flex-direction: column; overflow-y: auto; z-index: 10; }}
+        .sidebar-header {{ padding: 15px; border-bottom: 1px solid #eee; background: #f8f9fa; }}
+        .sidebar-content {{ padding: 15px; flex: 1; }}
         
-        .control-group {{ padding: 20px; border-bottom: 1px solid #eee; }}
-        .control-group h3 {{ margin: 0 0 15px 0; font-size: 0.9rem; text-transform: uppercase; color: #888; letter-spacing: 1px; }}
+        .control-group {{ margin-bottom: 20px; border-bottom: 1px solid #f0f0f0; padding-bottom: 15px; }}
+        .control-group:last-child {{ border-bottom: none; }}
+        .control-group h3 {{ margin: 0 0 10px 0; font-size: 0.9rem; color: #7f8c8d; text-transform: uppercase; letter-spacing: 1px; }}
         
-        /* Financial Panel Style */
-        .financial-card {{ background: #fdfefe; border: 1px solid #e1e8ed; border-radius: 6px; padding: 10px; margin-bottom: 5px; }}
-        .fin-label {{ font-size: 0.8rem; color: #7f8c8d; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; display:block; }}
-        .fin-value {{ font-size: 1.0rem; font-weight: 600; color: #2c3e50; }}
+        label {{ display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 5px; color: #2c3e50; }}
+        select, input[type=number], input[type=range] {{ width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; font-size: 0.9rem; }}
+        input[type=range] {{ margin-top: 5px; }}
         
-        input[type=number] {{ width: 100%; box-sizing: border-box; padding: 6px; border: 1px solid #ddd; border-radius: 4px; font-size: 0.9rem; margin-top: 2px; }}
-
-        /* INFO PANEL */
-        .info-panel {{ height: 260px; border-top: 2px solid #3498db; background: #f8f9fa; padding: 20px; overflow-y: auto; font-size: 0.85rem; line-height: 1.5; color: #444; box-shadow: inset 0 3px 6px rgba(0,0,0,0.05); }}
+        /* PRESET BUTTONS */
+        .preset-btn-group {{ display: flex; gap: 5px; margin-bottom: 10px; flex-wrap: wrap; }}
+        .preset-btn {{ flex: 1; padding: 6px 10px; border: 1px solid #3498db; background: white; color: #3498db; border-radius: 4px; cursor: pointer; font-size: 0.8rem; transition: all 0.2s; white-space: nowrap; }}
+        .preset-btn:hover {{ background: #ebf5fb; }}
+        .preset-btn.active {{ background: #3498db; color: white; }}
         
-        select, input[type=range] {{ width: 100%; box-sizing: border-box; padding: 8px; border: 1px solid #ddd; border-radius: 4px; font-size: 0.9rem; margin-bottom: 5px; }}
-        label {{ display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 5px; color: #555; }}
-        .val-badge {{ background: #eee; padding: 2px 6px; border-radius: 4px; font-weight: bold; color: #333; }}
-        
-        .preset-btn-group {{ display: flex; gap: 5px; margin-bottom: 20px; }}
-        .preset-btn {{ flex: 1; padding: 8px 4px; border: 1px solid #ddd; background: #f9f9f9; cursor: pointer; border-radius: 4px; font-size: 0.8rem; transition: all 0.2s; }}
-        .preset-btn.active {{ background: #3498db; color: white; border-color: #2980b9; }}
-        
-        .tabs {{ display: flex; gap: 20px; }}
-        .tab {{ cursor: pointer; padding: 5px 10px; opacity: 0.7; transition: 0.2s; border-bottom: 2px solid transparent; }}
-        .tab:hover {{ opacity: 1; }}
-        .tab.active {{ opacity: 1; border-bottom-color: #3498db; font-weight: bold; }}
-        
-        .main-view {{ flex: 1; position: relative; display: flex; flex-direction: column; background: #eef2f5; }}
-        .canvas-container {{ flex: 1; background: #222; position: relative; cursor: crosshair; overflow: hidden; }}
-        #mainCanvas {{ display: block; }}
+        /* MAP AREA */
+        .map-area {{ flex: 1; position: relative; background: #eef2f7; overflow: hidden; cursor: grab; }}
+        .map-area:active {{ cursor: grabbing; }}
+        .canvas-container {{ width: 100%; height: 100%; }}
         
         /* OVERLAYS */
-        .live-stats {{ position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.95); padding: 15px; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); width: 220px; backdrop-filter: blur(5px); font-size:0.9rem; z-index: 50; }}
+        .loading-overlay {{ position: absolute; top:0; left:0; right:0; bottom:0; background: rgba(255,255,255,0.9); display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 1000; }}
+        .block-info-overlay {{ position: absolute; top: 10px; left: 10px; background: rgba(255,255,255,0.9); padding: 10px; border-radius: 4px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); pointer-events: none; font-size: 0.9rem; }}
         
-        .block-info-overlay {{ position: absolute; top: 250px; right: 20px; background: rgba(255,255,255,0.9); padding: 15px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); width: 220px; backdrop-filter: blur(5px); font-size:0.9rem; z-index: 50; border-left: 5px solid #3498db; }}
+        /* LEGEND */
+        .legend {{ position: absolute; bottom: 20px; right: 20px; background: white; padding: 10px; border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); font-size: 0.8rem; pointer-events: none; }}
+        .legend-item {{ display: flex; align-items: center; margin-bottom: 4px; }}
+        .legend-color {{ width: 12px; height: 12px; margin-right: 8px; border-radius: 2px; }}
         
-        .stat-row {{ display: flex; justify-content: space-between; margin-bottom: 5px; cursor: pointer; padding:2px; }}
-        .stat-row:hover {{ background: rgba(0,0,0,0.05); border-radius: 4px; }}
-        .dot {{ width: 10px; height: 10px; display: inline-block; border-radius: 50%; margin-right: 8px; }}
+        /* STATS BADGES */
+        .stats-grid {{ display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }}
+        .stat-card {{ background: #f8f9fa; padding: 8px; border-radius: 4px; text-align: center; border: 1px solid #eee; }}
+        .stat-val {{ font-size: 1.1rem; font-weight: bold; display: block; }}
+        .stat-label {{ font-size: 0.7rem; color: #7f8c8d; }}
         
-        .pov-section {{ padding: 0; background: white; flex: 1; overflow-y: auto; display: none; }}
-        .pov-table {{ width: 100%; border-collapse: collapse; font-size: 0.85rem; }}
-        .pov-table th {{ background: #2c3e50; color: white; padding: 10px; text-align: left; position: sticky; top: 0; }}
-        .pov-table td {{ padding: 8px 10px; border-bottom: 1px solid #eee; }}
-        .pov-table tr:hover {{ background: #f9f9f9; }}
+        /* FINANCIAL CARDS */
+        .financial-card {{ background: #fff; border: 1px solid #e0e0e0; border-left: 4px solid #3498db; padding: 10px; margin-bottom: 8px; border-radius: 0 4px 4px 0; }}
+        .fin-label {{ display: block; font-size: 0.75rem; color: #7f8c8d; text-transform: uppercase; }}
+        .fin-value {{ font-size: 1.0rem; font-weight: bold; color: #2c3e50; margin-top: 2px; }}
         
-        #loader {{ position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: white; z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; }}
-        .spinner {{ width: 40px; height: 40px; border: 4px solid #f3f3f3; border-top: 4px solid #3498db; border-radius: 50%; animation: spin 1s linear infinite; }}
-        @keyframes spin {{ 0% {{ transform: rotate(0deg); }} 100% {{ transform: rotate(360deg); }} }}
+        /* TOOLTIPS */
+        .tooltip {{ position: absolute; background: rgba(0,0,0,0.85); color: white; padding: 8px 12px; border-radius: 4px; font-size: 0.8rem; pointer-events: none; display: none; z-index: 1001; white-space: nowrap; box-shadow: 0 4px 6px rgba(0,0,0,0.3); }}
         
-        .map-controls {{ position: absolute; bottom: 20px; right: 20px; display: flex; flex-direction: column; gap: 5px; }}
-        .map-btn {{ width: 36px; height: 36px; background: white; border: none; border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); cursor: pointer; font-size: 1.2rem; display: flex; align-items: center; justify-content: center; color: #555; }}
-        .map-btn:hover {{ background: #f0f0f0; }}
+        /* POV TABLE Styles */
+        .pov-table {{ width:100%; border-collapse: collapse; font-size: 0.8rem; }}
+        .pov-table th {{ background: #ecf0f1; padding: 6px; text-align: left; border-bottom: 2px solid #ddd; }}
+        .pov-table td {{ padding: 6px; border-bottom: 1px solid #eee; }}
+        .pov-table tr:hover {{ background: #f5f6fa; }}
         
-        #tooltip {{ position: absolute; pointer-events: none; background: rgba(0,0,0,0.9); color: white; padding: 10px; border-radius: 4px; font-size: 0.8rem; display: none; z-index: 100; box-shadow: 0 4px 10px rgba(0,0,0,0.3); border: 1px solid #444; }}
-
-        .help-tip {{ display: inline-block; cursor: help; margin-left: 5px; color: #3498db; font-weight:bold; width:20px; height:20px; text-align:center; line-height:20px; border-radius:50%; background:#eef6fc; border:1px solid #d6eaf8; font-size:12px; }}
-        .help-tip:hover {{ background:#3498db; color:white; transform:scale(1.1); transition:0.2s; }}
+        /* TABS */
+        .tab-buttons {{ display: flex; border-bottom: 1px solid #ddd; }}
+        .tab-btn {{ flex: 1; padding: 10px; border: none; background: none; cursor: pointer; font-weight: 600; color: #7f8c8d; border-bottom: 3px solid transparent; }}
+        .tab-btn.active {{ color: #3498db; border-bottom-color: #3498db; }}
         
+        .tab-content {{ display: none; padding: 15px; overflow-y: auto; height: 100%; }}
+        .tab-content.active {{ display: block; }}
+        
+        .val-badge {{ background:#eee; padding:2px 6px; border-radius:10px; font-size:0.75rem; font-weight:bold }}
+        
+        /* HELP TIP (?) */
+        .help-tip {{
+            display: inline-block; width: 16px; height: 16px; background: #95a5a6; color: white;
+            border-radius: 50%; text-align: center; line-height: 16px; font-size: 11px;
+            cursor: help; margin-left: 5px;
+        }}
+        .help-tip:hover {{ background: #3498db; }}
+        
+        #infoPanel {{ height: 150px; background: white; border-top: 1px solid #ccc; padding: 15px; font-size: 0.9rem; overflow-y: auto; line-height: 1.5; }}
+        
+        /* POPOVER */
         #statsPopover {{ position: absolute; display: none; background: white; border: 1px solid #ddd; padding: 0; border-radius: 8px; box-shadow: 0 5px 20px rgba(0,0,0,0.2); z-index: 900; width: 300px; max-height: 400px; flex-direction: column; }}
         .pop-header {{ background: #f8f9fa; padding: 10px 15px; border-bottom: 1px solid #eee; font-weight: bold; border-radius: 8px 8px 0 0; display: flex; justify-content: space-between; }}
         .pop-body {{ overflow-y: auto; padding: 0; flex: 1; }}
@@ -1018,194 +1180,446 @@ function sortTable(n, isNumeric=false) {
         .pop-table tr:hover {{ background: #f9f9f9; }}
         .pop-close {{ cursor: pointer; color: #999; }}
         .pop-close:hover {{ color: #333; }}
+
+        /* Toggle Switch Styles */
+        .toggle-switch {{
+            position: relative;
+            display: inline-block;
+            width: 40px;
+            height: 20px;
+        }}
+        .toggle-switch input {{
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }}
+        .slider {{
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }}
+        .slider:before {{
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 2px;
+            bottom: 2px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }}
+        input:checked + .slider {{
+            background-color: #2196F3;
+        }}
+        input:focus + .slider {{
+            box-shadow: 0 0 1px #2196F3;
+        }}
+        input:checked + .slider:before {{
+            -webkit-transform: translateX(20px);
+            -ms-transform: translateX(20px);
+            transform: translateX(20px);
+        }}
+        /* Rounded sliders */
+        .slider.round {{
+            border-radius: 20px;
+        }}
+        .slider.round:before {{
+            border-radius: 50%;
+        }}
     </style>
 </head>
 <body>
-
-<div id="loader">
-    <div class="spinner"></div>
-    <h3 style="margin-top:15px; color:#555">Initialising Engine...</h3>
-</div>
-
-<div id="tooltip"></div>
-<div id="statsPopover">
-    <div class="pop-header">
-        <span id="popTitle">Title</span>
-        <span class="pop-close" onclick="document.getElementById('statsPopover').style.display='none'">✖</span>
+    <div id="loader" class="loading-overlay">
+        <div style="font-size: 2rem; margin-bottom: 10px;">🤖</div>
+        <div>Initializing Cincin Api Engine v8.2...</div>
+        <div style="font-size:0.8rem; color:#777; margin-top:5px">Simulating Cost Control & Neural Analysis</div>
     </div>
-    <div class="pop-body">
-        <table class="pop-table" id="popTable"></table>
-    </div>
-</div>
 
-<header>
-    <div class="header-title">
-        <span>🌳</span> Simulation Engine v8.2
-        <span style="font-size:0.8rem; opacity:0.6; font-weight:normal; margin-left:10px">Generated: {timestamp}</span>
-    </div>
-    <div class="tabs">
-        <div class="tab active" onclick="switchTab('map')">🗺️ Interactive Map</div>
-        <div class="tab" onclick="switchTab('pov')">📊 Production Analysis</div>
-    </div>
-</header>
+    <!-- HEADER -->
+    <header>
+        <div class="header-controls">
+            <h1>POAC Cincin Api v8.2</h1>
+            <span style="background:rgba(255,255,255,0.2); pad:2px 8px; border-radius:4px; font-size:0.8rem">Interactive Cost Control & Audit</span>
+        </div>
+        <div style="font-size:0.9rem">
+            <b>Divisi:</b> <select id="divSelect" style="width:150px; margin-left:10px; color:black"></select>
+        </div>
+    </header>
 
-<div class="layout">
-    <aside class="sidebar">
-        <div class="sidebar-scroll">
-            <div class="control-group">
-                <h3>📍 Location</h3>
-                <label>Division</label>
-                <select id="divSelect" onchange="loadDivision()">
-                    <!-- Dyn -->
-                </select>
-                
-                <label>Block ID</label>
-                <select id="blockSelect" onchange="resetView(); calculateAlgorithm()">
-                    <!-- Dyn -->
-                </select>
-                
-                <!-- NEW: TOP 5 RANKINGS -->
-                <div id="top5Ranking" style="margin-top:10px; background:#fff5f5; border:1px solid #ffcccc; border-radius:4px; padding:8px;">
-                     <h4 style="margin:0 0 5px 0; font-size:0.8rem; color:#c0392b">🚨 Top 5 Critical Hotspots</h4>
-                     <div id="top5List" style="font-size:0.8rem"></div>
-                </div>
+    <div class="main-container">
+        <!-- SIDEBAR -->
+        <div class="sidebar">
+            <div class="tab-buttons">
+                <button class="tab-btn active" onclick="switchTab('controls')">Controls</button>
+                <button class="tab-btn" onclick="switchTab('pov')">Production Analysis</button>
             </div>
             
-            <div class="control-group">
-                <h3>💰 Financial & Audit</h3>
-                
-                <div class="financial-card">
-                     <span class="fin-label">Ghost Trees (Audit Aset)</span>
-                     <div id="val_ghost" class="fin-value">-</div>
-                     <span class="help-tip" style="float:right; margin-top:-20px" data-tooltip="GHOST TREES (Hilang)\\n👻 Selisih antara Data Buku vs Deteksi Drone.\\n📉 Total Kerugian Aset = (Buku - Drone) x Nilai per Pokok.">?</span>
-                </div>
-                
-                <div class="financial-card">
-                     <span class="fin-label">Sensus Validation</span>
-                     <div id="val_sensus" class="fin-value" style="font-size:0.9rem">-</div>
-                     <span class="help-tip" style="float:right; margin-top:-20px" data-tooltip="COMPARISON\\n⚖️ Membandingkan % Serangan Sensus Manual vs AI.\\n✅ Hijau: AI Valid / Menemukan infeksi baru.\\n⚠️ Merah: AI Under-detection.">?</span>
-                </div>
-                
-                <div class="financial-card">
-                     <span class="fin-label">Est. Treatment Cost</span>
-                     <div id="val_cost" class="fin-value" style="color:#e74c3c">-</div>
-                </div>
-
-                <div style="display:flex; gap:10px; margin-top:10px">
-                    <div style="flex:1">
-                        <label style="font-size:0.7rem">Cost/Tree</label>
-                        <input type="number" id="cost_per_tree" value="50000" oninput="updateFinancial('cost_per_tree')">
-                    </div>
-                    <div style="flex:1">
-                        <label style="font-size:0.7rem">Asset Val</label>
-                        <input type="number" id="asset_value" value="1000000" oninput="updateFinancial('asset_value')">
-                    </div>
-                </div>
-            </div>
-            
-            <div class="control-group">
-                <h3>🎛️ Algorithm Presets</h3>
-                <div class="preset-btn-group">
-                    <button class="preset-btn" onclick="applyPreset('konservatif')" title="Konservatif">Konservatif</button>
-                    <span class="help-tip" data-tooltip="PRESET KONSERVATIF (Si 'Paranoid')\n🛡️ Filosofi: 'Lebih baik salah rawat daripada kecolongan.'\n📉 Ambang Batas: -1.2 (Sangat Sensitif)\n💡 Konsekuensi: Biaya Treatment TINGGI, tapi Aset AMAN. Cocok untuk pembibitan.">?</span>
+            <!-- CONTROLS TAB -->
+            <div id="tab-controls" class="tab-content active">
+                <div class="control-group">
+                    <h3>📍 Navigation</h3>
+                    <label>Block ID</label>
+                    <select id="blockSelect" onchange="resetView(); calculateAlgorithm()">
+                        <!-- Dyn -->
+                    </select>
                     
-                    <button class="preset-btn active" onclick="applyPreset('standar')" title="Standar">Standar</button>
-                    <span class="help-tip" data-tooltip="PRESET STANDAR (The Elbow)\n⚖️ Filosofi: 'Sesuai Kaidah Statistik.'\n📉 Ambang Batas: -1.5 (Titik Siku)\n💡 Konsekuensi: Memisahkan variasi alami vs penyakit secara matematis. Keseimbangan terbaik.">?</span>
+                    <!-- NEW: TOP 5 RANKINGS -->
+                    <div id="top5Ranking" style="margin-top:10px; background:#fff5f5; border:1px solid #ffcccc; border-radius:4px; padding:8px;">
+                        <h4 style="margin:0 0 5px 0; font-size:0.8rem; color:#c0392b">🚨 Top 5 Critical Hotspots</h4>
+                        <div id="top5List" style="font-size:0.8rem"></div>
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <h3>🛠️ Action Plan</h3>
+                    
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px">
+                        <label style="margin:0">Trench Planner</label>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="trenchToggle" onchange="toggleTrenchMode()">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                    
+                    <div id="trenchStats" style="display:none; background:#eee; padding:8px; border-radius:4px; font-size:0.85rem">
+                        <div style="display:flex; justify-content:space-between">
+                            <span>Panjang Parit:</span>
+                            <strong id="val_trench_len">0 m</strong>
+                        </div>
+                        <div style="display:flex; justify-content:space-between; margin-top:5px">
+                            <span>Est. Biaya:</span>
+                            <strong id="val_trench_cost" style="color:#d35400">Rp 0</strong>
+                        </div>
+                    </div>
+                </div>
 
-                    <button class="preset-btn" onclick="applyPreset('agresif')" title="Agresif">Agresif</button>
-                    <span class="help-tip" data-tooltip="PRESET AGRESIF (Si 'Hemat Biaya')\n💰 Filosofi: 'Hanya rawat yang parah.'\n📉 Ambang Batas: -1.8 (Toleransi Tinggi)\n💡 Konsekuensi: Biaya MURAH, tapi Risiko Penularan TINGGI. Cocok untuk tanaman tua siap replanting.">?</span>
+                <div class="control-group">
+                    <h3>💰 Financial Impact</h3>
+                    
+                    <div class="financial-card">
+                        <span class="fin-label">Ghost Trees (Audit Aset)</span>
+                        <div id="val_ghost" class="fin-value">-</div>
+                    </div>
+                    
+                    <div class="financial-card">
+                        <span class="fin-label">Sensus Validation</span>
+                        <div id="val_sensus" class="fin-value">-</div>
+                    </div>
+                    
+                    <div class="financial-card">
+                        <span class="fin-label">Est. Treatment Cost</span>
+                        <div id="val_cost" class="fin-value" style="color:#e67e22">-</div>
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <h3>🎛️ Algorithm Presets</h3>
+                    <div class="preset-btn-group">
+                        <button class="preset-btn" onclick="applyPreset('konservatif')" title="Konservatif">Konservatif</button>
+                        <span class="help-tip" data-tooltip="PRESET KONSERVATIF (Si 'Paranoid')\n🛡️ Filosofi: 'Lebih baik salah rawat daripada kecolongan.'\n📉 Ambang Batas: -1.2 (Sangat Sensitif)\n💡 Konsekuensi: Biaya Treatment TINGGI, tapi Aset AMAN. Cocok untuk pembibitan.">?</span>
+                        
+                        <button class="preset-btn active" onclick="applyPreset('standar')" title="Standar">Standar</button>
+                        <span class="help-tip" data-tooltip="PRESET STANDAR (The Elbow)\n⚖️ Filosofi: 'Sesuai Kaidah Statistik.'\n📉 Ambang Batas: -1.5 (Titik Siku)\n💡 Konsekuensi: Memisahkan variasi alami vs penyakit secara matematis. Keseimbangan terbaik.">?</span>
+
+                        <button class="preset-btn" onclick="applyPreset('agresif')" title="Agresif">Agresif</button>
+                        <span class="help-tip" data-tooltip="PRESET AGRESIF (Si 'Hemat Biaya')\n💰 Filosofi: 'Hanya rawat yang parah.'\n📉 Ambang Batas: -1.8 (Toleransi Tinggi)\n💡 Konsekuensi: Biaya MURAH, tapi Risiko Penularan TINGGI. Cocok untuk tanaman tua siap replanting.">?</span>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <h3>⚙️ Fine Tuning</h3>
+                    
+                    <label>
+                        Z-Score Core <span id="val_z_core" class="val-badge">-1.5</span>
+                        <span class="help-tip" data-tooltip="Z-SCORE (Skor Penyimpangan)\n📊 Definisi: Seberapa 'aneh' pohon ini dibanding rata-rata blok.\n0 = Normal\n-1 = Agak Stress\n-3 = Sakit Parah\n\nSemakin negatif angka Z-Core, semakin parah syarat untuk dianggap 'Suspect'.">?</span>
+                    </label>
+                    <input type="range" id="z_core" min="-3.0" max="0.0" step="0.1" value="-1.5" oninput="updateParam('z_core')">
+                    
+                    <label>
+                        Z-Score Neighbor <span id="val_z_neighbor" class="val-badge">-1.0</span>
+                        <span class="help-tip" data-tooltip="Z-NEIGHBOR (Syarat Tetangga)\n🏡 Fungsi: Filter noise.\nHanya jika tetangganya JUGA punya skor di bawah ini, baru dianggap valid.\nMencegah 'False Alarm' dari satu pohon aneh sendirian.">?</span>
+                    </label>
+                    <input type="range" id="z_neighbor" min="-3.0" max="0.0" step="0.1" value="-1.0" oninput="updateParam('z_neighbor')">
+                    
+                    <label>
+                        Min Neighbors <span id="val_min" class="val-badge">3</span>
+                        <span class="help-tip" data-tooltip="MINIMUM CLUSTER\n👨‍👩‍👧‍👦 Fungsi: Konfirmasi masa.\nBerapa banyak tetangga 'sakit' yang dibutuhkan untuk memvonis Merah?\n3 = Butuh 3 teman sakit\n1 = Sangat sensitif">?</span>
+                    </label>
+                    <input type="range" id="min" min="1" max="8" step="1" value="3" oninput="updateParam('min')">
+                </div>
+                
+                <div class="stats-grid">
+                    <div class="stat-card" style="border-bottom:3px solid #e74c3c">
+                        <span class="stat-val" id="cnt_red" style="color:#e74c3c">0</span>
+                        <span class="stat-label">Merah</span>
+                    </div>
+                    <div class="stat-card" style="border-bottom:3px solid #e67e22">
+                        <span class="stat-val" id="cnt_org" style="color:#e67e22">0</span>
+                        <span class="stat-label">Oranye</span>
+                    </div>
+                    <div class="stat-card" style="border-bottom:3px solid #f1c40f">
+                        <span class="stat-val" id="cnt_yell" style="color:#f1c40f">0</span>
+                        <span class="stat-label">Kuning</span>
+                    </div>
+                    <div class="stat-card" style="border-bottom:3px solid #2ecc71">
+                        <span class="stat-val" id="cnt_grn" style="color:#2ecc71">0</span>
+                        <span class="stat-label">Hijau</span>
+                    </div>
+                </div>
+                
+                <div style="margin-top:10px; text-align:center; padding:10px; background:#e8f8f5; border:1px solid #d1f2eb; border-radius:4px">
+                    <span style="font-size:0.8rem; color:#555">Est. Attack Rate</span>
+                    <div id="attack_rate" style="font-size:1.5rem; font-weight:bold; color:#16a085">0.0%</div>
                 </div>
             </div>
-
-            <div class="control-group">
-                <h3>⚙️ Fine Tuning</h3>
-                
-                <label>
-                    Z-Score Core <span id="val_z_core" class="val-badge">-1.5</span>
-                    <span class="help-tip" data-tooltip="Z-SCORE (Skor Penyimpangan)\n📊 Definisi: Seberapa 'aneh' pohon ini dibanding rata-rata blok.\n0 = Normal\n-1 = Agak Stress\n-3 = Sakit Parah\n\nSemakin negatif angka Z-Core, semakin parah syarat untuk dianggap 'Suspect'.">?</span>
-                </label>
-                <input type="range" id="z_core" min="-3.0" max="0.0" step="0.1" value="-1.5" oninput="updateParam('z_core')">
-                
-                <label>
-                    Z-Score Neighbor <span id="val_z_neighbor" class="val-badge">-1.0</span>
-                     <span class="help-tip" data-tooltip="THRESHOLD NEIGHBOR (Penularan)\\n🎛 Fungsi: Batas toleransi pohon tetangga untuk dianggap 'tertular'.\\n💡 Makna: Digunakan untuk memvalidasi apakah ada cluster serangan.\\n⚠️ Jika tetangga < Z-Neighbor, dia dianggap mendukung status MERAH pohon tengah.">?</span>
-                </label>
-                <input type="range" id="z_neighbor" min="-3.0" max="0.0" step="0.1" value="-1.0" oninput="updateParam('z_neighbor')">
-                
-                <label>
-                    Min Neighbors <span id="val_min" class="val-badge">3</span>
-                     <span class="help-tip" data-tooltip="SENSITIVITAS KLUSTER\\n🎛 Fungsi: Jumlah minimal tetangga sakit.\\n💡 Makna: Validasi spasial Cincin Api.\\n🔢 1-2: Mudah jadi Merah\\n🔢 4-6: Susah jadi Merah (butuh bukti kuat)">?</span>
-                </label>
-                <input type="range" id="min" min="1" max="6" step="1" value="3" oninput="updateParam('min')">
+            
+            <!-- POV TAB -->
+            <div id="tab-pov" class="tab-content">
+                <h3 style="margin-top:0">Production vs Health Analysis</h3>
+                <div style="font-size:0.8rem; color:#666; margin-bottom:10px">
+                    Comparing SPH, Yield, and Gap with Attack Rate (Cincin Api).
+                </div>
+                <div id="povContent">
+                    Select a Division to view data.
+                </div>
             </div>
+            
         </div>
         
-        <!-- INFO PANEL (Fixed Bottom) -->
-        <div class="info-panel">
-            <h4 style="margin:0 0 10px 0; color:#2980b9; border-bottom:1px solid #ddd; padding-bottom:5px">ℹ️ Explanation Panel</h4>
-            <div id="infoPanelContent"></div>
-        </div>
-    </aside>
-
-    <main class="main-view">
-        <div id="mapView" style="display:flex; flex:1; position:relative; overflow:hidden;">
+        <!-- MAP AREA -->
+        <div class="map-area" id="mapArea">
+            <div class="block-info-overlay" id="blockInfoOverlay">
+                <!-- Info block -->
+            </div>
+            
             <div class="canvas-container">
                 <canvas id="mainCanvas"></canvas>
             </div>
             
-            <div class="map-controls">
-                <button class="map-btn" onclick="adjustZoom(1.2)">➕</button>
-                <button class="map-btn" onclick="adjustZoom(0.8)">➖</button>
-                <button class="map-btn" onclick="resetView()">🏠</button>
-            </div>
-            
-            <!-- Live Stats -->
-            <div class="live-stats">
-                <h4 style="margin:0 0 10px 0; border-bottom:1px solid #eee; padding-bottom:5px">Live Detection</h4>
-                <div class="stat-row" onclick="showDrilldown('MERAH')"><span><span class="dot" style="background:#e74c3c"></span>Merah</span> <strong id="cnt_red">0</strong></div>
-                <div class="stat-row" onclick="showDrilldown('ORANYE')"><span><span class="dot" style="background:#e67e22"></span>Oranye</span> <strong id="cnt_org">0</strong></div>
-                <div class="stat-row" onclick="showDrilldown('KUNING')"><span><span class="dot" style="background:#f1c40f"></span>Kuning</span> <strong id="cnt_yell">0</strong></div>
-                <div class="stat-row" onclick="showDrilldown('HIJAU')"><span><span class="dot" style="background:#2ecc71"></span>Hijau</span> <strong id="cnt_grn">0</strong></div>
-                <div style="margin-top:10px; pt-10; border-top:1px solid #eee; font-size:0.8rem; text-align:right">
-                    Attack Rate: <strong id="attack_rate" style="color:#e74c3c">0%</strong>
+            <div class="legend">
+                <div class="legend-item"><div class="legend-color" style="background:#e74c3c"></div><b>Merah:</b> High Confidence Infection</div>
+                <div class="legend-item"><div class="legend-color" style="background:#e67e22"></div><b>Oranye:</b> Secondary Infection (Ring)</div>
+                <div class="legend-item"><div class="legend-color" style="background:#f1c40f"></div><b>Kuning:</b> Early Stress / Suspect</div>
+                <div class="legend-item"><div class="legend-color" style="background:#2ecc71"></div><b>Hijau:</b> Healthy</div>
+                <div class="legend-item" style="margin-top:5px; border-top:1px solid #ccc; padding-top:5px">
+                    <div style="width:10px; height:10px; border-radius:50%; background:white; border:2px solid #555; margin-right:8px"></div><b>Titik Putih:</b> Sisip (Replant)
                 </div>
-                <div style="font-size:0.7rem; color:#999; margin-top:5px; text-align:center">Click rows for details</div>
+                <div class="legend-item">
+                    <div style="width:15px; height:0; border-top:2px dashed #f1c40f; border-bottom:1px solid black; margin-right:5px"></div><b>Kotak Kuning:</b> Rencana Parit Isolas
+                </div>
             </div>
             
-            <!-- NEW BLOCK INFO OVERLAY -->
-            <div id="blockInfoOverlay" class="block-info-overlay">
-                Select a block...
+            <!-- TOOLTIP -->
+            <div id="tooltip" class="tooltip"></div>
+            
+             <!-- POPOVER STATS -->
+            <div id="statsPopover">
+                <div class="pop-header">
+                    <span>Cluster Analysis</span>
+                    <span class="pop-close" onclick="document.getElementById('statsPopover').style.display='none'">×</span>
+                </div>
+                <div class="pop-body">
+                    <table class="pop-table" id="popTable">
+                        <!-- Ajax content -->
+                    </table>
+                </div>
             </div>
         </div>
-        
-        <!-- POV View -->
-        <div id="povView" class="pov-section">
-            <div id="povContent">Select a division...</div>
-        </div>
-    </main>
-</div>
+    </div>
+    
+    <!-- INFO PANEL BOTTOM -->
+    <div id="infoPanel">
+        <div id="infoPanelContent"></div>
+    </div>
 
-<!-- DATA SCRIPT -->
-<script>
-const DATA = {json.dumps(divisi_json_map)};
-const POV_HTML = {json.dumps(pov_tables_html)};
-</script>
-
-<!-- LOGIC SCRIPT -->
-<script>
-{js_logic}
-</script>
+""")
+            
+            # 1b. INJECT ERROR HANDLER (Raw string to avoid f-string escaping issues)
+            f.write(r"""
+    <!-- ERROR HANDLER (Isolated to catch parse errors in main logic) -->
+    <script>
+    window.onerror = function(message, source, lineno, colno, error) {
+        const loader = document.getElementById('loader');
+        if(loader) {
+            loader.innerHTML = `
+                <div style="padding:20px; text-align:center; color:#c0392b; background:white; height:100vh; display:flex; flex-direction:column; justify-content:center">
+                    <h2>⚠️ Dashboard Crash</h2>
+                    <p style="font-size:1.2rem"><strong>${message}</strong></p>
+                    <div style="background:#eee; padding:15px; text-align:left; margin:20px auto; width:80%; max-width:800px; border-radius:8px; overflow:auto; font-family:monospace">
+                        <div style="margin-bottom:5px; color:#555">Location: ${source}:${lineno}:${colno}</div>
+                        <pre style="margin:0; color:#c0392b">${error ? error.stack : 'No stacktrace'}</pre>
+                    </div>
+                </div>
+            `;
+            loader.style.zIndex = '99999';
+        }
+        console.error("FATAL:", message, error);
+    };
+    </script>
+""")
+            
+            # 2. INJECT DATA (Separate Blocks)
+            f.write(f"<script>const DATA = {json.dumps(divisi_json_map)};</script>\n")
+            f.write(f"<script>const POV_HTML = {json.dumps(pov_tables_html)};</script>\n")
+            
+            # 3. WRITE MAIN JS ENGINE (Separate Block)
+            f.write("<script>\n")
+            f.write(js_logic)
+            f.write("\n</script>\n")
+            
+            # 4. CLOSE HTML
+            f.write("""
 </body>
 </html>
-"""
+""")
+            
+    except Exception as e:
+        print(f"❌ Error generating dashboard: {e}")
+        return None
+
+    print(f"Dashboard generated: {output_path}")
     
-    output_path = Path(f'data/output/dashboard_v8_interactive_{timestamp.replace(":", "").replace(" ", "_")}.html')
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-    
-    with open(output_path, 'w', encoding='utf-8') as f:
-        f.write(html)
-        
     return output_path
+
+
+
+# -----------------------------------------------------------------------------
+# 3. LOCAL OVERRIDES (Fixing Missing Data Issues)
+# -----------------------------------------------------------------------------
+
+def load_productivity_data():
+    """
+    Load productivity data from Realisasi vs Potensi PT SR.xlsx (Robust Dynamic Header Search)
+    """
+    candidates = [
+        Path('data/input/Realisasi vs Potensi PT SR.xlsx'),
+        Path('data/input/data_gabungan.xlsx')
+    ]
+    file_path = None
+    for p in candidates:
+        if p.exists():
+            file_path = p
+            break
+            
+    if not file_path:
+        logging.warning("⚠️ Productivity data file not found.")
+        return pd.DataFrame()
+    
+    print(f"   Using productivity file: {file_path}")
+    
+    try:
+        # Read header area to find structure
+        df_header = pd.read_excel(file_path, header=None, nrows=15)
+        
+        # 1. Find BLOK, Ha, TT (Tahun Tanam), and DIVISI (Estate) columns
+        blok_col_idx = -1
+        luas_col_idx = -1
+        tt_col_idx = -1
+        div_col_idx = -1 # Estate/Divisi
+        header_row_idx = -1
+        
+        for r in range(len(df_header)):
+            row_vals = df_header.iloc[r].astype(str).str.upper().tolist()
+            if 'BLOK' in row_vals:
+                header_row_idx = r
+                blok_col_idx = row_vals.index('BLOK')
+                
+                # Find Ha
+                indices = [i for i, x in enumerate(row_vals) if 'HA' == x or 'LUAS' in x]
+                if indices: luas_col_idx = indices[0]
+                
+                # Find TT
+                indices_tt = [i for i, x in enumerate(row_vals) if 'TT' == x or 'TAHUN' in x]
+                if indices_tt: tt_col_idx = indices_tt[0]
+                
+                # Find Divisi/Estate
+                indices_div = [i for i, x in enumerate(row_vals) if 'ESTATE' in x or 'KEBUN' in x or 'DIVISI' in x]
+                if indices_div: div_col_idx = indices_div[0]
+                else: div_col_idx = 0 # Default to 1st col if not found
+                
+                break
+        
+        if blok_col_idx == -1:
+            logging.warning("⚠️ Could not find 'BLOK' column header in prod file.")
+            return pd.DataFrame()
+
+        # 2. Find Production (Ton) and Potensi (Ton) Columns
+        prod_col_idx = -1
+        pot_col_idx = -1
+        target_year = "2023" # Default
+        
+        row_years = df_header.iloc[header_row_idx].astype(str).tolist()
+        year_start_col = -1
+        if "2024" in row_years: 
+            target_year = "2024"; year_start_col = row_years.index("2024")
+        elif "2023" in row_years:
+            target_year = "2023"; year_start_col = row_years.index("2023")
+            
+        if year_start_col != -1:
+             row_type = df_header.iloc[header_row_idx+1].astype(str).str.upper().tolist()
+             row_unit = df_header.iloc[header_row_idx+2].astype(str).str.upper().tolist()
+             
+             for c in range(year_start_col, min(year_start_col+20, len(row_type))):
+                typ = row_type[c]; unit = row_unit[c]
+                if 'REAL' in typ and 'TON' in unit and prod_col_idx == -1: prod_col_idx = c
+                if 'POTENSI' in typ and 'TON' in unit and 'REAL' not in typ and pot_col_idx == -1: pot_col_idx = c
+
+        # 3. Load FULL Data safely
+        data_start_row = header_row_idx + 3
+        df = pd.read_excel(file_path, header=None, skiprows=data_start_row)
+        
+        extracted = pd.DataFrame()
+        extracted['Blok_Prod'] = df.iloc[:, blok_col_idx]
+        extracted['Divisi_Prod'] = df.iloc[:, div_col_idx] if div_col_idx != -1 else 'Unknown'
+        extracted['Luas_Ha'] = df.iloc[:, luas_col_idx] if luas_col_idx != -1 else 0
+        extracted['Tahun_Tanam'] = df.iloc[:, tt_col_idx] if tt_col_idx != -1 else 0
+        extracted['Produksi_Ton'] = df.iloc[:, prod_col_idx] if prod_col_idx != -1 else 0
+        extracted['Potensi_Prod_Ton'] = df.iloc[:, pot_col_idx] if pot_col_idx != -1 else 0
+        
+        df = extracted
+        
+        # Stringify Block for matching
+        if 'Blok_Prod' in df.columns:
+            df['Blok_Prod'] = df['Blok_Prod'].astype(str).str.strip().str.upper()
+            # Drop invalid blocks
+            df = df[df['Blok_Prod'].apply(lambda x: len(x) > 1 and x != 'NAN')]
+
+        # Ensure numeric
+        for col in ['Luas_Ha', 'Produksi_Ton', 'Potensi_Prod_Ton', 'Tahun_Tanam']:
+            df[col] = pd.to_numeric(df[col], errors='coerce').fillna(0)
+        
+        # Age
+        current_year = datetime.now().year
+        df['Umur_Tahun'] = current_year - df['Tahun_Tanam']
+        
+        # Metrics
+        df['Yield_Realisasi'] = df['Produksi_Ton'] / df['Luas_Ha']
+        df['Potensi_Yield'] = df['Potensi_Prod_Ton'] / df['Luas_Ha']
+        # Replace INF
+        df['Yield_Realisasi'] = df['Yield_Realisasi'].replace([np.inf, -np.inf], 0)
+        df['Potensi_Yield'] = df['Potensi_Yield'].replace([np.inf, -np.inf], 0)
+        
+        df['Gap_Yield'] = df['Potensi_Yield'] - df['Yield_Realisasi']
+        
+        # Aliases
+        df['Yield_TonHa'] = df['Yield_Realisasi']
+
+        # Filter valid
+        df_clean = df[df['Luas_Ha'] > 0]
+        
+        return df_clean
+        
+    except Exception as e:
+        logging.error(f"❌ Error loading productivity data: {e}")
+        return pd.DataFrame()
+
 
 def main():
     print("🚀 STARTED: Dashboard v8.2 Generation (Cost Control)")

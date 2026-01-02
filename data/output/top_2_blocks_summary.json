@@ -1,0 +1,24 @@
+{
+  "Blok #1": {
+    "code": "F08",
+    "blok_name": "D 08",
+    "tt": 2009,
+    "luas": 25.3,
+    "merah": 1,
+    "oranye": 1104,
+    "kuning": 2663,
+    "spread_ratio": 1104.0,
+    "infection_pct": 29.310344827586203
+  },
+  "Blok #2": {
+    "code": "D01",
+    "blok_name": "D 01",
+    "tt": 2009,
+    "luas": 25.8,
+    "merah": 1,
+    "oranye": 887,
+    "kuning": 2586,
+    "spread_ratio": 887.0,
+    "infection_pct": 25.47332185886403
+  }
+}

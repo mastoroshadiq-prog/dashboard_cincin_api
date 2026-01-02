@@ -1,18 +1,26 @@
 
 import pandas as pd
-from pathlib import Path
+import os
 
-file_path = Path('data/input/data_gabungan.xlsx')
+# Relative to CWD: d:\PythonProjects\simulasi_poac\poac_sim
+path = 'data/input/data_gabungan.xlsx'
+
+if not os.path.exists(path):
+    print(f"File not found at: {os.path.abspath(path)}")
+    # Try alternate location just in case
+    path2 = 'd:/PythonProjects/simulasi_poac/poac_sim/data/input/data_gabungan.xlsx'
+    if os.path.exists(path2):
+        path = path2
+    else:
+        print("Still not found.")
+        exit()
 
 try:
-    # Try Header at row 8 (0-based index)
-    df = pd.read_excel(file_path, header=8, nrows=5)
+    df = pd.read_excel(path, nrows=5)
+    print(f"Read success from {path}")
+    print("Columns:", df.columns.tolist())
+    print("\nFirst row sample:")
+    print(df.iloc[0].to_dict())
     
-    print("HEADER ROW 8 COLUMNS:")
-    cols = df.columns.tolist()
-    # Print columns with index to locate Total Pokok
-    for i, c in enumerate(cols):
-        print(f"{i}: {c}")
-        
 except Exception as e:
-    print(f"Error: {e}")
+    print(f"Error reading file: {e}")

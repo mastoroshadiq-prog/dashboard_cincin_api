@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Executive Dashboard: Cincin Api Analysis - Block D006A & D007A</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .executive-summary {
+            background: linear-gradient(135deg, #134e5e 0%, #71b280 100%);
+            color: white;
+            padding: 30px 40px;
+            margin: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .executive-summary h2 {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+        }
+
+        .executive-summary .insight {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+
+        .blocks-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            padding: 40px;
+        }
+
+        .block-section {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .block-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .block-header h2 {
+            font-size: 2em;
+            margin-bottom: 5px;
+        }
+
+        .block-header p {
+            opacity: 0.9;
+            font-size: 1.1em;
+        }
+
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .kpi-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid;
+        }
+
+        .kpi-card.red {
+            border-color: #e74c3c;
+        }
+
+        .kpi-card.orange {
+            border-color: #ff9800;
+        }
+
+        .kpi-card.yellow {
+            border-color: #ffd700;
+        }
+
+        .kpi-card.green {
+            border-color: #27ae60;
+        }
+
+        .kpi-card.blue {
+            border-color: #3498db;
+        }
+
+        .kpi-card.purple {
+            border-color: #9b59b6;
+        }
+
+        .kpi-card .label {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .kpi-card .value {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .kpi-card .sub {
+            font-size: 0.85em;
+            color: #999;
+            margin-top: 5px;
+        }
+
+        .section-title {
+            font-size: 1.3em;
+            color: #2c3e50;
+            margin: 25px 0 15px 0;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+            font-weight: bold;
+        }
+
+        .chart-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .recommendation {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            border-left: 5px solid #e67e22;
+        }
+
+        .recommendation h3 {
+            color: #d35400;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .recommendation .priority {
+            display: inline-block;
+            background: #e67e22;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .comparison-section {
+            grid-column: 1 / -1;
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 20px;
+        }
+
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 1200px) {
+            .blocks-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>🎯 Executive Dashboard: Cincin Api Analysis</h1>
+            <p>Precision Agriculture for Palm Oil Plantation - Block Health & Production Impact</p>
+            <p style="font-size: 0.9em; margin-top: 10px; opacity: 0.8;">Analysis Date: 29 December 2025</p>
+        </header>
+
+        <div class="executive-summary">
+            <h2>📊 Ringkasan Eksekutif (Executive Summary)</h2>
+            <div class="insight">
+                <strong>🎯 Temuan Kunci:</strong> Kedua blok menunjukkan kehilangan produktivitas kritis (95%+) meskipun
+                tingkat infeksi terlihat rendah (5-7%),
+                memvalidasi Cincin Api sebagai sistem peringatan dini yang mendeteksi masalah sebelum gejala visual
+                muncul.
+            </div>
+            <div class="insight">
+                <strong>💰 Dampak Finansial:</strong> Estimasi kerugian gabungan mencapai Rp 50.6 Juta/Ha/tahun.
+                Intervensi segera dapat mencegah penyebaran ke zona sehat yang tersisa.
+            </div>
+            <div class="insight">
+                <strong>🚜 Rekomendasi Strategis:</strong> Prioritaskan PEMBUATAN PARIT ISOLASI untuk kedua blok di Q1
+                2025.
+                ROI yang diharapkan: Perlindungan 94% pohon sehat dari penularan aktif.
+            </div>
+        </div>
+
+        <div class="blocks-container">
+            <!-- BLOCK D006A -->
+            <div class="block-section">
+                <div class="block-header">
+                    <h2>BLOCK D006A</h2>
+                    <p>AME II - Division D</p>
+                </div>
+
+                <h3 class="section-title">📍 Block Profile</h3>
+                <div class="kpi-grid">
+                    <div class="kpi-card blue">
+                        <div class="label">Total Trees</div>
+                        <div class="value">2,382</div>
+                        <div class="sub">Pokok: 2,382 | Sisip: -</div>
+                    </div>
+                    <div class="kpi-card purple">
+                        <div class="label">Area & SPH</div>
+                        <div class="value">23.0 Ha</div>
+                        <div class="sub">SPH: 104 (Low Density)</div>
+                    </div>
+                    <div class="kpi-card" style="border-left: 5px solid #2ecc71;">
+                        <div class="label">Planting Details</div>
+                        <div class="value">2009</div>
+                        <div class="sub">Age: 16 Years (Mature)</div>
+                    </div>
+                    <div class="kpi-card" style="border-left: 5px solid #f1c40f;">
+                        <div class="label">Replanting (Sisip)</div>
+                        <div class="value">-</div>
+                        <div class="sub">Data to be verified</div>
+                    </div>
+                </div>
+
+                <h3 class="section-title">🔬 Health Status</h3>
+                <div class="kpi-grid">
+                    <div class="kpi-card red">
+                        <div class="label">🔴 Core Infection</div>
+                        <div class="value">37</div>
+                        <div class="sub">1.6% of trees</div>
+                    </div>
+                    <div class="kpi-card orange">
+                        <div class="label">🟠 Ring of Fire</div>
+                        <div class="value">80</div>
+                        <div class="sub">3.4% spreading</div>
+                    </div>
+                    <div class="kpi-card yellow">
+                        <div class="label">🟡 At-Risk</div>
+                        <div class="value">244</div>
+                        <div class="sub">10.2% suspect</div>
+                    </div>
+                    <div class="kpi-card green">
+                        <div class="label">✅ Healthy</div>
+                        <div class="value">2,021</div>
+                        <div class="sub">84.8% protected</div>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <canvas id="healthChartD006A"></canvas>
+                </div>
+
+                <h3 class="section-title">🗺️ Spatial Cluster Map</h3>
+                <div class="chart-container" style="padding: 10px;">
+                    <img src="cincin_api_map_D006A.png" alt="Cincin Api Cluster Map D006A"
+                        style="width: 100%; border-radius: 8px;">
+                    <p style="text-align: center; color: #666; font-size: 0.9em; margin-top: 10px;">Spatial distribution
+                        of tree health status using Cincin Api algorithm</p>
+                </div>
+
+                <h3 class="section-title">💰 Production Impact</h3>
+                <div class="kpi-grid">
+                    <div class="kpi-card blue">
+                        <div class="label">Current Yield</div>
+                        <div class="value">0.79</div>
+                        <div class="sub">Ton/Ha</div>
+                    </div>
+                    <div class="kpi-card purple">
+                        <div class="label">Potential Yield</div>
+                        <div class="value">17.30</div>
+                        <div class="sub">Ton/Ha</div>
+                    </div>
+                </div>
+
+                <div class="kpi-card red" style="margin: 15px 0;">
+                    <div class="label">📉 Productivity Loss</div>
+                    <div class="value">16.51 Ton/Ha</div>
+                    <div class="sub">95.4% loss from potential | Est. Rp 24.8 Million/Ha/year</div>
+                </div>
+
+                <div class="chart-container">
+                    <canvas id="productionChartD006A"></canvas>
+                </div>
+
+                <div class="recommendation">
+                    <h3>🚜 REKOMENDASI STRATEGIS: PARIT ISOLASI</h3>
+                    <div class="priority">PRIORITY: MEDIUM</div>
+                    <p style="margin-top: 10px;"><strong>Timeline:</strong> Monitor dan rencanakan untuk Q1 2025</p>
+                    <p><strong>Analisis Krusialitas:</strong> Spread Ratio 2.16x (80 Ring vs 37 Core). Laju penyebaran
+                        di zona oranye 2x lebih cepat dari kematian inti.</p>
+                    <p><strong>Manfaat:</strong> Mencegah 5.0% area terinfeksi merusak 95% populasi sehat yang tersisa
+                        (SPH 104).</p>
+                </div>
+            </div>
+
+            <!-- BLOCK D007A -->
+            <div class="block-section">
+                <div class="block-header">
+                    <h2>BLOCK D007A</h2>
+                    <p>AME II - Division D</p>
+                </div>
+
+                <h3 class="section-title">📍 Block Profile</h3>
+                <div class="kpi-grid">
+                    <div class="kpi-card blue">
+                        <div class="label">Total Trees</div>
+                        <div class="value">2,586</div>
+                        <div class="sub">Pokok: 2,586 | Sisip: -</div>
+                    </div>
+                    <div class="kpi-card purple">
+                        <div class="label">Area & SPH</div>
+                        <div class="value">24.7 Ha</div>
+                        <div class="sub">SPH: 105 (Low Density)</div>
+                    </div>
+                    <div class="kpi-card" style="border-left: 5px solid #2ecc71;">
+                        <div class="label">Planting Details</div>
+                        <div class="value">2009</div>
+                        <div class="sub">Age: 16 Years (Mature)</div>
+                    </div>
+                    <div class="kpi-card" style="border-left: 5px solid #f1c40f;">
+                        <div class="label">Replanting (Sisip)</div>
+                        <div class="value">-</div>
+                        <div class="sub">Data to be verified</div>
+                    </div>
+                </div>
+
+                <h3 class="section-title">🔬 Health Status</h3>
+                <div class="kpi-grid">
+                    <div class="kpi-card red">
+                        <div class="label">🔴 Core Infection</div>
+                        <div class="value">57</div>
+                        <div class="sub">2.2% of trees</div>
+                    </div>
+                    <div class="kpi-card orange">
+                        <div class="label">🟠 Ring of Fire</div>
+                        <div class="value">107</div>
+                        <div class="sub">4.1% spreading</div>
+                    </div>
+                    <div class="kpi-card yellow">
+                        <div class="label">🟡 At-Risk</div>
+                        <div class="value">200</div>
+                        <div class="sub">7.7% suspect</div>
+                    </div>
+                    <div class="kpi-card green">
+                        <div class="label">✅ Healthy</div>
+                        <div class="value">2,222</div>
+                        <div class="sub">86.0% protected</div>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <canvas id="healthChartD007A"></canvas>
+                </div>
+
+                <h3 class="section-title">🗺️ Spatial Cluster Map</h3>
+                <div class="chart-container" style="padding: 10px;">
+                    <img src="cincin_api_map_D007A.png" alt="Cincin Api Cluster Map D007A"
+                        style="width: 100%; border-radius: 8px;">
+                    <p style="text-align: center; color: #666; font-size: 0.9em; margin-top: 10px;">Spatial distribution
+                        of tree health status using Cincin Api algorithm</p>
+                </div>
+
+                <h3 class="section-title">💰 Production Impact</h3>
+                <div class="kpi-grid">
+                    <div class="kpi-card blue">
+                        <div class="label">Current Yield</div>
+                        <div class="value">0.30</div>
+                        <div class="sub">Ton/Ha</div>
+                    </div>
+                    <div class="kpi-card purple">
+                        <div class="label">Potential Yield</div>
+                        <div class="value">17.53</div>
+                        <div class="sub">Ton/Ha</div>
+                    </div>
+                </div>
+
+                <div class="kpi-card red" style="margin: 15px 0;">
+                    <div class="label">📉 Productivity Loss</div>
+                    <div class="value">17.23 Ton/Ha</div>
+                    <div class="sub">98.3% loss from potential | Est. Rp 25.8 Million/Ha/year</div>
+                </div>
+
+                <div class="chart-container">
+                    <canvas id="productionChartD007A"></canvas>
+                </div>
+
+                <div class="recommendation">
+                    <h3>🚜 REKOMENDASI STRATEGIS: PARIT ISOLASI</h3>
+                    <div class="priority">PRIORITY: MEDIUM-HIGH</div>
+                    <p style="margin-top: 10px;"><strong>Timeline:</strong> Jadwalkan dalam 1-2 bulan ke depan</p>
+                    <p><strong>Analisis Krusialitas:</strong> Spread Ratio 1.87x (Ring vs Core). Urgensi tinggi karena
+                        SPH sangat rendah (105).</p>
+                    <p><strong>Manfaat:</strong> Menyelamatkan aset tersisa. Tanpa isolasi, SPH akan jatuh di bawah
+                        batas ekonomis (<100) dengan cepat.</p>
+                </div>
+            </div>
+
+            <!-- COMPARISON SECTION -->
+            <div class="comparison-section">
+                <h2 style="color: #2c3e50; margin-bottom: 20px;">📊 Side-by-Side Comparison</h2>
+                <div class="chart-container">
+                    <canvas id="comparisonChart"></canvas>
+                </div>
+
+                <div style="margin-top: 20px; background: white; padding: 20px; border-radius: 10px;">
+                    <h3 style="color: #2c3e50; margin-bottom: 15px;">🎯 Insight Strategis (Strategic Insights)</h3>
+                    <ul style="line-height: 2; color: #555;">
+                        <li><strong>Pola Serupa:</strong> Kedua blok menunjukkan infeksi visual rendah (5-7%) namun
+                            kehilangan hasil panen yang katastropik (95%+).</li>
+                        <li><strong>D007A Lebih Kritis:</strong> Tingkat infeksi lebih tinggi (6.3%) dan yield lebih
+                            rendah (0.30 Ton/Ha).</li>
+                        <li><strong>Validasi Cincin Api:</strong> Teknologi mendeteksi masalah "Ring of Fire" (Oranye)
+                            yang tidak terlihat mata telanjang namun menyebar aktif.</li>
+                        <li><strong>Peluang ROI:</strong> Potensi pemulihan Rp 50.6 Juta/tahun melalui perlindungan aset
+                            dan perbaikan kultur teknis.</li>
+                        <li><strong>Urutan Eksekusi:</strong> Prioritaskan isolasi D007A terlebih dahulu, diikuti D006A.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p><strong>Cincin API Technology</strong> | Precision Agriculture for Sustainable Palm Oil Production</p>
+            <p style="margin-top: 10px; opacity: 0.8;">Dashboard generated for stakeholder review | Confidential</p>
+        </footer>
+    </div>
+
+    <script>
+        // Health Status Chart D006A
+        const ctxHealthD006A = document.getElementById('healthChartD006A').getContext('2d');
+        new Chart(ctxHealthD006A, {
+            type: 'doughnut',
+            data: {
+                labels: ['🔴 Core (Red)', '🟠 Ring (Orange)', '🟡 At-Risk (Yellow)', '✅ Healthy'],
+                datasets: [{
+                    data: [37, 80, 244, 2021],
+                    backgroundColor: ['#e74c3c', '#ff9800', '#ffd700', '#27ae60'],
+                    borderWidth: 2,
+                    borderColor: '#fff'
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Tree Health Distribution - D006A',
+                        font: { size: 16, weight: 'bold' }
+                    },
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+
+        // Health Status Chart D007A
+        const ctxHealthD007A = document.getElementById('healthChartD007A').getContext('2d');
+        new Chart(ctxHealthD007A, {
+            type: 'doughnut',
+            data: {
+                labels: ['🔴 Core (Red)', '🟠 Ring (Orange)', '🟡 At-Risk (Yellow)', '✅ Healthy'],
+                datasets: [{
+                    data: [57, 107, 200, 2222],
+                    backgroundColor: ['#e74c3c', '#ff9800', '#ffd700', '#27ae60'],
+                    borderWidth: 2,
+                    borderColor: '#fff'
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Tree Health Distribution - D007A',
+                        font: { size: 16, weight: 'bold' }
+                    },
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+
+        // Production Chart D006A
+        const ctxProdD006A = document.getElementById('productionChartD006A').getContext('2d');
+        new Chart(ctxProdD006A, {
+            type: 'bar',
+            data: {
+                labels: ['Current Yield', 'Potential Yield'],
+                datasets: [{
+                    label: 'Ton/Ha',
+                    data: [0.79, 17.30],
+                    backgroundColor: ['#e74c3c', '#27ae60'],
+                    borderWidth: 2,
+                    borderColor: '#fff'
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 20,
+                        ticks: {
+                            callback: function (value) {
+                                return value + ' Ton/Ha';
+                            }
+                        }
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Production Gap - D006A',
+                        font: { size: 16, weight: 'bold' }
+                    },
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        });
+
+        // Production Chart D007A
+        const ctxProdD007A = document.getElementById('productionChartD007A').getContext('2d');
+        new Chart(ctxProdD007A, {
+            type: 'bar',
+            data: {
+                labels: ['Current Yield', 'Potential Yield'],
+                datasets: [{
+                    label: 'Ton/Ha',
+                    data: [0.30, 17.53],
+                    backgroundColor: ['#e74c3c', '#27ae60'],
+                    borderWidth: 2,
+                    borderColor: '#fff'
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 20,
+                        ticks: {
+                            callback: function (value) {
+                                return value + ' Ton/Ha';
+                            }
+                        }
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Production Gap - D007A',
+                        font: { size: 16, weight: 'bold' }
+                    },
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        });
+
+        // Comparison Chart
+        const ctxComparison = document.getElementById('comparisonChart').getContext('2d');
+        new Chart(ctxComparison, {
+            type: 'bar',
+            data: {
+                labels: ['Total Infection %', 'Current Yield (Ton/Ha)', 'Productivity Loss (Ton/Ha)', 'Financial Loss (Rp Million/Ha)'],
+                datasets: [
+                    {
+                        label: 'Block D006A',
+                        data: [5.0, 0.79, 16.51, 24.8],
+                        backgroundColor: 'rgba(102, 126, 234, 0.8)',
+                        borderColor: 'rgb(102, 126, 234)',
+                        borderWidth: 2
+                    },
+                    {
+                        label: 'Block D007A',
+                        data: [6.3, 0.30, 17.23, 25.8],
+                        backgroundColor: 'rgba(231, 76, 60, 0.8)',
+                        borderColor: 'rgb(231, 76, 60)',
+                        borderWidth: 2
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Block Performance Comparison',
+                        font: { size: 18, weight: 'bold' }
+                    },
+                    legend: {
+                        position: 'top'
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function (value) {
+                                return value.toLocaleString();
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
