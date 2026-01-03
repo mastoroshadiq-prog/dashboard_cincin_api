@@ -14,7 +14,14 @@
     "has_map": false,
     "map_filename": "cincin_api_map_E009A.png",
     "rank": 1,
-    "severity": "HIGH"
+    "severity": "HIGH",
+    "luas_ha": 23.7,
+    "realisasi_ton_ha": 15.65,
+    "potensi_ton_ha": 14.58,
+    "gap_ton_ha": 1.07,
+    "gap_pct": 7.4,
+    "realisasi_total_ton": 370.94,
+    "potensi_total_ton": 345.52
   },
   "D004A": {
     "block_code": "D004A",
@@ -31,7 +38,14 @@
     "has_map": false,
     "map_filename": "cincin_api_map_D004A.png",
     "rank": 2,
-    "severity": "HIGH"
+    "severity": "HIGH",
+    "luas_ha": 22,
+    "realisasi_ton_ha": 17.45,
+    "potensi_ton_ha": 21.88,
+    "gap_ton_ha": -4.43,
+    "gap_pct": -20.3,
+    "realisasi_total_ton": 383.92,
+    "potensi_total_ton": 481.44
   },
   "E004A": {
     "block_code": "E004A",
@@ -48,7 +62,14 @@
     "has_map": false,
     "map_filename": "cincin_api_map_E004A.png",
     "rank": 3,
-    "severity": "HIGH"
+    "severity": "HIGH",
+    "luas_ha": 19.9,
+    "realisasi_ton_ha": 17.3,
+    "potensi_ton_ha": 19.77,
+    "gap_ton_ha": -2.47,
+    "gap_pct": -12.5,
+    "realisasi_total_ton": 344.33,
+    "potensi_total_ton": 393.47
   },
   "F001A": {
     "block_code": "F001A",
@@ -65,7 +86,14 @@
     "has_map": false,
     "map_filename": "cincin_api_map_F001A.png",
     "rank": 4,
-    "severity": "HIGH"
+    "severity": "HIGH",
+    "luas_ha": 17.9,
+    "realisasi_ton_ha": 22.7,
+    "potensi_ton_ha": 21.93,
+    "gap_ton_ha": 0.77,
+    "gap_pct": 3.5,
+    "realisasi_total_ton": 406.34,
+    "potensi_total_ton": 392.57
   },
   "E002A": {
     "block_code": "E002A",
@@ -82,7 +110,14 @@
     "has_map": false,
     "map_filename": "cincin_api_map_E002A.png",
     "rank": 5,
-    "severity": "HIGH"
+    "severity": "HIGH",
+    "luas_ha": 22.2,
+    "realisasi_ton_ha": 15.63,
+    "potensi_ton_ha": 21.32,
+    "gap_ton_ha": -5.69,
+    "gap_pct": -26.7,
+    "realisasi_total_ton": 346.98,
+    "potensi_total_ton": 473.2
   },
   "F002A": {
     "block_code": "F002A",
@@ -99,7 +134,14 @@
     "has_map": false,
     "map_filename": "cincin_api_map_F002A.png",
     "rank": 6,
-    "severity": "HIGH"
+    "severity": "HIGH",
+    "luas_ha": 15.2,
+    "realisasi_ton_ha": 14.98,
+    "potensi_ton_ha": 22.35,
+    "gap_ton_ha": -7.37,
+    "gap_pct": -33.0,
+    "realisasi_total_ton": 227.7,
+    "potensi_total_ton": 339.7
   },
   "F008A": {
     "block_code": "F008A",
@@ -116,7 +158,14 @@
     "has_map": false,
     "map_filename": "cincin_api_map_F008A.png",
     "rank": 7,
-    "severity": "HIGH"
+    "severity": "HIGH",
+    "luas_ha": 29.6,
+    "realisasi_ton_ha": 21.22,
+    "potensi_ton_ha": 19.52,
+    "gap_ton_ha": 1.71,
+    "gap_pct": 8.7,
+    "realisasi_total_ton": 628.16,
+    "potensi_total_ton": 577.66
   },
   "F012A": {
     "block_code": "F012A",
@@ -133,7 +182,14 @@
     "has_map": false,
     "map_filename": "cincin_api_map_F012A.png",
     "rank": 8,
-    "severity": "HIGH"
+    "severity": "HIGH",
+    "luas_ha": 24.7,
+    "realisasi_ton_ha": 18.31,
+    "potensi_ton_ha": 19.14,
+    "gap_ton_ha": -0.83,
+    "gap_pct": -4.3,
+    "realisasi_total_ton": 452.33,
+    "potensi_total_ton": 472.85
   },
   "F007A": {
     "block_code": "F007A",
@@ -150,7 +206,14 @@
     "has_map": false,
     "map_filename": "cincin_api_map_F007A.png",
     "rank": 9,
-    "severity": "HIGH"
+    "severity": "HIGH",
+    "luas_ha": 20.2,
+    "realisasi_ton_ha": 19.54,
+    "potensi_ton_ha": 18.88,
+    "gap_ton_ha": 0.66,
+    "gap_pct": 3.5,
+    "realisasi_total_ton": 394.62,
+    "potensi_total_ton": 381.29
   },
   "D001A": {
     "block_code": "D001A",
@@ -167,7 +230,14 @@
     "has_map": false,
     "map_filename": "cincin_api_map_D001A.png",
     "rank": 10,
-    "severity": "HIGH"
+    "severity": "HIGH",
+    "luas_ha": 25.8,
+    "realisasi_ton_ha": 17.42,
+    "potensi_ton_ha": 22.13,
+    "gap_ton_ha": -4.71,
+    "gap_pct": -21.3,
+    "realisasi_total_ton": 449.32,
+    "potensi_total_ton": 570.96
   },
   "D011A": {
     "block_code": "D011A",
@@ -184,7 +254,14 @@
     "has_map": false,
     "map_filename": "cincin_api_map_D011A.png",
     "rank": 11,
-    "severity": "HIGH"
+    "severity": "HIGH",
+    "luas_ha": 24,
+    "realisasi_ton_ha": 15.03,
+    "potensi_ton_ha": 14.03,
+    "gap_ton_ha": 1.0,
+    "gap_pct": 7.1,
+    "realisasi_total_ton": 360.65,
+    "potensi_total_ton": 336.61
   },
   "F004A": {
     "block_code": "F004A",
@@ -201,7 +278,14 @@
     "has_map": false,
     "map_filename": "cincin_api_map_F004A.png",
     "rank": 12,
-    "severity": "HIGH"
+    "severity": "HIGH",
+    "luas_ha": 12,
+    "realisasi_ton_ha": 16.15,
+    "potensi_ton_ha": 21.85,
+    "gap_ton_ha": -5.7,
+    "gap_pct": -26.1,
+    "realisasi_total_ton": 193.8,
+    "potensi_total_ton": 262.17
   },
   "D003A": {
     "block_code": "D003A",
@@ -218,7 +302,14 @@
     "has_map": false,
     "map_filename": "cincin_api_map_D003A.png",
     "rank": 13,
-    "severity": "HIGH"
+    "severity": "HIGH",
+    "luas_ha": 25.3,
+    "realisasi_ton_ha": 16.51,
+    "potensi_ton_ha": 21.18,
+    "gap_ton_ha": -4.66,
+    "gap_pct": -22.0,
+    "realisasi_total_ton": 417.73,
+    "potensi_total_ton": 535.73
   },
   "D010A": {
     "block_code": "D010A",
@@ -235,7 +326,14 @@
     "has_map": false,
     "map_filename": "cincin_api_map_D010A.png",
     "rank": 14,
-    "severity": "HIGH"
+    "severity": "HIGH",
+    "luas_ha": 23.7,
+    "realisasi_ton_ha": 15.17,
+    "potensi_ton_ha": 17.27,
+    "gap_ton_ha": -2.1,
+    "gap_pct": -12.1,
+    "realisasi_total_ton": 359.54,
+    "potensi_total_ton": 409.25
   },
   "E011A": {
     "block_code": "E011A",
@@ -252,7 +350,14 @@
     "has_map": false,
     "map_filename": "cincin_api_map_E011A.png",
     "rank": 15,
-    "severity": "HIGH"
+    "severity": "HIGH",
+    "luas_ha": 24.3,
+    "realisasi_ton_ha": 16.33,
+    "potensi_ton_ha": 17.47,
+    "gap_ton_ha": -1.14,
+    "gap_pct": -6.5,
+    "realisasi_total_ton": 396.81,
+    "potensi_total_ton": 424.42
   },
   "E003A": {
     "block_code": "E003A",
@@ -269,7 +374,14 @@
     "has_map": false,
     "map_filename": "cincin_api_map_E003A.png",
     "rank": 16,
-    "severity": "HIGH"
+    "severity": "HIGH",
+    "luas_ha": 21.6,
+    "realisasi_ton_ha": 14.06,
+    "potensi_ton_ha": 20.5,
+    "gap_ton_ha": -6.45,
+    "gap_pct": -31.4,
+    "realisasi_total_ton": 303.66,
+    "potensi_total_ton": 442.87
   },
   "E006A": {
     "block_code": "E006A",
@@ -286,7 +398,14 @@
     "has_map": false,
     "map_filename": "cincin_api_map_E006A.png",
     "rank": 17,
-    "severity": "HIGH"
+    "severity": "HIGH",
+    "luas_ha": 24.3,
+    "realisasi_ton_ha": 18.21,
+    "potensi_ton_ha": 17.22,
+    "gap_ton_ha": 0.99,
+    "gap_pct": 5.8,
+    "realisasi_total_ton": 442.54,
+    "potensi_total_ton": 418.42
   },
   "F003A": {
     "block_code": "F003A",
@@ -303,7 +422,14 @@
     "has_map": false,
     "map_filename": "cincin_api_map_F003A.png",
     "rank": 18,
-    "severity": "HIGH"
+    "severity": "HIGH",
+    "luas_ha": 12.2,
+    "realisasi_ton_ha": 16.27,
+    "potensi_ton_ha": 21.85,
+    "gap_ton_ha": -5.57,
+    "gap_pct": -25.5,
+    "realisasi_total_ton": 198.55,
+    "potensi_total_ton": 266.52
   },
   "D009A": {
     "block_code": "D009A",
@@ -320,7 +446,14 @@
     "has_map": false,
     "map_filename": "cincin_api_map_D009A.png",
     "rank": 19,
-    "severity": "HIGH"
+    "severity": "HIGH",
+    "luas_ha": 24.4,
+    "realisasi_ton_ha": 17.06,
+    "potensi_ton_ha": 16.91,
+    "gap_ton_ha": 0.15,
+    "gap_pct": 0.9,
+    "realisasi_total_ton": 416.35,
+    "potensi_total_ton": 412.64
   },
   "E007A": {
     "block_code": "E007A",
@@ -337,7 +470,14 @@
     "has_map": false,
     "map_filename": "cincin_api_map_E007A.png",
     "rank": 20,
-    "severity": "HIGH"
+    "severity": "HIGH",
+    "luas_ha": 24.2,
+    "realisasi_ton_ha": 16.65,
+    "potensi_ton_ha": 16.14,
+    "gap_ton_ha": 0.52,
+    "gap_pct": 3.2,
+    "realisasi_total_ton": 403.04,
+    "potensi_total_ton": 390.54
   },
   "F006A": {
     "block_code": "F006A",
@@ -354,7 +494,14 @@
     "has_map": false,
     "map_filename": "cincin_api_map_F006A.png",
     "rank": 21,
-    "severity": "MEDIUM"
+    "severity": "MEDIUM",
+    "luas_ha": 24.9,
+    "realisasi_ton_ha": 19.57,
+    "potensi_ton_ha": 18.59,
+    "gap_ton_ha": 0.98,
+    "gap_pct": 5.3,
+    "realisasi_total_ton": 487.25,
+    "potensi_total_ton": 462.9
   },
   "E001A": {
     "block_code": "E001A",
@@ -371,7 +518,14 @@
     "has_map": false,
     "map_filename": "cincin_api_map_E001A.png",
     "rank": 22,
-    "severity": "MEDIUM"
+    "severity": "MEDIUM",
+    "luas_ha": 22.5,
+    "realisasi_ton_ha": 17.03,
+    "potensi_ton_ha": 22.33,
+    "gap_ton_ha": -5.3,
+    "gap_pct": -23.7,
+    "realisasi_total_ton": 383.28,
+    "potensi_total_ton": 502.46
   },
   "D007A": {
     "block_code": "D007A",
@@ -388,7 +542,14 @@
     "has_map": false,
     "map_filename": "cincin_api_map_D007A.png",
     "rank": 23,
-    "severity": "MEDIUM"
+    "severity": "MEDIUM",
+    "luas_ha": 24.7,
+    "realisasi_ton_ha": 17.53,
+    "potensi_ton_ha": 16.75,
+    "gap_ton_ha": 0.79,
+    "gap_pct": 4.7,
+    "realisasi_total_ton": 433.03,
+    "potensi_total_ton": 413.62
   },
   "D012A": {
     "block_code": "D012A",
@@ -405,7 +566,14 @@
     "has_map": false,
     "map_filename": "cincin_api_map_D012A.png",
     "rank": 24,
-    "severity": "MEDIUM"
+    "severity": "MEDIUM",
+    "luas_ha": 26.7,
+    "realisasi_ton_ha": 15.73,
+    "potensi_ton_ha": 15.35,
+    "gap_ton_ha": 0.38,
+    "gap_pct": 2.5,
+    "realisasi_total_ton": 419.94,
+    "potensi_total_ton": 409.9
   },
   "D002A": {
     "block_code": "D002A",
@@ -422,7 +590,14 @@
     "has_map": false,
     "map_filename": "cincin_api_map_D002A.png",
     "rank": 25,
-    "severity": "MEDIUM"
+    "severity": "MEDIUM",
+    "luas_ha": 23.7,
+    "realisasi_ton_ha": 17.54,
+    "potensi_ton_ha": 22.74,
+    "gap_ton_ha": -5.2,
+    "gap_pct": -22.9,
+    "realisasi_total_ton": 415.73,
+    "potensi_total_ton": 538.91
   },
   "E012A": {
     "block_code": "E012A",
@@ -439,7 +614,14 @@
     "has_map": false,
     "map_filename": "cincin_api_map_E012A.png",
     "rank": 26,
-    "severity": "MEDIUM"
+    "severity": "MEDIUM",
+    "luas_ha": 25.4,
+    "realisasi_ton_ha": 15.94,
+    "potensi_ton_ha": 16.84,
+    "gap_ton_ha": -0.9,
+    "gap_pct": -5.3,
+    "realisasi_total_ton": 404.86,
+    "potensi_total_ton": 427.64
   },
   "D005A": {
     "block_code": "D005A",
@@ -456,7 +638,14 @@
     "has_map": false,
     "map_filename": "cincin_api_map_D005A.png",
     "rank": 27,
-    "severity": "MEDIUM"
+    "severity": "MEDIUM",
+    "luas_ha": 24.1,
+    "realisasi_ton_ha": 15.98,
+    "potensi_ton_ha": 15.13,
+    "gap_ton_ha": 0.86,
+    "gap_pct": 5.7,
+    "realisasi_total_ton": 385.13,
+    "potensi_total_ton": 364.52
   },
   "E010A": {
     "block_code": "E010A",
@@ -473,7 +662,14 @@
     "has_map": false,
     "map_filename": "cincin_api_map_E010A.png",
     "rank": 28,
-    "severity": "MEDIUM"
+    "severity": "MEDIUM",
+    "luas_ha": 25.6,
+    "realisasi_ton_ha": 16.1,
+    "potensi_ton_ha": 15.48,
+    "gap_ton_ha": 0.62,
+    "gap_pct": 4.0,
+    "realisasi_total_ton": 412.2,
+    "potensi_total_ton": 396.36
   },
   "D006A": {
     "block_code": "D006A",
@@ -490,7 +686,14 @@
     "has_map": false,
     "map_filename": "cincin_api_map_D006A.png",
     "rank": 29,
-    "severity": "MEDIUM"
+    "severity": "MEDIUM",
+    "luas_ha": 23,
+    "realisasi_ton_ha": 17.3,
+    "potensi_ton_ha": 16.22,
+    "gap_ton_ha": 1.08,
+    "gap_pct": 6.6,
+    "realisasi_total_ton": 397.9,
+    "potensi_total_ton": 373.14
   },
   "E008A": {
     "block_code": "E008A",
@@ -507,7 +710,14 @@
     "has_map": false,
     "map_filename": "cincin_api_map_E008A.png",
     "rank": 30,
-    "severity": "MEDIUM"
+    "severity": "MEDIUM",
+    "luas_ha": 24.7,
+    "realisasi_ton_ha": 18.26,
+    "potensi_ton_ha": 17.16,
+    "gap_ton_ha": 1.1,
+    "gap_pct": 6.4,
+    "realisasi_total_ton": 451.05,
+    "potensi_total_ton": 423.94
   },
   "F005A": {
     "block_code": "F005A",
@@ -524,7 +734,14 @@
     "has_map": false,
     "map_filename": "cincin_api_map_F005A.png",
     "rank": 31,
-    "severity": "MEDIUM"
+    "severity": "MEDIUM",
+    "luas_ha": 20.5,
+    "realisasi_ton_ha": 18.14,
+    "potensi_ton_ha": 18.52,
+    "gap_ton_ha": -0.38,
+    "gap_pct": -2.0,
+    "realisasi_total_ton": 371.9,
+    "potensi_total_ton": 379.63
   },
   "F009A": {
     "block_code": "F009A",
@@ -541,7 +758,14 @@
     "has_map": false,
     "map_filename": "cincin_api_map_F009A.png",
     "rank": 32,
-    "severity": "MEDIUM"
+    "severity": "MEDIUM",
+    "luas_ha": 25.2,
+    "realisasi_ton_ha": 17.25,
+    "potensi_ton_ha": 16.29,
+    "gap_ton_ha": 0.95,
+    "gap_pct": 5.8,
+    "realisasi_total_ton": 434.58,
+    "potensi_total_ton": 410.61
   },
   "F010A": {
     "block_code": "F010A",
@@ -558,7 +782,14 @@
     "has_map": false,
     "map_filename": "cincin_api_map_F010A.png",
     "rank": 33,
-    "severity": "MEDIUM"
+    "severity": "MEDIUM",
+    "luas_ha": 25,
+    "realisasi_ton_ha": 17.12,
+    "potensi_ton_ha": 17.64,
+    "gap_ton_ha": -0.53,
+    "gap_pct": -3.0,
+    "realisasi_total_ton": 427.88,
+    "potensi_total_ton": 441.08
   },
   "F011A": {
     "block_code": "F011A",
@@ -575,7 +806,14 @@
     "has_map": false,
     "map_filename": "cincin_api_map_F011A.png",
     "rank": 34,
-    "severity": "MEDIUM"
+    "severity": "MEDIUM",
+    "luas_ha": 20.5,
+    "realisasi_ton_ha": 17.54,
+    "potensi_ton_ha": 18.95,
+    "gap_ton_ha": -1.41,
+    "gap_pct": -7.4,
+    "realisasi_total_ton": 359.58,
+    "potensi_total_ton": 388.41
   },
   "D008A": {
     "block_code": "D008A",
@@ -592,7 +830,14 @@
     "has_map": false,
     "map_filename": "cincin_api_map_D008A.png",
     "rank": 35,
-    "severity": "MEDIUM"
+    "severity": "MEDIUM",
+    "luas_ha": 25.3,
+    "realisasi_ton_ha": 15.72,
+    "potensi_ton_ha": 15.56,
+    "gap_ton_ha": 0.16,
+    "gap_pct": 1.0,
+    "realisasi_total_ton": 397.66,
+    "potensi_total_ton": 393.59
   },
   "E005A": {
     "block_code": "E005A",
@@ -609,6 +854,13 @@
     "has_map": false,
     "map_filename": "cincin_api_map_E005A.png",
     "rank": 36,
-    "severity": "MEDIUM"
+    "severity": "MEDIUM",
+    "luas_ha": 24,
+    "realisasi_ton_ha": 18.29,
+    "potensi_ton_ha": 16.97,
+    "gap_ton_ha": 1.33,
+    "gap_pct": 7.8,
+    "realisasi_total_ton": 439.02,
+    "potensi_total_ton": 407.17
   }
 }
