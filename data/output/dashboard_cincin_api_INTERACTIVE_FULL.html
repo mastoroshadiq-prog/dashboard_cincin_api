@@ -38,11 +38,20 @@
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
             transition: all 0.3s ease;
         }
-    
+
         @keyframes flashGreen {
-            0%, 100% { background-color: transparent; }
-            50% { background-color: #10b981; color: white; }
+
+            0%,
+            100% {
+                background-color: transparent;
+            }
+
+            50% {
+                background-color: #10b981;
+                color: white;
+            }
         }
+
         .flash-update {
             animation: flashGreen 0.6s ease-in-out;
         }
@@ -81,15 +90,16 @@
         </div>
     </div>
 
-    
+
     <!-- INTERACTIVE BLOCK SELECTOR -->
     <div class="max-w-7xl mx-auto mb-6">
-        <div class="bg-gradient-to-br from-indigo-900 to-blue-900 rounded-2xl p-6 border-2 border-indigo-500 shadow-2xl">
+        <div
+            class="bg-gradient-to-br from-indigo-900 to-blue-900 rounded-2xl p-6 border-2 border-indigo-500 shadow-2xl">
             <label for="blockSelector" class="block text-lg font-black uppercase mb-3 text-white">
                 🎯 Interactive Block Selector - AME II Division
             </label>
-            <select id="blockSelector" 
-                    class="w-full bg-slate-800 border-2 border-indigo-400 rounded-xl p-4 text-white font-bold text-lg focus:outline-none focus:ring-4 focus:ring-indigo-500 transition-all">
+            <select id="blockSelector"
+                class="w-full bg-slate-800 border-2 border-indigo-400 rounded-xl p-4 text-white font-bold text-lg focus:outline-none focus:ring-4 focus:ring-indigo-500 transition-all">
                 <option value="">-- Loading blocks data --</option>
             </select>
             <p class="text-xs text-white/60 mt-2 italic">
@@ -167,7 +177,8 @@
                                 <span
                                     class="text-emerald-400 text-sm uppercase tracking-tighter font-black">MILAR</span>
                             </div>
-                            <p class="text-[10px] text-emerald-300 mt-2 font-black italic" id="mitigationRatio">Parit Isolasi untuk cluster terinfeksi
+                            <p class="text-[10px] text-emerald-300 mt-2 font-black italic" id="mitigationRatio">Parit
+                                Isolasi untuk cluster terinfeksi
                             </p>
                         </div>
                     </div>
@@ -230,7 +241,10 @@
                     </div>
                     <p class="text-xl leading-relaxed font-black text-black">
                         <span
-                            class="text-orange-600 underline decoration-orange-600 decoration-2 font-black text-2xl"><span id="card2AttackNarrative">F008A 12.2%</span></span> attack rate. <span id="card2SymptomLagText">Infeksi belum berdampak signifikan ke produksi (SYMPTOM LAG)</span>.
+                            class="text-orange-600 underline decoration-orange-600 decoration-2 font-black text-2xl"><span
+                                id="card2AttackNarrative">F008A 12.2%</span></span> attack rate. <span
+                            id="card2SymptomLagText">Infeksi belum berdampak signifikan ke produksi (SYMPTOM
+                            LAG)</span>.
                     </p>
                 </div>
 
@@ -247,7 +261,8 @@
                         <h3 class="text-2xl font-black">3. Symptom Lag</h3>
                     </div>
                     <p class="text-xl leading-relaxed font-black text-black">
-                        Gap Produksi <span class="text-red-600 font-black text-2xl" id="card3GapText">9-21%</span> membuktikan akar
+                        Gap Produksi <span class="text-red-600 font-black text-2xl" id="card3GapText">9-21%</span>
+                        membuktikan akar
                         hancur jauh mendahului gejala visual permukaan.
                     </p>
                 </div>
@@ -528,7 +543,8 @@
                             </div>
                             <div class="text-right">
                                 <p class="text-[10px] font-black uppercase text-red-400">Tanaman Sisip</p>
-                                <p class="text-2xl font-black text-white" id="blockSisip">142 <span class="text-xs uppercase">PKK</span>
+                                <p class="text-2xl font-black text-white" id="blockSisip">142 <span
+                                        class="text-xs uppercase">PKK</span>
                                 </p>
                             </div>
                         </div>
@@ -1305,26 +1321,26 @@
         let currentBlockData = null;
 
         // Initialize on page load
-        window.addEventListener('DOMContentLoaded', function() {
+        window.addEventListener('DOMContentLoaded', function () {
             console.log('🚀 Interactive Dashboard Loading...');
-            
+
             if (typeof BLOCKS_DATA === 'undefined') {
                 console.error('❌ BLOCKS_DATA not loaded');
                 alert('Error: Block data not loaded. Ensure blocks_data_embed.js is in same folder.');
                 return;
             }
-            
+
             console.log('✅ Loaded', Object.keys(BLOCKS_DATA).length, 'blocks');
-            
+
             populateDropdown();
-            
+
             // Attach event listener
             const selector = document.getElementById('blockSelector');
             if (selector) {
-                selector.addEventListener('change', function() {
+                selector.addEventListener('change', function () {
                     updateDashboard(this.value);
                 });
-                
+
                 // Auto-select first block (highest attack rate)
                 const firstBlock = Object.keys(BLOCKS_DATA)[0];
                 if (firstBlock) {
@@ -1338,16 +1354,16 @@
         function populateDropdown() {
             const selector = document.getElementById('blockSelector');
             if (!selector) return;
-            
-            const sorted = Object.entries(BLOCKS_DATA).sort((a,b) => a[1].rank - b[1].rank);
-            
-            selector.innerHTML = sorted.map(([code, data]) => 
+
+            const sorted = Object.entries(BLOCKS_DATA).sort((a, b) => a[1].rank - b[1].rank);
+
+            selector.innerHTML = sorted.map(([code, data]) =>
                 `<option value="${code}">#${data.rank} - ${code} | ${data.attack_rate}% | ${data.severity}</option>`
             ).join('');
-            
+
             const totalEl = document.getElementById('totalBlocks');
             if (totalEl) totalEl.textContent = sorted.length;
-            
+
             console.log('✅ Populated dropdown with', sorted.length, 'blocks');
         }
 
@@ -1357,69 +1373,69 @@
                 console.warn('Invalid block code:', blockCode);
                 return;
             }
-            
+
             const data = BLOCKS_DATA[blockCode];
             currentBlockData = data;
-            
+
             console.log('📊 Updating dashboard for:', blockCode, data);
-            
+
             // Comprehensive updates array - ALL SECTIONS
             const updates = [
                 // Headers
                 ['headerBlockCode', blockCode],
                 ['blockDetailHeader', `Detail Blok ${blockCode} (${((data.total_pohon * 64) / 10000).toFixed(1)} Ha)`],
-                
+
                 // Status
                 ['statusText', data.severity === 'HIGH' ? 'Darurat' : 'Perhatian'],
-                
+
                 // Basic stats (Detail Blok)
                 ['blockTT', `${data.tt || 'N/A'} (${data.age || 'N/A'} Tahun)`],
                 ['blockSPH', `${data.sph || 'N/A'} Pokok/Ha`],
                 ['blockTotalPohon', data.total_pohon.toLocaleString()],
                 ['blockSisip', data.sisip ? data.sisip.toLocaleString() : 'N/A'],
-                
+
                 // Counts
                 ['blockMerahCount', data.merah],
                 ['blockOranyeCount', data.oranye],
                 ['blockKuningCount', data.kuning],
-                
+
                 // Potensi Kerugian Skala Makro - REALISTIC CALCULATIONS
                 ['potensiHeaderBlock', blockCode],
                 ['areaValue', ((data.total_pohon * 64) / 10000).toFixed(1)],  // Hectares from tree count
-                
+
                 // LOSS CALCULATION:
                 // Infected trees × avg productivity (20 ton/ha/yr) × TBS price (Rp 1,500/kg) × remaining years (10)
                 // = (merah + oranye) × (20000 kg / 156 trees/ha) × 1.5 × 10 / 1,000,000 (to get millions)
                 ['lossValue', `Rp ${(((data.merah + data.oranye) * 128 * 1.5 * 10) / 1000000).toFixed(2)}`],
-                
+
                 // MITIGATION COST - PARIT ISOLASI:
                 // Perimeter around infected clusters = sqrt(infected_trees) × 8m × 4 sides
                 // Cost per meter = Rp 75,000 (excavation + labor)
                 // Total = perimeter × cost / 1,000,000 (to get millions)
-                ['mitigationValue', `Rp ${((Math.sqrt(data.merah + data.oranye) * 8 * 4 * 75000) / 1000000).toFixed(2)}`]
-                
+                ['mitigationValue', `Rp ${((Math.sqrt(data.merah + data.oranye) * 8 * 4 * 75000) / 1000000).toFixed(2)}`],
+
                 // Kartu Bukti Ilmiah - COMPREHENSIVE
                 ['card1TTFull', `TT ${data.tt || 2008} (Usia ${data.age || 18} Tahun)`],
                 ['card2AttackNarrative', `${blockCode} ${data.attack_rate}%`],
                 ['card2SymptomLagText', data.severity === 'HIGH' ? 'Infeksi aktif, risiko tinggi kerugian produksi' : 'Infeksi terdeteksi, monitoring diperlukan'],
                 ['card3GapText', `${Math.abs(data.attack_rate * -1.5).toFixed(0)}-${Math.abs(data.attack_rate * -2.5).toFixed(0)}%`]
             ];
-            
-            
 
-            
+
+
+
             // Calculate mitigation efficiency ratio
             const infectedTrees = data.merah + data.oranye;
             const lossValue = ((infectedTrees * 128 * 1.5 * 10) / 1000000);
             const mitigationCost = ((Math.sqrt(infectedTrees) * 8 * 4 * 75000) / 1000000);
             const ratio = ((mitigationCost / lossValue) * 100).toFixed(1);
-            
+
             // Update mitigation ratio text
             const ratioEl = document.getElementById('mitigationRatio');
             if (ratioEl) {
                 ratioEl.textContent = `Hanya ${ratio}% dari potensi kerugian - SANGAT EFEKTIF!`;
             }
-            
+
             let successCount = 0;
             updates.forEach(([id, value]) => {
                 const el = document.getElementById(id);
@@ -1430,12 +1446,12 @@
                     successCount++;
                 }
             });
-            
+
             console.log(`✅ Updated ${successCount}/${updates.length} elements`);
-            
+
             // Update page title
             document.title = `Dashboard Cincin Api - ${blockCode} (${data.attack_rate}%)`;
-            
+
             // Update cluster map if it exists
             updateClusterMap(blockCode, data);
         }
@@ -1443,7 +1459,7 @@
         // Update cluster map
         function updateClusterMap(blockCode, data) {
             const mapImages = document.querySelectorAll('img[src*="cincin_api_map"]');
-            
+
             if (mapImages.length > 0) {
                 mapImages.forEach(img => {
                     if (blockCode === 'F008A' || blockCode === 'D001A') {
@@ -1477,20 +1493,20 @@
             // Hide all tabs
             const tabs = document.querySelectorAll('[id^="tab-"]');
             tabs.forEach(tab => tab.style.display = 'none');
-            
+
             // Remove active styling from all buttons
             const buttons = document.querySelectorAll('[id^="btn-"]');
             buttons.forEach(btn => {
                 btn.classList.remove('bg-indigo-600', 'text-white', 'shadow-md');
                 btn.classList.add('text-black', 'hover:bg-slate-50');
             });
-            
+
             // Show selected tab
             const selectedTab = document.getElementById('tab-' + tabName);
             if (selectedTab) {
                 selectedTab.style.display = 'block';
             }
-            
+
             // Add active styling to selected button
             const activeBtn = document.getElementById('btn-' + tabName);
             if (activeBtn) {
