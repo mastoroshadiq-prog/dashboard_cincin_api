@@ -212,7 +212,7 @@
                         <h3 class="text-2xl font-black">1. Kontak Akar</h3>
                     </div>
                     <p class="text-xl leading-relaxed font-black text-black">
-                        TT 2008 (Usia 18 Tahun). Sistem perakaran sudah <span
+                        <span id="card1TTFull">TT 2008 (Usia 18 Tahun)</span>. Sistem perakaran sudah <span
                             class="underline decoration-indigo-500 decoration-4 font-black">interlocking</span>.
                         Penularan bawah tanah dipastikan aktif dan masif.
                     </p>
@@ -230,8 +230,7 @@
                     </div>
                     <p class="text-xl leading-relaxed font-black text-black">
                         <span
-                            class="text-orange-600 underline decoration-orange-600 decoration-2 font-black text-2xl"><span id="card2AttackNarrative">F008A 12.2% ≈ D001A 12.9%</span></span>. Attack rate hampir identik, tapi produksi sangat berbeda (+8.7%
-                        vs -21.3%) = SYMPTOM LAG!
+                            class="text-orange-600 underline decoration-orange-600 decoration-2 font-black text-2xl"><span id="card2AttackNarrative">F008A 12.2%</span></span> attack rate. <span id="card2SymptomLagText">Infeksi belum berdampak signifikan ke produksi (SYMPTOM LAG)</span>.
                     </p>
                 </div>
 
@@ -248,7 +247,7 @@
                         <h3 class="text-2xl font-black">3. Symptom Lag</h3>
                     </div>
                     <p class="text-xl leading-relaxed font-black text-black">
-                        Gap Produksi <span class="text-red-600 font-black text-2xl">9-21%</span> membuktikan akar
+                        Gap Produksi <span class="text-red-600 font-black text-2xl" id="card3GapText">9-21%</span> membuktikan akar
                         hancur jauh mendahului gejala visual permukaan.
                     </p>
                 </div>
@@ -1389,10 +1388,11 @@
                 ['potensiKerugian', ((data.total_pohon * 0.35).toFixed(0))],  // Rough estimate in millions
                 ['biayaMitigasi', ((data.merah * 0.002).toFixed(1))],  // Rough estimate
                 
-                // Kartu Bukti Ilmiah
-                ['card1TT', `TT ${data.tt || 2008} (Usia ${data.age || 18} Tahun)`],
-                ['card2AttackNarrative', `${blockCode} ${data.attack_rate}% attack rate`],
-                ['card3GapRange', `${(data.attack_rate * -1.5).toFixed(0)}-${(data.attack_rate * -2.5).toFixed(0)}%`]  // Estimated gap
+                // Kartu Bukti Ilmiah - COMPREHENSIVE
+                ['card1TTFull', `TT ${data.tt || 2008} (Usia ${data.age || 18} Tahun)`],
+                ['card2AttackNarrative', `${blockCode} ${data.attack_rate}%`],
+                ['card2SymptomLagText', data.severity === 'HIGH' ? 'Infeksi aktif, risiko tinggi kerugian produksi' : 'Infeksi terdeteksi, monitoring diperlukan'],
+                ['card3GapText', `${Math.abs(data.attack_rate * -1.5).toFixed(0)}-${Math.abs(data.attack_rate * -2.5).toFixed(0)}%`]
             ];
             
             
