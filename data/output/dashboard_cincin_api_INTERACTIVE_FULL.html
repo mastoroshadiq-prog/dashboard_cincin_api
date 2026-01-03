@@ -167,7 +167,7 @@
                                 <span
                                     class="text-emerald-400 text-sm uppercase tracking-tighter font-black">MILAR</span>
                             </div>
-                            <p class="text-[10px] text-emerald-300 mt-2 font-black italic">Hanya ~0.1% dari risiko aset
+                            <p class="text-[10px] text-emerald-300 mt-2 font-black italic" id="mitigationRatio">Parit Isolasi untuk cluster terinfeksi
                             </p>
                         </div>
                     </div>
@@ -1383,11 +1383,20 @@
                 ['blockOranyeCount', data.oranye],
                 ['blockKuningCount', data.kuning],
                 
-                // Potensi Kerugian Skala Makro - SINGLE BLOCK
+                // Potensi Kerugian Skala Makro - REALISTIC CALCULATIONS
                 ['potensiHeaderBlock', blockCode],
-                ['areaValue', ((data.total_pohon * 64) / 10000).toFixed(1)],  // Hectares
-                ['lossValue', `Rp ${((data.total_pohon * data.attack_rate * 0.03).toFixed(2))}`],  // Loss based on attack rate
-                ['mitigationValue', `Rp ${((data.merah * 1.5) / 1000).toFixed(2)}`]  // Mitigation cost from infected trees
+                ['areaValue', ((data.total_pohon * 64) / 10000).toFixed(1)],  // Hectares from tree count
+                
+                // LOSS CALCULATION:
+                // Infected trees × avg productivity (20 ton/ha/yr) × TBS price (Rp 1,500/kg) × remaining years (10)
+                // = (merah + oranye) × (20000 kg / 156 trees/ha) × 1.5 × 10 / 1,000,000 (to get millions)
+                ['lossValue', `Rp ${(((data.merah + data.oranye) * 128 * 1.5 * 10) / 1000000).toFixed(2)}`],
+                
+                // MITIGATION COST - PARIT ISOLASI:
+                // Perimeter around infected clusters = sqrt(infected_trees) × 8m × 4 sides
+                // Cost per meter = Rp 75,000 (excavation + labor)
+                // Total = perimeter × cost / 1,000,000 (to get millions)
+                ['mitigationValue', `Rp ${((Math.sqrt(data.merah + data.oranye) * 8 * 4 * 75000) / 1000000).toFixed(2)}`]
                 
                 // Kartu Bukti Ilmiah - COMPREHENSIVE
                 ['card1TTFull', `TT ${data.tt || 2008} (Usia ${data.age || 18} Tahun)`],
@@ -1396,6 +1405,20 @@
                 ['card3GapText', `${Math.abs(data.attack_rate * -1.5).toFixed(0)}-${Math.abs(data.attack_rate * -2.5).toFixed(0)}%`]
             ];
             
+            
+
+            
+            // Calculate mitigation efficiency ratio
+            const infectedTrees = data.merah + data.oranye;
+            const lossValue = ((infectedTrees * 128 * 1.5 * 10) / 1000000);
+            const mitigationCost = ((Math.sqrt(infectedTrees) * 8 * 4 * 75000) / 1000000);
+            const ratio = ((mitigationCost / lossValue) * 100).toFixed(1);
+            
+            // Update mitigation ratio text
+            const ratioEl = document.getElementById('mitigationRatio');
+            if (ratioEl) {
+                ratioEl.textContent = `Hanya ${ratio}% dari potensi kerugian - SANGAT EFEKTIF!`;
+            }
             
             let successCount = 0;
             updates.forEach(([id, value]) => {
