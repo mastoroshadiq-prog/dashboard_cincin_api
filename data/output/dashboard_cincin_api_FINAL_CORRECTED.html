@@ -13,6 +13,23 @@
             font-family: 'Inter', sans-serif;
         }
 
+        @keyframes flashGreen {
+
+            0%,
+            100% {
+                background-color: transparent;
+            }
+
+            50% {
+                background-color: #10b981;
+                color: white;
+            }
+        }
+
+        .flash-update {
+            animation: flashGreen 0.6s ease-in-out;
+        }
+
         .animate-pulse {
             animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
         }
@@ -478,7 +495,7 @@
                                 fill="none" stroke="currentColor" stroke-width="2" class="text-indigo-400">
                                 <path d="M21 21V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v16l3.5-2 3.5 2 3.5-2 3.5 2Z" />
                             </svg>
-                            Detail Blok F008A (29.6 Ha)
+                            <span id="blockHeaderTitle">Detail Blok F008A (29.6 Ha)</span>
                         </h4>
                         <span
                             class="bg-red-600 text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest animate-pulse">Status:
@@ -1290,636 +1307,666 @@
     </script>
     <!-- Embedded Data Script -->
     <script>
-const BLOCKS_DATA = {
-  "E009A": {
-    "block_code": "E009A",
-    "total_pohon": 2671,
-    "merah": 55,
-    "oranye": 281,
-    "kuning": 258,
-    "hijau": 2077,
-    "attack_rate": 12.6,
-    "sph": 39,
-    "tt": 2009,
-    "age": 17,
-    "sisip": null,
-    "has_map": false,
-    "map_filename": "cincin_api_map_E009A.png",
-    "rank": 1,
-    "severity": "HIGH"
-  },
-  "D004A": {
-    "block_code": "D004A",
-    "total_pohon": 2861,
-    "merah": 122,
-    "oranye": 183,
-    "kuning": 147,
-    "hijau": 2409,
-    "attack_rate": 10.7,
-    "sph": 119,
-    "tt": 2009,
-    "age": 17,
-    "sisip": null,
-    "has_map": false,
-    "map_filename": "cincin_api_map_D004A.png",
-    "rank": 2,
-    "severity": "HIGH"
-  },
-  "E004A": {
-    "block_code": "E004A",
-    "total_pohon": 2569,
-    "merah": 69,
-    "oranye": 175,
-    "kuning": 155,
-    "hijau": 2170,
-    "attack_rate": 9.5,
-    "sph": 117,
-    "tt": 2009,
-    "age": 17,
-    "sisip": null,
-    "has_map": false,
-    "map_filename": "cincin_api_map_E004A.png",
-    "rank": 3,
-    "severity": "HIGH"
-  },
-  "F001A": {
-    "block_code": "F001A",
-    "total_pohon": 2500,
-    "merah": 75,
-    "oranye": 146,
-    "kuning": 177,
-    "hijau": 2102,
-    "attack_rate": 8.8,
-    "sph": 73,
-    "tt": 2009,
-    "age": 17,
-    "sisip": null,
-    "has_map": false,
-    "map_filename": "cincin_api_map_F001A.png",
-    "rank": 4,
-    "severity": "HIGH"
-  },
-  "E002A": {
-    "block_code": "E002A",
-    "total_pohon": 2854,
-    "merah": 99,
-    "oranye": 139,
-    "kuning": 185,
-    "hijau": 2431,
-    "attack_rate": 8.3,
-    "sph": 133,
-    "tt": 2009,
-    "age": 17,
-    "sisip": null,
-    "has_map": false,
-    "map_filename": "cincin_api_map_E002A.png",
-    "rank": 5,
-    "severity": "HIGH"
-  },
-  "F002A": {
-    "block_code": "F002A",
-    "total_pohon": 2147,
-    "merah": 54,
-    "oranye": 120,
-    "kuning": 152,
-    "hijau": 1821,
-    "attack_rate": 8.1,
-    "sph": 132,
-    "tt": 2009,
-    "age": 17,
-    "sisip": null,
-    "has_map": false,
-    "map_filename": "cincin_api_map_F002A.png",
-    "rank": 6,
-    "severity": "HIGH"
-  },
-  "F008A": {
-    "block_code": "F008A",
-    "total_pohon": 3770,
-    "merah": 90,
-    "oranye": 210,
-    "kuning": 299,
-    "hijau": 3171,
-    "attack_rate": 8.0,
-    "sph": 125,
-    "tt": 2008,
-    "age": 18,
-    "sisip": null,
-    "has_map": false,
-    "map_filename": "cincin_api_map_F008A.png",
-    "rank": 7,
-    "severity": "HIGH"
-  },
-  "F012A": {
-    "block_code": "F012A",
-    "total_pohon": 3435,
-    "merah": 102,
-    "oranye": 166,
-    "kuning": 201,
-    "hijau": 2966,
-    "attack_rate": 7.8,
-    "sph": 88,
-    "tt": 2009,
-    "age": 17,
-    "sisip": null,
-    "has_map": false,
-    "map_filename": "cincin_api_map_F012A.png",
-    "rank": 8,
-    "severity": "HIGH"
-  },
-  "F007A": {
-    "block_code": "F007A",
-    "total_pohon": 2472,
-    "merah": 64,
-    "oranye": 127,
-    "kuning": 204,
-    "hijau": 2077,
-    "attack_rate": 7.7,
-    "sph": 76,
-    "tt": 2008,
-    "age": 18,
-    "sisip": null,
-    "has_map": false,
-    "map_filename": "cincin_api_map_F007A.png",
-    "rank": 9,
-    "severity": "HIGH"
-  },
-  "D001A": {
-    "block_code": "D001A",
-    "total_pohon": 3486,
-    "merah": 87,
-    "oranye": 176,
-    "kuning": 286,
-    "hijau": 2937,
-    "attack_rate": 7.5,
-    "sph": 108,
-    "tt": 2009,
-    "age": 17,
-    "sisip": null,
-    "has_map": false,
-    "map_filename": "cincin_api_map_D001A.png",
-    "rank": 10,
-    "severity": "HIGH"
-  },
-  "D011A": {
-    "block_code": "D011A",
-    "total_pohon": 2145,
-    "merah": 46,
-    "oranye": 112,
-    "kuning": 161,
-    "hijau": 1826,
-    "attack_rate": 7.4,
-    "sph": 96,
-    "tt": 2009,
-    "age": 17,
-    "sisip": null,
-    "has_map": false,
-    "map_filename": "cincin_api_map_D011A.png",
-    "rank": 11,
-    "severity": "HIGH"
-  },
-  "F004A": {
-    "block_code": "F004A",
-    "total_pohon": 1695,
-    "merah": 42,
-    "oranye": 83,
-    "kuning": 141,
-    "hijau": 1429,
-    "attack_rate": 7.4,
-    "sph": 127,
-    "tt": 2009,
-    "age": 17,
-    "sisip": null,
-    "has_map": false,
-    "map_filename": "cincin_api_map_F004A.png",
-    "rank": 12,
-    "severity": "HIGH"
-  },
-  "D003A": {
-    "block_code": "D003A",
-    "total_pohon": 3131,
-    "merah": 77,
-    "oranye": 148,
-    "kuning": 249,
-    "hijau": 2657,
-    "attack_rate": 7.2,
-    "sph": 98,
-    "tt": 2009,
-    "age": 17,
-    "sisip": null,
-    "has_map": false,
-    "map_filename": "cincin_api_map_D003A.png",
-    "rank": 13,
-    "severity": "HIGH"
-  },
-  "D010A": {
-    "block_code": "D010A",
-    "total_pohon": 2574,
-    "merah": 62,
-    "oranye": 121,
-    "kuning": 207,
-    "hijau": 2184,
-    "attack_rate": 7.1,
-    "sph": 8,
-    "tt": 2009,
-    "age": 17,
-    "sisip": null,
-    "has_map": false,
-    "map_filename": "cincin_api_map_D010A.png",
-    "rank": 14,
-    "severity": "HIGH"
-  },
-  "E011A": {
-    "block_code": "E011A",
-    "total_pohon": 2639,
-    "merah": 85,
-    "oranye": 102,
-    "kuning": 219,
-    "hijau": 2233,
-    "attack_rate": 7.1,
-    "sph": 71,
-    "tt": 2009,
-    "age": 17,
-    "sisip": null,
-    "has_map": false,
-    "map_filename": "cincin_api_map_E011A.png",
-    "rank": 15,
-    "severity": "HIGH"
-  },
-  "E003A": {
-    "block_code": "E003A",
-    "total_pohon": 2797,
-    "merah": 59,
-    "oranye": 132,
-    "kuning": 222,
-    "hijau": 2384,
-    "attack_rate": 6.8,
-    "sph": 99,
-    "tt": 2009,
-    "age": 17,
-    "sisip": null,
-    "has_map": false,
-    "map_filename": "cincin_api_map_E003A.png",
-    "rank": 16,
-    "severity": "HIGH"
-  },
-  "E006A": {
-    "block_code": "E006A",
-    "total_pohon": 2667,
-    "merah": 45,
-    "oranye": 137,
-    "kuning": 229,
-    "hijau": 2256,
-    "attack_rate": 6.8,
-    "sph": 104,
-    "tt": 2009,
-    "age": 17,
-    "sisip": null,
-    "has_map": false,
-    "map_filename": "cincin_api_map_E006A.png",
-    "rank": 17,
-    "severity": "HIGH"
-  },
-  "F003A": {
-    "block_code": "F003A",
-    "total_pohon": 1667,
-    "merah": 38,
-    "oranye": 76,
-    "kuning": 139,
-    "hijau": 1414,
-    "attack_rate": 6.8,
-    "sph": 124,
-    "tt": 2009,
-    "age": 17,
-    "sisip": null,
-    "has_map": false,
-    "map_filename": "cincin_api_map_F003A.png",
-    "rank": 18,
-    "severity": "HIGH"
-  },
-  "D009A": {
-    "block_code": "D009A",
-    "total_pohon": 2594,
-    "merah": 53,
-    "oranye": 120,
-    "kuning": 230,
-    "hijau": 2191,
-    "attack_rate": 6.7,
-    "sph": 111,
-    "tt": 2009,
-    "age": 17,
-    "sisip": null,
-    "has_map": false,
-    "map_filename": "cincin_api_map_D009A.png",
-    "rank": 19,
-    "severity": "HIGH"
-  },
-  "E007A": {
-    "block_code": "E007A",
-    "total_pohon": 2523,
-    "merah": 44,
-    "oranye": 119,
-    "kuning": 215,
-    "hijau": 2145,
-    "attack_rate": 6.5,
-    "sph": 62,
-    "tt": 2009,
-    "age": 17,
-    "sisip": null,
-    "has_map": false,
-    "map_filename": "cincin_api_map_E007A.png",
-    "rank": 20,
-    "severity": "HIGH"
-  },
-  "F006A": {
-    "block_code": "F006A",
-    "total_pohon": 2963,
-    "merah": 47,
-    "oranye": 145,
-    "kuning": 260,
-    "hijau": 2511,
-    "attack_rate": 6.5,
-    "sph": 111,
-    "tt": 2008,
-    "age": 18,
-    "sisip": null,
-    "has_map": false,
-    "map_filename": "cincin_api_map_F006A.png",
-    "rank": 21,
-    "severity": "MEDIUM"
-  },
-  "E001A": {
-    "block_code": "E001A",
-    "total_pohon": 3008,
-    "merah": 69,
-    "oranye": 123,
-    "kuning": 271,
-    "hijau": 2545,
-    "attack_rate": 6.4,
-    "sph": 95,
-    "tt": 2009,
-    "age": 17,
-    "sisip": null,
-    "has_map": false,
-    "map_filename": "cincin_api_map_E001A.png",
-    "rank": 22,
-    "severity": "MEDIUM"
-  },
-  "D007A": {
-    "block_code": "D007A",
-    "total_pohon": 2586,
-    "merah": 57,
-    "oranye": 107,
-    "kuning": 200,
-    "hijau": 2222,
-    "attack_rate": 6.3,
-    "sph": 94,
-    "tt": 2009,
-    "age": 17,
-    "sisip": null,
-    "has_map": false,
-    "map_filename": "cincin_api_map_D007A.png",
-    "rank": 23,
-    "severity": "MEDIUM"
-  },
-  "D012A": {
-    "block_code": "D012A",
-    "total_pohon": 2603,
-    "merah": 40,
-    "oranye": 119,
-    "kuning": 221,
-    "hijau": 2223,
-    "attack_rate": 6.1,
-    "sph": 118,
-    "tt": 2009,
-    "age": 17,
-    "sisip": null,
-    "has_map": false,
-    "map_filename": "cincin_api_map_D012A.png",
-    "rank": 24,
-    "severity": "MEDIUM"
-  },
-  "D002A": {
-    "block_code": "D002A",
-    "total_pohon": 3182,
-    "merah": 50,
-    "oranye": 138,
-    "kuning": 275,
-    "hijau": 2719,
-    "attack_rate": 5.9,
-    "sph": 125,
-    "tt": 2009,
-    "age": 17,
-    "sisip": null,
-    "has_map": false,
-    "map_filename": "cincin_api_map_D002A.png",
-    "rank": 25,
-    "severity": "MEDIUM"
-  },
-  "E012A": {
-    "block_code": "E012A",
-    "total_pohon": 2578,
-    "merah": 36,
-    "oranye": 103,
-    "kuning": 269,
-    "hijau": 2170,
-    "attack_rate": 5.4,
-    "sph": 83,
-    "tt": 2009,
-    "age": 17,
-    "sisip": null,
-    "has_map": false,
-    "map_filename": "cincin_api_map_E012A.png",
-    "rank": 26,
-    "severity": "MEDIUM"
-  },
-  "D005A": {
-    "block_code": "D005A",
-    "total_pohon": 2394,
-    "merah": 45,
-    "oranye": 83,
-    "kuning": 229,
-    "hijau": 2037,
-    "attack_rate": 5.3,
-    "sph": 87,
-    "tt": 2009,
-    "age": 17,
-    "sisip": null,
-    "has_map": false,
-    "map_filename": "cincin_api_map_D005A.png",
-    "rank": 27,
-    "severity": "MEDIUM"
-  },
-  "E010A": {
-    "block_code": "E010A",
-    "total_pohon": 2471,
-    "merah": 40,
-    "oranye": 84,
-    "kuning": 226,
-    "hijau": 2121,
-    "attack_rate": 5.0,
-    "sph": 87,
-    "tt": 2009,
-    "age": 17,
-    "sisip": null,
-    "has_map": false,
-    "map_filename": "cincin_api_map_E010A.png",
-    "rank": 28,
-    "severity": "MEDIUM"
-  },
-  "D006A": {
-    "block_code": "D006A",
-    "total_pohon": 2382,
-    "merah": 37,
-    "oranye": 80,
-    "kuning": 244,
-    "hijau": 2021,
-    "attack_rate": 4.9,
-    "sph": 85,
-    "tt": 2009,
-    "age": 17,
-    "sisip": null,
-    "has_map": false,
-    "map_filename": "cincin_api_map_D006A.png",
-    "rank": 29,
-    "severity": "MEDIUM"
-  },
-  "E008A": {
-    "block_code": "E008A",
-    "total_pohon": 2733,
-    "merah": 48,
-    "oranye": 87,
-    "kuning": 275,
-    "hijau": 2323,
-    "attack_rate": 4.9,
-    "sph": 67,
-    "tt": 2009,
-    "age": 17,
-    "sisip": null,
-    "has_map": false,
-    "map_filename": "cincin_api_map_E008A.png",
-    "rank": 30,
-    "severity": "MEDIUM"
-  },
-  "F005A": {
-    "block_code": "F005A",
-    "total_pohon": 2447,
-    "merah": 28,
-    "oranye": 82,
-    "kuning": 260,
-    "hijau": 2077,
-    "attack_rate": 4.5,
-    "sph": 119,
-    "tt": 2009,
-    "age": 17,
-    "sisip": null,
-    "has_map": false,
-    "map_filename": "cincin_api_map_F005A.png",
-    "rank": 31,
-    "severity": "MEDIUM"
-  },
-  "F009A": {
-    "block_code": "F009A",
-    "total_pohon": 2579,
-    "merah": 27,
-    "oranye": 80,
-    "kuning": 281,
-    "hijau": 2191,
-    "attack_rate": 4.1,
-    "sph": 68,
-    "tt": 2009,
-    "age": 17,
-    "sisip": null,
-    "has_map": false,
-    "map_filename": "cincin_api_map_F009A.png",
-    "rank": 32,
-    "severity": "MEDIUM"
-  },
-  "F010A": {
-    "block_code": "F010A",
-    "total_pohon": 3443,
-    "merah": 48,
-    "oranye": 91,
-    "kuning": 250,
-    "hijau": 3054,
-    "attack_rate": 4.0,
-    "sph": 77,
-    "tt": 2009,
-    "age": 17,
-    "sisip": null,
-    "has_map": false,
-    "map_filename": "cincin_api_map_F010A.png",
-    "rank": 33,
-    "severity": "MEDIUM"
-  },
-  "F011A": {
-    "block_code": "F011A",
-    "total_pohon": 2875,
-    "merah": 38,
-    "oranye": 77,
-    "kuning": 224,
-    "hijau": 2536,
-    "attack_rate": 4.0,
-    "sph": 72,
-    "tt": 2009,
-    "age": 17,
-    "sisip": null,
-    "has_map": false,
-    "map_filename": "cincin_api_map_F011A.png",
-    "rank": 34,
-    "severity": "MEDIUM"
-  },
-  "D008A": {
-    "block_code": "D008A",
-    "total_pohon": 2524,
-    "merah": 23,
-    "oranye": 72,
-    "kuning": 274,
-    "hijau": 2155,
-    "attack_rate": 3.8,
-    "sph": 101,
-    "tt": 2009,
-    "age": 17,
-    "sisip": null,
-    "has_map": false,
-    "map_filename": "cincin_api_map_D008A.png",
-    "rank": 35,
-    "severity": "MEDIUM"
-  },
-  "E005A": {
-    "block_code": "E005A",
-    "total_pohon": 2595,
-    "merah": 26,
-    "oranye": 69,
-    "kuning": 286,
-    "hijau": 2214,
-    "attack_rate": 3.7,
-    "sph": 98,
-    "tt": 2009,
-    "age": 17,
-    "sisip": null,
-    "has_map": false,
-    "map_filename": "cincin_api_map_E005A.png",
-    "rank": 36,
-    "severity": "MEDIUM"
-  }
-};
-</script>
+        const BLOCKS_DATA = {
+            "E009A": {
+                "block_code": "E009A",
+                "total_pohon": 2671,
+                "merah": 55,
+                "oranye": 281,
+                "kuning": 258,
+                "hijau": 2077,
+                "attack_rate": 12.6,
+                "sph": 39,
+                "tt": 2009,
+                "age": 17,
+                "sisip": null,
+                "has_map": false,
+                "map_filename": "cincin_api_map_E009A.png",
+                "rank": 1,
+                "severity": "HIGH"
+            },
+            "D004A": {
+                "block_code": "D004A",
+                "total_pohon": 2861,
+                "merah": 122,
+                "oranye": 183,
+                "kuning": 147,
+                "hijau": 2409,
+                "attack_rate": 10.7,
+                "sph": 119,
+                "tt": 2009,
+                "age": 17,
+                "sisip": null,
+                "has_map": false,
+                "map_filename": "cincin_api_map_D004A.png",
+                "rank": 2,
+                "severity": "HIGH"
+            },
+            "E004A": {
+                "block_code": "E004A",
+                "total_pohon": 2569,
+                "merah": 69,
+                "oranye": 175,
+                "kuning": 155,
+                "hijau": 2170,
+                "attack_rate": 9.5,
+                "sph": 117,
+                "tt": 2009,
+                "age": 17,
+                "sisip": null,
+                "has_map": false,
+                "map_filename": "cincin_api_map_E004A.png",
+                "rank": 3,
+                "severity": "HIGH"
+            },
+            "F001A": {
+                "block_code": "F001A",
+                "total_pohon": 2500,
+                "merah": 75,
+                "oranye": 146,
+                "kuning": 177,
+                "hijau": 2102,
+                "attack_rate": 8.8,
+                "sph": 73,
+                "tt": 2009,
+                "age": 17,
+                "sisip": null,
+                "has_map": false,
+                "map_filename": "cincin_api_map_F001A.png",
+                "rank": 4,
+                "severity": "HIGH"
+            },
+            "E002A": {
+                "block_code": "E002A",
+                "total_pohon": 2854,
+                "merah": 99,
+                "oranye": 139,
+                "kuning": 185,
+                "hijau": 2431,
+                "attack_rate": 8.3,
+                "sph": 133,
+                "tt": 2009,
+                "age": 17,
+                "sisip": null,
+                "has_map": false,
+                "map_filename": "cincin_api_map_E002A.png",
+                "rank": 5,
+                "severity": "HIGH"
+            },
+            "F002A": {
+                "block_code": "F002A",
+                "total_pohon": 2147,
+                "merah": 54,
+                "oranye": 120,
+                "kuning": 152,
+                "hijau": 1821,
+                "attack_rate": 8.1,
+                "sph": 132,
+                "tt": 2009,
+                "age": 17,
+                "sisip": null,
+                "has_map": false,
+                "map_filename": "cincin_api_map_F002A.png",
+                "rank": 6,
+                "severity": "HIGH"
+            },
+            "F008A": {
+                "block_code": "F008A",
+                "total_pohon": 3770,
+                "merah": 90,
+                "oranye": 210,
+                "kuning": 299,
+                "hijau": 3171,
+                "attack_rate": 8.0,
+                "sph": 125,
+                "tt": 2008,
+                "age": 18,
+                "sisip": null,
+                "has_map": false,
+                "map_filename": "cincin_api_map_F008A.png",
+                "rank": 7,
+                "severity": "HIGH"
+            },
+            "F012A": {
+                "block_code": "F012A",
+                "total_pohon": 3435,
+                "merah": 102,
+                "oranye": 166,
+                "kuning": 201,
+                "hijau": 2966,
+                "attack_rate": 7.8,
+                "sph": 88,
+                "tt": 2009,
+                "age": 17,
+                "sisip": null,
+                "has_map": false,
+                "map_filename": "cincin_api_map_F012A.png",
+                "rank": 8,
+                "severity": "HIGH"
+            },
+            "F007A": {
+                "block_code": "F007A",
+                "total_pohon": 2472,
+                "merah": 64,
+                "oranye": 127,
+                "kuning": 204,
+                "hijau": 2077,
+                "attack_rate": 7.7,
+                "sph": 76,
+                "tt": 2008,
+                "age": 18,
+                "sisip": null,
+                "has_map": false,
+                "map_filename": "cincin_api_map_F007A.png",
+                "rank": 9,
+                "severity": "HIGH"
+            },
+            "D001A": {
+                "block_code": "D001A",
+                "total_pohon": 3486,
+                "merah": 87,
+                "oranye": 176,
+                "kuning": 286,
+                "hijau": 2937,
+                "attack_rate": 7.5,
+                "sph": 108,
+                "tt": 2009,
+                "age": 17,
+                "sisip": null,
+                "has_map": false,
+                "map_filename": "cincin_api_map_D001A.png",
+                "rank": 10,
+                "severity": "HIGH"
+            },
+            "D011A": {
+                "block_code": "D011A",
+                "total_pohon": 2145,
+                "merah": 46,
+                "oranye": 112,
+                "kuning": 161,
+                "hijau": 1826,
+                "attack_rate": 7.4,
+                "sph": 96,
+                "tt": 2009,
+                "age": 17,
+                "sisip": null,
+                "has_map": false,
+                "map_filename": "cincin_api_map_D011A.png",
+                "rank": 11,
+                "severity": "HIGH"
+            },
+            "F004A": {
+                "block_code": "F004A",
+                "total_pohon": 1695,
+                "merah": 42,
+                "oranye": 83,
+                "kuning": 141,
+                "hijau": 1429,
+                "attack_rate": 7.4,
+                "sph": 127,
+                "tt": 2009,
+                "age": 17,
+                "sisip": null,
+                "has_map": false,
+                "map_filename": "cincin_api_map_F004A.png",
+                "rank": 12,
+                "severity": "HIGH"
+            },
+            "D003A": {
+                "block_code": "D003A",
+                "total_pohon": 3131,
+                "merah": 77,
+                "oranye": 148,
+                "kuning": 249,
+                "hijau": 2657,
+                "attack_rate": 7.2,
+                "sph": 98,
+                "tt": 2009,
+                "age": 17,
+                "sisip": null,
+                "has_map": false,
+                "map_filename": "cincin_api_map_D003A.png",
+                "rank": 13,
+                "severity": "HIGH"
+            },
+            "D010A": {
+                "block_code": "D010A",
+                "total_pohon": 2574,
+                "merah": 62,
+                "oranye": 121,
+                "kuning": 207,
+                "hijau": 2184,
+                "attack_rate": 7.1,
+                "sph": 8,
+                "tt": 2009,
+                "age": 17,
+                "sisip": null,
+                "has_map": false,
+                "map_filename": "cincin_api_map_D010A.png",
+                "rank": 14,
+                "severity": "HIGH"
+            },
+            "E011A": {
+                "block_code": "E011A",
+                "total_pohon": 2639,
+                "merah": 85,
+                "oranye": 102,
+                "kuning": 219,
+                "hijau": 2233,
+                "attack_rate": 7.1,
+                "sph": 71,
+                "tt": 2009,
+                "age": 17,
+                "sisip": null,
+                "has_map": false,
+                "map_filename": "cincin_api_map_E011A.png",
+                "rank": 15,
+                "severity": "HIGH"
+            },
+            "E003A": {
+                "block_code": "E003A",
+                "total_pohon": 2797,
+                "merah": 59,
+                "oranye": 132,
+                "kuning": 222,
+                "hijau": 2384,
+                "attack_rate": 6.8,
+                "sph": 99,
+                "tt": 2009,
+                "age": 17,
+                "sisip": null,
+                "has_map": false,
+                "map_filename": "cincin_api_map_E003A.png",
+                "rank": 16,
+                "severity": "HIGH"
+            },
+            "E006A": {
+                "block_code": "E006A",
+                "total_pohon": 2667,
+                "merah": 45,
+                "oranye": 137,
+                "kuning": 229,
+                "hijau": 2256,
+                "attack_rate": 6.8,
+                "sph": 104,
+                "tt": 2009,
+                "age": 17,
+                "sisip": null,
+                "has_map": false,
+                "map_filename": "cincin_api_map_E006A.png",
+                "rank": 17,
+                "severity": "HIGH"
+            },
+            "F003A": {
+                "block_code": "F003A",
+                "total_pohon": 1667,
+                "merah": 38,
+                "oranye": 76,
+                "kuning": 139,
+                "hijau": 1414,
+                "attack_rate": 6.8,
+                "sph": 124,
+                "tt": 2009,
+                "age": 17,
+                "sisip": null,
+                "has_map": false,
+                "map_filename": "cincin_api_map_F003A.png",
+                "rank": 18,
+                "severity": "HIGH"
+            },
+            "D009A": {
+                "block_code": "D009A",
+                "total_pohon": 2594,
+                "merah": 53,
+                "oranye": 120,
+                "kuning": 230,
+                "hijau": 2191,
+                "attack_rate": 6.7,
+                "sph": 111,
+                "tt": 2009,
+                "age": 17,
+                "sisip": null,
+                "has_map": false,
+                "map_filename": "cincin_api_map_D009A.png",
+                "rank": 19,
+                "severity": "HIGH"
+            },
+            "E007A": {
+                "block_code": "E007A",
+                "total_pohon": 2523,
+                "merah": 44,
+                "oranye": 119,
+                "kuning": 215,
+                "hijau": 2145,
+                "attack_rate": 6.5,
+                "sph": 62,
+                "tt": 2009,
+                "age": 17,
+                "sisip": null,
+                "has_map": false,
+                "map_filename": "cincin_api_map_E007A.png",
+                "rank": 20,
+                "severity": "HIGH"
+            },
+            "F006A": {
+                "block_code": "F006A",
+                "total_pohon": 2963,
+                "merah": 47,
+                "oranye": 145,
+                "kuning": 260,
+                "hijau": 2511,
+                "attack_rate": 6.5,
+                "sph": 111,
+                "tt": 2008,
+                "age": 18,
+                "sisip": null,
+                "has_map": false,
+                "map_filename": "cincin_api_map_F006A.png",
+                "rank": 21,
+                "severity": "MEDIUM"
+            },
+            "E001A": {
+                "block_code": "E001A",
+                "total_pohon": 3008,
+                "merah": 69,
+                "oranye": 123,
+                "kuning": 271,
+                "hijau": 2545,
+                "attack_rate": 6.4,
+                "sph": 95,
+                "tt": 2009,
+                "age": 17,
+                "sisip": null,
+                "has_map": false,
+                "map_filename": "cincin_api_map_E001A.png",
+                "rank": 22,
+                "severity": "MEDIUM"
+            },
+            "D007A": {
+                "block_code": "D007A",
+                "total_pohon": 2586,
+                "merah": 57,
+                "oranye": 107,
+                "kuning": 200,
+                "hijau": 2222,
+                "attack_rate": 6.3,
+                "sph": 94,
+                "tt": 2009,
+                "age": 17,
+                "sisip": null,
+                "has_map": false,
+                "map_filename": "cincin_api_map_D007A.png",
+                "rank": 23,
+                "severity": "MEDIUM"
+            },
+            "D012A": {
+                "block_code": "D012A",
+                "total_pohon": 2603,
+                "merah": 40,
+                "oranye": 119,
+                "kuning": 221,
+                "hijau": 2223,
+                "attack_rate": 6.1,
+                "sph": 118,
+                "tt": 2009,
+                "age": 17,
+                "sisip": null,
+                "has_map": false,
+                "map_filename": "cincin_api_map_D012A.png",
+                "rank": 24,
+                "severity": "MEDIUM"
+            },
+            "D002A": {
+                "block_code": "D002A",
+                "total_pohon": 3182,
+                "merah": 50,
+                "oranye": 138,
+                "kuning": 275,
+                "hijau": 2719,
+                "attack_rate": 5.9,
+                "sph": 125,
+                "tt": 2009,
+                "age": 17,
+                "sisip": null,
+                "has_map": false,
+                "map_filename": "cincin_api_map_D002A.png",
+                "rank": 25,
+                "severity": "MEDIUM"
+            },
+            "E012A": {
+                "block_code": "E012A",
+                "total_pohon": 2578,
+                "merah": 36,
+                "oranye": 103,
+                "kuning": 269,
+                "hijau": 2170,
+                "attack_rate": 5.4,
+                "sph": 83,
+                "tt": 2009,
+                "age": 17,
+                "sisip": null,
+                "has_map": false,
+                "map_filename": "cincin_api_map_E012A.png",
+                "rank": 26,
+                "severity": "MEDIUM"
+            },
+            "D005A": {
+                "block_code": "D005A",
+                "total_pohon": 2394,
+                "merah": 45,
+                "oranye": 83,
+                "kuning": 229,
+                "hijau": 2037,
+                "attack_rate": 5.3,
+                "sph": 87,
+                "tt": 2009,
+                "age": 17,
+                "sisip": null,
+                "has_map": false,
+                "map_filename": "cincin_api_map_D005A.png",
+                "rank": 27,
+                "severity": "MEDIUM"
+            },
+            "E010A": {
+                "block_code": "E010A",
+                "total_pohon": 2471,
+                "merah": 40,
+                "oranye": 84,
+                "kuning": 226,
+                "hijau": 2121,
+                "attack_rate": 5.0,
+                "sph": 87,
+                "tt": 2009,
+                "age": 17,
+                "sisip": null,
+                "has_map": false,
+                "map_filename": "cincin_api_map_E010A.png",
+                "rank": 28,
+                "severity": "MEDIUM"
+            },
+            "D006A": {
+                "block_code": "D006A",
+                "total_pohon": 2382,
+                "merah": 37,
+                "oranye": 80,
+                "kuning": 244,
+                "hijau": 2021,
+                "attack_rate": 4.9,
+                "sph": 85,
+                "tt": 2009,
+                "age": 17,
+                "sisip": null,
+                "has_map": false,
+                "map_filename": "cincin_api_map_D006A.png",
+                "rank": 29,
+                "severity": "MEDIUM"
+            },
+            "E008A": {
+                "block_code": "E008A",
+                "total_pohon": 2733,
+                "merah": 48,
+                "oranye": 87,
+                "kuning": 275,
+                "hijau": 2323,
+                "attack_rate": 4.9,
+                "sph": 67,
+                "tt": 2009,
+                "age": 17,
+                "sisip": null,
+                "has_map": false,
+                "map_filename": "cincin_api_map_E008A.png",
+                "rank": 30,
+                "severity": "MEDIUM"
+            },
+            "F005A": {
+                "block_code": "F005A",
+                "total_pohon": 2447,
+                "merah": 28,
+                "oranye": 82,
+                "kuning": 260,
+                "hijau": 2077,
+                "attack_rate": 4.5,
+                "sph": 119,
+                "tt": 2009,
+                "age": 17,
+                "sisip": null,
+                "has_map": false,
+                "map_filename": "cincin_api_map_F005A.png",
+                "rank": 31,
+                "severity": "MEDIUM"
+            },
+            "F009A": {
+                "block_code": "F009A",
+                "total_pohon": 2579,
+                "merah": 27,
+                "oranye": 80,
+                "kuning": 281,
+                "hijau": 2191,
+                "attack_rate": 4.1,
+                "sph": 68,
+                "tt": 2009,
+                "age": 17,
+                "sisip": null,
+                "has_map": false,
+                "map_filename": "cincin_api_map_F009A.png",
+                "rank": 32,
+                "severity": "MEDIUM"
+            },
+            "F010A": {
+                "block_code": "F010A",
+                "total_pohon": 3443,
+                "merah": 48,
+                "oranye": 91,
+                "kuning": 250,
+                "hijau": 3054,
+                "attack_rate": 4.0,
+                "sph": 77,
+                "tt": 2009,
+                "age": 17,
+                "sisip": null,
+                "has_map": false,
+                "map_filename": "cincin_api_map_F010A.png",
+                "rank": 33,
+                "severity": "MEDIUM"
+            },
+            "F011A": {
+                "block_code": "F011A",
+                "total_pohon": 2875,
+                "merah": 38,
+                "oranye": 77,
+                "kuning": 224,
+                "hijau": 2536,
+                "attack_rate": 4.0,
+                "sph": 72,
+                "tt": 2009,
+                "age": 17,
+                "sisip": null,
+                "has_map": false,
+                "map_filename": "cincin_api_map_F011A.png",
+                "rank": 34,
+                "severity": "MEDIUM"
+            },
+            "D008A": {
+                "block_code": "D008A",
+                "total_pohon": 2524,
+                "merah": 23,
+                "oranye": 72,
+                "kuning": 274,
+                "hijau": 2155,
+                "attack_rate": 3.8,
+                "sph": 101,
+                "tt": 2009,
+                "age": 17,
+                "sisip": null,
+                "has_map": false,
+                "map_filename": "cincin_api_map_D008A.png",
+                "rank": 35,
+                "severity": "MEDIUM"
+            },
+            "E005A": {
+                "block_code": "E005A",
+                "total_pohon": 2595,
+                "merah": 26,
+                "oranye": 69,
+                "kuning": 286,
+                "hijau": 2214,
+                "attack_rate": 3.7,
+                "sph": 98,
+                "tt": 2009,
+                "age": 17,
+                "sisip": null,
+                "has_map": false,
+                "map_filename": "cincin_api_map_E005A.png",
+                "rank": 36,
+                "severity": "MEDIUM"
+            }
+        };
+    </script>
 
     <!-- Interactive Controller Script -->
     <script>
         let currentBlockData = null;
 
-        // Initialize on page load
+        // Debug logging
+        function log(msg) {
+            console.log('🔵 Dashboard:', msg);
+        }
+
+        // Initialize on page load - PROVEN PoC PATTERN
         window.addEventListener('DOMContentLoaded', function () {
-            if (typeof BLOCKS_DATA !== 'undefined') {
-                populateDropdown();
-                // Auto-select first block
-                const firstBlock = Object.keys(BLOCKS_DATA)[0];
-                if (firstBlock) {
-                    document.getElementById('blockSelector').value = firstBlock;
-                    updateDashboard(firstBlock);
-                }
+            log('Page loaded, initializing...');
+
+            if (typeof BLOCKS_DATA === 'undefined') {
+                console.error('❌ BLOCKS_DATA not loaded!');
+                alert('Error: Block data not loaded. Please refresh.');
+                return;
+            }
+
+            log('✅ BLOCKS_DATA loaded with ' + Object.keys(BLOCKS_DATA).length + ' blocks');
+
+            populateDropdown();
+
+            // Attach event listener - PROVEN PATTERN
+            const selector = document.getElementById('blockSelector');
+            if (!selector) {
+                console.error('❌ blockSelector not found!');
+                return;
+            }
+
+            selector.addEventListener('change', function () {
+                const selected = this.value;
+                log('Dropdown changed to: ' + selected);
+                updateDashboard(selected);
+            });
+
+            log('✅ Event listener attached');
+
+            // Auto-select first block
+            const firstBlock = Object.keys(BLOCKS_DATA)[0];
+            if (firstBlock) {
+                selector.value = firstBlock;
+                updateDashboard(firstBlock);
+                log('✅ Auto-selected: ' + firstBlock);
             }
         });
 
@@ -1933,26 +1980,37 @@ const BLOCKS_DATA = {
             ).join('');
 
             document.getElementById('totalBlocks').textContent = sorted.length;
+            log('✅ Populated ' + sorted.length + ' blocks');
         }
 
-        // Update dashboard with selected block
+        // Update dashboard - COMPREHENSIVE VERSION
         function updateDashboard(blockCode) {
-            console.log('🔄 updateDashboard called with:', blockCode);
-
-            if (!blockCode || !BLOCKS_DATA[blockCode]) {
-                console.error('❌ Invalid blockCode or data not found:', blockCode);
+            if (!blockCode) {
+                log('⚠️ Empty blockCode');
                 return;
             }
 
             const data = BLOCKS_DATA[blockCode];
+            if (!data) {
+                console.error('❌ No data for block:', blockCode);
+                return;
+            }
+
             currentBlockData = data;
+            log('📊 Updating dashboard for: ' + blockCode);
 
             // Update header
-            document.getElementById('headerBlockCode').textContent = blockCode;
+            const headerEl = document.getElementById('headerBlockCode');
+            if (headerEl) {
+                headerEl.textContent = blockCode;
+                log('✅ Updated header');
+            }
+
             document.title = `Dashboard Cincin Api - ${blockCode} (${data.attack_rate}%)`;
 
-            // Update stats with CORRECT IDs that were added
+            // Update all stats with comprehensive ID list
             const updates = [
+                ['blockHeaderTitle', `Detail Blok ${blockCode} (${((data.total_pohon * 64) / 10000).toFixed(1)} Ha)`],
                 ['blockTT', `${data.tt || 'N/A'} (${data.age || 'N/A'} Tahun)`],
                 ['blockSPH', `${data.sph || 'N/A'} Pokok/Ha`],
                 ['blockTotalPohon', data.total_pohon.toLocaleString()],
@@ -1962,24 +2020,36 @@ const BLOCKS_DATA = {
                 ['blockKuningCount', data.kuning]
             ];
 
+            let successCount = 0;
+            let failCount = 0;
+
             updates.forEach(([id, value]) => {
                 const el = document.getElementById(id);
                 if (el) {
                     el.textContent = value;
-                    console.log(`✅ Updated ${id}:`, value);
+                    // Add flash animation
+                    el.classList.add('flash-update');
+                    setTimeout(() => el.classList.remove('flash-update'), 600);
+                    successCount++;
                 } else {
-                    console.error(`❌ Element not found: ${id}`);
+                    console.warn(`⚠️ Element not found: ${id}`);
+                    failCount++;
                 }
             });
 
-            // Update cluster map if exists
-            const mapImg = document.querySelector('img[alt*="Peta Kluster"]');
-            if (mapImg && data.map_filename) {
-                mapImg.src = data.map_filename;
-                mapImg.alt = `Peta Kluster ${blockCode}`;
+            log(`✅ Updated ${successCount} elements, ${failCount} missing`);
+
+            // Update cluster maps
+            const mapImages = document.querySelectorAll('img[src*="cincin_api_map"]');
+            if (mapImages.length > 0 && data.map_filename) {
+                mapImages.forEach(img => {
+                    img.src = data.map_filename;
+                    img.alt = `Peta Kluster ${blockCode}`;
+                });
+                log('✅ Updated ' + mapImages.length + ' map images');
             }
 
-            console.log('Dashboard updated for:', blockCode, data);
+            log('✅ Dashboard update complete for: ' + blockCode);
         }
 
         // Tab switching (existing function)
@@ -1990,13 +2060,17 @@ const BLOCKS_DATA = {
                 btn.classList.add('text-black', 'hover:bg-slate-50');
             });
 
-            document.getElementById('tab-' + tabName).style.display = 'block';
+            const selectedTab = document.getElementById('tab-' + tabName);
+            if (selectedTab) {
+                selectedTab.style.display = 'block';
+            }
+
             const activeBtn = document.getElementById('btn-' + tabName);
-            activeBtn.classList.add('bg-indigo-600', 'text-white', 'shadow-md');
-            activeBtn.classList.remove('text-black', 'hover:bg-slate-50');
+            if (activeBtn) {
+                activeBtn.classList.add('bg-indigo-600', 'text-white', 'shadow-md');
+                activeBtn.classList.remove('text-black', 'hover:bg-slate-50');
+            }
         }
     </script>
 
 </body>
-
-</html>
