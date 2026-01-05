@@ -1,160 +1,84 @@
-# 🔥 POAC v3.3 - Algoritma Cincin Api
+# 🔥 POAC Cincin Api Dashboard (V8)
 
-**Precision Oil Palm Agriculture Control** - Sistem Deteksi Kluster Ganoderma dengan Auto-Tuning
+**Precision Oil Palm Agriculture Control** - Sistem Deteksi Dini & Mitigasi Ganoderma Berbasis Analisis Spasial & Finansial.
 
-![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)
+![Status](https://img.shields.io/badge/Status-Production%20Ready-success.svg)
+![Version](https://img.shields.io/badge/Version-V8%20(Hybrid)-blue.svg)
 ![License](https://img.shields.io/badge/License-MIT-green.svg)
-![Status](https://img.shields.io/badge/Status-Active-success.svg)
 
 ## 📋 Deskripsi
 
-Algoritma Cincin Api adalah sistem deteksi kluster serangan Ganoderma pada perkebunan kelapa sawit berbasis analisis spasial hexagonal. Sistem ini menggunakan:
+**POAC Cincin Api Dashboard** adalah platform analitik interaktif yang dirancang untuk mendeteksi, memvisualisasikan, dan memitigasi penyebaran penyakit Ganoderma di perkebunan kelapa sawit. Sistem ini menggabungkan analisis citra satelit (NDRE), sensus visual lapangan, dan data produksi (Quick Count Yield) untuk memberikan peringatan dini (**Early Warning System**) yang akurat.
 
-- **Ranking Relatif (Percentile Rank)** - Normalisasi data NDRE per blok
-- **Elbow Method Auto-Tuning** - Penentuan threshold optimal secara otomatis
-- **Analisis Tetangga Hexagonal** - Deteksi kluster berdasarkan pola tanam mata lima
-- **Klasifikasi 4-Tier** - MERAH, KUNING, ORANYE, HIJAU
+Fitur utama dari dashboard ini adalah **"Vanishing Yield Alert"**, sebuah sistem diagnosa klinis yang mengidentifikasi degradasi produktivitas tak kasat mata akibat kerusakan akar, jauh sebelum gejala visual muncul pada kanopi.
 
-## 🎨 Klasifikasi Status
+## 🚀 Fitur Utama
 
-| Status | Emoji | Kriteria | Tindakan |
-|--------|-------|----------|----------|
-| **MERAH** | 🔴 | Persentil ≤ threshold, ≥3 tetangga sakit | Sanitasi segera |
-| **KUNING** | 🟡 | Persentil ≤ threshold, 1-2 tetangga sakit | Monitoring ketat |
-| **ORANYE** | 🟠 | Persentil ≤ threshold, 0 tetangga sakit | Investigasi |
-| **HIJAU** | 🟢 | Persentil > threshold | Normal |
+### 1. 🚨 Vanishing Yield Alert System
+Sistem pendeteksi anomali produksi yang membagi status kesehatan blok ke dalam 4 fase kritis:
+*   **Fase 1: Silent Infection (Inkubasi)** - Serangan tinggi tapi produksi masih normal. *Golden Period* intervensi.
+*   **Fase 2: Root Degradation (Stres Akar)** - Penurunan yield awal (-5% s/d -15%) & stres penyerapan nutrisi.
+*   **Fase 3: Cryptic Collapse (Bahaya Senyap)** - **Yield anjlok drastis** namun gejala visual minim. *The Silent Killer*.
+*   **Fase 4: Insolvency (Kebangkrutan)** - SPH < 100 atau sisa umur operasional < 3 tahun.
 
-## 🚀 Quick Start
+### 2. 🗺️ Peta Kluster Cincin Api (Interaktif)
+Visualisasi spasial berbasis **LeafletJS** yang memetakan setiap pohon ke dalam status risiko:
+*   🔴 **MERAH (Inti Infeksi):** Pohon sakit/mati yang menjadi sumber spora.
+*   🟠 **ORANYE (Cincin Api):** Zona penyebaran aktif di sekitar inti infeksi (High Risk).
+*   🟡 **KUNING (Suspect):** Tanaman dengan anomali vigor yang memerlukan pemeriksaan.
+*   🟢 **HIJAU (Sehat):** Tanaman produktif yang perlu dilindungi.
 
-### Instalasi
+### 3. 📉 Analisis Yield Drop (YoY)
+Analisis mendalam tren penurunan produksi tahunan (**Year-on-Year**) untuk memisahkan fluktuasi cuaca biasa dari dampak kerusakan sistem perakaran (Degradasi Biologis).
 
-```bash
-# Clone repository
-git clone https://github.com/mastoroshadiq/dashboard-cincin-api.git
-cd dashboard-cincin-api
+### 4. 🔮 3-Scenario Reality Check
+Simulasi dampak finansial berdasarkan tiga skenario:
+*   **Konservatif (Status Quo):** Asumsi penyakit diam (Baseline).
+*   **Moderat (Realistis):** Laju infeksi historical (2.5% per tahun).
+*   **Agresif (Worst Case):** Eskalasi eksponensial tanpa mitigasi.
 
-# Install dependencies
-pip install -r requirements.txt
-```
+## 🛠️ Metodologi V8 (Hybrid)
 
-### Menjalankan Analisis
+Algoritma V8 menggabungkan dua pendekatan untuk akurasi maksimal:
+1.  **Z-Score Hibrida:** Menggabungkan skor NDRE (Kesehatan Kanopi) dan Sensus (Gejala Batang) untuk mengurangi *False Negative* dan *False Positive*.
+2.  **Spatial Clustering:** Analisis tetangga terdekat (Nearest Neighbor) untuk mengidentifikasi pola penyebaran "Cincin Api" yang khas pada Ganoderma.
 
-```bash
-# Default (auto-tune dengan preset standar)
-python run_cincin_api.py
+[Baca Penjelasan Lengkap Metodologi V8](./METHODOLOGY_V8_EXPLAINED.md)
 
-# Menggunakan preset
-python run_cincin_api.py --preset konservatif
-python run_cincin_api.py --preset standar
-python run_cincin_api.py --preset agresif
-
-# Manual threshold
-python run_cincin_api.py -t 0.20
-
-# Override parameter
-python run_cincin_api.py --min-neighbors 4 --threshold-max 0.40
-
-# Lihat konfigurasi
-python run_cincin_api.py --show-config
-```
-
-## 📁 Struktur Proyek
+## 📂 Struktur Proyek
 
 ```
-poac_sim/
-├── config.py               # Konfigurasi & presets
-├── run_cincin_api.py       # Entry point utama
-├── main.py                 # Entry point Z-Score (legacy)
-├── src/
-│   ├── ingestion.py        # Data loading & cleaning
-│   ├── statistics.py       # Z-Score calculation
-│   ├── spatial.py          # Hexagonal geometry
-│   ├── clustering.py       # Algoritma Cincin Api
-│   ├── dashboard.py        # Visualisasi
-│   ├── report_generator.py # README & HTML report
-│   └── engine.py           # Simulation engine
+dashboard-cincin-api/
 ├── data/
-│   ├── input/              # Data CSV input
-│   └── output/             # Hasil analisis
-└── requirements.txt
+│   ├── output/
+│   │   └── dashboard_cincin_api_INTERACTIVE_FULL.html  # 👈 DASHBOARD UTAMA
+│   └── ...
+├── src/
+│   ├── generators/         # Skrip pembuatan data
+│   └── ...
+├── METHODOLOGY_V8_EXPLAINED.md  # Dokumentasi Teknis
+├── README.md                    # File ini
+└── ...
 ```
 
-## ⚙️ Konfigurasi
+## 💻 Cara Penggunaan
 
-### Preset Tersedia
+1.  **Buka Dashboard:**
+    Navigasi ke folder `data/output/` dan buka file `dashboard_cincin_api_INTERACTIVE_FULL.html` menggunakan browser modern (Chrome/Edge/Firefox).
+2.  **Pilih Blok:**
+    Gunakan menu dropdown di sebelah kiri (Blok A) dan kanan (Blok B) untuk membandingkan performa dua blok.
+3.  **Analisis:**
+    *   Perhatikan indikator **Vanishing Yield Alert**. Klik badge status untuk melihat **Diagnosa Klinis**.
+    *   Cek bagian **Peta Kluster** untuk melihat sebaran titik merah/oranye.
+    *   Klik tombol **"3Y DROP"** (jika muncul) untuk melihat detail degradasi yield per tahun.
 
-| Preset | Threshold Range | Min Neighbors | Deskripsi |
-|--------|-----------------|---------------|-----------|
-| **konservatif** | 3% - 15% | 4 | Deteksi ketat, hanya kluster padat |
-| **standar** | 5% - 30% | 3 | Setting default, seimbang |
-| **agresif** | 10% - 50% | 2 | Deteksi luas, threshold tinggi |
+## 🤝 Kontribusi
 
-### Kustomisasi
+Silakan ajukan *Pull Request* atau *Issue* untuk saran pengembangan fitur atau perbaikan bug.
 
-Edit `config.py` untuk menyesuaikan:
+## 📄 Lisensi
 
-```python
-CINCIN_API_CONFIG = {
-    "threshold_min": 0.05,      # Batas bawah simulasi
-    "threshold_max": 0.30,      # Batas atas simulasi
-    "threshold_step": 0.05,     # Step increment
-    "min_sick_neighbors": 3,    # Min tetangga sakit untuk MERAH
-    "top_n_blocks": 10,         # Jumlah top block visualisasi
-    ...
-}
-```
-
-## 📊 Output
-
-Setiap run menghasilkan folder dengan format `YYYYMMDD_HHMM_{preset}_t{threshold}_n{neighbors}`:
-
-```
-20251209_1530_standar_t30_n3/
-├── dashboard_main.png          # Dashboard utama
-├── dashboard_block_heatmap.png # Heatmap per blok
-├── dashboard_elbow.png         # Elbow method chart
-├── top10_XX_blok_YYY.png      # Detail blok terparah
-├── hasil_klasifikasi_lengkap.csv
-├── target_prioritas.csv
-├── ringkasan_per_blok.csv
-├── run_config.json            # Konfigurasi (untuk reproduksi)
-├── README.md                  # Panduan interpretasi
-├── laporan_mandor.txt         # Laporan untuk mandor
-└── report.html                # 🌐 HTML Report interaktif
-```
-
-## 📈 Contoh Hasil
-
-### Distribusi Status (Preset Standar)
-- 🔴 MERAH: ~11,000 pohon (12%)
-- 🟡 KUNING: ~14,000 pohon (15%)
-- 🟠 ORANYE: ~3,000 pohon (3%)
-- 🟢 HIJAU: ~67,000 pohon (70%)
-
-## 🔧 Requirements
-
-- Python 3.8+
-- pandas
-- numpy
-- matplotlib
-
-## 📖 Dokumentasi
-
-- [Panduan Teknis Algoritma Cincin Api](context/Panduan_Teknis_Algoritma_Cincin_Api.md)
-- [Software Requirements Specification](context/SOFTWARE%20REQUIREMENTS%20SPECIFICATION%20(SRS).md)
-
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-## 📄 License
-
-This project is licensed under the MIT License.
-
-## 👥 Authors
-
-- **Mastoro Shadiq** - *Initial work*
+Project ini dilisensikan di bawah **MIT License**.
 
 ---
-
-*POAC v3.3 - Precision Oil Palm Agriculture Control*
+*Dikembangkan oleh Mastoro Shadiq & Tim POAC*
