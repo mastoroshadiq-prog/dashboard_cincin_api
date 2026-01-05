@@ -35,14 +35,74 @@ unique_blocks = sorted(df['Blok'].unique())
 
 print(f"\n📊 Found {len(unique_blocks)} unique blocks")
 
-# Load sisip and production data if available
+# Load Census (Ganoderma) Data from data_gabungan.xlsx
+census_data_map = {}
 try:
-    df_gabungan = pd.read_excel('poac_sim/data/input/data_gabungan.xlsx')
-    has_gabungan = True
-    print("✅ Loaded data_gabungan.xlsx for sisip/production")
-except:
-    has_gabungan = False
-    print("⚠️  data_gabungan.xlsx not found - sisip/production will be null")
+    print("\n📋 Loading Census Data from data_gabungan.xlsx...")
+    # Read entire sheet without header to avoid format issues
+    df_census = pd.read_excel('poac_sim/data/input/data_gabungan.xlsx', header=None)
+    
+    # Locate data start - assume rows with valid block code in Col 0
+    # Based on inspection, data starts around row 7
+    count_loaded = 0
+    for idx, row in df_census.iloc[7:].iterrows():
+        block_code_raw = str(row[0]).strip().upper()
+        # Basic validation for block code format
+        if not block_code_raw or block_code_raw == 'NAN' or len(block_code_raw) < 3:
+            continue
+            
+        # Extract values using checked indices
+        try:
+            # Col 53: Total Pokok Sensus
+            pop_sensus = pd.to_numeric(row[53], errors='coerce') or 0
+            
+            # Col 55: Stadium 1&2
+            st12 = pd.to_numeric(row[55], errors='coerce') or 0
+            
+            # Col 56: Stadium 3&4
+            st34 = pd.to_numeric(row[56], errors='coerce') or 0
+            
+            infected_total = st12 + st34
+            
+            census_data_map[block_code_raw] = {
+                'census_pop': int(pop_sensus),
+                'census_st12': int(st12),
+                'census_st34': int(st34),
+                'census_infected_total': int(infected_total),
+                'census_rate_pct': round((infected_total / pop_sensus * 100), 2) if pop_sensus > 0 else 0
+            }
+            count_loaded += 1
+        except Exception as e:
+            # pass silent errors for non-data rows
+            pass
+            
+    print("✅ Loaded Census data for {count_loaded} blocks")
+    
+    # Enrich with Production History (2021-2024)
+    # Columns discovered:
+    # 2021 Real Ton: 134
+    # 2022 Real Ton: 143
+    # 2023 Real Ton: 152
+    # 2024 Real Ton: 161
+    for idx, row in df_census.iloc[7:].iterrows():
+        block_code_raw = str(row[0]).strip().upper()
+        if block_code_raw in census_data_map:
+            try:
+                # Helper to parse float
+                def get_val(col_idx):
+                    v = pd.to_numeric(row[col_idx], errors='coerce')
+                    return float(v) if not pd.isna(v) else 0.0
+
+                census_data_map[block_code_raw]['hist_ton_2021'] = get_val(134)
+                census_data_map[block_code_raw]['hist_ton_2022'] = get_val(143)
+                census_data_map[block_code_raw]['hist_ton_2023'] = get_val(152)
+                census_data_map[block_code_raw]['hist_ton_2024'] = get_val(161)
+                census_data_map[block_code_raw]['hist_ton_2025'] = get_val(170)
+            except:
+                pass
+
+except Exception as e:
+    print(f"⚠️ Failed to load Census data: {e}")
 
 # Load production data
 try:
@@ -211,6 +271,16 @@ for block_code in unique_blocks:
             'gap_pct': 0
         })
 
+    # Add Census Data Integration
+    census_info = census_data_map.get(block_code, {})
+    block_data.update({
+        'census_pop': census_info.get('census_pop', 0),
+        'census_st12': census_info.get('census_st12', 0),
+        'census_st34': census_info.get('census_st34', 0),
+        'census_infected_total': census_info.get('census_infected_total', 0),
+        'census_rate_pct': census_info.get('census_rate_pct', 0)
+    })
+
     # FINANCIAL CALCULATIONS (Centralized Logic)
     # 1. Mitigation Cost
     # Formula: sqrt(Merah + Oranye) * 8 * 4 * Rp 15,000
@@ -239,17 +309,122 @@ for block_code in unique_blocks:
     else:
         block_data['mitigation_ratio_pct'] = 0
 
-    # 4. Narrative/Interpretation
+    # 4. Narrative/Interpretation & Trends
     gap_pct = block_data.get('gap_pct', 0)
-    if gap_pct > 0 and block_data['attack_rate'] > 5:
-         block_data['status_narrative'] = "SYMPTOM LAG"
-         block_data['status_desc'] = f"Produksi masih surplus ({gap_pct}%) meskipun serangan aktif. Kerugian belum terlihat."
-    elif gap_pct < 0:
-         block_data['status_narrative'] = "PRODUCTION COLLAPSE"
-         block_data['status_desc'] = f"Produksi deficit ({gap_pct}%) akibat kerusakan akar masif."
+    census_rate = block_data.get('census_rate_pct', 0)
+    
+    # Financial Projection (New)
+    years_to_zero = 999
+    projected_loss_3yr = 0
+    
+    if gap_pct < -5:
+        # Simple linear extrapolation: assume gap worsens by 10% relative per year if no action
+        # Current Loss Trend
+        current_loss_juta = block_data.get('loss_value_juta', 0)
+        
+        # Projected 3 Years Accumulation (Aggressive Decay)
+        # Year 1: Current Loss
+        # Year 2: Current Loss * 1.2
+        # Year 3: Current Loss * 1.5
+        y1 = current_loss_juta
+        y2 = current_loss_juta * 1.2
+        y3 = current_loss_juta * 1.5
+        projected_loss_3yr = round(y1 + y2 + y3, 1)
+        
+        # Years until insolvency (Cost > Revenue) - roughly when yield drops another 30%
+        # Assuming current age 17, vanishing point is usually around 20-22
+        years_to_zero = round(3 * (30 / abs(gap_pct)), 1) if abs(gap_pct) > 0 else 10
+        
+    block_data['years_to_zero'] = years_to_zero
+    block_data['projected_loss_3yr'] = projected_loss_3yr
+
+    # Classification Logic
+    # Yield History Analysis
+    h21 = census_info.get('hist_ton_2021', 0)
+    h22 = census_info.get('hist_ton_2022', 0)
+    h23 = census_info.get('hist_ton_2023', 0)
+    h24 = census_info.get('hist_ton_2024', 0)
+    h25 = census_info.get('hist_ton_2025', 0)
+    
+    luas = block_data.get('luas_ha', 1)
+    if luas and luas > 0:
+        y21 = h21 / luas
+        y22 = h22 / luas
+        y23 = h23 / luas
+        y24 = h24 / luas
+        y25 = h25 / luas
     else:
+        y21 = y22 = y23 = y24 = y25 = 0
+        
+    # Check consecutive drop sequences
+    # Sequence A: 2022 -> 2023 -> 2024
+    drop_22_24 = (y24 < y23) and (y23 < y22) and (y22 > 1) and (y24 > 1)
+    
+    # Sequence B: 2023 -> 2024 -> 2025
+    # Warning: 2025 is partial (SD Nov), so drops are expected. 
+    # Only flag if significant? Or just strict? User requested strict check.
+    drop_23_25 = (y25 < y24) and (y24 < y23) and (y23 > 1) and (y25 > 1)
+    
+    consecutive_drop = drop_22_24 or drop_23_25
+    
+    block_data['yield_history'] = {
+        '2021': round(y21, 1), 
+        '2022': round(y22, 1), 
+        '2023': round(y23, 1), 
+        '2024': round(y24, 1),
+        '2025': round(y25, 1)
+    }
+    block_data['consecutive_drop'] = consecutive_drop
+    block_data['drop_type'] = "2023-2025" if drop_23_25 else ("2022-2024" if drop_22_24 else None)
+
+    # Classification Logic (Vanishing Yield Phases)
+    vanishing_phase = 0
+    attack_rate = block_data.get('attack_rate', 0)
+    sph = block_data.get('sph', 130)
+    
+    # Priority 1: FASE 4 - INSOLVENCY (Operational Bankruptcy)
+    if sph < 100 or years_to_zero < 3:
+         vanishing_phase = 4
+         block_data['status_narrative'] = "INSOLVENCY"
+         block_data['status_desc'] = f"FASE 4 (CRITICAL): Populasi hancur (SPH {sph}) atau Bangkrut < 3 thn."
+         block_data['severity'] = "CRITICAL"
+
+    # Priority 2: FASE 3 - CRYPTIC COLLAPSE (The Silent Killer's Peak)
+    # Definition: High Gap (-15%), Low Visual Census (<5%), OR Years to Zero < 7
+    elif (gap_pct < -15 and census_rate < 5) or (years_to_zero < 7):
+         vanishing_phase = 3
+         block_data['status_narrative'] = "CRYPTIC COLLAPSE"
+         block_data['status_desc'] = f"FASE 3 (BAHAYA SENYAP): Yield anjlok ({gap_pct}%) tapi gejala visual minim ({census_rate}%). Akar kritis!"
+         block_data['severity'] = "CRITICAL"
+
+    # Priority 3: FASE 2 - ROOT DEGRADATION (Early Decline)
+    # Definition: Consecutive Drop identified OR Moderate Gap (-5 to -15%) with High AR
+    elif consecutive_drop or (gap_pct < -5 and attack_rate > 5):
+         vanishing_phase = 2
+         block_data['status_narrative'] = "ROOT DEGRADATION"
+         
+         if consecutive_drop:
+             trend_txt = f"Tren Turun 3 Tahun ({block_data['drop_type']})"
+         else:
+             trend_txt = f"Defisit {gap_pct}%"
+             
+         block_data['status_desc'] = f"FASE 2 (STRES AKAR): {trend_txt}. Penyerapan nutrisi terganggu."
+         block_data['severity'] = "HIGH"
+
+    # Priority 4: FASE 1 - SILENT INFECTION (Incubation)
+    elif attack_rate > 5:
+         vanishing_phase = 1
+         block_data['status_narrative'] = "SILENT INFECTION"
+         block_data['status_desc'] = f"FASE 1 (INKUBASI): Serangan {attack_rate}% terdeteksi, produksi masih normal/surplus."
+         block_data['severity'] = "MEDIUM"
+
+    else:
+         vanishing_phase = 0
          block_data['status_narrative'] = "STABLE"
-         block_data['status_desc'] = "Kondisi relatif stabil."
+         block_data['status_desc'] = "Kondisi relatif stabil. Tidak ada anomali signifikan."
+         block_data['severity'] = "LOW"
+         
+    block_data['vanishing_phase'] = vanishing_phase
     
     all_blocks_data[block_code] = block_data
     processed += 1
