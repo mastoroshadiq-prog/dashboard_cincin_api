@@ -111,29 +111,15 @@
             <div class="flex items-center gap-2 mb-2">
                 <span
                     class="bg-red-600 text-white px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest animate-pulse">
-                    Reality Check Briefing
-                </span>
-                <span class="opacity-20 font-black">|</span>
-                <span class="text-xs font-black uppercase tracking-widest flex items-center gap-1">
-                    ⏰ Update 31 Des 2025 • Blok F008A & D001A
+                    Strategic Asset Rescue
                 </span>
             </div>
-            <h1 class="text-3xl font-black text-black tracking-tighter">Analisis Krusialitas & Eskalasi Dampak</h1>
-            <p class="text-black mt-1 max-w-2xl font-black">
-                Transparansi Data Produksi: Bedah Gap Potensi vs Realisasi Lapangan (Tahun Produksi 2025).
+            <h1 class="text-3xl font-black text-black tracking-tighter">Executive Situation Room: Kesehatan Aset</h1>
+            <p class="text-black mt-1 max-w-3xl font-black">
+                Early Warning System: Deteksi 'Vanishing Yield' & Mitigasi Kebangkrutan Sebelum Terlambat.
             </p>
         </div>
 
-        <div class="flex p-1 bg-white rounded-xl shadow-sm border border-slate-200">
-            <button onclick="showTab('overview')" id="btn-overview"
-                class="tab-button px-6 py-2.5 rounded-lg text-sm font-black transition-all bg-indigo-600 text-white shadow-md">
-                Snapshot & Ekstrapolasi
-            </button>
-            <button onclick="showTab('scenarios')" id="btn-scenarios"
-                class="tab-button px-6 py-2.5 rounded-lg text-sm font-black transition-all text-black hover:bg-slate-50">
-                Reality Check: 3 Skenario
-            </button>
-        </div>
     </div>
 
 
@@ -141,6 +127,50 @@
     <div id="tab-overview" class="space-y-6">
 
         <!-- 2. INFORMASI POTENSI KERUGIAN (Dual Comparison - HEAD TO HEAD) -->
+        <!-- Skenario Finansial Interaktif (What-If) -->
+        <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-200 mb-8 mx-1 relative overflow-hidden">
+            <div
+                class="absolute top-0 right-0 w-64 h-64 bg-indigo-50 rounded-full blur-3xl opacity-50 -translate-y-1/2 translate-x-1/2">
+            </div>
+
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6 relative z-10">
+                <div class="flex items-start gap-4">
+                    <div class="bg-indigo-600 text-white p-3 rounded-2xl shadow-lg shadow-indigo-500/20">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2">
+                            <rect width="20" height="14" x="2" y="5" rx="2" />
+                            <line x1="2" x2="22" y1="10" y2="10" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-black text-slate-800 uppercase tracking-tight">Financial Simulator</h3>
+                        <p class="text-slate-500 text-sm font-medium">Sesuaikan <span
+                                class="text-indigo-600 font-bold">Harga TBS (Rp/Kg)</span> untuk melihat proyeksi
+                            kerugian real-time.</p>
+                    </div>
+                </div>
+
+                <div
+                    class="flex items-center gap-6 w-full md:w-auto bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                    <div class="flex-1 min-w-[200px]">
+                        <div class="flex justify-between text-[10px] font-black uppercase text-slate-400 mb-2">
+                            <span>Bearish (Rp 1.500)</span>
+                            <span>Bullish (Rp 4.000)</span>
+                        </div>
+                        <input type="range" id="priceSlider" min="1500" max="4000" step="50" value="2500"
+                            class="w-full h-3 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-indigo-600 hover:accent-indigo-500 transition-all">
+                    </div>
+                    <div
+                        class="bg-white border-2 border-indigo-100 px-5 py-2 rounded-xl text-center min-w-[120px] shadow-sm">
+                        <span class="text-[10px] font-black uppercase text-slate-400 block mb-1">Harga TBS</span>
+                        <div class="text-xl font-black text-indigo-700">
+                            Rp <span id="priceDisplay">2.500</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 relative mt-4">
             <div class="absolute inset-x-0 -top-6 text-center">
                 <span
@@ -416,9 +446,14 @@
                         <!-- Removed Selector -->
                         <div class="flex justify-between items-center text-white">
                             <span class="text-xl font-black uppercase tracking-tight" id="mapTitleLeft">--</span>
-                            <span class="text-xs bg-indigo-600 px-3 py-1 rounded-full font-black" id="mapARLeft">AR:
-                                --%</span>
+                            <div class="flex items-center gap-3">
+                                <span class="text-lg font-black text-white uppercase tracking-tight"
+                                    id="mapTotalLeft">Total: --</span>
+                                <span class="text-xs bg-indigo-600 px-3 py-1 rounded-full font-black" id="mapARLeft">AR:
+                                    --%</span>
+                            </div>
                         </div>
+
                     </div>
                     <div class="p-4 bg-slate-50 relative min-h-[500px] flex items-center justify-center">
                         <!-- Helper Text for Empty State -->
@@ -530,9 +565,15 @@
                         <!-- Removed Selector -->
                         <div class="flex justify-between items-center text-white">
                             <span class="text-xl font-black uppercase tracking-tight" id="mapTitleRight">--</span>
-                            <span class="text-xs bg-orange-600 px-3 py-1 rounded-full font-black" id="mapARRight">AR:
-                                --%</span>
+                            <div class="flex items-center gap-3">
+                                <span
+                                    class="text-[10px] font-bold text-slate-300 uppercase tracking-wider bg-slate-700/50 px-2 py-1 rounded"
+                                    id="mapTotalRight">Total: --</span>
+                                <span class="text-xs bg-orange-600 px-3 py-1 rounded-full font-black"
+                                    id="mapARRight">AR: --%</span>
+                            </div>
                         </div>
+
                     </div>
                     <div class="p-4 bg-slate-50 relative min-h-[500px] flex items-center justify-center">
                         <!-- Helper Text for Empty State -->
@@ -886,349 +927,232 @@
             </div>
         </div>
 
-    </div>
-
-    </div>
-
-    <!-- SECTION ANALISIS SPESIFIK SPH (NEW & IMPROVED) -->
-    <div
-        class="bg-gradient-to-br from-indigo-900 to-purple-900 rounded-[2rem] p-8 text-white shadow-2xl border border-indigo-500/30 mt-6 relative overflow-hidden">
-        <!-- Decorative Elements -->
+        <!-- SPH & EFFICIENCY ANALYSIS SECTION (NEW) -->
         <div
-            class="absolute top-0 right-0 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2">
-        </div>
-
-        <div class="flex items-center gap-4 mb-8 relative z-10">
-            <div class="p-4 bg-indigo-500/20 rounded-2xl border border-indigo-500/30 shadow-lg">
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" class="text-indigo-400">
-                    <path d="M7 20h10" />
-                    <path d="M10 20c0-1.33-.67-3-2-5 3.33 1 6 1 10-1-.67-1.33-2-2-2-4" />
-                    <path d="M9 11V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v1" />
-                </svg>
+            class="w-full mt-12 bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 rounded-[2.5rem] p-8 md:p-12 text-white shadow-2xl relative overflow-hidden border-2 border-indigo-500 ring-4 ring-indigo-900/40 col-span-full">
+            <!-- Background Decor -->
+            <div
+                class="absolute top-0 right-0 w-96 h-96 bg-indigo-500 rounded-full blur-[150px] opacity-10 pointer-events-none">
             </div>
-            <div>
-                <h2 class="text-3xl font-black uppercase tracking-tighter text-white">Analisis Kerapatan Tanam (SPH)
-                </h2>
-                <p class="text-indigo-200 text-sm font-bold mt-1 tracking-wide">The "Density Paradox": Hubungan SPH,
-                    Attack Rate & Produktivitas</p>
-            </div>
-        </div>
 
-        <!-- MAIN GRID CONTENT -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 relative z-10 mb-8">
-
-            <!-- COLUMN 1: MATRIX RISIKO SPH -->
-            <div class="lg:col-span-2 bg-white/5 backdrop-blur-sm p-6 rounded-3xl border border-indigo-500/20">
-                <h3 class="text-lg font-black uppercase text-white mb-6 flex items-center gap-2">
-                    <span class="text-indigo-400">📉 Matriks Risiko SPH</span>
-                    <span class="text-[10px] bg-indigo-600 px-2 py-0.5 rounded text-white">Panduan Keputusan</span>
-                </h3>
-
-                <!-- Visual Threshold Bar -->
-                <div class="relative h-4 bg-slate-700 rounded-full mb-12">
-                    <!-- Markers -->
-                    <div class="absolute top-0 left-0 h-full bg-red-600 rounded-l-full w-[30%]"></div> <!-- <100 -->
-                    <div class="absolute top-0 left-[30%] h-full bg-yellow-500 w-[20%]"></div> <!-- 100-120 -->
-                    <div class="absolute top-0 left-[50%] h-full bg-emerald-500 rounded-r-full w-[50%]"></div>
-                    <!-- >120 -->
-
-                    <!-- Labels -->
-                    <div class="absolute -top-8 left-[15%] -translate-x-1/2 text-center">
-                        <span class="text-red-400 font-black text-xs block">ZONE BAHAYA</span>
-                        <span class="text-[10px] text-slate-400">SPH < 100</span>
+            <div class="relative z-10">
+                <!-- Header -->
+                <div class="flex flex-col md:flex-row md:items-center gap-6 mb-8 border-b border-indigo-500/30 pb-6">
+                    <div
+                        class="w-16 h-16 bg-gradient-to-br from-indigo-500 to-indigo-700 rounded-2xl flex items-center justify-center text-3xl shadow-lg shadow-indigo-500/30">
+                        🌱
                     </div>
-                    <div class="absolute -top-8 left-[40%] -translate-x-1/2 text-center">
-                        <span class="text-yellow-400 font-black text-xs block">WARNING</span>
-                        <span class="text-[10px] text-slate-400">SPH 100-120</span>
-                    </div>
-                    <div class="absolute -top-8 right-[25%] -translate-x-1/2 text-center">
-                        <span class="text-emerald-400 font-black text-xs block">OPTIMAL / AMAN</span>
-                        <span class="text-[10px] text-slate-400">SPH > 120</span>
+                    <div>
+                        <div class="flex items-center gap-3 mb-1">
+                            <h2 class="text-3xl font-black uppercase tracking-tight text-white">Analisis Kerapatan (SPH)
+                            </h2>
+                            <span
+                                class="bg-red-600 text-white text-[10px] uppercase font-black px-2 py-0.5 rounded animate-pulse">New
+                                Feature</span>
+                        </div>
+                        <p class="text-indigo-200 mt-1 font-medium">The "Density Paradox": Hubungan SPH, Attack Rate &
+                            Efisiensi Biaya</p>
                     </div>
                 </div>
 
-                <!-- COLUMN 2: KEY INSIGHT (AHA MOMENT) -->
-                <div
-                    class="bg-indigo-950 p-6 rounded-3xl border border-indigo-500/40 flex flex-col justify-center relative overflow-hidden">
-                    <div class="absolute -right-4 -top-4 w-24 h-24 bg-indigo-500/20 rounded-full blur-xl"></div>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                    <!-- LEFT: Real-time Block Status -->
+                    <div class="bg-indigo-950/50 rounded-3xl p-8 border border-white/10 flex flex-col justify-between">
+                        <div>
+                            <div class="flex flex-col gap-4 mb-6">
+                                <div class="flex justify-between items-center">
+                                    <h4 class="text-xs font-black text-indigo-300 uppercase tracking-widest">Status Blok
+                                        Terpilih</h4>
 
-                    <h4 class="text-xl font-black text-white mb-4 relative z-10">🤔 The SPH Paradox</h4>
+                                    <!-- SPH Source Toggle -->
+                                    <div class="flex bg-indigo-900/50 rounded-lg p-1 border border-indigo-500/30">
+                                        <button id="btnSphManual"
+                                            class="px-3 py-1 text-[10px] font-black rounded transition-all bg-indigo-500 text-white shadow">BUKU</button>
+                                        <button id="btnSphDrone"
+                                            class="px-3 py-1 text-[10px] font-black rounded transition-all text-indigo-400 hover:text-white">DRONE</button>
+                                    </div>
+                                </div>
 
-                    <div class="space-y-4 relative z-10">
-                        <div class="flex gap-3">
-                            <div
-                                class="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center font-bold text-white shrink-0">
-                                A</div>
+                                <!-- Drone Sub-Filter (Hidden by default) -->
+                                <div id="panelDroneFilter"
+                                    class="hidden bg-black/20 p-2 rounded-lg border border-indigo-500/20 flex items-center justify-between transition-all">
+                                    <span class="text-[10px] font-bold text-indigo-200 uppercase">Mode Hitung:</span>
+                                    <label class="inline-flex items-center cursor-pointer">
+                                        <input type="checkbox" id="checkDroneAll" class="sr-only peer" checked>
+                                        <div
+                                            class="relative w-9 h-5 bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-emerald-500">
+                                        </div>
+                                        <span
+                                            class="ms-2 text-[10px] font-bold text-slate-300 peer-checked:text-emerald-300"
+                                            id="labelDroneMode">Hitung Semua (Sisipan)</span>
+                                    </label>
+                                </div>
+                            </div>
+
+
+                            <!-- Block A (Left) SPH Status -->
+                            <div class="mb-6">
+                                <div class="flex justify-between items-end mb-2">
+                                    <span class="text-sm font-bold opacity-80" id="sphTitleLeft">Blok A</span>
+                                    <div class="flex items-baseline gap-2">
+                                        <span class="text-3xl font-black" id="sphValueLeft">--</span>
+                                        <span id="sphDeltaLeft"
+                                            class="text-xs font-bold opacity-0 transition-opacity"></span>
+                                    </div>
+                                </div>
+                                <div class="h-4 bg-black/50 rounded-full overflow-hidden relative">
+                                    <div id="sphBarLeft" class="h-full bg-slate-500 transition-all duration-1000"
+                                        style="width: 0%"></div>
+                                </div>
+                                <div class="flex justify-between mt-2">
+                                    <span
+                                        class="text-[10px] uppercase font-black px-2 py-0.5 rounded bg-white/10 text-white"
+                                        id="sphStatusLeft">--</span>
+                                    <span class="text-xs italic opacity-60" id="sphDescLeft">Memuat data...</span>
+                                </div>
+                            </div>
+
+                            <!-- Block B (Right) SPH Status -->
                             <div>
-                                <p class="text-xs font-bold text-indigo-300 uppercase">Persepsi Umum</p>
-                                <p class="text-sm text-slate-300">"SPH Tinggi = Produksi Tinggi = Bagus"</p>
+                                <div class="flex justify-between items-end mb-2">
+                                    <span class="text-sm font-bold opacity-80" id="sphTitleRight">Blok B</span>
+                                    <div class="flex items-baseline gap-2">
+                                        <span class="text-3xl font-black" id="sphValueRight">--</span>
+                                        <span id="sphDeltaRight"
+                                            class="text-xs font-bold opacity-0 transition-opacity"></span>
+                                    </div>
+                                </div>
+                                <div class="h-4 bg-black/50 rounded-full overflow-hidden relative">
+                                    <div id="sphBarRight" class="h-full bg-slate-500 transition-all duration-1000"
+                                        style="width: 0%"></div>
+                                </div>
+                                <div class="flex justify-between mt-2">
+                                    <span
+                                        class="text-[10px] uppercase font-black px-2 py-0.5 rounded bg-white/10 text-white"
+                                        id="sphStatusRight">--</span>
+                                    <span class="text-xs italic opacity-60" id="sphDescRight">Memuat data...</span>
+                                </div>
                             </div>
                         </div>
 
-                        <div class="flex gap-3">
+                        <!-- Legend Bar -->
+                        <div class="mt-8 pt-6 border-t border-white/10">
+                            <div class="flex text-[9px] uppercase font-black tracking-widest text-center mb-1">
+                                <div class="w-1/3 text-red-400">Insolvency (&lt;100)</div>
+                                <div class="w-1/3 text-yellow-400">Warning (100-120)</div>
+                                <div class="w-1/3 text-emerald-400">Optimal (120-136)</div>
+                            </div>
                             <div
-                                class="w-8 h-8 rounded-lg bg-red-600 flex items-center justify-center font-bold text-white shrink-0">
-                                B</div>
-                            <div>
-                                <p class="text-xs font-bold text-red-300 uppercase">Realita Lapangan</p>
-                                <p class="text-sm text-slate-300">SPH Tinggi (>130) pada usia tua (>15th) memicu
-                                    <span class="text-white font-bold">Root Contact</span> yang masif.
-                                </p>
+                                class="h-2 w-full rounded-full bg-gradient-to-r from-red-500 via-yellow-400 to-emerald-500">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- RIGHT: The Paradox Education (Static from Image) -->
+                    <div class="space-y-6">
+                        <div class="bg-indigo-800/40 p-6 rounded-2xl border-l-4 border-indigo-400">
+                            <h4 class="text-lg font-black text-white mb-4 flex items-center gap-2">
+                                🤔 The SPH Paradox
+                            </h4>
+                            <div class="space-y-4">
+                                <div class="flex gap-4">
+                                    <div
+                                        class="w-8 h-8 rounded bg-indigo-500 text-white flex items-center justify-center font-black shrink-0">
+                                        A</div>
+                                    <div>
+                                        <p class="text-xs font-black text-indigo-300 uppercase tracking-widest">
+                                            Persepsi Umum
+                                        </p>
+                                        <p class="text-sm text-indigo-50 leading-relaxed">"SPH Tinggi = Populasi
+                                            Banyak = Produksi
+                                            Pasti Tinggi."</p>
+                                    </div>
+                                </div>
+                                <div class="flex gap-4">
+                                    <div
+                                        class="w-8 h-8 rounded bg-red-500 text-white flex items-center justify-center font-black shrink-0">
+                                        B</div>
+                                    <div>
+                                        <p class="text-xs font-black text-red-300 uppercase tracking-widest">Realita
+                                            Lapangan
+                                        </p>
+                                        <p class="text-sm text-indigo-50 leading-relaxed">Pada tanaman tua (>15th),
+                                            SPH >130
+                                            justru memicu <strong>Root Contact</strong> (Kontak Akar) masif. Satu
+                                            pohon sakit
+                                            bisa menularkan ke 6 tetangga hanya dalam 6 bulan.</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
-                        <div class="bg-black/30 p-4 rounded-xl border border-indigo-500/30 mt-2">
-                            <p class="text-xs text-white leading-relaxed font-bold">
-                                "Satu pohon sakit di SPH tinggi bisa membunuh 6 tetangganya dalam 6 bulan karena
-                                akar saling bersentuhan."
-                            </p>
+                        <!-- 3 ICONS MATRIX (Match Screenshot) -->
+                        <div class="bg-black/20 rounded-2xl p-6 border border-white/5">
+                            <div class="grid grid-cols-3 gap-4 text-center">
+                                <!-- Icon 1 -->
+                                <div class="flex flex-col items-center">
+                                    <div
+                                        class="w-10 h-10 mb-2 rounded-full bg-indigo-500/20 flex items-center justify-center text-indigo-400">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+                                            <path d="M3 3v5h5" />
+                                            <path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16" />
+                                            <path d="M16 21h5v-5" />
+                                        </svg>
+                                    </div>
+                                    <h5 class="text-xs font-black uppercase text-slate-400 tracking-widest mb-3">
+                                        Status Kontak Akar</h5>
+                                    <div class="space-y-2">
+                                        <p class="text-xs text-white">SPH &gt; 120:<br><span
+                                                class="text-red-400 font-bold bg-red-900/40 px-2 py-0.5 rounded text-xs mt-1 inline-block">HIGH
+                                                RISK</span></p>
+                                        <p class="text-xs text-white">SPH &lt; 120:<br><span
+                                                class="text-yellow-400 font-bold bg-yellow-900/40 px-2 py-0.5 rounded text-xs mt-1 inline-block">MEDIUM</span>
+                                        </p>
+                                    </div>
+
+                                </div>
+                                <!-- Icon 2 -->
+                                <div class="flex flex-col items-center border-l border-white/10 pl-4">
+                                    <div
+                                        class="w-10 h-10 mb-2 rounded-full bg-orange-500/20 flex items-center justify-center text-orange-400">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <circle cx="12" cy="12" r="10" />
+                                            <polyline points="12 6 12 12 16 14" />
+                                        </svg>
+                                    </div>
+                                    <h5 class="text-xs font-black uppercase text-slate-400 tracking-widest mb-3">
+                                        Kecepatan Sebar</h5>
+                                    <p class="text-xs text-white leading-normal">Pada SPH tinggi, laju infeksi bisa
+                                        mencapai <span class="font-bold text-orange-400 text-sm">2.5% per tahun</span>
+                                        tanpa
+                                        mitigasi.</p>
+
+                                </div>
+                                <!-- Icon 3 -->
+                                <div class="flex flex-col items-center border-l border-white/10 pl-4">
+                                    <div
+                                        class="w-10 h-10 mb-2 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-400">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+                                        </svg>
+                                    </div>
+                                    <h5 class="text-xs font-black uppercase text-slate-400 tracking-widest mb-3">
+                                        Ambang Batas</h5>
+                                    <p class="text-3xl font-black text-white leading-none mb-2">SPH 100</p>
+                                    <p class="text-[11px] text-slate-400 leading-tight font-medium">Titik Kritis Ekonomi
+                                        (BEP)</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-
             </div>
 
-            <!-- COMPARISON METRICS SECTION -->
-            <div class="bg-slate-900/50 rounded-2xl p-6 border border-white/5">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-
-                    <!-- Metric 1: Kontak Akar -->
-                    <div class="text-center group">
-                        <div
-                            class="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-indigo-600/20 text-indigo-400 mb-3 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
-                                <path d="M3 3v5h5" />
-                                <path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16" />
-                                <path d="M16 21h5v-5" />
-                            </svg>
-                        </div>
-                        <h5 class="text-xs font-black uppercase text-slate-400 tracking-widest mb-1">Status Kontak
-                            Akar</h5>
-                        <p class="text-white font-bold text-sm">SPH > 120: <span
-                                class="text-red-400 bg-red-900/30 px-2 py-0.5 rounded">HIGH RISK</span></p>
-                        <p class="text-white font-bold text-sm mt-1">SPH < 120: <span
-                                class="text-yellow-400 bg-yellow-900/30 px-2 py-0.5 rounded">MEDIUM</span></p>
-                    </div>
-
-                    <!-- Metric 2: Infection Rate Speed -->
-                    <div class="text-center group">
-                        <div
-                            class="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-orange-600/20 text-orange-400 mb-3 group-hover:bg-orange-600 group-hover:text-white transition-all duration-300">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="12" cy="12" r="10" />
-                                <line x1="12" y1="8" x2="12" y2="12" />
-                                <line x1="12" y1="16" x2="12.01" y2="16" />
-                            </svg>
-                        </div>
-                        <h5 class="text-xs font-black uppercase text-slate-400 tracking-widest mb-1">Kecepatan Sebar
-                        </h5>
-                        <p class="text-xs text-slate-300 px-4">Pada SPH tinggi, laju infeksi bisa mencapai <span
-                                class="text-white font-bold">2.5% per tahun</span> tanpa mitigasi.</p>
-                    </div>
-
-                    <!-- Metric 3: Critical Threshold -->
-                    <div class="text-center group">
-                        <div
-                            class="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-emerald-600/20 text-emerald-400 mb-3 group-hover:bg-emerald-600 group-hover:text-white transition-all duration-300">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2">
-                                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
-                            </svg>
-                        </div>
-                        <h5 class="text-xs font-black uppercase text-slate-400 tracking-widest mb-1">Ambang Batas
-                        </h5>
-                        <p class="text-2xl font-black text-white">SPH 100</p>
-                        <p class="text-[10px] text-slate-400">Titik Kritis Ekonomi (BEP)</p>
-                    </div>
-
-                </div>
-            </div>
         </div>
-
-    </div>
-
-    <!-- ========== TAB SCENARIOS ========== -->
-    <div id="tab-scenarios" class="space-y-6" style="display: none;">
-
-        <!-- Indikator Status Transisi -->
-        <div
-            class="bg-white p-8 rounded-3xl shadow-sm border border-slate-200 flex flex-col md:flex-row items-center justify-between gap-6">
-            <div class="flex items-center gap-6">
-                <div class="p-5 bg-orange-100 rounded-3xl">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" class="text-orange-600">
-                        <path
-                            d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2" />
-                    </svg>
-                </div>
-                <div>
-                    <h3 class="text-2xl font-black uppercase tracking-tighter italic">Status Transisi Krisis</h3>
-                    <p class="text-lg font-black">Analisis Faktual: <span
-                            class="text-orange-600 underline decoration-4">STANDAR</span> bergerak menuju <span
-                            class="text-red-600 underline decoration-4">AGRESIF</span></p>
-                </div>
-            </div>
-            <div
-                class="flex items-center gap-1 w-full md:w-80 bg-slate-100 h-5 rounded-full overflow-hidden border-2 border-slate-200 shadow-inner">
-                <div class="h-full bg-slate-400" style="width: 33%"></div>
-                <div class="h-full bg-orange-500 animate-pulse" style="width: 33%"></div>
-                <div class="h-full bg-slate-200" style="width: 34%"></div>
-            </div>
-        </div>
-
-        <!-- 3 Skenario Cards -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <!-- Konservatif -->
-            <div class="relative p-8 rounded-[2.5rem] border-4 transition-all bg-slate-50 border-slate-200 opacity-60">
-                <div class="mb-8">
-                    <span class="text-xs font-black uppercase tracking-widest text-black">STATUS QUO</span>
-                    <h4 class="text-2xl font-black text-black mt-1 uppercase tracking-tighter">1. KONSERVATIF</h4>
-                </div>
-                <div class="space-y-5 mb-8 text-sm">
-                    <div class="flex justify-between border-b-2 border-slate-200 pb-3">
-                        <span class="uppercase tracking-widest opacity-60 font-black">Asumsi Dasar</span>
-                        <span class="font-black">Penyakit Dianggap Diam</span>
-                    </div>
-                    <div class="flex justify-between border-b-2 border-slate-200 pb-3">
-                        <span class="uppercase tracking-widest opacity-60 font-black">Respons Oleh</span>
-                        <span class="font-black">Asisten Divisi</span>
-                    </div>
-                    <div class="flex justify-between items-center py-4">
-                        <span class="text-xs uppercase tracking-wider opacity-60 font-black">Potensi Dampak</span>
-                        <span class="text-2xl font-black text-black">Rp 0.2 M (Eksisting)</span>
-                    </div>
-                </div>
-                <div
-                    class="p-5 rounded-3xl bg-slate-100 text-black text-sm font-black italic border border-slate-300 leading-relaxed shadow-inner">
-                    "Asumsi penyebaran berhenti. Namun kerugian Rp 0.2 M sudah tidak berkelanjutan secara
-                    operasional."
-                </div>
-                <div class="mt-8 flex items-center gap-3 text-xs font-black uppercase tracking-widest">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="10" />
-                        <path d="M12 16v-4" />
-                        <path d="M12 8h.01" />
-                    </svg>
-                    Status Analisis: TIDAK REALISTIS
-                </div>
-            </div>
-
-            <!-- Standar -->
-            <div
-                class="relative p-8 rounded-[2.5rem] border-4 transition-all bg-white border-orange-500 shadow-2xl scale-135 z-10">
-                <div
-                    class="absolute -top-4 left-1/2 -translate-x-1/2 bg-orange-600 text-white text-[10px] font-black px-6 py-1.5 rounded-full shadow-lg tracking-widest uppercase">
-                    Target Intervensi</div>
-                <div class="mb-8">
-                    <span class="text-xs font-black uppercase tracking-widest text-orange-600">THE REAL
-                        THREAT</span>
-                    <h4 class="text-2xl font-black text-black mt-1 uppercase tracking-tighter">2. STANDAR</h4>
-                </div>
-                <div class="space-y-5 mb-8 text-sm">
-                    <div class="flex justify-between border-b-2 border-slate-200 pb-3">
-                        <span class="uppercase tracking-widest opacity-60 font-black">Asumsi Dasar</span>
-                        <span class="font-black">Cincin Api Menular</span>
-                    </div>
-                    <div class="flex justify-between border-b-2 border-slate-200 pb-3">
-                        <span class="uppercase tracking-widest opacity-60 font-black">Respons Oleh</span>
-                        <span class="font-black">Manajer Kebun</span>
-                    </div>
-                    <div class="flex justify-between items-center py-4">
-                        <span class="text-xs uppercase tracking-wider opacity-60 font-black">Potensi Dampak</span>
-                        <span class="text-2xl font-black text-orange-600">+ Rp 45.3 Juta</span>
-                    </div>
-                </div>
-                <div
-                    class="p-5 rounded-3xl bg-slate-100 text-black text-sm font-black italic border border-slate-300 leading-relaxed shadow-inner">
-                    "Zona Ring tertular aktif. Kepadatan (SPH) jatuh di bawah ambang batas ekonomi."
-                </div>
-                <div class="mt-8 flex items-center gap-3 text-xs font-black uppercase tracking-widest">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" class="text-orange-600">
-                        <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" />
-                        <path d="m9 12 2 2 4-4" />
-                    </svg>
-                    Status Analisis: POSISI SAAT INI
-                </div>
-            </div>
-
-            <!-- Agresif -->
-            <div class="relative p-8 rounded-[2.5rem] border-4 transition-all bg-slate-50 border-slate-200 opacity-60">
-                <div class="mb-8">
-                    <span class="text-xs font-black uppercase tracking-widest text-black">OUTBREAK</span>
-                    <h4 class="text-2xl font-black text-black mt-1 uppercase tracking-tighter">3. AGRESIF</h4>
-                </div>
-                <div class="space-y-5 mb-8 text-sm">
-                    <div class="flex justify-between border-b-2 border-slate-200 pb-3">
-                        <span class="uppercase tracking-widest opacity-60 font-black">Asumsi Dasar</span>
-                        <span class="font-black">Ledakan Infeksi Masif</span>
-                    </div>
-                    <div class="flex justify-between border-b-2 border-slate-200 pb-3">
-                        <span class="uppercase tracking-widest opacity-60 font-black">Respons Oleh</span>
-                        <span class="font-black">Direksi / GM</span>
-                    </div>
-                    <div class="flex justify-between items-center py-4">
-                        <span class="text-xs uppercase tracking-wider opacity-60 font-black">Potensi Dampak</span>
-                        <span class="text-2xl font-black text-black">+ Rp 152.7 Juta</span>
-                    </div>
-                </div>
-                <div
-                    class="p-5 rounded-3xl bg-slate-100 text-black text-sm font-black italic border border-slate-300 leading-relaxed shadow-inner">
-                    "Inokulum jenuh. Blok kolaps total. Membutuhkan Replanting darurat dengan biaya katastropik."
-                </div>
-                <div class="mt-8 flex items-center gap-3 text-xs font-black uppercase tracking-widest">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="10" />
-                        <path d="M12 16v-4" />
-                        <path d="M12 8h.01" />
-                    </svg>
-                    Status Analisis: AMBANG KOLAPS
-                </div>
-            </div>
-        </div>
-
-
-
-        <!-- Panel The Wake Up Call -->
-        <div
-            class="bg-slate-950 rounded-[3rem] p-10 text-white shadow-2xl relative overflow-hidden border border-white/10">
-            <div class="absolute -bottom-10 -right-10 opacity-10 pointer-events-none rotate-12">
-                <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2">
-                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10" />
-                    <path d="m9 12 2 2 4-4" />
-                </svg>
-            </div>
-            <div class="relative z-10 flex items-center gap-8">
-                <div class="p-6 bg-white/10 rounded-[2rem] backdrop-blur-lg border border-white/20 shadow-xl">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" class="text-indigo-400">
-                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10" />
-                        <path d="m9 12 2 2 4-4" />
-                    </svg>
-                </div>
-                <div class="flex-1">
-                    <h4
-                        class="text-4xl font-black uppercase italic tracking-tighter mb-2 underline decoration-indigo-500 decoration-8 underline-offset-8">
-                        The Wake Up Call</h4>
-                    <p class="text-xl text-white max-w-4xl font-black leading-snug mt-6">
-                        Investasi mitigasi <span class="text-indigo-400 underline underline-offset-4 decoration-4">Rp
-                            100 Juta</span> vs
-                        Risiko kehilangan aset produktif senilai <span
-                            class="text-red-500 underline underline-offset-4 decoration-4">Rp 56.1 Miliar</span>.
-                        Data biologi dan Gap Produksi 95% adalah bukti konkrit bahwa status saat ini berada di
-                        ambang kolaps (Agresif).
-                    </p>
-                </div>
-            </div>
-        </div>
-
     </div>
 
     </div>
@@ -1240,11 +1164,11 @@
         <div id="infoModal"
             class="hidden fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm transition-opacity duration-300 opacity-0 pointer-events-none">
             <div
-                class="bg-slate-900 rounded-3xl border border-white/10 shadow-2xl max-w-3xl w-full mx-4 transform transition-all scale-95 duration-300 overflow-hidden relative">
+                class="bg-slate-900 rounded-3xl border border-white/10 shadow-2xl max-w-3xl w-full mx-4 transform transition-all scale-95 duration-300 overflow-hidden relative flex flex-col max-h-[90vh]">
 
                 <!-- Modal Header -->
                 <div id="modalHeader"
-                    class="bg-gradient-to-r from-slate-900 to-slate-800 p-8 border-b border-white/5 flex justify-between items-center">
+                    class="bg-gradient-to-r from-slate-900 to-slate-800 p-8 border-b border-white/5 flex justify-between items-center shrink-0">
                     <h3 id="modalTitle" class="text-3xl font-black uppercase tracking-wider text-white">Title</h3>
                     <button onclick="closeModal()" class="text-white/50 hover:text-white transition-colors">
                         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
@@ -1257,7 +1181,7 @@
                 </div>
 
                 <!-- Modal Content -->
-                <div id="modalContent" class="p-10 text-slate-300 leading-relaxed text-lg">
+                <div id="modalContent" class="p-10 text-slate-300 leading-relaxed text-lg overflow-y-auto">
                     <!-- Dynamic Content -->
                 </div>
 
@@ -1368,6 +1292,10 @@
         <!-- Comprehensive Interactive Controller -->
         <script>
             let currentBlockData = null;
+            let TBS_PRICE = 2500; // Default Price
+            let SPH_SOURCE = 'MANUAL'; // 'MANUAL' or 'DRONE'
+            let DRONE_MODE = 'ALL'; // 'ALL' or 'MAIN'
+
 
             // Initialize on page load
             window.addEventListener('DOMContentLoaded', function () {
@@ -1383,6 +1311,37 @@
 
                 // Initial Load Logic
                 populateGlobalDropdowns();
+
+                // PRICE SLIDER LISTENER (Optimized)
+                const priceSlider = document.getElementById('priceSlider');
+                const priceDisplay = document.getElementById('priceDisplay');
+
+                if (priceSlider && priceDisplay) {
+                    // Update on drag (input) and release (change)
+                    ['input', 'change'].forEach(evt => {
+                        priceSlider.addEventListener(evt, (e) => {
+                            const newVal = parseInt(e.target.value);
+                            TBS_PRICE = newVal;
+                            priceDisplay.textContent = newVal.toLocaleString('id-ID');
+
+                            // 1. Get current selections
+                            const selLeft = document.getElementById('globalSelectorLeft');
+                            const selRight = document.getElementById('globalSelectorRight');
+
+                            // 2. Force recalculate Left
+                            if (selLeft && selLeft.value && BLOCKS_DATA[selLeft.value]) {
+                                calculateAndSetLoss('Left', BLOCKS_DATA[selLeft.value]);
+                            }
+
+                            // 3. Force recalculate Right
+                            if (selRight && selRight.value && BLOCKS_DATA[selRight.value]) {
+                                calculateAndSetLoss('Right', BLOCKS_DATA[selRight.value]);
+                            }
+                        });
+                    });
+                } else {
+                    console.error("Slider Element Not Found!");
+                }
 
                 // Set Event Listeners
                 document.getElementById('globalSelectorLeft').addEventListener('change', (e) => {
@@ -1422,6 +1381,57 @@
                         const el = document.getElementById(id);
                         if (el) el.innerHTML = defOpt;
                     });
+
+                    // SPH CONTROLS LISTENERS
+                    const btnManual = document.getElementById('btnSphManual');
+                    const btnDrone = document.getElementById('btnSphDrone');
+                    const panelFilter = document.getElementById('panelDroneFilter');
+                    const checkAll = document.getElementById('checkDroneAll');
+                    const labelMode = document.querySelector('#panelDroneFilter label span'); // Adjusted selector
+
+                    if (btnManual && btnDrone) {
+                        btnManual.addEventListener('click', () => {
+                            SPH_SOURCE = 'MANUAL';
+                            updateSphUI();
+                            refreshBlockData();
+                        });
+
+                        btnDrone.addEventListener('click', () => {
+                            SPH_SOURCE = 'DRONE';
+                            updateSphUI();
+                            refreshBlockData();
+                        });
+                    }
+
+                    if (checkAll) {
+                        checkAll.addEventListener('change', (e) => {
+                            DRONE_MODE = e.target.checked ? 'ALL' : 'MAIN';
+                            if (labelMode) labelMode.textContent = e.target.checked ? 'Hitung Sisipan' : 'Pokok Utama Saja'; // Adjusted text
+                            refreshBlockData();
+                        });
+                    }
+
+                    function updateSphUI() {
+                        if (SPH_SOURCE === 'MANUAL') {
+                            btnManual.className = "px-3 py-1 text-[10px] font-black rounded transition-all bg-indigo-500 text-white shadow";
+                            btnDrone.className = "px-3 py-1 text-[10px] font-black rounded transition-all text-indigo-400 hover:text-white";
+                            panelFilter.classList.add('hidden');
+                        } else {
+                            btnManual.className = "px-3 py-1 text-[10px] font-black rounded transition-all text-indigo-400 hover:text-white";
+                            btnDrone.className = "px-3 py-1 text-[10px] font-black rounded transition-all bg-indigo-500 text-white shadow";
+                            panelFilter.classList.remove('hidden');
+                        }
+                    }
+
+                    function refreshBlockData() {
+                        const l = document.getElementById('globalSelectorLeft').value;
+                        const r = document.getElementById('globalSelectorRight').value;
+                        if (l) updateBlockData('Left', l);
+                        if (r) updateBlockData('Right', r);
+                    }
+
+                    // Initial UI state for SPH controls
+                    updateSphUI();
                 }
 
                 function updateBlockData(side, blockCode) {
@@ -1439,6 +1449,15 @@
 
                     const data = BLOCKS_DATA[blockCode];
 
+                    // CALC SPH (Centralized)
+                    let currentSph = data.sph;
+                    let labelSuffix = "";
+                    if (SPH_SOURCE === 'DRONE') {
+                        currentSph = (DRONE_MODE === 'ALL') ? (data.drone_sph_all || 0) : (data.drone_sph_main || 0);
+                        labelSuffix = (DRONE_MODE === 'ALL') ? "*" : "";
+                    }
+
+
                     // 1. FINANCIAL SECTION Update
                     // 1. FINANCIAL SECTION Update
                     const finTitle = document.getElementById(`finTitle${side}`);
@@ -1454,7 +1473,9 @@
                     const finMitigasi = document.getElementById(`finMitigasi${side}`);
 
                     if (finTitle) finTitle.textContent = blockCode;
-                    if (finLoss) finLoss.textContent = data.loss_value_juta;
+
+                    // Dynamic Loss Calculation
+                    calculateAndSetLoss(side, data);
 
                     if (finPot) finPot.textContent = data.potensi_ton_ha;
                     if (finReal) finReal.textContent = data.realisasi_ton_ha;
@@ -1553,7 +1574,7 @@
                     }
 
                     if (finLuas) finLuas.textContent = `${data.luas_ha} Ha`;
-                    if (finSph) finSph.textContent = data.sph;
+                    if (finSph) finSph.textContent = currentSph + labelSuffix;
 
                     // New Fields Population
                     const finTT = document.getElementById(`finTT${side}`);
@@ -1637,17 +1658,22 @@
                                 let reasoning = "";
 
                                 if (vanishingPhase === 4) {
-                                    reasoning = `Diagnosa <strong>INSOLVENCY</strong> (Kebangkrutan) ditegakkan karena kondisi kebun sudah tidak layak operasional. `;
-                                    if (sph < 100) reasoning += `Populasi tanaman produktif telah anjlok drastis (SPH hanya <strong class="text-red-400">${sph}</strong>) akibat kematian massal yang tidak tergantikan.`;
-                                    else reasoning += `Proyeksi kebangkrutan operasional sangat dekat (<strong class="text-red-400">${years} tahun</strong> lagi) berdasarkan laju degradasi yield saat ini.`;
+                                    reasoning = `Diagnosa <strong>KEBANGKRUTAN OPERASIONAL (Insolvency)</strong> statusnya sudah <strong>Permanen</strong>. `;
+                                    if (sph < 100) {
+                                        reasoning += `Penyebab utama adalah <strong>Kehilangan Populasi Masif</strong>. Standar normal populasi adalah ~136 pohon/Ha, namun blok ini hanya memiliki <strong class="text-red-400 text-xl">${sph} pohon/Ha</strong> (Kehilangan >30% Aset).<br><br>
+                                        Meski yield terlihat tertolong oleh <strong>'Efek Kompensasi'</strong> (pohon sisa tumbuh lebih besar karena nutrisi berlebih), biaya perawatan per-hektar (pupuk/semprot) menjadi <strong>Pemborosan Besar</strong> karena dibebankan pada populasi yang terlalu sedikit. Blok ini secara hitungan bisnis sudah merugi.`;
+                                    } else {
+                                        reasoning += `Penyebab utama adalah <strong>Penurunan Hasil yang Ekstrim</strong>. Meski populasi masih ada, proyeksi hitungan balik modal (Break Event) tersisa kurang dari <strong class="text-red-400 text-xl">${years} tahun</strong>.<br><br>
+                                        Mempertahankan blok ini tanpa tindakan radikal hanya akan membebani <strong>Arus Kas (Cash Flow)</strong> perusahaan dalam jangka pendek.`;
+                                    }
                                 } else if (vanishingPhase === 3) {
-                                    reasoning = `Diagnosa <strong>CRYPTIC COLLAPSE</strong> ditegakkan karena adanya <strong>Diskrepansi Ekstrim</strong>: Yield anjlok signifikan (Gap <strong class="text-red-400">${gap}%</strong>) sementara gejala visual di daun/batang masih minim (Sensus hanya <strong class="text-yellow-300">${census}%</strong>).<br><br>Ini indikator klasik bahwa kerusakan terbesar terjadi di sistem perakaran (tidak terlihat mata), membuat tanaman 'mati kelaparan' meski terlihat hijau.`;
+                                    reasoning = `Diagnosa <strong>CRYPTIC COLLAPSE (Keruntuhan Senyap)</strong> ditegakkan karena adanya <strong>Perbedaan Data yang Mencolok</strong>: Yield anjlok signifikan (Gap <strong class="text-red-400">${gap}%</strong>) sementara gejala visual di daun/batang masih minim (Sensus hanya <strong class="text-yellow-300">${census}%</strong>).<br><br>Ini tanda pasti bahwa kerusakan terbesar terjadi di sistem perakaran (tidak terlihat mata), membuat tanaman 'kelaparan' meski daun terlihat hijau.`;
                                 } else if (vanishingPhase === 2) {
-                                    reasoning = `Diagnosa <strong>ROOT DEGRADATION</strong> (Stres Akar) ditegakkan karena indikator penyerapan nutrisi terganggu jelas terlihat. `;
+                                    reasoning = `Diagnosa <strong>ROOT DEGRADATION (Kerusakan Akar)</strong> ditegakkan karena indikator penyerapan nutrisi terganggu jelas terlihat. `;
                                     if (data.consecutive_drop) reasoning += `Telah terjadi <strong>Penurunan Yield 3 Tahun Berturut-turut</strong>, tanda pasti bahwa sistem akar gagal mendukung produktivitas.`;
                                     else reasoning += `Defisit produksi telah terjadi (Gap <strong class="text-orange-400">${gap}%</strong>) seiring dengan tingkat serangan Ganoderma yang signifikan (<strong class="text-orange-400">${ar}%</strong>).`;
                                 } else if (vanishingPhase === 1) {
-                                    reasoning = `Diagnosa <strong>SILENT INFECTION</strong> (Inkubasi) ditegakkan karena serangan Ganoderma terdeteksi cukup tinggi (<strong class="text-yellow-300">${ar}%</strong>) namun belum berdampak signifikan pada penurunan produksi (Gap Yield masih di level <strong class="text-emerald-400">${gap}%</strong>).<br><br>Ini adalah <strong>Golden Period</strong> untuk intervensi sebelum masuk fase kerusakan hasil.`;
+                                    reasoning = `Diagnosa <strong>SILENT INFECTION (Infeksi Tersembunyi)</strong> ditegakkan karena serangan Ganoderma terdeteksi cukup tinggi (<strong class="text-yellow-300">${ar}%</strong>) namun belum berdampak signifikan pada penurunan produksi (Gap Yield masih di level <strong class="text-emerald-400">${gap}%</strong>).<br><br>Ini adalah <strong>Periode Emas (Waktu Terbaik)</strong> untuk pengobatan sebelum terlambat.`;
                                 }
 
                                 const content = `
@@ -1755,6 +1781,9 @@
                     if (document.getElementById(`mapTitle${side}`)) document.getElementById(`mapTitle${side}`).textContent = `Blok ${blockCode}`;
                     if (document.getElementById(`mapAR${side}`)) document.getElementById(`mapAR${side}`).textContent = `AR: ${data.attack_rate}%`;
 
+                    const totalTrees = (data.merah || 0) + (data.oranye || 0) + (data.kuning || 0) + (data.hijau || 0);
+                    if (document.getElementById(`mapTotal${side}`)) document.getElementById(`mapTotal${side}`).textContent = `Total: ${totalTrees.toLocaleString()}`;
+
                     if (document.getElementById(`mapInti${side}`)) document.getElementById(`mapInti${side}`).textContent = data.merah;
                     if (document.getElementById(`mapRing${side}`)) document.getElementById(`mapRing${side}`).textContent = data.oranye;
                     if (document.getElementById(`mapSuspect${side}`)) document.getElementById(`mapSuspect${side}`).textContent = data.kuning;
@@ -1767,14 +1796,14 @@
                         const diff = ndreVal - sensusVal;
 
                         let insight = "";
-                        let methodBadge = `< span class="block mt-2 text-[10px] text-indigo-800 bg-indigo-100 border border-indigo-200 px-2 py-1 rounded w-fit font-bold" >🛠️ Metodologi: Algoritma V8(Hibrida Z - Score + Spatial Clustering)</span > `;
+                        let methodBadge = `<span class="block mt-2 text-[10px] text-indigo-800 bg-indigo-100 border border-indigo-200 px-2 py-1 rounded w-fit font-bold">🛠️ Metodologi: Algoritma V8 (Hibrida Z-Score + Spatial Clustering)</span>`;
 
                         if (diff > 2.0) {
-                            insight = `Deteksi NDRE(${ndreVal} %) > Sensus(${sensusVal} %).Mengindikasikan < span class="text-orange-600 font-black" > SYMPTOM LAG</span >: Infeksi akar terdeteksi satelit sebelum gejala visual muncul.`;
+                            insight = `Deteksi NDRE (${ndreVal}%) > Sensus (${sensusVal}%). Mengindikasikan <span class="text-orange-600 font-black">SYMPTOM LAG</span>: Infeksi akar terdeteksi satelit sebelum gejala visual muncul.`;
                         } else if (diff < -2.0) {
-                            insight = `Deteksi NDRE(${ndreVal} %) < Sensus(${sensusVal} %).Gejala visual dominan, namun kanopi mungkin masih hijau(False Negative).`;
+                            insight = `Deteksi NDRE (${ndreVal}%) < Sensus (${sensusVal}%). Gejala visual dominan, namun kanopi mungkin masih hijau (False Negative).`;
                         } else {
-                            insight = `Deteksi selaras(Selisih < 2 %).Konfirmasi visual lapangan presisi dengan citra satelit.`;
+                            insight = `Deteksi selaras (Selisih < 2%). Konfirmasi visual lapangan presisi dengan citra satelit.`;
                         }
 
                         if (data.gap_pct < 0) {
@@ -1788,6 +1817,82 @@
                     if (document.getElementById(`recBlock${side}`)) document.getElementById(`recBlock${side}`).textContent = blockCode;
                     if (document.getElementById(`recAR${side}`)) document.getElementById(`recAR${side}`).textContent = `${data.attack_rate}%`;
                     if (document.getElementById(`recSaved${side}`)) document.getElementById(`recSaved${side}`).textContent = `${data.hijau.toLocaleString()} pohon`;
+
+
+                    // ---------------------------------------------------------
+                    // SPH & EFFICIENCY ANALYSIS UPDATE
+                    // ---------------------------------------------------------
+                    const sphTitle = document.getElementById(`sphTitle${side}`);
+                    const sphValue = document.getElementById(`sphValue${side}`);
+                    const sphDelta = document.getElementById(`sphDelta${side}`); // New Element
+                    const sphBar = document.getElementById(`sphBar${side}`);
+                    const sphStatus = document.getElementById(`sphStatus${side}`);
+                    const sphDesc = document.getElementById(`sphDesc${side}`);
+
+                    if (sphTitle && sphValue && sphBar) {
+                        sphTitle.textContent = `Blok ${blockCode}`;
+                        sphValue.textContent = currentSph + labelSuffix;
+
+                        // DELTA CALCULATION
+                        if (sphDelta) {
+                            if (SPH_SOURCE === 'DRONE') {
+                                // Calculate Delta against Manual Book (data.sph)
+                                const delta = Math.round((currentSph - data.sph) * 10) / 10;
+                                const sign = delta > 0 ? "+" : "";
+                                sphDelta.textContent = `(${sign}${delta})`;
+                                sphDelta.classList.remove('opacity-0');
+
+                                if (delta > 0) {
+                                    sphDelta.className = "text-xs font-bold text-emerald-400 ml-2 animate-pulse";
+                                    // Tooltip logic could go here
+                                } else if (delta < 0) {
+                                    sphDelta.className = "text-xs font-bold text-red-400 ml-2 animate-pulse";
+                                } else {
+                                    sphDelta.className = "text-xs font-bold text-slate-400 ml-2";
+                                }
+                            } else {
+                                // Hide in Manual Mode
+                                sphDelta.classList.add('opacity-0');
+                            }
+                        }
+
+
+                        sphValue.textContent = currentSph + labelSuffix;
+
+                        // Calculate Bar Width (Max 160 for visualization scale)
+                        // Scale: 0-160 range. 
+                        const widthPct = Math.min((currentSph / 160) * 100, 100);
+                        sphBar.style.width = `${widthPct}%`;
+
+                        // Determine Status & Color
+                        if (currentSph < 100) {
+                            sphBar.className = "h-full bg-red-500 transition-all duration-1000 shadow-[0_0_15px_rgba(239,68,68,0.6)]";
+                            sphStatus.textContent = "INSOLVENCY";
+                            sphStatus.className = "text-[10px] uppercase font-black px-2 py-0.5 rounded bg-red-600 text-white animate-pulse";
+                            sphDesc.textContent = "Populasi Kritis (<100). Biaya/Kg Tidak Masuk Akal.";
+                            sphDesc.className = "text-xs italic text-red-300 font-bold";
+                        } else if (currentSph >= 100 && currentSph <= 120) {
+                            sphBar.className = "h-full bg-yellow-400 transition-all duration-1000";
+                            sphStatus.textContent = "WARNING";
+                            sphStatus.className = "text-[10px] uppercase font-black px-2 py-0.5 rounded bg-yellow-600 text-black";
+                            sphDesc.textContent = "Sub-Optimal. Perlu evaluasi sisipan vs replanting.";
+                            sphDesc.className = "text-xs italic text-yellow-200";
+                        } else if (sph > 130) {
+                            // High SPH Risk
+                            sphBar.className = "h-full bg-indigo-400 transition-all duration-1000"; // Indigo to match theme for "Too High"
+                            sphStatus.textContent = "HIGH RISK (ROOT CONTACT)";
+                            sphStatus.className = "text-[10px] uppercase font-black px-2 py-0.5 rounded bg-indigo-500 text-white";
+                            sphDesc.textContent = "Terlalu padat! Risiko penularan akar sangat cepat.";
+                            sphDesc.className = "text-xs italic text-indigo-300";
+                        } else {
+                            // Optimal (121-130)
+                            sphBar.className = "h-full bg-emerald-500 transition-all duration-1000";
+                            sphStatus.textContent = "OPTIMAL";
+                            sphStatus.className = "text-[10px] uppercase font-black px-2 py-0.5 rounded bg-emerald-600 text-white";
+                            sphDesc.textContent = "Kepadatan ideal. Efisiensi biaya maksimal.";
+                            sphDesc.className = "text-xs italic text-emerald-300";
+                        }
+                    }
 
                     // 5. MAP RENDERING (Leaflet)
                     if (placeholder) placeholder.style.display = 'none';
@@ -1896,6 +2001,54 @@
                         }
                     }
                 } // End updateBlockData
+
+                function calculateAndSetLoss(side, data) {
+                    const finLoss = document.getElementById(`finLoss${side}`);
+                    if (!finLoss) return;
+
+                    // 1. Calculate Gap Volume (Ton/Ha)
+                    let gapTonHa = 0;
+                    if (data.gap_ton_ha && parseFloat(data.gap_ton_ha) > 0) {
+                        gapTonHa = parseFloat(data.gap_ton_ha);
+                    } else {
+                        // Fallback calculation: Potensi - Realisasi
+                        const pot = parseFloat(data.potensi_ton_ha) || 0;
+                        const real = parseFloat(data.realisasi_ton_ha) || 0;
+                        gapTonHa = Math.max(0, pot - real);
+                    }
+
+                    // 2. Total Loss Volume (Ton) = Gap * Luas Area
+                    const area = parseFloat(data.luas_ha) || 0;
+                    const totalLossTon = gapTonHa * area;
+
+                    // 3. Loss Value (Juta Rp) = TotalLossTon * Price(Rp/kg) / 1000
+                    // (Explanation: Ton * 1000 = Kg. Kg * Rp = Total Rp. Total Rp / 1,000,000 = Juta)
+                    // Simplified: Ton * Price / 1000
+                    const lossJuta = (totalLossTon * TBS_PRICE / 1000);
+
+                    // Display Update
+                    finLoss.textContent = Math.round(lossJuta).toLocaleString('id-ID');
+
+                    // Visual Feedback
+                    finLoss.classList.remove('text-white');
+                    finLoss.classList.add('text-indigo-200'); // Momentary flash color
+                    setTimeout(() => {
+                        finLoss.classList.add('text-white');
+                        finLoss.classList.remove('text-indigo-200');
+                    }, 150);
+
+                    // Optional: Update Projected Loss Panel (Vanishing Yield) by scaling
+                    const panelLoss = document.getElementById(`valProjLoss${side}`);
+                    if (panelLoss && data.projected_loss_3yr) {
+                        // Assume baseline price was 2500. Scale accordingly.
+                        // Or just use the same logic if we had projected volume.
+                        // For now, heuristic scaling:
+                        const baselinePrice = 2500;
+                        const originalProjLoss = parseFloat(data.projected_loss_3yr) || 0;
+                        const scaledProjLoss = originalProjLoss * (TBS_PRICE / baselinePrice);
+                        panelLoss.textContent = Math.round(scaledProjLoss).toLocaleString('id-ID');
+                    }
+                }
 
 
 
