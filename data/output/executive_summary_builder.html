@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Executive Summary Settings</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .selected {
+            border-color: #f43f5e;
+            background-color: rgba(244, 63, 94, 0.1);
+        }
+    </style>
+</head>
+
+<body class="bg-slate-900 text-white p-8">
+    <div class="max-w-2xl mx-auto bg-slate-800 rounded-3xl p-8 border border-white/10 shadow-2xl">
+        <h2 class="text-3xl font-black mb-6 uppercase tracking-tight">Executive Summary <span
+                class="text-rose-500">Builder</span></h2>
+
+        <p class="text-slate-400 mb-8">Pilih komponen dashboard yang ingin Anda sertakan dalam laporan Executive
+            Summary.</p>
+
+        <div class="grid grid-cols-2 gap-4 mb-8">
+            <!-- Option 1 -->
+            <div id="opt-financial" onclick="toggleOption(this)"
+                class="p-4 rounded-xl border border-slate-600 cursor-pointer hover:bg-slate-700 transition-all selected"
+                data-value="financial_overview">
+                <div class="flex items-center gap-3 mb-2">
+                    <div class="w-4 h-4 rounded-full bg-rose-500"></div>
+                    <span class="font-bold">Financial Exposure</span>
+                </div>
+                <p class="text-xs text-slate-400">Total kerugian estimasi & prioritas anggaran.</p>
+            </div>
+
+            <!-- Option 2 -->
+            <div id="opt-risk" onclick="toggleOption(this)"
+                class="p-4 rounded-xl border border-slate-600 cursor-pointer hover:bg-slate-700 transition-all selected"
+                data-value="risk_map">
+                <div class="flex items-center gap-3 mb-2">
+                    <div class="w-4 h-4 rounded-full bg-orange-500"></div>
+                    <span class="font-bold">Risk Intelligence Map</span>
+                </div>
+                <p class="text-xs text-slate-400">Peta sebaran Cincin Api & kluster infeksi.</p>
+            </div>
+
+            <!-- Option 3 -->
+            <div id="opt-action" onclick="toggleOption(this)"
+                class="p-4 rounded-xl border border-slate-600 cursor-pointer hover:bg-slate-700 transition-all selected"
+                data-value="action_plan">
+                <div class="flex items-center gap-3 mb-2">
+                    <div class="w-4 h-4 rounded-full bg-emerald-500"></div>
+                    <span class="font-bold">Action Plan (ISO 31000)</span>
+                </div>
+                <p class="text-xs text-slate-400">Rekomendasi teknis & matriks mitigasi.</p>
+            </div>
+
+            <!-- Option 4 -->
+            <div id="opt-yield" onclick="toggleOption(this)"
+                class="p-4 rounded-xl border border-slate-600 cursor-pointer hover:bg-slate-700 transition-all"
+                data-value="yield_loss">
+                <div class="flex items-center gap-3 mb-2">
+                    <div class="w-4 h-4 rounded-full bg-red-600"></div>
+                    <span class="font-bold">Vanishing Yield Analysis</span>
+                </div>
+                <p class="text-xs text-slate-400">Analisis detail penurunan produksi per blok.</p>
+            </div>
+        </div>
+
+        <button onclick="generateReport()"
+            class="w-full py-4 bg-rose-600 hover:bg-rose-500 text-white font-black rounded-xl text-lg uppercase tracking-widest shadow-lg shadow-rose-900/50 transition-all transform hover:scale-[1.02]">
+            Generate Report 📄
+        </button>
+    </div>
+
+    <script>
+        function toggleOption(el) {
+            el.classList.toggle('selected');
+        }
+
+        function generateReport() {
+            const selected = document.querySelectorAll('.selected');
+            const values = Array.from(selected).map(el => el.getAttribute('data-value'));
+
+            // In a real app, this would send data to a backend or generate a new page.
+            // For now, we simulate success.
+            alert(`Generating Executive Summary with modules:\n\n- ${values.join('\n- ')}`);
+        }
+    </script>
+</body>
+
+</html>
