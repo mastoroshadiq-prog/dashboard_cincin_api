@@ -6,6 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Analisis Krusialitas - Cincin Api F008A & D001A (Complete)</title>
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Chart.js & Plugins -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/3.0.1/chartjs-plugin-annotation.min.js"></script>
+
+    <!-- Leaflet Map -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap');
 
@@ -80,28 +91,20 @@
                         class="text-[10px] text-slate-500 font-normal">Analytics v2.0</span></span>
             </div>
 
-            <!-- Dual Selectors -->
-            <div class="flex-1 grid grid-cols-2 gap-4 w-full">
-                <!-- Selector Left -->
-                <div class="relative">
+            <!-- Single Selector Mode -->
+            <div class="flex-1 flex justify-center w-full">
+                <!-- Selector Left (Acting as Global) -->
+                <div class="relative w-full max-w-md">
                     <label
-                        class="absolute -top-2 left-3 bg-white px-1 text-[9px] font-bold text-indigo-500 uppercase">Blok
-                        A (Kiri)</label>
+                        class="absolute -top-2 left-3 bg-white px-1 text-[9px] font-bold text-indigo-500 uppercase">Fokus
+                        Analisis Blok</label>
                     <select id="globalSelectorLeft"
-                        class="w-full bg-slate-50 border-2 border-slate-200 text-slate-900 font-bold text-sm rounded-xl px-3 py-2 focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 cursor-pointer transition-all hover:bg-white">
-                        <option value="">Pilih Blok...</option>
+                        class="w-full bg-slate-50 border-2 border-slate-200 text-slate-900 font-bold text-sm rounded-xl px-3 py-2 focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 cursor-pointer transition-all hover:bg-white shadow">
+                        <option value="">Pilih Blok Analisis...</option>
                     </select>
                 </div>
-                <!-- Selector Right -->
-                <div class="relative">
-                    <label
-                        class="absolute -top-2 left-3 bg-white px-1 text-[9px] font-bold text-orange-500 uppercase">Blok
-                        B (Kanan)</label>
-                    <select id="globalSelectorRight"
-                        class="w-full bg-slate-50 border-2 border-slate-200 text-slate-900 font-bold text-sm rounded-xl px-3 py-2 focus:outline-none focus:border-orange-500 focus:ring-4 focus:ring-orange-500/10 cursor-pointer transition-all hover:bg-white">
-                        <option value="">Pilih Blok...</option>
-                    </select>
-                </div>
+                <!-- Hidden Right Selector to Prevent JS Errors -->
+                <select id="globalSelectorRight" class="hidden"></select>
             </div>
         </div>
     </div>
@@ -177,6 +180,7 @@
             </div>
         </div>
 
+        <!-- REMOVED DUPLICATE ... (Reverting: Restoring Top Matrix) -->
         <!-- 3. RISK MATRIX (ISO 31000 Strategic View) -->
         <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-200 mb-8 mx-1">
             <div class="flex justify-between items-center mb-4">
@@ -199,7 +203,8 @@
             </div>
 
             <div class="relative h-[350px] w-full">
-                <canvas id="riskMatrixChart"></canvas>
+                <!-- UNIQUE ID: isoMatrixChart -->
+                <canvas id="isoMatrixChart"></canvas>
             </div>
 
             <p class="text-center text-[10px] text-slate-400 mt-2 font-mono">Klik pada titik untuk memuat detail blok ke
@@ -620,6 +625,8 @@
                     </div>
                 </div>
 
+                <!-- [DELETED: Risk Precision Map - Merged into Top ISO Matrix] -->
+
                 <!-- ISO 31000 PROTOCOLS (Replaces Right Map) -->
                 <div
                     class="bg-indigo-900 rounded-3xl overflow-hidden shadow-xl border-4 border-indigo-500/30 flex flex-col h-full">
@@ -977,87 +984,93 @@
     </div>
     </div>
 
-    <!-- 2 SKENARIO MITIGASI -->
+    <!-- ISO 31000 RISK TREATMENT PLAN -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 relative z-10">
 
-        <!-- Skenario 1 (Bad) -->
-        <div class="bg-slate-950 p-8 rounded-3xl border border-slate-800 relative group overflow-hidden">
+        <!-- Option A: Passive (Risk Acceptance) -->
+        <div
+            class="bg-slate-950 p-8 rounded-3xl border border-slate-800 relative group overflow-hidden opacity-80 hover:opacity-100 transition-opacity">
             <div class="absolute inset-0 bg-red-900/5 group-hover:bg-red-900/10 transition-all"></div>
             <div class="relative z-10">
                 <div class="flex items-center justify-between mb-6">
-                    <h3 class="text-xl font-black text-white uppercase">Skenario 1: Business as Usual</h3>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" class="text-red-500">
-                        <path d="M18 6L6 18M6 6l12 12" />
-                    </svg>
+                    <div>
+                        <span
+                            class="text-[10px] font-bold text-red-500 bg-red-950 px-2 py-0.5 rounded border border-red-900 uppercase tracking-wider">Option
+                            A (Passive)</span>
+                        <h3 class="text-xl font-black text-white mt-2 uppercase">Risk Acceptance</h3>
+                    </div>
                 </div>
 
                 <ul class="space-y-4 mb-8">
                     <li class="flex items-start gap-3">
-                        <span class="text-red-500 mt-1">❌</span>
-                        <p class="text-sm text-slate-300"><b class="text-white">"Cryptic Collapse" Berlanjut:</b> Yield
-                            drop 20% ➔ 40% dalam 2 tahun karena akar terus mati.</p>
+                        <span class="text-red-500 mt-1">⚠️</span>
+                        <p class="text-sm text-slate-300"><b>Metode Konvensional:</b> Mengandalkan sensus visual (daun
+                            kuning). <i class="text-red-400">Inefektif untuk deteksi dini.</i></p>
                     </li>
                     <li class="flex items-start gap-3">
-                        <span class="text-red-500 mt-1">❌</span>
-                        <p class="text-sm text-slate-300">Biaya Sensus & Rawat Jalan Terus, tapi <b
-                                class="text-white">Produksi ZONK</b> (Bunga aborsi massal).</p>
-                    </li>
-                    <li class="flex items-start gap-3">
-                        <span class="text-red-500 mt-1">❌</span>
-                        <p class="text-sm text-slate-300">Akumulasi Kerugian > <span class="text-white font-black">Rp
-                                2.5 Miliar</span> (Insolvency).</p>
+                        <span class="text-red-500 mt-1">⚠️</span>
+                        <p class="text-sm text-slate-300"><b>Dampak Projected:</b> Infeksi menyebar eksponensial (r >
+                            0.15). Yield drop tidak terkendali.</p>
                     </li>
                 </ul>
 
                 <div class="bg-red-500/10 p-4 rounded-xl border border-red-500/20 text-center">
-                    <p class="text-xs uppercase text-red-400 font-bold mb-1">Hasil Akhir</p>
-                    <p class="text-lg font-black text-white">KEBANGKRUTAN OPERASIONAL (INSOLVENCY)</p>
+                    <p class="text-xs uppercase text-red-400 font-bold mb-1">Risk Outcome</p>
+                    <p class="text-lg font-black text-white">INSOLVENCY (KEBANGKRUTAN)</p>
                 </div>
             </div>
         </div>
 
-        <!-- Skenario 2 (Good) -->
-        <div class="bg-emerald-950 p-8 rounded-3xl border border-emerald-800 relative group overflow-hidden">
-            <div class="absolute inset-0 bg-emerald-900/10 group-hover:bg-emerald-900/20 transition-all"></div>
+        <!-- Option B: Active (Risk Mitigation) -->
+        <div
+            class="bg-indigo-950 p-8 rounded-3xl border-2 border-indigo-500 relative group overflow-hidden shadow-2xl shadow-indigo-900/50">
+            <div
+                class="absolute top-0 right-0 bg-indigo-600 text-white text-[10px] font-black px-3 py-1 rounded-bl-xl uppercase tracking-widest shadow-lg">
+                ISO 31000 Recommended
+            </div>
+            <div class="absolute inset-0 bg-indigo-900/10 group-hover:bg-indigo-900/20 transition-all"></div>
             <div class="relative z-10">
                 <div class="flex items-center justify-between mb-6">
-                    <h3 class="text-xl font-black text-white uppercase">Skenario 2: Radical Intervention</h3>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" class="text-emerald-500">
-                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
-                        <polyline points="22 4 12 14.01 9 11.01" />
+                    <div>
+                        <span
+                            class="text-[10px] font-bold text-emerald-300 bg-emerald-950 px-2 py-0.5 rounded border border-emerald-900 uppercase tracking-wider">Option
+                            B (Aggressive)</span>
+                        <h3 class="text-xl font-black text-white mt-2 uppercase">Risk Treatment</h3>
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" class="text-indigo-400">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
                     </svg>
                 </div>
 
                 <div class="space-y-4 mb-8">
-                    <!-- Action 1 -->
+                    <!-- Protocol 1 -->
                     <div class="flex gap-4">
                         <div
-                            class="w-8 h-8 rounded-full bg-emerald-500 flex items-center justify-center font-black text-slate-900 shrink-0">
+                            class="w-8 h-8 rounded-full bg-indigo-500 flex items-center justify-center font-black text-white shrink-0 shadow-lg shadow-indigo-500/50">
                             1</div>
                         <div>
-                            <h5 class="text-white font-bold">Stop Sensus Visual</h5>
-                            <p class="text-xs text-emerald-200 mt-1">Beralih total ke Peta Drone untuk panduan sanitasi.
-                                Jangan tertipu daun hijau.</p>
+                            <h5 class="text-white font-bold">Precision Sanitation (Drone)</h5>
+                            <p class="text-xs text-indigo-200 mt-1">Eksekusi sanitasi berdasarkan koordinat peta
+                                digital, bukan visual mata.</p>
                         </div>
                     </div>
-                    <!-- Action 2 -->
+                    <!-- Protocol 2 -->
                     <div class="flex gap-4">
                         <div
-                            class="w-8 h-8 rounded-full bg-emerald-500 flex items-center justify-center font-black text-slate-900 shrink-0">
+                            class="w-8 h-8 rounded-full bg-indigo-500 flex items-center justify-center font-black text-white shrink-0 shadow-lg shadow-indigo-500/50">
                             2</div>
                         <div>
-                            <h5 class="text-white font-bold">Isolasi Akar Masif</h5>
-                            <p class="text-xs text-emerald-200 mt-1">Putus kontak akar (Trenching 4x4m) di semua titik
-                                merah/oranye drone.</p>
+                            <h5 class="text-white font-bold">Containment Trenching</h5>
+                            <p class="text-xs text-indigo-200 mt-1">Isolasi parit 4x4m pada radius 15m dari titik
+                                infeksi (Protocol Ring Defense).</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="bg-emerald-500/10 p-4 rounded-xl border border-emerald-500/20 text-center">
-                    <p class="text-xs uppercase text-emerald-400 font-bold mb-1">Hasil Akhir</p>
-                    <p class="text-lg font-black text-white">MENGHENTIKAN "KEBOCORAN ASET"</p>
+                <div class="bg-indigo-500/20 p-4 rounded-xl border border-indigo-500/40 text-center">
+                    <p class="text-xs uppercase text-indigo-300 font-bold mb-1">Risk Outcome</p>
+                    <p class="text-lg font-black text-white">ASSET RECOVERY (PEMULIHAN)</p>
                 </div>
             </div>
         </div>
@@ -1147,27 +1160,7 @@
                                 </div>
                             </div>
 
-                            <!-- Block B (Right) SPH Status -->
-                            <div>
-                                <div class="flex justify-between items-end mb-2">
-                                    <span class="text-sm font-bold opacity-80" id="sphTitleRight">Blok B</span>
-                                    <div class="flex items-baseline gap-2">
-                                        <span class="text-3xl font-black" id="sphValueRight">--</span>
-                                        <span id="sphDeltaRight"
-                                            class="text-xs font-bold opacity-0 transition-opacity"></span>
-                                    </div>
-                                </div>
-                                <div class="h-4 bg-black/50 rounded-full overflow-hidden relative">
-                                    <div id="sphBarRight" class="h-full bg-slate-500 transition-all duration-1000"
-                                        style="width: 0%"></div>
-                                </div>
-                                <div class="flex justify-between mt-2">
-                                    <span
-                                        class="text-[10px] uppercase font-black px-2 py-0.5 rounded bg-white/10 text-white"
-                                        id="sphStatusRight">--</span>
-                                    <span class="text-xs italic opacity-60" id="sphDescRight">Memuat data...</span>
-                                </div>
-                            </div>
+                            <!-- Block B Removed (Single Focus) -->
                         </div>
 
                         <!-- Legend Bar -->
@@ -1192,8 +1185,8 @@
                             <div class="space-y-4">
                                 <div class="flex gap-4">
                                     <div
-                                        class="w-8 h-8 rounded bg-indigo-500 text-white flex items-center justify-center font-black shrink-0">
-                                        A</div>
+                                        class="w-8 h-8 rounded bg-indigo-500 text-white flex items-center justify-center font-black shrink-0 text-xs shadow-lg shadow-indigo-500/30">
+                                        MITOS</div>
                                     <div>
                                         <p class="text-xs font-black text-indigo-300 uppercase tracking-widest">
                                             Persepsi Umum
@@ -1205,8 +1198,8 @@
                                 </div>
                                 <div class="flex gap-4">
                                     <div
-                                        class="w-8 h-8 rounded bg-red-500 text-white flex items-center justify-center font-black shrink-0">
-                                        B</div>
+                                        class="w-8 h-8 rounded bg-red-500 text-white flex items-center justify-center font-black shrink-0 text-xs shadow-lg shadow-red-500/30">
+                                        FAKTA</div>
                                     <div>
                                         <p class="text-xs font-black text-red-300 uppercase tracking-widest">Realita
                                             Lapangan
@@ -1293,7 +1286,20 @@
     </div>
 
     <!-- Footer -->
-    <div class="max-w-7xl mx-auto mt-8 mb-12 text-center">
+    <div class="max-w-7xl mx-auto mt-8 mb-12 text-center space-y-4">
+        <p class="text-xs font-bold text-slate-600 uppercase tracking-widest">CONFIDENTIAL - INTERNAL USE ONLY</p>
+
+        <div class="max-w-4xl mx-auto border-t border-slate-700 pt-8 pb-10">
+            <div class="bg-slate-200 rounded-xl p-6 shadow-lg">
+                <p class="text-sm font-bold text-black leading-relaxed">
+                    <strong class="uppercase border-b-2 border-black">DISCLAIMER:</strong> Analisis ini adalah alat
+                    bantu keputusan (Risk Intelligence) berbasis data agronomi yang tersedia. Hasil proyeksi tidak
+                    bersifat absolut; kinerja blok dapat dipengaruhi multivariabel (iklim, hara, kultur teknis).
+                    Verifikasi lapangan (Ground Truth) tetap wajib.
+                </p>
+            </div>
+        </div>
+
         <!-- Dynamic Modal Overlay -->
         <!-- Dynamic Modal Overlay -->
         <div id="infoModal"
@@ -1500,11 +1506,14 @@
                     if (leftSel) leftSel.value = first;
                     updateBlockData('Left', first);
 
+                    /* 
+                    // DISABLE RIGHT SELECTOR (Single Focus Mode)
                     if (sortedKeys.length > 1) {
                         const rightSel = document.getElementById('globalSelectorRight');
                         if (rightSel) rightSel.value = second;
                         updateBlockData('Right', second);
                     }
+                    */
                 }
 
                 // Function Definitions
@@ -1598,12 +1607,247 @@
                 }
 
                 // RISK MATRIX LOGIC (Chart.js)
+                // REVISION: Robust Initialization with Error Handling
                 function initRiskMatrix() {
-                    const ctx = document.getElementById('riskMatrixChart').getContext('2d');
+                    window.initRiskMatrix = initRiskMatrix;
+                    console.log('🔥 Initializing Risk Matrix (Robust Mode)...');
+
+                    /* 
+                       =======================================================
+                       NATIVE CANVAS RENDERER (Dual Support: ISO & Risk Map)
+                       =======================================================
+                     */
+                    if (!BLOCKS_DATA || Object.keys(BLOCKS_DATA).length === 0) {
+                        console.warn('⚠️ BLOCKS_DATA is empty. Risk Matrix will be blank.');
+                        return;
+                    }
+
+                    // Prepare Data Points (Shared)
+                    const points = Object.values(BLOCKS_DATA).map(b => {
+                        let loss = 0;
+                        if (b.gap_ton_ha && parseFloat(b.gap_ton_ha) > 0) {
+                            loss = parseFloat(b.gap_ton_ha) * b.luas_ha * TBS_PRICE / 1000;
+                        } else {
+                            const pot = parseFloat(b.potensi_ton_ha) || 0;
+                            const real = parseFloat(b.realisasi_ton_ha) || 0;
+                            loss = Math.max(0, pot - real) * b.luas_ha * TBS_PRICE / 1000;
+                        }
+                        return {
+                            x: parseFloat(b.attack_rate || 0),
+                            y: loss,
+                            block: b.block_code,
+                            status: b.status_narrative
+                        };
+                    });
+
+                    // Helper: Draw Scatter Plot (Used by Bottom Chart)
+                    const drawNativeScatter = (ctx, w, h, data, isDark) => {
+                        ctx.setTransform(1, 0, 0, 1, 0, 0);
+                        const colBg = isDark ? '#0f172a' : '#ffffff';
+                        const colTxt = isDark ? '#94a3b8' : '#64748b';
+                        const colGrid = isDark ? '#1e293b' : '#e2e8f0';
+
+                        // Clear
+                        ctx.fillStyle = colBg; ctx.fillRect(0, 0, w, h);
+
+                        const pad = { t: 40, r: 40, b: 40, l: 60 };
+                        const gw = w - pad.l - pad.r, gh = h - pad.t - pad.b;
+                        const sx = v => pad.l + (v / 40) * gw;
+                        const sy = v => (h - pad.b) - (v / 1000) * gh;
+
+                        // Zones
+                        const xt = sx(10), yt = sy(100);
+                        ctx.fillStyle = 'rgba(16, 185, 129, 0.1)'; ctx.fillRect(pad.l, yt, xt - pad.l, (h - pad.b) - yt);
+                        ctx.fillStyle = 'rgba(239, 68, 68, 0.15)'; ctx.fillRect(xt, pad.t, (w - pad.r) - xt, yt - pad.t);
+                        ctx.fillStyle = 'rgba(234, 179, 8, 0.1)'; ctx.fillRect(pad.l, pad.t, xt - pad.l, yt - pad.t);
+                        ctx.fillRect(xt, yt, (w - pad.r) - xt, (h - pad.b) - yt);
+
+                        // Axes
+                        ctx.lineWidth = 1; ctx.font = 'bold 10px sans-serif'; ctx.textAlign = 'right'; ctx.textBaseline = 'middle';
+                        for (let i = 0; i <= 5; i++) {
+                            let v = i * 200, y = sy(v);
+                            ctx.fillStyle = colTxt; ctx.fillText(v, pad.l - 10, y);
+                            ctx.strokeStyle = colGrid; ctx.beginPath(); ctx.moveTo(pad.l, y); ctx.lineTo(w - pad.r, y); ctx.stroke();
+                        }
+                        ctx.textAlign = 'center'; ctx.textBaseline = 'top';
+                        for (let i = 0; i <= 4; i++) {
+                            let v = i * 10, x = sx(v);
+                            ctx.fillStyle = colTxt; ctx.fillText(v, x, h - pad.b + 5);
+                            ctx.strokeStyle = colGrid; ctx.beginPath(); ctx.moveTo(x, pad.t); ctx.lineTo(x, h - pad.b); ctx.stroke();
+                        }
+
+                        // Labels
+                        ctx.fillStyle = colTxt; ctx.fillText("ATTACK RATE (%)", pad.l + gw / 2, h - 20);
+                        ctx.save(); ctx.translate(20, pad.t + gh / 2); ctx.rotate(-Math.PI / 2);
+                        ctx.fillText("LOSS (Juta Rp)", 0, 0); ctx.restore();
+
+                        // Points
+                        data.forEach(p => {
+                            const px = sx(p.x), py = sy(p.y);
+                            ctx.beginPath(); ctx.arc(px, py, 6, 0, 2 * Math.PI);
+                            if (p.x > 15 || p.y > 500) ctx.fillStyle = '#ef4444';
+                            else if (p.x > 5) ctx.fillStyle = '#facc15';
+                            else ctx.fillStyle = '#10b981';
+                            ctx.fill(); ctx.strokeStyle = colBg; ctx.lineWidth = 2; ctx.stroke();
+                        });
+                    };
+
+                    // Define Renderer Function
+                    // RENDERER: UNIFIED STRATEGIC + PRECISION MATRIX
+                    const renderUnifiedMatrix = (canvasId) => {
+                        const canvas = document.getElementById(canvasId);
+                        if (!canvas) return;
+                        const ctx = canvas.getContext('2d');
+                        const w = canvas.width = canvas.parentElement.offsetWidth;
+                        const h = canvas.height = canvas.parentElement.offsetHeight;
+
+                        // THRESHOLDS (SINKRONISASI VISUAL)
+                        const TH_AR = 10;   // Attack Rate > 10%
+                        const TH_LOSS = 100; // Loss > 100 Juta
+
+                        // 1. Calculate Aggregates based on NEW Thresholds
+                        let low = { count: 0, loss: 0 }, med = { count: 0, loss: 0 }, high = { count: 0, loss: 0 };
+                        points.forEach(p => {
+                            if (p.x > TH_AR && p.y > TH_LOSS) { high.count++; high.loss += p.y; }
+                            else if (p.x <= TH_AR && p.y <= TH_LOSS) { low.count++; low.loss += p.y; }
+                            else { med.count++; med.loss += p.y; }
+                        });
+
+                        // 2. Setup Canvas
+                        ctx.setTransform(1, 0, 0, 1, 0, 0);
+                        ctx.fillStyle = '#ffffff'; ctx.fillRect(0, 0, w, h); // White BG
+
+                        const pad = { t: 30, r: 20, b: 30, l: 50 };
+                        const gw = w - pad.l - pad.r, gh = h - pad.t - pad.b;
+                        const sx = v => pad.l + (v / 40) * gw;
+                        const sy = v => (h - pad.b) - (v / 1000) * gh;
+                        const xt = sx(TH_AR), yt = sy(TH_LOSS);
+
+                        // 3. Draw Background Zones (Quadrants)
+                        // GREEN (Low/Low)
+                        ctx.fillStyle = 'rgba(16, 185, 129, 0.15)';
+                        ctx.fillRect(pad.l, yt, xt - pad.l, (h - pad.b) - yt);
+
+                        // RED (High/High)
+                        ctx.fillStyle = 'rgba(239, 68, 68, 0.15)';
+                        ctx.fillRect(xt, pad.t, (w - pad.r) - xt, yt - pad.t);
+
+                        // YELLOW (Mixed)
+                        ctx.fillStyle = 'rgba(234, 179, 8, 0.15)';
+                        ctx.fillRect(pad.l, pad.t, xt - pad.l, yt - pad.t); // TL
+                        ctx.fillRect(xt, yt, (w - pad.r) - xt, (h - pad.b) - yt); // BR
+
+                        // 4. Draw Scatter Points (Color Matches Quadrant)
+                        points.forEach(p => {
+                            const px = sx(p.x), py = sy(p.y);
+                            ctx.beginPath(); ctx.arc(px, py, 5, 0, 2 * Math.PI); // Radius 5
+
+                            // LOGIKA WARNA SAMA DENGAN KUADRAN
+                            if (p.x > TH_AR && p.y > TH_LOSS) ctx.fillStyle = '#ef4444'; // Red
+                            else if (p.x <= TH_AR && p.y <= TH_LOSS) ctx.fillStyle = '#10b981'; // Green
+                            else ctx.fillStyle = '#facc15'; // Yellow
+
+                            ctx.fill();
+                            ctx.strokeStyle = 'rgba(0,0,0,0.2)'; ctx.lineWidth = 1; ctx.stroke();
+                        });
+
+                        // 5. Draw Legend/Stats Overlay (Text)
+                        const drawStatLabel = (cx, cy, label, stats) => {
+                            // Text Background Bubble for Readability
+                            ctx.fillStyle = 'rgba(255, 255, 255, 0.85)';
+                            ctx.beginPath(); ctx.roundRect(cx - 60, cy - 25, 120, 50, 8); ctx.fill();
+                            ctx.strokeStyle = 'rgba(0,0,0,0.05)'; ctx.stroke();
+
+                            ctx.fillStyle = '#1e293b'; ctx.textAlign = 'center';
+                            ctx.font = '900 12px "Inter", sans-serif'; ctx.fillText(label, cx, cy - 8);
+                            ctx.font = 'bold 16px "Inter", sans-serif'; ctx.fillText(stats.count + " Blok", cx, cy + 10);
+                        };
+
+                        // Position Stats nicely in center of zones
+                        const cxGreen = pad.l + (xt - pad.l) / 2;
+                        const cyGreen = yt + ((h - pad.b) - yt) / 2;
+                        drawStatLabel(cxGreen, cyGreen, 'ACCEPTABLE', low);
+
+                        const cxRed = xt + ((w - pad.r) - xt) / 2;
+                        const cyRed = pad.t + (yt - pad.t) / 2;
+                        drawStatLabel(cxRed, cyRed, 'CRITICAL', high);
+
+                        const cxYellow = pad.l + (xt - pad.l) / 2;
+                        const cyYellow = pad.t + (yt - pad.t) / 2;
+                        drawStatLabel(cxYellow, cyYellow, 'WARNING', med);
+
+                        // 6. Axes & Labels
+                        const colTxt = '#94a3b8'; const colGrid = '#e2e8f0';
+                        ctx.lineWidth = 1; ctx.font = 'bold 10px sans-serif'; ctx.textAlign = 'right'; ctx.textBaseline = 'middle';
+                        for (let i = 0; i <= 5; i++) {
+                            let v = i * 200, y = sy(v); ctx.fillStyle = colTxt; ctx.fillText(v, pad.l - 10, y);
+                            ctx.strokeStyle = colGrid; ctx.beginPath(); ctx.moveTo(pad.l, y); ctx.lineTo(w - pad.r, y); ctx.stroke();
+                        }
+                        ctx.textAlign = 'center'; ctx.textBaseline = 'top';
+                        for (let i = 0; i <= 4; i++) {
+                            let v = i * 10, x = sx(v); ctx.fillStyle = colTxt; ctx.fillText(v, x, h - pad.b + 5);
+                            ctx.strokeStyle = colGrid; ctx.beginPath(); ctx.moveTo(x, pad.t); ctx.lineTo(x, h - pad.b); ctx.stroke();
+                        }
+
+                        ctx.fillStyle = '#64748b'; ctx.font = 'bold 11px sans-serif';
+                        ctx.fillText("PROBABILITAS (Attack Rate %)", pad.l + (w - pad.l - pad.r) / 2, h - 10);
+                        ctx.save(); ctx.translate(15, pad.t + (h - pad.t - pad.b) / 2); ctx.rotate(-Math.PI / 2);
+                        ctx.fillText("DAMPAK FINANSIAL (Juta Rp)", 0, 0); ctx.restore();
+
+                        // 7. INTERACTION: CLICK HANDLER
+                        canvas.onclick = (e) => {
+                            const rect = canvas.getBoundingClientRect();
+                            const clickX = e.clientX - rect.left;
+                            const clickY = e.clientY - rect.top;
+
+                            // Find clicked point (allow 8px margin of error)
+                            const clickedPoint = points.find(p => {
+                                const px = sx(p.x);
+                                const py = sy(p.y);
+                                const dx = px - clickX;
+                                const dy = py - clickY;
+                                return (dx * dx + dy * dy) <= 64; // 8^2
+                            });
+
+                            if (clickedPoint) {
+                                console.log('🎯 Matrix Clicked:', clickedPoint.block);
+                                const selector = document.getElementById('globalSelectorLeft');
+                                if (selector) {
+                                    selector.value = clickedPoint.block;
+                                    selector.dispatchEvent(new Event('change'));
+                                    // Optional: Scroll visualization or highlight
+                                    selector.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                    // Alert removed by User request
+                                }
+                            }
+                        };
+
+                        // 8. INTERACTION: HOVER CURSOR
+                        canvas.onmousemove = (e) => {
+                            const rect = canvas.getBoundingClientRect();
+                            const clickX = e.clientX - rect.left;
+                            const clickY = e.clientY - rect.top;
+                            const isHover = points.some(p => {
+                                const px = sx(p.x);
+                                const py = sy(p.y);
+                                return ((px - clickX) ** 2 + (py - clickY) ** 2) <= 64;
+                            });
+                            canvas.style.cursor = isHover ? 'pointer' : 'default';
+                        };
+                    };
+
+                    // EXECUTE UNIFIED RENDER
+                    renderUnifiedMatrix('isoMatrixChart');
+                    // renderPrecisionChart('riskMatrixChart'); // REMOVED (Merged)
+
+                    console.log('✅ DUAL RISK MATRIX RENDER COMPLETE');
+                    return; // Stop execution of old code
+
+                    // OLD CODE BELOW IS BYPASSED BY RETURN
+                    /*
 
                     // Prepare Data Points
                     const points = Object.values(BLOCKS_DATA).map(b => {
-                        // Loss dynamic check
                         let loss = 0;
                         if (b.gap_ton_ha && parseFloat(b.gap_ton_ha) > 0) {
                             loss = parseFloat(b.gap_ton_ha) * b.luas_ha * TBS_PRICE / 1000;
@@ -1614,94 +1858,180 @@
                         }
 
                         return {
-                            x: b.attack_rate, // Axis X: Probability (Attack Rate)
+                            x: parseFloat(b.attack_rate || 0), // Axis X: Probability (Attack Rate)
                             y: loss,          // Axis Y: Impact (Financial Loss)
                             block: b.block_code,
                             status: b.status_narrative
                         };
                     });
 
-                    // Define Zones (Quadrant Backgrounds) using Annotation Plugin
-                    const annotations = {
-                        zoneCritical: {
-                            type: 'box',
-                            xMin: 10, xMax: 100,
-                            yMin: 100, yMax: 5000,
-                            backgroundColor: 'rgba(239, 68, 68, 0.1)', // Red
-                            borderWidth: 0
-                        },
-                        zoneWarning: {
-                            type: 'box',
-                            xMin: 5, xMax: 10,
-                            yMin: 50, yMax: 5000,
-                            backgroundColor: 'rgba(234, 179, 8, 0.1)', // Yellow
-                            borderWidth: 0
+                    console.log(`✅ Prepared ${points.length} data points for Risk Matrix.`);
+                    console.log(`✅ Prepared ${points.length} data points for Risk Matrix.`);
+
+                    // Background Zones Plugin (Inline Safe & Robust)
+                    const bgPlugin = {
+                        id: 'customCanvasBackgroundColor',
+                        beforeDraw: (chart) => {
+                            const { ctx, chartArea, scales: { x, y } } = chart;
+                            if (!chartArea || !x || !y) return;
+                            const { top, bottom, left, right } = chartArea;
+                            if (!top || !bottom || !left || !right) return;
+
+                            ctx.save();
+                            let x10 = x.getPixelForValue(10);
+                            let y100 = y.getPixelForValue(100);
+
+                            if (!isFinite(x10)) x10 = left + (right - left) * 0.25;
+                            if (!isFinite(y100)) y100 = bottom - (bottom - top) * 0.25;
+
+                            // Draw Zones
+                            ctx.fillStyle = 'rgba(16, 185, 129, 0.1)'; // Green (Safe)
+                            ctx.fillRect(left, y100, Math.max(0, x10 - left), Math.max(0, bottom - y100));
+
+                            ctx.fillStyle = 'rgba(239, 68, 68, 0.15)'; // Red (Critical)
+                            ctx.fillRect(x10, top, Math.max(0, right - x10), Math.max(0, y100 - top));
+
+                            ctx.fillStyle = 'rgba(234, 179, 8, 0.1)'; // Yellow (Warning 1)
+                            ctx.fillRect(left, top, Math.max(0, x10 - left), Math.max(0, y100 - top));
+
+                            ctx.fillStyle = 'rgba(234, 179, 8, 0.1)'; // Yellow (Warning 2)
+                            ctx.fillRect(x10, y100, Math.max(0, right - x10), Math.max(0, bottom - y100));
+
+                            ctx.restore();
                         }
                     };
 
-                    window.riskChart = new Chart(ctx, {
-                        type: 'scatter',
-                        data: {
-                            datasets: [{
-                                label: 'Blok Aset',
-                                data: points,
-                                backgroundColor: (ctx) => {
-                                    const v = ctx.raw;
-                                    if (!v) return '#94a3b8';
-                                    if (v.x > 15 || v.y > 500) return '#ef4444'; // Critical Red
-                                    if (v.x > 5) return '#facc15'; // Warning Yellow
-                                    return '#10b981'; // Safe Green
-                                },
-                                pointRadius: 6,
-                                pointHoverRadius: 10
-                            }]
-                        },
-                        options: {
-                            responsive: true,
-                            maintainAspectRatio: false,
-                            plugins: {
-                                legend: { display: false },
-                                tooltip: {
-                                    callbacks: {
-                                        label: function (context) {
-                                            const p = context.raw;
-                                            return `${p.block}: AR ${p.x}% | Loss Rp ${Math.round(p.y).toLocaleString()} Jt`;
-                                        }
-                                    }
-                                },
-                                annotation: {
-                                    annotations: annotations
-                                }
-                            },
-                            scales: {
-                                x: {
-                                    title: { display: true, text: 'Probabilitas: Attack Rate (%)', font: { weight: 'bold' } },
-                                    min: 0, max: 35
-                                },
-                                y: {
-                                    title: { display: true, text: 'Dampak: Potential Loss (Juta Rp)', font: { weight: 'bold' } },
-                                    beginAtZero: true
-                                }
-                            },
-                            onClick: (e, elements) => {
-                                if (elements.length > 0) {
-                                    const index = elements[0].index;
-                                    const blockCode = window.riskChart.data.datasets[0].data[index].block;
+                    /* 
+                       =======================================================
+                       FALLBACK: NATIVE CANVAS RENDERER (No Chart.js Dependency)
+                       Reason: Chart.js failed to render visibility repeatedly.
+                       =======================================================
+                     */
+                    // Reset Transform
+                    ctx.setTransform(1, 0, 0, 1, 0, 0);
 
-                                    // Action: Load to Left Panel
-                                    document.getElementById('globalSelectorLeft').value = blockCode;
-                                    // Trigger change event manually
-                                    document.getElementById('globalSelectorLeft').dispatchEvent(new Event('change'));
+                    const w = canvas.width = canvas.parentElement.offsetWidth;
+                    const h = canvas.height = canvas.parentElement.offsetHeight;
 
-                                    // Smooth scroll to details
-                                    document.getElementById('globalSelectorLeft').scrollIntoView({ behavior: 'smooth', block: 'center' });
-                                }
-                            }
-                        }
+                    // Clear Canvas
+                    ctx.fillStyle = 'white';
+                    ctx.fillRect(0, 0, w, h);
+
+                    // Config
+                    const padding = { top: 40, right: 40, bottom: 40, left: 60 };
+                    const graphW = w - padding.left - padding.right;
+                    const graphH = h - padding.top - padding.bottom;
+
+                    // Scaling Functions
+                    const maxX = 40; // Max Attack Rate
+                    const maxY = 1000; // Max Loss
+                    const scaleX = (val) => padding.left + (val / maxX) * graphW;
+                    const scaleY = (val) => (h - padding.bottom) - (val / maxY) * graphH;
+
+                    // 1. Draw Zones (Background)
+                    const xThreshold = scaleX(10);
+                    const yThreshold = scaleY(100);
+
+                    // Draw Zone: Low Risk (Green)
+                    ctx.fillStyle = 'rgba(16, 185, 129, 0.1)';
+                    ctx.fillRect(padding.left, yThreshold, xThreshold - padding.left, (h - padding.bottom) - yThreshold);
+
+                    // Draw Zone: High Risk (Red)
+                    ctx.fillStyle = 'rgba(239, 68, 68, 0.1)';
+                    ctx.fillRect(xThreshold, padding.top, (w - padding.right) - xThreshold, yThreshold - padding.top);
+
+                    // Draw Zone: Warning (Yellow - Mixed)
+                    ctx.fillStyle = 'rgba(234, 179, 8, 0.1)';
+                    // Top Left (High Loss, Low AR)
+                    ctx.fillRect(padding.left, padding.top, xThreshold - padding.left, yThreshold - padding.top);
+                    // Bottom Right (Low Loss, High AR)
+                    ctx.fillRect(xThreshold, yThreshold, (w - padding.right) - xThreshold, (h - padding.bottom) - yThreshold);
+
+                    // 2. Draw Axes
+                    ctx.beginPath();
+                    ctx.strokeStyle = '#cbd5e1';
+                    ctx.lineWidth = 2;
+                    // Y Axis
+                    ctx.moveTo(padding.left, padding.top);
+                    ctx.lineTo(padding.left, h - padding.bottom);
+                    // X Axis
+                    ctx.lineTo(w - padding.right, h - padding.bottom);
+                    ctx.stroke();
+
+                    // 3. Draw Labels
+                    ctx.fillStyle = '#64748b';
+                    ctx.font = 'bold 10px sans-serif';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'top';
+                    ctx.fillText("ATTACK RATE (%)", padding.left + graphW / 2, h - 20);
+
+                    ctx.save();
+                    ctx.translate(20, padding.top + graphH / 2);
+                    ctx.rotate(-Math.PI / 2);
+                    ctx.textAlign = 'center';
+                    ctx.fillText("POTENTIAL LOSS (Juta Rp)", 0, 0);
+                    ctx.restore();
+
+                    // Grid Lines & Ticks (Simple)
+                    ctx.strokeStyle = '#e2e8f0';
+                    ctx.lineWidth = 1;
+                    ctx.textBaseline = 'middle';
+                    ctx.textAlign = 'right';
+                    // Y Ticks
+                    for (let i = 0; i <= 5; i++) {
+                        let val = i * 200;
+                        let yPos = scaleY(val);
+                        ctx.fillStyle = '#94a3b8';
+                        ctx.fillText(val, padding.left - 10, yPos);
+                        ctx.beginPath(); ctx.moveTo(padding.left, yPos); ctx.lineTo(w - padding.right, yPos); ctx.stroke();
+                    }
+                    // X Ticks
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'top';
+                    for (let i = 0; i <= 4; i++) {
+                        let val = i * 10;
+                        let xPos = scaleX(val);
+                        ctx.fillStyle = '#94a3b8';
+                        ctx.fillText(val, xPos, h - padding.bottom + 5);
+                        ctx.beginPath(); ctx.moveTo(xPos, padding.top); ctx.lineTo(xPos, h - padding.bottom); ctx.stroke();
+                    }
+
+                    // 4. PLOT POINTS
+                    points.forEach(p => {
+                        const px = scaleX(p.x);
+                        const py = scaleY(p.y);
+
+                        // Color Logic
+                        ctx.beginPath();
+                        ctx.arc(px, py, 6, 0, 2 * Math.PI); // Radius 6
+
+                        if (p.x > 15 || p.y > 500) ctx.fillStyle = '#ef4444'; // Red
+                        else if (p.x > 5) ctx.fillStyle = '#facc15'; // Yellow
+                        else ctx.fillStyle = '#10b981'; // Green
+
+                        ctx.fill();
+                        ctx.strokeStyle = 'white';
+                        ctx.lineWidth = 2;
+                        ctx.stroke();
                     });
+
+                    console.log("✅ NATIVE CANVAS RENDER COMPLETE");
+
+                    try {
+                        // Empty catch to match structure replaced
+                    } catch (err) { }
                 }
 
+
+
+
+
+
+
+
+
                 function updateRiskMatrix() {
+                    window.updateRiskMatrix = updateRiskMatrix;
                     if (!window.riskChart) return;
 
                     const newPoints = Object.values(BLOCKS_DATA).map(b => {
@@ -2958,6 +3288,55 @@
                 }).join('');
             }
         </script>
+
+        <!-- AUTO-START SCRIPT FOR RISK MATRIX -->
+        <script>
+            (function () {
+                console.log('🔄 Attaching Auto-Start for Risk Matrix...');
+
+                let attempts = 0;
+                const maxAttempts = 20; // 10 seconds max
+
+                const checkAndRun = setInterval(() => {
+                    attempts++;
+
+                    // 1. Check Function Check
+                    const fnReady = typeof window.initRiskMatrix === 'function';
+
+                    // 2. Check Data Check (Safer)
+                    let dataReady = false;
+                    let dataCount = 0;
+                    try {
+                        // Check global variable directly, not as window property (handles const/let)
+                        if (typeof BLOCKS_DATA !== 'undefined' && BLOCKS_DATA) {
+                            dataCount = Object.keys(BLOCKS_DATA).length;
+                            if (dataCount > 0) dataReady = true;
+                        } else if (window.BLOCKS_DATA) {
+                            // Fallback to window property
+                            dataCount = Object.keys(window.BLOCKS_DATA).length;
+                            if (dataCount > 0) dataReady = true;
+                        }
+                    } catch (e) {
+                        // Ignore ReferenceError if BLOCKS_DATA is not defined
+                    }
+
+                    if (fnReady && dataReady) {
+                        console.log(`✅ Dependencies ready (Data: ${dataCount} items). Executing initRiskMatrix()...`);
+                        window.initRiskMatrix();
+                        clearInterval(checkAndRun);
+                    } else {
+                        if (attempts >= maxAttempts) {
+                            console.error(`❌ Failed to auto-start Risk Matrix: Timeout. Fn=${fnReady}, Data=${dataReady} (${dataCount})`);
+                            clearInterval(checkAndRun);
+                        } else {
+                            // Only log every 2 seconds to reduce noise
+                            if (attempts % 4 === 0) console.log(`⏳ Waiting... Fn=${fnReady}, Data=${dataReady} (${attempts}/${maxAttempts})`);
+                        }
+                    }
+                }, 500);
+            })();
+        </script>
+
 </body>
 
 </html>
