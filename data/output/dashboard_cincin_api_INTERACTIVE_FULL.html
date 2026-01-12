@@ -283,7 +283,7 @@
                         </div>
                     </div>
 
-                    <!-- Col 2: TT & Attack Rate -->
+                    <!-- Col 2: TT & Tingkat Infeksi -->
                     <div class="space-y-2 border-r border-indigo-500/10 pr-2 pl-2">
                         <div>
                             <span class="text-indigo-200/60 font-bold block mb-0.5 text-[10px] uppercase">Tahun
@@ -291,7 +291,8 @@
                             <span class="text-white font-black text-xl" id="finTTLeft">--</span>
                         </div>
                         <div>
-                            <span class="text-indigo-200/60 font-bold block mb-0.5 text-[10px] uppercase">Attack Rate
+                            <span class="text-indigo-200/60 font-bold block mb-0.5 text-[10px] uppercase">Tingkat
+                                Infeksi
                                 (NDRE vs Sensus)</span>
                             <div class="flex items-baseline gap-2">
                                 <span class="text-red-400 font-black text-xl" id="finARLeft">--%</span>
@@ -348,32 +349,32 @@
                     <div>
                         <h3 class="text-rose-400 text-[10px] font-black uppercase tracking-widest mb-1">Risk Control
                             Tower</h3>
-                        <h2 class="text-2xl font-black text-white tracking-tight">ESTATE RISK EXPOSURE</h2>
+                        <h2 class="text-2xl font-black text-white tracking-tight">PAPARAN RISIKO ESTATE</h2>
                     </div>
                 </div>
 
                 <!-- Main Number -->
                 <div class="mb-6 relative z-10">
-                    <span class="text-[10px] uppercase font-bold text-slate-400 block mb-1">Total Potential Loss (Top
-                        Risks)</span>
+                    <span class="text-[10px] uppercase font-bold text-slate-400 block mb-1">Total Potensi Kerugian (8
+                        Blok Kritis)</span>
                     <div class="flex items-baseline gap-1">
                         <span class="text-xl font-bold text-rose-500">Rp</span>
                         <span class="text-5xl font-black text-white tracking-tighter" id="summaryTotalLoss">--</span>
                         <span class="text-sm font-bold text-slate-400">Miliar</span>
                     </div>
-                    <p class="text-[10px] text-rose-300/80 mt-1 italic">*Akumulasi dari blok berstatus Critical & High
-                        Risk</p>
+                    <p class="text-[10px] text-rose-300/80 mt-1 italic">*Akumulasi kerugian dari 8 blok berstatus KRITIS
+                    </p>
                 </div>
 
                 <!-- Stats Grid -->
                 <div class="grid grid-cols-2 gap-3 pb-6 border-b border-rose-500/20 mb-4">
                     <div class="bg-black/30 p-3 rounded-xl border border-white/5">
-                        <span class="text-[9px] font-black text-slate-400 uppercase block mb-1">Critical Blocks</span>
+                        <span class="text-[9px] font-black text-slate-400 uppercase block mb-1">Blok Kritis</span>
                         <span class="text-2xl font-black text-white" id="summaryCriticalCount">--</span>
                         <span class="text-xs font-bold text-slate-500 ml-1">Blok</span>
                     </div>
                     <div class="bg-black/30 p-3 rounded-xl border border-white/5">
-                        <span class="text-[9px] font-black text-slate-400 uppercase block mb-1">Area at Risk</span>
+                        <span class="text-[9px] font-black text-slate-400 uppercase block mb-1">Area Berisiko</span>
                         <span class="text-2xl font-black text-white" id="summaryRiskArea">--</span>
                         <span class="text-xs font-bold text-slate-500 ml-1">Ha</span>
                     </div>
@@ -386,139 +387,151 @@
                 </div>
 
                 <!-- ============================================ -->
-                
+
                 <!-- ============================================ -->
                 <!-- COST OF INACTION WARNING PANEL (CORRECTED) -->
                 <!-- ============================================ -->
-                <div class="mt-8 p-6 bg-gradient-to-br from-rose-900/40 to-orange-900/40 rounded-2xl border-2 border-rose-500 shadow-2xl relative overflow-hidden">
-                    <div class="absolute inset-0 opacity-5" style="background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, currentColor 10px, currentColor 20px);"></div>
-                    
+                <div
+                    class="mt-8 p-6 bg-gradient-to-br from-rose-900/40 to-orange-900/40 rounded-2xl border-2 border-rose-500 shadow-2xl relative overflow-hidden">
+                    <div class="absolute inset-0 opacity-5"
+                        style="background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, currentColor 10px, currentColor 20px);">
+                    </div>
+
                     <div class="relative z-10">
                         <div class="flex items-center gap-3 mb-4">
-                            <div class="w-12 h-12 bg-rose-600 rounded-xl flex items-center justify-center shadow-lg animate-pulse">
+                            <div
+                                class="w-12 h-12 bg-rose-600 rounded-xl flex items-center justify-center shadow-lg animate-pulse">
                                 <span class="text-2xl">⚠️</span>
                             </div>
                             <div>
-                                <h3 class="text-xl font-black text-white uppercase tracking-wider">URGENT: Cost of Inaction</h3>
-                                <p class="text-rose-300 text-sm font-semibold">8 Critical Blocks Require Immediate Attention</p>
+                                <h3 class="text-xl font-black text-white uppercase tracking-wider">URGENT: Biaya Tidak
+                                    Bertindak</h3>
+                                <p class="text-rose-300 text-sm font-semibold">8 Blok Kritis Memerlukan Perhatian Segera
+                                </p>
                             </div>
                         </div>
-                        
+
                         <!-- Financial Impact Grid -->
                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
                             <div class="bg-black/30 backdrop-blur-sm p-4 rounded-xl border border-rose-500/30">
-                                <div class="text-xs text-rose-300 font-bold uppercase mb-1">Current Loss (Year 0)</div>
+                                <div class="text-xs text-rose-300 font-bold uppercase mb-1">Kerugian Saat Ini (Tahun 0)
+                                </div>
                                 <div class="text-3xl font-black text-white">Rp 1,353</div>
-                                <div class="text-xs text-rose-400 mt-1">Juta / year</div>
+                                <div class="text-xs text-rose-400 mt-1">Juta / tahun</div>
                             </div>
-                            
+
                             <div class="bg-black/30 backdrop-blur-sm p-4 rounded-xl border border-orange-500/30">
-                                <div class="text-xs text-orange-300 font-bold uppercase mb-1">3-Year Projected Loss</div>
+                                <div class="text-xs text-orange-300 font-bold uppercase mb-1">Proyeksi Kerugian 3 Tahun
+                                </div>
                                 <div class="text-3xl font-black text-white">Rp 6,204</div>
-                                <div class="text-xs text-orange-400 mt-1">Juta (with degradation)</div>
+                                <div class="text-xs text-orange-400 mt-1">Juta (dengan degradasi)</div>
                             </div>
-                            
+
                             <div class="bg-black/30 backdrop-blur-sm p-4 rounded-xl border border-emerald-500/30">
-                                <div class="text-xs text-emerald-300 font-bold uppercase mb-1">Treatment Investment</div>
+                                <div class="text-xs text-emerald-300 font-bold uppercase mb-1">Investasi Treatment</div>
                                 <div class="text-3xl font-black text-white">Rp 400</div>
-                                <div class="text-xs text-emerald-400 mt-1">Juta (one-time)</div>
+                                <div class="text-xs text-emerald-400 mt-1">Juta (sekali bayar)</div>
                             </div>
-                            
+
                             <div class="bg-black/30 backdrop-blur-sm p-4 rounded-xl border border-cyan-500/30">
-                                <div class="text-xs text-cyan-300 font-bold uppercase mb-1">Potential Savings</div>
+                                <div class="text-xs text-cyan-300 font-bold uppercase mb-1">Potensi Penghematan</div>
                                 <div class="text-3xl font-black text-white">Rp 4,343</div>
-                                <div class="text-xs text-cyan-400 mt-1">Juta (3-year prevented)</div>
+                                <div class="text-xs text-cyan-400 mt-1">Juta (dicegah 3 tahun)</div>
                             </div>
                         </div>
-                        
+
                         <!-- ROI Metrics -->
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-                            <div class="bg-gradient-to-r from-rose-600/20 to-orange-600/20 p-4 rounded-xl border border-yellow-500/50">
-                                <div class="text-xs text-yellow-300 font-bold uppercase mb-1">Return on Investment</div>
+                            <div
+                                class="bg-gradient-to-r from-rose-600/20 to-orange-600/20 p-4 rounded-xl border border-yellow-500/50">
+                                <div class="text-xs text-yellow-300 font-bold uppercase mb-1">Return on Investment (ROI)
+                                </div>
                                 <div class="text-4xl font-black text-yellow-400">986%</div>
-                                <div class="text-xs text-yellow-300 mt-1">Over 3 years</div>
+                                <div class="text-xs text-yellow-300 mt-1">Dalam 3 tahun</div>
                             </div>
-                            
-                            <div class="bg-gradient-to-r from-orange-600/20 to-rose-600/20 p-4 rounded-xl border border-green-500/50">
-                                <div class="text-xs text-green-300 font-bold uppercase mb-1">Payback Period</div>
+
+                            <div
+                                class="bg-gradient-to-r from-orange-600/20 to-rose-600/20 p-4 rounded-xl border border-green-500/50">
+                                <div class="text-xs text-green-300 font-bold uppercase mb-1">Periode Balik Modal</div>
                                 <div class="text-4xl font-black text-green-400">3.3</div>
                                 <div class="text-xs text-green-300 mt-1">Months</div>
                             </div>
-                            
-                            <div class="bg-gradient-to-r from-rose-600/20 to-purple-600/20 p-4 rounded-xl border border-red-500/50">
-                                <div class="text-xs text-red-300 font-bold uppercase mb-1">Action Window</div>
+
+                            <div
+                                class="bg-gradient-to-r from-rose-600/20 to-purple-600/20 p-4 rounded-xl border border-red-500/50">
+                                <div class="text-xs text-red-300 font-bold uppercase mb-1">Jendela Aksi</div>
                                 <div class="text-4xl font-black text-red-400">6</div>
-                                <div class="text-xs text-red-300 mt-1">Months before irreversible</div>
+                                <div class="text-xs text-red-300 mt-1">Bulan sebelum irreversible</div>
                             </div>
                         </div>
-                        
+
                         <!-- Degradation Note -->
                         <div class="mb-6 p-4 bg-yellow-900/20 border border-yellow-600/40 rounded-xl">
                             <p class="text-sm text-yellow-200">
-                                <strong>📉 Degradation Model:</strong> Projected loss includes realistic deterioration - 
-                                Attack Rate increases (+2.5-4% yearly), Yield Gap worsens (-5 to -10%), 
-                                SPH drops (-10 to -20 trees/ha yearly) if no treatment applied.
+                                <strong>📉 Model Degradasi:</strong> Proyeksi kerugian mencakup deteriorasi realistis -
+                                Tingkat Infeksi meningkat (+2.5-4% yearly), Gap Hasil memburuk (-5 to -10%),
+                                SPH drops (-10 to -20 trees/ha yearly) jika tidak ada treatment.
                             </p>
                         </div>
-                        
+
                         <!-- Critical Blocks List (Clickable) -->
                         <div class="mt-6">
                             <div class="text-sm font-bold text-white uppercase mb-3">
-                                🔥 Critical Blocks (Click for Detail):
+                                🔥 Blok Kritis (Klik untuk Detail):
                             </div>
                             <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
 
-                                <div onclick="showBlockDetail('E003A')" 
-                                     class="bg-rose-900/30 border border-rose-600/50 rounded-lg p-2 hover:bg-rose-800/50 hover:border-rose-500 hover:scale-105 transition-all cursor-pointer">
+                                <div onclick="showBlockDetail('E003A')"
+                                    class="bg-rose-900/30 border border-rose-600/50 rounded-lg p-2 hover:bg-rose-800/50 hover:border-rose-500 hover:scale-105 transition-all cursor-pointer">
                                     <div class="text-xs font-black text-white">E003A</div>
                                     <div class="text-[10px] text-rose-300">Now: Rp 209 Jt</div>
                                     <div class="text-[10px] text-orange-300">3yr: Rp 928 Jt</div>
                                 </div>
 
-                                <div onclick="showBlockDetail('D001A')" 
-                                     class="bg-rose-900/30 border border-rose-600/50 rounded-lg p-2 hover:bg-rose-800/50 hover:border-rose-500 hover:scale-105 transition-all cursor-pointer">
+                                <div onclick="showBlockDetail('D001A')"
+                                    class="bg-rose-900/30 border border-rose-600/50 rounded-lg p-2 hover:bg-rose-800/50 hover:border-rose-500 hover:scale-105 transition-all cursor-pointer">
                                     <div class="text-xs font-black text-white">D001A</div>
                                     <div class="text-[10px] text-rose-300">Now: Rp 182 Jt</div>
                                     <div class="text-[10px] text-orange-300">3yr: Rp 874 Jt</div>
                                 </div>
 
-                                <div onclick="showBlockDetail('D003A')" 
-                                     class="bg-rose-900/30 border border-rose-600/50 rounded-lg p-2 hover:bg-rose-800/50 hover:border-rose-500 hover:scale-105 transition-all cursor-pointer">
+                                <div onclick="showBlockDetail('D003A')"
+                                    class="bg-rose-900/30 border border-rose-600/50 rounded-lg p-2 hover:bg-rose-800/50 hover:border-rose-500 hover:scale-105 transition-all cursor-pointer">
                                     <div class="text-xs font-black text-white">D003A</div>
                                     <div class="text-[10px] text-rose-300">Now: Rp 177 Jt</div>
                                     <div class="text-[10px] text-orange-300">3yr: Rp 873 Jt</div>
                                 </div>
 
-                                <div onclick="showBlockDetail('E002A')" 
-                                     class="bg-rose-900/30 border border-rose-600/50 rounded-lg p-2 hover:bg-rose-800/50 hover:border-rose-500 hover:scale-105 transition-all cursor-pointer">
+                                <div onclick="showBlockDetail('E002A')"
+                                    class="bg-rose-900/30 border border-rose-600/50 rounded-lg p-2 hover:bg-rose-800/50 hover:border-rose-500 hover:scale-105 transition-all cursor-pointer">
                                     <div class="text-xs font-black text-white">E002A</div>
                                     <div class="text-[10px] text-rose-300">Now: Rp 190 Jt</div>
                                     <div class="text-[10px] text-orange-300">3yr: Rp 860 Jt</div>
                                 </div>
 
-                                <div onclick="showBlockDetail('E001A')" 
-                                     class="bg-rose-900/30 border border-rose-600/50 rounded-lg p-2 hover:bg-rose-800/50 hover:border-rose-500 hover:scale-105 transition-all cursor-pointer">
+                                <div onclick="showBlockDetail('E001A')"
+                                    class="bg-rose-900/30 border border-rose-600/50 rounded-lg p-2 hover:bg-rose-800/50 hover:border-rose-500 hover:scale-105 transition-all cursor-pointer">
                                     <div class="text-xs font-black text-white">E001A</div>
                                     <div class="text-[10px] text-rose-300">Now: Rp 179 Jt</div>
                                     <div class="text-[10px] text-orange-300">3yr: Rp 811 Jt</div>
                                 </div>
 
-                                <div onclick="showBlockDetail('D004A')" 
-                                     class="bg-rose-900/30 border border-rose-600/50 rounded-lg p-2 hover:bg-rose-800/50 hover:border-rose-500 hover:scale-105 transition-all cursor-pointer">
+                                <div onclick="showBlockDetail('D004A')"
+                                    class="bg-rose-900/30 border border-rose-600/50 rounded-lg p-2 hover:bg-rose-800/50 hover:border-rose-500 hover:scale-105 transition-all cursor-pointer">
                                     <div class="text-xs font-black text-white">D004A</div>
                                     <div class="text-[10px] text-rose-300">Now: Rp 146 Jt</div>
                                     <div class="text-[10px] text-orange-300">3yr: Rp 725 Jt</div>
                                 </div>
 
-                                <div onclick="showBlockDetail('F002A')" 
-                                     class="bg-rose-900/30 border border-rose-600/50 rounded-lg p-2 hover:bg-rose-800/50 hover:border-rose-500 hover:scale-105 transition-all cursor-pointer">
+                                <div onclick="showBlockDetail('F002A')"
+                                    class="bg-rose-900/30 border border-rose-600/50 rounded-lg p-2 hover:bg-rose-800/50 hover:border-rose-500 hover:scale-105 transition-all cursor-pointer">
                                     <div class="text-xs font-black text-white">F002A</div>
                                     <div class="text-[10px] text-rose-300">Now: Rp 168 Jt</div>
                                     <div class="text-[10px] text-orange-300">3yr: Rp 675 Jt</div>
                                 </div>
 
-                                <div onclick="showBlockDetail('F004A')" 
-                                     class="bg-rose-900/30 border border-rose-600/50 rounded-lg p-2 hover:bg-rose-800/50 hover:border-rose-500 hover:scale-105 transition-all cursor-pointer">
+                                <div onclick="showBlockDetail('F004A')"
+                                    class="bg-rose-900/30 border border-rose-600/50 rounded-lg p-2 hover:bg-rose-800/50 hover:border-rose-500 hover:scale-105 transition-all cursor-pointer">
                                     <div class="text-xs font-black text-white">F004A</div>
                                     <div class="text-[10px] text-rose-300">Now: Rp 103 Jt</div>
                                     <div class="text-[10px] text-orange-300">3yr: Rp 458 Jt</div>
@@ -526,11 +539,12 @@
 
                             </div>
                         </div>
-                        
+
                         <!-- Action CTA -->
                         <div class="mt-6 p-4 bg-gradient-to-r from-rose-600 to-orange-600 rounded-xl text-center">
-                            <p class="text-white font-black text-lg mb-2">⏰ Immediate Action Required</p>
-                            <p class="text-white/90 text-sm">Treatment decision must be made within 30 days to prevent exponential loss escalation</p>
+                            <p class="text-white font-black text-lg mb-2">⏰ Tindakan Segera Diperlukan</p>
+                            <p class="text-white/90 text-sm">Keputusan treatment harus diambil dalam 30 hari untuk
+                                mencegah eskalasi kerugian eksponensial</p>
                         </div>
                     </div>
                 </div>
@@ -538,30 +552,34 @@
                 <!-- ============================================ -->
                 <!-- MODAL: BLOCK DETAIL POPUP -->
                 <!-- ============================================ -->
-                <div id="blockDetailModal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-                    <div class="bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl border-2 border-rose-500 max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">
+                <div id="blockDetailModal"
+                    class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+                    <div
+                        class="bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl border-2 border-rose-500 max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">
                         <!-- Modal Header -->
-                        <div class="sticky top-0 bg-gradient-to-r from-rose-600 to-orange-600 p-6 border-b border-white/10">
+                        <div
+                            class="sticky top-0 bg-gradient-to-r from-rose-600 to-orange-600 p-6 border-b border-white/10">
                             <div class="flex items-center justify-between">
                                 <div>
                                     <h2 class="text-2xl font-black text-white" id="modalBlockCode">BLOK XXX</h2>
-                                    <p class="text-white/80 text-sm">Cost of Inaction Detail Analysis</p>
+                                    <p class="text-white/80 text-sm">Biaya Tidak Bertindak Detail Analysis</p>
                                 </div>
-                                <button onclick="closeBlockDetail()" class="text-white hover:text-rose-200 text-3xl font-bold">×</button>
+                                <button onclick="closeBlockDetail()"
+                                    class="text-white hover:text-rose-200 text-3xl font-bold">×</button>
                             </div>
                         </div>
-                        
+
                         <!-- Modal Body -->
                         <div class="p-6 space-y-6">
                             <!-- Financial Summary -->
                             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                                 <div class="bg-black/40 p-4 rounded-xl border border-rose-500/30">
-                                    <div class="text-xs text-rose-300 font-bold uppercase mb-1">Current Loss</div>
+                                    <div class="text-xs text-rose-300 font-bold uppercase mb-1">Kerugian Saat Ini</div>
                                     <div class="text-2xl font-black text-white" id="modalCurrentLoss">--</div>
                                     <div class="text-xs text-rose-400">Juta/year</div>
                                 </div>
                                 <div class="bg-black/40 p-4 rounded-xl border border-orange-500/30">
-                                    <div class="text-xs text-orange-300 font-bold uppercase mb-1">3-Year Total</div>
+                                    <div class="text-xs text-orange-300 font-bold uppercase mb-1">Total 3 Tahun</div>
                                     <div class="text-2xl font-black text-white" id="modal3YrLoss">--</div>
                                     <div class="text-xs text-orange-400">Juta</div>
                                 </div>
@@ -576,20 +594,22 @@
                                     <div class="text-xs text-cyan-400">%</div>
                                 </div>
                             </div>
-                            
+
                             <!-- Degradation Timeline Table -->
                             <div class="bg-black/30 p-5 rounded-xl border border-white/10">
-                                <h3 class="text-lg font-black text-white mb-4">📉 Degradation Timeline (No Treatment)</h3>
+                                <h3 class="text-lg font-black text-white mb-4">📉 Degradation Timeline (No Treatment)
+                                </h3>
                                 <div class="overflow-x-auto">
                                     <table class="w-full text-sm">
                                         <thead>
                                             <tr class="border-b border-white/20">
                                                 <th class="text-left text-rose-300 font-bold p-2">Parameter</th>
-                                                <th class="text-center text-white font-bold p-2">Year 0<br/><span class="text-xs text-gray-400">(Current)</span></th>
-                                                <th class="text-center text-orange-300 font-bold p-2">Year 1</th>
-                                                <th class="text-center text-yellow-300 font-bold p-2">Year 2</th>
-                                                <th class="text-center text-red-300 font-bold p-2">Year 3</th>
-                                                <th class="text-center text-cyan-300 font-bold p-2">Change</th>
+                                                <th class="text-center text-white font-bold p-2">Tahun 0<br /><span
+                                                        class="text-xs text-gray-400">(Saat Ini)</span></th>
+                                                <th class="text-center text-orange-300 font-bold p-2">Tahun 1</th>
+                                                <th class="text-center text-yellow-300 font-bold p-2">Tahun 2</th>
+                                                <th class="text-center text-red-300 font-bold p-2">Tahun 3</th>
+                                                <th class="text-center text-cyan-300 font-bold p-2">Perubahan</th>
                                             </tr>
                                         </thead>
                                         <tbody id="modalDegradationTable">
@@ -598,29 +618,33 @@
                                     </table>
                                 </div>
                             </div>
-                            
+
                             <!-- Treatment Impact -->
-                            <div class="bg-gradient-to-r from-emerald-900/30 to-green-900/30 p-5 rounded-xl border border-emerald-500/50">
+                            <div
+                                class="bg-gradient-to-r from-emerald-900/30 to-green-900/30 p-5 rounded-xl border border-emerald-500/50">
                                 <h3 class="text-lg font-black text-white mb-3">✅ Impact of Treatment</h3>
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div>
-                                        <p class="text-sm text-emerald-200 mb-2"><strong>Prevented Loss (70% eff):</strong></p>
+                                        <p class="text-sm text-emerald-200 mb-2"><strong>Kerugian yang Dicegah (70%
+                                                efektif):</strong></p>
                                         <p class="text-2xl font-black text-emerald-400" id="modalPreventedLoss">--</p>
                                     </div>
                                     <div>
-                                        <p class="text-sm text-green-200 mb-2"><strong>Net Benefit:</strong></p>
+                                        <p class="text-sm text-green-200 mb-2"><strong>Manfaat Bersih:</strong></p>
                                         <p class="text-2xl font-black text-green-400" id="modalNetBenefit">--</p>
                                     </div>
                                 </div>
                                 <p class="text-xs text-emerald-300 mt-3 italic">
-                                    Treatment includes: Isolation trenching (4×4m), systemic fungicide, sanitation, and drainage improvement.
+                                    Treatment mencakup: Parit isolasi (4×4m), fungisida sistemik, sanitasi, dan
+                                    perbaikan drainase.
                                 </p>
                             </div>
                         </div>
-                        
+
                         <!-- Modal Footer -->
                         <div class="bg-slate-800/50 p-4 border-t border-white/10 text-center">
-                            <button onclick="closeBlockDetail()" class="px-6 py-2 bg-rose-600 hover:bg-rose-700 text-white font-bold rounded-lg transition-all">
+                            <button onclick="closeBlockDetail()"
+                                class="px-6 py-2 bg-rose-600 hover:bg-rose-700 text-white font-bold rounded-lg transition-all">
                                 Close
                             </button>
                         </div>
@@ -628,261 +652,261 @@
                 </div>
 
                 <script>
-                // Cost of Inaction Projection Data (Embedded)
-                const COST_PROJECTIONS = {
-    "D003A": {
-        "current": {
-            "ar": 7.2,
-            "gap_pct": -22.0,
-            "sph": 98,
-            "loss_juta": 176.8
-        },
-        "year1": {
-            "ar": 9.7,
-            "gap_pct": -27.0,
-            "sph": 88,
-            "loss_juta": 204.93
-        },
-        "year2": {
-            "ar": 12.7,
-            "gap_pct": -34.0,
-            "sph": 73,
-            "loss_juta": 258.06000000000006
-        },
-        "year3": {
-            "ar": 16.7,
-            "gap_pct": -54.0,
-            "sph": 53,
-            "loss_juta": 409.86
-        },
-        "total_3yr_loss": 872.8500000000001,
-        "avg_annual_loss": 290.95000000000005
-    },
-    "D004A": {
-        "current": {
-            "ar": 10.7,
-            "gap_pct": -20.3,
-            "sph": 119,
-            "loss_juta": 146.2
-        },
-        "year1": {
-            "ar": 13.2,
-            "gap_pct": -25.3,
-            "sph": 109,
-            "loss_juta": 166.98000000000002
-        },
-        "year2": {
-            "ar": 16.2,
-            "gap_pct": -32.3,
-            "sph": 94,
-            "loss_juta": 213.17999999999995
-        },
-        "year3": {
-            "ar": 20.2,
-            "gap_pct": -52.3,
-            "sph": 74,
-            "loss_juta": 345.18
-        },
-        "total_3yr_loss": 725.3399999999999,
-        "avg_annual_loss": 241.77999999999997
-    },
-    "D001A": {
-        "current": {
-            "ar": 7.5,
-            "gap_pct": -21.3,
-            "sph": 108,
-            "loss_juta": 182.3
-        },
-        "year1": {
-            "ar": 10.0,
-            "gap_pct": -26.3,
-            "sph": 98,
-            "loss_juta": 203.562
-        },
-        "year2": {
-            "ar": 13.0,
-            "gap_pct": -33.3,
-            "sph": 83,
-            "loss_juta": 257.74199999999996
-        },
-        "year3": {
-            "ar": 17.0,
-            "gap_pct": -53.3,
-            "sph": 63,
-            "loss_juta": 412.5419999999999
-        },
-        "total_3yr_loss": 873.8459999999999,
-        "avg_annual_loss": 291.282
-    },
-    "E003A": {
-        "current": {
-            "ar": 6.8,
-            "gap_pct": -31.4,
-            "sph": 99,
-            "loss_juta": 209.0
-        },
-        "year1": {
-            "ar": 9.3,
-            "gap_pct": -36.4,
-            "sph": 89,
-            "loss_juta": 235.87199999999999
-        },
-        "year2": {
-            "ar": 12.3,
-            "gap_pct": -43.4,
-            "sph": 74,
-            "loss_juta": 281.23199999999997
-        },
-        "year3": {
-            "ar": 16.3,
-            "gap_pct": -63.4,
-            "sph": 54,
-            "loss_juta": 410.83200000000005
-        },
-        "total_3yr_loss": 927.9359999999999,
-        "avg_annual_loss": 309.31199999999995
-    },
-    "E001A": {
-        "current": {
-            "ar": 6.4,
-            "gap_pct": -23.7,
-            "sph": 95,
-            "loss_juta": 178.9
-        },
-        "year1": {
-            "ar": 8.9,
-            "gap_pct": -28.7,
-            "sph": 85,
-            "loss_juta": 193.72499999999997
-        },
-        "year2": {
-            "ar": 11.9,
-            "gap_pct": -35.7,
-            "sph": 70,
-            "loss_juta": 240.97500000000002
-        },
-        "year3": {
-            "ar": 15.9,
-            "gap_pct": -55.7,
-            "sph": 50,
-            "loss_juta": 375.975
-        },
-        "total_3yr_loss": 810.675,
-        "avg_annual_loss": 270.22499999999997
-    },
-    "E002A": {
-        "current": {
-            "ar": 8.3,
-            "gap_pct": -26.7,
-            "sph": 133,
-            "loss_juta": 189.5
-        },
-        "year1": {
-            "ar": 10.8,
-            "gap_pct": -31.7,
-            "sph": 123,
-            "loss_juta": 211.12199999999999
-        },
-        "year2": {
-            "ar": 13.8,
-            "gap_pct": -38.7,
-            "sph": 108,
-            "loss_juta": 257.742
-        },
-        "year3": {
-            "ar": 17.8,
-            "gap_pct": -58.7,
-            "sph": 88,
-            "loss_juta": 390.94200000000006
-        },
-        "total_3yr_loss": 859.806,
-        "avg_annual_loss": 286.60200000000003
-    },
-    "F002A": {
-        "current": {
-            "ar": 8.1,
-            "gap_pct": -33.0,
-            "sph": 132,
-            "loss_juta": 168.0
-        },
-        "year1": {
-            "ar": 10.6,
-            "gap_pct": -38.0,
-            "sph": 122,
-            "loss_juta": 173.28
-        },
-        "year2": {
-            "ar": 13.6,
-            "gap_pct": -45.0,
-            "sph": 107,
-            "loss_juta": 205.2
-        },
-        "year3": {
-            "ar": 17.6,
-            "gap_pct": -65.0,
-            "sph": 87,
-            "loss_juta": 296.4
-        },
-        "total_3yr_loss": 674.88,
-        "avg_annual_loss": 224.96
-    },
-    "F004A": {
-        "current": {
-            "ar": 7.4,
-            "gap_pct": -26.1,
-            "sph": 127,
-            "loss_juta": 102.6
-        },
-        "year1": {
-            "ar": 9.9,
-            "gap_pct": -31.1,
-            "sph": 117,
-            "loss_juta": 111.96000000000001
-        },
-        "year2": {
-            "ar": 12.9,
-            "gap_pct": -38.1,
-            "sph": 102,
-            "loss_juta": 137.16
-        },
-        "year3": {
-            "ar": 16.9,
-            "gap_pct": -58.1,
-            "sph": 82,
-            "loss_juta": 209.16
-        },
-        "total_3yr_loss": 458.28,
-        "avg_annual_loss": 152.76
-    }
-};
-                
-                // Show block detail modal
-                function showBlockDetail(blockCode) {
-                    const data = COST_PROJECTIONS[blockCode];
-                    if (!data) {
-                        alert('Data not found for block: ' + blockCode);
-                        return;
-                    }
-                    
-                    // Update modal content
-                    document.getElementById('modalBlockCode').textContent = 'BLOK ' + blockCode;
-                    document.getElementById('modalCurrentLoss').textContent =  'Rp ' + data.current.loss_juta.toFixed(0);
-                    document.getElementById('modal3YrLoss').textContent = 'Rp ' + data.total_3yr_loss.toFixed(0);
-                    
-                    // Calculate ROI for this block
-                    const treatment = 50;
-                    const prevented = data.total_3yr_loss * 0.70;
-                    const netBenefit = prevented - treatment;
-                    const roi = (netBenefit / treatment * 100).toFixed(0);
-                    
-                    document.getElementById('modalROI').textContent = roi;
-                    document.getElementById('modalPreventedLoss').textContent = 'Rp ' + prevented.toFixed(0) + ' Juta';
-                    document.getElementById('modalNetBenefit').textContent = 'Rp ' + netBenefit.toFixed(0) + ' Juta';
-                    
-                    // Build degradation table
-                    const tableHTML = `
+                    // Biaya Tidak Bertindak Projection Data (Embedded)
+                    const COST_PROJECTIONS = {
+                        "D003A": {
+                            "current": {
+                                "ar": 7.2,
+                                "gap_pct": -22.0,
+                                "sph": 98,
+                                "loss_juta": 176.8
+                            },
+                            "year1": {
+                                "ar": 9.7,
+                                "gap_pct": -27.0,
+                                "sph": 88,
+                                "loss_juta": 204.93
+                            },
+                            "year2": {
+                                "ar": 12.7,
+                                "gap_pct": -34.0,
+                                "sph": 73,
+                                "loss_juta": 258.06000000000006
+                            },
+                            "year3": {
+                                "ar": 16.7,
+                                "gap_pct": -54.0,
+                                "sph": 53,
+                                "loss_juta": 409.86
+                            },
+                            "total_3yr_loss": 872.8500000000001,
+                            "avg_annual_loss": 290.95000000000005
+                        },
+                        "D004A": {
+                            "current": {
+                                "ar": 10.7,
+                                "gap_pct": -20.3,
+                                "sph": 119,
+                                "loss_juta": 146.2
+                            },
+                            "year1": {
+                                "ar": 13.2,
+                                "gap_pct": -25.3,
+                                "sph": 109,
+                                "loss_juta": 166.98000000000002
+                            },
+                            "year2": {
+                                "ar": 16.2,
+                                "gap_pct": -32.3,
+                                "sph": 94,
+                                "loss_juta": 213.17999999999995
+                            },
+                            "year3": {
+                                "ar": 20.2,
+                                "gap_pct": -52.3,
+                                "sph": 74,
+                                "loss_juta": 345.18
+                            },
+                            "total_3yr_loss": 725.3399999999999,
+                            "avg_annual_loss": 241.77999999999997
+                        },
+                        "D001A": {
+                            "current": {
+                                "ar": 7.5,
+                                "gap_pct": -21.3,
+                                "sph": 108,
+                                "loss_juta": 182.3
+                            },
+                            "year1": {
+                                "ar": 10.0,
+                                "gap_pct": -26.3,
+                                "sph": 98,
+                                "loss_juta": 203.562
+                            },
+                            "year2": {
+                                "ar": 13.0,
+                                "gap_pct": -33.3,
+                                "sph": 83,
+                                "loss_juta": 257.74199999999996
+                            },
+                            "year3": {
+                                "ar": 17.0,
+                                "gap_pct": -53.3,
+                                "sph": 63,
+                                "loss_juta": 412.5419999999999
+                            },
+                            "total_3yr_loss": 873.8459999999999,
+                            "avg_annual_loss": 291.282
+                        },
+                        "E003A": {
+                            "current": {
+                                "ar": 6.8,
+                                "gap_pct": -31.4,
+                                "sph": 99,
+                                "loss_juta": 209.0
+                            },
+                            "year1": {
+                                "ar": 9.3,
+                                "gap_pct": -36.4,
+                                "sph": 89,
+                                "loss_juta": 235.87199999999999
+                            },
+                            "year2": {
+                                "ar": 12.3,
+                                "gap_pct": -43.4,
+                                "sph": 74,
+                                "loss_juta": 281.23199999999997
+                            },
+                            "year3": {
+                                "ar": 16.3,
+                                "gap_pct": -63.4,
+                                "sph": 54,
+                                "loss_juta": 410.83200000000005
+                            },
+                            "total_3yr_loss": 927.9359999999999,
+                            "avg_annual_loss": 309.31199999999995
+                        },
+                        "E001A": {
+                            "current": {
+                                "ar": 6.4,
+                                "gap_pct": -23.7,
+                                "sph": 95,
+                                "loss_juta": 178.9
+                            },
+                            "year1": {
+                                "ar": 8.9,
+                                "gap_pct": -28.7,
+                                "sph": 85,
+                                "loss_juta": 193.72499999999997
+                            },
+                            "year2": {
+                                "ar": 11.9,
+                                "gap_pct": -35.7,
+                                "sph": 70,
+                                "loss_juta": 240.97500000000002
+                            },
+                            "year3": {
+                                "ar": 15.9,
+                                "gap_pct": -55.7,
+                                "sph": 50,
+                                "loss_juta": 375.975
+                            },
+                            "total_3yr_loss": 810.675,
+                            "avg_annual_loss": 270.22499999999997
+                        },
+                        "E002A": {
+                            "current": {
+                                "ar": 8.3,
+                                "gap_pct": -26.7,
+                                "sph": 133,
+                                "loss_juta": 189.5
+                            },
+                            "year1": {
+                                "ar": 10.8,
+                                "gap_pct": -31.7,
+                                "sph": 123,
+                                "loss_juta": 211.12199999999999
+                            },
+                            "year2": {
+                                "ar": 13.8,
+                                "gap_pct": -38.7,
+                                "sph": 108,
+                                "loss_juta": 257.742
+                            },
+                            "year3": {
+                                "ar": 17.8,
+                                "gap_pct": -58.7,
+                                "sph": 88,
+                                "loss_juta": 390.94200000000006
+                            },
+                            "total_3yr_loss": 859.806,
+                            "avg_annual_loss": 286.60200000000003
+                        },
+                        "F002A": {
+                            "current": {
+                                "ar": 8.1,
+                                "gap_pct": -33.0,
+                                "sph": 132,
+                                "loss_juta": 168.0
+                            },
+                            "year1": {
+                                "ar": 10.6,
+                                "gap_pct": -38.0,
+                                "sph": 122,
+                                "loss_juta": 173.28
+                            },
+                            "year2": {
+                                "ar": 13.6,
+                                "gap_pct": -45.0,
+                                "sph": 107,
+                                "loss_juta": 205.2
+                            },
+                            "year3": {
+                                "ar": 17.6,
+                                "gap_pct": -65.0,
+                                "sph": 87,
+                                "loss_juta": 296.4
+                            },
+                            "total_3yr_loss": 674.88,
+                            "avg_annual_loss": 224.96
+                        },
+                        "F004A": {
+                            "current": {
+                                "ar": 7.4,
+                                "gap_pct": -26.1,
+                                "sph": 127,
+                                "loss_juta": 102.6
+                            },
+                            "year1": {
+                                "ar": 9.9,
+                                "gap_pct": -31.1,
+                                "sph": 117,
+                                "loss_juta": 111.96000000000001
+                            },
+                            "year2": {
+                                "ar": 12.9,
+                                "gap_pct": -38.1,
+                                "sph": 102,
+                                "loss_juta": 137.16
+                            },
+                            "year3": {
+                                "ar": 16.9,
+                                "gap_pct": -58.1,
+                                "sph": 82,
+                                "loss_juta": 209.16
+                            },
+                            "total_3yr_loss": 458.28,
+                            "avg_annual_loss": 152.76
+                        }
+                    };
+
+                    // Show block detail modal
+                    function showBlockDetail(blockCode) {
+                        const data = COST_PROJECTIONS[blockCode];
+                        if (!data) {
+                            alert('Data not found for block: ' + blockCode);
+                            return;
+                        }
+
+                        // Update modal content
+                        document.getElementById('modalBlockCode').textContent = 'BLOK ' + blockCode;
+                        document.getElementById('modalCurrentLoss').textContent = 'Rp ' + data.current.loss_juta.toFixed(0);
+                        document.getElementById('modal3YrLoss').textContent = 'Rp ' + data.total_3yr_loss.toFixed(0);
+
+                        // Calculate ROI for this block
+                        const treatment = 50;
+                        const prevented = data.total_3yr_loss * 0.70;
+                        const netBenefit = prevented - treatment;
+                        const roi = (netBenefit / treatment * 100).toFixed(0);
+
+                        document.getElementById('modalROI').textContent = roi;
+                        document.getElementById('modalPreventedLoss').textContent = 'Rp ' + prevented.toFixed(0) + ' Juta';
+                        document.getElementById('modalNetBenefit').textContent = 'Rp ' + netBenefit.toFixed(0) + ' Juta';
+
+                        // Build degradation table
+                        const tableHTML = `
                         <tr class="border-b border-white/10">
-                            <td class="p-2 text-rose-200 font-semibold">Attack Rate</td>
+                            <td class="p-2 text-rose-200 font-semibold">Tingkat Infeksi</td>
                             <td class="p-2 text-center text-white">${data.current.ar.toFixed(1)}%</td>
                             <td class="p-2 text-center text-orange-200">${data.year1.ar.toFixed(1)}%</td>
                             <td class="p-2 text-center text-yellow-200">${data.year2.ar.toFixed(1)}%</td>
@@ -890,7 +914,7 @@
                             <td class="p-2 text-center text-cyan-200 font-bold">+${(data.year3.ar - data.current.ar).toFixed(1)}%</td>
                         </tr>
                         <tr class="border-b border-white/10">
-                            <td class="p-2 text-rose-200 font-semibold">Yield Gap</td>
+                            <td class="p-2 text-rose-200 font-semibold">Gap Hasil</td>
                             <td class="p-2 text-center text-white">${data.current.gap_pct.toFixed(1)}%</td>
                             <td class="p-2 text-center text-orange-200">${data.year1.gap_pct.toFixed(1)}%</td>
                             <td class="p-2 text-center text-yellow-200">${data.year2.gap_pct.toFixed(1)}%</td>
@@ -906,7 +930,7 @@
                             <td class="p-2 text-center text-cyan-200 font-bold">${(data.year3.sph - data.current.sph).toFixed(0)} trees</td>
                         </tr>
                         <tr>
-                            <td class="p-2 text-rose-200 font-semibold">Loss (Juta)</td>
+                            <td class="p-2 text-rose-200 font-semibold">Kerugian (Juta)</td>
                             <td class="p-2 text-center text-white font-bold">Rp ${data.current.loss_juta.toFixed(0)}</td>
                             <td class="p-2 text-center text-orange-200 font-bold">Rp ${data.year1.loss_juta.toFixed(0)}</td>
                             <td class="p-2 text-center text-yellow-200 font-bold">Rp ${data.year2.loss_juta.toFixed(0)}</td>
@@ -914,27 +938,27 @@
                             <td class="p-2 text-center text-cyan-200 font-bold">+Rp ${(data.year3.loss_juta - data.current.loss_juta).toFixed(0)}</td>
                         </tr>
                     `;
-                    
-                    document.getElementById('modalDegradationTable').innerHTML = tableHTML;
-                    
-                    // Show modal
-                    document.getElementById('blockDetailModal').classList.remove('hidden');
-                }
-                
-                // Close modal
-                function closeBlockDetail() {
-                    document.getElementById('blockDetailModal').classList.add('hidden');
-                }
-                
-                // Close on Escape key
-                document.addEventListener('keydown', function(e) {
-                    if (e.key === 'Escape') closeBlockDetail();
-                });
-                
-                // Close on background click
-                document.getElementById('blockDetailModal').addEventListener('click', function(e) {
-                    if (e.target === this) closeBlockDetail();
-                });
+
+                        document.getElementById('modalDegradationTable').innerHTML = tableHTML;
+
+                        // Show modal
+                        document.getElementById('blockDetailModal').classList.remove('hidden');
+                    }
+
+                    // Close modal
+                    function closeBlockDetail() {
+                        document.getElementById('blockDetailModal').classList.add('hidden');
+                    }
+
+                    // Close on Escape key
+                    document.addEventListener('keydown', function (e) {
+                        if (e.key === 'Escape') closeBlockDetail();
+                    });
+
+                    // Close on background click
+                    document.getElementById('blockDetailModal').addEventListener('click', function (e) {
+                        if (e.target === this) closeBlockDetail();
+                    });
                 </script>
 
 
@@ -956,7 +980,7 @@
                         </div>
                     </div>
 
-                    <!-- Col 2: TT & Attack Rate -->
+                    <!-- Col 2: TT & Tingkat Infeksi -->
                     <div class="space-y-2 border-r border-orange-500/10 pr-2 pl-2">
                         <div>
                             <span class="text-orange-200/60 font-bold block mb-0.5 text-[10px] uppercase">Tahun
@@ -964,7 +988,8 @@
                             <span class="text-white font-black text-xl" id="finTTRight">--</span>
                         </div>
                         <div>
-                            <span class="text-orange-200/60 font-bold block mb-0.5 text-[10px] uppercase">Attack Rate
+                            <span class="text-orange-200/60 font-bold block mb-0.5 text-[10px] uppercase">Tingkat
+                                Infeksi
                                 (NDRE vs Sensus)</span>
                             <div class="flex items-baseline gap-2">
                                 <span class="text-red-400 font-black text-xl" id="finARRight">--%</span>
@@ -1639,7 +1664,8 @@
                                 class="bg-red-600 text-white text-[10px] uppercase font-black px-2 py-0.5 rounded animate-pulse">New
                                 Feature</span>
                         </div>
-                        <p class="text-indigo-200 mt-1 font-medium">The "Density Paradox": Hubungan SPH, Attack Rate &
+                        <p class="text-indigo-200 mt-1 font-medium">The "Density Paradox": Hubungan SPH, Tingkat Infeksi
+                            &
                             Efisiensi Biaya</p>
                     </div>
                 </div>
@@ -2083,8 +2109,10 @@
                 }
 
                 function renderRiskWatchlist() {
-                    // Sort by Severity Rank (1 is Critical)
-                    const sorted = Object.entries(BLOCKS_DATA).sort((a, b) => a[1].rank - b[1].rank);
+                    // FILTER: HANYA BLOK CRITICAL (8 blok)
+                    const sorted = Object.entries(BLOCKS_DATA)
+                        .filter(([code, data]) => data.severity_hybrid === 'CRITICAL')
+                        .sort((a, b) => (b[1].risk_score || 0) - (a[1].risk_score || 0));
 
                     let totalLoss = 0;
                     let criticalCount = 0;
@@ -2092,43 +2120,35 @@
                     let html = '';
 
                     sorted.forEach(([code, data]) => {
-                        // Calculate Loss (Logic duplicated from calculateAndSetLoss)
+                        // Calculate Loss
                         let currentLoss = 0;
                         if (data.gap_ton_ha && parseFloat(data.gap_ton_ha) > 0) {
-                            currentLoss = parseFloat(data.gap_ton_ha) * data.luas_ha * TBS_PRICE / 1000; // Juta
+                            currentLoss = parseFloat(data.gap_ton_ha) * data.luas_ha * TBS_PRICE / 1000;
                         } else {
                             const pot = parseFloat(data.potensi_ton_ha) || 0;
                             const real = parseFloat(data.realisasi_ton_ha) || 0;
                             currentLoss = Math.max(0, pot - real) * data.luas_ha * TBS_PRICE / 1000;
                         }
 
-                        // Accumulate Stats
-                        if (['CRITICAL', 'HIGH'].includes(data.severity)) {
-                            totalLoss += currentLoss;
-                            criticalCount++;
-                            riskArea += data.luas_ha;
-                        }
+                        // Accumulate (all are CRITICAL)
+                        totalLoss += currentLoss;
+                        criticalCount++;
+                        riskArea += data.luas_ha;
 
-                        // Determine Color based on Risk
-                        let badgeColor = 'bg-slate-700 text-slate-300';
-                        if (data.severity === 'CRITICAL') badgeColor = 'bg-rose-600 text-white animate-pulse';
-                        if (data.severity === 'HIGH') badgeColor = 'bg-orange-600 text-white';
-                        if (data.severity === 'MEDIUM') badgeColor = 'bg-yellow-500 text-black';
-
-                        // Build Card HTML
+                        // Build Card HTML (Bahasa Indonesia)
                         html += `
                         <div onclick="updateBlockData('Left', '${code}')" class="bg-slate-800/40 p-3 rounded-lg border border-slate-700 hover:border-rose-500 cursor-pointer transition-all hover:bg-slate-800 group mb-2">
                             <div class="flex justify-between items-center mb-2">
                                 <span class="text-sm font-black text-white group-hover:text-rose-400 opacity-90">Blok ${code}</span>
-                                <span class="text-[9px] font-black uppercase px-2 py-0.5 rounded ${badgeColor} shadow-lg shadow-black/50">${data.severity}</span>
+                                <span class="text-[9px] font-black uppercase px-2 py-0.5 rounded bg-rose-600 text-white animate-pulse shadow-lg shadow-black/50">KRITIS</span>
                             </div>
                             <div class="flex justify-between items-end">
                                 <div>
-                                    <span class="text-[9px] text-slate-500 block uppercase font-bold">Est. Loss</span>
+                                    <span class="text-[9px] text-slate-500 block uppercase font-bold">Est. Kerugian</span>
                                     <span class="text-sm font-bold text-rose-400">Rp ${Math.round(currentLoss).toLocaleString('id-ID')} Jt</span>
                                 </div>
                                 <div class="text-right">
-                                    <span class="text-[9px] text-slate-500 block uppercase font-bold">Infection</span>
+                                    <span class="text-[9px] text-slate-500 block uppercase font-bold">Infeksi</span>
                                     <span class="text-xs font-bold text-white bg-white/10 px-1.5 rounded">${data.attack_rate}%</span>
                                 </div>
                             </div>
@@ -2142,13 +2162,13 @@
 
                     // Update Summary
                     const elTotal = document.getElementById('summaryTotalLoss');
-                    if (elTotal) elTotal.textContent = (totalLoss / 1000).toFixed(1); // Miliar
+                    if (elTotal) elTotal.textContent = (totalLoss / 1000).toFixed(1);
 
                     const elCount = document.getElementById('summaryCriticalCount');
                     if (elCount) elCount.textContent = criticalCount;
 
                     const elArea = document.getElementById('summaryRiskArea');
-                    if (elArea) elArea.textContent = Math.round(riskArea).toLocaleString('id-ID');
+                    if (elArea) elArea.textContent = riskArea.toFixed(1);
                 }
 
                 // RISK MATRIX LOGIC (Chart.js)
@@ -2168,7 +2188,7 @@
                         }
 
                         return {
-                            x: b.attack_rate, // Axis X: Probability (Attack Rate)
+                            x: b.attack_rate, // Axis X: Probability (Tingkat Infeksi)
                             y: loss,          // Axis Y: Impact (Financial Loss)
                             block: b.block_code,
                             status: b.status_narrative
@@ -2229,7 +2249,7 @@
                             },
                             scales: {
                                 x: {
-                                    title: { display: true, text: 'Probabilitas: Attack Rate (%)', font: { weight: 'bold' } },
+                                    title: { display: true, text: 'Probabilitas: Tingkat Infeksi (%)', font: { weight: 'bold' } },
                                     min: 0, max: 35
                                 },
                                 y: {
@@ -3295,11 +3315,11 @@
                             <p class="text-4xl font-black text-rose-600 tracking-tighter">Rp ${totalLoss} M</p>
                         </div>
                         <div class="bg-slate-100 p-6 rounded-xl border border-slate-200">
-                            <p class="text-xs font-bold text-slate-500 uppercase mb-1">Critical Blocks</p>
+                            <p class="text-xs font-bold text-slate-500 uppercase mb-1">Blok Kritis</p>
                             <p class="text-4xl font-black text-slate-800 tracking-tighter">${criticalCount}</p>
                         </div>
                         <div class="bg-slate-100 p-6 rounded-xl border border-slate-200">
-                            <p class="text-xs font-bold text-slate-500 uppercase mb-1">Area at Risk</p>
+                            <p class="text-xs font-bold text-slate-500 uppercase mb-1">Area Berisiko</p>
                             <p class="text-4xl font-black text-slate-800 tracking-tighter">${riskArea} Ha</p>
                         </div>
                     </div>
