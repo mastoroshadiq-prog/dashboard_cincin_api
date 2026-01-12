@@ -1,4 +1,4 @@
-const BLOCKS_DATA = {
+{
   "E009A": {
     "block_code": "E009A",
     "total_pohon": 2671,
@@ -47,16 +47,7 @@ const BLOCKS_DATA = {
     "status_desc": "FASE 4 (CRITICAL): Populasi hancur (SPH 39) atau Bangkrut < 3 thn.",
     "severity": "HIGH",
     "vanishing_phase": 4,
-    "rank": 14,
-    "severity_original": "HIGH",
-    "rank_original": 1,
-    "risk_score": 55.0,
-    "ar_score": 100,
-    "financial_score": 0,
-    "sph_score": 100,
-    "gap_score": 0,
-    "severity_hybrid": "HIGH",
-    "rank_hybrid": 14
+    "rank": 1
   },
   "D004A": {
     "block_code": "D004A",
@@ -104,18 +95,9 @@ const BLOCKS_DATA = {
     "drop_type": null,
     "status_narrative": "CRYPTIC COLLAPSE",
     "status_desc": "FASE 3 (BAHAYA SENYAP): Yield anjlok (-20.3%) tapi gejala visual minim (2.25%). Akar kritis!",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vanishing_phase": 3,
-    "rank": 2,
-    "severity_original": "HIGH",
-    "rank_original": 2,
-    "risk_score": 85.0,
-    "ar_score": 100,
-    "financial_score": 75,
-    "sph_score": 50,
-    "gap_score": 100,
-    "severity_hybrid": "CRITICAL",
-    "rank_hybrid": 2
+    "rank": 2
   },
   "E004A": {
     "block_code": "E004A",
@@ -165,16 +147,7 @@ const BLOCKS_DATA = {
     "status_desc": "FASE 2 (STRES AKAR): Defisit -12.5%. Penyerapan nutrisi terganggu.",
     "severity": "HIGH",
     "vanishing_phase": 2,
-    "rank": 12,
-    "severity_original": "HIGH",
-    "rank_original": 3,
-    "risk_score": 60.0,
-    "ar_score": 75,
-    "financial_score": 50,
-    "sph_score": 50,
-    "gap_score": 50,
-    "severity_hybrid": "HIGH",
-    "rank_hybrid": 12
+    "rank": 3
   },
   "F001A": {
     "block_code": "F001A",
@@ -222,18 +195,9 @@ const BLOCKS_DATA = {
     "drop_type": "2022-2024",
     "status_narrative": "INSOLVENCY",
     "status_desc": "FASE 4 (CRITICAL): Populasi hancur (SPH 73) atau Bangkrut < 3 thn.",
-    "severity": "MEDIUM",
+    "severity": "HIGH",
     "vanishing_phase": 4,
-    "rank": 16,
-    "severity_original": "HIGH",
-    "rank_original": 4,
-    "risk_score": 45.0,
-    "ar_score": 75,
-    "financial_score": 0,
-    "sph_score": 100,
-    "gap_score": 0,
-    "severity_hybrid": "MEDIUM",
-    "rank_hybrid": 16
+    "rank": 4
   },
   "E002A": {
     "block_code": "E002A",
@@ -281,18 +245,9 @@ const BLOCKS_DATA = {
     "drop_type": null,
     "status_narrative": "CRYPTIC COLLAPSE",
     "status_desc": "FASE 3 (BAHAYA SENYAP): Yield anjlok (-26.7%) tapi gejala visual minim (2.59%). Akar kritis!",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vanishing_phase": 3,
-    "rank": 6,
-    "severity_original": "HIGH",
-    "rank_original": 5,
-    "risk_score": 75.0,
-    "ar_score": 75,
-    "financial_score": 100,
-    "sph_score": 0,
-    "gap_score": 100,
-    "severity_hybrid": "CRITICAL",
-    "rank_hybrid": 6
+    "rank": 5
   },
   "F002A": {
     "block_code": "F002A",
@@ -340,18 +295,9 @@ const BLOCKS_DATA = {
     "drop_type": "2022-2024",
     "status_narrative": "INSOLVENCY",
     "status_desc": "FASE 4 (CRITICAL): Populasi hancur (SPH 132) atau Bangkrut < 3 thn.",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vanishing_phase": 4,
-    "rank": 7,
-    "severity_original": "HIGH",
-    "rank_original": 6,
-    "risk_score": 75.0,
-    "ar_score": 75,
-    "financial_score": 100,
-    "sph_score": 0,
-    "gap_score": 100,
-    "severity_hybrid": "CRITICAL",
-    "rank_hybrid": 7
+    "rank": 6
   },
   "F008A": {
     "block_code": "F008A",
@@ -399,18 +345,9 @@ const BLOCKS_DATA = {
     "drop_type": null,
     "status_narrative": "SILENT INFECTION",
     "status_desc": "FASE 1 (INKUBASI): Serangan 8.0% terdeteksi, produksi masih normal/surplus.",
-    "severity": "MEDIUM",
+    "severity": "HIGH",
     "vanishing_phase": 1,
-    "rank": 22,
-    "severity_original": "HIGH",
-    "rank_original": 7,
-    "risk_score": 33.75,
-    "ar_score": 75,
-    "financial_score": 0,
-    "sph_score": 25,
-    "gap_score": 0,
-    "severity_hybrid": "MEDIUM",
-    "rank_hybrid": 22
+    "rank": 7
   },
   "F012A": {
     "block_code": "F012A",
@@ -458,18 +395,9 @@ const BLOCKS_DATA = {
     "drop_type": null,
     "status_narrative": "INSOLVENCY",
     "status_desc": "FASE 4 (CRITICAL): Populasi hancur (SPH 88) atau Bangkrut < 3 thn.",
-    "severity": "MEDIUM",
+    "severity": "HIGH",
     "vanishing_phase": 4,
-    "rank": 15,
-    "severity_original": "HIGH",
-    "rank_original": 8,
-    "risk_score": 48.75,
-    "ar_score": 75,
-    "financial_score": 25,
-    "sph_score": 75,
-    "gap_score": 0,
-    "severity_hybrid": "MEDIUM",
-    "rank_hybrid": 15
+    "rank": 8
   },
   "F007A": {
     "block_code": "F007A",
@@ -517,18 +445,9 @@ const BLOCKS_DATA = {
     "drop_type": null,
     "status_narrative": "INSOLVENCY",
     "status_desc": "FASE 4 (CRITICAL): Populasi hancur (SPH 76) atau Bangkrut < 3 thn.",
-    "severity": "MEDIUM",
+    "severity": "HIGH",
     "vanishing_phase": 4,
-    "rank": 17,
-    "severity_original": "HIGH",
-    "rank_original": 9,
-    "risk_score": 45.0,
-    "ar_score": 75,
-    "financial_score": 0,
-    "sph_score": 100,
-    "gap_score": 0,
-    "severity_hybrid": "MEDIUM",
-    "rank_hybrid": 17
+    "rank": 9
   },
   "D001A": {
     "block_code": "D001A",
@@ -576,18 +495,9 @@ const BLOCKS_DATA = {
     "drop_type": null,
     "status_narrative": "CRYPTIC COLLAPSE",
     "status_desc": "FASE 3 (BAHAYA SENYAP): Yield anjlok (-21.3%) tapi gejala visual minim (3.04%). Akar kritis!",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vanishing_phase": 3,
-    "rank": 3,
-    "severity_original": "HIGH",
-    "rank_original": 10,
-    "risk_score": 82.5,
-    "ar_score": 75,
-    "financial_score": 100,
-    "sph_score": 50,
-    "gap_score": 100,
-    "severity_hybrid": "CRITICAL",
-    "rank_hybrid": 3
+    "rank": 10
   },
   "D011A": {
     "block_code": "D011A",
@@ -635,18 +545,9 @@ const BLOCKS_DATA = {
     "drop_type": "2023-2025",
     "status_narrative": "INSOLVENCY",
     "status_desc": "FASE 4 (CRITICAL): Populasi hancur (SPH 96) atau Bangkrut < 3 thn.",
-    "severity": "MEDIUM",
+    "severity": "HIGH",
     "vanishing_phase": 4,
-    "rank": 19,
-    "severity_original": "HIGH",
-    "rank_original": 11,
-    "risk_score": 41.25,
-    "ar_score": 75,
-    "financial_score": 0,
-    "sph_score": 75,
-    "gap_score": 0,
-    "severity_hybrid": "MEDIUM",
-    "rank_hybrid": 19
+    "rank": 11
   },
   "F004A": {
     "block_code": "F004A",
@@ -694,18 +595,9 @@ const BLOCKS_DATA = {
     "drop_type": "2022-2024",
     "status_narrative": "CRYPTIC COLLAPSE",
     "status_desc": "FASE 3 (BAHAYA SENYAP): Yield anjlok (-26.1%) tapi gejala visual minim (1.59%). Akar kritis!",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vanishing_phase": 3,
-    "rank": 8,
-    "severity_original": "HIGH",
-    "rank_original": 12,
-    "risk_score": 71.25,
-    "ar_score": 75,
-    "financial_score": 75,
-    "sph_score": 25,
-    "gap_score": 100,
-    "severity_hybrid": "CRITICAL",
-    "rank_hybrid": 8
+    "rank": 12
   },
   "D003A": {
     "block_code": "D003A",
@@ -753,18 +645,9 @@ const BLOCKS_DATA = {
     "drop_type": null,
     "status_narrative": "INSOLVENCY",
     "status_desc": "FASE 4 (CRITICAL): Populasi hancur (SPH 98) atau Bangkrut < 3 thn.",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vanishing_phase": 4,
-    "rank": 1,
-    "severity_original": "HIGH",
-    "rank_original": 13,
-    "risk_score": 86.25,
-    "ar_score": 75,
-    "financial_score": 100,
-    "sph_score": 75,
-    "gap_score": 100,
-    "severity_hybrid": "CRITICAL",
-    "rank_hybrid": 1
+    "rank": 13
   },
   "D010A": {
     "block_code": "D010A",
@@ -814,16 +697,7 @@ const BLOCKS_DATA = {
     "status_desc": "FASE 4 (CRITICAL): Populasi hancur (SPH 8) atau Bangkrut < 3 thn.",
     "severity": "HIGH",
     "vanishing_phase": 4,
-    "rank": 10,
-    "severity_original": "HIGH",
-    "rank_original": 14,
-    "risk_score": 67.5,
-    "ar_score": 75,
-    "financial_score": 50,
-    "sph_score": 100,
-    "gap_score": 50,
-    "severity_hybrid": "HIGH",
-    "rank_hybrid": 10
+    "rank": 14
   },
   "E011A": {
     "block_code": "E011A",
@@ -873,16 +747,7 @@ const BLOCKS_DATA = {
     "status_desc": "FASE 4 (CRITICAL): Populasi hancur (SPH 71) atau Bangkrut < 3 thn.",
     "severity": "HIGH",
     "vanishing_phase": 4,
-    "rank": 13,
-    "severity_original": "HIGH",
-    "rank_original": 15,
-    "risk_score": 56.25,
-    "ar_score": 75,
-    "financial_score": 25,
-    "sph_score": 100,
-    "gap_score": 25,
-    "severity_hybrid": "HIGH",
-    "rank_hybrid": 13
+    "rank": 15
   },
   "E003A": {
     "block_code": "E003A",
@@ -930,18 +795,9 @@ const BLOCKS_DATA = {
     "drop_type": null,
     "status_narrative": "INSOLVENCY",
     "status_desc": "FASE 4 (CRITICAL): Populasi hancur (SPH 99) atau Bangkrut < 3 thn.",
-    "severity": "CRITICAL",
+    "severity": "HIGH",
     "vanishing_phase": 4,
-    "rank": 4,
-    "severity_original": "HIGH",
-    "rank_original": 16,
-    "risk_score": 76.25,
-    "ar_score": 50,
-    "financial_score": 100,
-    "sph_score": 75,
-    "gap_score": 100,
-    "severity_hybrid": "CRITICAL",
-    "rank_hybrid": 4
+    "rank": 16
   },
   "E006A": {
     "block_code": "E006A",
@@ -989,18 +845,9 @@ const BLOCKS_DATA = {
     "drop_type": null,
     "status_narrative": "SILENT INFECTION",
     "status_desc": "FASE 1 (INKUBASI): Serangan 6.8% terdeteksi, produksi masih normal/surplus.",
-    "severity": "LOW",
+    "severity": "HIGH",
     "vanishing_phase": 1,
-    "rank": 26,
-    "severity_original": "HIGH",
-    "rank_original": 17,
-    "risk_score": 27.5,
-    "ar_score": 50,
-    "financial_score": 0,
-    "sph_score": 50,
-    "gap_score": 0,
-    "severity_hybrid": "LOW",
-    "rank_hybrid": 26
+    "rank": 17
   },
   "F003A": {
     "block_code": "F003A",
@@ -1050,16 +897,7 @@ const BLOCKS_DATA = {
     "status_desc": "FASE 3 (BAHAYA SENYAP): Yield anjlok (-25.5%) tapi gejala visual minim (3.35%). Akar kritis!",
     "severity": "HIGH",
     "vanishing_phase": 3,
-    "rank": 11,
-    "severity_original": "HIGH",
-    "rank_original": 18,
-    "risk_score": 61.25,
-    "ar_score": 50,
-    "financial_score": 75,
-    "sph_score": 25,
-    "gap_score": 100,
-    "severity_hybrid": "HIGH",
-    "rank_hybrid": 11
+    "rank": 18
   },
   "D009A": {
     "block_code": "D009A",
@@ -1107,18 +945,9 @@ const BLOCKS_DATA = {
     "drop_type": "2023-2025",
     "status_narrative": "ROOT DEGRADATION",
     "status_desc": "FASE 2 (STRES AKAR): Tren Turun 3 Tahun (2023-2025). Penyerapan nutrisi terganggu.",
-    "severity": "LOW",
+    "severity": "HIGH",
     "vanishing_phase": 2,
-    "rank": 27,
-    "severity_original": "HIGH",
-    "rank_original": 19,
-    "risk_score": 27.5,
-    "ar_score": 50,
-    "financial_score": 0,
-    "sph_score": 50,
-    "gap_score": 0,
-    "severity_hybrid": "LOW",
-    "rank_hybrid": 27
+    "rank": 19
   },
   "E007A": {
     "block_code": "E007A",
@@ -1166,18 +995,9 @@ const BLOCKS_DATA = {
     "drop_type": "2023-2025",
     "status_narrative": "INSOLVENCY",
     "status_desc": "FASE 4 (CRITICAL): Populasi hancur (SPH 62) atau Bangkrut < 3 thn.",
-    "severity": "MEDIUM",
+    "severity": "HIGH",
     "vanishing_phase": 4,
-    "rank": 21,
-    "severity_original": "HIGH",
-    "rank_original": 20,
-    "risk_score": 35.0,
-    "ar_score": 50,
-    "financial_score": 0,
-    "sph_score": 100,
-    "gap_score": 0,
-    "severity_hybrid": "MEDIUM",
-    "rank_hybrid": 21
+    "rank": 20
   },
   "F006A": {
     "block_code": "F006A",
@@ -1225,18 +1045,9 @@ const BLOCKS_DATA = {
     "drop_type": null,
     "status_narrative": "SILENT INFECTION",
     "status_desc": "FASE 1 (INKUBASI): Serangan 6.5% terdeteksi, produksi masih normal/surplus.",
-    "severity": "LOW",
+    "severity": "MEDIUM",
     "vanishing_phase": 1,
-    "rank": 28,
-    "severity_original": "MEDIUM",
-    "rank_original": 21,
-    "risk_score": 27.5,
-    "ar_score": 50,
-    "financial_score": 0,
-    "sph_score": 50,
-    "gap_score": 0,
-    "severity_hybrid": "LOW",
-    "rank_hybrid": 28
+    "rank": 21
   },
   "E001A": {
     "block_code": "E001A",
@@ -1284,18 +1095,9 @@ const BLOCKS_DATA = {
     "drop_type": null,
     "status_narrative": "INSOLVENCY",
     "status_desc": "FASE 4 (CRITICAL): Populasi hancur (SPH 95) atau Bangkrut < 3 thn.",
-    "severity": "CRITICAL",
+    "severity": "MEDIUM",
     "vanishing_phase": 4,
-    "rank": 5,
-    "severity_original": "MEDIUM",
-    "rank_original": 22,
-    "risk_score": 76.25,
-    "ar_score": 50,
-    "financial_score": 100,
-    "sph_score": 75,
-    "gap_score": 100,
-    "severity_hybrid": "CRITICAL",
-    "rank_hybrid": 5
+    "rank": 22
   },
   "D007A": {
     "block_code": "D007A",
@@ -1345,16 +1147,7 @@ const BLOCKS_DATA = {
     "status_desc": "FASE 4 (CRITICAL): Populasi hancur (SPH 94) atau Bangkrut < 3 thn.",
     "severity": "MEDIUM",
     "vanishing_phase": 4,
-    "rank": 23,
-    "severity_original": "MEDIUM",
-    "rank_original": 23,
-    "risk_score": 31.25,
-    "ar_score": 50,
-    "financial_score": 0,
-    "sph_score": 75,
-    "gap_score": 0,
-    "severity_hybrid": "MEDIUM",
-    "rank_hybrid": 23
+    "rank": 23
   },
   "D012A": {
     "block_code": "D012A",
@@ -1402,18 +1195,9 @@ const BLOCKS_DATA = {
     "drop_type": null,
     "status_narrative": "SILENT INFECTION",
     "status_desc": "FASE 1 (INKUBASI): Serangan 6.1% terdeteksi, produksi masih normal/surplus.",
-    "severity": "LOW",
+    "severity": "MEDIUM",
     "vanishing_phase": 1,
-    "rank": 29,
-    "severity_original": "MEDIUM",
-    "rank_original": 24,
-    "risk_score": 27.5,
-    "ar_score": 50,
-    "financial_score": 0,
-    "sph_score": 50,
-    "gap_score": 0,
-    "severity_hybrid": "LOW",
-    "rank_hybrid": 29
+    "rank": 24
   },
   "D002A": {
     "block_code": "D002A",
@@ -1461,18 +1245,9 @@ const BLOCKS_DATA = {
     "drop_type": "2022-2024",
     "status_narrative": "CRYPTIC COLLAPSE",
     "status_desc": "FASE 3 (BAHAYA SENYAP): Yield anjlok (-22.9%) tapi gejala visual minim (1.49%). Akar kritis!",
-    "severity": "HIGH",
+    "severity": "MEDIUM",
     "vanishing_phase": 3,
-    "rank": 9,
-    "severity_original": "MEDIUM",
-    "rank_original": 25,
-    "risk_score": 68.75,
-    "ar_score": 50,
-    "financial_score": 100,
-    "sph_score": 25,
-    "gap_score": 100,
-    "severity_hybrid": "HIGH",
-    "rank_hybrid": 9
+    "rank": 25
   },
   "E012A": {
     "block_code": "E012A",
@@ -1522,16 +1297,7 @@ const BLOCKS_DATA = {
     "status_desc": "FASE 4 (CRITICAL): Populasi hancur (SPH 83) atau Bangkrut < 3 thn.",
     "severity": "MEDIUM",
     "vanishing_phase": 4,
-    "rank": 18,
-    "severity_original": "MEDIUM",
-    "rank_original": 26,
-    "risk_score": 42.5,
-    "ar_score": 50,
-    "financial_score": 25,
-    "sph_score": 75,
-    "gap_score": 25,
-    "severity_hybrid": "MEDIUM",
-    "rank_hybrid": 18
+    "rank": 26
   },
   "D005A": {
     "block_code": "D005A",
@@ -1581,16 +1347,7 @@ const BLOCKS_DATA = {
     "status_desc": "FASE 4 (CRITICAL): Populasi hancur (SPH 87) atau Bangkrut < 3 thn.",
     "severity": "MEDIUM",
     "vanishing_phase": 4,
-    "rank": 24,
-    "severity_original": "MEDIUM",
-    "rank_original": 27,
-    "risk_score": 31.25,
-    "ar_score": 50,
-    "financial_score": 0,
-    "sph_score": 75,
-    "gap_score": 0,
-    "severity_hybrid": "MEDIUM",
-    "rank_hybrid": 24
+    "rank": 27
   },
   "E010A": {
     "block_code": "E010A",
@@ -1640,16 +1397,7 @@ const BLOCKS_DATA = {
     "status_desc": "FASE 4 (CRITICAL): Populasi hancur (SPH 87) atau Bangkrut < 3 thn.",
     "severity": "MEDIUM",
     "vanishing_phase": 4,
-    "rank": 25,
-    "severity_original": "MEDIUM",
-    "rank_original": 28,
-    "risk_score": 31.25,
-    "ar_score": 50,
-    "financial_score": 0,
-    "sph_score": 75,
-    "gap_score": 0,
-    "severity_hybrid": "MEDIUM",
-    "rank_hybrid": 25
+    "rank": 28
   },
   "D006A": {
     "block_code": "D006A",
@@ -1697,18 +1445,9 @@ const BLOCKS_DATA = {
     "drop_type": null,
     "status_narrative": "INSOLVENCY",
     "status_desc": "FASE 4 (CRITICAL): Populasi hancur (SPH 85) atau Bangkrut < 3 thn.",
-    "severity": "LOW",
+    "severity": "MEDIUM",
     "vanishing_phase": 4,
-    "rank": 33,
-    "severity_original": "MEDIUM",
-    "rank_original": 29,
-    "risk_score": 21.25,
-    "ar_score": 25,
-    "financial_score": 0,
-    "sph_score": 75,
-    "gap_score": 0,
-    "severity_hybrid": "LOW",
-    "rank_hybrid": 33
+    "rank": 29
   },
   "E008A": {
     "block_code": "E008A",
@@ -1756,18 +1495,9 @@ const BLOCKS_DATA = {
     "drop_type": "2023-2025",
     "status_narrative": "INSOLVENCY",
     "status_desc": "FASE 4 (CRITICAL): Populasi hancur (SPH 67) atau Bangkrut < 3 thn.",
-    "severity": "LOW",
+    "severity": "MEDIUM",
     "vanishing_phase": 4,
-    "rank": 30,
-    "severity_original": "MEDIUM",
-    "rank_original": 30,
-    "risk_score": 25.0,
-    "ar_score": 25,
-    "financial_score": 0,
-    "sph_score": 100,
-    "gap_score": 0,
-    "severity_hybrid": "LOW",
-    "rank_hybrid": 30
+    "rank": 30
   },
   "F005A": {
     "block_code": "F005A",
@@ -1815,18 +1545,9 @@ const BLOCKS_DATA = {
     "drop_type": "2022-2024",
     "status_narrative": "ROOT DEGRADATION",
     "status_desc": "FASE 2 (STRES AKAR): Tren Turun 3 Tahun (2022-2024). Penyerapan nutrisi terganggu.",
-    "severity": "LOW",
+    "severity": "MEDIUM",
     "vanishing_phase": 2,
-    "rank": 35,
-    "severity_original": "MEDIUM",
-    "rank_original": 31,
-    "risk_score": 17.5,
-    "ar_score": 25,
-    "financial_score": 0,
-    "sph_score": 50,
-    "gap_score": 0,
-    "severity_hybrid": "LOW",
-    "rank_hybrid": 35
+    "rank": 31
   },
   "F009A": {
     "block_code": "F009A",
@@ -1874,18 +1595,9 @@ const BLOCKS_DATA = {
     "drop_type": null,
     "status_narrative": "INSOLVENCY",
     "status_desc": "FASE 4 (CRITICAL): Populasi hancur (SPH 68) atau Bangkrut < 3 thn.",
-    "severity": "LOW",
+    "severity": "MEDIUM",
     "vanishing_phase": 4,
-    "rank": 31,
-    "severity_original": "MEDIUM",
-    "rank_original": 32,
-    "risk_score": 25.0,
-    "ar_score": 25,
-    "financial_score": 0,
-    "sph_score": 100,
-    "gap_score": 0,
-    "severity_hybrid": "LOW",
-    "rank_hybrid": 31
+    "rank": 32
   },
   "F010A": {
     "block_code": "F010A",
@@ -1933,18 +1645,9 @@ const BLOCKS_DATA = {
     "drop_type": null,
     "status_narrative": "INSOLVENCY",
     "status_desc": "FASE 4 (CRITICAL): Populasi hancur (SPH 77) atau Bangkrut < 3 thn.",
-    "severity": "LOW",
+    "severity": "MEDIUM",
     "vanishing_phase": 4,
-    "rank": 32,
-    "severity_original": "MEDIUM",
-    "rank_original": 33,
-    "risk_score": 25.0,
-    "ar_score": 25,
-    "financial_score": 0,
-    "sph_score": 100,
-    "gap_score": 0,
-    "severity_hybrid": "LOW",
-    "rank_hybrid": 32
+    "rank": 33
   },
   "F011A": {
     "block_code": "F011A",
@@ -1994,16 +1697,7 @@ const BLOCKS_DATA = {
     "status_desc": "FASE 4 (CRITICAL): Populasi hancur (SPH 72) atau Bangkrut < 3 thn.",
     "severity": "MEDIUM",
     "vanishing_phase": 4,
-    "rank": 20,
-    "severity_original": "MEDIUM",
-    "rank_original": 34,
-    "risk_score": 36.25,
-    "ar_score": 25,
-    "financial_score": 25,
-    "sph_score": 100,
-    "gap_score": 25,
-    "severity_hybrid": "MEDIUM",
-    "rank_hybrid": 20
+    "rank": 34
   },
   "D008A": {
     "block_code": "D008A",
@@ -2051,18 +1745,9 @@ const BLOCKS_DATA = {
     "drop_type": null,
     "status_narrative": "STABLE",
     "status_desc": "Kondisi relatif stabil. Tidak ada anomali signifikan.",
-    "severity": "LOW",
+    "severity": "MEDIUM",
     "vanishing_phase": 0,
-    "rank": 36,
-    "severity_original": "MEDIUM",
-    "rank_original": 35,
-    "risk_score": 17.5,
-    "ar_score": 25,
-    "financial_score": 0,
-    "sph_score": 50,
-    "gap_score": 0,
-    "severity_hybrid": "LOW",
-    "rank_hybrid": 36
+    "rank": 35
   },
   "E005A": {
     "block_code": "E005A",
@@ -2110,17 +1795,8 @@ const BLOCKS_DATA = {
     "drop_type": null,
     "status_narrative": "INSOLVENCY",
     "status_desc": "FASE 4 (CRITICAL): Populasi hancur (SPH 98) atau Bangkrut < 3 thn.",
-    "severity": "LOW",
+    "severity": "MEDIUM",
     "vanishing_phase": 4,
-    "rank": 34,
-    "severity_original": "MEDIUM",
-    "rank_original": 36,
-    "risk_score": 21.25,
-    "ar_score": 25,
-    "financial_score": 0,
-    "sph_score": 75,
-    "gap_score": 0,
-    "severity_hybrid": "LOW",
-    "rank_hybrid": 34
+    "rank": 36
   }
-};
+}

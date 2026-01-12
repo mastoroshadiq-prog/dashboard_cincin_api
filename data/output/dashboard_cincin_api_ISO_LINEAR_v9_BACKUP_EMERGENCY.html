@@ -6,6 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Analisis Krusialitas - Cincin Api F008A & D001A (Complete)</title>
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Chart.js & Plugins -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/3.0.1/chartjs-plugin-annotation.min.js"></script>
+
+    <!-- Leaflet Map -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap');
 
@@ -55,7 +66,74 @@
         .flash-update {
             animation: flashGreen 0.6s ease-in-out;
         }
-    </style>
+
+        /* ISO 31000 Badges */
+        .iso-badge {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            padding: 0.35rem 0.85rem;
+            border-radius: 9999px;
+            font-size: 0.6rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            z-index: 50;
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+            pointer-events: none;
+        }
+
+        .iso-phase-1 {
+            background: rgba(99, 102, 241, 0.85);
+            color: white;
+        }
+
+        /* Indigo - ID */
+        .iso-phase-2 {
+            background: rgba(59, 130, 246, 0.85);
+            color: white;
+        }
+
+        /* Blue - Analysis */
+        .iso-phase-3 {
+            background: rgba(245, 158, 11, 0.85);
+            color: white;
+        }
+
+        /* Amber - Eval */
+        .iso-phase-4 {
+            background: rgba(16, 185, 129, 0.85);
+            color: white;
+        }
+
+        /* Emerald - Treat */
+        .iso-phase-5 {
+            background: rgba(100, 116, 139, 0.85);
+            color: white;
+        }
+
+        /* Slate - Monitor */
+    
+<style>
+    /* ISO 31000 Badges */
+    .iso-badge {
+        position: absolute; top: 1.5rem; right: 1.5rem;
+        padding: 0.35rem 0.85rem; border-radius: 9999px;
+        font-size: 0.6rem; font-weight: 900; text-transform: uppercase;
+        letter-spacing: 0.15em; z-index: 50; backdrop-filter: blur(8px);
+        border: 1px solid rgba(255,255,255,0.15); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+        pointer-events: none;
+    }
+    .iso-phase-1 { background: rgba(99, 102, 241, 0.85); color: white; } /* Indigo */
+    .iso-phase-2 { background: rgba(59, 130, 246, 0.85); color: white; } /* Blue */
+    .iso-phase-3 { background: rgba(245, 158, 11, 0.85); color: white; } /* Amber */
+    .iso-phase-4 { background: rgba(16, 185, 129, 0.85); color: white; } /* Emerald */
+    .iso-phase-5 { background: rgba(100, 116, 139, 0.85); color: white; } /* Slate */
+</style>
+
+</style>
 </head>
 <!-- Leaflet CSS -->
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
@@ -80,28 +158,20 @@
                         class="text-[10px] text-slate-500 font-normal">Analytics v2.0</span></span>
             </div>
 
-            <!-- Dual Selectors -->
-            <div class="flex-1 grid grid-cols-2 gap-4 w-full">
-                <!-- Selector Left -->
-                <div class="relative">
+            <!-- Single Selector Mode -->
+            <div class="flex-1 flex justify-center w-full">
+                <!-- Selector Left (Acting as Global) -->
+                <div class="relative w-full max-w-md">
                     <label
-                        class="absolute -top-2 left-3 bg-white px-1 text-[9px] font-bold text-indigo-500 uppercase">Blok
-                        A (Kiri)</label>
+                        class="absolute -top-2 left-3 bg-white px-1 text-[9px] font-bold text-indigo-500 uppercase">Fokus
+                        Analisis Blok</label>
                     <select id="globalSelectorLeft"
-                        class="w-full bg-slate-50 border-2 border-slate-200 text-slate-900 font-bold text-sm rounded-xl px-3 py-2 focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 cursor-pointer transition-all hover:bg-white">
-                        <option value="">Pilih Blok...</option>
+                        class="w-full bg-slate-50 border-2 border-slate-200 text-slate-900 font-bold text-sm rounded-xl px-3 py-2 focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 cursor-pointer transition-all hover:bg-white shadow">
+                        <option value="">Pilih Blok Analisis...</option>
                     </select>
                 </div>
-                <!-- Selector Right -->
-                <div class="relative">
-                    <label
-                        class="absolute -top-2 left-3 bg-white px-1 text-[9px] font-bold text-orange-500 uppercase">Blok
-                        B (Kanan)</label>
-                    <select id="globalSelectorRight"
-                        class="w-full bg-slate-50 border-2 border-slate-200 text-slate-900 font-bold text-sm rounded-xl px-3 py-2 focus:outline-none focus:border-orange-500 focus:ring-4 focus:ring-orange-500/10 cursor-pointer transition-all hover:bg-white">
-                        <option value="">Pilih Blok...</option>
-                    </select>
-                </div>
+                <!-- Hidden Right Selector to Prevent JS Errors -->
+                <select id="globalSelectorRight" class="hidden"></select>
             </div>
         </div>
     </div>
@@ -129,916 +199,15 @@
     </div>
 
 
-    <!-- MAIN DASHBOARD CONTENT -->
-    <div id="tab-overview" class="space-y-6">
-
-        <!-- 2. INFORMASI POTENSI KERUGIAN (Dual Comparison - HEAD TO HEAD) -->
-        <!-- Skenario Finansial Interaktif (What-If) -->
-        <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-200 mb-8 mx-1 relative overflow-hidden">
-            <div
-                class="absolute top-0 right-0 w-64 h-64 bg-indigo-50 rounded-full blur-3xl opacity-50 -translate-y-1/2 translate-x-1/2">
-            </div>
-
-            <div class="flex flex-col md:flex-row items-center justify-between gap-6 relative z-10">
-                <div class="flex items-start gap-4">
-                    <div class="bg-indigo-600 text-white p-3 rounded-2xl shadow-lg shadow-indigo-500/20">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2">
-                            <rect width="20" height="14" x="2" y="5" rx="2" />
-                            <line x1="2" x2="22" y1="10" y2="10" />
-                        </svg>
-                    </div>
-                    <div>
-                        <h3 class="text-lg font-black text-slate-800 uppercase tracking-tight">Financial Simulator</h3>
-                        <p class="text-slate-500 text-sm font-medium">Sesuaikan <span
-                                class="text-indigo-600 font-bold">Harga TBS (Rp/Kg)</span> untuk melihat proyeksi
-                            kerugian real-time.</p>
-                    </div>
-                </div>
-
-                <div
-                    class="flex items-center gap-6 w-full md:w-auto bg-slate-50 p-4 rounded-2xl border border-slate-200">
-                    <div class="flex-1 min-w-[200px]">
-                        <div class="flex justify-between text-[10px] font-black uppercase text-slate-400 mb-2">
-                            <span>Bearish (Rp 1.500)</span>
-                            <span>Bullish (Rp 4.000)</span>
-                        </div>
-                        <input type="range" id="priceSlider" min="1500" max="4000" step="50" value="2500"
-                            class="w-full h-3 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-indigo-600 hover:accent-indigo-500 transition-all">
-                    </div>
-                    <div
-                        class="bg-white border-2 border-indigo-100 px-5 py-2 rounded-xl text-center min-w-[120px] shadow-sm">
-                        <span class="text-[10px] font-black uppercase text-slate-400 block mb-1">Harga TBS</span>
-                        <div class="text-xl font-black text-indigo-700">
-                            Rp <span id="priceDisplay">2.500</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- 3. RISK MATRIX (ISO 31000 Strategic View) -->
-        <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-200 mb-8 mx-1">
-            <div class="flex justify-between items-center mb-4">
-                <div>
-                    <h3 class="text-lg font-black text-slate-800 uppercase tracking-tight flex items-center gap-2">
-                        <span class="bg-indigo-600 text-white p-1 rounded">ISO 31000</span> Risk Matrix
-                    </h3>
-                    <p class="text-slate-500 text-sm font-medium">Peta Sebaran Risiko Aset: <span
-                            class="text-indigo-600 font-bold">Probabilitas (X)</span> vs <span
-                            class="text-red-600 font-bold">Dampak Finansial (Y)</span></p>
-                </div>
-                <div class="flex gap-2 text-[10px] font-bold uppercase">
-                    <span class="flex items-center gap-1"><span class="w-3 h-3 rounded-full bg-red-500"></span>
-                        Critical</span>
-                    <span class="flex items-center gap-1"><span class="w-3 h-3 rounded-full bg-yellow-400"></span>
-                        Warning</span>
-                    <span class="flex items-center gap-1"><span class="w-3 h-3 rounded-full bg-emerald-400"></span>
-                        Monitoring</span>
-                </div>
-            </div>
-
-            <div class="relative h-[350px] w-full">
-                <canvas id="riskMatrixChart"></canvas>
-            </div>
-
-            <p class="text-center text-[10px] text-slate-400 mt-2 font-mono">Klik pada titik untuk memuat detail blok ke
-                Panel Kiri.</p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 relative mt-4">
-            <div class="absolute inset-x-0 -top-6 text-center">
-                <span
-                    class="bg-slate-200 text-slate-600 px-3 py-1 rounded-b-lg text-[10px] font-black uppercase tracking-widest">Analisis
-                    Dampak Finansial</span>
-            </div>
-
-            <!-- Left Financial (Blok A) -->
-            <div
-                class="bg-gradient-to-br from-indigo-900 to-slate-900 text-white p-6 rounded-3xl shadow-xl relative overflow-hidden group border border-indigo-500/30">
-                <div
-                    class="absolute top-0 right-0 w-48 h-48 bg-indigo-500/10 rounded-bl-[100px] transition-transform group-hover:scale-110 pointer-events-none">
-                </div>
-
-                <!-- Header: Title & Block Name Large -->
-                <div class="flex justify-between items-start mb-6 relative z-10">
-                    <span class="text-indigo-300 text-[10px] font-black uppercase tracking-widest mt-1">Estimasi
-                        Kerugian (Blok A)</span>
-                    <span id="finTitleLeft"
-                        class="text-4xl font-black text-white tracking-tighter drop-shadow-lg">--</span>
-                </div>
-
-                <!-- Main Number: Loss Value -->
-                <div class="flex items-baseline gap-1 mb-6 relative z-10">
-                    <span class="text-2xl font-bold text-red-500">Rp</span>
-                    <span class="text-6xl font-black text-white tracking-tighter" id="finLossLeft">0</span>
-                    <span class="text-xl font-bold text-slate-400">Juta</span>
-                </div>
-
-                <!-- Detailed Grid: Potensi vs Realisasi vs Gap -->
-                <div
-                    class="grid grid-cols-2 gap-4 text-xs font-bold bg-black/30 p-4 rounded-xl border border-indigo-500/20 relative z-10">
-                    <div>
-                        <div class="mb-2">
-                            <p class="text-indigo-200/60 uppercase text-xs tracking-wider font-bold mb-1">Potensi Est
-                            </p>
-                            <p class="text-white text-3xl font-black"><span id="finPotLeft">--</span> <span
-                                    class="text-xs opacity-50">Ton/Ha</span></p>
-                        </div>
-                        <div>
-                            <p class="text-indigo-200/60 uppercase text-xs tracking-wider font-bold mb-1">Realisasi Act
-                            </p>
-                            <p class="text-white text-3xl font-black"><span id="finRealLeft">--</span> <span
-                                    class="text-xs opacity-50">Ton/Ha</span></p>
-                        </div>
-                    </div>
-                    <div class="text-right border-l border-indigo-500/20 pl-4">
-                        <div class="mb-2">
-                            <p class="text-indigo-200/60 uppercase text-xs tracking-wider font-bold mb-1">Gap (Volume)
-                            </p>
-                            <p class="text-red-400 text-3xl font-black" id="finGapTonLeft">--</p>
-                        </div>
-                        <div>
-                            <p class="text-indigo-200/60 uppercase text-xs tracking-wider font-bold mb-1">Gap (Persen)
-                            </p>
-                            <p class="font-mono text-3xl font-black" id="finGapPctLeft">--%</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Footer Stats: Detailed Grid -->
-                <div class="grid grid-cols-3 gap-2 mt-4 pt-4 border-t border-indigo-500/20 relative z-10 text-xs">
-
-                    <!-- Col 1: Luas & SPH -->
-                    <div class="space-y-2 border-r border-indigo-500/10 pr-2">
-                        <div>
-                            <span class="text-indigo-200/60 font-bold block mb-0.5 text-[10px] uppercase">Luas
-                                Area</span>
-                            <span class="text-white font-black text-2xl" id="finLuasLeft">-- Ha</span>
-                        </div>
-                        <div>
-                            <span class="text-indigo-200/60 font-bold block mb-0.5 text-[10px] uppercase">Kerapatan
-                                (SPH)</span>
-                            <span class="text-white font-black text-2xl" id="finSphLeft">--</span>
-                        </div>
-                    </div>
-
-                    <!-- Col 2: TT & Attack Rate -->
-                    <div class="space-y-2 border-r border-indigo-500/10 pr-2 pl-2">
-                        <div>
-                            <span class="text-indigo-200/60 font-bold block mb-0.5 text-[10px] uppercase">Tahun
-                                Tanam</span>
-                            <span class="text-white font-black text-xl" id="finTTLeft">--</span>
-                        </div>
-                        <div>
-                            <span class="text-indigo-200/60 font-bold block mb-0.5 text-[10px] uppercase">Attack Rate
-                                (NDRE vs Sensus)</span>
-                            <div class="flex items-baseline gap-2">
-                                <span class="text-red-400 font-black text-xl" id="finARLeft">--%</span>
-                                <span class="text-white/30 text-[10px] font-bold">vs</span>
-                                <span class="text-yellow-400 font-black text-xl" id="finCensusRateLeft">--%</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Col 3: Mitigasi & Status -->
-                    <div class="space-y-2 pl-2 text-right">
-                        <div>
-                            <div class="flex items-center justify-end gap-2 mb-1">
-                                <span class="text-slate-500 text-[9px] font-bold uppercase mr-1">Unit:</span>
-                                <label class="relative inline-flex items-center cursor-pointer group">
-                                    <input type="checkbox" id="toggleMitigationUnitLeft" class="sr-only peer">
-
-                                    <!-- Toggle Track -->
-                                    <div
-                                        class="w-9 h-5 bg-emerald-900/50 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-emerald-500 after:border-emerald-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-indigo-900/80 peer-checked:after:bg-indigo-400 peer-checked:after:border-indigo-200">
-                                    </div>
-
-                                    <!-- Dynamic Label -->
-                                    <span class="ml-2 text-[9px] font-black tracking-wider w-[40px] text-left">
-                                        <span class="text-emerald-500 block peer-checked:hidden">TOTAL</span>
-                                        <span class="text-indigo-400 hidden peer-checked:block">PER HA</span>
-                                    </span>
-                                </label>
-                            </div>
-                            <span class="text-emerald-400 font-black text-lg tracking-tight" id="finMitigasiLeft">Rp
-                                --</span>
-                        </div>
-                        <div>
-                            <span class="text-white/40 text-[9px] uppercase font-black block mb-0.5">Status
-                                Indikasi</span>
-                            <div id="finSymptomLagLeft"
-                                class="inline-block px-2 py-1 rounded bg-slate-800 border border-slate-600 text-[10px] font-bold text-slate-400">
-                                --
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Risk Control Tower (Summary) -->
-            <div id="panelRiskSummary"
-                class="bg-gradient-to-br from-slate-900 via-rose-950 to-slate-900 text-white p-6 rounded-3xl shadow-xl relative overflow-hidden group border border-rose-500/30">
-                <div
-                    class="absolute top-0 right-0 w-48 h-48 bg-orange-500/10 rounded-bl-[100px] transition-transform group-hover:scale-110 pointer-events-none">
-                </div>
-
-                <!-- Header -->
-                <div class="flex justify-between items-start mb-6 relative z-10">
-                    <div>
-                        <h3 class="text-rose-400 text-[10px] font-black uppercase tracking-widest mb-1">Risk Control
-                            Tower</h3>
-                        <h2 class="text-2xl font-black text-white tracking-tight">ESTATE RISK EXPOSURE</h2>
-                    </div>
-                </div>
-
-                <!-- Main Number -->
-                <div class="mb-6 relative z-10">
-                    <span class="text-[10px] uppercase font-bold text-slate-400 block mb-1">Total Potential Loss (Top
-                        Risks)</span>
-                    <div class="flex items-baseline gap-1">
-                        <span class="text-xl font-bold text-rose-500">Rp</span>
-                        <span class="text-5xl font-black text-white tracking-tighter" id="summaryTotalLoss">--</span>
-                        <span class="text-sm font-bold text-slate-400">Miliar</span>
-                    </div>
-                    <p class="text-[10px] text-rose-300/80 mt-1 italic">*Akumulasi dari blok berstatus Critical & High
-                        Risk</p>
-                </div>
-
-                <!-- Stats Grid -->
-                <div class="grid grid-cols-2 gap-3 pb-6 border-b border-rose-500/20 mb-4">
-                    <div class="bg-black/30 p-3 rounded-xl border border-white/5">
-                        <span class="text-[9px] font-black text-slate-400 uppercase block mb-1">Critical Blocks</span>
-                        <span class="text-2xl font-black text-white" id="summaryCriticalCount">--</span>
-                        <span class="text-xs font-bold text-slate-500 ml-1">Blok</span>
-                    </div>
-                    <div class="bg-black/30 p-3 rounded-xl border border-white/5">
-                        <span class="text-[9px] font-black text-slate-400 uppercase block mb-1">Area at Risk</span>
-                        <span class="text-2xl font-black text-white" id="summaryRiskArea">--</span>
-                        <span class="text-xs font-bold text-slate-500 ml-1">Ha</span>
-                    </div>
-                </div>
-
-                <!-- Watchlist Container -->
-                <div class="space-y-2 mt-4 pt-4 border-t border-rose-500/20 max-h-[400px] overflow-y-auto pr-2 custom-scrollbar"
-                    id="riskWatchlistContainer">
-                    <div class="text-center text-xs text-slate-500 py-4 italic">Loading Risk Data...</div>
-                </div>
-
-                <!-- ============================================ -->
-                
-                <!-- ============================================ -->
-                <!-- COST OF INACTION WARNING PANEL (CORRECTED) -->
-                <!-- ============================================ -->
-                <div class="mt-8 p-6 bg-gradient-to-br from-rose-900/40 to-orange-900/40 rounded-2xl border-2 border-rose-500 shadow-2xl relative overflow-hidden">
-                    <div class="absolute inset-0 opacity-5" style="background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, currentColor 10px, currentColor 20px);"></div>
-                    
-                    <div class="relative z-10">
-                        <div class="flex items-center gap-3 mb-4">
-                            <div class="w-12 h-12 bg-rose-600 rounded-xl flex items-center justify-center shadow-lg animate-pulse">
-                                <span class="text-2xl">⚠️</span>
-                            </div>
-                            <div>
-                                <h3 class="text-xl font-black text-white uppercase tracking-wider">URGENT: Cost of Inaction</h3>
-                                <p class="text-rose-300 text-sm font-semibold">8 Critical Blocks Require Immediate Attention</p>
-                            </div>
-                        </div>
-                        
-                        <!-- Financial Impact Grid -->
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-                            <div class="bg-black/30 backdrop-blur-sm p-4 rounded-xl border border-rose-500/30">
-                                <div class="text-xs text-rose-300 font-bold uppercase mb-1">Current Loss (Year 0)</div>
-                                <div class="text-3xl font-black text-white">Rp 1,353</div>
-                                <div class="text-xs text-rose-400 mt-1">Juta / year</div>
-                            </div>
-                            
-                            <div class="bg-black/30 backdrop-blur-sm p-4 rounded-xl border border-orange-500/30">
-                                <div class="text-xs text-orange-300 font-bold uppercase mb-1">3-Year Projected Loss</div>
-                                <div class="text-3xl font-black text-white">Rp 6,204</div>
-                                <div class="text-xs text-orange-400 mt-1">Juta (with degradation)</div>
-                            </div>
-                            
-                            <div class="bg-black/30 backdrop-blur-sm p-4 rounded-xl border border-emerald-500/30">
-                                <div class="text-xs text-emerald-300 font-bold uppercase mb-1">Treatment Investment</div>
-                                <div class="text-3xl font-black text-white">Rp 400</div>
-                                <div class="text-xs text-emerald-400 mt-1">Juta (one-time)</div>
-                            </div>
-                            
-                            <div class="bg-black/30 backdrop-blur-sm p-4 rounded-xl border border-cyan-500/30">
-                                <div class="text-xs text-cyan-300 font-bold uppercase mb-1">Potential Savings</div>
-                                <div class="text-3xl font-black text-white">Rp 4,343</div>
-                                <div class="text-xs text-cyan-400 mt-1">Juta (3-year prevented)</div>
-                            </div>
-                        </div>
-                        
-                        <!-- ROI Metrics -->
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-                            <div class="bg-gradient-to-r from-rose-600/20 to-orange-600/20 p-4 rounded-xl border border-yellow-500/50">
-                                <div class="text-xs text-yellow-300 font-bold uppercase mb-1">Return on Investment</div>
-                                <div class="text-4xl font-black text-yellow-400">986%</div>
-                                <div class="text-xs text-yellow-300 mt-1">Over 3 years</div>
-                            </div>
-                            
-                            <div class="bg-gradient-to-r from-orange-600/20 to-rose-600/20 p-4 rounded-xl border border-green-500/50">
-                                <div class="text-xs text-green-300 font-bold uppercase mb-1">Payback Period</div>
-                                <div class="text-4xl font-black text-green-400">3.3</div>
-                                <div class="text-xs text-green-300 mt-1">Months</div>
-                            </div>
-                            
-                            <div class="bg-gradient-to-r from-rose-600/20 to-purple-600/20 p-4 rounded-xl border border-red-500/50">
-                                <div class="text-xs text-red-300 font-bold uppercase mb-1">Action Window</div>
-                                <div class="text-4xl font-black text-red-400">6</div>
-                                <div class="text-xs text-red-300 mt-1">Months before irreversible</div>
-                            </div>
-                        </div>
-                        
-                        <!-- Degradation Note -->
-                        <div class="mb-6 p-4 bg-yellow-900/20 border border-yellow-600/40 rounded-xl">
-                            <p class="text-sm text-yellow-200">
-                                <strong>📉 Degradation Model:</strong> Projected loss includes realistic deterioration - 
-                                Attack Rate increases (+2.5-4% yearly), Yield Gap worsens (-5 to -10%), 
-                                SPH drops (-10 to -20 trees/ha yearly) if no treatment applied.
-                            </p>
-                        </div>
-                        
-                        <!-- Critical Blocks List (Clickable) -->
-                        <div class="mt-6">
-                            <div class="text-sm font-bold text-white uppercase mb-3">
-                                🔥 Critical Blocks (Click for Detail):
-                            </div>
-                            <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
-
-                                <div onclick="showBlockDetail('E003A')" 
-                                     class="bg-rose-900/30 border border-rose-600/50 rounded-lg p-2 hover:bg-rose-800/50 hover:border-rose-500 hover:scale-105 transition-all cursor-pointer">
-                                    <div class="text-xs font-black text-white">E003A</div>
-                                    <div class="text-[10px] text-rose-300">Now: Rp 209 Jt</div>
-                                    <div class="text-[10px] text-orange-300">3yr: Rp 928 Jt</div>
-                                </div>
-
-                                <div onclick="showBlockDetail('D001A')" 
-                                     class="bg-rose-900/30 border border-rose-600/50 rounded-lg p-2 hover:bg-rose-800/50 hover:border-rose-500 hover:scale-105 transition-all cursor-pointer">
-                                    <div class="text-xs font-black text-white">D001A</div>
-                                    <div class="text-[10px] text-rose-300">Now: Rp 182 Jt</div>
-                                    <div class="text-[10px] text-orange-300">3yr: Rp 874 Jt</div>
-                                </div>
-
-                                <div onclick="showBlockDetail('D003A')" 
-                                     class="bg-rose-900/30 border border-rose-600/50 rounded-lg p-2 hover:bg-rose-800/50 hover:border-rose-500 hover:scale-105 transition-all cursor-pointer">
-                                    <div class="text-xs font-black text-white">D003A</div>
-                                    <div class="text-[10px] text-rose-300">Now: Rp 177 Jt</div>
-                                    <div class="text-[10px] text-orange-300">3yr: Rp 873 Jt</div>
-                                </div>
-
-                                <div onclick="showBlockDetail('E002A')" 
-                                     class="bg-rose-900/30 border border-rose-600/50 rounded-lg p-2 hover:bg-rose-800/50 hover:border-rose-500 hover:scale-105 transition-all cursor-pointer">
-                                    <div class="text-xs font-black text-white">E002A</div>
-                                    <div class="text-[10px] text-rose-300">Now: Rp 190 Jt</div>
-                                    <div class="text-[10px] text-orange-300">3yr: Rp 860 Jt</div>
-                                </div>
-
-                                <div onclick="showBlockDetail('E001A')" 
-                                     class="bg-rose-900/30 border border-rose-600/50 rounded-lg p-2 hover:bg-rose-800/50 hover:border-rose-500 hover:scale-105 transition-all cursor-pointer">
-                                    <div class="text-xs font-black text-white">E001A</div>
-                                    <div class="text-[10px] text-rose-300">Now: Rp 179 Jt</div>
-                                    <div class="text-[10px] text-orange-300">3yr: Rp 811 Jt</div>
-                                </div>
-
-                                <div onclick="showBlockDetail('D004A')" 
-                                     class="bg-rose-900/30 border border-rose-600/50 rounded-lg p-2 hover:bg-rose-800/50 hover:border-rose-500 hover:scale-105 transition-all cursor-pointer">
-                                    <div class="text-xs font-black text-white">D004A</div>
-                                    <div class="text-[10px] text-rose-300">Now: Rp 146 Jt</div>
-                                    <div class="text-[10px] text-orange-300">3yr: Rp 725 Jt</div>
-                                </div>
-
-                                <div onclick="showBlockDetail('F002A')" 
-                                     class="bg-rose-900/30 border border-rose-600/50 rounded-lg p-2 hover:bg-rose-800/50 hover:border-rose-500 hover:scale-105 transition-all cursor-pointer">
-                                    <div class="text-xs font-black text-white">F002A</div>
-                                    <div class="text-[10px] text-rose-300">Now: Rp 168 Jt</div>
-                                    <div class="text-[10px] text-orange-300">3yr: Rp 675 Jt</div>
-                                </div>
-
-                                <div onclick="showBlockDetail('F004A')" 
-                                     class="bg-rose-900/30 border border-rose-600/50 rounded-lg p-2 hover:bg-rose-800/50 hover:border-rose-500 hover:scale-105 transition-all cursor-pointer">
-                                    <div class="text-xs font-black text-white">F004A</div>
-                                    <div class="text-[10px] text-rose-300">Now: Rp 103 Jt</div>
-                                    <div class="text-[10px] text-orange-300">3yr: Rp 458 Jt</div>
-                                </div>
-
-                            </div>
-                        </div>
-                        
-                        <!-- Action CTA -->
-                        <div class="mt-6 p-4 bg-gradient-to-r from-rose-600 to-orange-600 rounded-xl text-center">
-                            <p class="text-white font-black text-lg mb-2">⏰ Immediate Action Required</p>
-                            <p class="text-white/90 text-sm">Treatment decision must be made within 30 days to prevent exponential loss escalation</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ============================================ -->
-                <!-- MODAL: BLOCK DETAIL POPUP -->
-                <!-- ============================================ -->
-                <div id="blockDetailModal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-                    <div class="bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl border-2 border-rose-500 max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">
-                        <!-- Modal Header -->
-                        <div class="sticky top-0 bg-gradient-to-r from-rose-600 to-orange-600 p-6 border-b border-white/10">
-                            <div class="flex items-center justify-between">
-                                <div>
-                                    <h2 class="text-2xl font-black text-white" id="modalBlockCode">BLOK XXX</h2>
-                                    <p class="text-white/80 text-sm">Cost of Inaction Detail Analysis</p>
-                                </div>
-                                <button onclick="closeBlockDetail()" class="text-white hover:text-rose-200 text-3xl font-bold">×</button>
-                            </div>
-                        </div>
-                        
-                        <!-- Modal Body -->
-                        <div class="p-6 space-y-6">
-                            <!-- Financial Summary -->
-                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                                <div class="bg-black/40 p-4 rounded-xl border border-rose-500/30">
-                                    <div class="text-xs text-rose-300 font-bold uppercase mb-1">Current Loss</div>
-                                    <div class="text-2xl font-black text-white" id="modalCurrentLoss">--</div>
-                                    <div class="text-xs text-rose-400">Juta/year</div>
-                                </div>
-                                <div class="bg-black/40 p-4 rounded-xl border border-orange-500/30">
-                                    <div class="text-xs text-orange-300 font-bold uppercase mb-1">3-Year Total</div>
-                                    <div class="text-2xl font-black text-white" id="modal3YrLoss">--</div>
-                                    <div class="text-xs text-orange-400">Juta</div>
-                                </div>
-                                <div class="bg-black/40 p-4 rounded-xl border border-emerald-500/30">
-                                    <div class="text-xs text-emerald-300 font-bold uppercase mb-1">Treatment</div>
-                                    <div class="text-2xl font-black text-white">Rp 50</div>
-                                    <div class="text-xs text-emerald-400">Juta</div>
-                                </div>
-                                <div class="bg-black/40 p-4 rounded-xl border border-cyan-500/30">
-                                    <div class="text-xs text-cyan-300 font-bold uppercase mb-1">ROI</div>
-                                    <div class="text-2xl font-black text-white" id="modalROI">--</div>
-                                    <div class="text-xs text-cyan-400">%</div>
-                                </div>
-                            </div>
-                            
-                            <!-- Degradation Timeline Table -->
-                            <div class="bg-black/30 p-5 rounded-xl border border-white/10">
-                                <h3 class="text-lg font-black text-white mb-4">📉 Degradation Timeline (No Treatment)</h3>
-                                <div class="overflow-x-auto">
-                                    <table class="w-full text-sm">
-                                        <thead>
-                                            <tr class="border-b border-white/20">
-                                                <th class="text-left text-rose-300 font-bold p-2">Parameter</th>
-                                                <th class="text-center text-white font-bold p-2">Year 0<br/><span class="text-xs text-gray-400">(Current)</span></th>
-                                                <th class="text-center text-orange-300 font-bold p-2">Year 1</th>
-                                                <th class="text-center text-yellow-300 font-bold p-2">Year 2</th>
-                                                <th class="text-center text-red-300 font-bold p-2">Year 3</th>
-                                                <th class="text-center text-cyan-300 font-bold p-2">Change</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="modalDegradationTable">
-                                            <!-- Will be populated by JavaScript -->
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            
-                            <!-- Treatment Impact -->
-                            <div class="bg-gradient-to-r from-emerald-900/30 to-green-900/30 p-5 rounded-xl border border-emerald-500/50">
-                                <h3 class="text-lg font-black text-white mb-3">✅ Impact of Treatment</h3>
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    <div>
-                                        <p class="text-sm text-emerald-200 mb-2"><strong>Prevented Loss (70% eff):</strong></p>
-                                        <p class="text-2xl font-black text-emerald-400" id="modalPreventedLoss">--</p>
-                                    </div>
-                                    <div>
-                                        <p class="text-sm text-green-200 mb-2"><strong>Net Benefit:</strong></p>
-                                        <p class="text-2xl font-black text-green-400" id="modalNetBenefit">--</p>
-                                    </div>
-                                </div>
-                                <p class="text-xs text-emerald-300 mt-3 italic">
-                                    Treatment includes: Isolation trenching (4×4m), systemic fungicide, sanitation, and drainage improvement.
-                                </p>
-                            </div>
-                        </div>
-                        
-                        <!-- Modal Footer -->
-                        <div class="bg-slate-800/50 p-4 border-t border-white/10 text-center">
-                            <button onclick="closeBlockDetail()" class="px-6 py-2 bg-rose-600 hover:bg-rose-700 text-white font-bold rounded-lg transition-all">
-                                Close
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <script>
-                // Cost of Inaction Projection Data (Embedded)
-                const COST_PROJECTIONS = {
-    "D003A": {
-        "current": {
-            "ar": 7.2,
-            "gap_pct": -22.0,
-            "sph": 98,
-            "loss_juta": 176.8
-        },
-        "year1": {
-            "ar": 9.7,
-            "gap_pct": -27.0,
-            "sph": 88,
-            "loss_juta": 204.93
-        },
-        "year2": {
-            "ar": 12.7,
-            "gap_pct": -34.0,
-            "sph": 73,
-            "loss_juta": 258.06000000000006
-        },
-        "year3": {
-            "ar": 16.7,
-            "gap_pct": -54.0,
-            "sph": 53,
-            "loss_juta": 409.86
-        },
-        "total_3yr_loss": 872.8500000000001,
-        "avg_annual_loss": 290.95000000000005
-    },
-    "D004A": {
-        "current": {
-            "ar": 10.7,
-            "gap_pct": -20.3,
-            "sph": 119,
-            "loss_juta": 146.2
-        },
-        "year1": {
-            "ar": 13.2,
-            "gap_pct": -25.3,
-            "sph": 109,
-            "loss_juta": 166.98000000000002
-        },
-        "year2": {
-            "ar": 16.2,
-            "gap_pct": -32.3,
-            "sph": 94,
-            "loss_juta": 213.17999999999995
-        },
-        "year3": {
-            "ar": 20.2,
-            "gap_pct": -52.3,
-            "sph": 74,
-            "loss_juta": 345.18
-        },
-        "total_3yr_loss": 725.3399999999999,
-        "avg_annual_loss": 241.77999999999997
-    },
-    "D001A": {
-        "current": {
-            "ar": 7.5,
-            "gap_pct": -21.3,
-            "sph": 108,
-            "loss_juta": 182.3
-        },
-        "year1": {
-            "ar": 10.0,
-            "gap_pct": -26.3,
-            "sph": 98,
-            "loss_juta": 203.562
-        },
-        "year2": {
-            "ar": 13.0,
-            "gap_pct": -33.3,
-            "sph": 83,
-            "loss_juta": 257.74199999999996
-        },
-        "year3": {
-            "ar": 17.0,
-            "gap_pct": -53.3,
-            "sph": 63,
-            "loss_juta": 412.5419999999999
-        },
-        "total_3yr_loss": 873.8459999999999,
-        "avg_annual_loss": 291.282
-    },
-    "E003A": {
-        "current": {
-            "ar": 6.8,
-            "gap_pct": -31.4,
-            "sph": 99,
-            "loss_juta": 209.0
-        },
-        "year1": {
-            "ar": 9.3,
-            "gap_pct": -36.4,
-            "sph": 89,
-            "loss_juta": 235.87199999999999
-        },
-        "year2": {
-            "ar": 12.3,
-            "gap_pct": -43.4,
-            "sph": 74,
-            "loss_juta": 281.23199999999997
-        },
-        "year3": {
-            "ar": 16.3,
-            "gap_pct": -63.4,
-            "sph": 54,
-            "loss_juta": 410.83200000000005
-        },
-        "total_3yr_loss": 927.9359999999999,
-        "avg_annual_loss": 309.31199999999995
-    },
-    "E001A": {
-        "current": {
-            "ar": 6.4,
-            "gap_pct": -23.7,
-            "sph": 95,
-            "loss_juta": 178.9
-        },
-        "year1": {
-            "ar": 8.9,
-            "gap_pct": -28.7,
-            "sph": 85,
-            "loss_juta": 193.72499999999997
-        },
-        "year2": {
-            "ar": 11.9,
-            "gap_pct": -35.7,
-            "sph": 70,
-            "loss_juta": 240.97500000000002
-        },
-        "year3": {
-            "ar": 15.9,
-            "gap_pct": -55.7,
-            "sph": 50,
-            "loss_juta": 375.975
-        },
-        "total_3yr_loss": 810.675,
-        "avg_annual_loss": 270.22499999999997
-    },
-    "E002A": {
-        "current": {
-            "ar": 8.3,
-            "gap_pct": -26.7,
-            "sph": 133,
-            "loss_juta": 189.5
-        },
-        "year1": {
-            "ar": 10.8,
-            "gap_pct": -31.7,
-            "sph": 123,
-            "loss_juta": 211.12199999999999
-        },
-        "year2": {
-            "ar": 13.8,
-            "gap_pct": -38.7,
-            "sph": 108,
-            "loss_juta": 257.742
-        },
-        "year3": {
-            "ar": 17.8,
-            "gap_pct": -58.7,
-            "sph": 88,
-            "loss_juta": 390.94200000000006
-        },
-        "total_3yr_loss": 859.806,
-        "avg_annual_loss": 286.60200000000003
-    },
-    "F002A": {
-        "current": {
-            "ar": 8.1,
-            "gap_pct": -33.0,
-            "sph": 132,
-            "loss_juta": 168.0
-        },
-        "year1": {
-            "ar": 10.6,
-            "gap_pct": -38.0,
-            "sph": 122,
-            "loss_juta": 173.28
-        },
-        "year2": {
-            "ar": 13.6,
-            "gap_pct": -45.0,
-            "sph": 107,
-            "loss_juta": 205.2
-        },
-        "year3": {
-            "ar": 17.6,
-            "gap_pct": -65.0,
-            "sph": 87,
-            "loss_juta": 296.4
-        },
-        "total_3yr_loss": 674.88,
-        "avg_annual_loss": 224.96
-    },
-    "F004A": {
-        "current": {
-            "ar": 7.4,
-            "gap_pct": -26.1,
-            "sph": 127,
-            "loss_juta": 102.6
-        },
-        "year1": {
-            "ar": 9.9,
-            "gap_pct": -31.1,
-            "sph": 117,
-            "loss_juta": 111.96000000000001
-        },
-        "year2": {
-            "ar": 12.9,
-            "gap_pct": -38.1,
-            "sph": 102,
-            "loss_juta": 137.16
-        },
-        "year3": {
-            "ar": 16.9,
-            "gap_pct": -58.1,
-            "sph": 82,
-            "loss_juta": 209.16
-        },
-        "total_3yr_loss": 458.28,
-        "avg_annual_loss": 152.76
-    }
-};
-                
-                // Show block detail modal
-                function showBlockDetail(blockCode) {
-                    const data = COST_PROJECTIONS[blockCode];
-                    if (!data) {
-                        alert('Data not found for block: ' + blockCode);
-                        return;
-                    }
-                    
-                    // Update modal content
-                    document.getElementById('modalBlockCode').textContent = 'BLOK ' + blockCode;
-                    document.getElementById('modalCurrentLoss').textContent =  'Rp ' + data.current.loss_juta.toFixed(0);
-                    document.getElementById('modal3YrLoss').textContent = 'Rp ' + data.total_3yr_loss.toFixed(0);
-                    
-                    // Calculate ROI for this block
-                    const treatment = 50;
-                    const prevented = data.total_3yr_loss * 0.70;
-                    const netBenefit = prevented - treatment;
-                    const roi = (netBenefit / treatment * 100).toFixed(0);
-                    
-                    document.getElementById('modalROI').textContent = roi;
-                    document.getElementById('modalPreventedLoss').textContent = 'Rp ' + prevented.toFixed(0) + ' Juta';
-                    document.getElementById('modalNetBenefit').textContent = 'Rp ' + netBenefit.toFixed(0) + ' Juta';
-                    
-                    // Build degradation table
-                    const tableHTML = `
-                        <tr class="border-b border-white/10">
-                            <td class="p-2 text-rose-200 font-semibold">Attack Rate</td>
-                            <td class="p-2 text-center text-white">${data.current.ar.toFixed(1)}%</td>
-                            <td class="p-2 text-center text-orange-200">${data.year1.ar.toFixed(1)}%</td>
-                            <td class="p-2 text-center text-yellow-200">${data.year2.ar.toFixed(1)}%</td>
-                            <td class="p-2 text-center text-red-200">${data.year3.ar.toFixed(1)}%</td>
-                            <td class="p-2 text-center text-cyan-200 font-bold">+${(data.year3.ar - data.current.ar).toFixed(1)}%</td>
-                        </tr>
-                        <tr class="border-b border-white/10">
-                            <td class="p-2 text-rose-200 font-semibold">Yield Gap</td>
-                            <td class="p-2 text-center text-white">${data.current.gap_pct.toFixed(1)}%</td>
-                            <td class="p-2 text-center text-orange-200">${data.year1.gap_pct.toFixed(1)}%</td>
-                            <td class="p-2 text-center text-yellow-200">${data.year2.gap_pct.toFixed(1)}%</td>
-                            <td class="p-2 text-center text-red-200">${data.year3.gap_pct.toFixed(1)}%</td>
-                            <td class="p-2 text-center text-cyan-200 font-bold">${(data.year3.gap_pct - data.current.gap_pct).toFixed(1)}%</td>
-                        </tr>
-                        <tr class="border-b border-white/10">
-                            <td class="p-2 text-rose-200 font-semibold">SPH (trees/ha)</td>
-                            <td class="p-2 text-center text-white">${data.current.sph.toFixed(0)}</td>
-                            <td class="p-2 text-center text-orange-200">${data.year1.sph.toFixed(0)}</td>
-                            <td class="p-2 text-center text-yellow-200">${data.year2.sph.toFixed(0)}</td>
-                            <td class="p-2 text-center text-red-200">${data.year3.sph.toFixed(0)}</td>
-                            <td class="p-2 text-center text-cyan-200 font-bold">${(data.year3.sph - data.current.sph).toFixed(0)} trees</td>
-                        </tr>
-                        <tr>
-                            <td class="p-2 text-rose-200 font-semibold">Loss (Juta)</td>
-                            <td class="p-2 text-center text-white font-bold">Rp ${data.current.loss_juta.toFixed(0)}</td>
-                            <td class="p-2 text-center text-orange-200 font-bold">Rp ${data.year1.loss_juta.toFixed(0)}</td>
-                            <td class="p-2 text-center text-yellow-200 font-bold">Rp ${data.year2.loss_juta.toFixed(0)}</td>
-                            <td class="p-2 text-center text-red-200 font-bold">Rp ${data.year3.loss_juta.toFixed(0)}</td>
-                            <td class="p-2 text-center text-cyan-200 font-bold">+Rp ${(data.year3.loss_juta - data.current.loss_juta).toFixed(0)}</td>
-                        </tr>
-                    `;
-                    
-                    document.getElementById('modalDegradationTable').innerHTML = tableHTML;
-                    
-                    // Show modal
-                    document.getElementById('blockDetailModal').classList.remove('hidden');
-                }
-                
-                // Close modal
-                function closeBlockDetail() {
-                    document.getElementById('blockDetailModal').classList.add('hidden');
-                }
-                
-                // Close on Escape key
-                document.addEventListener('keydown', function(e) {
-                    if (e.key === 'Escape') closeBlockDetail();
-                });
-                
-                // Close on background click
-                document.getElementById('blockDetailModal').addEventListener('click', function(e) {
-                    if (e.target === this) closeBlockDetail();
-                });
-                </script>
-
-
-
-                <!-- HIDDEN FOOTER (Preserved for structure safety) -->
-                <div class="hidden">
-
-                    <!-- Col 1: Luas & SPH -->
-                    <div class="space-y-2 border-r border-orange-500/10 pr-2">
-                        <div>
-                            <span class="text-orange-200/60 font-bold block mb-0.5 text-[10px] uppercase">Luas
-                                Area</span>
-                            <span class="text-white font-black text-2xl" id="finLuasRight">-- Ha</span>
-                        </div>
-                        <div>
-                            <span class="text-orange-200/60 font-bold block mb-0.5 text-[10px] uppercase">Kerapatan
-                                (SPH)</span>
-                            <span class="text-white font-black text-2xl" id="finSphRight">--</span>
-                        </div>
-                    </div>
-
-                    <!-- Col 2: TT & Attack Rate -->
-                    <div class="space-y-2 border-r border-orange-500/10 pr-2 pl-2">
-                        <div>
-                            <span class="text-orange-200/60 font-bold block mb-0.5 text-[10px] uppercase">Tahun
-                                Tanam</span>
-                            <span class="text-white font-black text-xl" id="finTTRight">--</span>
-                        </div>
-                        <div>
-                            <span class="text-orange-200/60 font-bold block mb-0.5 text-[10px] uppercase">Attack Rate
-                                (NDRE vs Sensus)</span>
-                            <div class="flex items-baseline gap-2">
-                                <span class="text-red-400 font-black text-xl" id="finARRight">--%</span>
-                                <span class="text-white/30 text-[10px] font-bold">vs</span>
-                                <span class="text-yellow-400 font-black text-xl" id="finCensusRateRight">--%</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Col 3: Mitigasi & Status -->
-                    <div class="space-y-2 pl-2 text-right">
-                        <div>
-                            <div class="flex items-center justify-end gap-2 mb-1">
-                                <span class="text-slate-500 text-[9px] font-bold uppercase mr-1">Unit:</span>
-                                <label class="relative inline-flex items-center cursor-pointer group">
-                                    <input type="checkbox" id="toggleMitigationUnitRight" class="sr-only peer">
-
-                                    <!-- Toggle Track -->
-                                    <div
-                                        class="w-9 h-5 bg-emerald-900/50 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-emerald-500 after:border-emerald-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-indigo-900/80 peer-checked:after:bg-indigo-400 peer-checked:after:border-indigo-200">
-                                    </div>
-
-                                    <!-- Dynamic Label -->
-                                    <span class="ml-2 text-[9px] font-black tracking-wider w-[40px] text-left">
-                                        <span class="text-emerald-500 block peer-checked:hidden">TOTAL</span>
-                                        <span class="text-indigo-400 hidden peer-checked:block">PER HA</span>
-                                    </span>
-                                </label>
-                            </div>
-                            <span class="text-emerald-400 font-black text-lg tracking-tight" id="finMitigasiRight">Rp
-                                --</span>
-                        </div>
-                        <div>
-                            <span class="text-white/40 text-[9px] uppercase font-black block mb-0.5">Status
-                                Indikasi</span>
-                            <div id="finSymptomLagRight"
-                                class="inline-block px-2 py-1 rounded bg-slate-800 border border-slate-600 text-[10px] font-bold text-slate-400">
-                                --
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Warning for Estate Scale -->
-        <div id="estate-warning"
-            class="mt-8 p-6 bg-red-600/20 border-2 border-red-500/50 rounded-2xl flex items-start gap-4 shadow-xl"
-            style="display: none;">
-            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="2" class="text-red-400 shrink-0 mt-1">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10" />
-                <path d="m9 12 2 2 4-4" />
-            </svg>
-            <div>
-                <h4 class="text-lg font-black text-white uppercase tracking-tighter">Peringatan Interpretasi Data:
-                </h4>
-                <p class="text-base text-white font-bold leading-relaxed">Angka <span
-                        class="text-red-400 font-black px-1.5 bg-black/40 rounded">Rp 56.1 Miliar</span> didasarkan
-                    pada asumsi bahwa <span
-                        class="underline decoration-red-500 decoration-2 underline-offset-4 font-black">HANYA 20%
-                        (2.200 Ha)</span> dari total 11.000 Ha kebun yang memiliki kondisi kritis serupa dengan
-                    sampel. Laporan ini tidak merepresentasikan kerugian untuk luasan 11.000 Ha secara keseluruhan.
-                </p>
-            </div>
-        </div>
-
-
-
-
-
-        <!-- SECTION PETA CINCIN API -->
+    
+<!-- ISO 31000 LINEAR DASHBOARD v9 -->
+<div id="tab-overview" class="max-w-7xl mx-auto space-y-6">
+<div class="mb-8 p-4 bg-slate-100 rounded-xl border border-slate-200 flex items-center gap-4"><div class="w-10 h-10 bg-indigo-600 rounded-lg flex items-center justify-center text-white font-black">1</div><div><h2 class="text-xl font-black text-slate-800 uppercase">RISK IDENTIFICATION</h2><p class="text-xs text-slate-500 font-bold">Identifikasi Sumber & Sebaran Risiko</p></div></div>
+<!-- SECTION PETA CINCIN API -->
         <div
-            class="bg-gradient-to-br from-slate-900 to-slate-800 rounded-[2rem] p-8 text-white shadow-2xl border border-white/10">
+            class="bg-gradient-to-br from-slate-900 to-slate-800 rounded-[2rem] p-8 text-white shadow-2xl border border-white/10 relative">
+<span class="iso-badge iso-phase-1">1. IDENTIFICATION</span>
+            <span class="iso-badge iso-phase-1">1. IDENTIFICATION</span>
             <div class="flex items-center gap-3 mb-8">
                 <div class="p-4 bg-orange-500/20 rounded-2xl border border-orange-500/30">
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
@@ -1174,9 +343,439 @@
                     </div>
                 </div>
 
-                <!-- ISO 31000 PROTOCOLS (Replaces Right Map) -->
+                <!-- [DELETED: Risk Precision Map - Merged into Top ISO Matrix] -->
+
+                
+<div class="mb-8 mt-12 p-4 bg-slate-100 rounded-xl border border-slate-200 flex items-center gap-4"><div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center text-white font-black">2</div><div><h2 class="text-xl font-black text-slate-800 uppercase">RISK ANALYSIS</h2><p class="text-xs text-slate-500 font-bold">Analisis Dampak Finansial & Probabilitas</p></div></div>
+<!-- Skenario Finansial Interaktif (What-If) -->
+        <div class="bg-white p-6 relative rounded-3xl shadow-sm border border-slate-200 mb-8 mx-1 relative overflow-hidden">
+<span class="iso-badge iso-phase-2">2. ANALYSIS</span>
+            <span class="iso-badge iso-phase-2">2. ANALYSIS</span>
+            <div
+                class="absolute top-0 right-0 w-64 h-64 bg-indigo-50 rounded-full blur-3xl opacity-50 -translate-y-1/2 translate-x-1/2">
+            </div>
+
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6 relative z-10">
+                <div class="flex items-start gap-4">
+                    <div class="bg-indigo-600 text-white p-3 rounded-2xl shadow-lg shadow-indigo-500/20">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2">
+                            <rect width="20" height="14" x="2" y="5" rx="2" />
+                            <line x1="2" x2="22" y1="10" y2="10" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-black text-slate-800 uppercase tracking-tight">Financial Simulator</h3>
+                        <p class="text-slate-500 text-sm font-medium">Sesuaikan <span
+                                class="text-indigo-600 font-bold">Harga TBS (Rp/Kg)</span> untuk melihat proyeksi
+                            kerugian real-time.</p>
+                    </div>
+                </div>
+
                 <div
-                    class="bg-indigo-900 rounded-3xl overflow-hidden shadow-xl border-4 border-indigo-500/30 flex flex-col h-full">
+                    class="flex items-center gap-6 w-full md:w-auto bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                    <div class="flex-1 min-w-[200px]">
+                        <div class="flex justify-between text-[10px] font-black uppercase text-slate-400 mb-2">
+                            <span>Bearish (Rp 1.500)</span>
+                            <span>Bullish (Rp 4.000)</span>
+                        </div>
+                        <input type="range" id="priceSlider" min="1500" max="4000" step="50" value="2500"
+                            class="w-full h-3 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-indigo-600 hover:accent-indigo-500 transition-all">
+                    </div>
+                    <div
+                        class="bg-white border-2 border-indigo-100 px-5 py-2 rounded-xl text-center min-w-[120px] shadow-sm">
+                        <span class="text-[10px] font-black uppercase text-slate-400 block mb-1">Harga TBS</span>
+                        <div class="text-xl font-black text-indigo-700">
+                            Rp <span id="priceDisplay">2.500</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- REMOVED DUPLICATE ... (Reverting: Restoring Top Matrix) -->
+        
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+<!-- Left Financial (Blok A) -->
+            <div
+                class="bg-gradient-to-br from-indigo-900 to-slate-900 text-white p-6 rounded-3xl shadow-xl relative overflow-hidden group border border-indigo-500/30
+<span class="iso-badge iso-phase-2">2. ANALYSIS</span>">
+                <span class="iso-badge iso-phase-2">2. ANALYSIS</span>
+                <div
+                    class="absolute top-0 right-0 w-48 h-48 bg-indigo-500/10 rounded-bl-[100px] transition-transform group-hover:scale-110 pointer-events-none">
+                </div>
+
+                <!-- Header: Title & Block Name Large -->
+                <div class="flex justify-between items-start mb-6 relative z-10">
+                    <span class="text-indigo-300 text-[10px] font-black uppercase tracking-widest mt-1">Estimasi
+                        Kerugian (Blok A)</span>
+                    <span id="finTitleLeft"
+                        class="text-4xl font-black text-white tracking-tighter drop-shadow-lg">--</span>
+                </div>
+
+                <!-- Main Number: Loss Value -->
+                <div class="flex items-baseline gap-1 mb-6 relative z-10">
+                    <span class="text-2xl font-bold text-red-500">Rp</span>
+                    <span class="text-6xl font-black text-white tracking-tighter" id="finLossLeft">0</span>
+                    <span class="text-xl font-bold text-slate-400">Juta</span>
+                </div>
+
+                <!-- Detailed Grid: Potensi vs Realisasi vs Gap -->
+                <div
+                    class="grid grid-cols-2 gap-4 text-xs font-bold bg-black/30 p-4 rounded-xl border border-indigo-500/20 relative z-10">
+                    <div>
+                        <div class="mb-2">
+                            <p class="text-indigo-200/60 uppercase text-xs tracking-wider font-bold mb-1">Potensi Est
+                            </p>
+                            <p class="text-white text-3xl font-black"><span id="finPotLeft">--</span> <span
+                                    class="text-xs opacity-50">Ton/Ha</span></p>
+                        </div>
+                        <div>
+                            <p class="text-indigo-200/60 uppercase text-xs tracking-wider font-bold mb-1">Realisasi Act
+                            </p>
+                            <p class="text-white text-3xl font-black"><span id="finRealLeft">--</span> <span
+                                    class="text-xs opacity-50">Ton/Ha</span></p>
+                        </div>
+                    </div>
+                    <div class="text-right border-l border-indigo-500/20 pl-4">
+                        <div class="mb-2">
+                            <p class="text-indigo-200/60 uppercase text-xs tracking-wider font-bold mb-1">Gap (Volume)
+                            </p>
+                            <p class="text-red-400 text-3xl font-black" id="finGapTonLeft">--</p>
+                        </div>
+                        <div>
+                            <p class="text-indigo-200/60 uppercase text-xs tracking-wider font-bold mb-1">Gap (Persen)
+                            </p>
+                            <p class="font-mono text-3xl font-black" id="finGapPctLeft">--%</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer Stats: Detailed Grid -->
+                <div class="grid grid-cols-3 gap-2 mt-4 pt-4 border-t border-indigo-500/20 relative z-10 text-xs">
+
+                    <!-- Col 1: Luas & SPH -->
+                    <div class="space-y-2 border-r border-indigo-500/10 pr-2">
+                        <div>
+                            <span class="text-indigo-200/60 font-bold block mb-0.5 text-[10px] uppercase">Luas
+                                Area</span>
+                            <span class="text-white font-black text-2xl" id="finLuasLeft">-- Ha</span>
+                        </div>
+                        <div>
+                            <span class="text-indigo-200/60 font-bold block mb-0.5 text-[10px] uppercase">Kerapatan
+                                (SPH)</span>
+                            <span class="text-white font-black text-2xl" id="finSphLeft">--</span>
+                        </div>
+                    </div>
+
+                    <!-- Col 2: TT & Attack Rate -->
+                    <div class="space-y-2 border-r border-indigo-500/10 pr-2 pl-2">
+                        <div>
+                            <span class="text-indigo-200/60 font-bold block mb-0.5 text-[10px] uppercase">Tahun
+                                Tanam</span>
+                            <span class="text-white font-black text-xl" id="finTTLeft">--</span>
+                        </div>
+                        <div>
+                            <span class="text-indigo-200/60 font-bold block mb-0.5 text-[10px] uppercase">Attack Rate
+                                (NDRE vs Sensus)</span>
+                            <div class="flex items-baseline gap-2">
+                                <span class="text-red-400 font-black text-xl" id="finARLeft">--%</span>
+                                <span class="text-white/30 text-[10px] font-bold">vs</span>
+                                <span class="text-yellow-400 font-black text-xl" id="finCensusRateLeft">--%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Col 3: Mitigasi & Status -->
+                    <div class="space-y-2 pl-2 text-right">
+                        <div>
+                            <div class="flex items-center justify-end gap-2 mb-1">
+                                <span class="text-slate-500 text-[9px] font-bold uppercase mr-1">Unit:</span>
+                                <label class="relative inline-flex items-center cursor-pointer group">
+                                    <input type="checkbox" id="toggleMitigationUnitLeft" class="sr-only peer">
+
+                                    <!-- Toggle Track -->
+                                    <div
+                                        class="w-9 h-5 bg-emerald-900/50 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-emerald-500 after:border-emerald-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-indigo-900/80 peer-checked:after:bg-indigo-400 peer-checked:after:border-indigo-200">
+                                    </div>
+
+                                    <!-- Dynamic Label -->
+                                    <span class="ml-2 text-[9px] font-black tracking-wider w-[40px] text-left">
+                                        <span class="text-emerald-500 block peer-checked:hidden">TOTAL</span>
+                                        <span class="text-indigo-400 hidden peer-checked:block">PER HA</span>
+                                    </span>
+                                </label>
+                            </div>
+                            <span class="text-emerald-400 font-black text-lg tracking-tight" id="finMitigasiLeft">Rp
+                                --</span>
+                        </div>
+                        <div>
+                            <span class="text-white/40 text-[9px] uppercase font-black block mb-0.5">Status
+                                Indikasi</span>
+                            <div id="finSymptomLagLeft"
+                                class="inline-block px-2 py-1 rounded bg-slate-800 border border-slate-600 text-[10px] font-bold text-slate-400">
+                                --
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+
+<!-- Likelihood & Trend Analysis -->
+<div class="bg-gradient-to-br from-blue-900 to-blue-950 text-white p-6 rounded-3xl shadow-xl relative overflow-hidden border border-blue-500/30">
+    <span class="iso-badge iso-phase-2">2. ANALYSIS</span>
+    <h3 class="text-lg font-black text-blue-200 uppercase tracking-tight mb-6">Likelihood & Trend</h3>
+    
+    <!-- Probability Score -->
+    <div class="bg-black/30 rounded-2xl p-5 mb-4">
+        <span class="text-xs font-black text-blue-300 uppercase block mb-3">Probability Score</span>
+        <div class="flex items-baseline gap-2">
+            <span class="text-5xl font-black text-white" id="likelihoodScore">--</span>
+            <span class="text-xl font-bold text-blue-400">%</span>
+        </div>
+        <div class="mt-3 h-2 bg-slate-800 rounded-full overflow-hidden">
+            <div id="likelihoodBar" class="h-full bg-gradient-to-r from-yellow-500 to-red-500" style="width: 0%"></div>
+        </div>
+    </div>
+    
+    <!-- Sliders -->
+    <div class="bg-black/30 rounded-2xl p-4">
+        <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-black text-blue-300 uppercase">Formula Parameters</span>
+            <button id="toggleFormulaInfo" class="text-xs text-blue-400 hover:text-blue-200 underline">ℹ️ Info</button>
+        </div>
+        <div id="formulaExplanation" class="hidden mb-4 p-3 bg-slate-900/50 rounded-lg">
+            <p class="text-xs text-blue-200"><strong>Formula:</strong> AR (40-95%) + SPH modifier</p>
+        </div>
+        <div class="space-y-3">
+            <div>
+                <div class="flex justify-between text-xs mb-1">
+                    <span class="text-blue-300 font-bold">AR Weight</span>
+                    <span class="text-white font-black" id="arWeightValue">1.0x</span>
+                </div>
+                <input type="range" id="arWeightSlider" min="0.5" max="2.0" step="0.1" value="1.0" class="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-blue-500">
+            </div>
+            <div>
+                <div class="flex justify-between text-xs mb-1">
+                    <span class="text-blue-300 font-bold">SPH Modifier</span>
+                    <span class="text-white font-black" id="sphModifierValue">1.0x</span>
+                </div>
+                <input type="range" id="sphModifierSlider" min="0" max="2.0" step="0.1" value="1.0" class="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-blue-500">
+            </div>
+            <button id="recalculateLikelihood" class="w-full px-3 py-2 bg-blue-600 hover:bg-blue-500 text-white text-xs font-black uppercase rounded-lg">🔄 Recalculate</button>
+        </div>
+    </div>
+    
+    <!-- Time to Critical -->
+    <div class="bg-black/30 rounded-2xl p-5 mt-4">
+        <span class="text-xs font-black text-blue-300 uppercase block mb-3">Time to Critical</span>
+        <div class="flex items-baseline gap-2">
+            <span class="text-4xl font-black text-white" id="timeToCritical">--</span>
+            <span class="text-lg font-bold text-blue-400">Bulan</span>
+        </div>
+    </div>
+</div>
+
+</div>
+
+<div class="bg-gradient-to-r from-slate-900 to-slate-950 rounded-[3rem] p-10 border border-slate-800 relative overflow-hidden shadow-2xl mb-8">
+    <span class="iso-badge iso-phase-2">2. ANALYSIS</span>
+    <h2 class="text-3xl font-black text-white tracking-tighter uppercase mb-2">VANISHING YIELD ANALYSIS</h2>
+    <p class="text-slate-400 font-bold text-lg">Analisis Kesenjangan Produksi vs Potensi Biologis</p>
+</div>
+
+<div class="mb-8 mt-12 p-4 bg-slate-100 rounded-xl border border-slate-200 flex items-center gap-4"><div class="w-10 h-10 bg-amber-600 rounded-lg flex items-center justify-center text-white font-black">3</div><div><h2 class="text-xl font-black text-slate-800 uppercase">RISK EVALUATION</h2><p class="text-xs text-slate-500 font-bold">Evaluasi Level Risiko & Prioritas</p></div></div>
+<!-- 3. RISK MATRIX (ISO 31000 Strategic View) -->
+        <div class="bg-white p-6 relative rounded-3xl shadow-sm border border-slate-200 mb-8 mx-1 relative">
+<span class="iso-badge iso-phase-3">3. EVALUATION</span>
+            <span class="iso-badge iso-phase-3">3. EVALUATION</span>
+            <div class="flex justify-between items-center mb-4">
+                <div>
+                    <h3 class="text-lg font-black text-slate-800 uppercase tracking-tight flex items-center gap-2">
+                        <span class="bg-indigo-600 text-white p-1 rounded">ISO 31000</span> Risk Matrix
+                    </h3>
+                    <p class="text-slate-500 text-sm font-medium">Peta Sebaran Risiko Aset: <span
+                            class="text-indigo-600 font-bold">Probabilitas (X)</span> vs <span
+                            class="text-red-600 font-bold">Dampak Finansial (Y)</span></p>
+                </div>
+                <div class="flex gap-2 text-[10px] font-bold uppercase">
+                    <span class="flex items-center gap-1"><span class="w-3 h-3 rounded-full bg-red-500"></span>
+                        Critical</span>
+                    <span class="flex items-center gap-1"><span class="w-3 h-3 rounded-full bg-yellow-400"></span>
+                        Warning</span>
+                    <span class="flex items-center gap-1"><span class="w-3 h-3 rounded-full bg-emerald-400"></span>
+                        Monitoring</span>
+                </div>
+            </div>
+
+            <div class="relative h-[350px] w-full">
+                <!-- UNIQUE ID: isoMatrixChart -->
+                <canvas id="isoMatrixChart"></canvas>
+            </div>
+
+            <p class="text-center text-[10px] text-slate-400 mt-2 font-mono">Klik pada titik untuk memuat detail blok ke
+                Panel Kiri.</p>
+        </div>
+
+        
+<!-- Risk Control Tower (Summary) -->
+            <div id="panelRiskSummary"
+                class="bg-gradient-to-br from-slate-900 via-rose-950 to-slate-900 text-white p-6 rounded-3xl shadow-xl relative overflow-hidden group border border-rose-500/30
+<span class="iso-badge iso-phase-3">3. EVALUATION</span>">
+                <span class="iso-badge iso-phase-3">3. EVALUATION</span>
+                <div
+                    class="absolute top-0 right-0 w-48 h-48 bg-orange-500/10 rounded-bl-[100px] transition-transform group-hover:scale-110 pointer-events-none">
+                </div>
+
+                <!-- Header -->
+                <div class="flex justify-between items-start mb-6 relative z-10">
+                    <div>
+                        <h3 class="text-rose-400 text-[10px] font-black uppercase tracking-widest mb-1">Risk Control
+                            Tower</h3>
+                        <h2 class="text-2xl font-black text-white tracking-tight">ESTATE RISK EXPOSURE</h2>
+                    </div>
+                </div>
+
+                <!-- Main Number -->
+                <div class="mb-6 relative z-10">
+                    <span class="text-[10px] uppercase font-bold text-slate-400 block mb-1">Total Potential Loss (Top
+                        Risks)</span>
+                    <div class="flex items-baseline gap-1">
+                        <span class="text-xl font-bold text-rose-500">Rp</span>
+                        <span class="text-5xl font-black text-white tracking-tighter" id="summaryTotalLoss">--</span>
+                        <span class="text-sm font-bold text-slate-400">Miliar</span>
+                    </div>
+                    <p class="text-[10px] text-rose-300/80 mt-1 italic">*Akumulasi dari blok berstatus Critical & High
+                        Risk</p>
+                </div>
+
+                <!-- Stats Grid -->
+                <div class="grid grid-cols-2 gap-3 pb-6 border-b border-rose-500/20 mb-4">
+                    <div class="bg-black/30 p-3 rounded-xl border border-white/5">
+                        <span class="text-[9px] font-black text-slate-400 uppercase block mb-1">Critical Blocks</span>
+                        <span class="text-2xl font-black text-white" id="summaryCriticalCount">--</span>
+                        <span class="text-xs font-bold text-slate-500 ml-1">Blok</span>
+                    </div>
+                    <div class="bg-black/30 p-3 rounded-xl border border-white/5">
+                        <span class="text-[9px] font-black text-slate-400 uppercase block mb-1">Area at Risk</span>
+                        <span class="text-2xl font-black text-white" id="summaryRiskArea">--</span>
+                        <span class="text-xs font-bold text-slate-500 ml-1">Ha</span>
+                    </div>
+                </div>
+
+                <!-- Watchlist Container -->
+                <div class="space-y-2 mt-4 pt-4 border-t border-rose-500/20 max-h-[400px] overflow-y-auto pr-2 custom-scrollbar"
+                    id="riskWatchlistContainer">
+                    <div class="text-center text-xs text-slate-500 py-4 italic">Loading Risk Data...</div>
+                </div>
+
+                <!-- HIDDEN FOOTER (Preserved for structure safety) -->
+                <div class="hidden">
+
+                    <!-- Col 1: Luas & SPH -->
+                    <div class="space-y-2 border-r border-orange-500/10 pr-2">
+                        <div>
+                            <span class="text-orange-200/60 font-bold block mb-0.5 text-[10px] uppercase">Luas
+                                Area</span>
+                            <span class="text-white font-black text-2xl" id="finLuasRight">-- Ha</span>
+                        </div>
+                        <div>
+                            <span class="text-orange-200/60 font-bold block mb-0.5 text-[10px] uppercase">Kerapatan
+                                (SPH)</span>
+                            <span class="text-white font-black text-2xl" id="finSphRight">--</span>
+                        </div>
+                    </div>
+
+                    <!-- Col 2: TT & Attack Rate -->
+                    <div class="space-y-2 border-r border-orange-500/10 pr-2 pl-2">
+                        <div>
+                            <span class="text-orange-200/60 font-bold block mb-0.5 text-[10px] uppercase">Tahun
+                                Tanam</span>
+                            <span class="text-white font-black text-xl" id="finTTRight">--</span>
+                        </div>
+                        <div>
+                            <span class="text-orange-200/60 font-bold block mb-0.5 text-[10px] uppercase">Attack Rate
+                                (NDRE vs Sensus)</span>
+                            <div class="flex items-baseline gap-2">
+                                <span class="text-red-400 font-black text-xl" id="finARRight">--%</span>
+                                <span class="text-white/30 text-[10px] font-bold">vs</span>
+                                <span class="text-yellow-400 font-black text-xl" id="finCensusRateRight">--%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Col 3: Mitigasi & Status -->
+                    <div class="space-y-2 pl-2 text-right">
+                        <div>
+                            <div class="flex items-center justify-end gap-2 mb-1">
+                                <span class="text-slate-500 text-[9px] font-bold uppercase mr-1">Unit:</span>
+                                <label class="relative inline-flex items-center cursor-pointer group">
+                                    <input type="checkbox" id="toggleMitigationUnitRight" class="sr-only peer">
+
+                                    <!-- Toggle Track -->
+                                    <div
+                                        class="w-9 h-5 bg-emerald-900/50 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-emerald-500 after:border-emerald-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-indigo-900/80 peer-checked:after:bg-indigo-400 peer-checked:after:border-indigo-200">
+                                    </div>
+
+                                    <!-- Dynamic Label -->
+                                    <span class="ml-2 text-[9px] font-black tracking-wider w-[40px] text-left">
+                                        <span class="text-emerald-500 block peer-checked:hidden">TOTAL</span>
+                                        <span class="text-indigo-400 hidden peer-checked:block">PER HA</span>
+                                    </span>
+                                </label>
+                            </div>
+                            <span class="text-emerald-400 font-black text-lg tracking-tight" id="finMitigasiRight">Rp
+                                --</span>
+                        </div>
+                        <div>
+                            <span class="text-white/40 text-[9px] uppercase font-black block mb-0.5">Status
+                                Indikasi</span>
+                            <div id="finSymptomLagRight"
+                                class="inline-block px-2 py-1 rounded bg-slate-800 border border-slate-600 text-[10px] font-bold text-slate-400">
+                                --
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+<!-- Warning for Estate Scale -->
+        <div id="estate-warning"
+            class="mt-8 p-6 bg-red-600/20 border-2 border-red-500/50 rounded-2xl flex items-start gap-4 shadow-xl"
+            style="display: none;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" class="text-red-400 shrink-0 mt-1">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10" />
+                <path d="m9 12 2 2 4-4" />
+            </svg>
+            <div>
+                <h4 class="text-lg font-black text-white uppercase tracking-tighter">Peringatan Interpretasi Data:
+                </h4>
+                <p class="text-base text-white font-bold leading-relaxed">Angka <span
+                        class="text-red-400 font-black px-1.5 bg-black/40 rounded">Rp 56.1 Miliar</span> didasarkan
+                    pada asumsi bahwa <span
+                        class="underline decoration-red-500 decoration-2 underline-offset-4 font-black">HANYA 20%
+                        (2.200 Ha)</span> dari total 11.000 Ha kebun yang memiliki kondisi kritis serupa dengan
+                    sampel. Laporan ini tidak merepresentasikan kerugian untuk luasan 11.000 Ha secara keseluruhan.
+                </p>
+            </div>
+        </div>
+
+
+
+
+
+        
+<div class="mb-8 mt-12 p-4 bg-slate-100 rounded-xl border border-slate-200 flex items-center gap-4"><div class="w-10 h-10 bg-emerald-600 rounded-lg flex items-center justify-center text-white font-black">4</div><div><h2 class="text-xl font-black text-slate-800 uppercase">RISK TREATMENT</h2><p class="text-xs text-slate-500 font-bold">Protokol Mitigasi & Pengendalian</p></div></div>
+<!-- ISO 31000 PROTOCOLS (Replaces Right Map) -->
+                <div
+                    class="bg-indigo-900 rounded-3xl overflow-hidden shadow-xl border-4 border-indigo-500/30 flex flex-col h-full relative">
+<span class="iso-badge iso-phase-4">4. TREATMENT</span>
+                    <span class="iso-badge iso-phase-4">4. TREATMENT</span>
                     <div class="bg-indigo-950 p-6 border-b-4 border-indigo-500">
                         <div class="flex items-center gap-4">
                             <div class="p-3 bg-indigo-500/20 rounded-xl border border-indigo-400/30">
@@ -1381,6 +980,7 @@
                      ========================================================================= -->
         <div
             class="bg-gradient-to-r from-slate-900 to-slate-950 rounded-[3rem] p-10 border border-slate-800 relative overflow-hidden mb-12 shadow-2xl">
+            <span class="iso-badge iso-phase-2">2. ANALYSIS</span>
 
             <!-- Decorative Background -->
             <div class="absolute top-0 right-0 w-[500px] h-full bg-red-900/10 blur-[100px] pointer-events-none"></div>
@@ -1531,87 +1131,93 @@
     </div>
     </div>
 
-    <!-- 2 SKENARIO MITIGASI -->
+    <!-- ISO 31000 RISK TREATMENT PLAN -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 relative z-10">
 
-        <!-- Skenario 1 (Bad) -->
-        <div class="bg-slate-950 p-8 rounded-3xl border border-slate-800 relative group overflow-hidden">
+        <!-- Option A: Passive (Risk Acceptance) -->
+        <div
+            class="bg-slate-950 p-8 rounded-3xl border border-slate-800 relative group overflow-hidden opacity-80 hover:opacity-100 transition-opacity">
             <div class="absolute inset-0 bg-red-900/5 group-hover:bg-red-900/10 transition-all"></div>
             <div class="relative z-10">
                 <div class="flex items-center justify-between mb-6">
-                    <h3 class="text-xl font-black text-white uppercase">Skenario 1: Business as Usual</h3>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" class="text-red-500">
-                        <path d="M18 6L6 18M6 6l12 12" />
-                    </svg>
+                    <div>
+                        <span
+                            class="text-[10px] font-bold text-red-500 bg-red-950 px-2 py-0.5 rounded border border-red-900 uppercase tracking-wider">Option
+                            A (Passive)</span>
+                        <h3 class="text-xl font-black text-white mt-2 uppercase">Risk Acceptance</h3>
+                    </div>
                 </div>
 
                 <ul class="space-y-4 mb-8">
                     <li class="flex items-start gap-3">
-                        <span class="text-red-500 mt-1">❌</span>
-                        <p class="text-sm text-slate-300"><b class="text-white">"Cryptic Collapse" Berlanjut:</b> Yield
-                            drop 20% ➔ 40% dalam 2 tahun karena akar terus mati.</p>
+                        <span class="text-red-500 mt-1">⚠️</span>
+                        <p class="text-sm text-slate-300"><b>Metode Konvensional:</b> Mengandalkan sensus visual (daun
+                            kuning). <i class="text-red-400">Inefektif untuk deteksi dini.</i></p>
                     </li>
                     <li class="flex items-start gap-3">
-                        <span class="text-red-500 mt-1">❌</span>
-                        <p class="text-sm text-slate-300">Biaya Sensus & Rawat Jalan Terus, tapi <b
-                                class="text-white">Produksi ZONK</b> (Bunga aborsi massal).</p>
-                    </li>
-                    <li class="flex items-start gap-3">
-                        <span class="text-red-500 mt-1">❌</span>
-                        <p class="text-sm text-slate-300">Akumulasi Kerugian > <span class="text-white font-black">Rp
-                                2.5 Miliar</span> (Insolvency).</p>
+                        <span class="text-red-500 mt-1">⚠️</span>
+                        <p class="text-sm text-slate-300"><b>Dampak Projected:</b> Infeksi menyebar eksponensial (r >
+                            0.15). Yield drop tidak terkendali.</p>
                     </li>
                 </ul>
 
                 <div class="bg-red-500/10 p-4 rounded-xl border border-red-500/20 text-center">
-                    <p class="text-xs uppercase text-red-400 font-bold mb-1">Hasil Akhir</p>
-                    <p class="text-lg font-black text-white">KEBANGKRUTAN OPERASIONAL (INSOLVENCY)</p>
+                    <p class="text-xs uppercase text-red-400 font-bold mb-1">Risk Outcome</p>
+                    <p class="text-lg font-black text-white">INSOLVENCY (KEBANGKRUTAN)</p>
                 </div>
             </div>
         </div>
 
-        <!-- Skenario 2 (Good) -->
-        <div class="bg-emerald-950 p-8 rounded-3xl border border-emerald-800 relative group overflow-hidden">
-            <div class="absolute inset-0 bg-emerald-900/10 group-hover:bg-emerald-900/20 transition-all"></div>
+        <!-- Option B: Active (Risk Mitigation) -->
+        <div
+            class="bg-indigo-950 p-8 rounded-3xl border-2 border-indigo-500 relative group overflow-hidden shadow-2xl shadow-indigo-900/50">
+            <div
+                class="absolute top-0 right-0 bg-indigo-600 text-white text-[10px] font-black px-3 py-1 rounded-bl-xl uppercase tracking-widest shadow-lg">
+                ISO 31000 Recommended
+            </div>
+            <div class="absolute inset-0 bg-indigo-900/10 group-hover:bg-indigo-900/20 transition-all"></div>
             <div class="relative z-10">
                 <div class="flex items-center justify-between mb-6">
-                    <h3 class="text-xl font-black text-white uppercase">Skenario 2: Radical Intervention</h3>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" class="text-emerald-500">
-                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
-                        <polyline points="22 4 12 14.01 9 11.01" />
+                    <div>
+                        <span
+                            class="text-[10px] font-bold text-emerald-300 bg-emerald-950 px-2 py-0.5 rounded border border-emerald-900 uppercase tracking-wider">Option
+                            B (Aggressive)</span>
+                        <h3 class="text-xl font-black text-white mt-2 uppercase">Risk Treatment</h3>
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" class="text-indigo-400">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
                     </svg>
                 </div>
 
                 <div class="space-y-4 mb-8">
-                    <!-- Action 1 -->
+                    <!-- Protocol 1 -->
                     <div class="flex gap-4">
                         <div
-                            class="w-8 h-8 rounded-full bg-emerald-500 flex items-center justify-center font-black text-slate-900 shrink-0">
+                            class="w-8 h-8 rounded-full bg-indigo-500 flex items-center justify-center font-black text-white shrink-0 shadow-lg shadow-indigo-500/50">
                             1</div>
                         <div>
-                            <h5 class="text-white font-bold">Stop Sensus Visual</h5>
-                            <p class="text-xs text-emerald-200 mt-1">Beralih total ke Peta Drone untuk panduan sanitasi.
-                                Jangan tertipu daun hijau.</p>
+                            <h5 class="text-white font-bold">Precision Sanitation (Drone)</h5>
+                            <p class="text-xs text-indigo-200 mt-1">Eksekusi sanitasi berdasarkan koordinat peta
+                                digital, bukan visual mata.</p>
                         </div>
                     </div>
-                    <!-- Action 2 -->
+                    <!-- Protocol 2 -->
                     <div class="flex gap-4">
                         <div
-                            class="w-8 h-8 rounded-full bg-emerald-500 flex items-center justify-center font-black text-slate-900 shrink-0">
+                            class="w-8 h-8 rounded-full bg-indigo-500 flex items-center justify-center font-black text-white shrink-0 shadow-lg shadow-indigo-500/50">
                             2</div>
                         <div>
-                            <h5 class="text-white font-bold">Isolasi Akar Masif</h5>
-                            <p class="text-xs text-emerald-200 mt-1">Putus kontak akar (Trenching 4x4m) di semua titik
-                                merah/oranye drone.</p>
+                            <h5 class="text-white font-bold">Containment Trenching</h5>
+                            <p class="text-xs text-indigo-200 mt-1">Isolasi parit 4x4m pada radius 15m dari titik
+                                infeksi (Protocol Ring Defense).</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="bg-emerald-500/10 p-4 rounded-xl border border-emerald-500/20 text-center">
-                    <p class="text-xs uppercase text-emerald-400 font-bold mb-1">Hasil Akhir</p>
-                    <p class="text-lg font-black text-white">MENGHENTIKAN "KEBOCORAN ASET"</p>
+                <div class="bg-indigo-500/20 p-4 rounded-xl border border-indigo-500/40 text-center">
+                    <p class="text-xs uppercase text-indigo-300 font-bold mb-1">Risk Outcome</p>
+                    <p class="text-lg font-black text-white">ASSET RECOVERY (PEMULIHAN)</p>
                 </div>
             </div>
         </div>
@@ -1619,6 +1225,7 @@
         <!-- SPH & EFFICIENCY ANALYSIS SECTION (NEW) -->
         <div
             class="w-full mt-12 bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 rounded-[2.5rem] p-8 md:p-12 text-white shadow-2xl relative overflow-hidden border-2 border-indigo-500 ring-4 ring-indigo-900/40 col-span-full">
+            <span class="iso-badge iso-phase-1">1. IDENTIFICATION</span>
             <!-- Background Decor -->
             <div
                 class="absolute top-0 right-0 w-96 h-96 bg-indigo-500 rounded-full blur-[150px] opacity-10 pointer-events-none">
@@ -1701,27 +1308,7 @@
                                 </div>
                             </div>
 
-                            <!-- Block B (Right) SPH Status -->
-                            <div>
-                                <div class="flex justify-between items-end mb-2">
-                                    <span class="text-sm font-bold opacity-80" id="sphTitleRight">Blok B</span>
-                                    <div class="flex items-baseline gap-2">
-                                        <span class="text-3xl font-black" id="sphValueRight">--</span>
-                                        <span id="sphDeltaRight"
-                                            class="text-xs font-bold opacity-0 transition-opacity"></span>
-                                    </div>
-                                </div>
-                                <div class="h-4 bg-black/50 rounded-full overflow-hidden relative">
-                                    <div id="sphBarRight" class="h-full bg-slate-500 transition-all duration-1000"
-                                        style="width: 0%"></div>
-                                </div>
-                                <div class="flex justify-between mt-2">
-                                    <span
-                                        class="text-[10px] uppercase font-black px-2 py-0.5 rounded bg-white/10 text-white"
-                                        id="sphStatusRight">--</span>
-                                    <span class="text-xs italic opacity-60" id="sphDescRight">Memuat data...</span>
-                                </div>
-                            </div>
+                            <!-- Block B Removed (Single Focus) -->
                         </div>
 
                         <!-- Legend Bar -->
@@ -1746,8 +1333,8 @@
                             <div class="space-y-4">
                                 <div class="flex gap-4">
                                     <div
-                                        class="w-8 h-8 rounded bg-indigo-500 text-white flex items-center justify-center font-black shrink-0">
-                                        A</div>
+                                        class="w-8 h-8 rounded bg-indigo-500 text-white flex items-center justify-center font-black shrink-0 text-xs shadow-lg shadow-indigo-500/30">
+                                        MITOS</div>
                                     <div>
                                         <p class="text-xs font-black text-indigo-300 uppercase tracking-widest">
                                             Persepsi Umum
@@ -1759,8 +1346,8 @@
                                 </div>
                                 <div class="flex gap-4">
                                     <div
-                                        class="w-8 h-8 rounded bg-red-500 text-white flex items-center justify-center font-black shrink-0">
-                                        B</div>
+                                        class="w-8 h-8 rounded bg-red-500 text-white flex items-center justify-center font-black shrink-0 text-xs shadow-lg shadow-red-500/30">
+                                        FAKTA</div>
                                     <div>
                                         <p class="text-xs font-black text-red-300 uppercase tracking-widest">Realita
                                             Lapangan
@@ -1847,7 +1434,20 @@
     </div>
 
     <!-- Footer -->
-    <div class="max-w-7xl mx-auto mt-8 mb-12 text-center">
+    <div class="max-w-7xl mx-auto mt-8 mb-12 text-center space-y-4">
+        <p class="text-xs font-bold text-slate-600 uppercase tracking-widest">CONFIDENTIAL - INTERNAL USE ONLY</p>
+
+        <div class="max-w-4xl mx-auto border-t border-slate-700 pt-8 pb-10">
+            <div class="bg-slate-200 rounded-xl p-6 shadow-lg">
+                <p class="text-sm font-bold text-black leading-relaxed">
+                    <strong class="uppercase border-b-2 border-black">DISCLAIMER:</strong> Analisis ini adalah alat
+                    bantu keputusan (Risk Intelligence) berbasis data agronomi yang tersedia. Hasil proyeksi tidak
+                    bersifat absolut; kinerja blok dapat dipengaruhi multivariabel (iklim, hara, kultur teknis).
+                    Verifikasi lapangan (Ground Truth) tetap wajib.
+                </p>
+            </div>
+        </div>
+
         <!-- Dynamic Modal Overlay -->
         <!-- Dynamic Modal Overlay -->
         <div id="infoModal"
@@ -1881,10 +1481,42 @@
                         Tutup
                     </button>
                 </div>
-            </div>
-        </div>
+            
+<div class="mb-8 mt-12 p-4 bg-slate-100 rounded-xl border border-slate-200 flex items-center gap-4"><div class="w-10 h-10 bg-slate-600 rounded-lg flex items-center justify-center text-white font-black">5</div><div><h2 class="text-xl font-black text-slate-800 uppercase">MONITORING & REVIEW</h2><p class="text-xs text-slate-500 font-bold">Pemantauan Berkelanjutan</p></div></div>
 
-        <script>
+<div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-200 mb-8 mx-1 relative overflow-hidden">
+    <span class="iso-badge iso-phase-5">5. MONITORING</span>
+    <h3 class="text-xl font-black text-slate-800 uppercase tracking-tight mb-4">Watchlist Evaluation</h3>
+    <div class="overflow-x-auto">
+        <table class="w-full text-xs text-left text-slate-600">
+            <thead class="bg-slate-50 text-slate-900 font-bold uppercase">
+                <tr>
+                    <th class="px-3 py-2">Blok</th>
+                    <th class="px-3 py-2">Status</th>
+                    <th class="px-3 py-2">Risk Level</th>
+                    <th class="px-3 py-2">Recommendation</th>
+                </tr>
+            </thead>
+            <tbody id="monitoringTableBody">
+                <tr class="border-b border-slate-100">
+                    <td class="px-3 py-2 font-bold">F008A</td>
+                    <td class="px-3 py-2"><span class="bg-red-100 text-red-600 px-2 py-0.5 rounded text-[10px] font-bold">CRITICAL</span></td>
+                    <td class="px-3 py-2">High Exposure (Rp 29M)</td>
+                    <td class="px-3 py-2">Isolasi Immediately</td>
+                </tr>
+                <tr class="border-b border-slate-100">
+                    <td class="px-3 py-2 font-bold">D001A</td>
+                    <td class="px-3 py-2"><span class="bg-yellow-100 text-yellow-600 px-2 py-0.5 rounded text-[10px] font-bold">WARNING</span></td>
+                    <td class="px-3 py-2">Moderate</td>
+                    <td class="px-3 py-2">Monitor Monthly</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</div> <!-- End Overview -->
+<script>
             function showModal(title, contentHtml) {
                 const modal = document.getElementById('infoModal');
                 const titleEl = document.getElementById('modalTitle');
@@ -2054,11 +1686,14 @@
                     if (leftSel) leftSel.value = first;
                     updateBlockData('Left', first);
 
+                    /* 
+                    // DISABLE RIGHT SELECTOR (Single Focus Mode)
                     if (sortedKeys.length > 1) {
                         const rightSel = document.getElementById('globalSelectorRight');
                         if (rightSel) rightSel.value = second;
                         updateBlockData('Right', second);
                     }
+                    */
                 }
 
                 // Function Definitions
@@ -2152,12 +1787,247 @@
                 }
 
                 // RISK MATRIX LOGIC (Chart.js)
+                // REVISION: Robust Initialization with Error Handling
                 function initRiskMatrix() {
-                    const ctx = document.getElementById('riskMatrixChart').getContext('2d');
+                    window.initRiskMatrix = initRiskMatrix;
+                    console.log('🔥 Initializing Risk Matrix (Robust Mode)...');
+
+                    /* 
+                       =======================================================
+                       NATIVE CANVAS RENDERER (Dual Support: ISO & Risk Map)
+                       =======================================================
+                     */
+                    if (!BLOCKS_DATA || Object.keys(BLOCKS_DATA).length === 0) {
+                        console.warn('⚠️ BLOCKS_DATA is empty. Risk Matrix will be blank.');
+                        return;
+                    }
+
+                    // Prepare Data Points (Shared)
+                    const points = Object.values(BLOCKS_DATA).map(b => {
+                        let loss = 0;
+                        if (b.gap_ton_ha && parseFloat(b.gap_ton_ha) > 0) {
+                            loss = parseFloat(b.gap_ton_ha) * b.luas_ha * TBS_PRICE / 1000;
+                        } else {
+                            const pot = parseFloat(b.potensi_ton_ha) || 0;
+                            const real = parseFloat(b.realisasi_ton_ha) || 0;
+                            loss = Math.max(0, pot - real) * b.luas_ha * TBS_PRICE / 1000;
+                        }
+                        return {
+                            x: parseFloat(b.attack_rate || 0),
+                            y: loss,
+                            block: b.block_code,
+                            status: b.status_narrative
+                        };
+                    });
+
+                    // Helper: Draw Scatter Plot (Used by Bottom Chart)
+                    const drawNativeScatter = (ctx, w, h, data, isDark) => {
+                        ctx.setTransform(1, 0, 0, 1, 0, 0);
+                        const colBg = isDark ? '#0f172a' : '#ffffff';
+                        const colTxt = isDark ? '#94a3b8' : '#64748b';
+                        const colGrid = isDark ? '#1e293b' : '#e2e8f0';
+
+                        // Clear
+                        ctx.fillStyle = colBg; ctx.fillRect(0, 0, w, h);
+
+                        const pad = { t: 40, r: 40, b: 40, l: 60 };
+                        const gw = w - pad.l - pad.r, gh = h - pad.t - pad.b;
+                        const sx = v => pad.l + (v / 40) * gw;
+                        const sy = v => (h - pad.b) - (v / 1000) * gh;
+
+                        // Zones
+                        const xt = sx(10), yt = sy(100);
+                        ctx.fillStyle = 'rgba(16, 185, 129, 0.1)'; ctx.fillRect(pad.l, yt, xt - pad.l, (h - pad.b) - yt);
+                        ctx.fillStyle = 'rgba(239, 68, 68, 0.15)'; ctx.fillRect(xt, pad.t, (w - pad.r) - xt, yt - pad.t);
+                        ctx.fillStyle = 'rgba(234, 179, 8, 0.1)'; ctx.fillRect(pad.l, pad.t, xt - pad.l, yt - pad.t);
+                        ctx.fillRect(xt, yt, (w - pad.r) - xt, (h - pad.b) - yt);
+
+                        // Axes
+                        ctx.lineWidth = 1; ctx.font = 'bold 10px sans-serif'; ctx.textAlign = 'right'; ctx.textBaseline = 'middle';
+                        for (let i = 0; i <= 5; i++) {
+                            let v = i * 200, y = sy(v);
+                            ctx.fillStyle = colTxt; ctx.fillText(v, pad.l - 10, y);
+                            ctx.strokeStyle = colGrid; ctx.beginPath(); ctx.moveTo(pad.l, y); ctx.lineTo(w - pad.r, y); ctx.stroke();
+                        }
+                        ctx.textAlign = 'center'; ctx.textBaseline = 'top';
+                        for (let i = 0; i <= 4; i++) {
+                            let v = i * 10, x = sx(v);
+                            ctx.fillStyle = colTxt; ctx.fillText(v, x, h - pad.b + 5);
+                            ctx.strokeStyle = colGrid; ctx.beginPath(); ctx.moveTo(x, pad.t); ctx.lineTo(x, h - pad.b); ctx.stroke();
+                        }
+
+                        // Labels
+                        ctx.fillStyle = colTxt; ctx.fillText("ATTACK RATE (%)", pad.l + gw / 2, h - 20);
+                        ctx.save(); ctx.translate(20, pad.t + gh / 2); ctx.rotate(-Math.PI / 2);
+                        ctx.fillText("LOSS (Juta Rp)", 0, 0); ctx.restore();
+
+                        // Points
+                        data.forEach(p => {
+                            const px = sx(p.x), py = sy(p.y);
+                            ctx.beginPath(); ctx.arc(px, py, 6, 0, 2 * Math.PI);
+                            if (p.x > 15 || p.y > 500) ctx.fillStyle = '#ef4444';
+                            else if (p.x > 5) ctx.fillStyle = '#facc15';
+                            else ctx.fillStyle = '#10b981';
+                            ctx.fill(); ctx.strokeStyle = colBg; ctx.lineWidth = 2; ctx.stroke();
+                        });
+                    };
+
+                    // Define Renderer Function
+                    // RENDERER: UNIFIED STRATEGIC + PRECISION MATRIX
+                    const renderUnifiedMatrix = (canvasId) => {
+                        const canvas = document.getElementById(canvasId);
+                        if (!canvas) return;
+                        const ctx = canvas.getContext('2d');
+                        const w = canvas.width = canvas.parentElement.offsetWidth;
+                        const h = canvas.height = canvas.parentElement.offsetHeight;
+
+                        // THRESHOLDS (SINKRONISASI VISUAL)
+                        const TH_AR = 10;   // Attack Rate > 10%
+                        const TH_LOSS = 100; // Loss > 100 Juta
+
+                        // 1. Calculate Aggregates based on NEW Thresholds
+                        let low = { count: 0, loss: 0 }, med = { count: 0, loss: 0 }, high = { count: 0, loss: 0 };
+                        points.forEach(p => {
+                            if (p.x > TH_AR && p.y > TH_LOSS) { high.count++; high.loss += p.y; }
+                            else if (p.x <= TH_AR && p.y <= TH_LOSS) { low.count++; low.loss += p.y; }
+                            else { med.count++; med.loss += p.y; }
+                        });
+
+                        // 2. Setup Canvas
+                        ctx.setTransform(1, 0, 0, 1, 0, 0);
+                        ctx.fillStyle = '#ffffff'; ctx.fillRect(0, 0, w, h); // White BG
+
+                        const pad = { t: 30, r: 20, b: 30, l: 50 };
+                        const gw = w - pad.l - pad.r, gh = h - pad.t - pad.b;
+                        const sx = v => pad.l + (v / 40) * gw;
+                        const sy = v => (h - pad.b) - (v / 1000) * gh;
+                        const xt = sx(TH_AR), yt = sy(TH_LOSS);
+
+                        // 3. Draw Background Zones (Quadrants)
+                        // GREEN (Low/Low)
+                        ctx.fillStyle = 'rgba(16, 185, 129, 0.15)';
+                        ctx.fillRect(pad.l, yt, xt - pad.l, (h - pad.b) - yt);
+
+                        // RED (High/High)
+                        ctx.fillStyle = 'rgba(239, 68, 68, 0.15)';
+                        ctx.fillRect(xt, pad.t, (w - pad.r) - xt, yt - pad.t);
+
+                        // YELLOW (Mixed)
+                        ctx.fillStyle = 'rgba(234, 179, 8, 0.15)';
+                        ctx.fillRect(pad.l, pad.t, xt - pad.l, yt - pad.t); // TL
+                        ctx.fillRect(xt, yt, (w - pad.r) - xt, (h - pad.b) - yt); // BR
+
+                        // 4. Draw Scatter Points (Color Matches Quadrant)
+                        points.forEach(p => {
+                            const px = sx(p.x), py = sy(p.y);
+                            ctx.beginPath(); ctx.arc(px, py, 5, 0, 2 * Math.PI); // Radius 5
+
+                            // LOGIKA WARNA SAMA DENGAN KUADRAN
+                            if (p.x > TH_AR && p.y > TH_LOSS) ctx.fillStyle = '#ef4444'; // Red
+                            else if (p.x <= TH_AR && p.y <= TH_LOSS) ctx.fillStyle = '#10b981'; // Green
+                            else ctx.fillStyle = '#facc15'; // Yellow
+
+                            ctx.fill();
+                            ctx.strokeStyle = 'rgba(0,0,0,0.2)'; ctx.lineWidth = 1; ctx.stroke();
+                        });
+
+                        // 5. Draw Legend/Stats Overlay (Text)
+                        const drawStatLabel = (cx, cy, label, stats) => {
+                            // Text Background Bubble for Readability
+                            ctx.fillStyle = 'rgba(255, 255, 255, 0.85)';
+                            ctx.beginPath(); ctx.roundRect(cx - 60, cy - 25, 120, 50, 8); ctx.fill();
+                            ctx.strokeStyle = 'rgba(0,0,0,0.05)'; ctx.stroke();
+
+                            ctx.fillStyle = '#1e293b'; ctx.textAlign = 'center';
+                            ctx.font = '900 12px "Inter", sans-serif'; ctx.fillText(label, cx, cy - 8);
+                            ctx.font = 'bold 16px "Inter", sans-serif'; ctx.fillText(stats.count + " Blok", cx, cy + 10);
+                        };
+
+                        // Position Stats nicely in center of zones
+                        const cxGreen = pad.l + (xt - pad.l) / 2;
+                        const cyGreen = yt + ((h - pad.b) - yt) / 2;
+                        drawStatLabel(cxGreen, cyGreen, 'ACCEPTABLE', low);
+
+                        const cxRed = xt + ((w - pad.r) - xt) / 2;
+                        const cyRed = pad.t + (yt - pad.t) / 2;
+                        drawStatLabel(cxRed, cyRed, 'CRITICAL', high);
+
+                        const cxYellow = pad.l + (xt - pad.l) / 2;
+                        const cyYellow = pad.t + (yt - pad.t) / 2;
+                        drawStatLabel(cxYellow, cyYellow, 'WARNING', med);
+
+                        // 6. Axes & Labels
+                        const colTxt = '#94a3b8'; const colGrid = '#e2e8f0';
+                        ctx.lineWidth = 1; ctx.font = 'bold 10px sans-serif'; ctx.textAlign = 'right'; ctx.textBaseline = 'middle';
+                        for (let i = 0; i <= 5; i++) {
+                            let v = i * 200, y = sy(v); ctx.fillStyle = colTxt; ctx.fillText(v, pad.l - 10, y);
+                            ctx.strokeStyle = colGrid; ctx.beginPath(); ctx.moveTo(pad.l, y); ctx.lineTo(w - pad.r, y); ctx.stroke();
+                        }
+                        ctx.textAlign = 'center'; ctx.textBaseline = 'top';
+                        for (let i = 0; i <= 4; i++) {
+                            let v = i * 10, x = sx(v); ctx.fillStyle = colTxt; ctx.fillText(v, x, h - pad.b + 5);
+                            ctx.strokeStyle = colGrid; ctx.beginPath(); ctx.moveTo(x, pad.t); ctx.lineTo(x, h - pad.b); ctx.stroke();
+                        }
+
+                        ctx.fillStyle = '#64748b'; ctx.font = 'bold 11px sans-serif';
+                        ctx.fillText("PROBABILITAS (Attack Rate %)", pad.l + (w - pad.l - pad.r) / 2, h - 10);
+                        ctx.save(); ctx.translate(15, pad.t + (h - pad.t - pad.b) / 2); ctx.rotate(-Math.PI / 2);
+                        ctx.fillText("DAMPAK FINANSIAL (Juta Rp)", 0, 0); ctx.restore();
+
+                        // 7. INTERACTION: CLICK HANDLER
+                        canvas.onclick = (e) => {
+                            const rect = canvas.getBoundingClientRect();
+                            const clickX = e.clientX - rect.left;
+                            const clickY = e.clientY - rect.top;
+
+                            // Find clicked point (allow 8px margin of error)
+                            const clickedPoint = points.find(p => {
+                                const px = sx(p.x);
+                                const py = sy(p.y);
+                                const dx = px - clickX;
+                                const dy = py - clickY;
+                                return (dx * dx + dy * dy) <= 64; // 8^2
+                            });
+
+                            if (clickedPoint) {
+                                console.log('🎯 Matrix Clicked:', clickedPoint.block);
+                                const selector = document.getElementById('globalSelectorLeft');
+                                if (selector) {
+                                    selector.value = clickedPoint.block;
+                                    selector.dispatchEvent(new Event('change'));
+                                    // Optional: Scroll visualization or highlight
+                                    selector.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                    // Alert removed by User request
+                                }
+                            }
+                        };
+
+                        // 8. INTERACTION: HOVER CURSOR
+                        canvas.onmousemove = (e) => {
+                            const rect = canvas.getBoundingClientRect();
+                            const clickX = e.clientX - rect.left;
+                            const clickY = e.clientY - rect.top;
+                            const isHover = points.some(p => {
+                                const px = sx(p.x);
+                                const py = sy(p.y);
+                                return ((px - clickX) ** 2 + (py - clickY) ** 2) <= 64;
+                            });
+                            canvas.style.cursor = isHover ? 'pointer' : 'default';
+                        };
+                    };
+
+                    // EXECUTE UNIFIED RENDER
+                    renderUnifiedMatrix('isoMatrixChart');
+                    // renderPrecisionChart('riskMatrixChart'); // REMOVED (Merged)
+
+                    console.log('✅ DUAL RISK MATRIX RENDER COMPLETE');
+                    return; // Stop execution of old code
+
+                    // OLD CODE BELOW IS BYPASSED BY RETURN
+                    /*
 
                     // Prepare Data Points
                     const points = Object.values(BLOCKS_DATA).map(b => {
-                        // Loss dynamic check
                         let loss = 0;
                         if (b.gap_ton_ha && parseFloat(b.gap_ton_ha) > 0) {
                             loss = parseFloat(b.gap_ton_ha) * b.luas_ha * TBS_PRICE / 1000;
@@ -2168,94 +2038,180 @@
                         }
 
                         return {
-                            x: b.attack_rate, // Axis X: Probability (Attack Rate)
+                            x: parseFloat(b.attack_rate || 0), // Axis X: Probability (Attack Rate)
                             y: loss,          // Axis Y: Impact (Financial Loss)
                             block: b.block_code,
                             status: b.status_narrative
                         };
                     });
 
-                    // Define Zones (Quadrant Backgrounds) using Annotation Plugin
-                    const annotations = {
-                        zoneCritical: {
-                            type: 'box',
-                            xMin: 10, xMax: 100,
-                            yMin: 100, yMax: 5000,
-                            backgroundColor: 'rgba(239, 68, 68, 0.1)', // Red
-                            borderWidth: 0
-                        },
-                        zoneWarning: {
-                            type: 'box',
-                            xMin: 5, xMax: 10,
-                            yMin: 50, yMax: 5000,
-                            backgroundColor: 'rgba(234, 179, 8, 0.1)', // Yellow
-                            borderWidth: 0
+                    console.log(`✅ Prepared ${points.length} data points for Risk Matrix.`);
+                    console.log(`✅ Prepared ${points.length} data points for Risk Matrix.`);
+
+                    // Background Zones Plugin (Inline Safe & Robust)
+                    const bgPlugin = {
+                        id: 'customCanvasBackgroundColor',
+                        beforeDraw: (chart) => {
+                            const { ctx, chartArea, scales: { x, y } } = chart;
+                            if (!chartArea || !x || !y) return;
+                            const { top, bottom, left, right } = chartArea;
+                            if (!top || !bottom || !left || !right) return;
+
+                            ctx.save();
+                            let x10 = x.getPixelForValue(10);
+                            let y100 = y.getPixelForValue(100);
+
+                            if (!isFinite(x10)) x10 = left + (right - left) * 0.25;
+                            if (!isFinite(y100)) y100 = bottom - (bottom - top) * 0.25;
+
+                            // Draw Zones
+                            ctx.fillStyle = 'rgba(16, 185, 129, 0.1)'; // Green (Safe)
+                            ctx.fillRect(left, y100, Math.max(0, x10 - left), Math.max(0, bottom - y100));
+
+                            ctx.fillStyle = 'rgba(239, 68, 68, 0.15)'; // Red (Critical)
+                            ctx.fillRect(x10, top, Math.max(0, right - x10), Math.max(0, y100 - top));
+
+                            ctx.fillStyle = 'rgba(234, 179, 8, 0.1)'; // Yellow (Warning 1)
+                            ctx.fillRect(left, top, Math.max(0, x10 - left), Math.max(0, y100 - top));
+
+                            ctx.fillStyle = 'rgba(234, 179, 8, 0.1)'; // Yellow (Warning 2)
+                            ctx.fillRect(x10, y100, Math.max(0, right - x10), Math.max(0, bottom - y100));
+
+                            ctx.restore();
                         }
                     };
 
-                    window.riskChart = new Chart(ctx, {
-                        type: 'scatter',
-                        data: {
-                            datasets: [{
-                                label: 'Blok Aset',
-                                data: points,
-                                backgroundColor: (ctx) => {
-                                    const v = ctx.raw;
-                                    if (!v) return '#94a3b8';
-                                    if (v.x > 15 || v.y > 500) return '#ef4444'; // Critical Red
-                                    if (v.x > 5) return '#facc15'; // Warning Yellow
-                                    return '#10b981'; // Safe Green
-                                },
-                                pointRadius: 6,
-                                pointHoverRadius: 10
-                            }]
-                        },
-                        options: {
-                            responsive: true,
-                            maintainAspectRatio: false,
-                            plugins: {
-                                legend: { display: false },
-                                tooltip: {
-                                    callbacks: {
-                                        label: function (context) {
-                                            const p = context.raw;
-                                            return `${p.block}: AR ${p.x}% | Loss Rp ${Math.round(p.y).toLocaleString()} Jt`;
-                                        }
-                                    }
-                                },
-                                annotation: {
-                                    annotations: annotations
-                                }
-                            },
-                            scales: {
-                                x: {
-                                    title: { display: true, text: 'Probabilitas: Attack Rate (%)', font: { weight: 'bold' } },
-                                    min: 0, max: 35
-                                },
-                                y: {
-                                    title: { display: true, text: 'Dampak: Potential Loss (Juta Rp)', font: { weight: 'bold' } },
-                                    beginAtZero: true
-                                }
-                            },
-                            onClick: (e, elements) => {
-                                if (elements.length > 0) {
-                                    const index = elements[0].index;
-                                    const blockCode = window.riskChart.data.datasets[0].data[index].block;
+                    /* 
+                       =======================================================
+                       FALLBACK: NATIVE CANVAS RENDERER (No Chart.js Dependency)
+                       Reason: Chart.js failed to render visibility repeatedly.
+                       =======================================================
+                     */
+                    // Reset Transform
+                    ctx.setTransform(1, 0, 0, 1, 0, 0);
 
-                                    // Action: Load to Left Panel
-                                    document.getElementById('globalSelectorLeft').value = blockCode;
-                                    // Trigger change event manually
-                                    document.getElementById('globalSelectorLeft').dispatchEvent(new Event('change'));
+                    const w = canvas.width = canvas.parentElement.offsetWidth;
+                    const h = canvas.height = canvas.parentElement.offsetHeight;
 
-                                    // Smooth scroll to details
-                                    document.getElementById('globalSelectorLeft').scrollIntoView({ behavior: 'smooth', block: 'center' });
-                                }
-                            }
-                        }
+                    // Clear Canvas
+                    ctx.fillStyle = 'white';
+                    ctx.fillRect(0, 0, w, h);
+
+                    // Config
+                    const padding = { top: 40, right: 40, bottom: 40, left: 60 };
+                    const graphW = w - padding.left - padding.right;
+                    const graphH = h - padding.top - padding.bottom;
+
+                    // Scaling Functions
+                    const maxX = 40; // Max Attack Rate
+                    const maxY = 1000; // Max Loss
+                    const scaleX = (val) => padding.left + (val / maxX) * graphW;
+                    const scaleY = (val) => (h - padding.bottom) - (val / maxY) * graphH;
+
+                    // 1. Draw Zones (Background)
+                    const xThreshold = scaleX(10);
+                    const yThreshold = scaleY(100);
+
+                    // Draw Zone: Low Risk (Green)
+                    ctx.fillStyle = 'rgba(16, 185, 129, 0.1)';
+                    ctx.fillRect(padding.left, yThreshold, xThreshold - padding.left, (h - padding.bottom) - yThreshold);
+
+                    // Draw Zone: High Risk (Red)
+                    ctx.fillStyle = 'rgba(239, 68, 68, 0.1)';
+                    ctx.fillRect(xThreshold, padding.top, (w - padding.right) - xThreshold, yThreshold - padding.top);
+
+                    // Draw Zone: Warning (Yellow - Mixed)
+                    ctx.fillStyle = 'rgba(234, 179, 8, 0.1)';
+                    // Top Left (High Loss, Low AR)
+                    ctx.fillRect(padding.left, padding.top, xThreshold - padding.left, yThreshold - padding.top);
+                    // Bottom Right (Low Loss, High AR)
+                    ctx.fillRect(xThreshold, yThreshold, (w - padding.right) - xThreshold, (h - padding.bottom) - yThreshold);
+
+                    // 2. Draw Axes
+                    ctx.beginPath();
+                    ctx.strokeStyle = '#cbd5e1';
+                    ctx.lineWidth = 2;
+                    // Y Axis
+                    ctx.moveTo(padding.left, padding.top);
+                    ctx.lineTo(padding.left, h - padding.bottom);
+                    // X Axis
+                    ctx.lineTo(w - padding.right, h - padding.bottom);
+                    ctx.stroke();
+
+                    // 3. Draw Labels
+                    ctx.fillStyle = '#64748b';
+                    ctx.font = 'bold 10px sans-serif';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'top';
+                    ctx.fillText("ATTACK RATE (%)", padding.left + graphW / 2, h - 20);
+
+                    ctx.save();
+                    ctx.translate(20, padding.top + graphH / 2);
+                    ctx.rotate(-Math.PI / 2);
+                    ctx.textAlign = 'center';
+                    ctx.fillText("POTENTIAL LOSS (Juta Rp)", 0, 0);
+                    ctx.restore();
+
+                    // Grid Lines & Ticks (Simple)
+                    ctx.strokeStyle = '#e2e8f0';
+                    ctx.lineWidth = 1;
+                    ctx.textBaseline = 'middle';
+                    ctx.textAlign = 'right';
+                    // Y Ticks
+                    for (let i = 0; i <= 5; i++) {
+                        let val = i * 200;
+                        let yPos = scaleY(val);
+                        ctx.fillStyle = '#94a3b8';
+                        ctx.fillText(val, padding.left - 10, yPos);
+                        ctx.beginPath(); ctx.moveTo(padding.left, yPos); ctx.lineTo(w - padding.right, yPos); ctx.stroke();
+                    }
+                    // X Ticks
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'top';
+                    for (let i = 0; i <= 4; i++) {
+                        let val = i * 10;
+                        let xPos = scaleX(val);
+                        ctx.fillStyle = '#94a3b8';
+                        ctx.fillText(val, xPos, h - padding.bottom + 5);
+                        ctx.beginPath(); ctx.moveTo(xPos, padding.top); ctx.lineTo(xPos, h - padding.bottom); ctx.stroke();
+                    }
+
+                    // 4. PLOT POINTS
+                    points.forEach(p => {
+                        const px = scaleX(p.x);
+                        const py = scaleY(p.y);
+
+                        // Color Logic
+                        ctx.beginPath();
+                        ctx.arc(px, py, 6, 0, 2 * Math.PI); // Radius 6
+
+                        if (p.x > 15 || p.y > 500) ctx.fillStyle = '#ef4444'; // Red
+                        else if (p.x > 5) ctx.fillStyle = '#facc15'; // Yellow
+                        else ctx.fillStyle = '#10b981'; // Green
+
+                        ctx.fill();
+                        ctx.strokeStyle = 'white';
+                        ctx.lineWidth = 2;
+                        ctx.stroke();
                     });
+
+                    console.log("✅ NATIVE CANVAS RENDER COMPLETE");
+
+                    try {
+                        // Empty catch to match structure replaced
+                    } catch (err) { }
                 }
 
+
+
+
+
+
+
+
+
                 function updateRiskMatrix() {
+                    window.updateRiskMatrix = updateRiskMatrix;
                     if (!window.riskChart) return;
 
                     const newPoints = Object.values(BLOCKS_DATA).map(b => {
@@ -3427,7 +3383,78 @@
                         // Auto Print
                         setTimeout(() => { window.print(); }, 1000);
                     <\/script>
-                </body>
+                
+<script>
+// Likelihood Analysis Logic
+function updateLikelihoodMetrics(blockData) {
+    if (!blockData) return;
+    const ar = blockData.arNdre || 0;
+    const sph = blockData.sph || 0;
+    const arSlider = document.getElementById('arWeightSlider');
+    const sphSlider = document.getElementById('sphModifierSlider');
+    const arWeight = arSlider ? parseFloat(arSlider.value) : 1.0;
+    const sphModifier = sphSlider ? parseFloat(sphSlider.value) : 1.0;
+    
+    let score = 0;
+    if (ar >= 5) score = 75 + (ar - 5) * 5;
+    else if (ar >= 2) score = 40 + (ar - 2) * 10;
+    else score = ar * 20;
+    score = score * arWeight;
+    let sphBonus = (sph > 130 ? 10 : (sph > 120 ? 5 : 0)) * sphModifier;
+    score = Math.min(95, Math.max(0, score + sphBonus));
+    
+    const scoreEl = document.getElementById('likelihoodScore');
+    const barEl = document.getElementById('likelihoodBar');
+    if (scoreEl) scoreEl.textContent = Math.round(score);
+    if (barEl) barEl.style.width = score + '%';
+    
+    let months = 0;
+    if (sph > 100) {
+        const deficit = sph - 100;
+        const decline = Math.max(ar * 0.5, 0.1);
+        months = Math.ceil(deficit / decline);
+    }
+    months = Math.max(1, Math.min(36, months));
+    const timeEl = document.getElementById('timeToCritical');
+    if (timeEl) timeEl.textContent = months;
+}
+
+window.addEventListener('load', function() {
+    console.log("ISO 31000 Dashboard Logic Loaded");
+    const toggleBtn = document.getElementById('toggleFormulaInfo');
+    if (toggleBtn) toggleBtn.addEventListener('click', () => document.getElementById('formulaExplanation').classList.toggle('hidden'));
+    
+    const arSlider = document.getElementById('arWeightSlider');
+    if (arSlider) arSlider.addEventListener('input', function() {
+        const val = document.getElementById('arWeightValue');
+        if (val) val.textContent = parseFloat(this.value).toFixed(1) + 'x';
+    });
+    
+    const sphSlider = document.getElementById('sphModifierSlider');
+    if (sphSlider) sphSlider.addEventListener('input', function() {
+        const val = document.getElementById('sphModifierValue');
+        if (val) val.textContent = parseFloat(this.value).toFixed(1) + 'x';
+    });
+    
+    const recalcBtn = document.getElementById('recalculateLikelihood');
+    if (recalcBtn) recalcBtn.addEventListener('click', function() {
+        const sel = document.getElementById('globalSelectorLeft');
+        if (sel && sel.value && typeof BLOCKS_DATA !== 'undefined') updateLikelihoodMetrics(BLOCKS_DATA[sel.value]);
+    });
+    
+    // Attach listener to global selector to trigger likelihood update as well
+    const sel = document.getElementById('globalSelectorLeft');
+    if (sel) {
+        sel.addEventListener('change', function() {
+            if (this.value && typeof BLOCKS_DATA !== 'undefined') {
+                updateLikelihoodMetrics(BLOCKS_DATA[this.value]);
+            }
+        });
+    }
+});
+</script>
+
+</body>
                 </html>
             `);
                 printWin.document.close();
@@ -3512,6 +3539,126 @@
                 }).join('');
             }
         </script>
+
+        <!-- AUTO-START SCRIPT FOR RISK MATRIX -->
+        <script>
+            (function () {
+                console.log('🔄 Attaching Auto-Start for Risk Matrix...');
+
+                let attempts = 0;
+                const maxAttempts = 20; // 10 seconds max
+
+                const checkAndRun = setInterval(() => {
+                    attempts++;
+
+                    // 1. Check Function Check
+                    const fnReady = typeof window.initRiskMatrix === 'function';
+
+                    // 2. Check Data Check (Safer)
+                    let dataReady = false;
+                    let dataCount = 0;
+                    try {
+                        // Check global variable directly, not as window property (handles const/let)
+                        if (typeof BLOCKS_DATA !== 'undefined' && BLOCKS_DATA) {
+                            dataCount = Object.keys(BLOCKS_DATA).length;
+                            if (dataCount > 0) dataReady = true;
+                        } else if (window.BLOCKS_DATA) {
+                            // Fallback to window property
+                            dataCount = Object.keys(window.BLOCKS_DATA).length;
+                            if (dataCount > 0) dataReady = true;
+                        }
+                    } catch (e) {
+                        // Ignore ReferenceError if BLOCKS_DATA is not defined
+                    }
+
+                    if (fnReady && dataReady) {
+                        console.log(`✅ Dependencies ready (Data: ${dataCount} items). Executing initRiskMatrix()...`);
+                        window.initRiskMatrix();
+                        clearInterval(checkAndRun);
+                    } else {
+                        if (attempts >= maxAttempts) {
+                            console.error(`❌ Failed to auto-start Risk Matrix: Timeout. Fn=${fnReady}, Data=${dataReady} (${dataCount})`);
+                            clearInterval(checkAndRun);
+                        } else {
+                            // Only log every 2 seconds to reduce noise
+                            if (attempts % 4 === 0) console.log(`⏳ Waiting... Fn=${fnReady}, Data=${dataReady} (${attempts}/${maxAttempts})`);
+                        }
+                    }
+                }, 500);
+            })();
+        </script>
+
+
+<script>
+// Likelihood Analysis Logic
+function updateLikelihoodMetrics(blockData) {
+    if (!blockData) return;
+    const ar = blockData.arNdre || 0;
+    const sph = blockData.sph || 0;
+    const arSlider = document.getElementById('arWeightSlider');
+    const sphSlider = document.getElementById('sphModifierSlider');
+    const arWeight = arSlider ? parseFloat(arSlider.value) : 1.0;
+    const sphModifier = sphSlider ? parseFloat(sphSlider.value) : 1.0;
+    
+    let score = 0;
+    if (ar >= 5) score = 75 + (ar - 5) * 5;
+    else if (ar >= 2) score = 40 + (ar - 2) * 10;
+    else score = ar * 20;
+    score = score * arWeight;
+    let sphBonus = (sph > 130 ? 10 : (sph > 120 ? 5 : 0)) * sphModifier;
+    score = Math.min(95, Math.max(0, score + sphBonus));
+    
+    const scoreEl = document.getElementById('likelihoodScore');
+    const barEl = document.getElementById('likelihoodBar');
+    if (scoreEl) scoreEl.textContent = Math.round(score);
+    if (barEl) barEl.style.width = score + '%';
+    
+    let months = 0;
+    if (sph > 100) {
+        const deficit = sph - 100;
+        const decline = Math.max(ar * 0.5, 0.1);
+        months = Math.ceil(deficit / decline);
+    }
+    months = Math.max(1, Math.min(36, months));
+    const timeEl = document.getElementById('timeToCritical');
+    if (timeEl) timeEl.textContent = months;
+}
+
+window.addEventListener('load', function() {
+    console.log("ISO 31000 Dashboard Logic Loaded");
+    const toggleBtn = document.getElementById('toggleFormulaInfo');
+    if (toggleBtn) toggleBtn.addEventListener('click', () => document.getElementById('formulaExplanation').classList.toggle('hidden'));
+    
+    const arSlider = document.getElementById('arWeightSlider');
+    if (arSlider) arSlider.addEventListener('input', function() {
+        const val = document.getElementById('arWeightValue');
+        if (val) val.textContent = parseFloat(this.value).toFixed(1) + 'x';
+    });
+    
+    const sphSlider = document.getElementById('sphModifierSlider');
+    if (sphSlider) sphSlider.addEventListener('input', function() {
+        const val = document.getElementById('sphModifierValue');
+        if (val) val.textContent = parseFloat(this.value).toFixed(1) + 'x';
+    });
+    
+    const recalcBtn = document.getElementById('recalculateLikelihood');
+    if (recalcBtn) recalcBtn.addEventListener('click', function() {
+        const sel = document.getElementById('globalSelectorLeft');
+        if (sel && sel.value && typeof BLOCKS_DATA !== 'undefined') updateLikelihoodMetrics(BLOCKS_DATA[sel.value]);
+    });
+    
+    // Attach listener to global selector to trigger likelihood update as well
+    const sel = document.getElementById('globalSelectorLeft');
+    if (sel) {
+        sel.addEventListener('change', function() {
+            if (this.value && typeof BLOCKS_DATA !== 'undefined') {
+                updateLikelihoodMetrics(BLOCKS_DATA[this.value]);
+            }
+        });
+    }
+});
+</script>
+
 </body>
 
 </html>

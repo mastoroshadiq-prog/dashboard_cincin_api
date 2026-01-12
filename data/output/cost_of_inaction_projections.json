@@ -1,0 +1,231 @@
+{
+  "total_blocks": 8,
+  "total_current_loss_juta": 1353.2999999999997,
+  "total_3yr_loss_juta": 6203.612999999999,
+  "projections_by_block": {
+    "D003A": {
+      "current": {
+        "ar": 7.2,
+        "gap_pct": -22.0,
+        "sph": 98,
+        "loss_juta": 176.8
+      },
+      "year1": {
+        "ar": 9.7,
+        "gap_pct": -27.0,
+        "sph": 88,
+        "loss_juta": 204.93
+      },
+      "year2": {
+        "ar": 12.7,
+        "gap_pct": -34.0,
+        "sph": 73,
+        "loss_juta": 258.06000000000006
+      },
+      "year3": {
+        "ar": 16.7,
+        "gap_pct": -54.0,
+        "sph": 53,
+        "loss_juta": 409.86
+      },
+      "total_3yr_loss": 872.8500000000001,
+      "avg_annual_loss": 290.95000000000005
+    },
+    "D004A": {
+      "current": {
+        "ar": 10.7,
+        "gap_pct": -20.3,
+        "sph": 119,
+        "loss_juta": 146.2
+      },
+      "year1": {
+        "ar": 13.2,
+        "gap_pct": -25.3,
+        "sph": 109,
+        "loss_juta": 166.98000000000002
+      },
+      "year2": {
+        "ar": 16.2,
+        "gap_pct": -32.3,
+        "sph": 94,
+        "loss_juta": 213.17999999999995
+      },
+      "year3": {
+        "ar": 20.2,
+        "gap_pct": -52.3,
+        "sph": 74,
+        "loss_juta": 345.18
+      },
+      "total_3yr_loss": 725.3399999999999,
+      "avg_annual_loss": 241.77999999999997
+    },
+    "D001A": {
+      "current": {
+        "ar": 7.5,
+        "gap_pct": -21.3,
+        "sph": 108,
+        "loss_juta": 182.3
+      },
+      "year1": {
+        "ar": 10.0,
+        "gap_pct": -26.3,
+        "sph": 98,
+        "loss_juta": 203.562
+      },
+      "year2": {
+        "ar": 13.0,
+        "gap_pct": -33.3,
+        "sph": 83,
+        "loss_juta": 257.74199999999996
+      },
+      "year3": {
+        "ar": 17.0,
+        "gap_pct": -53.3,
+        "sph": 63,
+        "loss_juta": 412.5419999999999
+      },
+      "total_3yr_loss": 873.8459999999999,
+      "avg_annual_loss": 291.282
+    },
+    "E003A": {
+      "current": {
+        "ar": 6.8,
+        "gap_pct": -31.4,
+        "sph": 99,
+        "loss_juta": 209.0
+      },
+      "year1": {
+        "ar": 9.3,
+        "gap_pct": -36.4,
+        "sph": 89,
+        "loss_juta": 235.87199999999999
+      },
+      "year2": {
+        "ar": 12.3,
+        "gap_pct": -43.4,
+        "sph": 74,
+        "loss_juta": 281.23199999999997
+      },
+      "year3": {
+        "ar": 16.3,
+        "gap_pct": -63.4,
+        "sph": 54,
+        "loss_juta": 410.83200000000005
+      },
+      "total_3yr_loss": 927.9359999999999,
+      "avg_annual_loss": 309.31199999999995
+    },
+    "E001A": {
+      "current": {
+        "ar": 6.4,
+        "gap_pct": -23.7,
+        "sph": 95,
+        "loss_juta": 178.9
+      },
+      "year1": {
+        "ar": 8.9,
+        "gap_pct": -28.7,
+        "sph": 85,
+        "loss_juta": 193.72499999999997
+      },
+      "year2": {
+        "ar": 11.9,
+        "gap_pct": -35.7,
+        "sph": 70,
+        "loss_juta": 240.97500000000002
+      },
+      "year3": {
+        "ar": 15.9,
+        "gap_pct": -55.7,
+        "sph": 50,
+        "loss_juta": 375.975
+      },
+      "total_3yr_loss": 810.675,
+      "avg_annual_loss": 270.22499999999997
+    },
+    "E002A": {
+      "current": {
+        "ar": 8.3,
+        "gap_pct": -26.7,
+        "sph": 133,
+        "loss_juta": 189.5
+      },
+      "year1": {
+        "ar": 10.8,
+        "gap_pct": -31.7,
+        "sph": 123,
+        "loss_juta": 211.12199999999999
+      },
+      "year2": {
+        "ar": 13.8,
+        "gap_pct": -38.7,
+        "sph": 108,
+        "loss_juta": 257.742
+      },
+      "year3": {
+        "ar": 17.8,
+        "gap_pct": -58.7,
+        "sph": 88,
+        "loss_juta": 390.94200000000006
+      },
+      "total_3yr_loss": 859.806,
+      "avg_annual_loss": 286.60200000000003
+    },
+    "F002A": {
+      "current": {
+        "ar": 8.1,
+        "gap_pct": -33.0,
+        "sph": 132,
+        "loss_juta": 168.0
+      },
+      "year1": {
+        "ar": 10.6,
+        "gap_pct": -38.0,
+        "sph": 122,
+        "loss_juta": 173.28
+      },
+      "year2": {
+        "ar": 13.6,
+        "gap_pct": -45.0,
+        "sph": 107,
+        "loss_juta": 205.2
+      },
+      "year3": {
+        "ar": 17.6,
+        "gap_pct": -65.0,
+        "sph": 87,
+        "loss_juta": 296.4
+      },
+      "total_3yr_loss": 674.88,
+      "avg_annual_loss": 224.96
+    },
+    "F004A": {
+      "current": {
+        "ar": 7.4,
+        "gap_pct": -26.1,
+        "sph": 127,
+        "loss_juta": 102.6
+      },
+      "year1": {
+        "ar": 9.9,
+        "gap_pct": -31.1,
+        "sph": 117,
+        "loss_juta": 111.96000000000001
+      },
+      "year2": {
+        "ar": 12.9,
+        "gap_pct": -38.1,
+        "sph": 102,
+        "loss_juta": 137.16
+      },
+      "year3": {
+        "ar": 16.9,
+        "gap_pct": -58.1,
+        "sph": 82,
+        "loss_juta": 209.16
+      },
+      "total_3yr_loss": 458.28,
+      "avg_annual_loss": 152.76
+    }
+  }
+}

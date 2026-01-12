@@ -334,6 +334,36 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- SPH STATUS INDICATOR -->
+                <div class="mt-6 pt-6 border-t border-indigo-500/20 relative z-10">
+                    <div class="bg-black/30 p-4 rounded-xl border border-indigo-500/20">
+                        <div class="flex items-center justify-between mb-3">
+                            <div class="flex items-center gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-indigo-400">
+                                    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                                    <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+                                    <line x1="12" y1="22.08" x2="12" y2="12"/>
+                                </svg>
+                                <span class="text-[9px] font-bold text-indigo-200/60 uppercase">Status Kerapatan</span>
+                            </div>
+                            <span class="text-xs font-black" id="sphStatusBadgeLeft">--</span>
+                        </div>
+                        
+                        <!-- Progress Bar -->
+                        <div class="relative h-3 bg-slate-800 rounded-full overflow-hidden mb-2">
+                            <div id="sphProgressLeft" class="h-full transition-all duration-500 rounded-full" style="width: 0%"></div>
+                        </div>
+                        
+                        <!-- Markers -->
+                        <div class="flex justify-between text-[8px] text-slate-500">
+                            <span>Kritis (&lt;100)</span>
+                            <span>Optimal (130-140)</span>
+                        </div>
+                    </div>
+                </div>
+
+
             </div>
 
             <!-- Risk Control Tower (Summary) -->
@@ -384,560 +414,6 @@
                     id="riskWatchlistContainer">
                     <div class="text-center text-xs text-slate-500 py-4 italic">Loading Risk Data...</div>
                 </div>
-
-                <!-- ============================================ -->
-                
-                <!-- ============================================ -->
-                <!-- COST OF INACTION WARNING PANEL (CORRECTED) -->
-                <!-- ============================================ -->
-                <div class="mt-8 p-6 bg-gradient-to-br from-rose-900/40 to-orange-900/40 rounded-2xl border-2 border-rose-500 shadow-2xl relative overflow-hidden">
-                    <div class="absolute inset-0 opacity-5" style="background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, currentColor 10px, currentColor 20px);"></div>
-                    
-                    <div class="relative z-10">
-                        <div class="flex items-center gap-3 mb-4">
-                            <div class="w-12 h-12 bg-rose-600 rounded-xl flex items-center justify-center shadow-lg animate-pulse">
-                                <span class="text-2xl">⚠️</span>
-                            </div>
-                            <div>
-                                <h3 class="text-xl font-black text-white uppercase tracking-wider">URGENT: Cost of Inaction</h3>
-                                <p class="text-rose-300 text-sm font-semibold">8 Critical Blocks Require Immediate Attention</p>
-                            </div>
-                        </div>
-                        
-                        <!-- Financial Impact Grid -->
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-                            <div class="bg-black/30 backdrop-blur-sm p-4 rounded-xl border border-rose-500/30">
-                                <div class="text-xs text-rose-300 font-bold uppercase mb-1">Current Loss (Year 0)</div>
-                                <div class="text-3xl font-black text-white">Rp 1,353</div>
-                                <div class="text-xs text-rose-400 mt-1">Juta / year</div>
-                            </div>
-                            
-                            <div class="bg-black/30 backdrop-blur-sm p-4 rounded-xl border border-orange-500/30">
-                                <div class="text-xs text-orange-300 font-bold uppercase mb-1">3-Year Projected Loss</div>
-                                <div class="text-3xl font-black text-white">Rp 6,204</div>
-                                <div class="text-xs text-orange-400 mt-1">Juta (with degradation)</div>
-                            </div>
-                            
-                            <div class="bg-black/30 backdrop-blur-sm p-4 rounded-xl border border-emerald-500/30">
-                                <div class="text-xs text-emerald-300 font-bold uppercase mb-1">Treatment Investment</div>
-                                <div class="text-3xl font-black text-white">Rp 400</div>
-                                <div class="text-xs text-emerald-400 mt-1">Juta (one-time)</div>
-                            </div>
-                            
-                            <div class="bg-black/30 backdrop-blur-sm p-4 rounded-xl border border-cyan-500/30">
-                                <div class="text-xs text-cyan-300 font-bold uppercase mb-1">Potential Savings</div>
-                                <div class="text-3xl font-black text-white">Rp 4,343</div>
-                                <div class="text-xs text-cyan-400 mt-1">Juta (3-year prevented)</div>
-                            </div>
-                        </div>
-                        
-                        <!-- ROI Metrics -->
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-                            <div class="bg-gradient-to-r from-rose-600/20 to-orange-600/20 p-4 rounded-xl border border-yellow-500/50">
-                                <div class="text-xs text-yellow-300 font-bold uppercase mb-1">Return on Investment</div>
-                                <div class="text-4xl font-black text-yellow-400">986%</div>
-                                <div class="text-xs text-yellow-300 mt-1">Over 3 years</div>
-                            </div>
-                            
-                            <div class="bg-gradient-to-r from-orange-600/20 to-rose-600/20 p-4 rounded-xl border border-green-500/50">
-                                <div class="text-xs text-green-300 font-bold uppercase mb-1">Payback Period</div>
-                                <div class="text-4xl font-black text-green-400">3.3</div>
-                                <div class="text-xs text-green-300 mt-1">Months</div>
-                            </div>
-                            
-                            <div class="bg-gradient-to-r from-rose-600/20 to-purple-600/20 p-4 rounded-xl border border-red-500/50">
-                                <div class="text-xs text-red-300 font-bold uppercase mb-1">Action Window</div>
-                                <div class="text-4xl font-black text-red-400">6</div>
-                                <div class="text-xs text-red-300 mt-1">Months before irreversible</div>
-                            </div>
-                        </div>
-                        
-                        <!-- Degradation Note -->
-                        <div class="mb-6 p-4 bg-yellow-900/20 border border-yellow-600/40 rounded-xl">
-                            <p class="text-sm text-yellow-200">
-                                <strong>📉 Degradation Model:</strong> Projected loss includes realistic deterioration - 
-                                Attack Rate increases (+2.5-4% yearly), Yield Gap worsens (-5 to -10%), 
-                                SPH drops (-10 to -20 trees/ha yearly) if no treatment applied.
-                            </p>
-                        </div>
-                        
-                        <!-- Critical Blocks List (Clickable) -->
-                        <div class="mt-6">
-                            <div class="text-sm font-bold text-white uppercase mb-3">
-                                🔥 Critical Blocks (Click for Detail):
-                            </div>
-                            <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
-
-                                <div onclick="showBlockDetail('E003A')" 
-                                     class="bg-rose-900/30 border border-rose-600/50 rounded-lg p-2 hover:bg-rose-800/50 hover:border-rose-500 hover:scale-105 transition-all cursor-pointer">
-                                    <div class="text-xs font-black text-white">E003A</div>
-                                    <div class="text-[10px] text-rose-300">Now: Rp 209 Jt</div>
-                                    <div class="text-[10px] text-orange-300">3yr: Rp 928 Jt</div>
-                                </div>
-
-                                <div onclick="showBlockDetail('D001A')" 
-                                     class="bg-rose-900/30 border border-rose-600/50 rounded-lg p-2 hover:bg-rose-800/50 hover:border-rose-500 hover:scale-105 transition-all cursor-pointer">
-                                    <div class="text-xs font-black text-white">D001A</div>
-                                    <div class="text-[10px] text-rose-300">Now: Rp 182 Jt</div>
-                                    <div class="text-[10px] text-orange-300">3yr: Rp 874 Jt</div>
-                                </div>
-
-                                <div onclick="showBlockDetail('D003A')" 
-                                     class="bg-rose-900/30 border border-rose-600/50 rounded-lg p-2 hover:bg-rose-800/50 hover:border-rose-500 hover:scale-105 transition-all cursor-pointer">
-                                    <div class="text-xs font-black text-white">D003A</div>
-                                    <div class="text-[10px] text-rose-300">Now: Rp 177 Jt</div>
-                                    <div class="text-[10px] text-orange-300">3yr: Rp 873 Jt</div>
-                                </div>
-
-                                <div onclick="showBlockDetail('E002A')" 
-                                     class="bg-rose-900/30 border border-rose-600/50 rounded-lg p-2 hover:bg-rose-800/50 hover:border-rose-500 hover:scale-105 transition-all cursor-pointer">
-                                    <div class="text-xs font-black text-white">E002A</div>
-                                    <div class="text-[10px] text-rose-300">Now: Rp 190 Jt</div>
-                                    <div class="text-[10px] text-orange-300">3yr: Rp 860 Jt</div>
-                                </div>
-
-                                <div onclick="showBlockDetail('E001A')" 
-                                     class="bg-rose-900/30 border border-rose-600/50 rounded-lg p-2 hover:bg-rose-800/50 hover:border-rose-500 hover:scale-105 transition-all cursor-pointer">
-                                    <div class="text-xs font-black text-white">E001A</div>
-                                    <div class="text-[10px] text-rose-300">Now: Rp 179 Jt</div>
-                                    <div class="text-[10px] text-orange-300">3yr: Rp 811 Jt</div>
-                                </div>
-
-                                <div onclick="showBlockDetail('D004A')" 
-                                     class="bg-rose-900/30 border border-rose-600/50 rounded-lg p-2 hover:bg-rose-800/50 hover:border-rose-500 hover:scale-105 transition-all cursor-pointer">
-                                    <div class="text-xs font-black text-white">D004A</div>
-                                    <div class="text-[10px] text-rose-300">Now: Rp 146 Jt</div>
-                                    <div class="text-[10px] text-orange-300">3yr: Rp 725 Jt</div>
-                                </div>
-
-                                <div onclick="showBlockDetail('F002A')" 
-                                     class="bg-rose-900/30 border border-rose-600/50 rounded-lg p-2 hover:bg-rose-800/50 hover:border-rose-500 hover:scale-105 transition-all cursor-pointer">
-                                    <div class="text-xs font-black text-white">F002A</div>
-                                    <div class="text-[10px] text-rose-300">Now: Rp 168 Jt</div>
-                                    <div class="text-[10px] text-orange-300">3yr: Rp 675 Jt</div>
-                                </div>
-
-                                <div onclick="showBlockDetail('F004A')" 
-                                     class="bg-rose-900/30 border border-rose-600/50 rounded-lg p-2 hover:bg-rose-800/50 hover:border-rose-500 hover:scale-105 transition-all cursor-pointer">
-                                    <div class="text-xs font-black text-white">F004A</div>
-                                    <div class="text-[10px] text-rose-300">Now: Rp 103 Jt</div>
-                                    <div class="text-[10px] text-orange-300">3yr: Rp 458 Jt</div>
-                                </div>
-
-                            </div>
-                        </div>
-                        
-                        <!-- Action CTA -->
-                        <div class="mt-6 p-4 bg-gradient-to-r from-rose-600 to-orange-600 rounded-xl text-center">
-                            <p class="text-white font-black text-lg mb-2">⏰ Immediate Action Required</p>
-                            <p class="text-white/90 text-sm">Treatment decision must be made within 30 days to prevent exponential loss escalation</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ============================================ -->
-                <!-- MODAL: BLOCK DETAIL POPUP -->
-                <!-- ============================================ -->
-                <div id="blockDetailModal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-                    <div class="bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl border-2 border-rose-500 max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">
-                        <!-- Modal Header -->
-                        <div class="sticky top-0 bg-gradient-to-r from-rose-600 to-orange-600 p-6 border-b border-white/10">
-                            <div class="flex items-center justify-between">
-                                <div>
-                                    <h2 class="text-2xl font-black text-white" id="modalBlockCode">BLOK XXX</h2>
-                                    <p class="text-white/80 text-sm">Cost of Inaction Detail Analysis</p>
-                                </div>
-                                <button onclick="closeBlockDetail()" class="text-white hover:text-rose-200 text-3xl font-bold">×</button>
-                            </div>
-                        </div>
-                        
-                        <!-- Modal Body -->
-                        <div class="p-6 space-y-6">
-                            <!-- Financial Summary -->
-                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                                <div class="bg-black/40 p-4 rounded-xl border border-rose-500/30">
-                                    <div class="text-xs text-rose-300 font-bold uppercase mb-1">Current Loss</div>
-                                    <div class="text-2xl font-black text-white" id="modalCurrentLoss">--</div>
-                                    <div class="text-xs text-rose-400">Juta/year</div>
-                                </div>
-                                <div class="bg-black/40 p-4 rounded-xl border border-orange-500/30">
-                                    <div class="text-xs text-orange-300 font-bold uppercase mb-1">3-Year Total</div>
-                                    <div class="text-2xl font-black text-white" id="modal3YrLoss">--</div>
-                                    <div class="text-xs text-orange-400">Juta</div>
-                                </div>
-                                <div class="bg-black/40 p-4 rounded-xl border border-emerald-500/30">
-                                    <div class="text-xs text-emerald-300 font-bold uppercase mb-1">Treatment</div>
-                                    <div class="text-2xl font-black text-white">Rp 50</div>
-                                    <div class="text-xs text-emerald-400">Juta</div>
-                                </div>
-                                <div class="bg-black/40 p-4 rounded-xl border border-cyan-500/30">
-                                    <div class="text-xs text-cyan-300 font-bold uppercase mb-1">ROI</div>
-                                    <div class="text-2xl font-black text-white" id="modalROI">--</div>
-                                    <div class="text-xs text-cyan-400">%</div>
-                                </div>
-                            </div>
-                            
-                            <!-- Degradation Timeline Table -->
-                            <div class="bg-black/30 p-5 rounded-xl border border-white/10">
-                                <h3 class="text-lg font-black text-white mb-4">📉 Degradation Timeline (No Treatment)</h3>
-                                <div class="overflow-x-auto">
-                                    <table class="w-full text-sm">
-                                        <thead>
-                                            <tr class="border-b border-white/20">
-                                                <th class="text-left text-rose-300 font-bold p-2">Parameter</th>
-                                                <th class="text-center text-white font-bold p-2">Year 0<br/><span class="text-xs text-gray-400">(Current)</span></th>
-                                                <th class="text-center text-orange-300 font-bold p-2">Year 1</th>
-                                                <th class="text-center text-yellow-300 font-bold p-2">Year 2</th>
-                                                <th class="text-center text-red-300 font-bold p-2">Year 3</th>
-                                                <th class="text-center text-cyan-300 font-bold p-2">Change</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="modalDegradationTable">
-                                            <!-- Will be populated by JavaScript -->
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            
-                            <!-- Treatment Impact -->
-                            <div class="bg-gradient-to-r from-emerald-900/30 to-green-900/30 p-5 rounded-xl border border-emerald-500/50">
-                                <h3 class="text-lg font-black text-white mb-3">✅ Impact of Treatment</h3>
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    <div>
-                                        <p class="text-sm text-emerald-200 mb-2"><strong>Prevented Loss (70% eff):</strong></p>
-                                        <p class="text-2xl font-black text-emerald-400" id="modalPreventedLoss">--</p>
-                                    </div>
-                                    <div>
-                                        <p class="text-sm text-green-200 mb-2"><strong>Net Benefit:</strong></p>
-                                        <p class="text-2xl font-black text-green-400" id="modalNetBenefit">--</p>
-                                    </div>
-                                </div>
-                                <p class="text-xs text-emerald-300 mt-3 italic">
-                                    Treatment includes: Isolation trenching (4×4m), systemic fungicide, sanitation, and drainage improvement.
-                                </p>
-                            </div>
-                        </div>
-                        
-                        <!-- Modal Footer -->
-                        <div class="bg-slate-800/50 p-4 border-t border-white/10 text-center">
-                            <button onclick="closeBlockDetail()" class="px-6 py-2 bg-rose-600 hover:bg-rose-700 text-white font-bold rounded-lg transition-all">
-                                Close
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <script>
-                // Cost of Inaction Projection Data (Embedded)
-                const COST_PROJECTIONS = {
-    "D003A": {
-        "current": {
-            "ar": 7.2,
-            "gap_pct": -22.0,
-            "sph": 98,
-            "loss_juta": 176.8
-        },
-        "year1": {
-            "ar": 9.7,
-            "gap_pct": -27.0,
-            "sph": 88,
-            "loss_juta": 204.93
-        },
-        "year2": {
-            "ar": 12.7,
-            "gap_pct": -34.0,
-            "sph": 73,
-            "loss_juta": 258.06000000000006
-        },
-        "year3": {
-            "ar": 16.7,
-            "gap_pct": -54.0,
-            "sph": 53,
-            "loss_juta": 409.86
-        },
-        "total_3yr_loss": 872.8500000000001,
-        "avg_annual_loss": 290.95000000000005
-    },
-    "D004A": {
-        "current": {
-            "ar": 10.7,
-            "gap_pct": -20.3,
-            "sph": 119,
-            "loss_juta": 146.2
-        },
-        "year1": {
-            "ar": 13.2,
-            "gap_pct": -25.3,
-            "sph": 109,
-            "loss_juta": 166.98000000000002
-        },
-        "year2": {
-            "ar": 16.2,
-            "gap_pct": -32.3,
-            "sph": 94,
-            "loss_juta": 213.17999999999995
-        },
-        "year3": {
-            "ar": 20.2,
-            "gap_pct": -52.3,
-            "sph": 74,
-            "loss_juta": 345.18
-        },
-        "total_3yr_loss": 725.3399999999999,
-        "avg_annual_loss": 241.77999999999997
-    },
-    "D001A": {
-        "current": {
-            "ar": 7.5,
-            "gap_pct": -21.3,
-            "sph": 108,
-            "loss_juta": 182.3
-        },
-        "year1": {
-            "ar": 10.0,
-            "gap_pct": -26.3,
-            "sph": 98,
-            "loss_juta": 203.562
-        },
-        "year2": {
-            "ar": 13.0,
-            "gap_pct": -33.3,
-            "sph": 83,
-            "loss_juta": 257.74199999999996
-        },
-        "year3": {
-            "ar": 17.0,
-            "gap_pct": -53.3,
-            "sph": 63,
-            "loss_juta": 412.5419999999999
-        },
-        "total_3yr_loss": 873.8459999999999,
-        "avg_annual_loss": 291.282
-    },
-    "E003A": {
-        "current": {
-            "ar": 6.8,
-            "gap_pct": -31.4,
-            "sph": 99,
-            "loss_juta": 209.0
-        },
-        "year1": {
-            "ar": 9.3,
-            "gap_pct": -36.4,
-            "sph": 89,
-            "loss_juta": 235.87199999999999
-        },
-        "year2": {
-            "ar": 12.3,
-            "gap_pct": -43.4,
-            "sph": 74,
-            "loss_juta": 281.23199999999997
-        },
-        "year3": {
-            "ar": 16.3,
-            "gap_pct": -63.4,
-            "sph": 54,
-            "loss_juta": 410.83200000000005
-        },
-        "total_3yr_loss": 927.9359999999999,
-        "avg_annual_loss": 309.31199999999995
-    },
-    "E001A": {
-        "current": {
-            "ar": 6.4,
-            "gap_pct": -23.7,
-            "sph": 95,
-            "loss_juta": 178.9
-        },
-        "year1": {
-            "ar": 8.9,
-            "gap_pct": -28.7,
-            "sph": 85,
-            "loss_juta": 193.72499999999997
-        },
-        "year2": {
-            "ar": 11.9,
-            "gap_pct": -35.7,
-            "sph": 70,
-            "loss_juta": 240.97500000000002
-        },
-        "year3": {
-            "ar": 15.9,
-            "gap_pct": -55.7,
-            "sph": 50,
-            "loss_juta": 375.975
-        },
-        "total_3yr_loss": 810.675,
-        "avg_annual_loss": 270.22499999999997
-    },
-    "E002A": {
-        "current": {
-            "ar": 8.3,
-            "gap_pct": -26.7,
-            "sph": 133,
-            "loss_juta": 189.5
-        },
-        "year1": {
-            "ar": 10.8,
-            "gap_pct": -31.7,
-            "sph": 123,
-            "loss_juta": 211.12199999999999
-        },
-        "year2": {
-            "ar": 13.8,
-            "gap_pct": -38.7,
-            "sph": 108,
-            "loss_juta": 257.742
-        },
-        "year3": {
-            "ar": 17.8,
-            "gap_pct": -58.7,
-            "sph": 88,
-            "loss_juta": 390.94200000000006
-        },
-        "total_3yr_loss": 859.806,
-        "avg_annual_loss": 286.60200000000003
-    },
-    "F002A": {
-        "current": {
-            "ar": 8.1,
-            "gap_pct": -33.0,
-            "sph": 132,
-            "loss_juta": 168.0
-        },
-        "year1": {
-            "ar": 10.6,
-            "gap_pct": -38.0,
-            "sph": 122,
-            "loss_juta": 173.28
-        },
-        "year2": {
-            "ar": 13.6,
-            "gap_pct": -45.0,
-            "sph": 107,
-            "loss_juta": 205.2
-        },
-        "year3": {
-            "ar": 17.6,
-            "gap_pct": -65.0,
-            "sph": 87,
-            "loss_juta": 296.4
-        },
-        "total_3yr_loss": 674.88,
-        "avg_annual_loss": 224.96
-    },
-    "F004A": {
-        "current": {
-            "ar": 7.4,
-            "gap_pct": -26.1,
-            "sph": 127,
-            "loss_juta": 102.6
-        },
-        "year1": {
-            "ar": 9.9,
-            "gap_pct": -31.1,
-            "sph": 117,
-            "loss_juta": 111.96000000000001
-        },
-        "year2": {
-            "ar": 12.9,
-            "gap_pct": -38.1,
-            "sph": 102,
-            "loss_juta": 137.16
-        },
-        "year3": {
-            "ar": 16.9,
-            "gap_pct": -58.1,
-            "sph": 82,
-            "loss_juta": 209.16
-        },
-        "total_3yr_loss": 458.28,
-        "avg_annual_loss": 152.76
-    }
-};
-                
-                // Show block detail modal
-                function showBlockDetail(blockCode) {
-                    const data = COST_PROJECTIONS[blockCode];
-                    if (!data) {
-                        alert('Data not found for block: ' + blockCode);
-                        return;
-                    }
-                    
-                    // Update modal content
-                    document.getElementById('modalBlockCode').textContent = 'BLOK ' + blockCode;
-                    document.getElementById('modalCurrentLoss').textContent =  'Rp ' + data.current.loss_juta.toFixed(0);
-                    document.getElementById('modal3YrLoss').textContent = 'Rp ' + data.total_3yr_loss.toFixed(0);
-                    
-                    // Calculate ROI for this block
-                    const treatment = 50;
-                    const prevented = data.total_3yr_loss * 0.70;
-                    const netBenefit = prevented - treatment;
-                    const roi = (netBenefit / treatment * 100).toFixed(0);
-                    
-                    document.getElementById('modalROI').textContent = roi;
-                    document.getElementById('modalPreventedLoss').textContent = 'Rp ' + prevented.toFixed(0) + ' Juta';
-                    document.getElementById('modalNetBenefit').textContent = 'Rp ' + netBenefit.toFixed(0) + ' Juta';
-                    
-                    // Build degradation table
-                    const tableHTML = `
-                        <tr class="border-b border-white/10">
-                            <td class="p-2 text-rose-200 font-semibold">Attack Rate</td>
-                            <td class="p-2 text-center text-white">${data.current.ar.toFixed(1)}%</td>
-                            <td class="p-2 text-center text-orange-200">${data.year1.ar.toFixed(1)}%</td>
-                            <td class="p-2 text-center text-yellow-200">${data.year2.ar.toFixed(1)}%</td>
-                            <td class="p-2 text-center text-red-200">${data.year3.ar.toFixed(1)}%</td>
-                            <td class="p-2 text-center text-cyan-200 font-bold">+${(data.year3.ar - data.current.ar).toFixed(1)}%</td>
-                        </tr>
-                        <tr class="border-b border-white/10">
-                            <td class="p-2 text-rose-200 font-semibold">Yield Gap</td>
-                            <td class="p-2 text-center text-white">${data.current.gap_pct.toFixed(1)}%</td>
-                            <td class="p-2 text-center text-orange-200">${data.year1.gap_pct.toFixed(1)}%</td>
-                            <td class="p-2 text-center text-yellow-200">${data.year2.gap_pct.toFixed(1)}%</td>
-                            <td class="p-2 text-center text-red-200">${data.year3.gap_pct.toFixed(1)}%</td>
-                            <td class="p-2 text-center text-cyan-200 font-bold">${(data.year3.gap_pct - data.current.gap_pct).toFixed(1)}%</td>
-                        </tr>
-                        <tr class="border-b border-white/10">
-                            <td class="p-2 text-rose-200 font-semibold">SPH (trees/ha)</td>
-                            <td class="p-2 text-center text-white">${data.current.sph.toFixed(0)}</td>
-                            <td class="p-2 text-center text-orange-200">${data.year1.sph.toFixed(0)}</td>
-                            <td class="p-2 text-center text-yellow-200">${data.year2.sph.toFixed(0)}</td>
-                            <td class="p-2 text-center text-red-200">${data.year3.sph.toFixed(0)}</td>
-                            <td class="p-2 text-center text-cyan-200 font-bold">${(data.year3.sph - data.current.sph).toFixed(0)} trees</td>
-                        </tr>
-                        <tr>
-                            <td class="p-2 text-rose-200 font-semibold">Loss (Juta)</td>
-                            <td class="p-2 text-center text-white font-bold">Rp ${data.current.loss_juta.toFixed(0)}</td>
-                            <td class="p-2 text-center text-orange-200 font-bold">Rp ${data.year1.loss_juta.toFixed(0)}</td>
-                            <td class="p-2 text-center text-yellow-200 font-bold">Rp ${data.year2.loss_juta.toFixed(0)}</td>
-                            <td class="p-2 text-center text-red-200 font-bold">Rp ${data.year3.loss_juta.toFixed(0)}</td>
-                            <td class="p-2 text-center text-cyan-200 font-bold">+Rp ${(data.year3.loss_juta - data.current.loss_juta).toFixed(0)}</td>
-                        </tr>
-                    `;
-                    
-                    document.getElementById('modalDegradationTable').innerHTML = tableHTML;
-                    
-                    // Show modal
-                    document.getElementById('blockDetailModal').classList.remove('hidden');
-                }
-                
-                // Close modal
-                function closeBlockDetail() {
-                    document.getElementById('blockDetailModal').classList.add('hidden');
-                }
-                
-                // Close on Escape key
-                document.addEventListener('keydown', function(e) {
-                    if (e.key === 'Escape') closeBlockDetail();
-                });
-                
-                // Close on background click
-                document.getElementById('blockDetailModal').addEventListener('click', function(e) {
-                    if (e.target === this) closeBlockDetail();
-                });
-                </script>
-
-
 
                 <!-- HIDDEN FOOTER (Preserved for structure safety) -->
                 <div class="hidden">
@@ -3511,7 +2987,62 @@
                 `;
                 }).join('');
             }
-        </script>
+        
+
+    // ============================================
+    // SPH STATUS UPDATE FUNCTION
+    // ============================================
+    function updateSPHStatus(blockData, side = 'Left') {
+        if (!blockData) return;
+        
+        const sphActual = blockData.sph || 0;
+        const sphStandard = 136;
+        const sphPercentage = (sphActual / sphStandard) * 100;
+        
+        // Determine status and color
+        let statusText = '';
+        let statusColor = '';
+        let progressColor = '';
+        
+        if (sphActual < 100) {
+            statusText = '🔴 KRITIS';
+            statusColor = 'text-red-400';
+            progressColor = 'bg-gradient-to-r from-red-600 to-red-500';
+        } else if (sphActual < 120) {
+            statusText = '🟠 RENDAH';
+            statusColor = 'text-orange-400';
+            progressColor = 'bg-gradient-to-r from-orange-600 to-orange-500';
+        } else if (sphActual < 130) {
+            statusText = '🟡 SEDANG';
+            statusColor = 'text-yellow-400';
+            progressColor = 'bg-gradient-to-r from-yellow-600 to-yellow-500';
+        } else if (sphActual <= 140) {
+            statusText = '🟢 OPTIMAL';
+            statusColor = 'text-emerald-400';
+            progressColor = 'bg-gradient-to-r from-emerald-600 to-emerald-500';
+        } else {
+            statusText = '🔵 TINGGI';
+            statusColor = 'text-blue-400';
+            progressColor = 'bg-gradient-to-r from-blue-600 to-blue-500';
+        }
+        
+        // Update status badge
+        const badgeElement = document.getElementById(`sphStatusBadge${side}`);
+        if (badgeElement) {
+            badgeElement.textContent = statusText;
+            badgeElement.className = `text-xs font-black ${statusColor}`;
+        }
+        
+        // Update progress bar
+        const progressElement = document.getElementById(`sphProgress${side}`);
+        if (progressElement) {
+            const clampedPercentage = Math.min(Math.max(sphPercentage, 0), 100);
+            progressElement.style.width = `${clampedPercentage}%`;
+            progressElement.className = `h-full transition-all duration-500 rounded-full ${progressColor}`;
+        }
+    }
+
+</script>
 </body>
 
 </html>

@@ -1,0 +1,33 @@
+﻿======================================================================
+DEBUGGING & FIXING SPH STATUS COMPONENT
+======================================================================
+
+1. File size: 179504 characters
+2. Found finSphLeft: 1 matches
+3. Found 10 closing divs after finSphLeft
+python : Traceback (most recent call last):
+At line:1 char:1
++ python fix_sph_status_debug.py 2>&1 | 
+Out-File -Encoding UTF8 debug_o ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified:  
+   (Traceback (most recent call last)::Stri  
+  ng) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandE 
+   rror
+ 
+  File "F:\PythonProjects\poac_cincin_api\das
+hboard-cincin-api\fix_sph_status_debug.py", 
+line 88, in <module>
+    print(f"4. \u2713 HTML Component 
+inserted at position {insert_pos}")
+  File 
+"C:\Python312\Lib\encodings\cp1252.py", line 
+19, in encode
+    return codecs.charmap_encode(input,self.e
+rrors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't 
+encode character '\u2713' in position 3: 
+character maps to <undefined>
