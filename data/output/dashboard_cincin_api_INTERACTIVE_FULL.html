@@ -2174,7 +2174,7 @@
 
                     // Update Summary
                     const elTotal = document.getElementById('summaryTotalLoss');
-                    if (elTotal) elTotal.textContent = (totalLoss / 1000).toFixed(1);
+                    if (elTotal) elTotal.textContent = (totalLoss / 1000).toFixed(2); // Changed from .toFixed(1) for consistency
 
                     const elCount = document.getElementById('summaryCriticalCount');
                     if (elCount) elCount.textContent = criticalCount;
@@ -3594,8 +3594,9 @@
                         <div class="bg-slate-900/50 p-4 rounded-lg font-mono text-sm text-cyan-300 mb-4">
                             Kerugian per Blok = Gap Yield (Ton/Ha) × Luas (Ha) × Harga TBS (Rp/Ton)<br />
                             <br />
-                            <em class="text-gray-400">(Lihat tabel breakdown di bawah untuk data actual per blok)</em><br />
-                            <br />
+                            Contoh: Blok D003A<br />
+                            = 4.66 Ton/Ha × 25.3 Ha × Rp 1,500,000/Ton<br />
+                            = Rp 176 Juta/tahun
                         </div>
                     </div>
 
