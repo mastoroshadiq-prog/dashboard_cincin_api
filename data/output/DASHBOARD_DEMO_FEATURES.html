@@ -2040,6 +2040,137 @@
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // ====== DATA ======
+        const BLOCKS_DATA = {
+            "D003A": { "block_code": "D003A", "attack_rate": 7.2, "sph": 98, "tt": 2009, "luas_ha": 25.3, "realisasi_ton_ha": 16.88, "potensi_ton_ha": 21.54, "gap_ton_ha": -4.66, "gap_pct": -21.6, "census_rate_pct": 3.8, "mitigation_cost_juta": 50, "loss_value_juta": 176.8, "projected_loss_3yr": 540, "status_narrative": "CRYPTIC COLLAPSE" },
+            "D004A": { "block_code": "D004A", "attack_rate": 10.7, "sph": 119, "tt": 2009, "luas_ha": 22, "realisasi_ton_ha": 17.45, "potensi_ton_ha": 21.88, "gap_ton_ha": -4.43, "gap_pct": -20.3, "census_rate_pct": 2.25, "mitigation_cost_juta": 50, "loss_value_juta": 146.2, "projected_loss_3yr": 540.9, "status_narrative": "CRYPTIC COLLAPSE" },
+            "D001A": { "block_code": "D001A", "attack_rate": 7.5, "sph": 108, "tt": 2009, "luas_ha": 25.8, "realisasi_ton_ha": 17.17, "potensi_ton_ha": 21.88, "gap_ton_ha": -4.71, "gap_pct": -21.5, "census_rate_pct": 2.38, "mitigation_cost_juta": 50, "loss_value_juta": 182.3, "projected_loss_3yr": 675, "status_narrative": "CRYPTIC COLLAPSE" },
+            "E002A": { "block_code": "E002A", "attack_rate": 8.3, "sph": 133, "tt": 2009, "luas_ha": 22.2, "realisasi_ton_ha": 15.63, "potensi_ton_ha": 21.32, "gap_ton_ha": -5.69, "gap_pct": -26.7, "census_rate_pct": 2.59, "mitigation_cost_juta": 50, "loss_value_juta": 189.5, "projected_loss_3yr": 701.1, "status_narrative": "CRYPTIC COLLAPSE" },
+            "F002A": { "block_code": "F002A", "attack_rate": 8.1, "sph": 132, "tt": 2009, "luas_ha": 15.2, "realisasi_ton_ha": 14.98, "potensi_ton_ha": 22.35, "gap_ton_ha": -7.37, "gap_pct": -33.0, "census_rate_pct": 2.51, "mitigation_cost_juta": 50, "loss_value_juta": 168.0, "projected_loss_3yr": 621, "status_narrative": "CRYPTIC COLLAPSE" },
+            "F004A": { "block_code": "F004A", "attack_rate": 7.4, "sph": 127, "tt": 2009, "luas_ha": 12, "realisasi_ton_ha": 16.3, "potensi_ton_ha": 22.0, "gap_ton_ha": -5.7, "gap_pct": -25.9, "census_rate_pct": 1.59, "mitigation_cost_juta": 50, "loss_value_juta": 102.6, "projected_loss_3yr": 379.6, "status_narrative": "CRYPTIC COLLAPSE" },
+            "E003A": { "block_code": "E003A", "attack_rate": 6.8, "sph": 99, "tt": 2009, "luas_ha": 21.6, "realisasi_ton_ha": 15.55, "potensi_ton_ha": 22.0, "gap_ton_ha": -6.45, "gap_pct": -29.3, "census_rate_pct": 2.12, "mitigation_cost_juta": 50, "loss_value_juta": 209.0, "projected_loss_3yr": 772.5, "status_narrative": "CRYPTIC COLLAPSE" },
+            "E001A": { "block_code": "E001A", "attack_rate": 6.4, "sph": 95, "tt": 2009, "luas_ha": 22.5, "realisasi_ton_ha": 16.7, "potensi_ton_ha": 22.0, "gap_ton_ha": -5.3, "gap_pct": -24.1, "census_rate_pct": 3.28, "mitigation_cost_juta": 50, "loss_value_juta": 178.9, "projected_loss_3yr": 661.5, "status_narrative": "CRYPTIC COLLAPSE" }
+        };
+
+        // ====== POPULATE PAPARAN RISK ======
+        function renderPaparanRisk() {
+            const container = document.getElementById('riskWatchlistContainer');
+            if (!container || !BLOCKS_DATA) return;
+
+            const sorted = Object.entries(BLOCKS_DATA).sort((a, b) => (b[1].attack_rate || 0) - (a[1].attack_rate || 0));
+            let html = '', totalLoss = 0, totalArea = 0;
+
+            sorted.forEach(([code, data]) => {
+                const loss = data.loss_value_juta || 0;
+                const ar = data.attack_rate || 0;
+                totalLoss += loss;
+                totalArea += (data.luas_ha || 0);
+                html += `<div class="bg-rose-900/40 p-3 rounded-xl border border-rose-500/30 hover:border-rose-400 transition-all cursor-pointer" onclick="loadBlockData('${code}')">
+                    <div class="flex justify-between items-center">
+                        <div><span class="text-white font-bold text-sm">${code}</span><span class="text-rose-300 text-xs ml-2">AR: ${ar.toFixed(1)}%</span></div>
+                        <span class="text-rose-200 text-sm">Rp ${loss.toFixed(1)} Jt</span>
+                    </div></div>`;
+            });
+            container.innerHTML = html;
+            document.getElementById('summaryTotalLoss').textContent = (totalLoss / 1000).toFixed(2);
+            document.getElementById('summaryCriticalCount').textContent = sorted.length;
+            document.getElementById('summaryRiskArea').textContent = totalArea.toFixed(1);
+        }
+
+        // ====== LOAD BLOCK DATA ======
+        function loadBlockData(code) {
+            if (!BLOCKS_DATA[code]) return;
+            const data = BLOCKS_DATA[code];
+
+            document.getElementById('finTitleLeft').textContent = code;
+            document.getElementById('finLossLeft').textContent = Math.round(data.loss_value_juta || 0);
+            document.getElementById('finPotLeft').textContent = (data.potensi_ton_ha || 0).toFixed(2);
+            document.getElementById('finRealLeft').textContent = (data.realisasi_ton_ha || 0).toFixed(2);
+            document.getElementById('finGapTonLeft').textContent = Math.abs(data.gap_ton_ha || 0).toFixed(2);
+
+            const gapPct = Math.abs(data.gap_pct || 0);
+            const gapPctEl = document.getElementById('finGapPctLeft');
+            gapPctEl.textContent = gapPct.toFixed(0) + '%';
+            gapPctEl.className = gapPct > 20 ? 'text-red-400 text-3xl font-black' : 'text-emerald-400 text-3xl font-black';
+
+            document.getElementById('finLuasLeft').textContent = (data.luas_ha || 0).toFixed(1) + ' Ha';
+            document.getElementById('finSphLeft').textContent = data.sph || 0;
+            document.getElementById('finTTLeft').textContent = data.tt || '--';
+            document.getElementById('finARLeft').textContent = (data.attack_rate || 0).toFixed(1) + '%';
+            document.getElementById('finCensusRateLeft').textContent = (data.census_rate_pct || 0).toFixed(2) + '%';
+            document.getElementById('finMitigasiLeft').textContent = 'Rp ' + (data.mitigation_cost_juta || 0).toFixed(1) + ' Jt';
+
+            const statusEl = document.getElementById('finSymptomLagLeft');
+            const narrative = data.status_narrative || '--';
+            statusEl.textContent = narrative;
+            statusEl.className = narrative.includes('STABIL') ? 'inline-block px-2 py-1 rounded bg-green-800 border border-green-600 text-[10px] font-bold text-green-200' : 'inline-block px-2 py-1 rounded bg-red-800 border border-red-600 text-[10px] font-bold text-red-200';
+
+            // BREAKDOWN
+            document.getElementById('blockBreakdownSection').classList.remove('hidden');
+            const currentLoss = data.loss_value_juta || 0;
+            const total3Year = data.projected_loss_3yr || (currentLoss * 3);
+            const treatmentCost = data.mitigation_cost_juta || 50;
+            const roi = treatmentCost > 0 ? Math.round(((total3Year - treatmentCost) / treatmentCost) * 100) : 0;
+
+            document.getElementById('breakdownCurrentLoss').textContent = 'Rp ' + Math.round(currentLoss);
+            document.getElementById('breakdown3YearTotal').textContent = 'Rp ' + Math.round(total3Year);
+            document.getElementById('breakdownTreatment').textContent = 'Rp ' + Math.round(treatmentCost);
+            document.getElementById('breakdownROI').textContent = roi;
+
+            const ar0 = data.attack_rate || 7.5, gap0 = Math.abs(data.gap_pct || 21), sph0 = data.sph || 108, loss0 = currentLoss;
+            const ar1 = ar0 * 1.33, gap1 = gap0 * 1.23, sph1 = sph0 - 10, loss1 = loss0 * 1.12;
+            const ar2 = ar0 * 1.59, gap2 = gap0 * 1.56, sph2 = sph0 - 25, loss2 = loss0 * 1.42;
+            const ar3 = ar0 * 2.27, gap3 = gap0 * 2.50, sph3 = sph0 - 45, loss3 = loss0 * 2.27;
+
+            document.getElementById('degradationTableBody').innerHTML = `
+                <tr class="border-b border-white/10 hover:bg-white/5">
+                    <td class="p-3 font-bold">Tingkat Infeksi</td>
+                    <td class="p-3 text-center">${ar0.toFixed(1)}%</td>
+                    <td class="p-3 text-center text-yellow-400">${ar1.toFixed(1)}%</td>
+                    <td class="p-3 text-center text-yellow-400">${ar2.toFixed(1)}%</td>
+                    <td class="p-3 text-center text-yellow-400">${ar3.toFixed(1)}%</td>
+                    <td class="p-3 text-center text-orange-400">+${(ar3 - ar0).toFixed(1)}%</td>
+                </tr>
+                <tr class="border-b border-white/10 hover:bg-white/5">
+                    <td class="p-3 font-bold">Gap Hasil</td>
+                    <td class="p-3 text-center">-${gap0.toFixed(1)}%</td>
+                    <td class="p-3 text-center text-yellow-400">-${gap1.toFixed(1)}%</td>
+                    <td class="p-3 text-center text-yellow-400">-${gap2.toFixed(1)}%</td>
+                    <td class="p-3 text-center text-yellow-400">-${gap3.toFixed(1)}%</td>
+                    <td class="p-3 text-center text-orange-400">-${(gap3 - gap0).toFixed(1)}%</td>
+                </tr>
+                <tr class="border-b border-white/10 hover:bg-white/5">
+                    <td class="p-3 font-bold">SPH (trees/ha)</td>
+                    <td class="p-3 text-center">${Math.round(sph0)}</td>
+                    <td class="p-3 text-center text-yellow-400">${Math.round(sph1)}</td>
+                    <td class="p-3 text-center text-yellow-400">${Math.round(sph2)}</td>
+                    <td class="p-3 text-center text-yellow-400">${Math.round(sph3)}</td>
+                    <td class="p-3 text-center text-orange-400">-${Math.round(sph0 - sph3)} trees</td>
+                </tr>
+                <tr class="hover:bg-white/5">
+                    <td class="p-3 font-bold">Kerugian (Juta)</td>
+                    <td class="p-3 text-center">Rp ${Math.round(loss0)}</td>
+                    <td class="p-3 text-center text-yellow-400">Rp ${Math.round(loss1)}</td>
+                    <td class="p-3 text-center text-yellow-400">Rp ${Math.round(loss2)}</td>
+                    <td class="p-3 text-center text-yellow-400">Rp ${Math.round(loss3)}</td>
+                    <td class="p-3 text-center text-orange-400">+Rp ${Math.round(loss3 - loss0)}</td>
+                </tr>`;
+
+            const prevented = total3Year * 0.70, netBenefit = prevented - treatmentCost;
+            document.getElementById('treatmentPrevented').textContent = 'Rp ' + Math.round(prevented) + ' Juta';
+            document.getElementById('treatmentNetBenefit').textContent = 'Rp ' + Math.round(netBenefit) + ' Juta';
+        }
+
+        // ====== AUTO-RUN ======
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', renderPaparanRisk);
+        } else {
+            renderPaparanRisk();
+        }
+    </script>
+
 </body>
 
 </html>
