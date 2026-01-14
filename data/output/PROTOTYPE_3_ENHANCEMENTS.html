@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Enhancement Prototype - 3 Features</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            min-height: 100vh;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(251, 113, 133, 0.5);
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body class="p-8">
+
+    <!-- Header -->
+    <div class="max-w-7xl mx-auto mb-8">
+        <div class="bg-gradient-to-r from-indigo-600 to-purple-600 p-6 rounded-2xl shadow-2xl">
+            <h1 class="text-3xl font-black text-white mb-2">🎨 PROTOTYPE: Dashboard Enhancements</h1>
+            <p class="text-white/80">Preview 3 major features sebelum implement ke dashboard utama</p>
+        </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto space-y-8">
+
+        <!-- ============================================ -->
+        <!-- FEATURE 1: Before/After Treatment Chart -->
+        <!-- ============================================ -->
+        <div class="bg-slate-800/50 backdrop-blur-lg p-8 rounded-2xl border border-white/10 shadow-2xl">
+            <div class="flex items-center gap-3 mb-6">
+                <span class="text-4xl">📊</span>
+                <div>
+                    <h2 class="text-2xl font-black text-white">FEATURE 1: Before/After Treatment Chart</h2>
+                    <p class="text-slate-400">Side-by-side comparison dengan visual yang jelas</p>
+                </div>
+            </div>
+
+            <!-- Chart Container -->
+            <div class="bg-black/30 p-6 rounded-xl border border-white/10 mb-4">
+                <h3 class="text-lg font-bold text-white mb-4 text-center">
+                    Perbandingan: TANPA vs DENGAN Treatment (3 Tahun)
+                </h3>
+                <div style="height: 350px;">
+                    <canvas id="treatmentComparisonChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Summary Boxes -->
+            <div class="grid grid-cols-3 gap-4">
+                <div class="text-center p-4 bg-red-900/30 rounded-xl border border-red-500/30">
+                    <div class="text-xs text-red-300 font-bold uppercase mb-1">Total TANPA Treatment</div>
+                    <div class="text-3xl font-black text-red-400">Rp 6.2 M</div>
+                    <div class="text-xs text-red-400 mt-1">Baseline (no action)</div>
+                </div>
+                <div class="text-center p-4 bg-green-900/30 rounded-xl border border-green-500/30">
+                    <div class="text-xs text-green-300 font-bold uppercase mb-1">Total DENGAN Treatment</div>
+                    <div class="text-3xl font-black text-green-400">Rp 1.86 M</div>
+                    <div class="text-xs text-green-400 mt-1">With intervention (70% effective)</div>
+                </div>
+                <div class="text-center p-4 bg-emerald-900/30 rounded-xl border-2 border-emerald-500 shadow-lg">
+                    <div class="text-xs text-emerald-300 font-bold uppercase mb-1">💰 PENGHEMATAN</div>
+                    <div class="text-3xl font-black text-emerald-400">Rp 4.3 M</div>
+                    <div class="text-xs text-emerald-400 mt-1">Savings in 3 years</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- FEATURE 2: Swapped Section Layout -->
+        <!-- ============================================ -->
+        <div class="bg-slate-800/50 backdrop-blur-lg p-8 rounded-2xl border border-white/10 shadow-2xl">
+            <div class="flex items-center gap-3 mb-6">
+                <span class="text-4xl">🔄</span>
+                <div>
+                    <h2 class="text-2xl font-black text-white">FEATURE 2: Swapped Section Positions</h2>
+                    <p class="text-slate-400">ESTIMASI (Biru) di kiri, PAPARAN RISK (Merah) di kanan</p>
+                </div>
+            </div>
+
+            <!-- New Layout: ESTIMASI first (Blue), then PAPARAN (Red) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                <!-- LEFT: ESTIMASI KERUGIAN BLOK (Blue) - NOW FIRST -->
+                <div
+                    class="bg-gradient-to-br from-blue-950/90 to-indigo-950/90 p-6 rounded-2xl border-2 border-blue-500 shadow-2xl">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center">
+                            <span class="text-2xl">📘</span>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-black text-white uppercase">ESTIMASI KERUGIAN BLOK</h3>
+                            <p class="text-blue-300 text-xs">Klik blok untuk detail (SEKARANG DI KIRI)</p>
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <div
+                            class="bg-blue-900/40 p-3 rounded-xl border border-blue-500/30 hover:border-blue-400 transition-all cursor-pointer">
+                            <div class="flex justify-between items-center">
+                                <span class="text-white font-bold">Blok D003A</span>
+                                <span class="text-blue-300">Rp 177 Jt</span>
+                            </div>
+                        </div>
+                        <div
+                            class="bg-blue-900/40 p-3 rounded-xl border border-blue-500/30 hover:border-blue-400 transition-all cursor-pointer">
+                            <div class="flex justify-between items-center">
+                                <span class="text-white font-bold">Blok E002A</span>
+                                <span class="text-blue-300">Rp 189 Jt</span>
+                            </div>
+                        </div>
+                        <div class="text-center text-xs text-blue-400 mt-4">
+                            ⬅️ Sekarang di posisi KIRI (prioritas view pertama)
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RIGHT: PAPARAN RISK ESTATE (Red) - NOW SECOND -->
+                <div
+                    class="bg-gradient-to-br from-rose-950/90 to-red-950/90 p-6 rounded-2xl border-2 border-rose-500 shadow-2xl">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 bg-rose-600 rounded-xl flex items-center justify-center animate-pulse">
+                            <span class="text-2xl">⚠️</span>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-black text-white uppercase">PAPARAN RISIKO ESTATE</h3>
+                            <p class="text-rose-300 text-xs">8 Blok Kritis (SEKARANG DI KANAN)</p>
+                        </div>
+                    </div>
+                    <div class="text-center mb-4">
+                        <div class="text-sm text-rose-300 mb-1">Total Potensi Kerugian</div>
+                        <div class="text-5xl font-black text-white">1.35</div>
+                        <div class="text-sm text-slate-400">Miliar</div>
+                    </div>
+                    <div class="text-center text-xs text-rose-400">
+                        Sekarang di posisi KANAN (secondary context) ➡️
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="mt-6 p-4 bg-yellow-900/30 rounded-xl border border-yellow-500/30">
+                <p class="text-yellow-200 text-sm">
+                    <strong>💡 Rationale:</strong> User lihat ESTIMASI detail dulu (actionable data per block),
+                    baru lihat PAPARAN summary (aggregate risk context).
+                </p>
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- FEATURE 3: Visual Charts in Modals -->
+        <!-- ============================================ -->
+        <div class="bg-slate-800/50 backdrop-blur-lg p-8 rounded-2xl border border-white/10 shadow-2xl">
+            <div class="flex items-center gap-3 mb-6">
+                <span class="text-4xl">📈</span>
+                <div>
+                    <h2 class="text-2xl font-black text-white">FEATURE 3: Visual Charts in Breakdown Modals</h2>
+                    <p class="text-slate-400">Transform text/tables menjadi interactive charts</p>
+                </div>
+            </div>
+
+            <!-- Demo Buttons to Open Modal Previews -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                <button onclick="showModalPreview('current')"
+                    class="p-4 bg-gradient-to-br from-rose-600 to-rose-700 rounded-xl text-white font-bold hover:scale-105 transition-all shadow-lg">
+                    📊 Current Loss<br><span class="text-xs opacity-80">Bar Chart</span>
+                </button>
+                <button onclick="showModalPreview('3year')"
+                    class="p-4 bg-gradient-to-br from-orange-600 to-orange-700 rounded-xl text-white font-bold hover:scale-105 transition-all shadow-lg">
+                    📉 3-Year Trend<br><span class="text-xs opacity-80">Line Chart</span>
+                </button>
+                <button onclick="showModalPreview('treatment')"
+                    class="p-4 bg-gradient-to-br from-emerald-600 to-emerald-700 rounded-xl text-white font-bold hover:scale-105 transition-all shadow-lg">
+                    💵 Treatment Cost<br><span class="text-xs opacity-80">Pie Chart</span>
+                </button>
+                <button onclick="showModalPreview('roi')"
+                    class="p-4 bg-gradient-to-br from-yellow-600 to-yellow-700 rounded-xl text-white font-bold hover:scale-105 transition-all shadow-lg">
+                    📈 ROI Comparison<br><span class="text-xs opacity-80">Bar Chart</span>
+                </button>
+            </div>
+
+            <!-- Chart Preview Container (shows selected chart) -->
+            <div id="chartPreviewContainer" class="bg-black/30 p-6 rounded-xl border border-white/10">
+                <h3 id="chartPreviewTitle" class="text-lg font-bold text-white mb-4 text-center">
+                    👆 Klik salah satu button di atas untuk preview chart
+                </h3>
+                <div style="height: 350px;">
+                    <canvas id="modalChartPreview"></canvas>
+                </div>
+            </div>
+
+            <div class="mt-6 p-4 bg-cyan-900/30 rounded-xl border border-cyan-500/30">
+                <p class="text-cyan-200 text-sm">
+                    <strong>✨ Enhancement:</strong> Setiap modal breakdown akan punya chart interactive + tabel detail.
+                    Charts memudahkan quick insight, tables untuk deep dive.
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Modal for actual implementation preview -->
+    <div id="fullModalPreview"
+        class="hidden fixed inset-0 bg-black/90 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div
+            class="bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl border-2 border-indigo-500 max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="sticky top-0 bg-gradient-to-r from-indigo-600 to-purple-600 p-6 border-b border-white/10">
+                <div class="flex items-center justify-between">
+                    <h2 class="text-2xl font-black text-white">Modal dengan Chart (Full Preview)</h2>
+                    <button onclick="closeFullModal()"
+                        class="text-white hover:text-rose-200 text-3xl font-bold">×</button>
+                </div>
+            </div>
+            <div id="fullModalContent" class="p-6">
+                <!-- Content loaded dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ====================================================
+        // FEATURE 1: Before/After Treatment Comparison Chart
+        // ====================================================
+        const ctx1 = document.getElementById('treatmentComparisonChart').getContext('2d');
+        const treatmentChart = new Chart(ctx1, {
+            type: 'bar',
+            data: {
+                labels: ['Tahun 0', 'Tahun 1', 'Tahun 2', 'Tahun 3'],
+                datasets: [
+                    {
+                        label: 'TANPA Treatment',
+                        data: [1353, 1567, 1974, 3133],
+                        backgroundColor: 'rgba(239, 68, 68, 0.8)',
+                        borderColor: 'rgba(239, 68, 68, 1)',
+                        borderWidth: 2
+                    },
+                    {
+                        label: 'DENGAN Treatment (70% effective)',
+                        data: [1353, 470, 592, 940], // 30% of no-treatment loss
+                        backgroundColor: 'rgba(52, 211, 153, 0.8)',
+                        borderColor: 'rgba(52, 211, 153, 1)',
+                        borderWidth: 2
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: 'white',
+                            font: { size: 14, weight: 'bold' },
+                            padding: 20
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function (context) {
+                                return context.dataset.label + ': Rp ' +
+                                    context.parsed.y.toFixed(0) + ' Juta';
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            color: 'white',
+                            callback: function (value) {
+                                return 'Rp ' + value + ' Jt';
+                            }
+                        },
+                        grid: { color: 'rgba(255,255,255,0.1)' },
+                        title: {
+                            display: true,
+                            text: 'Kerugian (Juta)',
+                            color: 'white',
+                            font: { size: 12, weight: 'bold' }
+                        }
+                    },
+                    x: {
+                        ticks: { color: 'white' },
+                        grid: { color: 'rgba(255,255,255,0.1)' }
+                    }
+                }
+            }
+        });
+
+        // ====================================================
+        // FEATURE 3: Modal Chart Previews
+        // ====================================================
+        let currentPreviewChart = null;
+
+        function showModalPreview(type) {
+            // Destroy previous chart if exists
+            if (currentPreviewChart) {
+                currentPreviewChart.destroy();
+            }
+
+            const ctx = document.getElementById('modalChartPreview').getContext('2d');
+            const titleEl = document.getElementById('chartPreviewTitle');
+
+            if (type === 'current') {
+                titleEl.textContent = '📊 Current Loss Breakdown (Horizontal Bar)';
+                currentPreviewChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['D003A', 'E002A', 'D001A', 'D004A', 'E001A', 'E003A', 'F002A', 'F004A'],
+                        datasets: [{
+                            label: 'Kerugian (Juta)',
+                            data: [177, 189, 182, 146, 142, 168, 168, 103],
+                            backgroundColor: 'rgba(251, 113, 133, 0.8)',
+                            borderColor: 'rgba(251, 113, 133, 1)',
+                            borderWidth: 2
+                        }]
+                    },
+                    options: {
+                        indexAxis: 'y',
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                callbacks: {
+                                    label: (context) => 'Rp ' + context.parsed.x + ' Juta'
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                beginAtZero: true,
+                                ticks: { color: 'white' },
+                                grid: { color: 'rgba(255,255,255,0.1)' }
+                            },
+                            y: {
+                                ticks: { color: 'white', font: { weight: 'bold' } },
+                                grid: { display: false }
+                            }
+                        }
+                    }
+                });
+
+            } else if (type === '3year') {
+                titleEl.textContent = '📉 3-Year Projection Trend (Line Chart)';
+                currentPreviewChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Tahun 0 (Now)', 'Tahun 1', 'Tahun 2', 'Tahun 3'],
+                        datasets: [{
+                            label: 'Kerugian Tanpa Treatment',
+                            data: [1353, 1567, 1974, 3133],
+                            borderColor: 'rgba(251, 146, 60, 1)',
+                            backgroundColor: 'rgba(251, 146, 60, 0.2)',
+                            borderWidth: 3,
+                            fill: true,
+                            tension: 0.4,
+                            pointRadius: 6,
+                            pointBackgroundColor: 'rgba(251, 146, 60, 1)'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { labels: { color: 'white', font: { size: 14 } } },
+                            tooltip: {
+                                callbacks: {
+                                    label: (context) => 'Rp ' + context.parsed.y + ' Juta'
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: { color: 'white' },
+                                grid: { color: 'rgba(255,255,255,0.1)' }
+                            },
+                            x: {
+                                ticks: { color: 'white' },
+                                grid: { color: 'rgba(255,255,255,0.1)' }
+                            }
+                        }
+                    }
+                });
+
+            } else if (type === 'treatment') {
+                titleEl.textContent = '💵 Treatment Cost Breakdown (Pie Chart)';
+                currentPreviewChart = new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Parit Isolasi', 'Fungisida Sistemik', 'Sanitasi', 'Drainage', 'Monitoring'],
+                        datasets: [{
+                            data: [25, 10, 8, 5, 2],
+                            backgroundColor: [
+                                'rgba(52, 211, 153, 0.9)',
+                                'rgba(34, 197, 94, 0.9)',
+                                'rgba(74, 222, 128, 0.9)',
+                                'rgba(134, 239, 172, 0.9)',
+                                'rgba(187, 247, 208, 0.9)'
+                            ],
+                            borderWidth: 3,
+                            borderColor: '#1e293b'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'right',
+                                labels: {
+                                    color: 'white',
+                                    font: { size: 13 },
+                                    padding: 15
+                                }
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: (context) => context.label + ': Rp ' + context.parsed + ' Juta/blok'
+                                }
+                            }
+                        }
+                    }
+                });
+
+            } else if (type === 'roi') {
+                titleEl.textContent = '📈 ROI Comparison vs Other Investments';
+                currentPreviewChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Deposito\n(5%/yr)', 'Obligasi\n(8%/yr)', 'Saham\n(15%/yr)', 'Property\n(10%/yr)', 'Treatment\n(Project)'],
+                        datasets: [{
+                            label: 'ROI 3 Tahun (%)',
+                            data: [15, 24, 45, 30, 986],
+                            backgroundColor: [
+                                'rgba(148, 163, 184, 0.7)',
+                                'rgba(148, 163, 184, 0.7)',
+                                'rgba(148, 163, 184, 0.7)',
+                                'rgba(148, 163, 184, 0.7)',
+                                'rgba(250, 204, 21, 0.9)'
+                            ],
+                            borderColor: [
+                                'rgba(148, 163, 184, 1)',
+                                'rgba(148, 163, 184, 1)',
+                                'rgba(148, 163, 184, 1)',
+                                'rgba(148, 163, 184, 1)',
+                                'rgba(250, 204, 21, 1)'
+                            ],
+                            borderWidth: 2
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                callbacks: {
+                                    label: (context) => 'ROI: ' + context.parsed.y + '%'
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    color: 'white',
+                                    callback: function (value) {
+                                        return value + '%';
+                                    }
+                                },
+                                grid: { color: 'rgba(255,255,255,0.1)' },
+                                title: {
+                                    display: true,
+                                    text: 'ROI (%)',
+                                    color: 'white',
+                                    font: { size: 12, weight: 'bold' }
+                                }
+                            },
+                            x: {
+                                ticks: {
+                                    color: 'white',
+                                    font: { size: 11 }
+                                },
+                                grid: { display: false }
+                            }
+                        }
+                    }
+                });
+            }
+        }
+
+        function closeFullModal() {
+            document.getElementById('fullModalPreview').classList.add('hidden');
+        }
+
+        // Initialize with first chart
+        window.addEventListener('load', () => {
+            // Auto-show first modal preview
+            setTimeout(() => showModalPreview('current'), 500);
+        });
+    </script>
+
+    <!-- Footer -->
+    <div class="max-w-7xl mx-auto mt-8 p-6 bg-slate-800/30 rounded-xl border border-white/10">
+        <h3 class="text-lg font-bold text-white mb-3">✅ Prototype Review Checklist:</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+            <div class="space-y-2">
+                <p class="text-emerald-400 font-bold">Feature 1: Treatment Chart</p>
+                <ul class="text-slate-300 space-y-1 text-xs">
+                    <li>✓ Side-by-side comparison jelas?</li>
+                    <li>✓ Color coding intuitive (Red vs Green)?</li>
+                    <li>✓ Summary boxes helpful?</li>
+                </ul>
+            </div>
+            <div class="space-y-2">
+                <p class="text-blue-400 font-bold">Feature 2: Swapped Layout</p>
+                <ul class="text-slate-300 space-y-1 text-xs">
+                    <li>✓ Blue (ESTIMASI) di kiri make sense?</li>
+                    <li>✓ Red (PAPARAN) di kanan OK?</li>
+                    <li>✓ Flow logic better?</li>
+                </ul>
+            </div>
+            <div class="space-y-2">
+                <p class="text-yellow-400 font-bold">Feature 3: Modal Charts</p>
+                <ul class="text-slate-300 space-y-1 text-xs">
+                    <li>✓ Chart types appropriate?</li>
+                    <li>✓ Colors & styling consistent?</li>
+                    <li>✓ Data visualization clear?</li>
+                </ul>
+            </div>
+        </div>
+        <div class="mt-4 p-4 bg-indigo-900/30 rounded-xl border border-indigo-500/30">
+            <p class="text-indigo-200 text-sm text-center">
+                <strong>📋 Next Step:</strong> Review prototype → Provide feedback → Implement approved features ke
+                dashboard utama
+            </p>
+        </div>
+    </div>
+
+</body>
+
+</html>
