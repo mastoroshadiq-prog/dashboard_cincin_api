@@ -203,6 +203,18 @@
                 <div style="height: 350px;">
                     <canvas id="modalChartPreview"></canvas>
                 </div>
+                
+                <!-- Data Display Table (shown on click) -->
+                <div id="dataDisplayTable" class="hidden mt-4 bg-slate-900/50 p-4 rounded-xl border border-cyan-500/30">
+                    <div class="flex items-center justify-between mb-3">
+                        <h4 class="text-cyan-300 font-bold text-sm">📊 Detail Metrics (Klik datapoint pada chart)</h4>
+                        <button onclick="document.getElementById('dataDisplayTable').classList.add('hidden')" 
+                            class="text-cyan-300 hover:text-cyan-100 text-xs">✕ Close</button>
+                    </div>
+                    <div id="dataTableContent" class="overflow-x-auto">
+                        <!-- Table will be populated by JavaScript -->
+                    </div
+                </div>
             </div>
 
             <div class="mt-6 p-4 bg-cyan-900/30 rounded-xl border border-cyan-500/30">
@@ -485,20 +497,101 @@
                     }
                 });
 
+                
+                // Add click handler to show data table
+                document.getElementById('modalChartPreview').onclick = (evt) => {
+                    const points = currentPreviewChart.getElementsAtEventForMode(evt, 'nearest', { intersect: true }, true);
+                    
+                    if (points.length > 0) {
+                        const point = points[0];
+                        const datasetIndex = point.datasetIndex;
+                        const index = point.index;
+                        const dataset = currentPreviewChart.data.datasets[datasetIndex];
+                        
+                        // Get data
+                        const year = currentPreviewChart.data.labels[index];
+                        const scenario = dataset.label;
+                        const loss = dataset.data[index];
+                        const ar = dataset.ar[index];
+                        const gap = dataset.gap[index];
+                        const sph = dataset.sph[index];
+                        
+                        // Calculate deltas if not year 0
+                        let deltaHTML = '';
+                        if (index > 0) {
+                            const deltaLoss = loss - dataset.data[0];
+                            const deltaAR = ar - dataset.ar[0];
+                            const deltaGap = gap - dataset.gap[0];
+                            const deltaSPH = sph - dataset.sph[0];
+                            
+                            deltaHTML = `
+                                <tr class="border-t-2 border-cyan-500/30">
+                                    <td class="p-2 text-yellow-300 font-bold">Δ dari Tahun 0</td>
+                                    <td class="p-2 text-right ${deltaLoss > 0 ? 'text-red-400' : 'text-green-400'}">
+                                        ${deltaLoss > 0 ? '+' : ''}${deltaLoss.toFixed(0)} Jt
+                                    </td>
+                                    <td class="p-2 text-right ${deltaAR > 0 ? 'text-red-400' : 'text-green-400'}">
+                                        ${deltaAR > 0 ? '+' : ''}${deltaAR.toFixed(1)}%
+                                    </td>
+                                    <td class="p-2 text-right ${deltaGap > 0 ? 'text-red-400' : 'text-green-400'}">
+                                        ${deltaGap > 0 ? '+' : ''}${deltaGap.toFixed(2)}
+                                    </td>
+                                    <td class="p-2 text-right ${deltaSPH > 0 ? 'text-green-400' : 'text-red-400'}">
+                                        ${deltaSPH > 0 ? '+' : ''}${deltaSPH}
+                                    </td>
+                                </tr>
+                            `;
+                        }
+                        
+                        // Build table
+                        const tableHTML = `
+                            <div class="mb-2 text-sm">
+                                <span class="font-bold ${datasetIndex === 0 ? 'text-red-400' : 'text-emerald-400'}">${scenario}</span>
+                                <span class="text-gray-400"> - ${year}</span>
+                            </div>
+                            <table class="w-full text-sm">
+                                <thead>
+                                    <tr class="border-b border-cyan-500/50">
+                                        <th class="text-left p-2 text-cyan-300">Metric</th>
+                                        <th class="text-right p-2 text-cyan-300">Loss</th>
+                                        <th class="text-right p-2 text-cyan-300">AR</th>
+                                        <th class="text-right p-2 text-cyan-300">Gap Yield</th>
+                                        <th class="text-right p-2 text-cyan-300">SPH</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-white">
+                                    <tr>
+                                        <td class="p-2 font-bold">Value</td>
+                                        <td class="p-2 text-right">Rp ${loss.toFixed(0)} Jt</td>
+                                        <td class="p-2 text-right">${ar}%</td>
+                                        <td class="p-2 text-right">${gap.toFixed(2)} Ton/Ha</td>
+                                        <td class="p-2 text-right">${sph} trees/ha</td>
+                                    </tr>
+                                    ${deltaHTML}
+                                </tbody>
+                            </table>
+                        `;
+                        
+                        // Show table
+                        document.getElementById('dataTableContent').innerHTML = tableHTML;
+                        document.getElementById('dataDisplayTable').classList.remove('hidden');
+                    }
+                };
+
             } else if (type === 'treatment') {
-                titleEl.textContent = '💵 Treatment Cost Breakdown (Pie Chart)';
+                titleEl.textContent = '💵 Treatment Cost Breakdown (Per Blok)';
                 currentPreviewChart = new Chart(ctx, {
                     type: 'doughnut',
                     data: {
-                        labels: ['Parit Isolasi', 'Fungisida Sistemik', 'Sanitasi', 'Drainage', 'Monitoring'],
+                        labels: ['Parit Isolasi (50%)', 'Fungisida (20%)', 'Sanitasi (16%)', 'Drainage (10%)', 'Monitoring (4%)'],
                         datasets: [{
                             data: [25, 10, 8, 5, 2],
                             backgroundColor: [
-                                'rgba(52, 211, 153, 0.9)',
-                                'rgba(34, 197, 94, 0.9)',
-                                'rgba(74, 222, 128, 0.9)',
-                                'rgba(134, 239, 172, 0.9)',
-                                'rgba(187, 247, 208, 0.9)'
+                                'rgba(239, 68, 68, 0.9)',      // Red - Parit (biggest cost)
+                                'rgba(251, 146, 60, 0.9)',     // Orange - Fungisida
+                                'rgba(234, 179, 8, 0.9)',      // Yellow - Sanitasi
+                                'rgba(52, 211, 153, 0.9)',     // Green - Drainage
+                                'rgba(59, 130, 246, 0.9)'      // Blue - Monitoring
                             ],
                             borderWidth: 3,
                             borderColor: '#1e293b'
@@ -512,17 +605,84 @@
                                 position: 'right',
                                 labels: {
                                     color: 'white',
-                                    font: { size: 13 },
-                                    padding: 15
+                                    font: { size: 12, weight: 'bold' },
+                                    padding: 12,
+                                    generateLabels: (chart) => {
+                                        const data = chart.data;
+                                        return data.labels.map((label, i) => {
+                                            const value = data.datasets[0].data[i];
+                                            return {
+                                                text: label + ' - Rp ' + value + ' Jt',
+                                                fillStyle: data.datasets[0].backgroundColor[i],
+                                                hidden: false,
+                                                index: i
+                                            };
+                                        });
+                                    }
                                 }
                             },
                             tooltip: {
+                                backgroundColor: 'rgba(0, 0, 0, 0.9)',
+                                padding: 12,
                                 callbacks: {
-                                    label: (context) => context.label + ': Rp ' + context.parsed + ' Juta/blok'
+                                    label: (context) => {
+                                        const label = context.label.split(' (')[0]; // Remove percentage
+                                        const value = context.parsed;
+                                        const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                        const percentage = ((value / total) * 100).toFixed(1);
+                                        return [
+                                            label,
+                                            'Rp ' + value + ' Juta/blok',
+                                            percentage + '% dari total'
+                                        ];
+                                    }
+                                }
+                            },
+                            // Data labels on pie segments
+                            datalabels: {
+                                color: 'white',
+                                font: {
+                                    weight: 'bold',
+                                    size: 11
+                                },
+                                formatter: (value, context) => {
+                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                    const percentage = ((value / total) * 100).toFixed(0);
+                                    return 'Rp ' + value + ' Jt\n(' + percentage + '%)';
                                 }
                             }
                         }
-                    }
+                    },
+                    plugins: [{
+                        // Custom plugin to draw labels on segments
+                        id: 'customLabels',
+                        afterDatasetDraw: (chart) => {
+                            const ctx = chart.ctx;
+                            const dataset = chart.data.datasets[0];
+                            const meta = chart.getDatasetMeta(0);
+                            
+                            meta.data.forEach((arc, index) => {
+                                const midAngle = (arc.startAngle + arc.endAngle) / 2;
+                                const x = arc.x + Math.cos(midAngle) * (arc.outerRadius * 0.7);
+                                const y = arc.y + Math.sin(midAngle) * (arc.outerRadius * 0.7);
+                                
+                                const value = dataset.data[index];
+                                const total = dataset.data.reduce((a, b) => a + b, 0);
+                                const percentage = ((value / total) * 100).toFixed(0);
+                                
+                                ctx.fillStyle = 'white';
+                                ctx.font = 'bold 11px sans-serif';
+                                ctx.textAlign = 'center';
+                                ctx.textBaseline = 'middle';
+                                
+                                // Only show label if segment is big enough
+                                if (percentage >= 10) {
+                                    ctx.fillText('Rp ' + value + ' Jt', x, y - 6);
+                                    ctx.fillText('(' + percentage + '%)', x, y + 8);
+                                }
+                            });
+                        }
+                    }]
                 });
 
             } else if (type === 'roi') {
