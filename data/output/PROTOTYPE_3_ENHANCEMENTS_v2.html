@@ -53,33 +53,9 @@
             </div>
 
             <!-- New Layout: ESTIMASI first (Blue), then PAPARAN (Red) -->
-            <!-- Corrected Layout: PAPARAN (Red) LEFT, STATISTIK (Blue) RIGHT -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-                <!-- LEFT: PAPARAN RISK ESTATE (Red) - USER REQUESTED -->
-                <div
-                    class="bg-gradient-to-br from-rose-950/90 to-red-950/90 p-6 rounded-2xl border-2 border-rose-500 shadow-2xl">
-                    <div class="flex items-center gap-3 mb-4">
-                        <div class="w-12 h-12 bg-rose-600 rounded-xl flex items-center justify-center animate-pulse">
-                            <span class="text-2xl">⚠️</span>
-                        </div>
-                        <div>
-                            <h3 class="text-lg font-black text-white uppercase">PAPARAN RISIKO ESTATE</h3>
-                            <p class="text-rose-300 text-xs">8 Blok Kritis (DI KANAN - Detail Statistics)</p>
-                        </div>
-                    </div>
-                    <div class="text-center mb-4">
-                        <div class="text-sm text-rose-300 mb-1">Total Potensi Kerugian</div>
-                        <div class="text-5xl font-black text-white">1.35</div>
-                        <div class="text-sm text-slate-400">Miliar</div>
-                    </div>
-                    <div class="text-center text-xs text-rose-400">
-                        Di posisi KANAN (detail breakdowns) ➡️
-                    </div>
-                </div>
-
-
-                <!-- RIGHT: STATISTIK BLOK (Blue) -->
+                <!-- LEFT: STATISTIK BLOK (Blue) - NOW FIRST -->
                 <div
                     class="bg-gradient-to-br from-blue-950/90 to-indigo-950/90 p-6 rounded-2xl border-2 border-blue-500 shadow-2xl">
                     <div class="flex items-center gap-3 mb-4">
@@ -88,7 +64,7 @@
                         </div>
                         <div>
                             <h3 class="text-lg font-black text-white uppercase">STATISTIK BLOK</h3>
-                            <p class="text-blue-300 text-xs">Klik blok untuk detail (DI KIRI - Watchlist 8 Critical)</p>
+                            <p class="text-blue-300 text-xs">Klik blok untuk detail (SEKARANG DI KIRI)</p>
                         </div>
                     </div>
                     <div class="space-y-2">
@@ -107,16 +83,39 @@
                             </div>
                         </div>
                         <div class="text-center text-xs text-blue-400 mt-4">
-                            ⬅️ Di posisi KIRI (priority: risk overview first)
+                            ⬅️ Sekarang di posisi KIRI (prioritas view pertama)
                         </div>
                     </div>
                 </div>
 
+                <!-- RIGHT: PAPARAN RISK ESTATE (Red) - NOW SECOND -->
+                <div
+                    class="bg-gradient-to-br from-rose-950/90 to-red-950/90 p-6 rounded-2xl border-2 border-rose-500 shadow-2xl">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 bg-rose-600 rounded-xl flex items-center justify-center animate-pulse">
+                            <span class="text-2xl">⚠️</span>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-black text-white uppercase">PAPARAN RISIKO ESTATE</h3>
+                            <p class="text-rose-300 text-xs">8 Blok Kritis (SEKARANG DI KANAN)</p>
+                        </div>
+                    </div>
+                    <div class="text-center mb-4">
+                        <div class="text-sm text-rose-300 mb-1">Total Potensi Kerugian</div>
+                        <div class="text-5xl font-black text-white">1.35</div>
+                        <div class="text-sm text-slate-400">Miliar</div>
+                    </div>
+                    <div class="text-center text-xs text-rose-400">
+                        Sekarang di posisi KANAN (secondary context) ➡️
+                    </div>
+                </div>
+
+            </div>
 
             <div class="mt-6 p-4 bg-yellow-900/30 rounded-xl border border-yellow-500/30">
                 <p class="text-yellow-200 text-sm">
-                    <strong>💡 Rationale:</strong> Flow: PAPARAN RISK dulu (identify 8 critical blocks) (actionable data per block),
-                    lalu STATISTIK BLOK (detailed breakdown per block) (aggregate risk context).
+                    <strong>💡 Rationale:</strong> User lihat PAPARAN RISK (8 critical blocks) dulu (actionable data per block),
+                    baru lihat PAPARAN summary (aggregate risk context).
                 </p>
             </div>
         </div>
