@@ -41,126 +41,198 @@
     <div class="max-w-7xl mx-auto space-y-8">
 
         <!-- ============================================ -->
-        <!-- FEATURE 2: Section with Renamed Title -->
+                <!-- ============================================ -->
+        <!-- FEATURE 2: Section Layout (COPIED FROM ORIGINAL) -->
         <!-- ============================================ -->
         <div class="bg-slate-800/50 backdrop-blur-lg p-8 rounded-2xl border border-white/10 shadow-2xl">
             <div class="flex items-center gap-3 mb-6">
                 <span class="text-4xl">🔄</span>
                 <div>
-                    <h2 class="text-2xl font-black text-white">FEATURE 2: Section Rename</h2>
-                    <p class="text-slate-400">ESTIMASI KERUGIAN BLOK → STATISTIK BLOK</p>
+                    <h2 class="text-2xl font-black text-white">Analisis Dampak Finansial</h2>
+                    <p class="text-slate-400">PAPARAN RISK (Kiri) + STATISTIK BLOK (Kanan)</p>
                 </div>
             </div>
 
-            <!-- Grid Layout: PAPARAN (Red) LEFT, STATISTIK (Blue) RIGHT -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-                <!-- LEFT: PAPARAN RISK ESTATE (Red) -->
+                
+                <!-- LEFT: PAPARAN RISIKO ESTATE (Red) -->
+                <!-- Risk Control Tower (Summary) -->
+            <div id="panelRiskSummary"
+                class="bg-gradient-to-br from-slate-900 via-rose-950 to-slate-900 text-white p-6 rounded-3xl shadow-xl relative overflow-hidden group border border-rose-500/30">
                 <div
-                    class="bg-gradient-to-br from-rose-950/90 to-red-950/90 p-6 rounded-2xl border-2 border-rose-500 shadow-2xl">
-                    <div class="flex items-center gap-3 mb-4">
-                        <div class="w-12 h-12 bg-rose-600 rounded-xl flex items-center justify-center animate-pulse">
-                            <span class="text-2xl">⚠️</span>
+                    class="absolute top-0 right-0 w-48 h-48 bg-orange-500/10 rounded-bl-[100px] transition-transform group-hover:scale-110 pointer-events-none">
+                </div>
+
+                <!-- Header -->
+                <div class="flex justify-between items-start mb-6 relative z-10">
+                    <div>
+                        <h3 class="text-rose-400 text-[10px] font-black uppercase tracking-widest mb-1">Risk Control
+                            Tower</h3>
+                        <h2 class="text-2xl font-black text-white tracking-tight">PAPARAN RISIKO ESTATE</h2>
+                    </div>
+                </div>
+
+                <!-- Main Number -->
+                <div class="mb-6 relative z-10">
+                    <span class="text-[10px] uppercase font-bold text-slate-400 block mb-1">Total Potensi Kerugian (8
+                        Blok Kritis)</span>
+                    <div class="flex items-baseline gap-1">
+                        <span class="text-xl font-bold text-rose-500">Rp</span>
+                        <span class="text-5xl font-black text-white tracking-tighter" id="summaryTotalLoss">--</span>
+                        <span class="text-sm font-bold text-slate-400">Miliar</span>
+                    </div>
+                    <p class="text-[10px] text-rose-300/80 mt-1 italic">*Akumulasi kerugian dari 8 blok berstatus KRITIS
+                    </p>
+                </div>
+
+                <!-- Stats Grid -->
+                <div class="grid grid-cols-2 gap-3 pb-6 border-b border-rose-500/20 mb-4">
+                    <div class="bg-black/30 p-3 rounded-xl border border-white/5">
+                        <span class="text-[9px] font-black text-slate-400 uppercase block mb-1">Blok Kritis</span>
+                        <span class="text-2xl font-black text-white" id="summaryCriticalCount">--</span>
+                        <span class="text-xs font-bold text-slate-500 ml-1">Blok</span>
+                    </div>
+                    <div class="bg-black/30 p-3 rounded-xl border border-white/5">
+                        <span class="text-[9px] font-black text-slate-400 uppercase block mb-1">Area Berisiko</span>
+                        <span class="text-2xl font-black text-white" id="summaryRiskArea">--</span>
+                        <span class="text-xs font-bold text-slate-500 ml-1">Ha</span>
+                    </div>
+                </div>
+
+                <!-- Watchlist Container -->
+                <div class="space-y-2 mt-4 pt-4 border-t border-rose-500/20 max-h-[400px] overflow-y-auto pr-2 custom-scrollbar"
+                    id="riskWatchlistContainer">
+                    <div class="text-center text-xs text-slate-500 py-4 italic">Loading Risk Data...</div>
+                </div>
+
+                <!-- RIGHT: STATISTIK BLOK / ESTIMASI KERUGIAN (Blue) -->
+                <!-- Left Financial (Blok A) -->
+            <div
+                class="bg-gradient-to-br from-indigo-900 to-slate-900 text-white p-6 rounded-3xl shadow-xl relative overflow-hidden group border border-indigo-500/30">
+                <div
+                    class="absolute top-0 right-0 w-48 h-48 bg-indigo-500/10 rounded-bl-[100px] transition-transform group-hover:scale-110 pointer-events-none">
+                </div>
+
+                <!-- Header: Title & Block Name Large -->
+                <div class="flex justify-between items-start mb-6 relative z-10">
+                    <span class="text-indigo-300 text-[10px] font-black uppercase tracking-widest mt-1">Estimasi
+                        Kerugian (Blok A)</span>
+                    <span id="finTitleLeft"
+                        class="text-4xl font-black text-white tracking-tighter drop-shadow-lg">--</span>
+                </div>
+
+                <!-- Main Number: Loss Value -->
+                <div class="flex items-baseline gap-1 mb-6 relative z-10">
+                    <span class="text-2xl font-bold text-red-500">Rp</span>
+                    <span class="text-6xl font-black text-white tracking-tighter" id="finLossLeft">0</span>
+                    <span class="text-xl font-bold text-slate-400">Juta</span>
+                </div>
+
+                <!-- Detailed Grid: Potensi vs Realisasi vs Gap -->
+                <div
+                    class="grid grid-cols-2 gap-4 text-xs font-bold bg-black/30 p-4 rounded-xl border border-indigo-500/20 relative z-10">
+                    <div>
+                        <div class="mb-2">
+                            <p class="text-indigo-200/60 uppercase text-xs tracking-wider font-bold mb-1">Potensi Est
+                            </p>
+                            <p class="text-white text-3xl font-black"><span id="finPotLeft">--</span> <span
+                                    class="text-xs opacity-50">Ton/Ha</span></p>
                         </div>
                         <div>
-                            <h3 class="text-lg font-black text-white uppercase">PAPARAN RISIKO ESTATE</h3>
-                            <p class="text-rose-300 text-xs">8 Blok Kritis</p>
+                            <p class="text-indigo-200/60 uppercase text-xs tracking-wider font-bold mb-1">Realisasi Act
+                            </p>
+                            <p class="text-white text-3xl font-black"><span id="finRealLeft">--</span> <span
+                                    class="text-xs opacity-50">Ton/Ha</span></p>
                         </div>
                     </div>
-                    <div class="text-center mb-4">
-                        <div class="text-sm text-rose-300 mb-1">Total Potensi Kerugian</div>
-                        <div class="text-5xl font-black text-white">1.35</div>
-                        <div class="text-sm text-slate-400">Miliar</div>
+                    <div class="text-right border-l border-indigo-500/20 pl-4">
+                        <div class="mb-2">
+                            <p class="text-indigo-200/60 uppercase text-xs tracking-wider font-bold mb-1">Gap (Volume)
+                            </p>
+                            <p class="text-red-400 text-3xl font-black" id="finGapTonLeft">--</p>
+                        </div>
+                        <div>
+                            <p class="text-indigo-200/60 uppercase text-xs tracking-wider font-bold mb-1">Gap (Persen)
+                            </p>
+                            <p class="font-mono text-3xl font-black" id="finGapPctLeft">--%</p>
+                        </div>
                     </div>
-                    <div class="space-y-2 max-h-96 overflow-y-auto custom-scrollbar">
-
-                        <div class="bg-rose-900/40 p-3 rounded-xl border border-rose-500/30 hover:border-rose-400 transition-all cursor-pointer" onclick="openBlockModal('D003A')">
-                            <div class="flex justify-between items-center">
-                                <div>
-                                    <span class="text-white font-bold">D003A</span>
-                                    <span class="text-rose-300 text-xs ml-2">AR: 7.2%</span>
-                                </div>
-                                <span class="text-rose-200">Rp 176.8 Jt</span>
-                            </div>
-                        </div>
-
-                        <div class="bg-rose-900/40 p-3 rounded-xl border border-rose-500/30 hover:border-rose-400 transition-all cursor-pointer" onclick="openBlockModal('D004A')">
-                            <div class="flex justify-between items-center">
-                                <div>
-                                    <span class="text-white font-bold">D004A</span>
-                                    <span class="text-rose-300 text-xs ml-2">AR: 10.7%</span>
-                                </div>
-                                <span class="text-rose-200">Rp 146.2 Jt</span>
-                            </div>
-                        </div>
-
-                        <div class="bg-rose-900/40 p-3 rounded-xl border border-rose-500/30 hover:border-rose-400 transition-all cursor-pointer" onclick="openBlockModal('D001A')">
-                            <div class="flex justify-between items-center">
-                                <div>
-                                    <span class="text-white font-bold">D001A</span>
-                                    <span class="text-rose-300 text-xs ml-2">AR: 7.5%</span>
-                                </div>
-                                <span class="text-rose-200">Rp 182.3 Jt</span>
-                            </div>
-                        </div>
-
-                        <div class="bg-rose-900/40 p-3 rounded-xl border border-rose-500/30 hover:border-rose-400 transition-all cursor-pointer" onclick="openBlockModal('E003A')">
-                            <div class="flex justify-between items-center">
-                                <div>
-                                    <span class="text-white font-bold">E003A</span>
-                                    <span class="text-rose-300 text-xs ml-2">AR: 6.8%</span>
-                                </div>
-                                <span class="text-rose-200">Rp 209.0 Jt</span>
-                            </div>
-                        </div>
-
-                        <div class="bg-rose-900/40 p-3 rounded-xl border border-rose-500/30 hover:border-rose-400 transition-all cursor-pointer" onclick="openBlockModal('E001A')">
-                            <div class="flex justify-between items-center">
-                                <div>
-                                    <span class="text-white font-bold">E001A</span>
-                                    <span class="text-rose-300 text-xs ml-2">AR: 6.4%</span>
-                                </div>
-                                <span class="text-rose-200">Rp 178.9 Jt</span>
-                            </div>
-                        </div>
-
-                        <div class="bg-rose-900/40 p-3 rounded-xl border border-rose-500/30 hover:border-rose-400 transition-all cursor-pointer" onclick="openBlockModal('E002A')">
-                            <div class="flex justify-between items-center">
-                                <div>
-                                    <span class="text-white font-bold">E002A</span>
-                                    <span class="text-rose-300 text-xs ml-2">AR: 8.3%</span>
-                                </div>
-                                <span class="text-rose-200">Rp 189.5 Jt</span>
-                            </div>
-                        </div>
-
-                        <div class="bg-rose-900/40 p-3 rounded-xl border border-rose-500/30 hover:border-rose-400 transition-all cursor-pointer" onclick="openBlockModal('F002A')">
-                            <div class="flex justify-between items-center">
-                                <div>
-                                    <span class="text-white font-bold">F002A</span>
-                                    <span class="text-rose-300 text-xs ml-2">AR: 8.1%</span>
-                                </div>
-                                <span class="text-rose-200">Rp 168.0 Jt</span>
-                            </div>
-                        </div>
-
-                        <div class="bg-rose-900/40 p-3 rounded-xl border border-rose-500/30 hover:border-rose-400 transition-all cursor-pointer" onclick="openBlockModal('F004A')">
-                            <div class="flex justify-between items-center">
-                                <div>
-                                    <span class="text-white font-bold">F004A</span>
-                                    <span class="text-rose-300 text-xs ml-2">AR: 7.4%</span>
-                                </div>
-                                <span class="text-rose-200">Rp 102.6 Jt</span>
-                            </div>
-                        </div>
-
-                    </div
                 </div>
+
+                <!-- Footer Stats: Detailed Grid -->
+                <div class="grid grid-cols-3 gap-2 mt-4 pt-4 border-t border-indigo-500/20 relative z-10 text-xs">
+
+                    <!-- Col 1: Luas & SPH -->
+                    <div class="space-y-2 border-r border-indigo-500/10 pr-2">
+                        <div>
+                            <span class="text-indigo-200/60 font-bold block mb-0.5 text-[10px] uppercase">Luas
+                                Area</span>
+                            <span class="text-white font-black text-2xl" id="finLuasLeft">-- Ha</span>
+                        </div>
+                        <div>
+                            <span class="text-indigo-200/60 font-bold block mb-0.5 text-[10px] uppercase">Kerapatan
+                                (SPH)</span>
+                            <span class="text-white font-black text-2xl" id="finSphLeft">--</span>
+                        </div>
+                    </div>
+
+                    <!-- Col 2: TT & Tingkat Infeksi -->
+                    <div class="space-y-2 border-r border-indigo-500/10 pr-2 pl-2">
+                        <div>
+                            <span class="text-indigo-200/60 font-bold block mb-0.5 text-[10px] uppercase">Tahun
+                                Tanam</span>
+                            <span class="text-white font-black text-xl" id="finTTLeft">--</span>
+                        </div>
+                        <div>
+                            <span class="text-indigo-200/60 font-bold block mb-0.5 text-[10px] uppercase">Tingkat
+                                Infeksi
+                                (NDRE vs Sensus)</span>
+                            <div class="flex items-baseline gap-2">
+                                <span class="text-red-400 font-black text-xl" id="finARLeft">--%</span>
+                                <span class="text-white/30 text-[10px] font-bold">vs</span>
+                                <span class="text-yellow-400 font-black text-xl" id="finCensusRateLeft">--%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Col 3: Mitigasi & Status -->
+                    <div class="space-y-2 pl-2 text-right">
+                        <div>
+                            <div class="flex items-center justify-end gap-2 mb-1">
+                                <span class="text-slate-500 text-[9px] font-bold uppercase mr-1">Unit:</span>
+                                <label class="relative inline-flex items-center cursor-pointer group">
+                                    <input type="checkbox" id="toggleMitigationUnitLeft" class="sr-only peer">
+
+                                    <!-- Toggle Track -->
+                                    <div
+                                        class="w-9 h-5 bg-emerald-900/50 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-emerald-500 after:border-emerald-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-indigo-900/80 peer-checked:after:bg-indigo-400 peer-checked:after:border-indigo-200">
+                                    </div>
+
+                                    <!-- Dynamic Label -->
+                                    <span class="ml-2 text-[9px] font-black tracking-wider w-[40px] text-left">
+                                        <span class="text-emerald-500 block peer-checked:hidden">TOTAL</span>
+                                        <span class="text-indigo-400 hidden peer-checked:block">PER HA</span>
+                                    </span>
+                                </label>
+                            </div>
+                            <span class="text-emerald-400 font-black text-lg tracking-tight" id="finMitigasiLeft">Rp
+                                --</span>
+                        </div>
+                        <div>
+                            <span class="text-white/40 text-[9px] uppercase font-black block mb-0.5">Status
+                                Indikasi</span>
+                            <div id="finSymptomLagLeft"
+                                class="inline-block px-2 py-1 rounded bg-slate-800 border border-slate-600 text-[10px] font-bold text-slate-400">
+                                --
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             </div>
         </div>
 
-        <!-- ============================================ -->
         <!-- FEATURE 1: Treatment Comparison Chart -->
         <!-- ============================================ -->
         <div class="bg-slate-800/50 backdrop-blur-lg p-8 rounded-2xl border border-white/10 shadow-2xl">
