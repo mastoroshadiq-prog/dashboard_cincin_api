@@ -1157,7 +1157,7 @@ const closeBlockModal = (code) => { document.getElementById('modal' + code).clas
                 totalArea += (data.luas_ha || 0);
                 
                 html += `
-                    <div class="bg-rose-900/40 p-3 rounded-xl border border-rose-500/30 hover:border-rose-400 transition-all cursor-pointer">
+                    <div class="bg-rose-900/40 p-3 rounded-xl border border-rose-500/30 hover:border-rose-400 transition-all cursor-pointer" onclick="loadBlockData('${code}')">
                         <div class="flex justify-between items-center">
                             <div>
                                 <span class="text-white font-bold text-sm">${code}</span>
@@ -1177,6 +1177,49 @@ const closeBlockModal = (code) => { document.getElementById('modal' + code).clas
             document.getElementById('summaryRiskArea').textContent = totalArea.toFixed(1);
         }
         
+
+        // Load block data into ESTIMASI panel
+        function loadBlockData(code) {
+            if (!BLOCKS_DATA[code]) return;
+            
+            const data = BLOCKS_DATA[code];
+            
+            // Update block name
+            document.getElementById('finTitleLeft').textContent = code;
+            
+            // Update loss value
+            document.getElementById('finLossLeft').textContent = Math.round(data.loss_value_juta || 0);
+            
+            // Update Potensi & Realisasi
+            document.getElementById('finPotLeft').textContent = (data.potensi_ton_ha || 0).toFixed(2);
+            document.getElementById('finRealLeft').textContent = (data.realisasi_ton_ha || 0).toFixed(2);
+            
+            // Update Gap
+            const gap = Math.abs(data.gap_ton_ha || 0);
+            document.getElementById('finGapTonLeft').textContent = gap.toFixed(2);
+            
+            const gapPct = Math.abs(data.gap_pct || 0);
+            const gapPctEl = document.getElementById('finGapPctLeft');
+            gapPctEl.textContent = gapPct.toFixed(0) + '%';
+            gapPctEl.className = gapPct > 20 ? 'text-red-400 text-3xl font-black' : 'text-emerald-400 text-3xl font-black';
+            
+            // Update Footer Stats
+            document.getElementById('finLuasLeft').textContent = (data.luas_ha || 0).toFixed(1) + ' Ha';
+            document.getElementById('finSphLeft').textContent = data.sph || 0;
+            document.getElementById('finTTLeft').textContent = data.tt || '--';
+            document.getElementById('finARLeft').textContent = (data.attack_rate || 0).toFixed(1) + '%';
+            document.getElementById('finCensusRateLeft').textContent = (data.census_rate_pct || 0).toFixed(2) + '%';
+            document.getElementById('finMitigasiLeft').textContent = 'Rp ' + (data.mitigation_cost_juta || 0).toFixed(1) + ' Jt';
+            
+            // Update status
+            const statusEl = document.getElementById('finSymptomLagLeft');
+            const narrative = data.status_narrative || '--';
+            statusEl.textContent = narrative;
+            statusEl.className = narrative.includes('STABIL') || narrative.includes('MONITORING') 
+                ? 'inline-block px-2 py-1 rounded bg-green-800 border border-green-600 text-[10px] font-bold text-green-200'
+                : 'inline-block px-2 py-1 rounded bg-red-800 border border-red-600 text-[10px] font-bold text-red-200';
+        }
+
         // Auto-run on load
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', renderPaparanRisk);
