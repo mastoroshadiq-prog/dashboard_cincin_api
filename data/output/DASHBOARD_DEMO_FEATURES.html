@@ -253,18 +253,19 @@
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- DEGRADATION CHART (below ESTIMASI panel) -->
-                <div id="degradationChartContainer"
-                    class="hidden mt-4 p-4 bg-indigo-900/20 rounded-xl border border-indigo-500/30">
-                    <h4 class="text-white text-sm font-bold mb-3 flex items-center gap-2">
-                        📉 Degradation Timeline (No Treatment)
-                    </h4>
-                    <div style="height: 300px;">
-                        <canvas id="degradationChart"></canvas>
+                    <!-- DEGRADATION CHART (inside ESTIMASI panel) -->
+                    <div id="degradationChartContainer" class="hidden mt-4 pt-4 border-t border-indigo-500/20">
+                        <h4 class="text-white text-xs font-bold mb-3 flex items-center gap-2">
+                            📉 Degradation Timeline (No Treatment)
+                        </h4>
+                        <div style="height: 250px;">
+                            <canvas id="degradationChart"></canvas>
+                        </div>
                     </div>
                 </div>
+
+
 
                 <!-- BREAKDOWN SECTION (hidden by default, shown after block click) -->
                 <div id="blockBreakdownSection"
@@ -954,12 +955,14 @@
             const prevented = total3Year * 0.70, netBenefit = prevented - treatmentCost;
             document.getElementById('treatmentPrevented').textContent = 'Rp ' + Math.round(prevented) + ' Juta';
             document.getElementById('treatmentNetBenefit').textContent = 'Rp ' + Math.round(netBenefit) + ' Juta';
-            
+
             // DEGRADATION CHART
             document.getElementById('degradationChartContainer').classList.remove('hidden');
             const ctx2 = document.getElementById('degradationChart');
-            if (window.degradationChart) window.degradationChart.destroy();
-            
+            if (window.degradationChart && typeof window.degradationChart.destroy === 'function') {
+                window.degradationChart.destroy();
+            }
+
             window.degradationChart = new Chart(ctx2, {
                 type: 'line',
                 data: {
