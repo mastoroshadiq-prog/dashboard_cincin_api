@@ -255,6 +255,17 @@
                     </div>
                 </div>
 
+                <!-- DEGRADATION CHART (below ESTIMASI panel) -->
+                <div id="degradationChartContainer"
+                    class="hidden mt-4 p-4 bg-indigo-900/20 rounded-xl border border-indigo-500/30">
+                    <h4 class="text-white text-sm font-bold mb-3 flex items-center gap-2">
+                        📉 Degradation Timeline (No Treatment)
+                    </h4>
+                    <div style="height: 300px;">
+                        <canvas id="degradationChart"></canvas>
+                    </div>
+                </div>
+
                 <!-- BREAKDOWN SECTION (hidden by default, shown after block click) -->
                 <div id="blockBreakdownSection"
                     class="hidden mt-6 p-6 bg-slate-900/30 rounded-2xl border border-white/10 col-span-2">
@@ -779,7 +790,7 @@
             if (!BLOCKS_DATA) return;
 
             // Update button states
-            document.getElementById('sortByAR').className = sortBy === 'ar' 
+            document.getElementById('sortByAR').className = sortBy === 'ar'
                 ? 'px-3 py-1 rounded-lg text-xs font-bold bg-rose-600 text-white border border-rose-400'
                 : 'px-3 py-1 rounded-lg text-xs font-bold bg-rose-900/30 text-rose-300 border border-rose-500/30';
             document.getElementById('sortByLoss').className = sortBy === 'loss'
@@ -943,6 +954,82 @@
             const prevented = total3Year * 0.70, netBenefit = prevented - treatmentCost;
             document.getElementById('treatmentPrevented').textContent = 'Rp ' + Math.round(prevented) + ' Juta';
             document.getElementById('treatmentNetBenefit').textContent = 'Rp ' + Math.round(netBenefit) + ' Juta';
+            
+            // DEGRADATION CHART
+            document.getElementById('degradationChartContainer').classList.remove('hidden');
+            const ctx2 = document.getElementById('degradationChart');
+            if (window.degradationChart) window.degradationChart.destroy();
+            
+            window.degradationChart = new Chart(ctx2, {
+                type: 'line',
+                data: {
+                    labels: ['Tahun 0 (Saat Ini)', 'Tahun 1', 'Tahun 2', 'Tahun 3'],
+                    datasets: [
+                        {
+                            label: 'Tingkat Infeksi (%)',
+                            data: [ar0, ar1, ar2, ar3],
+                            borderColor: 'rgba(239, 68, 68, 1)',
+                            backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                            borderWidth: 3,
+                            tension: 0.3,
+                            yAxisID: 'y1'
+                        },
+                        {
+                            label: 'Gap Hasil (%)',
+                            data: [gap0, gap1, gap2, gap3],
+                            borderColor: 'rgba(251, 146, 60, 1)',
+                            backgroundColor: 'rgba(251, 146, 60, 0.1)',
+                            borderWidth: 3,
+                            tension: 0.3,
+                            yAxisID: 'y1'
+                        },
+                        {
+                            label: 'SPH (trees/ha)',
+                            data: [sph0, sph1, sph2, sph3],
+                            borderColor: 'rgba(234, 179, 8, 1)',
+                            backgroundColor: 'rgba(234, 179, 8, 0.1)',
+                            borderWidth: 3,
+                            tension: 0.3,
+                            yAxisID: 'y2'
+                        },
+                        {
+                            label: 'Kerugian (Juta)',
+                            data: [loss0, loss1, loss2, loss3],
+                            borderColor: 'rgba(59, 130, 246, 1)',
+                            backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                            borderWidth: 3,
+                            tension: 0.3,
+                            yAxisID: 'y3'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: { mode: 'index', intersect: false },
+                    plugins: {
+                        legend: {
+                            labels: { color: 'white', font: { size: 11, weight: 'bold' }, padding: 10 }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: (ctx) => {
+                                    let label = ctx.dataset.label || '';
+                                    if (label.includes('Kerugian')) return label + ': Rp ' + Math.round(ctx.parsed.y) + ' Jt';
+                                    if (label.includes('SPH')) return label + ': ' + Math.round(ctx.parsed.y) + ' trees/ha';
+                                    return label + ': ' + ctx.parsed.y.toFixed(1) + '%';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: { ticks: { color: 'white', font: { size: 10 } }, grid: { color: 'rgba(255,255,255,0.1)' } },
+                        y1: { type: 'linear', display: true, position: 'left', title: { display: true, text: 'AR/Gap (%)', color: 'white' }, ticks: { color: 'white' }, grid: { color: 'rgba(255,255,255,0.1)' } },
+                        y2: { type: 'linear', display: true, position: 'right', title: { display: true, text: 'SPH', color: 'white' }, ticks: { color: 'white' }, grid: { drawOnChartArea: false } },
+                        y3: { type: 'linear', display: false, position: 'right' }
+                    }
+                }
+            });
         }
 
         // ====== AUTO-RUN ======
