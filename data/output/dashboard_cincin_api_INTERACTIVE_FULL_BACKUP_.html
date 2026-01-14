@@ -411,62 +411,7 @@
                             </div>
                         </div>
 
-                        
-
-        <!-- ============================================ -->
-        <!-- FEATURE 1: Before/After Treatment Comparison -->
-        <!-- ============================================ -->
-        <div class="mt-8 p-6 bg-slate-800/50 backdrop-blur-lg rounded-2xl border border-white/10 shadow-2xl">
-            <div class="flex items-center gap-3 mb-6">
-                <span class="text-4xl">📊</span>
-                <div>
-                    <h2 class="text-2xl font-black text-white">Perbandingan: TANPA vs DENGAN Treatment</h2>
-                    <p class="text-slate-400">Proyeksi 3 tahun dengan degradation model</p>
-                </div>
-            </div>
-
-            <!-- Chart Container -->
-            <div class="bg-black/30 p-6 rounded-xl border border-white/10 mb-4">
-                <h3 class="text-lg font-bold text-white mb-4 text-center">
-                    Perbandingan: TANPA vs DENGAN Treatment (3 Tahun)
-                </h3>
-                <div style="height: 350px;">
-                    <canvas id="treatmentComparisonChart"></canvas>
-                </div>
-            </div>
-
-            <!-- Summary Boxes -->
-            <div class="grid grid-cols-3 gap-4">
-                <div class="text-center p-4 bg-red-900/30 rounded-xl border border-red-500/30">
-                    <div class="text-xs text-red-300 font-bold uppercase mb-1">Total TANPA Treatment</div>
-                    <div class="text-3xl font-black text-red-400">Rp 6.2 M</div>
-                    <div class="text-xs text-red-400 mt-1">Baseline (no action)</div>
-                </div>
-                <div class="text-center p-4 bg-green-900/30 rounded-xl border border-green-500/30">
-                    <div class="text-xs text-green-300 font-bold uppercase mb-1">Total DENGAN Treatment</div>
-                    <div class="text-3xl font-black text-green-400">Rp 1.86 M</div>
-                    <div class="text-xs text-green-400 mt-1">With intervention (70% effective)</div>
-                </div>
-                <div class="text-center p-4 bg-emerald-900/30 rounded-xl border-2 border-emerald-500 shadow-lg">
-                    <div class="text-xs text-emerald-300 font-bold uppercase mb-1">💰 PENGHEMATAN</div>
-                    <div class="text-3xl font-black text-emerald-400">Rp 4.3 M</div>
-                    <div class="text-xs text-emerald-400 mt-1">Savings in 3 years</div>
-                </div>
-            </div>
-        </div>
-
-\n        <!-- ============================================ -->
-        <!-- FEATURE 3: Visual Charts in Modals -->
-        <!-- ============================================ -->
-        <div class="bg-slate-800/50 backdrop-blur-lg p-8 rounded-2xl border border-white/10 shadow-2xl">
-            <div class="flex items-center gap-3 mb-6">
-                <span class="text-4xl">📈</span>
-                <div>
-                    <h2 class="text-2xl font-black text-white">FEATURE 3: Visual Charts in Breakdown Modals</h2>
-                    <p class="text-slate-400">Transform text/tables menjadi interactive charts</p>
-                </div>
-        </div>
-<!-- Financial Impact Grid -->
+                        <!-- Financial Impact Grid -->
                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
                             <div class="bg-black/30 backdrop-blur-sm p-4 rounded-xl border border-rose-500/30">
                                 <div class="text-xs text-rose-300 font-bold uppercase mb-1">Kerugian Saat Ini (Tahun 0)
@@ -4223,74 +4168,6 @@
                         });
                 }
             });
-        
-        // Feature 1: Treatment Comparison Chart
-        const ctx1 = document.getElementById('treatmentComparisonChart').getContext('2d');
-        const treatmentChart = new Chart(ctx1, {
-            type: 'bar',
-            data: {
-                labels: ['Tahun 0', 'Tahun 1', 'Tahun 2', 'Tahun 3'],
-                datasets: [
-                    {
-                        label: 'TANPA Treatment',
-                        data: [1353, 1567, 1974, 3133],
-                        backgroundColor: 'rgba(239, 68, 68, 0.8)',
-                        borderColor: 'rgba(239, 68, 68, 1)',
-                        borderWidth: 2
-                    },
-                    {
-                        label: 'DENGAN Treatment (70% effective)',
-                        data: [1353, 470, 592, 940], // 30% of no-treatment loss
-                        backgroundColor: 'rgba(52, 211, 153, 0.8)',
-                        borderColor: 'rgba(52, 211, 153, 1)',
-                        borderWidth: 2
-                    }
-                ]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        labels: {
-                            color: 'white',
-                            font: { size: 14, weight: 'bold' },
-                            padding: 20
-                        }
-                    },
-                    tooltip: {
-                        callbacks: {
-                            label: function (context) {
-                                return context.dataset.label + ': Rp ' +
-                                    context.parsed.y.toFixed(0) + ' Juta';
-                            }
-                        }
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        ticks: {
-                            color: 'white',
-                            callback: function (value) {
-                                return 'Rp ' + value + ' Jt';
-                            }
-                        },
-                        grid: { color: 'rgba(255,255,255,0.1)' },
-                        title: {
-                            display: true,
-                            text: 'Kerugian (Juta)',
-                            color: 'white',
-                            font: { size: 12, weight: 'bold' }
-                        }
-                    },
-                    x: {
-                        ticks: { color: 'white' },
-                        grid: { color: 'rgba(255,255,255,0.1)' }
-                    }
-                }
-            }
-        });
         </script>
 
 </body>
