@@ -102,10 +102,9 @@
                         </div>
                     </div>
 
-                    <!-- Watchlist Container -->
-                    <div class="space-y-2 mt-4 pt-4 border-t border-rose-500/20 max-h-[400px] overflow-y-auto pr-2 custom-scrollbar"
-                        id="riskWatchlistContainer">
-                        <div class="text-center text-xs text-slate-500 py-4 italic">Loading Risk Data...</div>
+                    <!-- Bar Chart Container -->
+                    <div class="mt-4 pt-4 border-t border-rose-500/20" style="height: 400px;">
+                        <canvas id="riskBarChart"></canvas>
                     </div>
                 </div>
 
@@ -757,28 +756,76 @@
         };
 
         // ====== POPULATE PAPARAN RISK ======
+        let riskChart = null;
         function renderPaparanRisk() {
-            const container = document.getElementById('riskWatchlistContainer');
-            if (!container || !BLOCKS_DATA) return;
+            if (!BLOCKS_DATA) return;
 
             const sorted = Object.entries(BLOCKS_DATA).sort((a, b) => (b[1].attack_rate || 0) - (a[1].attack_rate || 0));
-            let html = '', totalLoss = 0, totalArea = 0;
+            let totalLoss = 0, totalArea = 0;
 
+            const labels = [], arData = [], lossData = [], blockCodes = [];
             sorted.forEach(([code, data]) => {
-                const loss = data.loss_value_juta || 0;
-                const ar = data.attack_rate || 0;
-                totalLoss += loss;
+                totalLoss += (data.loss_value_juta || 0);
                 totalArea += (data.luas_ha || 0);
-                html += `<div class="bg-rose-900/40 p-3 rounded-xl border border-rose-500/30 hover:border-rose-400 transition-all cursor-pointer" onclick="loadBlockData('${code}')">
-                    <div class="flex justify-between items-center">
-                        <div><span class="text-white font-bold text-sm">${code}</span><span class="text-rose-300 text-xs ml-2">AR: ${ar.toFixed(1)}%</span></div>
-                        <span class="text-rose-200 text-sm">Rp ${loss.toFixed(1)} Jt</span>
-                    </div></div>`;
+                labels.push(`${code} • AR: ${(data.attack_rate || 0).toFixed(1)}%`);
+                arData.push(data.attack_rate || 0);
+                lossData.push(data.loss_value_juta || 0);
+                blockCodes.push(code);
             });
-            container.innerHTML = html;
+
             document.getElementById('summaryTotalLoss').textContent = (totalLoss / 1000).toFixed(2);
             document.getElementById('summaryCriticalCount').textContent = sorted.length;
             document.getElementById('summaryRiskArea').textContent = totalArea.toFixed(1);
+
+            const ctx = document.getElementById('riskBarChart');
+            if (riskChart) riskChart.destroy();
+
+            riskChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Loss (Juta)',
+                        data: lossData,
+                        backgroundColor: lossData.map((_, i) => {
+                            const intensity = 1 - (i / lossData.length);
+                            return `rgba(239, 68, 68, ${0.5 + intensity * 0.5})`;
+                        }),
+                        borderColor: 'rgba(239, 68, 68, 1)',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    onClick: (evt, activeEls) => {
+                        if (activeEls.length > 0) {
+                            const index = activeEls[0].index;
+                            loadBlockData(blockCodes[index]);
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: (ctx) => `Rp ${ctx.parsed.x.toFixed(1)} Juta`
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            ticks: { color: 'white', callback: (val) => 'Rp ' + val + ' Jt' },
+                            grid: { color: 'rgba(255,255,255,0.1)' }
+                        },
+                        y: {
+                            ticks: { color: 'white', font: { size: 11, weight: 'bold' } },
+                            grid: { display: false }
+                        }
+                    }
+                }
+            });
         }
 
         // ====== LOAD BLOCK DATA ======
