@@ -1,0 +1,258 @@
+{
+  "D001A": {
+    "block_code": "D001A",
+    "row_index": 87,
+    "year_planted": 2009,
+    "luas_ha": 25.8,
+    "years": {
+      "2023": {
+        "real_ton_total": 402.52,
+        "poten_ton_total": 609.0909090909091,
+        "real_ton_ha": 15.6,
+        "poten_ton_ha": 23.61,
+        "gap_ton_ha": 8.01,
+        "gap_pct": 33.9
+      },
+      "2024": {
+        "real_ton_total": 415.33,
+        "poten_ton_total": 600.125874125874,
+        "real_ton_ha": 16.1,
+        "poten_ton_ha": 23.26,
+        "gap_ton_ha": 7.16,
+        "gap_pct": 30.8
+      },
+      "2025": {
+        "real_ton_total": 449.32,
+        "poten_ton_total": 570.9580419580419,
+        "real_ton_ha": 17.42,
+        "poten_ton_ha": 22.13,
+        "gap_ton_ha": 4.71,
+        "gap_pct": 21.3
+      }
+    }
+  },
+  "D003A": {
+    "block_code": "D003A",
+    "row_index": 90,
+    "year_planted": 2009,
+    "luas_ha": 25.3,
+    "years": {
+      "2023": {
+        "real_ton_total": 413.9,
+        "poten_ton_total": 547.3776223776224,
+        "real_ton_ha": 16.36,
+        "poten_ton_ha": 21.64,
+        "gap_ton_ha": 5.28,
+        "gap_pct": 24.4
+      },
+      "2024": {
+        "real_ton_total": 395.45,
+        "poten_ton_total": 539.6153846153845,
+        "real_ton_ha": 15.63,
+        "poten_ton_ha": 21.33,
+        "gap_ton_ha": 5.7,
+        "gap_pct": 26.7
+      },
+      "2025": {
+        "real_ton_total": 417.73,
+        "poten_ton_total": 535.7342657342657,
+        "real_ton_ha": 16.51,
+        "poten_ton_ha": 21.18,
+        "gap_ton_ha": 4.67,
+        "gap_pct": 22.0
+      }
+    }
+  },
+  "D004A": {
+    "block_code": "D004A",
+    "row_index": 92,
+    "year_planted": 2009,
+    "luas_ha": 22.0,
+    "years": {
+      "2023": {
+        "real_ton_total": 362.98,
+        "poten_ton_total": 496.6783216783217,
+        "real_ton_ha": 16.5,
+        "poten_ton_ha": 22.58,
+        "gap_ton_ha": 6.08,
+        "gap_pct": 26.9
+      },
+      "2024": {
+        "real_ton_total": 368.66,
+        "poten_ton_total": 494.53846153846155,
+        "real_ton_ha": 16.76,
+        "poten_ton_ha": 22.48,
+        "gap_ton_ha": 5.72,
+        "gap_pct": 25.4
+      },
+      "2025": {
+        "real_ton_total": 383.92,
+        "poten_ton_total": 481.44055944055947,
+        "real_ton_ha": 17.45,
+        "poten_ton_ha": 21.88,
+        "gap_ton_ha": 4.43,
+        "gap_pct": 20.2
+      }
+    }
+  },
+  "E001A": {
+    "block_code": "E001A",
+    "row_index": 102,
+    "year_planted": 2009,
+    "luas_ha": 22.5,
+    "years": {
+      "2023": {
+        "real_ton_total": 379.15,
+        "poten_ton_total": 526.9230769230769,
+        "real_ton_ha": 16.85,
+        "poten_ton_ha": 23.42,
+        "gap_ton_ha": 6.57,
+        "gap_pct": 28.1
+      },
+      "2024": {
+        "real_ton_total": 342.38,
+        "poten_ton_total": 514.3076923076924,
+        "real_ton_ha": 15.22,
+        "poten_ton_ha": 22.86,
+        "gap_ton_ha": 7.64,
+        "gap_pct": 33.4
+      },
+      "2025": {
+        "real_ton_total": 383.28,
+        "poten_ton_total": 502.46153846153845,
+        "real_ton_ha": 17.03,
+        "poten_ton_ha": 22.33,
+        "gap_ton_ha": 5.3,
+        "gap_pct": 23.7
+      }
+    }
+  },
+  "E002A": {
+    "block_code": "E002A",
+    "row_index": 103,
+    "year_planted": 2009,
+    "luas_ha": 22.2,
+    "years": {
+      "2023": {
+        "real_ton_total": 329.73,
+        "poten_ton_total": 499.82517482517477,
+        "real_ton_ha": 14.85,
+        "poten_ton_ha": 22.51,
+        "gap_ton_ha": 7.66,
+        "gap_pct": 34.0
+      },
+      "2024": {
+        "real_ton_total": 307.11,
+        "poten_ton_total": 484.7202797202796,
+        "real_ton_ha": 13.83,
+        "poten_ton_ha": 21.83,
+        "gap_ton_ha": 8.0,
+        "gap_pct": 36.6
+      },
+      "2025": {
+        "real_ton_total": 346.98,
+        "poten_ton_total": 473.19580419580416,
+        "real_ton_ha": 15.63,
+        "poten_ton_ha": 21.32,
+        "gap_ton_ha": 5.69,
+        "gap_pct": 26.7
+      }
+    }
+  },
+  "E003A": {
+    "block_code": "E003A",
+    "row_index": 104,
+    "year_planted": 2009,
+    "luas_ha": 21.6,
+    "years": {
+      "2023": {
+        "real_ton_total": 302.29,
+        "poten_ton_total": 486.71328671328666,
+        "real_ton_ha": 13.99,
+        "poten_ton_ha": 22.53,
+        "gap_ton_ha": 8.54,
+        "gap_pct": 37.9
+      },
+      "2024": {
+        "real_ton_total": 320.79,
+        "poten_ton_total": 459.7902097902098,
+        "real_ton_ha": 14.85,
+        "poten_ton_ha": 21.29,
+        "gap_ton_ha": 6.44,
+        "gap_pct": 30.2
+      },
+      "2025": {
+        "real_ton_total": 303.66,
+        "poten_ton_total": 442.87412587412587,
+        "real_ton_ha": 14.06,
+        "poten_ton_ha": 20.5,
+        "gap_ton_ha": 6.44,
+        "gap_pct": 31.4
+      }
+    }
+  },
+  "E005A": {
+    "block_code": "E005A",
+    "row_index": 106,
+    "year_planted": 2009,
+    "luas_ha": 24.0,
+    "years": {
+      "2023": {
+        "real_ton_total": 412.19,
+        "poten_ton_total": 455.4195804195805,
+        "real_ton_ha": 17.17,
+        "poten_ton_ha": 18.98,
+        "gap_ton_ha": 1.81,
+        "gap_pct": 9.5
+      },
+      "2024": {
+        "real_ton_total": 429.6,
+        "poten_ton_total": 423.8671328671329,
+        "real_ton_ha": 17.9,
+        "poten_ton_ha": 17.66,
+        "gap_ton_ha": -0.24,
+        "gap_pct": -1.4
+      },
+      "2025": {
+        "real_ton_total": 439.02,
+        "poten_ton_total": 407.1678321678323,
+        "real_ton_ha": 18.29,
+        "poten_ton_ha": 16.97,
+        "gap_ton_ha": -1.32,
+        "gap_pct": -7.8
+      }
+    }
+  },
+  "E006A": {
+    "block_code": "E006A",
+    "row_index": 107,
+    "year_planted": 2009,
+    "luas_ha": 24.3,
+    "years": {
+      "2023": {
+        "real_ton_total": 443.27,
+        "poten_ton_total": 467.8321678321679,
+        "real_ton_ha": 18.24,
+        "poten_ton_ha": 19.25,
+        "gap_ton_ha": 1.01,
+        "gap_pct": 5.2
+      },
+      "2024": {
+        "real_ton_total": 472.07,
+        "poten_ton_total": 435.49650349650346,
+        "real_ton_ha": 19.43,
+        "poten_ton_ha": 17.92,
+        "gap_ton_ha": -1.51,
+        "gap_pct": -8.4
+      },
+      "2025": {
+        "real_ton_total": 442.54,
+        "poten_ton_total": 418.41958041958037,
+        "real_ton_ha": 18.21,
+        "poten_ton_ha": 17.22,
+        "gap_ton_ha": -0.99,
+        "gap_pct": -5.7
+      }
+    }
+  }
+}

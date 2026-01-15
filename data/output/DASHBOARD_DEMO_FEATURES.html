@@ -258,7 +258,7 @@
                     <div id="degradationChartContainer" class="hidden mt-4 pt-4 border-t border-indigo-500/20">
                         <div class="flex justify-between items-center mb-3">
                             <h4 class="text-white text-xs font-bold flex items-center gap-2">
-                                📊 Trend Realisasi Produksi (2023-2025)
+                                📊 Trend Realisasi Produksi (Data Sensus 2023-2025)
                             </h4>
                             <div class="flex gap-2">
                                 <button onclick="openYieldTrendModal()" 
@@ -878,7 +878,195 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         // ====== DATA ======
-        const BLOCKS_DATA = {
+        // REAL HISTORICAL YIELD DATA FROM EXCEL (2023-2025)
+        const HISTORICAL_YIELDS = {
+    'D001A': {
+        luas_ha: 25.8,
+        yields: {
+            2023: {
+                real_ton_ha: 15.6,
+                poten_ton_ha: 23.61,
+                gap_ton_ha: 8.01,
+                gap_pct: 33.9
+            },
+            2024: {
+                real_ton_ha: 16.1,
+                poten_ton_ha: 23.26,
+                gap_ton_ha: 7.16,
+                gap_pct: 30.8
+            },
+            2025: {
+                real_ton_ha: 17.42,
+                poten_ton_ha: 22.13,
+                gap_ton_ha: 4.71,
+                gap_pct: 21.3
+            },
+        }
+    },
+    'D003A': {
+        luas_ha: 25.3,
+        yields: {
+            2023: {
+                real_ton_ha: 16.36,
+                poten_ton_ha: 21.64,
+                gap_ton_ha: 5.28,
+                gap_pct: 24.4
+            },
+            2024: {
+                real_ton_ha: 15.63,
+                poten_ton_ha: 21.33,
+                gap_ton_ha: 5.7,
+                gap_pct: 26.7
+            },
+            2025: {
+                real_ton_ha: 16.51,
+                poten_ton_ha: 21.18,
+                gap_ton_ha: 4.67,
+                gap_pct: 22.0
+            },
+        }
+    },
+    'D004A': {
+        luas_ha: 22.0,
+        yields: {
+            2023: {
+                real_ton_ha: 16.5,
+                poten_ton_ha: 22.58,
+                gap_ton_ha: 6.08,
+                gap_pct: 26.9
+            },
+            2024: {
+                real_ton_ha: 16.76,
+                poten_ton_ha: 22.48,
+                gap_ton_ha: 5.72,
+                gap_pct: 25.4
+            },
+            2025: {
+                real_ton_ha: 17.45,
+                poten_ton_ha: 21.88,
+                gap_ton_ha: 4.43,
+                gap_pct: 20.2
+            },
+        }
+    },
+    'E001A': {
+        luas_ha: 22.5,
+        yields: {
+            2023: {
+                real_ton_ha: 16.85,
+                poten_ton_ha: 23.42,
+                gap_ton_ha: 6.57,
+                gap_pct: 28.1
+            },
+            2024: {
+                real_ton_ha: 15.22,
+                poten_ton_ha: 22.86,
+                gap_ton_ha: 7.64,
+                gap_pct: 33.4
+            },
+            2025: {
+                real_ton_ha: 17.03,
+                poten_ton_ha: 22.33,
+                gap_ton_ha: 5.3,
+                gap_pct: 23.7
+            },
+        }
+    },
+    'E002A': {
+        luas_ha: 22.2,
+        yields: {
+            2023: {
+                real_ton_ha: 14.85,
+                poten_ton_ha: 22.51,
+                gap_ton_ha: 7.66,
+                gap_pct: 34.0
+            },
+            2024: {
+                real_ton_ha: 13.83,
+                poten_ton_ha: 21.83,
+                gap_ton_ha: 8.0,
+                gap_pct: 36.6
+            },
+            2025: {
+                real_ton_ha: 15.63,
+                poten_ton_ha: 21.32,
+                gap_ton_ha: 5.69,
+                gap_pct: 26.7
+            },
+        }
+    },
+    'E003A': {
+        luas_ha: 21.6,
+        yields: {
+            2023: {
+                real_ton_ha: 13.99,
+                poten_ton_ha: 22.53,
+                gap_ton_ha: 8.54,
+                gap_pct: 37.9
+            },
+            2024: {
+                real_ton_ha: 14.85,
+                poten_ton_ha: 21.29,
+                gap_ton_ha: 6.44,
+                gap_pct: 30.2
+            },
+            2025: {
+                real_ton_ha: 14.06,
+                poten_ton_ha: 20.5,
+                gap_ton_ha: 6.44,
+                gap_pct: 31.4
+            },
+        }
+    },
+    'E005A': {
+        luas_ha: 24.0,
+        yields: {
+            2023: {
+                real_ton_ha: 17.17,
+                poten_ton_ha: 18.98,
+                gap_ton_ha: 1.81,
+                gap_pct: 9.5
+            },
+            2024: {
+                real_ton_ha: 17.9,
+                poten_ton_ha: 17.66,
+                gap_ton_ha: -0.24,
+                gap_pct: -1.4
+            },
+            2025: {
+                real_ton_ha: 18.29,
+                poten_ton_ha: 16.97,
+                gap_ton_ha: -1.32,
+                gap_pct: -7.8
+            },
+        }
+    },
+    'E006A': {
+        luas_ha: 24.3,
+        yields: {
+            2023: {
+                real_ton_ha: 18.24,
+                poten_ton_ha: 19.25,
+                gap_ton_ha: 1.01,
+                gap_pct: 5.2
+            },
+            2024: {
+                real_ton_ha: 19.43,
+                poten_ton_ha: 17.92,
+                gap_ton_ha: -1.51,
+                gap_pct: -8.4
+            },
+            2025: {
+                real_ton_ha: 18.21,
+                poten_ton_ha: 17.22,
+                gap_ton_ha: -0.99,
+                gap_pct: -5.7
+            },
+        }
+    },
+};
+
+                const BLOCKS_DATA = {
             "D003A": { "block_code": "D003A", "attack_rate": 7.2, "sph": 98, "tt": 2009, "luas_ha": 25.3, "realisasi_ton_ha": 16.88, "potensi_ton_ha": 21.54, "gap_ton_ha": -4.66, "gap_pct": -21.6, "census_rate_pct": 3.8, "mitigation_cost_juta": 50, "loss_value_juta": 176.8, "projected_loss_3yr": 540, "status_narrative": "CRYPTIC COLLAPSE" },
             "D004A": { "block_code": "D004A", "attack_rate": 10.7, "sph": 119, "tt": 2009, "luas_ha": 22, "realisasi_ton_ha": 17.45, "potensi_ton_ha": 21.88, "gap_ton_ha": -4.43, "gap_pct": -20.3, "census_rate_pct": 2.25, "mitigation_cost_juta": 50, "loss_value_juta": 146.2, "projected_loss_3yr": 540.9, "status_narrative": "CRYPTIC COLLAPSE" },
             "D001A": { "block_code": "D001A", "attack_rate": 7.5, "sph": 108, "tt": 2009, "luas_ha": 25.8, "realisasi_ton_ha": 17.17, "potensi_ton_ha": 21.88, "gap_ton_ha": -4.71, "gap_pct": -21.5, "census_rate_pct": 2.38, "mitigation_cost_juta": 50, "loss_value_juta": 182.3, "projected_loss_3yr": 675, "status_narrative": "CRYPTIC COLLAPSE" },
@@ -1462,14 +1650,20 @@
     }
 
     function renderYieldTrendModal(data) {
-        const currentYield = data.realisasi_ton_ha || 18.5;
-        const potentialYield = data.potensi_ton_ha || 26.0;
-        const gapTonHa = Math.abs(data.gap_ton_ha || 7.5);
+        const blockCode = currentBlockCode;
+        const historicalData = HISTORICAL_YIELDS[blockCode];
         
-        // Calculate historical trend
-        const year3ago = currentYield + (gapTonHa * 0.7);  // 2023
-        const year2ago = currentYield + (gapTonHa * 0.5);  // 2024
-        const year1ago = currentYield;  // 2025 (actual census data)
+        if (!historicalData) {
+            console.error('No historical data for block:', blockCode);
+            return;
+        }
+        
+        // REAL data from Excel (2023-2025)
+        const year3ago = historicalData.yields[2023]?.real_ton_ha || 0;
+        const year2ago = historicalData.yields[2024]?.real_ton_ha || 0;
+        const year1ago = historicalData.yields[2025]?.real_ton_ha || 0;
+        
+        const potentialYield = historicalData.yields[2025]?.poten_ton_ha || 0;
         
         // Populate table
         const tableData = [
@@ -1619,7 +1813,7 @@
                 <div>
                     <h2 class="text-2xl font-black text-white">📊 Trend Realisasi Produksi (Ton/Ha)</h2>
                     <p class="text-sm text-slate-400 mt-1">Block: <span id="yieldModalBlockCode" class="text-cyan-400 font-bold">--</span> | Periode: 2023-2025</p>
-                    <p class="text-xs text-yellow-400 mt-1">⚠️ Data trend dihitung dari realisasi 2025 (data historis belum tersedia)</p>
+                    <p class="text-xs text-emerald-400 mt-1">✅ Data realisasi produksi dari sensus lapangan 2023-2025</p>
                 </div>
                 <button onclick="closeYieldTrendModal()" 
                     class="w-10 h-10 rounded-lg bg-red-600/20 hover:bg-red-600 border border-red-500/50 text-white font-bold text-xl transition-all">
