@@ -1,0 +1,24 @@
+{
+  "division_code": "AME02",
+  "total_blocks": 37,
+  "total_area_ha": 843.5,
+  "avg_yield_2025": {
+    "real_ton_ha": 17.18,
+    "poten_ton_ha": 18.67,
+    "gap_ton_ha": 1.49,
+    "gap_pct": 8.0
+  },
+  "total_gap_tons": 1254.0,
+  "critical_blocks_count": 6,
+  "critical_blocks_pct": 16.2,
+  "top_8_critical": [
+    "F005A",
+    "F002A",
+    "E003A",
+    "E002A",
+    "F004A",
+    "F003A",
+    "E001A",
+    "D002A"
+  ]
+}
