@@ -6,77 +6,77 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Demo - 3 New Features</title>
     <script src="https://cdn.tailwindcss.com">
-    // Division Filter Function (Week 0 Sprint)
-    // Removed duplicate: currentDivision = 'AME_II';
-    
-    function filterByDivision(division) {
-        currentDivision = division;
-        
-        // Update button states
-        document.getElementById('divBtn_AME_II').className = division === 'AME_II' 
-            ? 'px-4 py-2 rounded-lg font-bold bg-blue-600 text-white border-2 border-blue-400 shadow-lg'
-            : 'px-4 py-2 rounded-lg font-bold bg-slate-700 text-slate-300 border-2 border-slate-600';
-        
-        document.getElementById('divBtn_AME_IV').className = division === 'AME_IV'
-            ? 'px-4 py-2 rounded-lg font-bold bg-purple-600 text-white border-2 border-purple-400 shadow-lg'
-            : 'px-4 py-2 rounded-lg font-bold bg-slate-700 text-slate-300 border-2 border-slate-600';
-        
-        document.getElementById('divBtn_ALL').className = division === 'ALL'
-            ? 'px-4 py-2 rounded-lg font-bold bg-emerald-600 text-white border-2 border-emerald-400 shadow-lg'
-            : 'px-4 py-2 rounded-lg font-bold bg-slate-700 text-slate-300 border-2 border-slate-600';
-        
-        // Update stats display
-        let statsText = '';
-        if (division === 'AME_II') {
-            statsText = 'AME II (TIER 1) - 8 blocks | NDRE Available ✅ | Total Area: ~200 Ha';
-        } else if (division === 'AME_IV') {
-            statsText = 'AME IV (TIER 1) - 28 blocks | NDRE Available ✅ | Total Area: TBD';
-        } else {
-            statsText = 'ALL ESTATE - 36+ blocks | Mixed NDRE coverage';
+        // Division Filter Function (Week 0 Sprint)
+        // Removed duplicate: currentDivision = 'AME_II';
+
+        function filterByDivision(division) {
+            currentDivision = division;
+
+            // Update button states
+            document.getElementById('divBtn_AME_II').className = division === 'AME_II'
+                ? 'px-4 py-2 rounded-lg font-bold bg-blue-600 text-white border-2 border-blue-400 shadow-lg'
+                : 'px-4 py-2 rounded-lg font-bold bg-slate-700 text-slate-300 border-2 border-slate-600';
+
+            document.getElementById('divBtn_AME_IV').className = division === 'AME_IV'
+                ? 'px-4 py-2 rounded-lg font-bold bg-purple-600 text-white border-2 border-purple-400 shadow-lg'
+                : 'px-4 py-2 rounded-lg font-bold bg-slate-700 text-slate-300 border-2 border-slate-600';
+
+            document.getElementById('divBtn_ALL').className = division === 'ALL'
+                ? 'px-4 py-2 rounded-lg font-bold bg-emerald-600 text-white border-2 border-emerald-400 shadow-lg'
+                : 'px-4 py-2 rounded-lg font-bold bg-slate-700 text-slate-300 border-2 border-slate-600';
+
+            // Update stats display
+            let statsText = '';
+            if (division === 'AME_II') {
+                statsText = 'AME II (TIER 1) - 8 blocks | NDRE Available ✅ | Total Area: ~200 Ha';
+            } else if (division === 'AME_IV') {
+                statsText = 'AME IV (TIER 1) - 28 blocks | NDRE Available ✅ | Total Area: TBD';
+            } else {
+                statsText = 'ALL ESTATE - 36+ blocks | Mixed NDRE coverage';
+            }
+            document.getElementById('divisionStats').innerHTML = `<strong>📊 ${statsText}</strong>`;
+
+            // TODO: Actually filter BLOCKS_DATA and re-render
+            // For now, just show message
+            alert(`Division filter: ${division}\n\nNote: Block filtering will be implemented next!\nCurrently showing AME II blocks.`);
         }
-        document.getElementById('divisionStats').innerHTML = `<strong>📊 ${statsText}</strong>`;
-        
-        // TODO: Actually filter BLOCKS_DATA and re-render
-        // For now, just show message
-        alert(`Division filter: ${division}\n\nNote: Block filtering will be implemented next!\nCurrently showing AME II blocks.`);
-    }
 
     </script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js">
-    // Division Filter Function (Week 0 Sprint)
-    // Removed duplicate: currentDivision = 'AME_II';
-    
-    function filterByDivision(division) {
-        currentDivision = division;
-        
-        // Update button states
-        document.getElementById('divBtn_AME_II').className = division === 'AME_II' 
-            ? 'px-4 py-2 rounded-lg font-bold bg-blue-600 text-white border-2 border-blue-400 shadow-lg'
-            : 'px-4 py-2 rounded-lg font-bold bg-slate-700 text-slate-300 border-2 border-slate-600';
-        
-        document.getElementById('divBtn_AME_IV').className = division === 'AME_IV'
-            ? 'px-4 py-2 rounded-lg font-bold bg-purple-600 text-white border-2 border-purple-400 shadow-lg'
-            : 'px-4 py-2 rounded-lg font-bold bg-slate-700 text-slate-300 border-2 border-slate-600';
-        
-        document.getElementById('divBtn_ALL').className = division === 'ALL'
-            ? 'px-4 py-2 rounded-lg font-bold bg-emerald-600 text-white border-2 border-emerald-400 shadow-lg'
-            : 'px-4 py-2 rounded-lg font-bold bg-slate-700 text-slate-300 border-2 border-slate-600';
-        
-        // Update stats display
-        let statsText = '';
-        if (division === 'AME_II') {
-            statsText = 'AME II (TIER 1) - 8 blocks | NDRE Available ✅ | Total Area: ~200 Ha';
-        } else if (division === 'AME_IV') {
-            statsText = 'AME IV (TIER 1) - 28 blocks | NDRE Available ✅ | Total Area: TBD';
-        } else {
-            statsText = 'ALL ESTATE - 36+ blocks | Mixed NDRE coverage';
+        // Division Filter Function (Week 0 Sprint)
+        // Removed duplicate: currentDivision = 'AME_II';
+
+        function filterByDivision(division) {
+            currentDivision = division;
+
+            // Update button states
+            document.getElementById('divBtn_AME_II').className = division === 'AME_II'
+                ? 'px-4 py-2 rounded-lg font-bold bg-blue-600 text-white border-2 border-blue-400 shadow-lg'
+                : 'px-4 py-2 rounded-lg font-bold bg-slate-700 text-slate-300 border-2 border-slate-600';
+
+            document.getElementById('divBtn_AME_IV').className = division === 'AME_IV'
+                ? 'px-4 py-2 rounded-lg font-bold bg-purple-600 text-white border-2 border-purple-400 shadow-lg'
+                : 'px-4 py-2 rounded-lg font-bold bg-slate-700 text-slate-300 border-2 border-slate-600';
+
+            document.getElementById('divBtn_ALL').className = division === 'ALL'
+                ? 'px-4 py-2 rounded-lg font-bold bg-emerald-600 text-white border-2 border-emerald-400 shadow-lg'
+                : 'px-4 py-2 rounded-lg font-bold bg-slate-700 text-slate-300 border-2 border-slate-600';
+
+            // Update stats display
+            let statsText = '';
+            if (division === 'AME_II') {
+                statsText = 'AME II (TIER 1) - 8 blocks | NDRE Available ✅ | Total Area: ~200 Ha';
+            } else if (division === 'AME_IV') {
+                statsText = 'AME IV (TIER 1) - 28 blocks | NDRE Available ✅ | Total Area: TBD';
+            } else {
+                statsText = 'ALL ESTATE - 36+ blocks | Mixed NDRE coverage';
+            }
+            document.getElementById('divisionStats').innerHTML = `<strong>📊 ${statsText}</strong>`;
+
+            // TODO: Actually filter BLOCKS_DATA and re-render
+            // For now, just show message
+            alert(`Division filter: ${division}\n\nNote: Block filtering will be implemented next!\nCurrently showing AME II blocks.`);
         }
-        document.getElementById('divisionStats').innerHTML = `<strong>📊 ${statsText}</strong>`;
-        
-        // TODO: Actually filter BLOCKS_DATA and re-render
-        // For now, just show message
-        alert(`Division filter: ${division}\n\nNote: Block filtering will be implemented next!\nCurrently showing AME II blocks.`);
-    }
 
     </script>
     <style>
@@ -107,6 +107,50 @@
         <div class="bg-gradient-to-r from-rose-600 to-orange-600 p-6 rounded-2xl shadow-2xl">
             <h1 class="text-3xl font-black text-white mb-2">📊 Dashboard Demo - 3 New Features</h1>
             <p class="text-white/80">Focused demo: Treatment comparison + Section rename + Enhanced modals</p>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- DIVISION SELECTOR (Week 0 Sprint Enhancement) -->
+    <!-- ============================================ -->
+    <div class="max-w-7xl mx-auto mb-8">
+        <div
+            class="bg-gradient-to-r from-blue-900/40 to-purple-900/40 rounded-2xl border-2 border-cyan-500/50 p-6 shadow-2xl">
+            <div class="flex items-center justify-between mb-4">
+                <div>
+                    <h2 class="text-2xl font-black text-cyan-400 mb-1">🌍 ESTATE DIVISION SELECTOR</h2>
+                    <p class="text-sm text-slate-300">Toggle between divisions to view their blocks</p>
+                </div>
+                <div class="flex gap-3">
+                    <button onclick="filterByDivision('AME_II')" id="divBtn_AME_II"
+                        class="px-6 py-3 rounded-xl font-bold text-sm bg-blue-600 text-white border-2 border-blue-400 shadow-lg hover:shadow-blue-500/50 transition-all transform hover:scale-105">
+                        📍 AME II
+                        <div class="text-xs opacity-75 mt-1">NDRE ✅</div>
+                    </button>
+                    <button onclick="filterByDivision('AME_IV')" id="divBtn_AME_IV"
+                        class="px-6 py-3 rounded-xl font-bold text-sm bg-slate-700 text-slate-300 border-2 border-slate-600 hover:shadow-purple-500/50 transition-all transform hover:scale-105">
+                        📍 AME IV
+                        <div class="text-xs opacity-75 mt-1">NDRE ✅</div>
+                    </button>
+                    <button onclick="filterByDivision('ALL')" id="divBtn_ALL"
+                        class="px-6 py-3 rounded-xl font-bold text-sm bg-slate-700 text-slate-300 border-2 border-slate-600 hover:shadow-emerald-500/50 transition-all transform hover:scale-105">
+                        🌐 ALL ESTATE
+                        <div class="text-xs opacity-75 mt-1">Mixed</div>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Division Stats Display -->
+            <div id="divisionStats" class="mt-4 p-4 bg-black/30 rounded-xl border border-cyan-500/30">
+                <div class="flex items-center gap-3">
+                    <div class="text-4xl">📊</div>
+                    <div>
+                        <div class="text-sm text-cyan-300 font-bold">Currently Viewing:</div>
+                        <div class="text-lg text-white font-black">AME II (TIER 1) - 8 blocks | NDRE Available ✅ | Area:
+                            ~200 Ha</div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -945,79 +989,79 @@
         window.addEventListener('load', () => {
             setTimeout(() => showChartDemo('3year'), 500);
         });
-    
-    // Division Filter Function (Week 0 Sprint)
-    // Removed duplicate: currentDivision = 'AME_II';
-    
-    function filterByDivision(division) {
-        currentDivision = division;
-        
-        // Update button states
-        document.getElementById('divBtn_AME_II').className = division === 'AME_II' 
-            ? 'px-4 py-2 rounded-lg font-bold bg-blue-600 text-white border-2 border-blue-400 shadow-lg'
-            : 'px-4 py-2 rounded-lg font-bold bg-slate-700 text-slate-300 border-2 border-slate-600';
-        
-        document.getElementById('divBtn_AME_IV').className = division === 'AME_IV'
-            ? 'px-4 py-2 rounded-lg font-bold bg-purple-600 text-white border-2 border-purple-400 shadow-lg'
-            : 'px-4 py-2 rounded-lg font-bold bg-slate-700 text-slate-300 border-2 border-slate-600';
-        
-        document.getElementById('divBtn_ALL').className = division === 'ALL'
-            ? 'px-4 py-2 rounded-lg font-bold bg-emerald-600 text-white border-2 border-emerald-400 shadow-lg'
-            : 'px-4 py-2 rounded-lg font-bold bg-slate-700 text-slate-300 border-2 border-slate-600';
-        
-        // Update stats display
-        let statsText = '';
-        if (division === 'AME_II') {
-            statsText = 'AME II (TIER 1) - 8 blocks | NDRE Available ✅ | Total Area: ~200 Ha';
-        } else if (division === 'AME_IV') {
-            statsText = 'AME IV (TIER 1) - 28 blocks | NDRE Available ✅ | Total Area: TBD';
-        } else {
-            statsText = 'ALL ESTATE - 36+ blocks | Mixed NDRE coverage';
+
+        // Division Filter Function (Week 0 Sprint)
+        // Removed duplicate: currentDivision = 'AME_II';
+
+        function filterByDivision(division) {
+            currentDivision = division;
+
+            // Update button states
+            document.getElementById('divBtn_AME_II').className = division === 'AME_II'
+                ? 'px-4 py-2 rounded-lg font-bold bg-blue-600 text-white border-2 border-blue-400 shadow-lg'
+                : 'px-4 py-2 rounded-lg font-bold bg-slate-700 text-slate-300 border-2 border-slate-600';
+
+            document.getElementById('divBtn_AME_IV').className = division === 'AME_IV'
+                ? 'px-4 py-2 rounded-lg font-bold bg-purple-600 text-white border-2 border-purple-400 shadow-lg'
+                : 'px-4 py-2 rounded-lg font-bold bg-slate-700 text-slate-300 border-2 border-slate-600';
+
+            document.getElementById('divBtn_ALL').className = division === 'ALL'
+                ? 'px-4 py-2 rounded-lg font-bold bg-emerald-600 text-white border-2 border-emerald-400 shadow-lg'
+                : 'px-4 py-2 rounded-lg font-bold bg-slate-700 text-slate-300 border-2 border-slate-600';
+
+            // Update stats display
+            let statsText = '';
+            if (division === 'AME_II') {
+                statsText = 'AME II (TIER 1) - 8 blocks | NDRE Available ✅ | Total Area: ~200 Ha';
+            } else if (division === 'AME_IV') {
+                statsText = 'AME IV (TIER 1) - 28 blocks | NDRE Available ✅ | Total Area: TBD';
+            } else {
+                statsText = 'ALL ESTATE - 36+ blocks | Mixed NDRE coverage';
+            }
+            document.getElementById('divisionStats').innerHTML = `<strong>📊 ${statsText}</strong>`;
+
+            // TODO: Actually filter BLOCKS_DATA and re-render
+            // For now, just show message
+            alert(`Division filter: ${division}\n\nNote: Block filtering will be implemented next!\nCurrently showing AME II blocks.`);
         }
-        document.getElementById('divisionStats').innerHTML = `<strong>📊 ${statsText}</strong>`;
-        
-        // TODO: Actually filter BLOCKS_DATA and re-render
-        // For now, just show message
-        alert(`Division filter: ${division}\n\nNote: Block filtering will be implemented next!\nCurrently showing AME II blocks.`);
-    }
 
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js">
-    // Division Filter Function (Week 0 Sprint)
-    // Removed duplicate: currentDivision = 'AME_II';
-    
-    function filterByDivision(division) {
-        currentDivision = division;
-        
-        // Update button states
-        document.getElementById('divBtn_AME_II').className = division === 'AME_II' 
-            ? 'px-4 py-2 rounded-lg font-bold bg-blue-600 text-white border-2 border-blue-400 shadow-lg'
-            : 'px-4 py-2 rounded-lg font-bold bg-slate-700 text-slate-300 border-2 border-slate-600';
-        
-        document.getElementById('divBtn_AME_IV').className = division === 'AME_IV'
-            ? 'px-4 py-2 rounded-lg font-bold bg-purple-600 text-white border-2 border-purple-400 shadow-lg'
-            : 'px-4 py-2 rounded-lg font-bold bg-slate-700 text-slate-300 border-2 border-slate-600';
-        
-        document.getElementById('divBtn_ALL').className = division === 'ALL'
-            ? 'px-4 py-2 rounded-lg font-bold bg-emerald-600 text-white border-2 border-emerald-400 shadow-lg'
-            : 'px-4 py-2 rounded-lg font-bold bg-slate-700 text-slate-300 border-2 border-slate-600';
-        
-        // Update stats display
-        let statsText = '';
-        if (division === 'AME_II') {
-            statsText = 'AME II (TIER 1) - 8 blocks | NDRE Available ✅ | Total Area: ~200 Ha';
-        } else if (division === 'AME_IV') {
-            statsText = 'AME IV (TIER 1) - 28 blocks | NDRE Available ✅ | Total Area: TBD';
-        } else {
-            statsText = 'ALL ESTATE - 36+ blocks | Mixed NDRE coverage';
+        // Division Filter Function (Week 0 Sprint)
+        // Removed duplicate: currentDivision = 'AME_II';
+
+        function filterByDivision(division) {
+            currentDivision = division;
+
+            // Update button states
+            document.getElementById('divBtn_AME_II').className = division === 'AME_II'
+                ? 'px-4 py-2 rounded-lg font-bold bg-blue-600 text-white border-2 border-blue-400 shadow-lg'
+                : 'px-4 py-2 rounded-lg font-bold bg-slate-700 text-slate-300 border-2 border-slate-600';
+
+            document.getElementById('divBtn_AME_IV').className = division === 'AME_IV'
+                ? 'px-4 py-2 rounded-lg font-bold bg-purple-600 text-white border-2 border-purple-400 shadow-lg'
+                : 'px-4 py-2 rounded-lg font-bold bg-slate-700 text-slate-300 border-2 border-slate-600';
+
+            document.getElementById('divBtn_ALL').className = division === 'ALL'
+                ? 'px-4 py-2 rounded-lg font-bold bg-emerald-600 text-white border-2 border-emerald-400 shadow-lg'
+                : 'px-4 py-2 rounded-lg font-bold bg-slate-700 text-slate-300 border-2 border-slate-600';
+
+            // Update stats display
+            let statsText = '';
+            if (division === 'AME_II') {
+                statsText = 'AME II (TIER 1) - 8 blocks | NDRE Available ✅ | Total Area: ~200 Ha';
+            } else if (division === 'AME_IV') {
+                statsText = 'AME IV (TIER 1) - 28 blocks | NDRE Available ✅ | Total Area: TBD';
+            } else {
+                statsText = 'ALL ESTATE - 36+ blocks | Mixed NDRE coverage';
+            }
+            document.getElementById('divisionStats').innerHTML = `<strong>📊 ${statsText}</strong>`;
+
+            // TODO: Actually filter BLOCKS_DATA and re-render
+            // For now, just show message
+            alert(`Division filter: ${division}\n\nNote: Block filtering will be implemented next!\nCurrently showing AME II blocks.`);
         }
-        document.getElementById('divisionStats').innerHTML = `<strong>📊 ${statsText}</strong>`;
-        
-        // TODO: Actually filter BLOCKS_DATA and re-render
-        // For now, just show message
-        alert(`Division filter: ${division}\n\nNote: Block filtering will be implemented next!\nCurrently showing AME II blocks.`);
-    }
 
     </script>
     <script>
@@ -2006,41 +2050,41 @@
         } else {
             renderPaparanRisk();
         }
-    
-    // Division Filter Function (Week 0 Sprint)
-    let currentDivision = 'AME_II';
-    
-    function filterByDivision(division) {
-        currentDivision = division;
-        
-        // Update button states
-        document.getElementById('divBtn_AME_II').className = division === 'AME_II' 
-            ? 'px-4 py-2 rounded-lg font-bold bg-blue-600 text-white border-2 border-blue-400 shadow-lg'
-            : 'px-4 py-2 rounded-lg font-bold bg-slate-700 text-slate-300 border-2 border-slate-600';
-        
-        document.getElementById('divBtn_AME_IV').className = division === 'AME_IV'
-            ? 'px-4 py-2 rounded-lg font-bold bg-purple-600 text-white border-2 border-purple-400 shadow-lg'
-            : 'px-4 py-2 rounded-lg font-bold bg-slate-700 text-slate-300 border-2 border-slate-600';
-        
-        document.getElementById('divBtn_ALL').className = division === 'ALL'
-            ? 'px-4 py-2 rounded-lg font-bold bg-emerald-600 text-white border-2 border-emerald-400 shadow-lg'
-            : 'px-4 py-2 rounded-lg font-bold bg-slate-700 text-slate-300 border-2 border-slate-600';
-        
-        // Update stats display
-        let statsText = '';
-        if (division === 'AME_II') {
-            statsText = 'AME II (TIER 1) - 8 blocks | NDRE Available ✅ | Total Area: ~200 Ha';
-        } else if (division === 'AME_IV') {
-            statsText = 'AME IV (TIER 1) - 28 blocks | NDRE Available ✅ | Total Area: TBD';
-        } else {
-            statsText = 'ALL ESTATE - 36+ blocks | Mixed NDRE coverage';
+
+        // Division Filter Function (Week 0 Sprint)
+        let currentDivision = 'AME_II';
+
+        function filterByDivision(division) {
+            currentDivision = division;
+
+            // Update button states
+            document.getElementById('divBtn_AME_II').className = division === 'AME_II'
+                ? 'px-4 py-2 rounded-lg font-bold bg-blue-600 text-white border-2 border-blue-400 shadow-lg'
+                : 'px-4 py-2 rounded-lg font-bold bg-slate-700 text-slate-300 border-2 border-slate-600';
+
+            document.getElementById('divBtn_AME_IV').className = division === 'AME_IV'
+                ? 'px-4 py-2 rounded-lg font-bold bg-purple-600 text-white border-2 border-purple-400 shadow-lg'
+                : 'px-4 py-2 rounded-lg font-bold bg-slate-700 text-slate-300 border-2 border-slate-600';
+
+            document.getElementById('divBtn_ALL').className = division === 'ALL'
+                ? 'px-4 py-2 rounded-lg font-bold bg-emerald-600 text-white border-2 border-emerald-400 shadow-lg'
+                : 'px-4 py-2 rounded-lg font-bold bg-slate-700 text-slate-300 border-2 border-slate-600';
+
+            // Update stats display
+            let statsText = '';
+            if (division === 'AME_II') {
+                statsText = 'AME II (TIER 1) - 8 blocks | NDRE Available ✅ | Total Area: ~200 Ha';
+            } else if (division === 'AME_IV') {
+                statsText = 'AME IV (TIER 1) - 28 blocks | NDRE Available ✅ | Total Area: TBD';
+            } else {
+                statsText = 'ALL ESTATE - 36+ blocks | Mixed NDRE coverage';
+            }
+            document.getElementById('divisionStats').innerHTML = `<strong>📊 ${statsText}</strong>`;
+
+            // TODO: Actually filter BLOCKS_DATA and re-render
+            // For now, just show message
+            alert(`Division filter: ${division}\n\nNote: Block filtering will be implemented next!\nCurrently showing AME II blocks.`);
         }
-        document.getElementById('divisionStats').innerHTML = `<strong>📊 ${statsText}</strong>`;
-        
-        // TODO: Actually filter BLOCKS_DATA and re-render
-        // For now, just show message
-        alert(`Division filter: ${division}\n\nNote: Block filtering will be implemented next!\nCurrently showing AME II blocks.`);
-    }
 
     </script>
 
