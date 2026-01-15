@@ -3,6 +3,37 @@
 
 ---
 
+## ⚠️ **CRITICAL: DATA AVAILABILITY REALITY**
+
+### **What Data We ACTUALLY Have:**
+
+**TIER 1: Complete Data (AME II, IV only)**
+- ✅ NDRE Index (spatial tree-level infection detection)
+- ✅ Census data (block-level metrics)
+- ✅ Production/Yield/Potential (2023-2025)
+- ✅ Ganoderma Stadium (1-4) per block
+- ✅ Sisipan count
+- ✅ Main tree count (pokok utama)
+
+**TIER 2: Block Metrics Only (AME I, III, V, other divisions)**
+- ❌ **NO NDRE** (no spatial tree-level analysis)
+- ✅ Census data (block-level metrics)
+- ✅ Production/Yield/Potential (2023-2025)
+- ✅ Ganoderma Stadium (1-4) per block
+- ✅ Sisipan count
+- ✅ Main tree count (pokok utama)
+
+### **⚡ STRATEGIC IMPLICATION:**
+
+**This is NOT a limitation - it's an OPPORTUNITY to show two-tier dashboard:**
+1. **Precision Analysis** (AME II, IV): NDRE-based tree-level detection
+2. **Estate Coverage** (All divisions): Census-based block-level monitoring
+
+**Value Proposition:**
+> "We provide DEEP precision where we have NDRE (AME II, IV) and BROAD visibility across the entire estate (all divisions). This combination gives executives both SURGICAL PRECISION and COMPLETE COVERAGE."
+
+---
+
 ## 📅 **TIMELINE**
 - **Start:** Wednesday, January 15, 2026 (TODAY)
 - **End:** Friday, January 17, 2026
@@ -29,52 +60,85 @@
 
 **Remaining Time:** ~4-5 hours today
 
-#### **Task 1.1: Extract Multi-Division Data** ⏱️ 2 hours
-**Objective:** Extract ALL AME divisions (I, III, IV, V) data from Excel
+#### **Task 1.1: Extract Complete Estate Census Data** ⏱️ 2.5 hours
+**Objective:** Extract ALL available divisions from Excel (both NDRE and non-NDRE)
 
 **Actions:**
 ```python
-# Update extraction script to get ALL AME divisions
-divisions_to_extract = ['AME_I', 'AME_II', 'AME_III', 'AME_IV', 'AME_V']
+# Extract strategy based on data availability:
 
-# Run extraction for each division
-python extract_all_ame_divisions.py
+TIER_1_DIVISIONS = ['AME_II', 'AME_IV']  # Have NDRE + Census
+TIER_2_DIVISIONS = ['AME_I', 'AME_III', 'AME_V']  # Census only
+
+# For ALL divisions, extract:
+# - Production (2023-2025) 
+# - Yield (realisasi, potensi, gap)
+# - Ganoderma Stadium (1-4) per block
+# - Sisipan count
+# - Pokok utama count
+# - Block area (Ha)
+# - Division assignment
+
+# For TIER 1 only (AME II, IV):
+# - NDRE data (if we want to enhance beyond current 8 blocks)
+
+python extract_all_divisions_census.py
 ```
 
 **Expected Output:**
-- `ame_divisions_data.json` (50-100 blocks total)
-- Division summary report (area, blocks, avg yield per division)
+- `estate_census_complete.json` (100-200 blocks, ALL divisions)
+- `ndre_coverage_metadata.json` (documenting which divisions have NDRE)
+- Division summary showing two tiers clearly
 
 **Success Criteria:**
-- ✅ At least 40+ blocks extracted (across 5 divisions)
+- ✅ At least 100+ blocks extracted (across all AME divisions)
+- ✅ Clear labeling of TIER 1 (NDRE) vs TIER 2 (Census) divisions
+- ✅ Ganoderma Stadium data available for ALL blocks
 - ✅ Data quality >95% (minimal missing fields)
-- ✅ Historical yield data (2023-2025) for each block
 
 ---
 
-#### **Task 1.2: Calculate Division Aggregates** ⏱️ 1.5 hours
-**Objective:** Prove we can aggregate block data to division level
+#### **Task 1.2: Calculate Division Aggregates (Stadium-Based Risk)** ⏱️ 1.5 hours
+**Objective:** Prove we can rank divisions by risk using Ganoderma Stadium data
 
 **Actions:**
 ```python
-# Calculate for each division:
-# - Total area (Ha)
-# - Total blocks count
-# - Average yield (Ton/Ha)
-# - Total risk (Rp millions)
-# - Critical blocks count
+# For EACH division, calculate:
 
-python calculate_division_metrics.py
+division_metrics = {
+    'total_area_ha': sum(block.luas_ha),
+    'block_count': len(blocks),
+    'avg_yield_2025': weighted_avg(block.yield_2025, block.area),
+    'total_sisipan': sum(block.sisipan_count),
+    'total_pokok': sum(block.pokok_utama_count),
+    
+    # KEY RISK INDICATORS (Census-based):
+    'avg_ganoderma_stadium': avg(block.stadium),  # 1-4 scale
+    'critical_blocks_count': count(block.stadium >= 3),  # Stadium 3-4 = Critical
+    'critical_blocks_pct': critical_blocks / total_blocks * 100,
+    
+    # Data coverage:
+    'ndre_available': True/False,  # TIER 1 vs TIER 2
+    'risk_tier': 'High' / 'Medium' / 'Low'  # Based on stadium
+}
+
+# Rank divisions by risk:
+# 1. Primary: Average Ganoderma Stadium (higher = worse)
+# 2. Secondary: % Critical blocks (Stadium 3-4)
+# 3. Tertiary: Total area at risk
+
+python calculate_division_risk_ranking.py
 ```
 
 **Expected Output:**
-- `division_summary.json`
-- Division ranking table (by risk)
+- `division_metrics.json`
+- Division risk ranking table (sorted by Stadium)
+- Identification of which divisions need urgent NDRE survey
 
 **Success Criteria:**
-- ✅ All 5 AME divisions have calculated metrics
-- ✅ Division rankings make sense (validate with domain knowledge)
-- ✅ Aggregation formulas correct (spot-check 2 divisions manually)
+- ✅ All divisions have calculated Stadium-based risk scores
+- ✅ Division rankings make intuitive sense (validate with domain knowledge)
+- ✅ Clear prioritization: Which divisions need NDRE expansion first
 
 ---
 
