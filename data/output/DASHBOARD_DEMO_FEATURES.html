@@ -155,14 +155,14 @@
                         <div>
                             <div class="mb-2">
                                 <p class="text-indigo-200/60 uppercase text-xs tracking-wider font-bold mb-1">Potensi
-                                    Est
+                                    Est <span class="text-cyan-400">(2025)</span>
                                 </p>
                                 <p class="text-white text-3xl font-black"><span id="finPotLeft">--</span> <span
                                         class="text-xs opacity-50">Ton/Ha</span></p>
                             </div>
                             <div>
                                 <p class="text-indigo-200/60 uppercase text-xs tracking-wider font-bold mb-1">Realisasi
-                                    Act
+                                    Act <span class="text-cyan-400">(2025)</span>
                                 </p>
                                 <p class="text-white text-3xl font-black"><span id="finRealLeft">--</span> <span
                                         class="text-xs opacity-50">Ton/Ha</span></p>
@@ -1219,11 +1219,21 @@
 
             document.getElementById('finTitleLeft').textContent = code;
             document.getElementById('finLossLeft').textContent = Math.round(data.loss_value_juta || 0);
-            document.getElementById('finPotLeft').textContent = (data.potensi_ton_ha || 0).toFixed(2);
-            document.getElementById('finRealLeft').textContent = (data.realisasi_ton_ha || 0).toFixed(2);
-            document.getElementById('finGapTonLeft').textContent = Math.abs(data.gap_ton_ha || 0).toFixed(2);
+            // Use REAL 2025 data from HISTORICAL_YIELDS
+            const historicalData2025 = HISTORICAL_YIELDS[code]?.yields[2025];
 
-            const gapPct = Math.abs(data.gap_pct || 0);
+            if (historicalData2025) {
+                document.getElementById('finPotLeft').textContent = (historicalData2025.poten_ton_ha || 0).toFixed(2);
+                document.getElementById('finRealLeft').textContent = (historicalData2025.real_ton_ha || 0).toFixed(2);
+                document.getElementById('finGapTonLeft').textContent = Math.abs(historicalData2025.gap_ton_ha || 0).toFixed(2);
+            } else {
+                // Fallback to BLOCKS_DATA if no historical data
+                document.getElementById('finPotLeft').textContent = (data.potensi_ton_ha || 0).toFixed(2);
+                document.getElementById('finRealLeft').textContent = (data.realisasi_ton_ha || 0).toFixed(2);
+                document.getElementById('finGapTonLeft').textContent = Math.abs(data.gap_ton_ha || 0).toFixed(2);
+            }
+
+            const gapPct = historicalData2025 ? Math.abs(historicalData2025.gap_pct || 0) : Math.abs(data.gap_pct || 0);
             const gapPctEl = document.getElementById('finGapPctLeft');
             gapPctEl.textContent = gapPct.toFixed(0) + '%';
             gapPctEl.className = gapPct > 20 ? 'text-red-400 text-3xl font-black' : 'text-emerald-400 text-3xl font-black';
