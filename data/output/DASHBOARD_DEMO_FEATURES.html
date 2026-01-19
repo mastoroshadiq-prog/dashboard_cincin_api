@@ -9381,6 +9381,80 @@
             alert(`Division filter: ${division}\n\nNote: Block filtering will be implemented next!\nCurrently showing AME II blocks.`);
         }
 
+    
+        // Division Filter Function (PHASE 2 - FUNCTIONAL!)
+    let currentDivision = 'AME02';  // Default to AME02
+    let filteredBlocks = {};
+    
+    function filterByDivision(divisionCode) {
+        currentDivision = divisionCode;
+        
+        // Filter blocks by division
+        if (divisionCode === 'ALL') {
+            filteredBlocks = COMPLETE_BLOCKS_DATA;
+        } else {
+            filteredBlocks = Object.fromEntries(
+                Object.entries(COMPLETE_BLOCKS_DATA).filter(([code, data]) => data.division === divisionCode)
+            );
+        }
+        
+        // Update button states (support all divisions)
+        const allButtons = document.querySelectorAll('[id^="divBtn_"]');
+        allButtons.forEach(btn => {
+            const btnDiv = btn.id.replace('divBtn_', '');
+            if (btnDiv === divisionCode) {
+                btn.className = 'px-6 py-3 rounded-xl font-bold text-sm bg-blue-600 text-white border-2 border-blue-400 shadow-lg hover:shadow-blue-500/50 transition-all transform hover:scale-105';
+            } else {
+                btn.className = 'px-6 py-3 rounded-xl font-bold text-sm bg-slate-700 text-slate-300 border-2 border-slate-600 hover:shadow-purple-500/50 transition-all transform hover:scale-105';
+            }
+        });
+        
+        // Calculate stats for selected division
+        const blockCount = Object.keys(filteredBlocks).length;
+        const totalArea = Object.values(filteredBlocks).reduce((sum, b) => sum + (b.luas_ha || 0), 0);
+        const avgYield = blockCount > 0 ? 
+            Object.values(filteredBlocks).reduce((sum, b) => sum + (b.realisasi_ton_ha || 0) * (b.luas_ha || 0), 0) / totalArea 
+            : 0;
+        const criticalCount = Object.values(filteredBlocks).filter(b => Math.abs(b.gap_pct) > 25).length;
+        
+        // Get division metadata
+        const divMeta = DIVISIONS_META[divisionCode] || {code: divisionCode, ndre: false, tier: 'N/A'};
+        const ndreIcon = divMeta.ndre ? '✅' : '❌';
+        const tierLabel = divMeta.tier === 'TIER_1' ? 'TIER 1' : 'TIER 2';
+        
+        // Update stats display
+        const statsHTML = `
+            <div class="flex items-center gap-3">
+                <div class="text-4xl">📊</div>
+                <div>
+                    <div class="text-sm text-cyan-300 font-bold">Currently Viewing:</div>
+                    <div class="text-lg text-white font-black">
+                        ${divisionCode} (${tierLabel}) - ${blockCount} blocks | 
+                        NDRE ${ndreIcon} | 
+                        Area: ${totalArea.toFixed(0)} Ha | 
+                        Avg Yield: ${avgYield.toFixed(2)} T/Ha | 
+                        Critical: ${criticalCount}
+                    </div>
+                </div>
+            </div>
+        `;
+        document.getElementById('divisionStats').innerHTML = statsHTML;
+        
+        // Update division summary metrics
+        document.getElementById('divMetric_totalBlocks').textContent = blockCount;
+        document.getElementById('divMetric_totalArea').innerHTML = `${totalArea.toFixed(0)}<span class="text-sm text-slate-400 ml-1">Ha</span>`;
+        document.getElementById('divMetric_avgYield').innerHTML = `${avgYield.toFixed(2)}<span class="text-sm text-slate-400 ml-1">T/Ha</span>`;
+        document.getElementById('divMetric_critical').innerHTML = `${criticalCount}<span class="text-sm text-slate-400 ml-1">/ ${blockCount}</span>`;
+        
+        console.log(`✅ Filtered to ${divisionCode}: ${blockCount} blocks, ${totalArea.toFixed(1)} Ha`);
+    }
+    
+    // Initialize with AME02 on page load
+    document.addEventListener('DOMContentLoaded', function() {
+        if (typeof COMPLETE_BLOCKS_DATA !== 'undefined') {
+            filterByDivision('AME02');
+        }
+    });
     </script>
 
 
