@@ -257,105 +257,130 @@
 
                         <div class="grid grid-cols-2 gap-6">
                             <!-- 3-YEAR PROJECTION COMPARISON -->
-                            <div class="col-span-2 bg-gradient-to-br from-slate-900/90 to-black/90 rounded-2xl border-2 border-purple-500/30 p-6">
+                            <div
+                                class="col-span-2 bg-gradient-to-br from-slate-900/90 to-black/90 rounded-2xl border-2 border-purple-500/30 p-6">
                                 <h3 class="text-xl font-black text-white mb-4 flex items-center gap-2">
                                     📊 3-YEAR FINANCIAL IMPACT ANALYSIS
                                 </h3>
-                                
+
                                 <div class="grid grid-cols-2 gap-6 mb-6">
                                     <!-- LEFT: NO TREATMENT -->
                                     <div class="bg-red-900/20 rounded-xl border-2 border-red-500/30 p-4">
                                         <div class="flex items-center gap-2 mb-3">
                                             <div class="text-2xl">❌</div>
-                                            <h4 class="text-sm font-black text-red-300 uppercase">No Treatment<br/><span class="text-xs opacity-70">(Continue as-is)</span></h4>
+                                            <h4 class="text-sm font-black text-red-300 uppercase">No
+                                                Treatment<br /><span class="text-xs opacity-70">(Continue as-is)</span>
+                                            </h4>
                                         </div>
-                                        
+
                                         <!-- 3-Year Table -->
                                         <div class="grid grid-cols-4 gap-1 mb-3">
                                             <div class="bg-red-900/20 rounded p-1.5 text-center">
                                                 <div class="text-[8px] text-red-300/70 font-bold mb-0.5">2025</div>
-                                                <div class="text-sm font-black text-red-400" id="noTreatment_year0">--</div>
+                                                <div class="text-sm font-black text-red-400" id="noTreatment_year0">--
+                                                </div>
                                             </div>
                                             <div class="bg-red-900/30 rounded p-1.5 text-center">
                                                 <div class="text-[8px] text-red-300/70 font-bold mb-0.5">2026</div>
-                                                <div class="text-sm font-black text-red-400" id="noTreatment_year1">--</div>
+                                                <div class="text-sm font-black text-red-400" id="noTreatment_year1">--
+                                                </div>
                                             </div>
                                             <div class="bg-red-900/40 rounded p-1.5 text-center">
                                                 <div class="text-[8px] text-red-300/70 font-bold mb-0.5">2027</div>
-                                                <div class="text-sm font-black text-red-400" id="noTreatment_year2">--</div>
+                                                <div class="text-sm font-black text-red-400" id="noTreatment_year2">--
+                                                </div>
                                             </div>
                                             <div class="bg-red-900/50 rounded p-1.5 text-center">
                                                 <div class="text-[8px] text-red-300/70 font-bold mb-0.5">2028</div>
-                                                <div class="text-sm font-black text-red-400" id="noTreatment_year3">--</div>
+                                                <div class="text-sm font-black text-red-400" id="noTreatment_year3">--
+                                                </div>
                                             </div>
                                         </div>
-                                        
+
                                         <!-- Total Loss -->
                                         <div class="bg-red-950/50 rounded-lg border border-red-500/50 p-3 text-center">
-                                            <div class="text-[10px] text-red-300/80 font-bold mb-1 uppercase">Total 3-Year Loss</div>
-                                            <div class="text-3xl font-black text-red-400" id="noTreatment_cumulative">--</div>
+                                            <div class="text-[10px] text-red-300/80 font-bold mb-1 uppercase">Total
+                                                3-Year Loss</div>
+                                            <div class="text-3xl font-black text-red-400" id="noTreatment_cumulative">--
+                                            </div>
                                         </div>
                                     </div>
-                                    
+
                                     <!-- RIGHT: WITH TREATMENT -->
                                     <div class="bg-emerald-900/20 rounded-xl border-2 border-emerald-500/30 p-4">
                                         <div class="flex items-center gap-2 mb-3">
                                             <div class="text-2xl">✅</div>
-                                            <h4 class="text-sm font-black text-emerald-300 uppercase">With Treatment<br/><span class="text-xs opacity-70">(70% Effective)</span></h4>
+                                            <h4 class="text-sm font-black text-emerald-300 uppercase">With
+                                                Treatment<br /><span class="text-xs opacity-70">(70% Effective)</span>
+                                            </h4>
                                         </div>
-                                        
+
                                         <!-- 3-Year Table -->
                                         <div class="grid grid-cols-4 gap-1 mb-3">
                                             <div class="bg-emerald-900/20 rounded p-1.5 text-center">
                                                 <div class="text-[8px] text-emerald-300/70 font-bold mb-0.5">2025</div>
-                                                <div class="text-sm font-black text-emerald-400" id="withTreatment_year0">--</div>
+                                                <div class="text-sm font-black text-emerald-400"
+                                                    id="withTreatment_year0">--</div>
                                             </div>
                                             <div class="bg-emerald-900/30 rounded p-1.5 text-center">
                                                 <div class="text-[8px] text-emerald-300/70 font-bold mb-0.5">2026</div>
-                                                <div class="text-sm font-black text-emerald-400" id="withTreatment_year1">--</div>
+                                                <div class="text-sm font-black text-emerald-400"
+                                                    id="withTreatment_year1">--</div>
                                             </div>
                                             <div class="bg-emerald-900/40 rounded p-1.5 text-center">
                                                 <div class="text-[8px] text-emerald-300/70 font-bold mb-0.5">2027</div>
-                                                <div class="text-sm font-black text-emerald-400" id="withTreatment_year2">--</div>
+                                                <div class="text-sm font-black text-emerald-400"
+                                                    id="withTreatment_year2">--</div>
                                             </div>
                                             <div class="bg-emerald-900/50 rounded p-1.5 text-center">
                                                 <div class="text-[8px] text-emerald-300/70 font-bold mb-0.5">2028</div>
-                                                <div class="text-sm font-black text-emerald-400" id="withTreatment_year3">--</div>
+                                                <div class="text-sm font-black text-emerald-400"
+                                                    id="withTreatment_year3">--</div>
                                             </div>
                                         </div>
-                                        
+
                                         <!-- Total Loss -->
-                                        <div class="bg-emerald-950/50 rounded-lg border border-emerald-500/50 p-3 text-center">
-                                            <div class="text-[10px] text-emerald-300/80 font-bold mb-1 uppercase">Total 3-Year Loss</div>
-                                            <div class="text-3xl font-black text-emerald-400" id="withTreatment_cumulative">--</div>
+                                        <div
+                                            class="bg-emerald-950/50 rounded-lg border border-emerald-500/50 p-3 text-center">
+                                            <div class="text-[10px] text-emerald-300/80 font-bold mb-1 uppercase">Total
+                                                3-Year Loss</div>
+                                            <div class="text-3xl font-black text-emerald-400"
+                                                id="withTreatment_cumulative">--</div>
                                         </div>
                                     </div>
                                 </div>
-                                
+
                                 <!-- SAVINGS HIGHLIGHT -->
-                                <div class="bg-gradient-to-r from-yellow-900/30 to-orange-900/30 rounded-xl border-2 border-yellow-500/50 p-4">
+                                <div
+                                    class="bg-gradient-to-r from-yellow-900/30 to-orange-900/30 rounded-xl border-2 border-yellow-500/50 p-4">
                                     <div class="flex items-center justify-between">
                                         <div class="flex items-center gap-3">
                                             <div class="text-4xl">💰</div>
                                             <div>
-                                                <div class="text-xs text-yellow-300/80 font-bold uppercase mb-1">3-Year Savings with Treatment</div>
-                                                <div class="text-5xl font-black text-yellow-400" id="treatment_totalSavings">--</div>
+                                                <div class="text-xs text-yellow-300/80 font-bold uppercase mb-1">3-Year
+                                                    Savings with Treatment</div>
+                                                <div class="text-5xl font-black text-yellow-400"
+                                                    id="treatment_totalSavings">--</div>
                                             </div>
                                         </div>
                                         <div class="text-right">
-                                            <div class="text-xs text-yellow-300/80 font-bold uppercase mb-1">Savings Rate</div>
-                                            <div class="text-4xl font-black text-yellow-400" id="treatment_savingsPercent">--%</div>
+                                            <div class="text-xs text-yellow-300/80 font-bold uppercase mb-1">Savings
+                                                Rate</div>
+                                            <div class="text-4xl font-black text-yellow-400"
+                                                id="treatment_savingsPercent">--%</div>
                                         </div>
                                     </div>
                                     <div class="mt-3 text-xs text-yellow-200/70 text-center">
-                                        ⚡ Cost of Treatment vs. Cost of Inaction - <span class="font-bold text-yellow-300">Treatment ROI is clear</span>
+                                        ⚡ Cost of Treatment vs. Cost of Inaction - <span
+                                            class="font-bold text-yellow-300">Treatment ROI is clear</span>
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <!-- Other metrics (Production Gap, Critical Blocks) -->
                             <div class="bg-slate-800/50 rounded-xl border border-slate-600/30 p-4">
-                                <div class="space-y-2">                                    <div>
+                                <div class="space-y-2">
+                                    <div>
                                         <div class="text-xs text-red-200/60 font-bold mb-1">PRODUCTION GAP</div>
                                         <div class="text-2xl font-black text-white" id="noTreatment_gap">1254 Ton</div>
                                     </div>
@@ -510,7 +535,8 @@
 
                     <!-- Main Number -->
                     <div class="mb-6 relative z-10">
-                        <span class="text-[10px] uppercase font-bold text-slate-400 block mb-1" id="paparanRiskLabel">Total Potensi Kerugian
+                        <span class="text-[10px] uppercase font-bold text-slate-400 block mb-1"
+                            id="paparanRiskLabel">Total Potensi Kerugian
                             (-- Blok Kritis)</span>
                         <div class="flex items-baseline gap-1">
                             <span class="text-xl font-bold text-rose-500">Rp</span>
@@ -518,7 +544,8 @@
                                 id="summaryTotalLoss">--</span>
                             <span class="text-sm font-bold text-slate-400">Miliar</span>
                         </div>
-                        <p class="text-[10px] text-rose-300/80 mt-1 italic" id="paparanRiskDisclaimer">*Akumulasi kerugian dari blok berstatus KRITIS
+                        <p class="text-[10px] text-rose-300/80 mt-1 italic" id="paparanRiskDisclaimer">*Akumulasi
+                            kerugian dari blok berstatus KRITIS
                         </p>
                     </div>
 
@@ -881,109 +908,112 @@
             </div>
         </div>
 
-    <!-- ============================================ -->
-    <!-- PHASE 3: DIVISION COMPARISON TABLE -->
-    <!-- ============================================ -->
-    <div class="max-w-7xl mx-auto mb-8">
-        <div
-            class="bg-gradient-to-br from-slate-800/90 to-slate-900/90 backdrop-blur-xl rounded-3xl border-2 border-purple-500/30 shadow-2xl p-8">
+        <!-- ============================================ -->
+        <!-- PHASE 3: DIVISION COMPARISON TABLE -->
+        <!-- ============================================ -->
+        <div class="max-w-7xl mx-auto mb-8">
+            <div
+                class="bg-gradient-to-br from-slate-800/90 to-slate-900/90 backdrop-blur-xl rounded-3xl border-2 border-purple-500/30 shadow-2xl p-8">
 
-            <!-- Header -->
-            <div class="flex items-center justify-between mb-6">
-                <div class="flex items-center gap-4">
-                    <div class="text-5xl">📊</div>
-                    <div>
-                        <h2 class="text-3xl font-black text-purple-400 mb-1">DIVISION COMPARISON</h2>
-                        <p class="text-slate-300 text-sm">Estate-wide Ganoderma impact analysis across all 14 divisions
-                        </p>
+                <!-- Header -->
+                <div class="flex items-center justify-between mb-6">
+                    <div class="flex items-center gap-4">
+                        <div class="text-5xl">📊</div>
+                        <div>
+                            <h2 class="text-3xl font-black text-purple-400 mb-1">DIVISION COMPARISON</h2>
+                            <p class="text-slate-300 text-sm">Estate-wide Ganoderma impact analysis across all 14
+                                divisions
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Sort Controls -->
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs text-slate-400 font-bold uppercase">Sort By:</span>
+                        <button onclick="renderDivisionComparison('loss')" id="sortDivBy_loss"
+                            class="px-3 py-1 rounded-lg text-xs font-bold bg-purple-600 text-white border-2 border-purple-400 shadow-lg">
+                            Loss (Rp)
+                        </button>
+                        <button onclick="renderDivisionComparison('roi')" id="sortDivBy_roi"
+                            class="px-3 py-1 rounded-lg text-xs font-bold bg-slate-700 text-slate-300 border border-slate-600">
+                            ROI Ratio
+                        </button>
+                        <button onclick="renderDivisionComparison('critical')" id="sortDivBy_critical"
+                            class="px-3 py-1 rounded-lg text-xs font-bold bg-slate-700 text-slate-300 border border-slate-600">
+                            Critical %
+                        </button>
+                        <button onclick="renderDivisionComparison('infection')" id="sortDivBy_infection"
+                            class="px-3 py-1 rounded-lg text-xs font-bold bg-slate-700 text-slate-300 border border-slate-600">
+                            Infection %
+                        </button>
                     </div>
                 </div>
 
-                <!-- Sort Controls -->
-                <div class="flex items-center gap-2">
-                    <span class="text-xs text-slate-400 font-bold uppercase">Sort By:</span>
-                    <button onclick="renderDivisionComparison('loss')" id="sortDivBy_loss"
-                        class="px-3 py-1 rounded-lg text-xs font-bold bg-purple-600 text-white border-2 border-purple-400 shadow-lg">
-                        Loss (Rp)
-                    </button>
-                    <button onclick="renderDivisionComparison('roi')" id="sortDivBy_roi"
-                        class="px-3 py-1 rounded-lg text-xs font-bold bg-slate-700 text-slate-300 border border-slate-600">
-                        ROI Ratio
-                    </button>
-                    <button onclick="renderDivisionComparison('critical')" id="sortDivBy_critical"
-                        class="px-3 py-1 rounded-lg text-xs font-bold bg-slate-700 text-slate-300 border border-slate-600">
-                        Critical %
-                    </button>
-                    <button onclick="renderDivisionComparison('infection')" id="sortDivBy_infection"
-                        class="px-3 py-1 rounded-lg text-xs font-bold bg-slate-700 text-slate-300 border border-slate-600">
-                        Infection %
-                    </button>
+                <!-- Comparison Table -->
+                <div class="overflow-x-auto custom-scrollbar">
+                    <table class="w-full text-sm">
+                        <thead>
+                            <tr class="border-b-2 border-purple-500/30">
+                                <th class="text-left p-3 text-purple-300 font-bold sticky left-0 bg-slate-900/95">Rank
+                                </th>
+                                <th class="text-left p-3 text-purple-300 font-bold sticky left-16 bg-slate-900/95">
+                                    Division
+                                </th>
+                                <th class="text-center p-3 text-slate-300 font-bold">Blocks</th>
+                                <th class="text-center p-3 text-slate-300 font-bold">Area (Ha)</th>
+                                <th class="text-center p-3 text-red-300 font-bold">Gano Loss<br><span
+                                        class="text-xs opacity-70">(Rp Juta/yr)</span></th>
+                                <th class="text-center p-3 text-orange-300 font-bold">Critical<br><span
+                                        class="text-xs opacity-70">(blocks)</span></th>
+                                <th class="text-center p-3 text-yellow-300 font-bold">Critical<br><span
+                                        class="text-xs opacity-70">(%)</span></th>
+                                <th class="text-center p-3 text-cyan-300 font-bold">Infection<br><span
+                                        class="text-xs opacity-70">(%)</span></th>
+                                <th class="text-center p-3 text-blue-300 font-bold">Avg Yield<br><span
+                                        class="text-xs opacity-70">(T/Ha)</span></th>
+                                <th class="text-center p-3 text-emerald-300 font-bold">Treatment<br><span
+                                        class="text-xs opacity-70">(Rp Juta)</span></th>
+                                <th class="text-center p-3 text-green-300 font-bold">ROI<br><span
+                                        class="text-xs opacity-70">(ratio)</span></th>
+                                <th class="text-center p-3 text-purple-300 font-bold">Priority</th>
+                            </tr>
+                        </thead>
+                        <tbody id="divisionComparisonTableBody" class="text-white">
+                            <!-- Populated by JavaScript -->
+                            <tr>
+                                <td colspan="12" class="p-8 text-center text-slate-400">
+                                    <div class="flex flex-col items-center gap-2">
+                                        <div class="text-4xl">⏳</div>
+                                        <div>Loading division metrics...</div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-            </div>
 
-            <!-- Comparison Table -->
-            <div class="overflow-x-auto custom-scrollbar">
-                <table class="w-full text-sm">
-                    <thead>
-                        <tr class="border-b-2 border-purple-500/30">
-                            <th class="text-left p-3 text-purple-300 font-bold sticky left-0 bg-slate-900/95">Rank</th>
-                            <th class="text-left p-3 text-purple-300 font-bold sticky left-16 bg-slate-900/95">Division
-                            </th>
-                            <th class="text-center p-3 text-slate-300 font-bold">Blocks</th>
-                            <th class="text-center p-3 text-slate-300 font-bold">Area (Ha)</th>
-                            <th class="text-center p-3 text-red-300 font-bold">Gano Loss<br><span
-                                    class="text-xs opacity-70">(Rp Juta/yr)</span></th>
-                            <th class="text-center p-3 text-orange-300 font-bold">Critical<br><span
-                                    class="text-xs opacity-70">(blocks)</span></th>
-                            <th class="text-center p-3 text-yellow-300 font-bold">Critical<br><span
-                                    class="text-xs opacity-70">(%)</span></th>
-                            <th class="text-center p-3 text-cyan-300 font-bold">Infection<br><span
-                                    class="text-xs opacity-70">(%)</span></th>
-                            <th class="text-center p-3 text-blue-300 font-bold">Avg Yield<br><span
-                                    class="text-xs opacity-70">(T/Ha)</span></th>
-                            <th class="text-center p-3 text-emerald-300 font-bold">Treatment<br><span
-                                    class="text-xs opacity-70">(Rp Juta)</span></th>
-                            <th class="text-center p-3 text-green-300 font-bold">ROI<br><span
-                                    class="text-xs opacity-70">(ratio)</span></th>
-                            <th class="text-center p-3 text-purple-300 font-bold">Priority</th>
-                        </tr>
-                    </thead>
-                    <tbody id="divisionComparisonTableBody" class="text-white">
-                        <!-- Populated by JavaScript -->
-                        <tr>
-                            <td colspan="12" class="p-8 text-center text-slate-400">
-                                <div class="flex flex-col items-center gap-2">
-                                    <div class="text-4xl">⏳</div>
-                                    <div>Loading division metrics...</div>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+                <!-- Legend -->
+                <div class="mt-6 flex items-center gap-6 text-xs">
+                    <div class="flex items-center gap-2">
+                        <div class="w-3 h-3 bg-red-500 rounded"></div>
+                        <span class="text-slate-300">🔴 URGENT (Critical \u003e 40%)</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <div class="w-3 h-3 bg-orange-500 rounded"></div>
+                        <span class="text-slate-300">🟠 HIGH (Critical 25-40%)</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <div class="w-3 h-3 bg-yellow-500 rounded"></div>
+                        <span class="text-slate-300">🟡 MEDIUM (Critical 15-25%)</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <div class="w-3 h-3 bg-green-500 rounded"></div>
+                        <span class="text-slate-300">🟢 OK (Critical \u003c 15%)</span>
+                    </div>
+                </div>
 
-            <!-- Legend -->
-            <div class="mt-6 flex items-center gap-6 text-xs">
-                <div class="flex items-center gap-2">
-                    <div class="w-3 h-3 bg-red-500 rounded"></div>
-                    <span class="text-slate-300">🔴 URGENT (Critical \u003e 40%)</span>
-                </div>
-                <div class="flex items-center gap-2">
-                    <div class="w-3 h-3 bg-orange-500 rounded"></div>
-                    <span class="text-slate-300">🟠 HIGH (Critical 25-40%)</span>
-                </div>
-                <div class="flex items-center gap-2">
-                    <div class="w-3 h-3 bg-yellow-500 rounded"></div>
-                    <span class="text-slate-300">🟡 MEDIUM (Critical 15-25%)</span>
-                </div>
-                <div class="flex items-center gap-2">
-                    <div class="w-3 h-3 bg-green-500 rounded"></div>
-                    <span class="text-slate-300">🟢 OK (Critical \u003c 15%)</span>
-                </div>
             </div>
-
         </div>
-    </div>
 
         <!-- FEATURE 1: Treatment Comparison Chart -->
         <!-- ============================================ -->
@@ -9158,68 +9188,69 @@
             const baselineLoss = annualLoss;
             const degradationRate = 0.15;
             const treatmentEffectiveness = 0.70;
-            
+
             // NO TREATMENT: Losses increase by 15% annually
             const noTx_year0 = baselineLoss;
             const noTx_year1 = baselineLoss * (1 + degradationRate);
             const noTx_year2 = baselineLoss * Math.pow(1 + degradationRate, 2);
             const noTx_year3 = baselineLoss * Math.pow(1 + degradationRate, 3);
             const noTx_cumulative = noTx_year0 + noTx_year1 + noTx_year2 + noTx_year3;
-            
+
             // WITH TREATMENT: Progressive reduction (synchronized with chart)
             const withTx_year0 = baselineLoss; // Same starting point
             const withTx_year1 = baselineLoss * (1 - treatmentEffectiveness * 0.5); // 50% reduction in Y1
             const withTx_year2 = baselineLoss * (1 - treatmentEffectiveness * 0.8); // 80% reduction in Y2
             const withTx_year3 = baselineLoss * (1 - treatmentEffectiveness); // Full 70% reduction in Y3
             const withTx_cumulative = withTx_year0 + withTx_year1 + withTx_year2 + withTx_year3;
-            
+
             // SAVINGS CALCULATION
             const totalSavings = noTx_cumulative - withTx_cumulative;
             const treatment_savingsPercent = ((totalSavings / noTx_cumulative) * 100);
-            
+
             // Update NO TREATMENT displays
             document.getElementById('noTreatment_year0').textContent = formatLossMiliar(noTx_year0);
             document.getElementById('noTreatment_year1').textContent = formatLossMiliar(noTx_year1);
             document.getElementById('noTreatment_year2').textContent = formatLossMiliar(noTx_year2);
             document.getElementById('noTreatment_year3').textContent = formatLossMiliar(noTx_year3);
             document.getElementById('noTreatment_cumulative').textContent = formatLossMiliar(noTx_cumulative);
-            
+
             // Update WITH TREATMENT displays
             document.getElementById('withTreatment_year0').textContent = formatLossMiliar(withTx_year0);
             document.getElementById('withTreatment_year1').textContent = formatLossMiliar(withTx_year1);
             document.getElementById('withTreatment_year2').textContent = formatLossMiliar(withTx_year2);
             document.getElementById('withTreatment_year3').textContent = formatLossMiliar(withTx_year3);
             document.getElementById('withTreatment_cumulative').textContent = formatLossMiliar(withTx_cumulative);
-            
+
             // Update SAVINGS displays
             document.getElementById('treatment_totalSavings').textContent = formatLossMiliar(totalSavings);
             document.getElementById('treatment_savingsPercent').textContent = treatment_savingsPercent.toFixed(0) + '%';
-            
+
             document.getElementById('noTreatment_gap').textContent = `${Math.round(totalProductionGap)} Ton`;
             document.getElementById('noTreatment_critical').textContent =
                 `${metrics.criticalBlocks} / ${metrics.totalBlocks} (${metrics.criticalRate.toFixed(0)}%)`;
-            
+
             console.log('[TREATMENT IMPACT] 3-Year Projection:', {
-                year0: year0Loss,
-                year1: year1Loss,
-                year2: year2Loss,
-                year3: year3Loss,
-                cumulative: cumulativeLoss
+                noTreatment: {
+                    year0: noTx_year0,
+                    year1: noTx_year1,
+                    year2: noTx_year2,
+                    year3: noTx_year3,
+                    cumulative: noTx_cumulative
+                },
+                withTreatment: {
+                    year0: withTx_year0,
+                    year1: withTx_year1,
+                    year2: withTx_year2,
+                    year3: withTx_year3,
+                    cumulative: withTx_cumulative
+                },
+                savings: totalSavings,
+                savingsPercent: treatment_savingsPercent.toFixed(1) + '%'
             });
 
-            // WITH TREATMENT scenario (70% effectiveness)
-            // Compare against Year 1 projected loss
-            const reducedLoss = year1Loss * 0.30; // 70% prevented from Year 1 projection 
-            const recoveredGap = totalProductionGap * 0.80; // 80% production recovery
-            const blocksRecovered = Math.round(metrics.criticalBlocks * 0.67); // 67% blocks recovered
 
-            const oldSavingsPercent = Math.round((1 - reducedLoss / year1Loss) * 100);
-            document.getElementById('withTreatment_loss').innerHTML =
-                `${formatLossMiliar(reducedLoss)}<span class="text-lg ml-2 text-emerald-300">↓${oldSavingsPercent}%</span>`;
-            document.getElementById('withTreatment_gap').innerHTML =
-                `${Math.round(totalProductionGap - recoveredGap)} Ton<span class="text-sm text-emerald-300 ml-2">↓80%</span>`;
-            document.getElementById('withTreatment_recovered').textContent =
-                `${blocksRecovered} / ${metrics.criticalBlocks} (67%)`;
+            // OLD WITH TREATMENT code removed - now handled by side-by-side comparison above
+
 
             // ROI Highlight
             const savings = metrics.estimatedSavings;
@@ -9389,41 +9420,41 @@
          */
         function updatePaparanRisiko(metrics) {
             console.log('[PAPARAN RISIKO] Updating with metrics:', metrics);
-            
+
             // Calculate total loss from critical blocks only (Stadium 3+)
             // Use same source as Treatment Impact Analysis for consistency
             const totalLoss = metrics.totalGanodermaLoss; // in Juta
             const criticalCount = metrics.criticalBlocks;
-            
+
             // Convert to Miliar for display
             const lossInMiliar = totalLoss / 1000;
-            
+
             // Update main loss display
             document.getElementById('summaryTotalLoss').textContent = lossInMiliar.toFixed(2);
-            
+
             // Update critical count
             document.getElementById('summaryCriticalCount').textContent = criticalCount;
-            
+
             // Calculate risk area (area of critical blocks only)
             // Assuming critical blocks have proportional area
             const riskArea = metrics.totalArea * (criticalCount / metrics.totalBlocks);
             document.getElementById('summaryRiskArea').textContent = riskArea.toFixed(1);
-            
+
             // Update title and badge
             const currentDivision = window.currentDivision || 'ALL';
-            document.getElementById('paparanRiskTitle').textContent = 
+            document.getElementById('paparanRiskTitle').textContent =
                 currentDivision === 'ALL' ? 'PAPARAN RISIKO ESTATE' : `PAPARAN RISIKO - ${currentDivision}`;
-            
-            document.getElementById('paparanRiskBadge').textContent = 
+
+            document.getElementById('paparanRiskBadge').textContent =
                 `📍 Showing: ${currentDivision} Division (${criticalCount} Stadium 3+ critical blocks)`;
-            
-            
+
+
             // Update dynamic labels
             const labelEl = document.getElementById('paparanRiskLabel');
             if (labelEl) {
                 labelEl.innerHTML = `Total Potensi Kerugian<br/>(${criticalCount} Blok Kritis)`;
             }
-            
+
             const disclaimerEl = document.getElementById('paparanRiskDisclaimer');
             if (disclaimerEl) {
                 disclaimerEl.textContent = `*Akumulasi kerugian dari ${criticalCount} blok berstatus KRITIS`;
@@ -9431,10 +9462,10 @@
             console.log(`[PAPARAN RISIKO] Updated: Rp ${lossInMiliar.toFixed(2)} M from ${criticalCount} critical blocks`);
         }
 
-                /**
-         * Render Division Comparison Table dengan sorting
-         * @param {string} sortBy - Sort criteria: 'loss', 'roi', 'critical', 'infection'
-         */
+        /**
+ * Render Division Comparison Table dengan sorting
+ * @param {string} sortBy - Sort criteria: 'loss', 'roi', 'critical', 'infection'
+ */
         function renderDivisionComparison(sortBy = 'loss') {
             console.log(`[PHASE 3] Rendering division comparison, sorted by: ${sortBy}`);
 
