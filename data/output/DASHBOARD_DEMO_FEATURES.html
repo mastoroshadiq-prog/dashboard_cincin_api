@@ -9184,39 +9184,6 @@
                 document.getElementById('treatment_totalSavings').textContent = formatLossMiliar(totalSavings);
                 document.getElementById('treatment_savingsPercent').textContent = treatment_savingsPercent.toFixed(0) + '%';
 
-                document.getElementById('noTreatment_gap').textContent = `${Math.round(totalProductionGap)} Ton`;
-                document.getElementById('noTreatment_critical').textContent =
-                    `${metrics.criticalBlocks} / ${metrics.totalBlocks} (${metrics.criticalRate.toFixed(0)}%)`;
-
-                console.log('[TREATMENT IMPACT] 3-Year Projection:', {
-                    noTreatment: {
-                        year0: noTx_year0,
-                        year1: noTx_year1,
-                        year2: noTx_year2,
-                        year3: noTx_year3,
-                        cumulative: noTx_cumulative
-                    },
-                    withTreatment: {
-                        year0: withTx_year0,
-                        year1: withTx_year1,
-                        year2: withTx_year2,
-                        year3: withTx_year3,
-                        cumulative: withTx_cumulative
-                    },
-                    savings: totalSavings,
-                    savingsPercent: treatment_savingsPercent.toFixed(1) + '%'
-                });
-
-
-                // OLD WITH TREATMENT code removed - now handled by side-by-side comparison above
-
-
-                // ROI Highlight
-                const savings = metrics.estimatedSavings;
-                const roiRatio = metrics.divisionROI;
-
-                document.getElementById('roi_savings').textContent = formatLossMiliar(savings);
-                document.getElementById('roi_ratio').textContent = `${roiRatio.toFixed(1)}x`;
 
                 // Update disclaimer dengan actual data
                 const disclaimerDiv = document.querySelector('#divisionSummaryPanel .bg-blue-500\\/10 .text-blue-200');
