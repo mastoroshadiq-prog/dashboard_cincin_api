@@ -348,6 +348,110 @@
         </div>
     </div>
 
+    <!-- ============================================ -->
+    <!-- PHASE 3: DIVISION COMPARISON TABLE -->
+    <!-- ============================================ -->
+    <div class="max-w-7xl mx-auto mb-8">
+        <div
+            class="bg-gradient-to-br from-slate-800/90 to-slate-900/90 backdrop-blur-xl rounded-3xl border-2 border-purple-500/30 shadow-2xl p-8">
+
+            <!-- Header -->
+            <div class="flex items-center justify-between mb-6">
+                <div class="flex items-center gap-4">
+                    <div class="text-5xl">📊</div>
+                    <div>
+                        <h2 class="text-3xl font-black text-purple-400 mb-1">DIVISION COMPARISON</h2>
+                        <p class="text-slate-300 text-sm">Estate-wide Ganoderma impact analysis across all 14 divisions
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Sort Controls -->
+                <div class="flex items-center gap-2">
+                    <span class="text-xs text-slate-400 font-bold uppercase">Sort By:</span>
+                    <button onclick="renderDivisionComparison('loss')" id="sortDivBy_loss"
+                        class="px-3 py-1 rounded-lg text-xs font-bold bg-purple-600 text-white border-2 border-purple-400 shadow-lg">
+                        Loss (Rp)
+                    </button>
+                    <button onclick="renderDivisionComparison('roi')" id="sortDivBy_roi"
+                        class="px-3 py-1 rounded-lg text-xs font-bold bg-slate-700 text-slate-300 border border-slate-600">
+                        ROI Ratio
+                    </button>
+                    <button onclick="renderDivisionComparison('critical')" id="sortDivBy_critical"
+                        class="px-3 py-1 rounded-lg text-xs font-bold bg-slate-700 text-slate-300 border border-slate-600">
+                        Critical %
+                    </button>
+                    <button onclick="renderDivisionComparison('infection')" id="sortDivBy_infection"
+                        class="px-3 py-1 rounded-lg text-xs font-bold bg-slate-700 text-slate-300 border border-slate-600">
+                        Infection %
+                    </button>
+                </div>
+            </div>
+
+            <!-- Comparison Table -->
+            <div class="overflow-x-auto custom-scrollbar">
+                <table class="w-full text-sm">
+                    <thead>
+                        <tr class="border-b-2 border-purple-500/30">
+                            <th class="text-left p-3 text-purple-300 font-bold sticky left-0 bg-slate-900/95">Rank</th>
+                            <th class="text-left p-3 text-purple-300 font-bold sticky left-16 bg-slate-900/95">Division
+                            </th>
+                            <th class="text-center p-3 text-slate-300 font-bold">Blocks</th>
+                            <th class="text-center p-3 text-slate-300 font-bold">Area (Ha)</th>
+                            <th class="text-center p-3 text-red-300 font-bold">Gano Loss<br><span
+                                    class="text-xs opacity-70">(Rp Juta/yr)</span></th>
+                            <th class="text-center p-3 text-orange-300 font-bold">Critical<br><span
+                                    class="text-xs opacity-70">(blocks)</span></th>
+                            <th class="text-center p-3 text-yellow-300 font-bold">Critical<br><span
+                                    class="text-xs opacity-70">(%)</span></th>
+                            <th class="text-center p-3 text-cyan-300 font-bold">Infection<br><span
+                                    class="text-xs opacity-70">(%)</span></th>
+                            <th class="text-center p-3 text-blue-300 font-bold">Avg Yield<br><span
+                                    class="text-xs opacity-70">(T/Ha)</span></th>
+                            <th class="text-center p-3 text-emerald-300 font-bold">Treatment<br><span
+                                    class="text-xs opacity-70">(Rp Juta)</span></th>
+                            <th class="text-center p-3 text-green-300 font-bold">ROI<br><span
+                                    class="text-xs opacity-70">(ratio)</span></th>
+                            <th class="text-center p-3 text-purple-300 font-bold">Priority</th>
+                        </tr>
+                    </thead>
+                    <tbody id="divisionComparisonTableBody" class="text-white">
+                        <!-- Populated by JavaScript -->
+                        <tr>
+                            <td colspan="12" class="p-8 text-center text-slate-400">
+                                <div class="flex flex-col items-center gap-2">
+                                    <div class="text-4xl">⏳</div>
+                                    <div>Loading division metrics...</div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Legend -->
+            <div class="mt-6 flex items-center gap-6 text-xs">
+                <div class="flex items-center gap-2">
+                    <div class="w-3 h-3 bg-red-500 rounded"></div>
+                    <span class="text-slate-300">🔴 URGENT (Critical \u003e 40%)</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <div class="w-3 h-3 bg-orange-500 rounded"></div>
+                    <span class="text-slate-300">🟠 HIGH (Critical 25-40%)</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <div class="w-3 h-3 bg-yellow-500 rounded"></div>
+                    <span class="text-slate-300">🟡 MEDIUM (Critical 15-25%)</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <div class="w-3 h-3 bg-green-500 rounded"></div>
+                    <span class="text-slate-300">🟢 OK (Critical \u003c 15%)</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
     <div class="max-w-7xl mx-auto space-y-8">
 
         <!-- ============================================ -->
@@ -8644,6 +8748,358 @@
             "E001A": { "block_code": "E001A", "attack_rate": 6.4, "sph": 95, "tt": 2009, "luas_ha": 22.5, "realisasi_ton_ha": 16.7, "potensi_ton_ha": 22.0, "gap_ton_ha": -5.3, "gap_pct": -24.1, "census_rate_pct": 3.28, "mitigation_cost_juta": 50, "loss_value_juta": 178.9, "projected_loss_3yr": 661.5, "status_narrative": "CRYPTIC COLLAPSE" }
         };
 
+        // ================================================================
+        // ====== PHASE 3: DIVISION AGGREGATION ENGINE ==================
+        // ================================================================
+        // Purpose: Calculate division-level Ganoderma metrics from block data
+        // Author: Phase 3 Development - Session 1
+        // Date: 2026-01-19
+
+        /**
+         * Get all blocks belonging to a specific division
+         * @param {string} divisionCode - Division code (e.g., 'AME02', 'DBE01')
+         * @returns {Array} - Array of block data objects
+         */
+        function getBlocksByDivision(divisionCode) {
+            const blocks = [];
+            for (const [blockCode, blockData] of Object.entries(COMPLETE_BLOCKS_DATA || {})) {
+                if (blockData.division === divisionCode) {
+                    blocks.push(blockData);
+                }
+            }
+            return blocks;
+        }
+
+        /**
+         * Calculate comprehensive Ganoderma metrics for a division
+         * @param {string} divisionCode - Division code
+         * @returns {Object} - Division aggregated metrics (ALL Ganoderma-focused)
+         */
+        function calculateDivisionMetrics(divisionCode) {
+            const blocks = getBlocksByDivision(divisionCode);
+
+            if (blocks.length === 0) {
+                console.warn(`No blocks found for division: ${divisionCode}`);
+                return null;
+            }
+
+            // Initialize aggregation variables
+            let totalBlocks = blocks.length;
+            let totalArea = 0;
+            let totalGanodermaLoss = 0;
+            let totalTreatmentCost = 0;
+            let criticalBlocksCount = 0;
+            let infectedBlocksCount = 0;
+
+            // For weighted averages
+            let weightedYieldReal = 0;
+            let weightedYieldPot = 0;
+            let weightedGapPct = 0;
+            let weightedAttackRate = 0;
+
+            // Process each block
+            blocks.forEach(block => {
+                const area = block.luas_ha || 0;
+                const loss = block.loss_value_juta || 0;
+                const treatmentCost = block.mitigation_cost_juta || 0;
+                const gapPct = Math.abs(block.gap_pct || 0);
+                const attackRate = block.attack_rate || 0;
+                const yieldReal = block.realisasi_ton_ha || 0;
+                const yieldPot = block.potensi_ton_ha || 0;
+
+                // Sum totals
+                totalArea += area;
+                totalGanodermaLoss += loss;
+                totalTreatmentCost += treatmentCost;
+
+                // Count critical/infected blocks
+                if (gapPct > 20 || loss > 100) {
+                    criticalBlocksCount++;
+                }
+                if (attackRate > 0 || loss > 0) {
+                    infectedBlocksCount++;
+                }
+
+                // Weighted sums (by area)
+                weightedYieldReal += yieldReal * area;
+                weightedYieldPot += yieldPot * area;
+                weightedGapPct += gapPct * area;
+                weightedAttackRate += attackRate * area;
+            });
+
+            // Calculate weighted averages
+            const avgYieldReal = totalArea > 0 ? weightedYieldReal / totalArea : 0;
+            const avgYieldPot = totalArea > 0 ? weightedYieldPot / totalArea : 0;
+            const avgGapPct = totalArea > 0 ? weightedGapPct / totalArea : 0;
+            const avgAttackRate = totalArea > 0 ? weightedAttackRate / totalArea : 0;
+
+            // Calculate division-level metrics
+            const infectionRate = totalBlocks > 0 ? (infectedBlocksCount / totalBlocks) * 100 : 0;
+            const criticalRate = totalBlocks > 0 ? (criticalBlocksCount / totalBlocks) * 100 : 0;
+
+            // Division ROI calculation
+            const projected3YearLoss = totalGanodermaLoss * 3;
+            const estimatedSavings = projected3YearLoss * 0.70; // 70% treatment effectiveness
+            const netBenefit = estimatedSavings - totalTreatmentCost;
+            const divisionROI = totalTreatmentCost > 0 ? netBenefit / totalTreatmentCost : 0;
+
+            // Treatment priority score (higher = more urgent)
+            // Formula: (Loss × Infection Rate × Critical Rate) / Treatment Cost
+            const priorityScore = totalTreatmentCost > 0
+                ? (totalGanodermaLoss * infectionRate * criticalRate) / totalTreatmentCost
+                : 0;
+
+            return {
+                divisionCode: divisionCode,
+
+                // Block counts
+                totalBlocks: totalBlocks,
+                infectedBlocks: infectedBlocksCount,
+                criticalBlocks: criticalBlocksCount,
+
+                // Area
+                totalArea: totalArea,
+
+                // Ganoderma-specific metrics
+                totalGanodermaLoss: totalGanodermaLoss, // Rp Juta/year
+                avgAttackRate: avgAttackRate, // %
+                infectionRate: infectionRate, // % of blocks infected
+                criticalRate: criticalRate, // % of blocks critical
+
+                // Yield metrics (Ganoderma impact)
+                avgYieldReal: avgYieldReal, // Ton/Ha
+                avgYieldPot: avgYieldPot, // Ton/Ha
+                avgGapPct: avgGapPct, // %
+
+                // Treatment metrics
+                totalTreatmentCost: totalTreatmentCost, // Rp Juta
+                projected3YearLoss: projected3YearLoss,
+                estimatedSavings: estimatedSavings,
+                netBenefit: netBenefit,
+                divisionROI: divisionROI, // ratio
+
+                // Priority
+                priorityScore: priorityScore,
+
+                // Timestamp
+                calculatedAt: new Date().toISOString()
+            };
+        }
+
+        /**
+         * Calculate metrics for ALL divisions
+         * @returns {Array} - Array of division metrics, sorted by priority
+         */
+        function getAllDivisionMetrics() {
+            const allDivisions = Object.keys(DIVISIONS_META || {});
+            const divisionsMetrics = [];
+
+            allDivisions.forEach(divCode => {
+                const metrics = calculateDivisionMetrics(divCode);
+                if (metrics) {
+                    divisionsMetrics.push(metrics);
+                }
+            });
+
+            // Sort by priority score (descending)
+            divisionsMetrics.sort((a, b) => b.priorityScore - a.priorityScore);
+
+            return divisionsMetrics;
+        }
+
+        // Global variable to cache division metrics
+        let DIVISION_METRICS_CACHE = null;
+
+        /**
+         * Get or calculate division metrics (with caching)
+         * @param {boolean} forceRecalculate - Force recalculation even if cached
+         * @returns {Array} - Array of division metrics
+         */
+        function getDivisionMetrics(forceRecalculate = false) {
+            if (!DIVISION_METRICS_CACHE || forceRecalculate) {
+                console.log('[PHASE 3] Calculating division metrics...');
+                DIVISION_METRICS_CACHE = getAllDivisionMetrics();
+                console.log(`[PHASE 3] Calculated metrics for ${DIVISION_METRICS_CACHE.length} divisions`);
+            }
+            return DIVISION_METRICS_CACHE;
+        }
+
+        /**
+         * Update Division Summary Panel dengan dynamic aggregated data
+         * @param {string} divisionCode - Division code (e.g., 'AME02')
+         */
+        function updateDivisionSummary(divisionCode) {
+            console.log(`[PHASE 3] Updating division summary for: ${divisionCode}`);
+
+            const metrics = calculateDivisionMetrics(divisionCode);
+
+            if (!metrics) {
+                console.error(`[PHASE 3] No metrics found for division: ${divisionCode}`);
+                return;
+            }
+
+            // Update Quick Metrics Grid
+            document.getElementById('divMetric_totalBlocks').textContent = metrics.totalBlocks;
+            document.getElementById('divMetric_totalArea').innerHTML =
+                `${Math.round(metrics.totalArea)}<span class="text-sm text-slate-400 ml-1">Ha</span>`;
+            document.getElementById('divMetric_avgYield').innerHTML =
+                `${metrics.avgYieldReal.toFixed(2)}<span class="text-sm text-slate-400 ml-1">T/Ha</span>`;
+            document.getElementById('divMetric_critical').innerHTML =
+                `${metrics.criticalBlocks}<span class="text-sm text-slate-400 ml-1">/ ${metrics.totalBlocks}</span>`;
+
+            // Calculate treatment impact scenarios
+            const annualLoss = metrics.totalGanodermaLoss;
+            const projected3Year = metrics.projected3YearLoss;
+            const treatmentCost = metrics.totalTreatmentCost;
+
+            // Production gap calculation (based on avg gap % and total area)
+            const totalProductionGap = (metrics.avgGapPct / 100) * metrics.avgYieldPot * metrics.totalArea;
+
+            // NO TREATMENT scenario
+            document.getElementById('noTreatment_loss').textContent = `Rp ${Math.round(annualLoss)} Jt`;
+            document.getElementById('noTreatment_gap').textContent = `${Math.round(totalProductionGap)} Ton`;
+            document.getElementById('noTreatment_critical').textContent =
+                `${metrics.criticalBlocks} / ${metrics.totalBlocks} (${metrics.criticalRate.toFixed(0)}%)`;
+
+            // WITH TREATMENT scenario (70% effectiveness)
+            const reducedLoss = annualLoss * 0.30; // 70% prevented 
+            const recoveredGap = totalProductionGap * 0.80; // 80% production recovery
+            const blocksRecovered = Math.round(metrics.criticalBlocks * 0.67); // 67% blocks recovered
+
+            document.getElementById('withTreatment_loss').innerHTML =
+                `Rp ${Math.round(reducedLoss)} Jt<span class="text-lg ml-2 text-emerald-300">↓${Math.round((1 - reducedLoss / annualLoss) * 100)}%</span>`;
+            document.getElementById('withTreatment_gap').innerHTML =
+                `${Math.round(totalProductionGap - recoveredGap)} Ton<span class="text-sm text-emerald-300 ml-2">↓80%</span>`;
+            document.getElementById('withTreatment_recovered').textContent =
+                `${blocksRecovered} / ${metrics.criticalBlocks} (67%)`;
+
+            // ROI Highlight
+            const savings = metrics.estimatedSavings;
+            const roiRatio = metrics.divisionROI;
+
+            document.getElementById('roi_savings').textContent = `Rp ${Math.round(savings)} Juta`;
+            document.getElementById('roi_ratio').textContent = `${roiRatio.toFixed(1)}x`;
+
+            // Update disclaimer dengan actual data
+            const disclaimerDiv = document.querySelector('#divisionSummaryPanel .bg-blue-500\\/10 .text-blue-200');
+            if (disclaimerDiv) {
+                disclaimerDiv.innerHTML = `
+                    <strong>Data Coverage:</strong> Above metrics calculated from <strong>ALL ${metrics.totalBlocks} blocks</strong> 
+                    in ${divisionCode} division (${Math.round(metrics.totalArea)} Ha total). 
+                    Critical block details show <strong>${metrics.criticalBlocks} blocks</strong> requiring immediate attention.
+                `;
+            }
+
+            console.log(`[PHASE 3] Division summary updated successfully for ${divisionCode}`);
+            console.log('[PHASE 3] Metrics:', {
+                blocks: metrics.totalBlocks,
+                area: metrics.totalArea,
+                loss: metrics.totalGanodermaLoss,
+                roi: metrics.divisionROI
+            });
+        }
+
+        /**
+         * Render Division Comparison Table dengan sorting
+         * @param {string} sortBy - Sort criteria: 'loss', 'roi', 'critical', 'infection'
+         */
+        function renderDivisionComparison(sortBy = 'loss') {
+            console.log(`[PHASE 3] Rendering division comparison, sorted by: ${sortBy}`);
+
+            // Update button states
+            const sortButtons = {
+                loss: 'sortDivBy_loss',
+                roi: 'sortDivBy_roi',
+                critical: 'sortDivBy_critical',
+                infection: 'sortDivBy_infection'
+            };
+
+            Object.entries(sortButtons).forEach(([key, btnId]) => {
+                const btn = document.getElementById(btnId);
+                if (btn) {
+                    btn.className = key === sortBy
+                        ? 'px-3 py-1 rounded-lg text-xs font-bold bg-purple-600 text-white border-2 border-purple-400 shadow-lg'
+                        : 'px-3 py-1 rounded-lg text-xs font-bold bg-slate-700 text-slate-300 border border-slate-600';
+                }
+            });
+
+            // Get all division metrics
+            const allMetrics = getDivisionMetrics();
+
+            if (!allMetrics || allMetrics.length === 0) {
+                console.error('[PHASE 3] No division metrics available');
+                return;
+            }
+
+            // Sort divisions based on criteria
+            let sortedDivisions = [...allMetrics];
+            switch (sortBy) {
+                case 'loss':
+                    sortedDivisions.sort((a, b) => b.totalGanodermaLoss - a.totalGanodermaLoss);
+                    break;
+                case 'roi':
+                    sortedDivisions.sort((a, b) => b.divisionROI - a.divisionROI);
+                    break;
+                case 'critical':
+                    sortedDivisions.sort((a, b) => b.criticalRate - a.criticalRate);
+                    break;
+                case 'infection':
+                    sortedDivisions.sort((a, b) => b.infectionRate - a.infectionRate);
+                    break;
+            }
+
+            // Helper function: Get severity class based on critical rate
+            function getSeverityClass(criticalRate) {
+                if (criticalRate > 40) return { bg: 'bg-red-900/30', border: 'border-red-500/50', text: 'text-red-300' };
+                if (criticalRate > 25) return { bg: 'bg-orange-900/30', border: 'border-orange-500/50', text: 'text-orange-300' };
+                if (criticalRate > 15) return { bg: 'bg-yellow-900/30', border: 'border-yellow-500/50', text: 'text-yellow-300' };
+                return { bg: 'bg-green-900/30', border: 'border-green-500/50', text: 'text-green-300' };
+            }
+
+            // Helper function: Get priority badge
+            function getPriorityBadge(criticalRate, infectionRate) {
+                if (criticalRate > 40) return '<span class="px-2 py-1 rounded-full bg-red-600 text-white text-xs font-bold">🔴 URGENT</span>';
+                if (criticalRate > 25) return '<span class="px-2 py-1 rounded-full bg-orange-600 text-white text-xs font-bold">🟠 HIGH</span>';
+                if (criticalRate > 15) return '<span class="px-2 py-1 rounded-full bg-yellow-600 text-white text-xs font-bold">🟡 MEDIUM</span>';
+                return '<span class="px-2 py-1 rounded-full bg-green-600 text-white text-xs font-bold">🟢 OK</span>';
+            }
+
+            // Build table HTML
+            let tableHTML = '';
+            sortedDivisions.forEach((div, index) => {
+                const rank = index + 1;
+                const severity = getSeverityClass(div.criticalRate);
+                const priorityBadge = getPriorityBadge(div.criticalRate, div.infectionRate);
+
+                tableHTML += `
+                    <tr class="border-b border-white/5 hover:${severity.bg} transition-all cursor-pointer"
+                        onclick="updateDivisionSummary('${div.divisionCode}'); window.scrollTo({top: 0, behavior: 'smooth'});">
+                        <td class="p-3 font-bold ${severity.text} sticky left-0 bg-slate-900/95">#${rank}</td>
+                        <td class="p-3 font-bold text-white sticky left-16 bg-slate-900/95">${div.divisionCode}</td>
+                        <td class="p-3 text-center text-slate-300">${div.totalBlocks}</td>
+                        <td class="p-3 text-center text-slate-300">${Math.round(div.totalArea)}</td>
+                        <td class="p-3 text-center text-red-400 font-bold">${Math.round(div.totalGanodermaLoss)}</td>
+                        <td class="p-3 text-center text-orange-400">${div.criticalBlocks}</td>
+                        <td class="p-3 text-center ${severity.text} font-bold">${div.criticalRate.toFixed(1)}%</td>
+                        <td class="p-3 text-center text-cyan-400">${div.infectionRate.toFixed(1)}%</td>
+                        <td class="p-3 text-center text-blue-300">${div.avgYieldReal.toFixed(2)}</td>
+                        <td class="p-3 text-center text-emerald-400">${Math.round(div.totalTreatmentCost)}</td>
+                        <td class="p-3 text-center text-green-400 font-bold">${div.divisionROI.toFixed(1)}x</td>
+                        <td class="p-3 text-center">${priorityBadge}</td>
+                    </tr>
+                `;
+            });
+
+            // Update table
+            document.getElementById('divisionComparisonTableBody').innerHTML = tableHTML;
+
+            console.log(`[PHASE 3] Division comparison table rendered: ${sortedDivisions.length} divisions`);
+        }
+
+        // ================================================================
+        // ====== END PHASE 3: DIVISION AGGREGATION ENGINE ===============
+        // ================================================================
+
         // ====== POPULATE PAPARAN RISK ======
         let riskChart = null;
         function renderPaparanRisk(sortBy = 'ar') {
@@ -9379,8 +9835,22 @@
 
         // ====== AUTO-RUN ======
         if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', renderPaparanRisk);
+            document.addEventListener('DOMContentLoaded', function () {
+                // Phase 3: Update division summary dengan data dinamis
+                console.log('[PHASE 3] Initializing dashboard...');
+                updateDivisionSummary('AME02'); // Default division
+
+                // Render division comparison table
+                renderDivisionComparison('loss'); // Default sort by loss
+
+                // Render risk chart
+                renderPaparanRisk();
+            });
         } else {
+            // Page already loaded
+            console.log('[PHASE 3] Page already loaded, initializing...');
+            updateDivisionSummary('AME02');
+            renderDivisionComparison('loss');
             renderPaparanRisk();
         }
 
