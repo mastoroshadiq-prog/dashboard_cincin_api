@@ -424,17 +424,15 @@
 
                     <!-- Main Number -->
                     <div class="mb-6 relative z-10">
-                        <span class="text-[10px] uppercase font-bold text-slate-400 block mb-1">Total Potensi Kerugian
-                            (8
-                            Blok Kritis)</span>
+                        <span class="text-[10px] uppercase font-bold text-slate-400 block mb-1" id="paparanRiskLabel">Total Potensi Kerugian
+                            (-- Blok Kritis)</span>
                         <div class="flex items-baseline gap-1">
                             <span class="text-xl font-bold text-rose-500">Rp</span>
                             <span class="text-5xl font-black text-white tracking-tighter"
                                 id="summaryTotalLoss">--</span>
                             <span class="text-sm font-bold text-slate-400">Miliar</span>
                         </div>
-                        <p class="text-[10px] text-rose-300/80 mt-1 italic">*Akumulasi kerugian dari 8 blok berstatus
-                            KRITIS
+                        <p class="text-[10px] text-rose-300/80 mt-1 italic" id="paparanRiskDisclaimer">*Akumulasi kerugian dari blok berstatus KRITIS
                         </p>
                     </div>
 
@@ -9115,6 +9113,9 @@
 
             // FIX #3: Render 3-Year Degradation Model Chart
             renderDegradationModelChart(metrics);
+
+            // Update Paparan Risiko section
+            updatePaparanRisiko(metrics);
         }
 
         /**
@@ -9248,6 +9249,54 @@
         }
 
         /**
+         * Update Paparan Risiko Section (synchronized with Division metrics)
+         * @param {Object} metrics - Division metrics object
+         */
+        function updatePaparanRisiko(metrics) {
+            console.log('[PAPARAN RISIKO] Updating with metrics:', metrics);
+            
+            // Calculate total loss from critical blocks only (Stadium 3+)
+            // Use same source as Treatment Impact Analysis for consistency
+            const totalLoss = metrics.totalGanodermaLoss; // in Juta
+            const criticalCount = metrics.criticalBlocks;
+            
+            // Convert to Miliar for display
+            const lossInMiliar = totalLoss / 1000;
+            
+            // Update main loss display
+            document.getElementById('summaryTotalLoss').textContent = lossInMiliar.toFixed(2);
+            
+            // Update critical count
+            document.getElementById('summaryCriticalCount').textContent = criticalCount;
+            
+            // Calculate risk area (area of critical blocks only)
+            // Assuming critical blocks have proportional area
+            const riskArea = metrics.totalArea * (criticalCount / metrics.totalBlocks);
+            document.getElementById('summaryRiskArea').textContent = riskArea.toFixed(1);
+            
+            // Update title and badge
+            const currentDivision = window.currentDivision || 'ALL';
+            document.getElementById('paparanRiskTitle').textContent = 
+                currentDivision === 'ALL' ? 'PAPARAN RISIKO ESTATE' : `PAPARAN RISIKO - ${currentDivision}`;
+            
+            document.getElementById('paparanRiskBadge').textContent = 
+                `📍 Showing: ${currentDivision} Division (${criticalCount} Stadium 3+ critical blocks)`;
+            
+            
+            // Update dynamic labels
+            const labelEl = document.getElementById('paparanRiskLabel');
+            if (labelEl) {
+                labelEl.innerHTML = `Total Potensi Kerugian<br/>(${criticalCount} Blok Kritis)`;
+            }
+            
+            const disclaimerEl = document.getElementById('paparanRiskDisclaimer');
+            if (disclaimerEl) {
+                disclaimerEl.textContent = `*Akumulasi kerugian dari ${criticalCount} blok berstatus KRITIS`;
+            }
+            console.log(`[PAPARAN RISIKO] Updated: Rp ${lossInMiliar.toFixed(2)} M from ${criticalCount} critical blocks`);
+        }
+
+                /**
          * Render Division Comparison Table dengan sorting
          * @param {string} sortBy - Sort criteria: 'loss', 'roi', 'critical', 'infection'
          */
