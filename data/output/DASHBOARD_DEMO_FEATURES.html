@@ -202,7 +202,8 @@
                     <div class="text-4xl">📊</div>
                     <div>
                         <div class="text-sm text-cyan-300 font-bold">Currently Viewing:</div>
-                        <div class="text-lg text-white font-black">AME II (TIER 1) - 8 blocks | NDRE Available ✅ | Area:
+                        <div class="text-lg text-white font-black" id="statsBarText">AME II (TIER 1) - 8 blocks | NDRE
+                            Available ✅ | Area:
                             ~200 Ha</div>
                     </div>
                 </div>
@@ -326,6 +327,39 @@
                                     <div class="text-xs text-slate-400">Treatment cost: ~Rp 96 Juta</div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+
+                    <!-- FIX #3: 3-YEAR DEGRADATION MODEL CHART -->
+                    <div
+                        class="mt-6 bg-gradient-to-r from-slate-900/60 to-purple-900/60 rounded-2xl border-2 border-red-500/30 p-6">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="text-3xl">📊</div>
+                            <h3 class="text-xl font-black text-white">3-Year Degradation Model: <span
+                                    class="text-red-400">TANPA</span> vs <span class="text-emerald-400">DENGAN</span>
+                                Treatment</h3>
+                        </div>
+
+                        <div class="flex items-center gap-2 mb-4">
+                            <div
+                                class="flex items-center gap-2 px-3 py-1 bg-red-900/30 border border-red-500/50 rounded-lg">
+                                <div class="w-8 h-1 bg-red-500"></div>
+                                <span class="text-xs text-red-300 font-bold">TANPA Treatment</span>
+                            </div>
+                            <div
+                                class="flex items-center gap-2 px-3 py-1 bg-emerald-900/30 border border-emerald-500/50 rounded-lg">
+                                <div class="w-8 h-1 border-t-2 border-dashed border-emerald-400"></div>
+                                <span class="text-xs text-emerald-300 font-bold">DENGAN Treatment (70% effective)</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-black/40 rounded-xl p-4">
+                            <canvas id="degradationModelChart" height="100"></canvas>
+                        </div>
+
+                        <div class="mt-3 text-xs text-slate-400 text-center">
+                            <span class="text-yellow-300">⚠️</span> Degradation model assumes 15% annual loss increase
+                            without treatment, 70% mitigation with treatment
                         </div>
                     </div>
 
@@ -482,11 +516,12 @@
                         <div>
                             <h3 class="text-rose-400 text-[10px] font-black uppercase tracking-widest mb-1">Risk Control
                                 Tower</h3>
-                            <h2 class="text-2xl font-black text-white tracking-tight">PAPARAN RISIKO ESTATE</h2>
+                            <h2 id="paparanRiskTitle" class="text-2xl font-black text-white tracking-tight">PAPARAN
+                                RISIKO ESTATE</h2>
                             <div
                                 class="mt-2 inline-block px-3 py-1 bg-orange-900/40 border border-orange-500/50 rounded-full">
-                                <span class="text-orange-300 text-[10px] font-bold">📍 Sample Data: AME II
-                                    Division</span>
+                                <span id="paparanRiskBadge" class="text-orange-300 text-[10px] font-bold">📍 Showing:
+                                    ALL Divisions (CRYPTIC COLLAPSE blocks)</span>
                             </div>
                         </div>
                     </div>
@@ -8797,26 +8832,88 @@
             let weightedGapPct = 0;
             let weightedAttackRate = 0;
 
+
+            // Constants for loss calculation
+            const FFB_PRICE_PER_TON_JUTA = 2.5; // Rp 2.5 juta per ton (market average)
+            const TREATMENT_COST_PER_BLOCK_JUTA = 50; // Rp 50 juta per block (standard)
+
+            // Helper function: Determine Ganoderma Stadium (1-4) and Critical Status
+            function getGanodermaStadium(attackRate, gapPct) {
+                // Stadium classification based on attack rate and gap percentage
+                // Stadium 4: Critical collapse (>30% attack OR >40% gap)
+                if (attackRate >= 30 || gapPct >= 40) {
+                    return {
+                        stadium: 4,
+                        severity: 'URGENT',
+                        critical: true,
+                        action: 'REPLANTING',
+                        color: 'red'
+                    };
+                }
+                // Stadium 3: Severe infection (15-30% attack OR 20-40% gap)
+                if (attackRate >= 15 || gapPct >= 20) {
+                    return {
+                        stadium: 3,
+                        severity: 'HIGH',
+                        critical: true,
+                        action: 'TREATMENT',
+                        color: 'orange'
+                    };
+                }
+                // Stadium 2: Mid infection (5-15% attack OR 10-20% gap)
+                if (attackRate >= 5 || gapPct >= 10) {
+                    return {
+                        stadium: 2,
+                        severity: 'MEDIUM',
+                        critical: false,
+                        action: 'MONITORING',
+                        color: 'yellow'
+                    };
+                }
+                // Stadium 1: Early/no infection (<5% attack AND <10% gap)
+                return {
+                    stadium: 1,
+                    severity: 'LOW',
+                    critical: false,
+                    action: 'PREVENTION',
+                    color: 'green'
+                };
+            }
+
             // Process each block
             blocks.forEach(block => {
                 const area = block.luas_ha || 0;
-                const loss = block.loss_value_juta || 0;
-                const treatmentCost = block.mitigation_cost_juta || 0;
                 const gapPct = Math.abs(block.gap_pct || 0);
+                const gapTonHa = Math.abs(block.gap_ton_ha || 0);
                 const attackRate = block.attack_rate || 0;
                 const yieldReal = block.realisasi_ton_ha || 0;
                 const yieldPot = block.potensi_ton_ha || 0;
 
+                // PRIORITY 1: Calculate Loss from Gap if not available
+                let blockLoss = block.loss_value_juta || 0;
+                if (blockLoss === 0 && gapTonHa > 0 && area > 0) {
+                    // Loss = Production Gap (ton) × Area (Ha) × FFB Price (Rp/ton)
+                    blockLoss = gapTonHa * area * FFB_PRICE_PER_TON_JUTA;
+                }
+
+                // Treatment cost (standard Rp 50 juta per block needing treatment)
+                const treatmentCost = block.mitigation_cost_juta || TREATMENT_COST_PER_BLOCK_JUTA;
+
+                // PRIORITY 2: Stadium-based classification
+                const stadiumInfo = getGanodermaStadium(attackRate, gapPct);
+
                 // Sum totals
                 totalArea += area;
-                totalGanodermaLoss += loss;
-                totalTreatmentCost += treatmentCost;
+                totalGanodermaLoss += blockLoss;
 
-                // Count critical/infected blocks
-                if (gapPct > 20 || loss > 100) {
+                // Only count treatment cost for critical blocks (Stadium 3 & 4)
+                if (stadiumInfo.critical) {
+                    totalTreatmentCost += treatmentCost;
                     criticalBlocksCount++;
                 }
-                if (attackRate > 0 || loss > 0) {
+
+                // Count infected blocks (Stadium 2+)
+                if (stadiumInfo.stadium >= 2) {
                     infectedBlocksCount++;
                 }
 
@@ -8947,6 +9044,18 @@
             document.getElementById('divMetric_critical').innerHTML =
                 `${metrics.criticalBlocks}<span class="text-sm text-slate-400 ml-1">/ ${metrics.totalBlocks}</span>`;
 
+            // FIX #1: Update Division Title dynamically
+            const divTitle = document.querySelector('#divisionSummaryPanel h2');
+            if (divTitle) {
+                divTitle.textContent = `${divisionCode} DIVISION OVERVIEW`;
+            }
+
+            // Update Stats Bar (Currently Viewing)
+            const statsBar = document.getElementById('statsBarText');
+            if (statsBar) {
+                statsBar.textContent = `${divisionCode} - ${metrics.totalBlocks} blocks | Area: ${Math.round(metrics.totalArea)} Ha | Critical: ${metrics.criticalBlocks}`;
+            }
+
             // Calculate treatment impact scenarios
             const annualLoss = metrics.totalGanodermaLoss;
             const projected3Year = metrics.projected3YearLoss;
@@ -8955,8 +9064,14 @@
             // Production gap calculation (based on avg gap % and total area)
             const totalProductionGap = (metrics.avgGapPct / 100) * metrics.avgYieldPot * metrics.totalArea;
 
+            // Helper function untuk convert Juta to Miliar format
+            function formatLossMiliar(lossJuta) {
+                const miliar = lossJuta / 1000;
+                return miliar >= 0.1 ? `Rp ${miliar.toFixed(1)} M` : `Rp ${lossJuta.toFixed(0)} Jt`;
+            }
+
             // NO TREATMENT scenario
-            document.getElementById('noTreatment_loss').textContent = `Rp ${Math.round(annualLoss)} Jt`;
+            document.getElementById('noTreatment_loss').textContent = formatLossMiliar(annualLoss);
             document.getElementById('noTreatment_gap').textContent = `${Math.round(totalProductionGap)} Ton`;
             document.getElementById('noTreatment_critical').textContent =
                 `${metrics.criticalBlocks} / ${metrics.totalBlocks} (${metrics.criticalRate.toFixed(0)}%)`;
@@ -8967,7 +9082,7 @@
             const blocksRecovered = Math.round(metrics.criticalBlocks * 0.67); // 67% blocks recovered
 
             document.getElementById('withTreatment_loss').innerHTML =
-                `Rp ${Math.round(reducedLoss)} Jt<span class="text-lg ml-2 text-emerald-300">↓${Math.round((1 - reducedLoss / annualLoss) * 100)}%</span>`;
+                `${formatLossMiliar(reducedLoss)}<span class="text-lg ml-2 text-emerald-300">↓${Math.round((1 - reducedLoss / annualLoss) * 100)}%</span>`;
             document.getElementById('withTreatment_gap').innerHTML =
                 `${Math.round(totalProductionGap - recoveredGap)} Ton<span class="text-sm text-emerald-300 ml-2">↓80%</span>`;
             document.getElementById('withTreatment_recovered').textContent =
@@ -8977,7 +9092,7 @@
             const savings = metrics.estimatedSavings;
             const roiRatio = metrics.divisionROI;
 
-            document.getElementById('roi_savings').textContent = `Rp ${Math.round(savings)} Juta`;
+            document.getElementById('roi_savings').textContent = formatLossMiliar(savings);
             document.getElementById('roi_ratio').textContent = `${roiRatio.toFixed(1)}x`;
 
             // Update disclaimer dengan actual data
@@ -8997,6 +9112,139 @@
                 loss: metrics.totalGanodermaLoss,
                 roi: metrics.divisionROI
             });
+
+            // FIX #3: Render 3-Year Degradation Model Chart
+            renderDegradationModelChart(metrics);
+        }
+
+        /**
+         * FIX #3: Render 3-Year Degradation Model Chart
+         * Shows projected losses WITH vs WITHOUT treatment over 3 years
+         * @param {Object} metrics - Division metrics object
+         */
+        let degradationChart = null; // Global chart instance for reuse
+
+        function renderDegradationModelChart(metrics) {
+            const canvas = document.getElementById('degradationModelChart');
+            if (!canvas) {
+                console.error('[CHART] Canvas degradationModelChart not found');
+                return;
+            }
+
+            const ctx = canvas.getContext('2d');
+
+            // Destroy existing chart to prevent memory leaks
+            if (degradationChart) {
+                degradationChart.destroy();
+            }
+
+            // Calculate 3-year projection data
+            const annualLoss = metrics.totalGanodermaLoss; // Base loss (Juta)
+            const degradationRate = 0.15; // 15% annual increase without treatment
+            const treatmentEffectiveness = 0.70; // 70% effectiveness
+
+            // WITHOUT TREATMENT: Losses increase by 15% annually
+            const year0NoTreatment = annualLoss;
+            const year1NoTreatment = annualLoss * (1 + degradationRate);
+            const year2NoTreatment = annualLoss * Math.pow(1 + degradationRate, 2);
+            const year3NoTreatment = annualLoss * Math.pow(1 + degradationRate, 3);
+
+            // WITH TREATMENT: Losses reduced by 70% and stabilize
+            const year0WithTreatment = annualLoss;
+            const year1WithTreatment = annualLoss * (1 - treatmentEffectiveness * 0.5); // 50% reduction in year 1
+            const year2WithTreatment = annualLoss * (1 - treatmentEffectiveness * 0.8); // 80% reduction in year 2
+            const year3WithTreatment = annualLoss * (1 - treatmentEffectiveness); // Full 70% reduction by year 3
+
+            degradationChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Tahun 0', 'Tahun 1', 'Tahun 2', 'Tahun 3'],
+                    datasets: [
+                        {
+                            label: 'TANPA Treatment',
+                            data: [year0NoTreatment / 1000, year1NoTreatment / 1000, year2NoTreatment / 1000, year3NoTreatment / 1000],
+                            borderColor: '#ef4444',
+                            backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                            borderWidth: 3,
+                            tension: 0.4,
+                            fill: true,
+                            pointRadius: 6,
+                            pointBackgroundColor: '#ef4444',
+                            pointBorderColor: '#fff',
+                            pointBorderWidth: 2
+                        },
+                        {
+                            label: 'DENGAN Treatment (70% effective)',
+                            data: [year0WithTreatment / 1000, year1WithTreatment / 1000, year2WithTreatment / 1000, year3WithTreatment / 1000],
+                            borderColor: '#10b981',
+                            backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                            borderWidth: 3,
+                            borderDash: [8, 4],
+                            tension: 0.4,
+                            fill: true,
+                            pointRadius: 6,
+                            pointBackgroundColor: '#10b981',
+                            pointBorderColor: '#fff',
+                            pointBorderWidth: 2
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(0, 0, 0, 0.9)',
+                            titleColor: '#fff',
+                            bodyColor: '#fff',
+                            borderColor: 'rgba(255, 255, 255, 0.2)',
+                            borderWidth: 1,
+                            padding: 12,
+                            callbacks: {
+                                label: (context) => {
+                                    const value = context.parsed.y;
+                                    return `${context.dataset.label}: Rp ${value.toFixed(1)} Miliar`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)',
+                                drawBorder: false
+                            },
+                            ticks: {
+                                color: '#94a3b8',
+                                font: {
+                                    size: 11,
+                                    weight: 'bold'
+                                },
+                                callback: (value) => `Rp ${value.toFixed(0)} M`
+                            }
+                        },
+                        x: {
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.05)',
+                                drawBorder: false
+                            },
+                            ticks: {
+                                color: '#94a3b8',
+                                font: {
+                                    size: 11,
+                                    weight: 'bold'
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            console.log('[CHART] 3-Year Degradation Model rendered successfully');
         }
 
         /**
@@ -9102,8 +9350,10 @@
 
         // ====== POPULATE PAPARAN RISK ======
         let riskChart = null;
-        function renderPaparanRisk(sortBy = 'ar') {
+        function renderPaparanRisk(sortBy = 'ar', divisionCode = null) {
             if (!BLOCKS_DATA) return;
+
+            console.log(`[PHASE 3] Rendering Paparan Resiko - Sort: ${sortBy}, Division: ${divisionCode || 'ALL'}`);
 
             // Update button states
             document.getElementById('sortByAR').className = sortBy === 'ar'
@@ -9113,29 +9363,98 @@
                 ? 'px-3 py-1 rounded-lg text-xs font-bold bg-rose-600 text-white border border-rose-400'
                 : 'px-3 py-1 rounded-lg text-xs font-bold bg-rose-900/30 text-rose-300 border border-rose-500/30';
 
-            // Sort data
-            const sorted = Object.entries(BLOCKS_DATA).sort((a, b) => {
+
+            // FIX BUG #2: Use COMPLETE_BLOCKS_DATA and stadium-based filtering
+            // OPTION B: Show critical blocks filtered by selected division
+
+            // Constants for loss calculation
+            const FFB_PRICE_PER_TON_JUTA = 2.5;
+
+            // Helper: Get stadium classification
+            function getStadium(attackRate, gapPct) {
+                if (attackRate >= 30 || gapPct >= 40) return { stadium: 4, critical: true };
+                if (attackRate >= 15 || gapPct >= 20) return { stadium: 3, critical: true };
+                if (attackRate >= 5 || gapPct >= 10) return { stadium: 2, critical: false };
+                return { stadium: 1, critical: false };
+            }
+
+            // Step 1: Get all blocks from selected division
+            let divisionBlocks = Object.entries(COMPLETE_BLOCKS_DATA);
+            if (divisionCode) {
+                divisionBlocks = divisionBlocks.filter(([code, data]) => data.division === divisionCode);
+            }
+
+            // Step 2: Filter to CRITICAL blocks only (Stadium 3+)
+            const criticalBlocks = divisionBlocks.filter(([code, data]) => {
+                const gapPct = Math.abs(data.gap_pct || 0);
+                const attackRate = data.attack_rate || 0;
+                const stadiumInfo = getStadium(attackRate, gapPct);
+                return stadiumInfo.critical; // Only Stadium 3 & 4
+            });
+
+            console.log(`[PAPARAN RESIKO] Division: ${divisionCode || 'ALL'}, Total blocks: ${divisionBlocks.length}, Critical: ${criticalBlocks.length}`);
+
+            // Step 3: Calculate loss for each critical block
+            const blocksWithLoss = criticalBlocks.map(([code, data]) => {
+                const gapTonHa = Math.abs(data.gap_ton_ha || 0);
+                const area = data.luas_ha || 0;
+                const attackRate = data.attack_rate || 0;
+                const gapPct = Math.abs(data.gap_pct || 0);
+
+                // Calculate loss from gap if not available
+                let blockLoss = data.loss_value_juta || 0;
+                if (blockLoss === 0 && gapTonHa > 0 && area > 0) {
+                    blockLoss = gapTonHa * area * FFB_PRICE_PER_TON_JUTA;
+                }
+
+                return {
+                    code,
+                    data: {
+                        ...data,
+                        calculated_loss: blockLoss,
+                        attack_rate: attackRate,
+                        gap_pct: gapPct
+                    }
+                };
+            });
+
+            // Step 4: Sort by attack rate or loss
+            blocksWithLoss.sort((a, b) => {
                 if (sortBy === 'ar') {
-                    return (b[1].attack_rate || 0) - (a[1].attack_rate || 0);
+                    return (b.data.attack_rate || 0) - (a.data.attack_rate || 0);
                 } else {
-                    return (b[1].loss_value_juta || 0) - (a[1].loss_value_juta || 0);
+                    return (b.data.calculated_loss || 0) - (a.data.calculated_loss || 0);
                 }
             });
-            let totalLoss = 0, totalArea = 0;
 
+            // Step 5: Prepare chart data
+            let totalLoss = 0, totalArea = 0;
             const labels = [], arData = [], lossData = [], blockCodes = [];
-            sorted.forEach(([code, data]) => {
-                totalLoss += (data.loss_value_juta || 0);
+
+            blocksWithLoss.forEach(({ code, data }) => {
+                totalLoss += (data.calculated_loss || 0);
                 totalArea += (data.luas_ha || 0);
-                labels.push(`${code} • AR: ${(data.attack_rate || 0).toFixed(1)}%`);
+                labels.push(`${code} • AR: ${(data.attack_rate || 0).toFixed(1)}% • Gap: ${(data.gap_pct || 0).toFixed(0)}%`);
                 arData.push(data.attack_rate || 0);
-                lossData.push(data.loss_value_juta || 0);
+                lossData.push(data.calculated_loss || 0);
                 blockCodes.push(code);
             });
 
+            // Update summary displays
             document.getElementById('summaryTotalLoss').textContent = (totalLoss / 1000).toFixed(2);
-            document.getElementById('summaryCriticalCount').textContent = sorted.length;
+            document.getElementById('summaryCriticalCount').textContent = blocksWithLoss.length;
             document.getElementById('summaryRiskArea').textContent = totalArea.toFixed(1);
+
+            // Update title and badge based on division filter
+            const titleEl = document.getElementById('paparanRiskTitle');
+            const badgeEl = document.getElementById('paparanRiskBadge');
+            if (divisionCode) {
+                if (titleEl) titleEl.textContent = `PAPARAN RISIKO - ${divisionCode}`;
+                if (badgeEl) badgeEl.textContent = `📍 Showing: ${divisionCode} Division (${blocksWithLoss.length} Stadium 3+ critical blocks)`;
+            } else {
+                if (titleEl) titleEl.textContent = 'PAPARAN RISIKO ESTATE';
+                if (badgeEl) badgeEl.textContent = `📍 Showing: ALL Divisions (${blocksWithLoss.length} Stadium 3+ critical blocks)`;
+            }
 
             const ctx = document.getElementById('riskBarChart');
             if (riskChart) riskChart.destroy();
@@ -9895,6 +10214,7 @@
         let filteredBlocks = {};
 
         function filterByDivision(divisionCode) {
+            console.log(`[PHASE 3 INTEGRATION] Division selected: ${divisionCode}`);
             currentDivision = divisionCode;
 
             // Filter blocks by division
@@ -9917,20 +10237,42 @@
                 }
             });
 
-            // Calculate stats for selected division
+            // ====== PHASE 3: TRIGGER ALL 3 DYNAMIC SECTIONS ======
+
+            // 1. Update Division Summary Panel (Overview + Treatment Impact)
+            if (typeof updateDivisionSummary === 'function') {
+                updateDivisionSummary(divisionCode);
+                console.log(`[PHASE 3] ✅ Division Summary updated for ${divisionCode}`);
+            }
+
+            // 2. Update Paparan Resiko Estate (filtered by division)
+            if (typeof renderPaparanRisk === 'function') {
+                // Keep current sort, add division filter
+                renderPaparanRisk('ar', divisionCode === 'ALL' ? null : divisionCode);
+                console.log(`[PHASE 3] ✅ Paparan Resiko updated for ${divisionCode}`);
+            }
+
+            // 3. Calculate stats for stats bar - USE STADIUM-BASED CRITERIA
             const blockCount = Object.keys(filteredBlocks).length;
             const totalArea = Object.values(filteredBlocks).reduce((sum, b) => sum + (b.luas_ha || 0), 0);
             const avgYield = blockCount > 0 ?
                 Object.values(filteredBlocks).reduce((sum, b) => sum + (b.realisasi_ton_ha || 0) * (b.luas_ha || 0), 0) / totalArea
                 : 0;
-            const criticalCount = Object.values(filteredBlocks).filter(b => Math.abs(b.gap_pct) > 25).length;
+
+            // FIX BUG #1: Use stadium-based critical detection (consistent with Division Summary)
+            // Critical = Stadium 3+ (gap ≥20% OR attack ≥15%)
+            const criticalCount = Object.values(filteredBlocks).filter(b => {
+                const gapPct = Math.abs(b.gap_pct || 0);
+                const attackRate = b.attack_rate || 0;
+                return (gapPct >= 20 || attackRate >= 15); // Stadium 3+
+            }).length;
 
             // Get division metadata
             const divMeta = DIVISIONS_META[divisionCode] || { code: divisionCode, ndre: false, tier: 'N/A' };
             const ndreIcon = divMeta.ndre ? '✅' : '❌';
             const tierLabel = divMeta.tier === 'TIER_1' ? 'TIER 1' : 'TIER 2';
 
-            // Update stats display
+            // Update stats display bar
             const statsHTML = `
             <div class="flex items-center gap-3">
                 <div class="text-4xl">📊</div>
@@ -9948,13 +10290,7 @@
         `;
             document.getElementById('divisionStats').innerHTML = statsHTML;
 
-            // Update division summary metrics
-            document.getElementById('divMetric_totalBlocks').textContent = blockCount;
-            document.getElementById('divMetric_totalArea').innerHTML = `${totalArea.toFixed(0)}<span class="text-sm text-slate-400 ml-1">Ha</span>`;
-            document.getElementById('divMetric_avgYield').innerHTML = `${avgYield.toFixed(2)}<span class="text-sm text-slate-400 ml-1">T/Ha</span>`;
-            document.getElementById('divMetric_critical').innerHTML = `${criticalCount}<span class="text-sm text-slate-400 ml-1">/ ${blockCount}</span>`;
-
-            console.log(`✅ Filtered to ${divisionCode}: ${blockCount} blocks, ${totalArea.toFixed(1)} Ha`);
+            console.log(`✅ [PHASE 3 COMPLETE] All 3 sections updated for ${divisionCode}: ${blockCount} blocks, ${totalArea.toFixed(1)} Ha`);
         }
 
         // Initialize with AME02 on page load
