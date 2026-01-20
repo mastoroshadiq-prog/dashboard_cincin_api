@@ -9175,7 +9175,7 @@
             
             // SAVINGS CALCULATION
             const totalSavings = noTx_cumulative - withTx_cumulative;
-            const savingsPercent = ((totalSavings / noTx_cumulative) * 100);
+            const treatment_savingsPercent = ((totalSavings / noTx_cumulative) * 100);
             
             // Update NO TREATMENT displays
             document.getElementById('noTreatment_year0').textContent = formatLossMiliar(noTx_year0);
@@ -9193,7 +9193,7 @@
             
             // Update SAVINGS displays
             document.getElementById('treatment_totalSavings').textContent = formatLossMiliar(totalSavings);
-            document.getElementById('treatment_savingsPercent').textContent = savingsPercent.toFixed(0) + '%';
+            document.getElementById('treatment_savingsPercent').textContent = treatment_savingsPercent.toFixed(0) + '%';
             
             document.getElementById('noTreatment_gap').textContent = `${Math.round(totalProductionGap)} Ton`;
             document.getElementById('noTreatment_critical').textContent =
@@ -9213,9 +9213,9 @@
             const recoveredGap = totalProductionGap * 0.80; // 80% production recovery
             const blocksRecovered = Math.round(metrics.criticalBlocks * 0.67); // 67% blocks recovered
 
-            const savingsPercent = Math.round((1 - reducedLoss / year1Loss) * 100);
+            const oldSavingsPercent = Math.round((1 - reducedLoss / year1Loss) * 100);
             document.getElementById('withTreatment_loss').innerHTML =
-                `${formatLossMiliar(reducedLoss)}<span class="text-lg ml-2 text-emerald-300">↓${savingsPercent}%</span>`;
+                `${formatLossMiliar(reducedLoss)}<span class="text-lg ml-2 text-emerald-300">↓${oldSavingsPercent}%</span>`;
             document.getElementById('withTreatment_gap').innerHTML =
                 `${Math.round(totalProductionGap - recoveredGap)} Ton<span class="text-sm text-emerald-300 ml-2">↓80%</span>`;
             document.getElementById('withTreatment_recovered').textContent =
