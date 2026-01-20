@@ -9605,6 +9605,16 @@
                     if (badgeEl) badgeEl.textContent = `📍 Showing: ALL Divisions (${blocksWithLoss.length} Stadium 3+ critical blocks)`;
                 }
 
+                // Prepare Attack Rate data
+                const attackRateData = blockCodes.map(code => {
+                    const blockData = Object.values(BLOCKS_DATA).find(b => b.block_code === code);
+                    return parseFloat(blockData?.attack_rate) || 0;
+                });
+
+                // Convert Loss to Miliar (Juta / 1000)
+                const lossDataMiliar = lossData.map(val => val / 1000);
+
+                // Create chart
                 const ctx = document.getElementById('riskBarChart');
                 if (riskChart) riskChart.destroy();
 
@@ -9612,19 +9622,30 @@
                     type: 'bar',
                     data: {
                         labels: labels,
-                        datasets: [{
-                            label: 'Loss (Juta)',
-                            data: lossData,
-                            backgroundColor: lossData.map((_, i) => {
-                                const intensity = 1 - (i / lossData.length);
-                                return `rgba(239, 68, 68, ${0.5 + intensity * 0.5})`;
-                            }),
-                            borderColor: 'rgba(239, 68, 68, 1)',
-                            borderWidth: 2
-                        }]
+                        datasets: [
+                            {
+                                label: 'Attack Rate (%)',
+                                data: attackRateData,
+                                backgroundColor: 'rgba(239, 68, 68, 0.8)',
+                                borderColor: 'rgb(239, 68, 68)',
+                                borderWidth: 2,
+                                yAxisID: 'y',
+                                barThickness: 'flex',
+                                maxBarThickness: 30
+                            },
+                            {
+                                label: 'Loss (Miliar Rp)',
+                                data: lossDataMiliar,
+                                backgroundColor: 'rgba(251, 191, 36, 0.8)',
+                                borderColor: 'rgb(251, 191, 36)',
+                                borderWidth: 2,
+                                yAxisID: 'y1',
+                                barThickness: 'flex',
+                                maxBarThickness: 30
+                            }
+                        ]
                     },
                     options: {
-                        indexAxis: 'y',
                         responsive: true,
                         maintainAspectRatio: false,
                         onClick: (evt, activeEls) => {
@@ -9633,23 +9654,88 @@
                                 loadBlockData(blockCodes[index]);
                             }
                         },
+                        interaction: {
+                            mode: 'index',
+                            intersect: false
+                        },
                         plugins: {
-                            legend: { display: false },
+                            legend: {
+                                display: true,
+                                position: 'top',
+                                labels: {
+                                    color: '#fff',
+                                    font: { size: 10, weight: 'bold' },
+                                    padding: 10,
+                                    usePointStyle: true
+                                }
+                            },
                             tooltip: {
+                                backgroundColor: 'rgba(0, 0, 0, 0.9)',
+                                titleColor: '#fff',
+                                bodyColor: '#fff',
+                                borderColor: 'rgba(239, 68, 68, 0.5)',
+                                borderWidth: 1,
+                                padding: 10,
                                 callbacks: {
-                                    label: (ctx) => `Rp ${ctx.parsed.x.toFixed(1)} Juta`
+                                    label: function (context) {
+                                        const label = context.dataset.label || '';
+                                        const value = context.parsed.y;
+                                        if (label.includes('Attack Rate')) {
+                                            return `${label}: ${value.toFixed(1)}%`;
+                                        } else {
+                                            return `${label}: Rp ${value.toFixed(2)} M`;
+                                        }
+                                    }
                                 }
                             }
                         },
                         scales: {
                             x: {
-                                beginAtZero: true,
-                                ticks: { color: 'white', callback: (val) => 'Rp ' + val + ' Jt' },
+                                ticks: {
+                                    color: 'white',
+                                    font: { size: 9, weight: 'bold' },
+                                    maxRotation: 45,
+                                    minRotation: 0
+                                },
                                 grid: { color: 'rgba(255,255,255,0.1)' }
                             },
                             y: {
-                                ticks: { color: 'white', font: { size: 11, weight: 'bold' } },
-                                grid: { display: false }
+                                type: 'linear',
+                                position: 'left',
+                                beginAtZero: true,
+                                ticks: {
+                                    color: 'rgb(239, 68, 68)',
+                                    font: { size: 9, weight: 'bold' },
+                                    callback: function (value) {
+                                        return value.toFixed(0) + '%';
+                                    }
+                                },
+                                grid: { color: 'rgba(239, 68, 68, 0.2)' },
+                                title: {
+                                    display: true,
+                                    text: 'Attack Rate (%)',
+                                    color: 'rgb(239, 68, 68)',
+                                    font: { size: 11, weight: 'bold' }
+                                }
+                            },
+                            y1: {
+                                type: 'linear',
+                                position: 'right',
+                                beginAtZero: true,
+                                ticks: {
+                                    color: 'rgb(251, 191, 36)',
+                                    font: { size: 9, weight: 'bold' },
+                                    callback: function (value) {
+                                        return 'Rp ' + value.toFixed(1) + ' M';
+                                    }
+                                },
+                                grid: { drawOnChartArea: false },
+                                title: {
+                                    display: true,
+                                    text: 'Loss (Miliar Rp)',
+                                    color: 'rgb(251, 191, 36)',
+                                    font: { size: 11, weight: 'bold' }
+                                }
                             }
                         }
                     }
