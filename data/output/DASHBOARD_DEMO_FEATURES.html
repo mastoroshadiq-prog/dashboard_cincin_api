@@ -264,10 +264,15 @@
                                 </div>
 
                                 <div class="space-y-3">
-                                    <div>
-                                        <div class="text-xs text-red-200/60 font-bold mb-1">ANNUAL LOSS (2026)</div>
-                                        <div class="text-4xl font-black text-red-400" id="noTreatment_loss">Rp 602 Jt
-                                        </div>
+                                    <div class="bg-black/20 p-3 rounded-lg border border-red-500/20">
+                                        <div class="text-xs text-red-200/80 font-bold mb-1 uppercase">📊 Baseline Loss (2025)</div>
+                                        <div class="text-3xl font-black text-red-400" id="noTreatment_baseline">--</div>
+                                        <div class="text-[9px] text-red-300/60 mt-1">Current year actual loss</div>
+                                    </div>
+                                    <div class="bg-black/30 p-3 rounded-lg border border-red-500/30">
+                                        <div class="text-xs text-red-200/60 font-bold mb-1 uppercase">🔮 Projected Loss (2026)</div>
+                                        <div class="text-4xl font-black text-red-400" id="noTreatment_projected">--</div>
+                                        <div class="text-[9px] text-red-300/60 mt-1">+15% degradation rate (Year 1)</div>
                                     </div>
                                     <div>
                                         <div class="text-xs text-red-200/60 font-bold mb-1">PRODUCTION GAP</div>
@@ -9068,19 +9073,31 @@
                 return miliar >= 0.1 ? `Rp ${miliar.toFixed(1)} M` : `Rp ${lossJuta.toFixed(0)} Jt`;
             }
 
-            // NO TREATMENT scenario
-            document.getElementById('noTreatment_loss').textContent = formatLossMiliar(annualLoss);
+            // NO TREATMENT scenario - Show BOTH baseline and projected
+            // Baseline 2025: Current year actual loss
+            const baselineLoss2025 = annualLoss;
+            
+            // Projected 2026: Apply 15% annual degradation (consistent with 3-Year Chart)
+            const degradationRate = 0.15;
+            const projectedLoss2026 = baselineLoss2025 * (1 + degradationRate);
+            
+            document.getElementById('noTreatment_baseline').textContent = formatLossMiliar(baselineLoss2025);
+            document.getElementById('noTreatment_projected').textContent = formatLossMiliar(projectedLoss2026);
             document.getElementById('noTreatment_gap').textContent = `${Math.round(totalProductionGap)} Ton`;
             document.getElementById('noTreatment_critical').textContent =
                 `${metrics.criticalBlocks} / ${metrics.totalBlocks} (${metrics.criticalRate.toFixed(0)}%)`;
+            
+            console.log('[TREATMENT IMPACT] Baseline 2025:', baselineLoss2025, 'Jt | Projected 2026:', projectedLoss2026, 'Jt');
 
             // WITH TREATMENT scenario (70% effectiveness)
-            const reducedLoss = annualLoss * 0.30; // 70% prevented 
+            // Compare against projected 2026 loss (not baseline)
+            const reducedLoss = projectedLoss2026 * 0.30; // 70% prevented from projected loss 
             const recoveredGap = totalProductionGap * 0.80; // 80% production recovery
             const blocksRecovered = Math.round(metrics.criticalBlocks * 0.67); // 67% blocks recovered
 
+            const savingsPercent = Math.round((1 - reducedLoss / projectedLoss2026) * 100);
             document.getElementById('withTreatment_loss').innerHTML =
-                `${formatLossMiliar(reducedLoss)}<span class="text-lg ml-2 text-emerald-300">↓${Math.round((1 - reducedLoss / annualLoss) * 100)}%</span>`;
+                `${formatLossMiliar(reducedLoss)}<span class="text-lg ml-2 text-emerald-300">↓${savingsPercent}%</span>`;
             document.getElementById('withTreatment_gap').innerHTML =
                 `${Math.round(totalProductionGap - recoveredGap)} Ton<span class="text-sm text-emerald-300 ml-2">↓80%</span>`;
             document.getElementById('withTreatment_recovered').textContent =
