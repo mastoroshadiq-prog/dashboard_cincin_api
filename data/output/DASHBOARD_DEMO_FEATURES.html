@@ -241,10 +241,18 @@
                             <div class="text-3xl font-black text-white" id="divMetric_avgYield">17.18<span
                                     class="text-sm text-slate-400 ml-1">T/Ha</span></div>
                         </div>
-                        <div class="bg-black/30 rounded-xl p-4 border border-red-500/20">
-                            <div class="text-xs text-red-300 font-bold uppercase mb-1">Critical Blocks</div>
+                        <div onclick="openPaparanRisikoModal(window.currentDivision || 'AME02')"
+                            class="bg-black/30 rounded-xl p-4 border border-red-500/20 cursor-pointer hover:border-red-400 hover:scale-105 hover:shadow-lg hover:shadow-red-500/20 transition-all duration-200 group">
+                            <div class="text-xs text-red-300 font-bold uppercase mb-1 flex items-center gap-2">
+                                Critical Blocks
+                                <span
+                                    class="text-red-400 opacity-0 group-hover:opacity-100 transition-opacity">🔍</span>
+                            </div>
                             <div class="text-4xl font-black text-red-400" id="divMetric_critical">6<span
                                     class="text-sm text-slate-400 ml-1">/ 37</span></div>
+                            <div
+                                class="text-[10px] text-red-300/60 mt-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                                Klik untuk detail risiko</div>
                         </div>
                     </div>
 
@@ -10440,233 +10448,233 @@
                     filterByDivision('AME02');
                 }
             });
-        
-        // ========================================
-        // PAPARAN RISIKO MODAL FUNCTIONS
-        // ========================================
-        
-        let modalRiskChart = null;
-        let currentModalDivision = null;
-        let currentModalSort = 'ar';
-        
-        function openPaparanRisikoModal(divisionCode) {
-            console.log('[MODAL] Opening for division:', divisionCode);
-            currentModalDivision = divisionCode;
-            
-            // Get division data
-            const divisionBlocks = window.blocksData.filter(block => block.division === divisionCode);
-            const criticalBlocks = divisionBlocks.filter(block => {
-                const stadium = parseInt(block.stadium_kritis) || 0;
-                return stadium >= 3;
-            });
-            
-            // Calculate totals
-            const totalLoss = criticalBlocks.reduce((sum, block) => {
-                const loss = parseFloat(block.ganoderma_loss_juta) || 0;
-                return sum + loss;
-            }, 0);
-            
-            const totalArea = criticalBlocks.reduce((sum, block) => {
-                const area = parseFloat(block.luas_ha) || 0;
-                return sum + area;
-            }, 0);
-            
-            // Update modal content
-            document.getElementById('modalDivisionSubtitle').textContent = 
-                `${divisionCode} Division - ${criticalBlocks.length} blok dengan status Stadium 3+`;
-            
-            document.getElementById('modalTotalLoss').textContent = 
-                `Rp ${(totalLoss / 1000).toFixed(1)} M`;
-            
-            document.getElementById('modalCriticalCount').textContent = 
-                `${criticalBlocks.length} Blok`;
-            
-            document.getElementById('modalRiskArea').textContent = 
-                `${totalArea.toFixed(1)} Ha`;
-            
-            // Render chart
-            renderModalChart(criticalBlocks, currentModalSort);
-            
-            // Show modal
-            const modal = document.getElementById('paparanRisikoModal');
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-        }
-        
-        function closePaparanRisikoModal() {
-            const modal = document.getElementById('paparanRisikoModal');
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-            
-            // Destroy chart
-            if (modalRiskChart) {
-                modalRiskChart.destroy();
-                modalRiskChart = null;
-            }
-        }
-        
-        function sortModalChart(sortBy) {
-            currentModalSort = sortBy;
-            
-            // Update button styles
-            document.getElementById('modalSortByAR').className = 
-                sortBy === 'ar' 
-                    ? 'px-3 py-1.5 rounded-lg text-xs font-bold bg-rose-600 text-white border border-rose-400'
-                    : 'px-3 py-1.5 rounded-lg text-xs font-bold bg-rose-900/30 text-rose-300 border border-rose-500/30';
-            
-            document.getElementById('modalSortByLoss').className = 
-                sortBy === 'loss'
-                    ? 'px-3 py-1.5 rounded-lg text-xs font-bold bg-rose-600 text-white border border-rose-400'
-                    : 'px-3 py-1.5 rounded-lg text-xs font-bold bg-rose-900/30 text-rose-300 border border-rose-500/30';
-            
-            // Re-render chart
-            if (currentModalDivision) {
-                const divisionBlocks = window.blocksData.filter(block => block.division === currentModalDivision);
+
+            // ========================================
+            // PAPARAN RISIKO MODAL FUNCTIONS
+            // ========================================
+
+            let modalRiskChart = null;
+            let currentModalDivision = null;
+            let currentModalSort = 'ar';
+
+            function openPaparanRisikoModal(divisionCode) {
+                console.log('[MODAL] Opening for division:', divisionCode);
+                currentModalDivision = divisionCode;
+
+                // Get division data
+                const divisionBlocks = window.blocksData.filter(block => block.division === divisionCode);
                 const criticalBlocks = divisionBlocks.filter(block => {
                     const stadium = parseInt(block.stadium_kritis) || 0;
                     return stadium >= 3;
                 });
-                renderModalChart(criticalBlocks, sortBy);
+
+                // Calculate totals
+                const totalLoss = criticalBlocks.reduce((sum, block) => {
+                    const loss = parseFloat(block.ganoderma_loss_juta) || 0;
+                    return sum + loss;
+                }, 0);
+
+                const totalArea = criticalBlocks.reduce((sum, block) => {
+                    const area = parseFloat(block.luas_ha) || 0;
+                    return sum + area;
+                }, 0);
+
+                // Update modal content
+                document.getElementById('modalDivisionSubtitle').textContent =
+                    `${divisionCode} Division - ${criticalBlocks.length} blok dengan status Stadium 3+`;
+
+                document.getElementById('modalTotalLoss').textContent =
+                    `Rp ${(totalLoss / 1000).toFixed(1)} M`;
+
+                document.getElementById('modalCriticalCount').textContent =
+                    `${criticalBlocks.length} Blok`;
+
+                document.getElementById('modalRiskArea').textContent =
+                    `${totalArea.toFixed(1)} Ha`;
+
+                // Render chart
+                renderModalChart(criticalBlocks, currentModalSort);
+
+                // Show modal
+                const modal = document.getElementById('paparanRisikoModal');
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
             }
-        }
-        
-        function renderModalChart(blocks, sortBy) {
-            const ctx = document.getElementById('modalRiskChart');
-            if (!ctx) return;
-            
-            // Destroy existing chart
-            if (modalRiskChart) {
-                modalRiskChart.destroy();
-            }
-            
-            // Sort blocks
-            const sortedBlocks = [...blocks].sort((a, b) => {
-                if (sortBy === 'ar') {
-                    return (parseFloat(b.attack_rate) || 0) - (parseFloat(a.attack_rate) || 0);
-                } else {
-                    return (parseFloat(b.ganoderma_loss_juta) || 0) - (parseFloat(a.ganoderma_loss_juta) || 0);
+
+            function closePaparanRisikoModal() {
+                const modal = document.getElementById('paparanRisikoModal');
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+
+                // Destroy chart
+                if (modalRiskChart) {
+                    modalRiskChart.destroy();
+                    modalRiskChart = null;
                 }
-            });
-            
-            // Prepare data
-            const labels = sortedBlocks.map(block => block.block_code);
-            const arData = sortedBlocks.map(block => parseFloat(block.attack_rate) || 0);
-            const lossData = sortedBlocks.map(block => (parseFloat(block.ganoderma_loss_juta) || 0) / 1000); // Convert to Miliar
-            
-            // Create chart
-            modalRiskChart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: labels,
-                    datasets: [
-                        {
-                            label: 'Attack Rate (%)',
-                            data: arData,
-                            backgroundColor: 'rgba(239, 68, 68, 0.7)',
-                            borderColor: 'rgb(239, 68, 68)',
-                            borderWidth: 2,
-                            yAxisID: 'y'
-                        },
-                        {
-                            label: 'Loss (Miliar Rp)',
-                            data: lossData,
-                            backgroundColor: 'rgba(251, 191, 36, 0.7)',
-                            borderColor: 'rgb(251, 191, 36)',
-                            borderWidth: 2,
-                            yAxisID: 'y1'
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    interaction: {
-                        mode: 'index',
-                        intersect: false
-                    },
-                    plugins: {
-                        legend: {
-                            display: true,
-                            labels: {
-                                color: '#fff',
-                                font: { size: 12, weight: 'bold' }
+            }
+
+            function sortModalChart(sortBy) {
+                currentModalSort = sortBy;
+
+                // Update button styles
+                document.getElementById('modalSortByAR').className =
+                    sortBy === 'ar'
+                        ? 'px-3 py-1.5 rounded-lg text-xs font-bold bg-rose-600 text-white border border-rose-400'
+                        : 'px-3 py-1.5 rounded-lg text-xs font-bold bg-rose-900/30 text-rose-300 border border-rose-500/30';
+
+                document.getElementById('modalSortByLoss').className =
+                    sortBy === 'loss'
+                        ? 'px-3 py-1.5 rounded-lg text-xs font-bold bg-rose-600 text-white border border-rose-400'
+                        : 'px-3 py-1.5 rounded-lg text-xs font-bold bg-rose-900/30 text-rose-300 border border-rose-500/30';
+
+                // Re-render chart
+                if (currentModalDivision) {
+                    const divisionBlocks = window.blocksData.filter(block => block.division === currentModalDivision);
+                    const criticalBlocks = divisionBlocks.filter(block => {
+                        const stadium = parseInt(block.stadium_kritis) || 0;
+                        return stadium >= 3;
+                    });
+                    renderModalChart(criticalBlocks, sortBy);
+                }
+            }
+
+            function renderModalChart(blocks, sortBy) {
+                const ctx = document.getElementById('modalRiskChart');
+                if (!ctx) return;
+
+                // Destroy existing chart
+                if (modalRiskChart) {
+                    modalRiskChart.destroy();
+                }
+
+                // Sort blocks
+                const sortedBlocks = [...blocks].sort((a, b) => {
+                    if (sortBy === 'ar') {
+                        return (parseFloat(b.attack_rate) || 0) - (parseFloat(a.attack_rate) || 0);
+                    } else {
+                        return (parseFloat(b.ganoderma_loss_juta) || 0) - (parseFloat(a.ganoderma_loss_juta) || 0);
+                    }
+                });
+
+                // Prepare data
+                const labels = sortedBlocks.map(block => block.block_code);
+                const arData = sortedBlocks.map(block => parseFloat(block.attack_rate) || 0);
+                const lossData = sortedBlocks.map(block => (parseFloat(block.ganoderma_loss_juta) || 0) / 1000); // Convert to Miliar
+
+                // Create chart
+                modalRiskChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: labels,
+                        datasets: [
+                            {
+                                label: 'Attack Rate (%)',
+                                data: arData,
+                                backgroundColor: 'rgba(239, 68, 68, 0.7)',
+                                borderColor: 'rgb(239, 68, 68)',
+                                borderWidth: 2,
+                                yAxisID: 'y'
+                            },
+                            {
+                                label: 'Loss (Miliar Rp)',
+                                data: lossData,
+                                backgroundColor: 'rgba(251, 191, 36, 0.7)',
+                                borderColor: 'rgb(251, 191, 36)',
+                                borderWidth: 2,
+                                yAxisID: 'y1'
                             }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        interaction: {
+                            mode: 'index',
+                            intersect: false
                         },
-                        tooltip: {
-                            backgroundColor: 'rgba(0, 0, 0, 0.9)',
-                            titleColor: '#fff',
-                            bodyColor: '#fff',
-                            borderColor: 'rgba(239, 68, 68, 0.5)',
-                            borderWidth: 1,
-                            callbacks: {
-                                label: function(context) {
-                                    const label = context.dataset.label || '';
-                                    const value = context.parsed.y;
-                                    if (label.includes('Attack Rate')) {
-                                        return `${label}: ${value.toFixed(1)}%`;
-                                    } else {
-                                        return `${label}: Rp ${value.toFixed(2)} M`;
+                        plugins: {
+                            legend: {
+                                display: true,
+                                labels: {
+                                    color: '#fff',
+                                    font: { size: 12, weight: 'bold' }
+                                }
+                            },
+                            tooltip: {
+                                backgroundColor: 'rgba(0, 0, 0, 0.9)',
+                                titleColor: '#fff',
+                                bodyColor: '#fff',
+                                borderColor: 'rgba(239, 68, 68, 0.5)',
+                                borderWidth: 1,
+                                callbacks: {
+                                    label: function (context) {
+                                        const label = context.dataset.label || '';
+                                        const value = context.parsed.y;
+                                        if (label.includes('Attack Rate')) {
+                                            return `${label}: ${value.toFixed(1)}%`;
+                                        } else {
+                                            return `${label}: Rp ${value.toFixed(2)} M`;
+                                        }
                                     }
                                 }
                             }
-                        }
-                    },
-                    scales: {
-                        x: {
-                            ticks: { color: '#fff', font: { size: 10 } },
-                            grid: { color: 'rgba(255, 255, 255, 0.1)' }
                         },
-                        y: {
-                            type: 'linear',
-                            position: 'left',
-                            ticks: { 
-                                color: 'rgb(239, 68, 68)',
-                                callback: function(value) {
-                                    return value.toFixed(0) + '%';
+                        scales: {
+                            x: {
+                                ticks: { color: '#fff', font: { size: 10 } },
+                                grid: { color: 'rgba(255, 255, 255, 0.1)' }
+                            },
+                            y: {
+                                type: 'linear',
+                                position: 'left',
+                                ticks: {
+                                    color: 'rgb(239, 68, 68)',
+                                    callback: function (value) {
+                                        return value.toFixed(0) + '%';
+                                    }
+                                },
+                                grid: { color: 'rgba(239, 68, 68, 0.2)' },
+                                title: {
+                                    display: true,
+                                    text: 'Attack Rate (%)',
+                                    color: 'rgb(239, 68, 68)',
+                                    font: { weight: 'bold' }
                                 }
                             },
-                            grid: { color: 'rgba(239, 68, 68, 0.2)' },
-                            title: {
-                                display: true,
-                                text: 'Attack Rate (%)',
-                                color: 'rgb(239, 68, 68)',
-                                font: { weight: 'bold' }
-                            }
-                        },
-                        y1: {
-                            type: 'linear',
-                            position: 'right',
-                            ticks: { 
-                                color: 'rgb(251, 191, 36)',
-                                callback: function(value) {
-                                    return 'Rp ' + value.toFixed(1) + ' M';
+                            y1: {
+                                type: 'linear',
+                                position: 'right',
+                                ticks: {
+                                    color: 'rgb(251, 191, 36)',
+                                    callback: function (value) {
+                                        return 'Rp ' + value.toFixed(1) + ' M';
+                                    }
+                                },
+                                grid: { drawOnChartArea: false },
+                                title: {
+                                    display: true,
+                                    text: 'Loss (Miliar Rp)',
+                                    color: 'rgb(251, 191, 36)',
+                                    font: { weight: 'bold' }
                                 }
-                            },
-                            grid: { drawOnChartArea: false },
-                            title: {
-                                display: true,
-                                text: 'Loss (Miliar Rp)',
-                                color: 'rgb(251, 191, 36)',
-                                font: { weight: 'bold' }
                             }
                         }
-                    }
-                }
-            });
-        }
-        
-        // Close modal when clicking outside
-        document.addEventListener('DOMContentLoaded', function() {
-            const modal = document.getElementById('paparanRisikoModal');
-            if (modal) {
-                modal.addEventListener('click', function(e) {
-                    if (e.target === modal) {
-                        closePaparanRisikoModal();
                     }
                 });
             }
-        });
-    
+
+            // Close modal when clicking outside
+            document.addEventListener('DOMContentLoaded', function () {
+                const modal = document.getElementById('paparanRisikoModal');
+                if (modal) {
+                    modal.addEventListener('click', function (e) {
+                        if (e.target === modal) {
+                            closePaparanRisikoModal();
+                        }
+                    });
+                }
+            });
+
         </script>
 
 
@@ -10723,63 +10731,71 @@
         </div>
 
 
-    <!-- PAPARAN RISIKO MODAL -->
-    <div id="paparanRisikoModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
-        <div class="bg-gradient-to-br from-slate-900 via-rose-950 to-slate-900 rounded-3xl border-2 border-rose-500/50 max-w-6xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">
-            <!-- Modal Header -->
-            <div class="sticky top-0 bg-gradient-to-r from-rose-900/90 to-slate-900/90 backdrop-blur-md p-6 border-b border-rose-500/30 flex justify-between items-center">
-                <div>
-                    <h2 class="text-3xl font-black text-white flex items-center gap-3">
-                        🚨 PAPARAN RISIKO KRITIS
-                    </h2>
-                    <p class="text-rose-300/80 text-sm mt-1" id="modalDivisionSubtitle">Detail analisis blok berisiko tinggi</p>
+        <!-- PAPARAN RISIKO MODAL -->
+        <div id="paparanRisikoModal"
+            class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
+            <div
+                class="bg-gradient-to-br from-slate-900 via-rose-950 to-slate-900 rounded-3xl border-2 border-rose-500/50 max-w-6xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">
+                <!-- Modal Header -->
+                <div
+                    class="sticky top-0 bg-gradient-to-r from-rose-900/90 to-slate-900/90 backdrop-blur-md p-6 border-b border-rose-500/30 flex justify-between items-center">
+                    <div>
+                        <h2 class="text-3xl font-black text-white flex items-center gap-3">
+                            🚨 PAPARAN RISIKO KRITIS
+                        </h2>
+                        <p class="text-rose-300/80 text-sm mt-1" id="modalDivisionSubtitle">Detail analisis blok
+                            berisiko tinggi</p>
+                    </div>
+                    <button onclick="closePaparanRisikoModal()"
+                        class="text-white/80 hover:text-white hover:bg-white/10 rounded-full p-2 transition-all">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
                 </div>
-                <button onclick="closePaparanRisikoModal()" class="text-white/80 hover:text-white hover:bg-white/10 rounded-full p-2 transition-all">
-                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                    </svg>
-                </button>
-            </div>
-            
-            <!-- Modal Content -->
-            <div class="p-6">
-                <!-- Summary Cards -->
-                <div class="grid grid-cols-3 gap-4 mb-6">
-                    <div class="bg-black/30 rounded-xl border border-rose-500/30 p-4">
-                        <div class="text-xs text-rose-300/80 font-bold uppercase mb-2">Total Potensi Kerugian</div>
-                        <div class="text-4xl font-black text-rose-400" id="modalTotalLoss">--</div>
-                    </div>
-                    <div class="bg-black/30 rounded-xl border border-rose-500/30 p-4">
-                        <div class="text-xs text-rose-300/80 font-bold uppercase mb-2">Blok Kritis</div>
-                        <div class="text-4xl font-black text-white" id="modalCriticalCount">--</div>
-                    </div>
-                    <div class="bg-black/30 rounded-xl border border-rose-500/30 p-4">
-                        <div class="text-xs text-rose-300/80 font-bold uppercase mb-2">Area Berisiko</div>
-                        <div class="text-4xl font-black text-white" id="modalRiskArea">--</div>
-                    </div>
-                </div>
-                
-                <!-- Chart Container -->
-                <div class="bg-black/20 rounded-xl border border-rose-500/20 p-6">
-                    <div class="flex items-center justify-between mb-4">
-                        <h3 class="text-lg font-bold text-white">Distribusi Risiko per Blok</h3>
-                        <div class="flex gap-2">
-                            <button onclick="sortModalChart('ar')" id="modalSortByAR" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-rose-600 text-white border border-rose-400">
-                                AR %
-                            </button>
-                            <button onclick="sortModalChart('loss')" id="modalSortByLoss" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-rose-900/30 text-rose-300 border border-rose-500/30">
-                                Loss (Rp)
-                            </button>
+
+                <!-- Modal Content -->
+                <div class="p-6">
+                    <!-- Summary Cards -->
+                    <div class="grid grid-cols-3 gap-4 mb-6">
+                        <div class="bg-black/30 rounded-xl border border-rose-500/30 p-4">
+                            <div class="text-xs text-rose-300/80 font-bold uppercase mb-2">Total Potensi Kerugian</div>
+                            <div class="text-4xl font-black text-rose-400" id="modalTotalLoss">--</div>
+                        </div>
+                        <div class="bg-black/30 rounded-xl border border-rose-500/30 p-4">
+                            <div class="text-xs text-rose-300/80 font-bold uppercase mb-2">Blok Kritis</div>
+                            <div class="text-4xl font-black text-white" id="modalCriticalCount">--</div>
+                        </div>
+                        <div class="bg-black/30 rounded-xl border border-rose-500/30 p-4">
+                            <div class="text-xs text-rose-300/80 font-bold uppercase mb-2">Area Berisiko</div>
+                            <div class="text-4xl font-black text-white" id="modalRiskArea">--</div>
                         </div>
                     </div>
-                    <div style="height: 500px;">
-                        <canvas id="modalRiskChart"></canvas>
+
+                    <!-- Chart Container -->
+                    <div class="bg-black/20 rounded-xl border border-rose-500/20 p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-bold text-white">Distribusi Risiko per Blok</h3>
+                            <div class="flex gap-2">
+                                <button onclick="sortModalChart('ar')" id="modalSortByAR"
+                                    class="px-3 py-1.5 rounded-lg text-xs font-bold bg-rose-600 text-white border border-rose-400">
+                                    AR %
+                                </button>
+                                <button onclick="sortModalChart('loss')" id="modalSortByLoss"
+                                    class="px-3 py-1.5 rounded-lg text-xs font-bold bg-rose-900/30 text-rose-300 border border-rose-500/30">
+                                    Loss (Rp)
+                                </button>
+                            </div>
+                        </div>
+                        <div style="height: 500px;">
+                            <canvas id="modalRiskChart"></canvas>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    
+
 </body>
 
 </html>
