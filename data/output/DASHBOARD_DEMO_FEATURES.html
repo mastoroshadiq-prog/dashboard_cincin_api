@@ -10462,7 +10462,7 @@
                 currentModalDivision = divisionCode;
 
                 // Get division data
-                const divisionBlocks = window.blocksData.filter(block => block.division === divisionCode);
+                const divisionBlocks = window.blocks.filter(block => block.division === divisionCode);
                 const criticalBlocks = divisionBlocks.filter(block => {
                     const stadium = parseInt(block.stadium_kritis) || 0;
                     return stadium >= 3;
@@ -10529,7 +10529,7 @@
 
                 // Re-render chart
                 if (currentModalDivision) {
-                    const divisionBlocks = window.blocksData.filter(block => block.division === currentModalDivision);
+                    const divisionBlocks = window.blocks.filter(block => block.division === currentModalDivision);
                     const criticalBlocks = divisionBlocks.filter(block => {
                         const stadium = parseInt(block.stadium_kritis) || 0;
                         return stadium >= 3;
