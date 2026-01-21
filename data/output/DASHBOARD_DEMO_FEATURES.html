@@ -241,7 +241,7 @@
                             <div class="text-3xl font-black text-white" id="divMetric_avgYield">17.18<span
                                     class="text-sm text-slate-400 ml-1">T/Ha</span></div>
                         </div>
-                        <div onclick="openPaparanRisikoModal(typeof currentDivision !== 'undefined' ? currentDivision : 'AME_II')"
+                        <div onclick="openPaparanRisikoModal(typeof currentDivision !== 'undefined' ? currentDivision : 'AME02')"
                             class="bg-black/30 rounded-xl p-4 border border-red-500/20 cursor-pointer hover:border-red-400 hover:scale-105 hover:shadow-lg hover:shadow-red-500/20 transition-all duration-200 group">
                             <div class="text-xs text-red-300 font-bold uppercase mb-1 flex items-center gap-2">
                                 Critical Blocks
@@ -10544,8 +10544,14 @@
             let currentModalSort = 'ar';
 
             function openPaparanRisikoModal(divisionCode) {
-                console.log('[MODAL] Opening for division:', divisionCode);
-                currentModalDivision = divisionCode;
+                console.log('[MODAL] Opening for division (raw):', divisionCode);
+
+                // MAP: AME_II -> AME02, AME_IV -> AME04  
+                const divisionMap = { 'AME_II': 'AME02', 'AME_IV': 'AME04', 'ALL': 'ALL' };
+                const mappedCode = divisionMap[divisionCode] || divisionCode;
+                console.log('[MODAL] Mapped to:', mappedCode);
+
+                currentModalDivision = mappedCode;
 
                 // Check if BLOCKS_DATA exists
                 if (!BLOCKS_DATA) {
@@ -10559,8 +10565,8 @@
                 console.log('[MODAL DEBUG] Total blocks in BLOCKS_DATA:', allBlocks.length);
 
                 // Get division data
-                const divisionBlocks = allBlocks.filter(block => block.division === divisionCode);
-                console.log('[MODAL DEBUG] Division blocks for', divisionCode, ':', divisionBlocks.length);
+                const divisionBlocks = allBlocks.filter(block => block.division === mappedCode);
+                console.log('[MODAL DEBUG] Division blocks for', mappedCode, ':', divisionBlocks.length);
                 console.log('[MODAL DEBUG] Sample division block:', divisionBlocks[0]);
 
                 const criticalBlocks = divisionBlocks.filter(block => {
@@ -10583,7 +10589,7 @@
 
                 // Update modal content
                 document.getElementById('modalDivisionSubtitle').textContent =
-                    `${divisionCode} Division - ${criticalBlocks.length} blok dengan status Stadium 3+`;
+                    `${mappedCode} Division - ${criticalBlocks.length} blok dengan status Stadium 3+`;
 
                 document.getElementById('modalTotalLoss').textContent =
                     `Rp ${(totalLoss / 1000).toFixed(1)} M`;
