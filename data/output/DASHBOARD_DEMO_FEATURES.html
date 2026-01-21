@@ -10547,8 +10547,17 @@
                 console.log('[MODAL] Opening for division:', divisionCode);
                 currentModalDivision = divisionCode;
 
+                // Check if BLOCKS_DATA exists
+                if (!BLOCKS_DATA) {
+                    console.error('[MODAL] BLOCKS_DATA not found');
+                    return;
+                }
+
+                // Convert BLOCKS_DATA object to array
+                const allBlocks = Object.values(BLOCKS_DATA);
+
                 // Get division data
-                const divisionBlocks = window.blocks.filter(block => block.division === divisionCode);
+                const divisionBlocks = allBlocks.filter(block => block.division === divisionCode);
                 const criticalBlocks = divisionBlocks.filter(block => {
                     const stadium = parseInt(block.stadium_kritis) || 0;
                     return stadium >= 3;
@@ -10615,7 +10624,8 @@
 
                 // Re-render chart
                 if (currentModalDivision) {
-                    const divisionBlocks = window.blocks.filter(block => block.division === currentModalDivision);
+                    const allBlocks = Object.values(BLOCKS_DATA);
+                    const divisionBlocks = allBlocks.filter(block => block.division === currentModalDivision);
                     const criticalBlocks = divisionBlocks.filter(block => {
                         const stadium = parseInt(block.stadium_kritis) || 0;
                         return stadium >= 3;
