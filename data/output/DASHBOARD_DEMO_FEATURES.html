@@ -241,7 +241,7 @@
                             <div class="text-3xl font-black text-white" id="divMetric_avgYield">17.18<span
                                     class="text-sm text-slate-400 ml-1">T/Ha</span></div>
                         </div>
-                        <div onclick="openPaparanRisikoModal(window.currentDivision || 'AME02')"
+                        <div onclick="openPaparanRisikoModal(typeof currentDivision !== 'undefined' ? currentDivision : 'AME_II')"
                             class="bg-black/30 rounded-xl p-4 border border-red-500/20 cursor-pointer hover:border-red-400 hover:scale-105 hover:shadow-lg hover:shadow-red-500/20 transition-all duration-200 group">
                             <div class="text-xs text-red-300 font-bold uppercase mb-1 flex items-center gap-2">
                                 Critical Blocks
@@ -10553,15 +10553,22 @@
                     return;
                 }
 
+
                 // Convert BLOCKS_DATA object to array
                 const allBlocks = Object.values(BLOCKS_DATA);
+                console.log('[MODAL DEBUG] Total blocks in BLOCKS_DATA:', allBlocks.length);
 
                 // Get division data
                 const divisionBlocks = allBlocks.filter(block => block.division === divisionCode);
+                console.log('[MODAL DEBUG] Division blocks for', divisionCode, ':', divisionBlocks.length);
+                console.log('[MODAL DEBUG] Sample division block:', divisionBlocks[0]);
+
                 const criticalBlocks = divisionBlocks.filter(block => {
                     const stadium = parseInt(block.stadium_kritis) || 0;
                     return stadium >= 3;
                 });
+                console.log('[MODAL DEBUG] Critical blocks (Stadium >= 3):', criticalBlocks.length);
+                console.log('[MODAL DEBUG] Critical blocks:', criticalBlocks);
 
                 // Calculate totals
                 const totalLoss = criticalBlocks.reduce((sum, block) => {
