@@ -10570,12 +10570,19 @@
                 const allBlocks = Object.values(BLOCKS_DATA);
                 const divisionBlocks = allBlocks.filter(block => block.division === mappedCode);
 
-                // Filter critical blocks using getGanodermaStadium() - SAME as calculateDivisionMetrics
+                // INLINE Stadium classification - NO function dependency!
                 const criticalBlocksArray = divisionBlocks.filter(block => {
                     const attackRate = parseFloat(block.attack_rate) || 0;
                     const gapPct = Math.abs(parseFloat(block.gap_pct) || 0);
-                    const stadiumInfo = getGanodermaStadium(attackRate, gapPct);
-                    return stadiumInfo.critical;  // Use EXACT same function!
+
+                    // Stadium 4: CRITICAL (AR >= 30% OR Gap >= 40%)
+                    if (attackRate >= 30 || gapPct >= 40) return true;
+
+                    // Stadium 3: CRITICAL (AR >= 15% OR Gap >= 20%)
+                    if (attackRate >= 15 || gapPct >= 20) return true;
+
+                    // Stadium 2 or 1: NOT critical
+                    return false;
                 });
 
                 console.log('[MODAL] Critical blocks array:', criticalBlocksArray.length);
@@ -10637,8 +10644,8 @@
                     const criticalBlocks = divisionBlocks.filter(block => {
                         const attackRate = parseFloat(block.attack_rate) || 0;
                         const gapPct = Math.abs(parseFloat(block.gap_pct) || 0);
-                        const stadiumInfo = getGanodermaStadium(attackRate, gapPct);
-                        return stadiumInfo.critical;
+                        // Stadium 3+: AR >= 15% OR Gap >= 20%
+                        return (attackRate >= 30 || gapPct >= 40) || (attackRate >= 15 || gapPct >= 20);
                     });
                     renderModalChart(criticalBlocks, sortBy);
                 }
