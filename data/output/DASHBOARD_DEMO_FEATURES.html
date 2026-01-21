@@ -10545,55 +10545,55 @@
 
             function openPaparanRisikoModal(divisionCode) {
                 console.log('[MODAL] Opening for division (raw):', divisionCode);
-                
+
                 // MAP: AME_II -> AME02, AME_IV -> AME04  
                 const divisionMap = { 'AME_II': 'AME02', 'AME_IV': 'AME04', 'ALL': 'ALL' };
                 const mappedCode = divisionMap[divisionCode] || divisionCode;
                 console.log('[MODAL] Mapped to:', mappedCode);
-                
+
                 currentModalDivision = mappedCode;
-                
+
                 // USE EXISTING calculateDivisionMetrics() - IT WORKS!
                 const metrics = calculateDivisionMetrics(mappedCode);
-                
+
                 if (!metrics) {
                     console.error('[MODAL] No metrics found for division:', mappedCode);
                     alert(`Tidak ada data untuk division: ${mappedCode}`);
                     return;
                 }
-                
+
                 console.log('[MODAL] Division metrics:', metrics);
                 console.log('[MODAL] Critical blocks count:', metrics.criticalBlocks);
                 console.log('[MODAL] Total loss (Juta):', metrics.totalGanodermaLoss);
-                
+
                 // Get critical blocks array for chart
                 const allBlocks = Object.values(BLOCKS_DATA);
                 const divisionBlocks = allBlocks.filter(block => block.division === mappedCode);
-                
+
                 // Filter critical blocks (Stadium 3+) using SAME logic as getGanodermaStadium
                 const criticalBlocksArray = divisionBlocks.filter(block => {
                     const attackRate = parseFloat(block.attack_rate) || 0;
                     const gapPct = parseFloat(block.gap_pct) || 0;
                     return attackRate >= 15 || gapPct >= 20;  // Stadium 3+
                 });
-                
+
                 console.log('[MODAL] Critical blocks array:', criticalBlocksArray.length);
-                
+
                 // Update modal content using metrics
                 document.getElementById('modalDivisionSubtitle').textContent =
                     `${mappedCode} Division - ${metrics.criticalBlocks} blok kritis (Stadium 3+)`;
-                
+
                 document.getElementById('modalTotalLoss').textContent =
                     `Rp ${(metrics.totalGanodermaLoss / 1000).toFixed(1)} M`;
-                
+
                 document.getElementById('modalCriticalCount').textContent =
                     `${metrics.criticalBlocks} Blok`;
-                
+
                 // Calculate critical area
                 const criticalArea = metrics.totalArea * (metrics.criticalBlocks / metrics.totalBlocks);
                 document.getElementById('modalRiskArea').textContent =
                     `${criticalArea.toFixed(1)} Ha`;
-                
+
                 // Render chart with critical blocks array
                 renderModalChart(criticalBlocksArray, currentModalSort);
 
@@ -10656,14 +10656,14 @@
                     if (sortBy === 'ar') {
                         return (parseFloat(b.attack_rate) || 0) - (parseFloat(a.attack_rate) || 0);
                     } else {
-                        return (parseFloat(b.ganoderma_loss_juta) || 0) - (parseFloat(a.ganoderma_loss_juta) || 0);
+                        return (parseFloat(b.loss_value_juta) || 0) - (parseFloat(a.loss_value_juta) || 0);
                     }
                 });
 
                 // Prepare data
                 const labels = sortedBlocks.map(block => block.block_code);
                 const arData = sortedBlocks.map(block => parseFloat(block.attack_rate) || 0);
-                const lossData = sortedBlocks.map(block => (parseFloat(block.ganoderma_loss_juta) || 0) / 1000); // Convert to Miliar
+                const lossData = sortedBlocks.map(block => (parseFloat(block.loss_value_juta) || 0) / 1000); // Convert to Miliar
 
                 // Create chart
                 modalRiskChart = new Chart(ctx, {
