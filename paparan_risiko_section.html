@@ -1,0 +1,88 @@
+0 shadow-2xl">
+                <div class="flex items-center gap-3 mb-6">
+                    <span class="text-4xl">🔄</span>
+                    <div>
+                        <h2 class="text-2xl font-black text-white">Analisis Dampak Finansial</h2>
+                        <p class="text-slate-400">PAPARAN RISK (Kiri) + STATISTIK BLOK (Kanan)</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                    <!-- LEFT: PAPARAN RISIKO ESTATE (Red) -->
+                    <!-- Risk Control Tower (Summary) -->
+                    <div id="panelRiskSummary"
+                        class="bg-gradient-to-br from-slate-900 via-rose-950 to-slate-900 text-white p-6 rounded-3xl shadow-xl relative overflow-hidden group border border-rose-500/30">
+                        <div
+                            class="absolute top-0 right-0 w-48 h-48 bg-orange-500/10 rounded-bl-[100px] transition-transform group-hover:scale-110 pointer-events-none">
+                        </div>
+
+                        <!-- Header -->
+                        <div class="flex justify-between items-start mb-6 relative z-10">
+                            <div>
+                                <h3 class="text-rose-400 text-[10px] font-black uppercase tracking-widest mb-1">Risk
+                                    Control
+                                    Tower</h3>
+                                <h2 id="paparanRiskTitle" class="text-2xl font-black text-white tracking-tight">PAPARAN
+                                    RISIKO ESTATE</h2>
+                                <div
+                                    class="mt-2 inline-block px-3 py-1 bg-orange-900/40 border border-orange-500/50 rounded-full">
+                                    <span id="paparanRiskBadge" class="text-orange-300 text-[10px] font-bold">📍
+                                        Showing:
+                                        ALL Divisions (CRYPTIC COLLAPSE blocks)</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Main Number -->
+                        <div class="mb-6 relative z-10">
+                            <span class="text-[10px] uppercase font-bold text-slate-400 block mb-1"
+                                id="paparanRiskLabel">Total Potensi Kerugian
+                                (-- Blok Kritis)</span>
+                            <div class="flex items-baseline gap-1">
+                                <span class="text-xl font-bold text-rose-500">Rp</span>
+                                <span class="text-5xl font-black text-white tracking-tighter"
+                                    id="summaryTotalLoss">--</span>
+                                <span class="text-sm font-bold text-slate-400">Miliar</span>
+                            </div>
+                            <p class="text-[10px] text-rose-300/80 mt-1 italic" id="paparanRiskDisclaimer">*Akumulasi
+                                kerugian dari blok berstatus KRITIS
+                            </p>
+                        </div>
+
+                        <!-- Stats Grid -->
+                        <div class="grid grid-cols-2 gap-3 pb-6 border-b border-rose-500/20 mb-4">
+                            <div class="bg-black/30 p-3 rounded-xl border border-white/5">
+                                <span class="text-[9px] font-black text-slate-400 uppercase block mb-1">Blok
+                                    Kritis</span>
+                                <span class="text-2xl font-black text-white" id="summaryCriticalCount">--</span>
+                                <span class="text-xs font-bold text-slate-500 ml-1">Blok</span>
+                            </div>
+                            <div class="bg-black/30 p-3 rounded-xl border border-white/5">
+                                <span class="text-[9px] font-black text-slate-400 uppercase block mb-1">Area
+                                    Berisiko</span>
+                                <span class="text-2xl font-black text-white" id="summaryRiskArea">--</span>
+                                <span class="text-xs font-bold text-slate-500 ml-1">Ha</span>
+                            </div>
+                        </div>
+
+                        <!-- Sort Toggle -->
+                        <div class="flex items-center gap-2 mb-3 pb-3 border-b border-rose-500/20">
+                            <span class="text-[10px] text-slate-400 font-bold uppercase">Sort By:</span>
+                            <button onclick="renderPaparanRisk('ar')" id="sortByAR"
+                                class="px-3 py-1 rounded-lg text-xs font-bold bg-rose-600 text-white border border-rose-400">
+                                AR %
+                            </button>
+                            <button onclick="renderPaparanRisk('loss')" id="sortByLoss"
+                                class="px-3 py-1 rounded-lg text-xs font-bold bg-rose-900/30 text-rose-300 border border-rose-500/30">
+                                Loss (Rp)
+                            </button>
+                        </div>
+
+                        <!-- Bar Chart Container -->
+                        <div class="mt-4 pt-4 border-t border-rose-500/20" style="height: 400px;">
+                            <canvas id="riskBarChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- RIGHT: STATISTIK B

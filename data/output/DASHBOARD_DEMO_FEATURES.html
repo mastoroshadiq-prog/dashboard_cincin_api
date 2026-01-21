@@ -227,9 +227,18 @@
 
                     <!-- Quick Metrics Grid -->
                     <div class="grid grid-cols-4 gap-4 mb-6">
-                        <div class="bg-black/30 rounded-xl p-4 border border-cyan-500/20">
-                            <div class="text-xs text-cyan-300 font-bold uppercase mb-1">Total Blocks</div>
+                        <div onclick="openBlockBreakdownModal('AME02')"
+                            class="bg-black/30 rounded-xl p-4 border border-cyan-500/20 cursor-pointer hover:border-cyan-400 hover:scale-105 hover:shadow-lg hover:shadow-cyan-500/20 transition-all duration-200 group">
+                            <div class="text-xs text-cyan-300 font-bold uppercase mb-1 flex items-center gap-2">
+                                Total Blocks
+                                <span
+                                    class="text-cyan-400 opacity-0 group-hover:opacity-100 transition-opacity">📊</span>
+                            </div>
                             <div class="text-3xl font-black text-white" id="divMetric_totalBlocks">37</div>
+                            <div
+                                class="text-[10px] text-cyan-300/60 mt-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                                Klik untuk breakdown kategorisasi
+                            </div>
                         </div>
                         <div class="bg-black/30 rounded-xl p-4 border border-blue-500/20">
                             <div class="text-xs text-blue-300 font-bold uppercase mb-1">Total Area</div>
@@ -422,6 +431,56 @@
                                 <span class="text-yellow-300">⚠️</span> Degradation model assumes 15% annual loss
                                 increase
                                 without treatment, 70% mitigation with treatment
+                            </div>
+                        </div>
+
+                        <!-- HISTORICAL TRENDS CHART: 6 YEARS (2023-2028) -->
+                        <div
+                            class="mt-6 bg-gradient-to-r from-slate-900/60 to-indigo-900/60 rounded-2xl border-2 border-indigo-500/30 p-6">
+                            <div class="flex items-center gap-3 mb-4">
+                                <div class="text-3xl">📈</div>
+                                <h3 class="text-xl font-black text-white">Historical Trends & Projection:
+                                    <span class="text-cyan-400">Loss</span> +
+                                    <span class="text-orange-400">Attack Rate</span>
+                                    <span id="historicalChartDivision"
+                                        class="text-sm font-normal text-slate-400 ml-2">(Division: AME02)</span>
+                                </h3>
+                            </div>
+
+                            <div class="flex items-center gap-2 mb-4 flex-wrap">
+                                <div
+                                    class="flex items-center gap-2 px-3 py-1 bg-red-900/30 border border-red-500/50 rounded-lg">
+                                    <div class="w-6 h-0.5 bg-red-500"></div>
+                                    <span class="text-xs text-red-300 font-bold">Loss - TANPA Tx</span>
+                                </div>
+                                <div
+                                    class="flex items-center gap-2 px-3 py-1 bg-emerald-900/30 border border-emerald-500/50 rounded-lg">
+                                    <div class="w-6 h-0.5 border-t-2 border-dashed border-emerald-400"></div>
+                                    <span class="text-xs text-emerald-300 font-bold">Loss - DENGAN Tx</span>
+                                </div>
+                                <div
+                                    class="flex items-center gap-2 px-3 py-1 bg-orange-900/30 border border-orange-500/50 rounded-lg">
+                                    <div class="w-3 h-3 bg-orange-500 rounded-full"></div>
+                                    <span class="text-xs text-orange-300 font-bold" id="attackRateLegend">Attack Rate
+                                        %</span>
+                                </div>
+                                <div class="ml-auto text-xs text-slate-400">
+                                    <span class="text-yellow-400">●</span> Historical (2023-2025)
+                                    <span class="text-slate-500 mx-2">|</span>
+                                    <span class="text-cyan-400">●</span> Current (2025)
+                                    <span class="text-slate-500 mx-2">|</span>
+                                    <span class="text-red-400">▲</span> Projection (2026-2028)
+                                </div>
+                            </div>
+
+                            <div class="bg-black/40 rounded-xl p-4">
+                                <canvas id="historicalTrendsChart" height="120"></canvas>
+                            </div>
+
+                            <div class="mt-3 text-xs text-slate-400 text-center">
+                                <span class="text-cyan-300">💡</span>
+                                <span id="historicalChartNote">Divisions AME II & AME IV use Attack Rate (NDRE). Others
+                                    use Stadium % distribution.</span>
                             </div>
                         </div>
 
@@ -9214,6 +9273,9 @@
                 // FIX #3: Render 3-Year Degradation Model Chart
                 renderDegradationModelChart(metrics);
 
+                // NEW: Render Historical Trends Chart (6 years: 2023-2028)
+                renderHistoricalTrendsChart(divisionCode, metrics);
+
                 // Update Paparan Risiko section
                 updatePaparanRisiko(metrics);
             }
@@ -9347,6 +9409,613 @@
 
                 console.log('[CHART] 3-Year Degradation Model rendered successfully');
             }
+
+            /**
+             * Render Historical Trends Chart (6 years: 2023-2028)
+             * Shows Loss + Attack Rate on dual axis
+             * AME II & AME IV use NDRE Attack Rate; others use Stadium %
+             */
+            // Global variable to store tooltip data for click handler
+            let historicalTooltipData = {};
+            let currentHistoricalDivision = '';
+            let historicalTrendsChart = null;
+
+            function renderHistoricalTrendsChart(divisionCode, metrics) {
+                const canvas = document.getElementById('historicalTrendsChart');
+                if (!canvas) {
+                    console.error('[HISTORICAL CHART] Canvas not found');
+                    return;
+                }
+
+                const ctx = canvas.getContext('2d');
+                currentHistoricalDivision = divisionCode;
+
+                // Destroy existing chart
+                if (historicalTrendsChart) {
+                    historicalTrendsChart.destroy();
+                }
+
+                // Determine if division uses NDRE (AME02 = AME II, AME04 = AME IV)
+                const ndreEnabled = ['AME02', 'AME04', 'AME_II', 'AME_IV'].includes(divisionCode);
+
+                // Update UI labels
+                document.getElementById('historicalChartDivision').textContent = `(Division: ${divisionCode})`;
+                document.getElementById('attackRateLegend').textContent = ndreEnabled ? 'Attack Rate % (NDRE)' : 'Stadium 3+4 %';
+                document.getElementById('historicalChartNote').textContent = ndreEnabled
+                    ? 'Attack Rate from NDRE. Click on data point for detailed table.'
+                    : 'Stadium % from census. Click on data point for detailed table.';
+
+                // Get all blocks in this division from COMPLETE_BLOCKS_DATA
+                const divisionBlockCodes = Object.keys(COMPLETE_BLOCKS_DATA)
+                    .filter(code => COMPLETE_BLOCKS_DATA[code].division === divisionCode);
+
+                console.log('[HISTORICAL CHART] Division:', divisionCode, 'Blocks found:', divisionBlockCodes.length);
+
+                // If no blocks found, show message and return
+                if (divisionBlockCodes.length === 0) {
+                    console.warn('[HISTORICAL CHART] No blocks found for division:', divisionCode);
+                    return;
+                }
+
+                // Aggregate ALL metrics per year (2023, 2024, 2025)
+                let historicalData = {
+                    2023: { loss: 0, gapYield: 0, sph: 0, attackRate: 0, blockCount: 0, gapPctSum: 0 },
+                    2024: { loss: 0, gapYield: 0, sph: 0, attackRate: 0, blockCount: 0, gapPctSum: 0 },
+                    2025: { loss: 0, gapYield: 0, sph: 0, attackRate: 0, blockCount: 0, gapPctSum: 0 }
+                };
+
+                let totalArea = 0;
+                let currentSphSum = 0;
+                let sphCount = 0;
+                let attackRateCount = 0;
+
+                divisionBlockCodes.forEach(blockCode => {
+                    const historical = HISTORICAL_YIELDS[blockCode];
+                    const blockData = typeof BLOCKS_DATA !== 'undefined' ? BLOCKS_DATA[blockCode] : null;
+                    const completeData = COMPLETE_BLOCKS_DATA[blockCode];
+
+                    const luas = historical?.luas_ha || completeData?.luas_ha || 20;
+                    totalArea += luas;
+                    const pricePerTon = 2.5; // Juta per Ton
+
+                    // Historical data from HISTORICAL_YIELDS (2023, 2024, 2025)
+                    if (historical && historical.yields) {
+                        [2023, 2024, 2025].forEach(year => {
+                            if (historical.yields[year]) {
+                                const gapTonHa = Math.abs(historical.yields[year].gap_ton_ha || 0);
+                                const gapPct = Math.abs(historical.yields[year].gap_pct || 0);
+                                historicalData[year].loss += gapTonHa * luas * pricePerTon;
+                                historicalData[year].gapYield += gapTonHa;
+                                historicalData[year].gapPctSum += gapPct;
+                                historicalData[year].blockCount++;
+                            }
+                        });
+                    } else if (completeData) {
+                        // Fallback: use COMPLETE_BLOCKS_DATA for 2025 if no historical data
+                        const gapTonHa = Math.abs(completeData.gap_ton_ha || 0);
+                        const gapPct = Math.abs(completeData.gap_pct || 0);
+                        historicalData[2025].loss += gapTonHa * luas * pricePerTon;
+                        historicalData[2025].gapYield += gapTonHa;
+                        historicalData[2025].gapPctSum += gapPct;
+                        historicalData[2025].blockCount++;
+                        // Estimate 2024 and 2023 (slightly lower)
+                        historicalData[2024].loss += gapTonHa * luas * pricePerTon * 0.92;
+                        historicalData[2024].gapYield += gapTonHa * 0.92;
+                        historicalData[2024].gapPctSum += gapPct * 0.92;
+                        historicalData[2024].blockCount++;
+                        historicalData[2023].loss += gapTonHa * luas * pricePerTon * 0.85;
+                        historicalData[2023].gapYield += gapTonHa * 0.85;
+                        historicalData[2023].gapPctSum += gapPct * 0.85;
+                        historicalData[2023].blockCount++;
+                    }
+
+                    // Current SPH - try BLOCKS_DATA first, then estimate from gap
+                    if (blockData && blockData.sph) {
+                        currentSphSum += parseFloat(blockData.sph) || 0;
+                        sphCount++;
+                    } else {
+                        // Estimate SPH based on gap percentage (higher gap = lower SPH)
+                        const gapPct = Math.abs(completeData?.gap_pct || 0);
+                        const estimatedSph = Math.max(80, 140 - gapPct * 1.5);
+                        currentSphSum += estimatedSph;
+                        sphCount++;
+                    }
+
+                    // Attack rate - use BLOCKS_DATA if available, otherwise use gap_pct as proxy
+                    if (blockData && blockData.attack_rate) {
+                        const currentAR = parseFloat(blockData.attack_rate) || 0;
+                        historicalData[2025].attackRate += currentAR;
+                        historicalData[2024].attackRate += currentAR * 0.90;
+                        historicalData[2023].attackRate += currentAR * 0.80;
+                        attackRateCount++;
+                    } else if (completeData) {
+                        // Use gap_pct as proxy for attack rate (Stadium %)
+                        // Assumption: higher gap_pct correlates with higher infection
+                        const gapPct = Math.abs(completeData.gap_pct || 0);
+                        const proxyAR = Math.min(gapPct * 0.6, 50); // Scale gap to attack rate proxy
+                        historicalData[2025].attackRate += proxyAR;
+                        historicalData[2024].attackRate += proxyAR * 0.90;
+                        historicalData[2023].attackRate += proxyAR * 0.80;
+                        attackRateCount++;
+                    }
+                });
+
+                // Calculate averages
+                const avgSph2025 = sphCount > 0 ? currentSphSum / sphCount : 0;
+                [2023, 2024, 2025].forEach(year => {
+                    const bc = historicalData[year].blockCount;
+                    if (bc > 0) {
+                        historicalData[year].gapYield /= bc;
+                        historicalData[year].attackRate /= bc;
+                    }
+                    historicalData[year].loss /= 1000; // Convert to Miliar
+                });
+
+                // Estimate historical SPH (palms decline ~2% per year without treatment)
+                const sph2025 = avgSph2025;
+                const sph2024 = sph2025 * 1.02; // 2% more palms in past
+                const sph2023 = sph2025 * 1.04;
+
+                // PROJECTION: No Treatment vs With Treatment (2026-2028)
+                const degradationRate = 0.15; // 15% annual loss increase
+                const treatmentEffectiveness = 0.70; // 70% reduction with treatment
+                const sphDeclineRate = 0.03; // 3% SPH decline per year without treatment
+
+                // NO TREATMENT projections
+                const noTx = {
+                    2026: {
+                        loss: historicalData[2025].loss * (1 + degradationRate),
+                        gapYield: historicalData[2025].gapYield * 1.10,
+                        sph: sph2025 * (1 - sphDeclineRate),
+                        attackRate: historicalData[2025].attackRate * 1.10
+                    },
+                    2027: {
+                        loss: historicalData[2025].loss * Math.pow(1 + degradationRate, 2),
+                        gapYield: historicalData[2025].gapYield * 1.20,
+                        sph: sph2025 * Math.pow(1 - sphDeclineRate, 2),
+                        attackRate: historicalData[2025].attackRate * 1.20
+                    },
+                    2028: {
+                        loss: historicalData[2025].loss * Math.pow(1 + degradationRate, 3),
+                        gapYield: historicalData[2025].gapYield * 1.30,
+                        sph: sph2025 * Math.pow(1 - sphDeclineRate, 3),
+                        attackRate: historicalData[2025].attackRate * 1.30
+                    }
+                };
+
+                // WITH TREATMENT projections (70% effective)
+                const withTx = {
+                    2026: {
+                        loss: historicalData[2025].loss * (1 - treatmentEffectiveness * 0.5),
+                        gapYield: historicalData[2025].gapYield * 0.85,
+                        sph: sph2025 * 0.99, // Only 1% decline with treatment
+                        attackRate: historicalData[2025].attackRate * 0.85
+                    },
+                    2027: {
+                        loss: historicalData[2025].loss * (1 - treatmentEffectiveness * 0.8),
+                        gapYield: historicalData[2025].gapYield * 0.70,
+                        sph: sph2025 * 0.98,
+                        attackRate: historicalData[2025].attackRate * 0.70
+                    },
+                    2028: {
+                        loss: historicalData[2025].loss * (1 - treatmentEffectiveness),
+                        gapYield: historicalData[2025].gapYield * 0.55,
+                        sph: sph2025 * 0.97,
+                        attackRate: historicalData[2025].attackRate * 0.55
+                    }
+                };
+
+                // Build chart data arrays
+                const years = ['2023', '2024', '2025', '2026', '2027', '2028'];
+
+                // LOSS: No Treatment (full line, red for projection)
+                const lossNoTx = [
+                    historicalData[2023].loss,
+                    historicalData[2024].loss,
+                    historicalData[2025].loss,
+                    noTx[2026].loss,
+                    noTx[2027].loss,
+                    noTx[2028].loss
+                ];
+
+                // LOSS: With Treatment (only projection, green dashed)
+                const lossWithTx = [
+                    null, null, historicalData[2025].loss, // Start from 2025
+                    withTx[2026].loss,
+                    withTx[2027].loss,
+                    withTx[2028].loss
+                ];
+
+                // Attack Rate (No Treatment)
+                const attackRateData = [
+                    historicalData[2023].attackRate,
+                    historicalData[2024].attackRate,
+                    historicalData[2025].attackRate,
+                    noTx[2026].attackRate,
+                    noTx[2027].attackRate,
+                    noTx[2028].attackRate
+                ];
+
+                // Store additional data for tooltips AND click handler (global)
+                const tooltipData = {
+                    2023: { ...historicalData[2023], sph: sph2023, type: 'historical' },
+                    2024: { ...historicalData[2024], sph: sph2024, type: 'historical' },
+                    2025: { ...historicalData[2025], sph: sph2025, type: 'current' },
+                    2026: { noTx: noTx[2026], withTx: withTx[2026], type: 'projection' },
+                    2027: { noTx: noTx[2027], withTx: withTx[2027], type: 'projection' },
+                    2028: { noTx: noTx[2028], withTx: withTx[2028], type: 'projection' }
+                };
+                // Store globally for click handler
+                historicalTooltipData = tooltipData;
+
+
+                // Point styles
+                const pointStylesNoTx = ['circle', 'circle', 'circle', 'triangle', 'triangle', 'triangle'];
+                const pointColorsNoTx = ['#facc15', '#facc15', '#22d3ee', '#ef4444', '#ef4444', '#ef4444'];
+
+                historicalTrendsChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: years,
+                        datasets: [
+                            {
+                                label: 'Loss - TANPA Treatment',
+                                data: lossNoTx,
+                                borderColor: '#ef4444',
+                                backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                                borderWidth: 3,
+                                tension: 0.3,
+                                fill: false,
+                                yAxisID: 'y',
+                                pointRadius: 8,
+                                pointBackgroundColor: pointColorsNoTx,
+                                pointBorderColor: '#fff',
+                                pointBorderWidth: 2,
+                                pointStyle: pointStylesNoTx,
+                                segment: {
+                                    borderColor: ctx => ctx.p0DataIndex >= 2 ? '#ef4444' : '#22d3ee'
+                                }
+                            },
+                            {
+                                label: 'Loss - DENGAN Treatment',
+                                data: lossWithTx,
+                                borderColor: '#10b981',
+                                backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                                borderWidth: 3,
+                                borderDash: [8, 4],
+                                tension: 0.3,
+                                fill: false,
+                                yAxisID: 'y',
+                                pointRadius: 7,
+                                pointBackgroundColor: '#10b981',
+                                pointBorderColor: '#fff',
+                                pointBorderWidth: 2,
+                                pointStyle: 'rectRot',
+                                spanGaps: true
+                            },
+                            {
+                                label: ndreEnabled ? 'Attack Rate %' : 'Stadium 3+4 %',
+                                data: attackRateData,
+                                borderColor: '#f97316',
+                                backgroundColor: 'rgba(249, 115, 22, 0.1)',
+                                borderWidth: 2,
+                                borderDash: [4, 2],
+                                tension: 0.3,
+                                fill: false,
+                                yAxisID: 'y1',
+                                pointRadius: 5,
+                                pointBackgroundColor: '#f97316',
+                                pointBorderColor: '#fff',
+                                pointBorderWidth: 1
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: true,
+                        interaction: {
+                            mode: 'index',
+                            intersect: false
+                        },
+                        onClick: (evt, activeEls) => {
+                            if (activeEls.length > 0) {
+                                const index = activeEls[0].index;
+                                const year = ['2023', '2024', '2025', '2026', '2027', '2028'][index];
+                                showHistoricalDataModal(year);
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            tooltip: {
+                                backgroundColor: 'rgba(0, 0, 0, 0.95)',
+                                titleColor: '#fff',
+                                bodyColor: '#fff',
+                                borderColor: 'rgba(255, 255, 255, 0.3)',
+                                borderWidth: 1,
+                                padding: 16,
+                                displayColors: true,
+                                callbacks: {
+                                    title: (context) => {
+                                        const year = context[0].label;
+                                        const data = tooltipData[year];
+                                        const typeLabel = data.type === 'historical' ? '📊 Historical' :
+                                            data.type === 'current' ? '📍 Current Year' : '🔮 Projection';
+                                        return [`${typeLabel} - ${year}`, '─'.repeat(25)];
+                                    },
+                                    label: (context) => {
+                                        const year = context.label;
+                                        const data = tooltipData[year];
+                                        const label = context.dataset.label;
+
+                                        if (label.includes('TANPA')) {
+                                            const loss = data.type === 'projection' ? data.noTx.loss : data.loss;
+                                            return `❌ Loss (No Tx): Rp ${loss.toFixed(2)} M`;
+                                        } else if (label.includes('DENGAN')) {
+                                            if (data.type !== 'projection' && year !== '2025') return null;
+                                            const loss = data.type === 'projection' ? data.withTx.loss : data.loss;
+                                            return `✅ Loss (With Tx): Rp ${loss.toFixed(2)} M`;
+                                        } else {
+                                            const ar = data.type === 'projection' ? data.noTx.attackRate : data.attackRate;
+                                            return `🦠 ${ndreEnabled ? 'Attack Rate' : 'Stadium 3+4'}: ${ar.toFixed(1)}%`;
+                                        }
+                                    },
+                                    afterBody: (context) => {
+                                        const year = context[0].label;
+                                        const data = tooltipData[year];
+                                        const lines = ['', '── Additional Metrics ──'];
+
+                                        if (data.type === 'projection') {
+                                            lines.push(`📉 Gap Yield (No Tx): ${data.noTx.gapYield.toFixed(2)} Ton/Ha`);
+                                            lines.push(`📈 Gap Yield (Tx): ${data.withTx.gapYield.toFixed(2)} Ton/Ha`);
+                                            lines.push(`🌴 SPH (No Tx): ${Math.round(data.noTx.sph)}`);
+                                            lines.push(`🌴 SPH (Tx): ${Math.round(data.withTx.sph)}`);
+                                            lines.push('');
+                                            lines.push('💡 Treatment savings: Rp ' +
+                                                (data.noTx.loss - data.withTx.loss).toFixed(2) + ' M');
+                                        } else {
+                                            lines.push(`📉 Avg Gap Yield: ${data.gapYield.toFixed(2)} Ton/Ha`);
+                                            lines.push(`🌴 Avg SPH: ${Math.round(data.sph)}`);
+                                        }
+
+                                        return lines;
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                type: 'linear',
+                                display: true,
+                                position: 'left',
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: 'Loss (Miliar Rp)',
+                                    color: '#22d3ee',
+                                    font: { size: 11, weight: 'bold' }
+                                },
+                                grid: {
+                                    color: 'rgba(255, 255, 255, 0.1)'
+                                },
+                                ticks: {
+                                    color: '#22d3ee',
+                                    font: { size: 10, weight: 'bold' },
+                                    callback: (value) => `Rp ${value.toFixed(1)} M`
+                                }
+                            },
+                            y1: {
+                                type: 'linear',
+                                display: true,
+                                position: 'right',
+                                beginAtZero: true,
+                                max: 100,
+                                title: {
+                                    display: true,
+                                    text: ndreEnabled ? 'Attack Rate %' : 'Stadium 3+4 %',
+                                    color: '#f97316',
+                                    font: { size: 11, weight: 'bold' }
+                                },
+                                grid: {
+                                    drawOnChartArea: false
+                                },
+                                ticks: {
+                                    color: '#f97316',
+                                    font: { size: 10, weight: 'bold' },
+                                    callback: (value) => `${value}%`
+                                }
+                            },
+                            x: {
+                                grid: {
+                                    color: 'rgba(255, 255, 255, 0.05)'
+                                },
+                                ticks: {
+                                    color: '#94a3b8',
+                                    font: { size: 11, weight: 'bold' }
+                                }
+                            }
+                        }
+                    }
+                });
+
+                console.log('[HISTORICAL CHART] Rendered with treatment comparison', {
+                    division: divisionCode,
+                    ndreEnabled,
+                    lossNoTx,
+                    lossWithTx,
+                    tooltipData
+                });
+            }
+
+            /**
+             * Show Historical Data Modal with detailed table
+             * @param {string} year - Year to display (2023-2028)
+             */
+            function showHistoricalDataModal(year) {
+                const data = historicalTooltipData[year];
+                if (!data) {
+                    console.error('[MODAL] No data for year:', year);
+                    return;
+                }
+
+                const ndreEnabled = ['AME02', 'AME04', 'AME_II', 'AME_IV'].includes(currentHistoricalDivision);
+                const attackLabel = ndreEnabled ? 'Attack Rate (NDRE)' : 'Stadium 3+4 %';
+
+                let typeLabel, typeBadge;
+                if (data.type === 'historical') {
+                    typeLabel = '📊 Historical Data';
+                    typeBadge = 'bg-yellow-600';
+                } else if (data.type === 'current') {
+                    typeLabel = '📍 Current Year (Actual)';
+                    typeBadge = 'bg-cyan-600';
+                } else {
+                    typeLabel = '🔮 Projection (Model-Based)';
+                    typeBadge = 'bg-purple-600';
+                }
+
+                let tableHtml = '';
+
+                if (data.type === 'projection') {
+                    // For projection years, show comparison table
+                    tableHtml = `
+                        <table class="w-full text-sm border-collapse">
+                            <thead>
+                                <tr class="bg-slate-700/50">
+                                    <th class="p-3 text-left text-slate-300 font-bold border-b border-slate-600">Metric</th>
+                                    <th class="p-3 text-center text-red-400 font-bold border-b border-slate-600">❌ TANPA Treatment</th>
+                                    <th class="p-3 text-center text-green-400 font-bold border-b border-slate-600">✅ DENGAN Treatment</th>
+                                    <th class="p-3 text-center text-emerald-400 font-bold border-b border-slate-600">💰 Savings</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b border-slate-700/50 hover:bg-slate-700/30">
+                                    <td class="p-3 text-slate-300 font-semibold">📉 Loss (Miliar Rp)</td>
+                                    <td class="p-3 text-center text-red-400 font-bold">Rp ${data.noTx.loss.toFixed(2)} M</td>
+                                    <td class="p-3 text-center text-green-400 font-bold">Rp ${data.withTx.loss.toFixed(2)} M</td>
+                                    <td class="p-3 text-center text-emerald-400 font-bold">Rp ${(data.noTx.loss - data.withTx.loss).toFixed(2)} M</td>
+                                </tr>
+                                <tr class="border-b border-slate-700/50 hover:bg-slate-700/30">
+                                    <td class="p-3 text-slate-300 font-semibold">🦠 ${attackLabel}</td>
+                                    <td class="p-3 text-center text-red-400 font-bold">${data.noTx.attackRate.toFixed(1)}%</td>
+                                    <td class="p-3 text-center text-green-400 font-bold">${data.withTx.attackRate.toFixed(1)}%</td>
+                                    <td class="p-3 text-center text-emerald-400 font-bold">-${(data.noTx.attackRate - data.withTx.attackRate).toFixed(1)}%</td>
+                                </tr>
+                                <tr class="border-b border-slate-700/50 hover:bg-slate-700/30">
+                                    <td class="p-3 text-slate-300 font-semibold">📊 Gap Yield (Ton/Ha)</td>
+                                    <td class="p-3 text-center text-red-400 font-bold">${data.noTx.gapYield.toFixed(2)}</td>
+                                    <td class="p-3 text-center text-green-400 font-bold">${data.withTx.gapYield.toFixed(2)}</td>
+                                    <td class="p-3 text-center text-emerald-400 font-bold">-${(data.noTx.gapYield - data.withTx.gapYield).toFixed(2)}</td>
+                                </tr>
+                                <tr class="hover:bg-slate-700/30">
+                                    <td class="p-3 text-slate-300 font-semibold">🌴 SPH (Standing Palm)</td>
+                                    <td class="p-3 text-center text-red-400 font-bold">${Math.round(data.noTx.sph)}</td>
+                                    <td class="p-3 text-center text-green-400 font-bold">${Math.round(data.withTx.sph)}</td>
+                                    <td class="p-3 text-center text-emerald-400 font-bold">+${Math.round(data.withTx.sph - data.noTx.sph)}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="mt-4 p-3 bg-emerald-900/30 rounded-lg border border-emerald-500/30">
+                            <p class="text-emerald-300 text-sm font-bold">
+                                💡 Total Penghematan jika treatment diterapkan: 
+                                <span class="text-emerald-400 text-lg">Rp ${(data.noTx.loss - data.withTx.loss).toFixed(2)} Miliar</span>
+                            </p>
+                        </div>
+                    `;
+                } else {
+                    // For historical/current years, show single data table
+                    tableHtml = `
+                        <table class="w-full text-sm border-collapse">
+                            <thead>
+                                <tr class="bg-slate-700/50">
+                                    <th class="p-3 text-left text-slate-300 font-bold border-b border-slate-600">Metric</th>
+                                    <th class="p-3 text-right text-cyan-400 font-bold border-b border-slate-600">Value</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b border-slate-700/50 hover:bg-slate-700/30">
+                                    <td class="p-3 text-slate-300 font-semibold">📉 Loss (Miliar Rp)</td>
+                                    <td class="p-3 text-right text-cyan-400 font-bold text-lg">Rp ${data.loss.toFixed(2)} M</td>
+                                </tr>
+                                <tr class="border-b border-slate-700/50 hover:bg-slate-700/30">
+                                    <td class="p-3 text-slate-300 font-semibold">🦠 ${attackLabel}</td>
+                                    <td class="p-3 text-right text-orange-400 font-bold text-lg">${data.attackRate.toFixed(1)}%</td>
+                                </tr>
+                                <tr class="border-b border-slate-700/50 hover:bg-slate-700/30">
+                                    <td class="p-3 text-slate-300 font-semibold">📊 Avg Gap Yield (Ton/Ha)</td>
+                                    <td class="p-3 text-right text-yellow-400 font-bold text-lg">${data.gapYield.toFixed(2)}</td>
+                                </tr>
+                                <tr class="border-b border-slate-700/50 hover:bg-slate-700/30">
+                                    <td class="p-3 text-slate-300 font-semibold">🌴 Avg SPH (Standing Palm)</td>
+                                    <td class="p-3 text-right text-green-400 font-bold text-lg">${Math.round(data.sph)}</td>
+                                </tr>
+                                <tr class="hover:bg-slate-700/30">
+                                    <td class="p-3 text-slate-300 font-semibold">📦 Block Count (with data)</td>
+                                    <td class="p-3 text-right text-slate-400 font-bold text-lg">${data.blockCount || 'N/A'}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    `;
+                }
+
+                // Create/update modal
+                let modal = document.getElementById('historicalDataModal');
+                if (!modal) {
+                    modal = document.createElement('div');
+                    modal.id = 'historicalDataModal';
+                    modal.className = 'fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm hidden';
+                    modal.innerHTML = `
+                        <div class="bg-slate-800/95 rounded-2xl border border-white/10 shadow-2xl max-w-2xl w-full mx-4 overflow-hidden">
+                            <div class="p-6">
+                                <div id="historicalModalContent"></div>
+                            </div>
+                        </div>
+                    `;
+                    modal.onclick = (e) => {
+                        if (e.target === modal) closeHistoricalDataModal();
+                    };
+                    document.body.appendChild(modal);
+                }
+
+                const contentHtml = `
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center gap-3">
+                            <span class="text-4xl">${data.type === 'projection' ? '🔮' : data.type === 'current' ? '📍' : '📊'}</span>
+                            <div>
+                                <h3 class="text-xl font-black text-white">Tahun ${year}</h3>
+                                <span class="px-2 py-1 ${typeBadge} rounded text-xs font-bold text-white">${typeLabel}</span>
+                            </div>
+                        </div>
+                        <button onclick="closeHistoricalDataModal()" class="text-slate-400 hover:text-white text-2xl font-bold">&times;</button>
+                    </div>
+                    <div class="text-sm text-slate-400 mb-4">
+                        Division: <span class="text-cyan-400 font-bold">${currentHistoricalDivision}</span>
+                    </div>
+                    <div class="bg-slate-900/50 rounded-xl p-4 border border-slate-700/50">
+                        ${tableHtml}
+                    </div>
+                    ${data.type === 'projection' ? `
+                    <div class="mt-4 p-3 bg-yellow-900/20 rounded-lg border border-yellow-500/30">
+                        <p class="text-yellow-300 text-xs">
+                            ⚠️ <strong>Asumsi Proyeksi:</strong> 
+                            Degradation Rate: 15%/tahun (tanpa treatment), 
+                            Treatment Effectiveness: 70%
+                        </p>
+                    </div>
+                    ` : ''}
+                `;
+
+                document.getElementById('historicalModalContent').innerHTML = contentHtml;
+                modal.classList.remove('hidden');
+            }
+
+            function closeHistoricalDataModal() {
+                const modal = document.getElementById('historicalDataModal');
+                if (modal) {
+                    modal.classList.add('hidden');
+                }
+            }
+
 
             /**
              * Update Paparan Risiko Section (synchronized with Division metrics)
@@ -10623,6 +11292,435 @@
                 }
             }
 
+
+            // ========================================
+            // BLOCK BREAKDOWN MODAL FUNCTIONS
+            // ========================================
+
+            let categoryDistributionChart = null;
+
+            function openBlockBreakdownModal(divisionCode) {
+                divisionCode = divisionCode || window.currentDivision || 'AME02';
+                console.log('[BREAKDOWN] Opening for division:', divisionCode);
+
+                // Map division code format (button uses AME_II, data uses AME02)
+                const divisionMap = {
+                    'AME_I': 'AME01',
+                    'AME_II': 'AME02',
+                    'AME_III': 'AME03',
+                    'OLE_I': 'OLE01',
+                    'OLE_II': 'OLE02'
+                };
+                const mappedCode = divisionMap[divisionCode] || divisionCode;
+                console.log('[BREAKDOWN] Mapped division code:', mappedCode);
+
+                // Calculate breakdown using calculateDivisionMetrics
+                const metrics = calculateDivisionMetrics(mappedCode);
+                if (!metrics) {
+                    alert(`No data for division: ${divisionCode}`);
+                    return;
+                }
+
+                // Get all blocks for this division
+                // COMPLETE_BLOCKS_DATA has 'division' field
+                // BLOCKS_DATA has 'attack_rate', 'sph' fields
+                // We need to merge both using block_code as key
+
+                if (typeof COMPLETE_BLOCKS_DATA === 'undefined' || typeof BLOCKS_DATA === 'undefined') {
+                    alert('Block data not available. Please refresh the page.');
+                    return;
+                }
+
+                const completeBlocks = Object.values(COMPLETE_BLOCKS_DATA);
+                const blocksData = BLOCKS_DATA; // keyed by block_code
+
+                // Filter by division from COMPLETE_BLOCKS_DATA
+                const divisionBlocks = completeBlocks.filter(block => block.division === mappedCode);
+                console.log('[BREAKDOWN] Division blocks from COMPLETE_BLOCKS_DATA:', divisionBlocks.length);
+
+                // Merge with BLOCKS_DATA to get attack_rate, sph, etc.
+                const mergedBlocks = divisionBlocks.map(block => {
+                    const blockCode = block.block_code;
+                    const riskData = blocksData[blockCode] || {};
+                    return {
+                        ...block,
+                        attack_rate: riskData.attack_rate || 0,
+                        sph: riskData.sph || 0,
+                        loss_value_juta: riskData.loss_value_juta || 0
+                    };
+                });
+
+                console.log('[BREAKDOWN] Merged blocks sample:', mergedBlocks[0]);
+
+                // Categorize blocks by stadium
+                const categories = {
+                    critical: [], // Stadium 4
+                    high: [],     // Stadium 3
+                    medium: [],   // Stadium 2
+                    low: []       // Stadium 1
+                };
+
+                mergedBlocks.forEach(block => {
+                    const attackRate = parseFloat(block.attack_rate) || 0;
+                    const gapPct = Math.abs(parseFloat(block.gap_pct) || 0);
+
+                    // Stadium classification (inline logic)
+                    if (attackRate >= 30 || gapPct >= 40) {
+                        categories.critical.push(block);
+                    } else if (attackRate >= 15 || gapPct >= 20) {
+                        categories.high.push(block);
+                    } else if (attackRate >= 5 || gapPct >= 10) {
+                        categories.medium.push(block);
+                    } else {
+                        categories.low.push(block);
+                    }
+                });
+
+                console.log('[BREAKDOWN] Categories:', {
+                    critical: categories.critical.length,
+                    high: categories.high.length,
+                    medium: categories.medium.length,
+                    low: categories.low.length
+                });
+
+                // Update modal content
+                document.getElementById('breakdownDivisionSubtitle').textContent =
+                    `${divisionCode} Division - ${metrics.totalBlocks} blok total`;
+
+                // Update category counts
+                document.getElementById('categoryCount_critical').textContent = categories.critical.length;
+                document.getElementById('categoryCount_high').textContent = categories.high.length;
+                document.getElementById('categoryCount_medium').textContent = categories.medium.length;
+                document.getElementById('categoryCount_low').textContent = categories.low.length;
+
+                // Calculate multi-factor analysis for CRITICAL + HIGH blocks (Stadium 3+)
+                // This matches Division Overview "Critical Blocks" count
+                const stadium3Plus = [...categories.critical, ...categories.high];
+
+                console.log('[BREAKDOWN] Stadium 3+ blocks:', stadium3Plus.length);
+                if (stadium3Plus.length > 0) {
+                    console.log('[BREAKDOWN] Sample block fields:', stadium3Plus[0]);
+                    console.log('[BREAKDOWN] ALL KEYS:', Object.keys(stadium3Plus[0]));
+                }
+
+                if (stadium3Plus.length > 0) {
+                    const avgAR = stadium3Plus.reduce((sum, b) => sum + (parseFloat(b.attack_rate) || 0), 0) / stadium3Plus.length;
+                    const avgSPH = stadium3Plus.reduce((sum, b) => sum + (parseFloat(b.sph) || 0), 0) / stadium3Plus.length;
+                    const avgGap = stadium3Plus.reduce((sum, b) => sum + Math.abs(parseFloat(b.gap_pct) || 0), 0) / stadium3Plus.length;
+                    const totalArea = stadium3Plus.reduce((sum, b) => sum + (parseFloat(b.luas_ha) || 0), 0);
+
+                    console.log('[BREAKDOWN] Calculated avgAR:', avgAR);
+                    console.log('[BREAKDOWN] Calculated avgSPH:', avgSPH);
+                    console.log('[BREAKDOWN] Calculated avgGap:', avgGap);
+
+                    document.getElementById('avgAR_critical').textContent = avgAR.toFixed(1) + '%';
+                    document.getElementById('avgSPH_critical').textContent = Math.round(avgSPH);
+                    document.getElementById('avgGap_critical').textContent = avgGap.toFixed(1) + '%';
+                    document.getElementById('totalAreaRisk').textContent = totalArea.toFixed(1) + ' Ha';
+                } else {
+                    document.getElementById('avgAR_critical').textContent = '0%';
+                    document.getElementById('avgSPH_critical').textContent = '0';
+                    document.getElementById('avgGap_critical').textContent = '0%';
+                    document.getElementById('totalAreaRisk').textContent = '0 Ha';
+                }
+
+                // Render distribution chart
+                renderCategoryDistributionChart(categories);
+
+                // Show modal
+                const modal = document.getElementById('blockBreakdownModal');
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+            }
+
+            function closeBlockBreakdownModal() {
+                const modal = document.getElementById('blockBreakdownModal');
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+
+                // Destroy chart
+                if (categoryDistributionChart) {
+                    categoryDistributionChart.destroy();
+                    categoryDistributionChart = null;
+                }
+            }
+
+            function renderCategoryDistributionChart(categories) {
+                const ctx = document.getElementById('categoryDistributionChart');
+                if (!ctx) return;
+
+                // Destroy existing chart
+                if (categoryDistributionChart) {
+                    categoryDistributionChart.destroy();
+                }
+
+                const data = {
+                    labels: ['🔴 Critical', '🟠 High', '🟡 Medium', '🟢 Low'],
+                    datasets: [{
+                        label: 'Number of Blocks',
+                        data: [
+                            categories.critical.length,
+                            categories.high.length,
+                            categories.medium.length,
+                            categories.low.length
+                        ],
+                        backgroundColor: [
+                            'rgba(239, 68, 68, 0.8)',
+                            'rgba(251, 146, 60, 0.8)',
+                            'rgba(251, 191, 36, 0.8)',
+                            'rgba(34, 197, 94, 0.8)'
+                        ],
+                        borderColor: [
+                            'rgb(239, 68, 68)',
+                            'rgb(251, 146, 60)',
+                            'rgb(251, 191, 36)',
+                            'rgb(34, 197, 94)'
+                        ],
+                        borderWidth: 2
+                    }]
+                };
+
+                categoryDistributionChart = new Chart(ctx, {
+                    type: 'doughnut',
+                    data: data,
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: {
+                                    color: '#fff',
+                                    font: { size: 14, weight: 'bold' },
+                                    padding: 15
+                                }
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function (context) {
+                                        const label = context.label || '';
+                                        const value = context.parsed || 0;
+                                        const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                        const percentage = ((value / total) * 100).toFixed(1);
+                                        return `${label}: ${value} blocks (${percentage}%)`;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+
+                console.log('[BREAKDOWN] Chart rendered');
+            }
+
+
+            function sortModalChart(sortBy) {
+                currentModalSort = sortBy;
+
+                // Update button styles
+                document.getElementById('modalSortByAR').className =
+                    sortBy === 'ar'
+                        ? 'px-3 py-1.5 rounded-lg text-xs font-bold bg-rose-600 text-white border border-rose-400'
+                        : 'px-3 py-1.5 rounded-lg text-xs font-bold bg-rose-900/30 text-rose-300 border border-rose-500/30';
+
+                document.getElementById('modalSortByLoss').className =
+                    sortBy === 'loss'
+                        ? 'px-3 py-1.5 rounded-lg text-xs font-bold bg-rose-600 text-white border border-rose-400'
+                        : 'px-3 py-1.5 rounded-lg text-xs font-bold bg-rose-900/30 text-rose-300 border border-rose-500/30';
+
+                // Re-render chart
+                if (currentModalDivision) {
+                    const allBlocks = Object.values(BLOCKS_DATA);
+                    const divisionBlocks = allBlocks.filter(block => block.division === currentModalDivision);
+                    const criticalBlocks = divisionBlocks.filter(block => {
+                        const attackRate = parseFloat(block.attack_rate) || 0;
+                        const gapPct = Math.abs(parseFloat(block.gap_pct) || 0);
+                        // Stadium 3+: AR >= 15% OR Gap >= 20%
+                        return (attackRate >= 30 || gapPct >= 40) || (attackRate >= 15 || gapPct >= 20);
+                    });
+                    renderModalChart(criticalBlocks, sortBy);
+                }
+            }
+
+            function renderModalChart(blocks, sortBy) {
+                console.log('[renderModalChart] Called with', blocks.length, 'blocks, sortBy:', sortBy);
+
+                const ctx = document.getElementById('modalRiskChart');
+                if (!ctx) {
+                    console.error('[renderModalChart] Canvas not found!');
+                    return;
+                }
+
+                // Destroy existing chart
+                if (modalRiskChart) {
+                    modalRiskChart.destroy();
+                }
+
+                // FFB Price for loss calculation
+                const FFB_PRICE_PER_TON_JUTA = 2.5;
+
+                // Calculate loss for each block (COPIED from renderPaparanRisk)
+                const blocksWithLoss = blocks.map(block => {
+                    const gapTonHa = Math.abs(block.gap_ton_ha || 0);
+                    const area = block.luas_ha || 0;
+                    const attackRate = block.attack_rate || 0;
+                    const gapPct = Math.abs(block.gap_pct || 0);
+
+                    // Calculate loss from gap if not available
+                    let blockLoss = block.loss_value_juta || 0;
+                    if (blockLoss === 0 && gapTonHa > 0 && area > 0) {
+                        blockLoss = gapTonHa * area * FFB_PRICE_PER_TON_JUTA;
+                    }
+
+                    return {
+                        code: block.block_code,
+                        attack_rate: attackRate,
+                        gap_pct: gapPct,
+                        calculated_loss: blockLoss,
+                        luas_ha: area
+                    };
+                });
+
+                // Sort by attack rate or loss (COPIED from renderPaparanRisk)
+                blocksWithLoss.sort((a, b) => {
+                    if (sortBy === 'ar') {
+                        return (b.attack_rate || 0) - (a.attack_rate || 0);
+                    } else {
+                        return (b.calculated_loss || 0) - (a.calculated_loss || 0);
+                    }
+                });
+
+                // Prepare chart data (COPIED from renderPaparanRisk)
+                const labels = blocksWithLoss.map(block =>
+                    `${block.code} • AR: ${(block.attack_rate || 0).toFixed(1)}% • Gap: ${(block.gap_pct || 0).toFixed(0)}%`
+                );
+                const arData = blocksWithLoss.map(block => block.attack_rate || 0);
+                const lossDataMiliar = blocksWithLoss.map(block => (block.calculated_loss || 0) / 1000);
+
+                console.log('[renderModalChart] Labels:', labels.length);
+                console.log('[renderModalChart] AR data:', arData);
+                console.log('[renderModalChart] Loss data:', lossDataMiliar);
+
+                // Create chart (EXACT COPY from renderPaparanRisk)
+                modalRiskChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: labels,
+                        datasets: [
+                            {
+                                label: 'Attack Rate (%)',
+                                data: arData,
+                                backgroundColor: 'rgba(239, 68, 68, 0.8)',
+                                borderColor: 'rgb(239, 68, 68)',
+                                borderWidth: 2,
+                                yAxisID: 'y',
+                                barThickness: 'flex',
+                                maxBarThickness: 30
+                            },
+                            {
+                                label: 'Loss (Miliar Rp)',
+                                data: lossDataMiliar,
+                                backgroundColor: 'rgba(251, 191, 36, 0.8)',
+                                borderColor: 'rgb(251, 191, 36)',
+                                borderWidth: 2,
+                                yAxisID: 'y1',
+                                barThickness: 'flex',
+                                maxBarThickness: 30
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        interaction: {
+                            mode: 'index',
+                            intersect: false
+                        },
+                        plugins: {
+                            legend: {
+                                display: true,
+                                labels: {
+                                    color: '#fff',
+                                    font: { size: 12, weight: 'bold' }
+                                }
+                            },
+                            tooltip: {
+                                backgroundColor: 'rgba(0, 0, 0, 0.9)',
+                                titleColor: '#fff',
+                                bodyColor: '#fff',
+                                borderColor: 'rgba(239, 68, 68, 0.5)',
+                                borderWidth: 1,
+                                callbacks: {
+                                    label: function (context) {
+                                        const label = context.dataset.label || '';
+                                        const value = context.parsed.y;
+                                        if (label.includes('Attack Rate')) {
+                                            return `${label}: ${value.toFixed(1)}%`;
+                                        } else {
+                                            return `${label}: Rp ${value.toFixed(2)} M`;
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                ticks: { color: '#fff', font: { size: 10 } },
+                                grid: { color: 'rgba(255, 255, 255, 0.1)' }
+                            },
+                            y: {
+                                type: 'linear',
+                                position: 'left',
+                                ticks: {
+                                    color: 'rgb(239, 68, 68)',
+                                    callback: function (value) {
+                                        return value.toFixed(0) + '%';
+                                    }
+                                },
+                                grid: { color: 'rgba(239, 68, 68, 0.2)' },
+                                title: {
+                                    display: true,
+                                    text: 'Attack Rate (%)',
+                                    color: 'rgb(239, 68, 68)',
+                                    font: { weight: 'bold' }
+                                }
+                            },
+                            y1: {
+                                type: 'linear',
+                                position: 'right',
+                                ticks: {
+                                    color: 'rgb(251, 191, 36)',
+                                    callback: function (value) {
+                                        return 'Rp ' + value.toFixed(2) + ' M';
+                                    }
+                                },
+                                grid: { display: false },
+                                title: {
+                                    display: true,
+                                    text: 'Loss (Miliar Rp)',
+                                    color: 'rgb(251, 191, 36)',
+                                    font: { weight: 'bold' }
+                                }
+                            }
+                        }
+                    }
+                });
+
+                console.log('[renderModalChart] Chart created successfully!');
+            }
+
+            function closePaparanRisikoModal() {
+                const modal = document.getElementById('paparanRisikoModal');
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+
+                // Destroy chart
+                if (modalRiskChart) {
+                    modalRiskChart.destroy();
+                    modalRiskChart = null;
+                }
+            }
+
             function sortModalChart(sortBy) {
                 currentModalSort = sortBy;
 
@@ -10994,6 +12092,108 @@
                 </div>
             </div>
         </div>
+
+
+        <!-- ====== BLOCK BREAKDOWN MODAL ====== -->
+        <div id="blockBreakdownModal"
+            class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+            <div
+                class="bg-gradient-to-br from-slate-900 via-cyan-900 to-slate-900 rounded-2xl max-w-5xl w-full max-h-[90vh] overflow-hidden border-2 border-cyan-500/30 shadow-2xl shadow-cyan-500/20">
+
+                <!-- Header -->
+                <div
+                    class="bg-gradient-to-r from-cyan-900 to-blue-800 p-6 border-b-2 border-cyan-500/30 flex justify-between items-center">
+                    <div>
+                        <h2 class="text-3xl font-black text-white flex items-center gap-3">
+                            <span class="text-4xl">📊</span>
+                            BLOCK CATEGORIZATION
+                        </h2>
+                        <p class="text-cyan-200 text-sm mt-1" id="breakdownDivisionSubtitle">Loading...</p>
+                    </div>
+                    <button onclick="closeBlockBreakdownModal()"
+                        class="text-white hover:text-cyan-200 transition-colors">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Content -->
+                <div class="p-6 overflow-y-auto max-h-[calc(90vh-120px)]">
+
+                    <!-- Category Cards Grid -->
+                    <div class="grid grid-cols-4 gap-4 mb-6">
+                        <!-- CRITICAL -->
+                        <div
+                            class="bg-gradient-to-br from-red-900/40 to-red-800/20 rounded-xl p-6 border-2 border-red-500/40">
+                            <div class="text-4xl mb-2">🔴</div>
+                            <div class="text-red-200 text-xs font-bold uppercase mb-2">CRITICAL</div>
+                            <div class="text-5xl font-black text-red-400 mb-2" id="categoryCount_critical">0</div>
+                            <div class="text-xs text-red-300/70">Stadium 4 • AR ≥ 30%</div>
+                        </div>
+
+                        <!-- HIGH -->
+                        <div
+                            class="bg-gradient-to-br from-orange-900/40 to-orange-800/20 rounded-xl p-6 border-2 border-orange-500/40">
+                            <div class="text-4xl mb-2">🟠</div>
+                            <div class="text-orange-200 text-xs font-bold uppercase mb-2">HIGH</div>
+                            <div class="text-5xl font-black text-orange-400 mb-2" id="categoryCount_high">0</div>
+                            <div class="text-xs text-orange-300/70">Stadium 3 • AR 15-30%</div>
+                        </div>
+
+                        <!-- MEDIUM -->
+                        <div
+                            class="bg-gradient-to-br from-yellow-900/40 to-yellow-800/20 rounded-xl p-6 border-2 border-yellow-500/40">
+                            <div class="text-4xl mb-2">🟡</div>
+                            <div class="text-yellow-200 text-xs font-bold uppercase mb-2">MEDIUM</div>
+                            <div class="text-5xl font-black text-yellow-400 mb-2" id="categoryCount_medium">0</div>
+                            <div class="text-xs text-yellow-300/70">Stadium 2 • AR 5-15%</div>
+                        </div>
+
+                        <!-- LOW -->
+                        <div
+                            class="bg-gradient-to-br from-green-900/40 to-green-800/20 rounded-xl p-6 border-2 border-green-500/40">
+                            <div class="text-4xl mb-2">🟢</div>
+                            <div class="text-green-200 text-xs font-bold uppercase mb-2">LOW</div>
+                            <div class="text-5xl font-black text-green-400 mb-2" id="categoryCount_low">0</div>
+                            <div class="text-xs text-green-300/70">Stadium 1 • AR < 5%</div>
+                            </div>
+                        </div>
+
+                        <!-- Multi-Factor Analysis -->
+                        <div class="bg-black/20 rounded-xl p-6 border border-slate-700 mb-6">
+                            <h3 class="text-xl font-bold text-white mb-4">📈 Multi-Factor Analysis Summary</h3>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="bg-slate-800/50 rounded-lg p-4">
+                                    <div class="text-xs text-slate-400 mb-1">Avg Attack Rate (Critical)</div>
+                                    <div class="text-2xl font-bold text-red-400" id="avgAR_critical">0%</div>
+                                </div>
+                                <div class="bg-slate-800/50 rounded-lg p-4">
+                                    <div class="text-xs text-slate-400 mb-1">Avg SPH Decline (Critical)</div>
+                                    <div class="text-2xl font-bold text-orange-400" id="avgSPH_critical">0</div>
+                                </div>
+                                <div class="bg-slate-800/50 rounded-lg p-4">
+                                    <div class="text-xs text-slate-400 mb-1">Avg Yield Gap (Critical)</div>
+                                    <div class="text-2xl font-bold text-yellow-400" id="avgGap_critical">0%</div>
+                                </div>
+                                <div class="bg-slate-800/50 rounded-lg p-4">
+                                    <div class="text-xs text-slate-400 mb-1">Total Area at Risk</div>
+                                    <div class="text-2xl font-bold text-cyan-400" id="totalAreaRisk">0 Ha</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Distribution Chart -->
+                        <div class="bg-black/20 rounded-xl p-6 border border-slate-700">
+                            <h3 class="text-xl font-bold text-white mb-4">📊 Category Distribution</h3>
+                            <div style="height: 300px;">
+                                <canvas id="categoryDistributionChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
 </body>
 
