@@ -10570,15 +10570,17 @@
                 console.log('[MODAL DEBUG] Sample division block:', divisionBlocks[0]);
 
                 const criticalBlocks = divisionBlocks.filter(block => {
-                    const stadium = parseInt(block.stadium_kritis) || 0;
-                    return stadium >= 3;
+                    // CRITICAL = High attack rate OR high loss
+                    const attackRate = parseFloat(block.attack_rate) || 0;
+                    const loss = parseFloat(block.loss_value_juta) || 0;
+                    return attackRate >= 30 || loss >= 100;  // AR >= 30% or Loss >= 100 Juta
                 });
-                console.log('[MODAL DEBUG] Critical blocks (Stadium >= 3):', criticalBlocks.length);
+                console.log('[MODAL DEBUG] Critical blocks (AR>=30% or Loss>=100M):', criticalBlocks.length);
                 console.log('[MODAL DEBUG] Critical blocks:', criticalBlocks);
 
                 // Calculate totals
                 const totalLoss = criticalBlocks.reduce((sum, block) => {
-                    const loss = parseFloat(block.ganoderma_loss_juta) || 0;
+                    const loss = parseFloat(block.loss_value_juta) || 0;
                     return sum + loss;
                 }, 0);
 
@@ -10589,7 +10591,7 @@
 
                 // Update modal content
                 document.getElementById('modalDivisionSubtitle').textContent =
-                    `${mappedCode} Division - ${criticalBlocks.length} blok dengan status Stadium 3+`;
+                    `${mappedCode} Division - ${criticalBlocks.length} blok kritis (AR≥30% atau Loss≥100M)`;
 
                 document.getElementById('modalTotalLoss').textContent =
                     `Rp ${(totalLoss / 1000).toFixed(1)} M`;
@@ -10640,8 +10642,9 @@
                     const allBlocks = Object.values(BLOCKS_DATA);
                     const divisionBlocks = allBlocks.filter(block => block.division === currentModalDivision);
                     const criticalBlocks = divisionBlocks.filter(block => {
-                        const stadium = parseInt(block.stadium_kritis) || 0;
-                        return stadium >= 3;
+                        const attackRate = parseFloat(block.attack_rate) || 0;
+                        const loss = parseFloat(block.loss_value_juta) || 0;
+                        return attackRate >= 30 || loss >= 100;
                     });
                     renderModalChart(criticalBlocks, sortBy);
                 }
