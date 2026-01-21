@@ -10569,13 +10569,15 @@
                 console.log('[MODAL DEBUG] Division blocks for', mappedCode, ':', divisionBlocks.length);
                 console.log('[MODAL DEBUG] Sample division block:', divisionBlocks[0]);
 
+
                 const criticalBlocks = divisionBlocks.filter(block => {
-                    // CRITICAL = High attack rate OR high loss
+                    // CRITICAL = Stadium 3+ (matching getGanodermaStadium logic)
                     const attackRate = parseFloat(block.attack_rate) || 0;
-                    const loss = parseFloat(block.loss_value_juta) || 0;
-                    return attackRate >= 30 || loss >= 100;  // AR >= 30% or Loss >= 100 Juta
+                    const gapPct = parseFloat(block.gap_pct) || 0;
+                    // Stadium 3+: AR >= 15% OR gap >= 20%
+                    return attackRate >= 15 || gapPct >= 20;
                 });
-                console.log('[MODAL DEBUG] Critical blocks (AR>=30% or Loss>=100M):', criticalBlocks.length);
+                console.log('[MODAL DEBUG] Critical blocks (AR>=15% or Gap>=20%):', criticalBlocks.length);
                 console.log('[MODAL DEBUG] Critical blocks:', criticalBlocks);
 
                 // Calculate totals
@@ -10591,7 +10593,7 @@
 
                 // Update modal content
                 document.getElementById('modalDivisionSubtitle').textContent =
-                    `${mappedCode} Division - ${criticalBlocks.length} blok kritis (AR≥30% atau Loss≥100M)`;
+                    `${mappedCode} Division - ${criticalBlocks.length} blok kritis (Stadium 3+: AR≥15% atau Gap≥20%)`;
 
                 document.getElementById('modalTotalLoss').textContent =
                     `Rp ${(totalLoss / 1000).toFixed(1)} M`;
@@ -10643,8 +10645,8 @@
                     const divisionBlocks = allBlocks.filter(block => block.division === currentModalDivision);
                     const criticalBlocks = divisionBlocks.filter(block => {
                         const attackRate = parseFloat(block.attack_rate) || 0;
-                        const loss = parseFloat(block.loss_value_juta) || 0;
-                        return attackRate >= 30 || loss >= 100;
+                        const gapPct = parseFloat(block.gap_pct) || 0;
+                        return attackRate >= 15 || gapPct >= 20;
                     });
                     renderModalChart(criticalBlocks, sortBy);
                 }
