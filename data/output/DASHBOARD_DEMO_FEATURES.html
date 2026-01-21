@@ -10545,67 +10545,57 @@
 
             function openPaparanRisikoModal(divisionCode) {
                 console.log('[MODAL] Opening for division (raw):', divisionCode);
-
+                
                 // MAP: AME_II -> AME02, AME_IV -> AME04  
                 const divisionMap = { 'AME_II': 'AME02', 'AME_IV': 'AME04', 'ALL': 'ALL' };
                 const mappedCode = divisionMap[divisionCode] || divisionCode;
                 console.log('[MODAL] Mapped to:', mappedCode);
-
+                
                 currentModalDivision = mappedCode;
-
-                // Check if BLOCKS_DATA exists
-                if (!BLOCKS_DATA) {
-                    console.error('[MODAL] BLOCKS_DATA not found');
+                
+                // USE EXISTING calculateDivisionMetrics() - IT WORKS!
+                const metrics = calculateDivisionMetrics(mappedCode);
+                
+                if (!metrics) {
+                    console.error('[MODAL] No metrics found for division:', mappedCode);
+                    alert(`Tidak ada data untuk division: ${mappedCode}`);
                     return;
                 }
-
-
-                // Convert BLOCKS_DATA object to array
+                
+                console.log('[MODAL] Division metrics:', metrics);
+                console.log('[MODAL] Critical blocks count:', metrics.criticalBlocks);
+                console.log('[MODAL] Total loss (Juta):', metrics.totalGanodermaLoss);
+                
+                // Get critical blocks array for chart
                 const allBlocks = Object.values(BLOCKS_DATA);
-                console.log('[MODAL DEBUG] Total blocks in BLOCKS_DATA:', allBlocks.length);
-
-                // Get division data
                 const divisionBlocks = allBlocks.filter(block => block.division === mappedCode);
-                console.log('[MODAL DEBUG] Division blocks for', mappedCode, ':', divisionBlocks.length);
-                console.log('[MODAL DEBUG] Sample division block:', divisionBlocks[0]);
-
-
-                const criticalBlocks = divisionBlocks.filter(block => {
-                    // CRITICAL = Stadium 3+ (matching getGanodermaStadium logic)
+                
+                // Filter critical blocks (Stadium 3+) using SAME logic as getGanodermaStadium
+                const criticalBlocksArray = divisionBlocks.filter(block => {
                     const attackRate = parseFloat(block.attack_rate) || 0;
                     const gapPct = parseFloat(block.gap_pct) || 0;
-                    // Stadium 3+: AR >= 15% OR gap >= 20%
-                    return attackRate >= 15 || gapPct >= 20;
+                    return attackRate >= 15 || gapPct >= 20;  // Stadium 3+
                 });
-                console.log('[MODAL DEBUG] Critical blocks (AR>=15% or Gap>=20%):', criticalBlocks.length);
-                console.log('[MODAL DEBUG] Critical blocks:', criticalBlocks);
-
-                // Calculate totals
-                const totalLoss = criticalBlocks.reduce((sum, block) => {
-                    const loss = parseFloat(block.loss_value_juta) || 0;
-                    return sum + loss;
-                }, 0);
-
-                const totalArea = criticalBlocks.reduce((sum, block) => {
-                    const area = parseFloat(block.luas_ha) || 0;
-                    return sum + area;
-                }, 0);
-
-                // Update modal content
+                
+                console.log('[MODAL] Critical blocks array:', criticalBlocksArray.length);
+                
+                // Update modal content using metrics
                 document.getElementById('modalDivisionSubtitle').textContent =
-                    `${mappedCode} Division - ${criticalBlocks.length} blok kritis (Stadium 3+: AR≥15% atau Gap≥20%)`;
-
+                    `${mappedCode} Division - ${metrics.criticalBlocks} blok kritis (Stadium 3+)`;
+                
                 document.getElementById('modalTotalLoss').textContent =
-                    `Rp ${(totalLoss / 1000).toFixed(1)} M`;
-
+                    `Rp ${(metrics.totalGanodermaLoss / 1000).toFixed(1)} M`;
+                
                 document.getElementById('modalCriticalCount').textContent =
-                    `${criticalBlocks.length} Blok`;
-
+                    `${metrics.criticalBlocks} Blok`;
+                
+                // Calculate critical area
+                const criticalArea = metrics.totalArea * (metrics.criticalBlocks / metrics.totalBlocks);
                 document.getElementById('modalRiskArea').textContent =
-                    `${totalArea.toFixed(1)} Ha`;
-
-                // Render chart
-                renderModalChart(criticalBlocks, currentModalSort);
+                    `${criticalArea.toFixed(1)} Ha`;
+                
+                // Render chart with critical blocks array
+                renderModalChart(criticalBlocksArray, currentModalSort);
 
                 // Show modal
                 const modal = document.getElementById('paparanRisikoModal');
