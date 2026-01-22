@@ -1,0 +1,5992 @@
+{
+  "A001A": {
+    "block_code": "A001A",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 59.4,
+    "gap_pct": 22.6,
+    "luas_ha": 7.7
+  },
+  "C006A": {
+    "block_code": "C006A",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 2.9,
+    "gap_pct": 0.3,
+    "luas_ha": 30.0
+  },
+  "A002A": {
+    "block_code": "A002A",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 247.6,
+    "gap_pct": 30.6,
+    "luas_ha": 22.6
+  },
+  "C007A": {
+    "block_code": "C007A",
+    "attack_rate": 0,
+    "sph": 120.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 28.0,
+    "gap_pct": -3.5,
+    "luas_ha": 25.4
+  },
+  "A003A": {
+    "block_code": "A003A",
+    "attack_rate": 0,
+    "sph": 127.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 188.3,
+    "gap_pct": 19.1,
+    "luas_ha": 29.7
+  },
+  "C008A": {
+    "block_code": "C008A",
+    "attack_rate": 0,
+    "sph": 113.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 31.2,
+    "gap_pct": -3.7,
+    "luas_ha": 29.1
+  },
+  "A003B": {
+    "block_code": "A003B",
+    "attack_rate": 0,
+    "sph": 83.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 34.4,
+    "gap_pct": 47.3,
+    "luas_ha": 6.0
+  },
+  "B003A": {
+    "block_code": "B003A",
+    "attack_rate": 0,
+    "sph": 126.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 181.8,
+    "gap_pct": 24.6,
+    "luas_ha": 22.3
+  },
+  "A004A": {
+    "block_code": "A004A",
+    "attack_rate": 0,
+    "sph": 126.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 155.8,
+    "gap_pct": 25.0,
+    "luas_ha": 18.8
+  },
+  "B004A": {
+    "block_code": "B004A",
+    "attack_rate": 0,
+    "sph": 122.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 278.4,
+    "gap_pct": 29.2,
+    "luas_ha": 29.7
+  },
+  "A004B": {
+    "block_code": "A004B",
+    "attack_rate": 0,
+    "sph": 118.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 245.2,
+    "gap_pct": 63.0,
+    "luas_ha": 13.7
+  },
+  "B005A": {
+    "block_code": "B005A",
+    "attack_rate": 0,
+    "sph": 98.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 24.9,
+    "gap_pct": 3.2,
+    "luas_ha": 30.1
+  },
+  "A004C": {
+    "block_code": "A004C",
+    "attack_rate": 0,
+    "sph": 27.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 1.4,
+    "gap_pct": 38.1,
+    "luas_ha": 0.3
+  },
+  "C005A": {
+    "block_code": "C005A",
+    "attack_rate": 0,
+    "sph": 92.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 45.7,
+    "gap_pct": -8.8,
+    "luas_ha": 21.5
+  },
+  "A004D": {
+    "block_code": "A004D",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 4.8,
+    "gap_pct": 52.4,
+    "luas_ha": 1.2
+  },
+  "C009A": {
+    "block_code": "C009A",
+    "attack_rate": 0,
+    "sph": 116.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 21.6,
+    "gap_pct": 2.4,
+    "luas_ha": 29.7
+  },
+  "A004E": {
+    "block_code": "A004E",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 3.6,
+    "gap_pct": 58.4,
+    "luas_ha": 0.8
+  },
+  "A005A": {
+    "block_code": "A005A",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 75.5,
+    "gap_pct": 56.7,
+    "luas_ha": 15.0
+  },
+  "A005B": {
+    "block_code": "A005B",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 24.7,
+    "gap_pct": 40.4,
+    "luas_ha": 16.7
+  },
+  "A005C": {
+    "block_code": "A005C",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 0.0,
+    "gap_pct": 0,
+    "luas_ha": 0.9
+  },
+  "A006A": {
+    "block_code": "A006A",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 0.0,
+    "gap_pct": 0,
+    "luas_ha": 4.5
+  },
+  "B001A": {
+    "block_code": "B001A",
+    "attack_rate": 0,
+    "sph": 120.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 82.8,
+    "gap_pct": 27.9,
+    "luas_ha": 9.4
+  },
+  "A007A": {
+    "block_code": "A007A",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 0.0,
+    "gap_pct": 0,
+    "luas_ha": 1.2
+  },
+  "B002A": {
+    "block_code": "B002A",
+    "attack_rate": 0,
+    "sph": 117.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 60.9,
+    "gap_pct": 26.5,
+    "luas_ha": 7.5
+  },
+  "A010A": {
+    "block_code": "A010A",
+    "attack_rate": 0,
+    "sph": 32.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 4.7,
+    "gap_pct": -19.9,
+    "luas_ha": 3.4
+  },
+  "B006A": {
+    "block_code": "B006A",
+    "attack_rate": 0,
+    "sph": 116.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 224.5,
+    "gap_pct": 29.7,
+    "luas_ha": 24.5
+  },
+  "A010B": {
+    "block_code": "A010B",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 13.0,
+    "gap_pct": 37.7,
+    "luas_ha": 2.8
+  },
+  "B007A": {
+    "block_code": "B007A",
+    "attack_rate": 0,
+    "sph": 107.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 38.6,
+    "gap_pct": 7.7,
+    "luas_ha": 17.9
+  },
+  "A011A": {
+    "block_code": "A011A",
+    "attack_rate": 0,
+    "sph": 100.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 46.5,
+    "gap_pct": 43.1,
+    "luas_ha": 4.0
+  },
+  "C010A": {
+    "block_code": "C010A",
+    "attack_rate": 0,
+    "sph": 114.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 58.0,
+    "gap_pct": 6.2,
+    "luas_ha": 31.4
+  },
+  "A011B": {
+    "block_code": "A011B",
+    "attack_rate": 0,
+    "sph": 69.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 44.5,
+    "gap_pct": 56.3,
+    "luas_ha": 6.0
+  },
+  "C011A": {
+    "block_code": "C011A",
+    "attack_rate": 0,
+    "sph": 113.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 29.9,
+    "gap_pct": 3.5,
+    "luas_ha": 28.9
+  },
+  "C004A": {
+    "block_code": "C004A",
+    "attack_rate": 0,
+    "sph": 112.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 88.6,
+    "gap_pct": 49.2,
+    "luas_ha": 6.0
+  },
+  "B001B": {
+    "block_code": "B001B",
+    "attack_rate": 0,
+    "sph": 90.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 54.5,
+    "gap_pct": 46.5,
+    "luas_ha": 4.7
+  },
+  "C004B": {
+    "block_code": "C004B",
+    "attack_rate": 0,
+    "sph": 99.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 35.6,
+    "gap_pct": 71.2,
+    "luas_ha": 1.9
+  },
+  "B001C": {
+    "block_code": "B001C",
+    "attack_rate": 0,
+    "sph": 95.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 5.2,
+    "gap_pct": 57.0,
+    "luas_ha": 0.4
+  },
+  "C005B": {
+    "block_code": "C005B",
+    "attack_rate": 0,
+    "sph": 105.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 143.5,
+    "gap_pct": 63.7,
+    "luas_ha": 8.2
+  },
+  "B001D": {
+    "block_code": "B001D",
+    "attack_rate": 0,
+    "sph": 120.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 1.9,
+    "gap_pct": 21.4,
+    "luas_ha": 0.4
+  },
+  "C007B": {
+    "block_code": "C007B",
+    "attack_rate": 0,
+    "sph": 109.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 86.3,
+    "gap_pct": 69.5,
+    "luas_ha": 4.1
+  },
+  "B001E": {
+    "block_code": "B001E",
+    "attack_rate": 0,
+    "sph": 52.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 0.1,
+    "gap_pct": 0.7,
+    "luas_ha": 1.4
+  },
+  "B002B": {
+    "block_code": "B002B",
+    "attack_rate": 0,
+    "sph": 106.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 55.3,
+    "gap_pct": 64.9,
+    "luas_ha": 2.7
+  },
+  "B009A": {
+    "block_code": "B009A",
+    "attack_rate": 0,
+    "sph": 65.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 10.8,
+    "gap_pct": 19.4,
+    "luas_ha": 3.3
+  },
+  "B002C": {
+    "block_code": "B002C",
+    "attack_rate": 0,
+    "sph": 136.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 79.6,
+    "gap_pct": 68.9,
+    "luas_ha": 4.5
+  },
+  "B010A": {
+    "block_code": "B010A",
+    "attack_rate": 0,
+    "sph": 100.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 246.6,
+    "gap_pct": 36.0,
+    "luas_ha": 26.1
+  },
+  "B002D": {
+    "block_code": "B002D",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 1.1,
+    "gap_pct": 29.9,
+    "luas_ha": 0.3
+  },
+  "B011A": {
+    "block_code": "B011A",
+    "attack_rate": 0,
+    "sph": 115.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 158.7,
+    "gap_pct": 40.6,
+    "luas_ha": 13.0
+  },
+  "B002E": {
+    "block_code": "B002E",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 1.2,
+    "gap_pct": 36.0,
+    "luas_ha": 0.5
+  },
+  "C004C": {
+    "block_code": "C004C",
+    "attack_rate": 0,
+    "sph": 68.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 14.2,
+    "gap_pct": 55.8,
+    "luas_ha": 1.3
+  },
+  "B003B": {
+    "block_code": "B003B",
+    "attack_rate": 0,
+    "sph": 164.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 31.4,
+    "gap_pct": 63.0,
+    "luas_ha": 1.6
+  },
+  "B003C": {
+    "block_code": "B003C",
+    "attack_rate": 0,
+    "sph": 128.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 6.1,
+    "gap_pct": 65.0,
+    "luas_ha": 0.5
+  },
+  "B008A": {
+    "block_code": "B008A",
+    "attack_rate": 0,
+    "sph": 141.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 292.7,
+    "gap_pct": 50.4,
+    "luas_ha": 17.04
+  },
+  "B003D": {
+    "block_code": "B003D",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 4.3,
+    "gap_pct": -44.6,
+    "luas_ha": 2.3
+  },
+  "B009B": {
+    "block_code": "B009B",
+    "attack_rate": 0,
+    "sph": 122.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 235.0,
+    "gap_pct": 53.0,
+    "luas_ha": 15.1
+  },
+  "B003E": {
+    "block_code": "B003E",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 0.3,
+    "gap_pct": 12.9,
+    "luas_ha": 0.4
+  },
+  "B006B": {
+    "block_code": "B006B",
+    "attack_rate": 0,
+    "sph": 47.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 0.0,
+    "gap_pct": -1.2,
+    "luas_ha": 0.3
+  },
+  "B006C": {
+    "block_code": "B006C",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 33.2,
+    "gap_pct": 56.3,
+    "luas_ha": 4.0
+  },
+  "B008B": {
+    "block_code": "B008B",
+    "attack_rate": 0,
+    "sph": 131.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 52.1,
+    "gap_pct": -150.7,
+    "luas_ha": 1.4
+  },
+  "B009C": {
+    "block_code": "B009C",
+    "attack_rate": 0,
+    "sph": 98.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 17.1,
+    "gap_pct": 20.8,
+    "luas_ha": 4.4
+  },
+  "B010B": {
+    "block_code": "B010B",
+    "attack_rate": 0,
+    "sph": 93.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 29.6,
+    "gap_pct": 28.1,
+    "luas_ha": 6.0
+  },
+  "B007B": {
+    "block_code": "B007B",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 7.6,
+    "gap_pct": 35.7,
+    "luas_ha": 1.9
+  },
+  "B011B": {
+    "block_code": "B011B",
+    "attack_rate": 0,
+    "sph": 114.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 164.6,
+    "gap_pct": 56.4,
+    "luas_ha": 13.5
+  },
+  "B007C": {
+    "block_code": "B007C",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 3.2,
+    "gap_pct": 32.7,
+    "luas_ha": 1.4
+  },
+  "C005C": {
+    "block_code": "C005C",
+    "attack_rate": 0,
+    "sph": 140.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 14.7,
+    "gap_pct": 79.4,
+    "luas_ha": 0.7
+  },
+  "B007D": {
+    "block_code": "B007D",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 0.0,
+    "gap_pct": 0,
+    "luas_ha": 0.3
+  },
+  "B008C": {
+    "block_code": "B008C",
+    "attack_rate": 0,
+    "sph": 120.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 7.8,
+    "gap_pct": 27.8,
+    "luas_ha": 1.6
+  },
+  "B008D": {
+    "block_code": "B008D",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 15.2,
+    "gap_pct": 35.8,
+    "luas_ha": 3.1
+  },
+  "B008E": {
+    "block_code": "B008E",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 0.0,
+    "gap_pct": 0,
+    "luas_ha": 1.7
+  },
+  "B009D": {
+    "block_code": "B009D",
+    "attack_rate": 0,
+    "sph": 103.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 4.5,
+    "gap_pct": 24.1,
+    "luas_ha": 1.15
+  },
+  "B011C": {
+    "block_code": "B011C",
+    "attack_rate": 0,
+    "sph": 57.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 1.8,
+    "gap_pct": 10.8,
+    "luas_ha": 1.4
+  },
+  "C004D": {
+    "block_code": "C004D",
+    "attack_rate": 0,
+    "sph": 37.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 0.1,
+    "gap_pct": 4.3,
+    "luas_ha": 0.3
+  },
+  "C005D": {
+    "block_code": "C005D",
+    "attack_rate": 0,
+    "sph": 140.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 2.4,
+    "gap_pct": 57.3,
+    "luas_ha": 0.2
+  },
+  "B009E": {
+    "block_code": "B009E",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 5.9,
+    "gap_pct": 28.2,
+    "luas_ha": 1.7
+  },
+  "B009F": {
+    "block_code": "B009F",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 3.1,
+    "gap_pct": 38.1,
+    "luas_ha": 0.7
+  },
+  "B009G": {
+    "block_code": "B009G",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 0.0,
+    "gap_pct": 0,
+    "luas_ha": 1.2
+  },
+  "C004E": {
+    "block_code": "C004E",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 0.8,
+    "gap_pct": -170.1,
+    "luas_ha": 0.1
+  },
+  "D001A": {
+    "block_code": "D001A",
+    "attack_rate": 15.0,
+    "sph": 135.0,
+    "stadium": 3,
+    "stress_class": "Stres Sedang",
+    "loss_value_juta": 182.4,
+    "gap_pct": 21.3,
+    "luas_ha": 25.8
+  },
+  "D002A": {
+    "block_code": "D002A",
+    "attack_rate": 25.0,
+    "sph": 133.0,
+    "stadium": 3,
+    "stress_class": "Stres Berat",
+    "loss_value_juta": 185.1,
+    "gap_pct": 22.9,
+    "luas_ha": 23.7
+  },
+  "F006A": {
+    "block_code": "F006A",
+    "attack_rate": 15.0,
+    "sph": 119.0,
+    "stadium": 3,
+    "stress_class": "Stres Sedang",
+    "loss_value_juta": 36.8,
+    "gap_pct": -5.3,
+    "luas_ha": 24.9
+  },
+  "D003A": {
+    "block_code": "D003A",
+    "attack_rate": 15.0,
+    "sph": 124.0,
+    "stadium": 3,
+    "stress_class": "Stres Sedang",
+    "loss_value_juta": 176.8,
+    "gap_pct": 22.0,
+    "luas_ha": 25.3
+  },
+  "F007A": {
+    "block_code": "F007A",
+    "attack_rate": 15.0,
+    "sph": 122.0,
+    "stadium": 3,
+    "stress_class": "Stres Sedang",
+    "loss_value_juta": 20.0,
+    "gap_pct": -3.5,
+    "luas_ha": 20.2
+  },
+  "D004A": {
+    "block_code": "D004A",
+    "attack_rate": 25.0,
+    "sph": 129.0,
+    "stadium": 3,
+    "stress_class": "Stres Berat",
+    "loss_value_juta": 146.6,
+    "gap_pct": 20.3,
+    "luas_ha": 22.0
+  },
+  "F008A": {
+    "block_code": "F008A",
+    "attack_rate": 15.0,
+    "sph": 127.0,
+    "stadium": 3,
+    "stress_class": "Stres Sedang",
+    "loss_value_juta": 75.4,
+    "gap_pct": -8.7,
+    "luas_ha": 29.6
+  },
+  "D005A": {
+    "block_code": "D005A",
+    "attack_rate": 15.0,
+    "sph": 98.0,
+    "stadium": 3,
+    "stress_class": "Stres Sedang",
+    "loss_value_juta": 31.2,
+    "gap_pct": -5.7,
+    "luas_ha": 24.1
+  },
+  "D006A": {
+    "block_code": "D006A",
+    "attack_rate": 15.0,
+    "sph": 104.0,
+    "stadium": 3,
+    "stress_class": "Stres Sedang",
+    "loss_value_juta": 36.9,
+    "gap_pct": -6.6,
+    "luas_ha": 23.0
+  },
+  "D007A": {
+    "block_code": "D007A",
+    "attack_rate": 25.0,
+    "sph": 105.0,
+    "stadium": 3,
+    "stress_class": "Stres Berat",
+    "loss_value_juta": 29.2,
+    "gap_pct": -4.7,
+    "luas_ha": 24.7
+  },
+  "D008A": {
+    "block_code": "D008A",
+    "attack_rate": 15.0,
+    "sph": 100.0,
+    "stadium": 3,
+    "stress_class": "Stres Sedang",
+    "loss_value_juta": 5.9,
+    "gap_pct": -1.0,
+    "luas_ha": 25.3
+  },
+  "D009A": {
+    "block_code": "D009A",
+    "attack_rate": 15.0,
+    "sph": 107.0,
+    "stadium": 3,
+    "stress_class": "Stres Sedang",
+    "loss_value_juta": 5.6,
+    "gap_pct": -0.9,
+    "luas_ha": 24.4
+  },
+  "D010A": {
+    "block_code": "D010A",
+    "attack_rate": 15.0,
+    "sph": 109.0,
+    "stadium": 3,
+    "stress_class": "Stres Sedang",
+    "loss_value_juta": 74.3,
+    "gap_pct": 12.1,
+    "luas_ha": 23.7
+  },
+  "D011A": {
+    "block_code": "D011A",
+    "attack_rate": 15.0,
+    "sph": 90.0,
+    "stadium": 3,
+    "stress_class": "Stres Sedang",
+    "loss_value_juta": 35.9,
+    "gap_pct": -7.1,
+    "luas_ha": 24.0
+  },
+  "D012A": {
+    "block_code": "D012A",
+    "attack_rate": 15.0,
+    "sph": 98.0,
+    "stadium": 3,
+    "stress_class": "Stres Sedang",
+    "loss_value_juta": 15.4,
+    "gap_pct": -2.5,
+    "luas_ha": 26.7
+  },
+  "E001A": {
+    "block_code": "E001A",
+    "attack_rate": 25.0,
+    "sph": 134.0,
+    "stadium": 3,
+    "stress_class": "Stres Berat",
+    "loss_value_juta": 178.6,
+    "gap_pct": 23.7,
+    "luas_ha": 22.5
+  },
+  "E002A": {
+    "block_code": "E002A",
+    "attack_rate": 15.0,
+    "sph": 129.0,
+    "stadium": 3,
+    "stress_class": "Stres Sedang",
+    "loss_value_juta": 189.6,
+    "gap_pct": 26.7,
+    "luas_ha": 22.2
+  },
+  "E003A": {
+    "block_code": "E003A",
+    "attack_rate": 15.0,
+    "sph": 129.0,
+    "stadium": 3,
+    "stress_class": "Stres Sedang",
+    "loss_value_juta": 208.6,
+    "gap_pct": 31.4,
+    "luas_ha": 21.6
+  },
+  "E004A": {
+    "block_code": "E004A",
+    "attack_rate": 15.0,
+    "sph": 128.0,
+    "stadium": 3,
+    "stress_class": "Stres Sedang",
+    "loss_value_juta": 73.8,
+    "gap_pct": 12.5,
+    "luas_ha": 19.9
+  },
+  "E005A": {
+    "block_code": "E005A",
+    "attack_rate": 15.0,
+    "sph": 109.0,
+    "stadium": 3,
+    "stress_class": "Stres Sedang",
+    "loss_value_juta": 47.7,
+    "gap_pct": -7.8,
+    "luas_ha": 24.0
+  },
+  "E006A": {
+    "block_code": "E006A",
+    "attack_rate": 15.0,
+    "sph": 110.0,
+    "stadium": 3,
+    "stress_class": "Stres Sedang",
+    "loss_value_juta": 36.4,
+    "gap_pct": -5.8,
+    "luas_ha": 24.3
+  },
+  "E007A": {
+    "block_code": "E007A",
+    "attack_rate": 25.0,
+    "sph": 103.0,
+    "stadium": 3,
+    "stress_class": "Stres Berat",
+    "loss_value_juta": 18.7,
+    "gap_pct": -3.2,
+    "luas_ha": 24.2
+  },
+  "E008A": {
+    "block_code": "E008A",
+    "attack_rate": 25.0,
+    "sph": 111.0,
+    "stadium": 3,
+    "stress_class": "Stres Berat",
+    "loss_value_juta": 40.7,
+    "gap_pct": -6.4,
+    "luas_ha": 24.7
+  },
+  "E009A": {
+    "block_code": "E009A",
+    "attack_rate": 15.0,
+    "sph": 88.0,
+    "stadium": 3,
+    "stress_class": "Stres Sedang",
+    "loss_value_juta": 38.4,
+    "gap_pct": -7.4,
+    "luas_ha": 23.7
+  },
+  "E010A": {
+    "block_code": "E010A",
+    "attack_rate": 25.0,
+    "sph": 98.0,
+    "stadium": 3,
+    "stress_class": "Stres Berat",
+    "loss_value_juta": 23.8,
+    "gap_pct": -4.0,
+    "luas_ha": 25.6
+  },
+  "E011A": {
+    "block_code": "E011A",
+    "attack_rate": 15.0,
+    "sph": 102.0,
+    "stadium": 3,
+    "stress_class": "Stres Sedang",
+    "loss_value_juta": 41.4,
+    "gap_pct": 6.5,
+    "luas_ha": 24.3
+  },
+  "E012A": {
+    "block_code": "E012A",
+    "attack_rate": 15.0,
+    "sph": 102.0,
+    "stadium": 3,
+    "stress_class": "Stres Sedang",
+    "loss_value_juta": 34.0,
+    "gap_pct": 5.3,
+    "luas_ha": 25.4
+  },
+  "F001A": {
+    "block_code": "F001A",
+    "attack_rate": 15.0,
+    "sph": 140.0,
+    "stadium": 3,
+    "stress_class": "Stres Sedang",
+    "loss_value_juta": 20.6,
+    "gap_pct": -3.5,
+    "luas_ha": 17.9
+  },
+  "F002A": {
+    "block_code": "F002A",
+    "attack_rate": 15.0,
+    "sph": 141.0,
+    "stadium": 3,
+    "stress_class": "Stres Sedang",
+    "loss_value_juta": 168.2,
+    "gap_pct": 33.0,
+    "luas_ha": 15.2
+  },
+  "F003A": {
+    "block_code": "F003A",
+    "attack_rate": 15.0,
+    "sph": 137.0,
+    "stadium": 3,
+    "stress_class": "Stres Sedang",
+    "loss_value_juta": 102.0,
+    "gap_pct": 25.5,
+    "luas_ha": 12.2
+  },
+  "F004A": {
+    "block_code": "F004A",
+    "attack_rate": 15.0,
+    "sph": 141.0,
+    "stadium": 3,
+    "stress_class": "Stres Sedang",
+    "loss_value_juta": 102.7,
+    "gap_pct": 26.1,
+    "luas_ha": 12.0
+  },
+  "F005A": {
+    "block_code": "F005A",
+    "attack_rate": 15.0,
+    "sph": 119.0,
+    "stadium": 3,
+    "stress_class": "Stres Sedang",
+    "loss_value_juta": 465.3,
+    "gap_pct": 45.5,
+    "luas_ha": 20.5
+  },
+  "F009A": {
+    "block_code": "F009A",
+    "attack_rate": 15.0,
+    "sph": 103.0,
+    "stadium": 3,
+    "stress_class": "Stres Sedang",
+    "loss_value_juta": 35.7,
+    "gap_pct": -5.8,
+    "luas_ha": 25.2
+  },
+  "F010A": {
+    "block_code": "F010A",
+    "attack_rate": 15.0,
+    "sph": 111.0,
+    "stadium": 3,
+    "stress_class": "Stres Sedang",
+    "loss_value_juta": 19.8,
+    "gap_pct": 3.0,
+    "luas_ha": 25.0
+  },
+  "F011A": {
+    "block_code": "F011A",
+    "attack_rate": 15.0,
+    "sph": 118.0,
+    "stadium": 3,
+    "stress_class": "Stres Sedang",
+    "loss_value_juta": 43.1,
+    "gap_pct": 7.4,
+    "luas_ha": 20.5
+  },
+  "F012A": {
+    "block_code": "F012A",
+    "attack_rate": 15.0,
+    "sph": 123.0,
+    "stadium": 3,
+    "stress_class": "Stres Sedang",
+    "loss_value_juta": 30.5,
+    "gap_pct": 4.3,
+    "luas_ha": 24.7
+  },
+  "C020A": {
+    "block_code": "C020A",
+    "attack_rate": 0,
+    "sph": 115.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 396.9,
+    "gap_pct": 45.3,
+    "luas_ha": 29.0
+  },
+  "C021A": {
+    "block_code": "C021A",
+    "attack_rate": 0,
+    "sph": 118.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 17.7,
+    "gap_pct": 2.1,
+    "luas_ha": 28.9
+  },
+  "E016A": {
+    "block_code": "E016A",
+    "attack_rate": 0,
+    "sph": 100.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 28.7,
+    "gap_pct": -4.5,
+    "luas_ha": 25.3
+  },
+  "C022A": {
+    "block_code": "C022A",
+    "attack_rate": 0,
+    "sph": 123.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 462.5,
+    "gap_pct": 48.1,
+    "luas_ha": 29.9
+  },
+  "C023A": {
+    "block_code": "C023A",
+    "attack_rate": 0,
+    "sph": 116.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 471.1,
+    "gap_pct": 53.9,
+    "luas_ha": 28.8
+  },
+  "D013A": {
+    "block_code": "D013A",
+    "attack_rate": 0,
+    "sph": 123.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 214.0,
+    "gap_pct": 27.6,
+    "luas_ha": 24.6
+  },
+  "C024A": {
+    "block_code": "C024A",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 58.5,
+    "gap_pct": 71.5,
+    "luas_ha": 7.2
+  },
+  "D014A": {
+    "block_code": "D014A",
+    "attack_rate": 0,
+    "sph": 118.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 170.5,
+    "gap_pct": 23.5,
+    "luas_ha": 24.1
+  },
+  "D015A": {
+    "block_code": "D015A",
+    "attack_rate": 0,
+    "sph": 116.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 139.4,
+    "gap_pct": 19.9,
+    "luas_ha": 23.7
+  },
+  "D016A": {
+    "block_code": "D016A",
+    "attack_rate": 0,
+    "sph": 113.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 210.5,
+    "gap_pct": 26.8,
+    "luas_ha": 26.9
+  },
+  "D017A": {
+    "block_code": "D017A",
+    "attack_rate": 0,
+    "sph": 120.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 166.7,
+    "gap_pct": 24.9,
+    "luas_ha": 22.5
+  },
+  "D018A": {
+    "block_code": "D018A",
+    "attack_rate": 0,
+    "sph": 118.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 277.1,
+    "gap_pct": 37.2,
+    "luas_ha": 25.8
+  },
+  "D019A": {
+    "block_code": "D019A",
+    "attack_rate": 0,
+    "sph": 110.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 292.1,
+    "gap_pct": 42.3,
+    "luas_ha": 25.6
+  },
+  "D020A": {
+    "block_code": "D020A",
+    "attack_rate": 0,
+    "sph": 104.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 222.7,
+    "gap_pct": 34.9,
+    "luas_ha": 25.1
+  },
+  "D021A": {
+    "block_code": "D021A",
+    "attack_rate": 0,
+    "sph": 117.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 293.3,
+    "gap_pct": 33.6,
+    "luas_ha": 30.4
+  },
+  "D022A": {
+    "block_code": "D022A",
+    "attack_rate": 0,
+    "sph": 127.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 405.0,
+    "gap_pct": 39.3,
+    "luas_ha": 32.1
+  },
+  "D023A": {
+    "block_code": "D023A",
+    "attack_rate": 0,
+    "sph": 127.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 268.4,
+    "gap_pct": 27.9,
+    "luas_ha": 29.9
+  },
+  "E013A": {
+    "block_code": "E013A",
+    "attack_rate": 0,
+    "sph": 126.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 226.8,
+    "gap_pct": 29.4,
+    "luas_ha": 23.6
+  },
+  "E014A": {
+    "block_code": "E014A",
+    "attack_rate": 0,
+    "sph": 113.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 169.8,
+    "gap_pct": 23.1,
+    "luas_ha": 25.2
+  },
+  "E015A": {
+    "block_code": "E015A",
+    "attack_rate": 0,
+    "sph": 123.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 213.3,
+    "gap_pct": 28.1,
+    "luas_ha": 23.9
+  },
+  "D024A": {
+    "block_code": "D024A",
+    "attack_rate": 0,
+    "sph": 116.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 227.6,
+    "gap_pct": 61.7,
+    "luas_ha": 11.2
+  },
+  "E017A": {
+    "block_code": "E017A",
+    "attack_rate": 0,
+    "sph": 124.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 198.0,
+    "gap_pct": 27.9,
+    "luas_ha": 22.5
+  },
+  "D024B": {
+    "block_code": "D024B",
+    "attack_rate": 0,
+    "sph": 170.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 17.9,
+    "gap_pct": 72.8,
+    "luas_ha": 0.7
+  },
+  "E018A": {
+    "block_code": "E018A",
+    "attack_rate": 0,
+    "sph": 106.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 155.9,
+    "gap_pct": 22.7,
+    "luas_ha": 25.4
+  },
+  "D024C": {
+    "block_code": "D024C",
+    "attack_rate": 0,
+    "sph": 111.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 30.6,
+    "gap_pct": 81.3,
+    "luas_ha": 1.6
+  },
+  "E019A": {
+    "block_code": "E019A",
+    "attack_rate": 0,
+    "sph": 120.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 270.0,
+    "gap_pct": 34.4,
+    "luas_ha": 25.7
+  },
+  "D024D": {
+    "block_code": "D024D",
+    "attack_rate": 0,
+    "sph": 118.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 23.7,
+    "gap_pct": 73.7,
+    "luas_ha": 1.8
+  },
+  "E020A": {
+    "block_code": "E020A",
+    "attack_rate": 0,
+    "sph": 118.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 214.6,
+    "gap_pct": 29.0,
+    "luas_ha": 24.9
+  },
+  "D024E": {
+    "block_code": "D024E",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 11.4,
+    "gap_pct": 69.6,
+    "luas_ha": 1.2
+  },
+  "E021A": {
+    "block_code": "E021A",
+    "attack_rate": 0,
+    "sph": 128.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 342.8,
+    "gap_pct": 36.4,
+    "luas_ha": 29.9
+  },
+  "D024F": {
+    "block_code": "D024F",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 6.7,
+    "gap_pct": 45.0,
+    "luas_ha": 1.1
+  },
+  "E022A": {
+    "block_code": "E022A",
+    "attack_rate": 0,
+    "sph": 128.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 385.4,
+    "gap_pct": 36.9,
+    "luas_ha": 32.0
+  },
+  "D024G": {
+    "block_code": "D024G",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 2.0,
+    "gap_pct": 28.7,
+    "luas_ha": 1.1
+  },
+  "E023A": {
+    "block_code": "E023A",
+    "attack_rate": 0,
+    "sph": 120.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 274.7,
+    "gap_pct": 30.0,
+    "luas_ha": 29.4
+  },
+  "E024A": {
+    "block_code": "E024A",
+    "attack_rate": 0,
+    "sph": 74.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 120.7,
+    "gap_pct": 52.2,
+    "luas_ha": 9.1
+  },
+  "E024B": {
+    "block_code": "E024B",
+    "attack_rate": 0,
+    "sph": 113.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 7.8,
+    "gap_pct": 52.0,
+    "luas_ha": 0.7
+  },
+  "E024C": {
+    "block_code": "E024C",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 12.0,
+    "gap_pct": 35.4,
+    "luas_ha": 2.8
+  },
+  "E024D": {
+    "block_code": "E024D",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 4.4,
+    "gap_pct": 32.0,
+    "luas_ha": 2.0
+  },
+  "A012A": {
+    "block_code": "A012A",
+    "attack_rate": 0,
+    "sph": 76.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 3.2,
+    "gap_pct": 4.6,
+    "luas_ha": 3.1
+  },
+  "B019A": {
+    "block_code": "B019A",
+    "attack_rate": 0,
+    "sph": 116.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 115.5,
+    "gap_pct": 12.6,
+    "luas_ha": 30.1
+  },
+  "A012B": {
+    "block_code": "A012B",
+    "attack_rate": 0,
+    "sph": 66.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 6.5,
+    "gap_pct": -6.5,
+    "luas_ha": 5.7
+  },
+  "B020A": {
+    "block_code": "B020A",
+    "attack_rate": 0,
+    "sph": 115.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 115.4,
+    "gap_pct": 12.5,
+    "luas_ha": 30.5
+  },
+  "A012C": {
+    "block_code": "A012C",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 1.2,
+    "gap_pct": -35.7,
+    "luas_ha": 0.3
+  },
+  "C012A": {
+    "block_code": "C012A",
+    "attack_rate": 0,
+    "sph": 104.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 4.0,
+    "gap_pct": -0.5,
+    "luas_ha": 29.7
+  },
+  "C019A": {
+    "block_code": "C019A",
+    "attack_rate": 0,
+    "sph": 110.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 99.5,
+    "gap_pct": 12.2,
+    "luas_ha": 28.2
+  },
+  "A013A": {
+    "block_code": "A013A",
+    "attack_rate": 0,
+    "sph": 37.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 4.4,
+    "gap_pct": -151.2,
+    "luas_ha": 0.3
+  },
+  "A020A": {
+    "block_code": "A020A",
+    "attack_rate": 0,
+    "sph": 123.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 76.9,
+    "gap_pct": 24.5,
+    "luas_ha": 9.7
+  },
+  "A013B": {
+    "block_code": "A013B",
+    "attack_rate": 0,
+    "sph": 143.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 68.8,
+    "gap_pct": 31.5,
+    "luas_ha": 8.1
+  },
+  "B018A": {
+    "block_code": "B018A",
+    "attack_rate": 0,
+    "sph": 119.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 256.9,
+    "gap_pct": 22.9,
+    "luas_ha": 35.8
+  },
+  "A013C": {
+    "block_code": "A013C",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 2.9,
+    "gap_pct": -390.3,
+    "luas_ha": 0.1
+  },
+  "C014A": {
+    "block_code": "C014A",
+    "attack_rate": 0,
+    "sph": 128.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 120.5,
+    "gap_pct": 12.3,
+    "luas_ha": 29.2
+  },
+  "A013D": {
+    "block_code": "A013D",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 1.1,
+    "gap_pct": -5.8,
+    "luas_ha": 1.9
+  },
+  "C018A": {
+    "block_code": "C018A",
+    "attack_rate": 0,
+    "sph": 119.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 171.9,
+    "gap_pct": 20.1,
+    "luas_ha": 27.3
+  },
+  "A018A": {
+    "block_code": "A018A",
+    "attack_rate": 0,
+    "sph": 131.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 36.5,
+    "gap_pct": 28.7,
+    "luas_ha": 3.7
+  },
+  "A014A": {
+    "block_code": "A014A",
+    "attack_rate": 0,
+    "sph": 140.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 136.4,
+    "gap_pct": 46.4,
+    "luas_ha": 8.7
+  },
+  "A019A": {
+    "block_code": "A019A",
+    "attack_rate": 0,
+    "sph": 86.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 22.7,
+    "gap_pct": 8.7,
+    "luas_ha": 10.4
+  },
+  "A014B": {
+    "block_code": "A014B",
+    "attack_rate": 0,
+    "sph": 136.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 28.7,
+    "gap_pct": 26.1,
+    "luas_ha": 4.3
+  },
+  "A021A": {
+    "block_code": "A021A",
+    "attack_rate": 0,
+    "sph": 107.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 49.6,
+    "gap_pct": 20.2,
+    "luas_ha": 8.5
+  },
+  "A014C": {
+    "block_code": "A014C",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 3.3,
+    "gap_pct": 30.4,
+    "luas_ha": 0.8
+  },
+  "B014A": {
+    "block_code": "B014A",
+    "attack_rate": 0,
+    "sph": 129.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 40.0,
+    "gap_pct": 29.5,
+    "luas_ha": 4.0
+  },
+  "B015A": {
+    "block_code": "B015A",
+    "attack_rate": 0,
+    "sph": 102.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 2.3,
+    "gap_pct": -14.3,
+    "luas_ha": 0.6
+  },
+  "B016A": {
+    "block_code": "B016A",
+    "attack_rate": 0,
+    "sph": 154.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 13.3,
+    "gap_pct": 36.6,
+    "luas_ha": 0.9
+  },
+  "A018B": {
+    "block_code": "A018B",
+    "attack_rate": 0,
+    "sph": 86.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 6.0,
+    "gap_pct": -29.3,
+    "luas_ha": 1.2
+  },
+  "B017A": {
+    "block_code": "B017A",
+    "attack_rate": 0,
+    "sph": 122.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 7.2,
+    "gap_pct": 11.3,
+    "luas_ha": 2.0
+  },
+  "A018C": {
+    "block_code": "A018C",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 0.3,
+    "gap_pct": 2.5,
+    "luas_ha": 1.9
+  },
+  "B021A": {
+    "block_code": "B021A",
+    "attack_rate": 0,
+    "sph": 113.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 213.4,
+    "gap_pct": 23.4,
+    "luas_ha": 30.0
+  },
+  "B022A": {
+    "block_code": "B022A",
+    "attack_rate": 0,
+    "sph": 87.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 64.4,
+    "gap_pct": 21.2,
+    "luas_ha": 12.92
+  },
+  "A019B": {
+    "block_code": "A019B",
+    "attack_rate": 0,
+    "sph": 131.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 29.8,
+    "gap_pct": 31.5,
+    "luas_ha": 3.0
+  },
+  "A019C": {
+    "block_code": "A019C",
+    "attack_rate": 0,
+    "sph": 111.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 3.5,
+    "gap_pct": 7.7,
+    "luas_ha": 2.7
+  },
+  "C013A": {
+    "block_code": "C013A",
+    "attack_rate": 0,
+    "sph": 121.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 132.5,
+    "gap_pct": 14.0,
+    "luas_ha": 29.7
+  },
+  "C015A": {
+    "block_code": "C015A",
+    "attack_rate": 0,
+    "sph": 111.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 14.4,
+    "gap_pct": -1.7,
+    "luas_ha": 28.9
+  },
+  "A020B": {
+    "block_code": "A020B",
+    "attack_rate": 0,
+    "sph": 137.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 81.3,
+    "gap_pct": 36.6,
+    "luas_ha": 6.7
+  },
+  "C016A": {
+    "block_code": "C016A",
+    "attack_rate": 0,
+    "sph": 131.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 173.2,
+    "gap_pct": 17.6,
+    "luas_ha": 28.7
+  },
+  "A020C": {
+    "block_code": "A020C",
+    "attack_rate": 0,
+    "sph": 117.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 2.5,
+    "gap_pct": -7.6,
+    "luas_ha": 1.8
+  },
+  "C017A": {
+    "block_code": "C017A",
+    "attack_rate": 0,
+    "sph": 130.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 197.5,
+    "gap_pct": 21.5,
+    "luas_ha": 26.9
+  },
+  "C018B": {
+    "block_code": "C018B",
+    "attack_rate": 0,
+    "sph": 128.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 31.2,
+    "gap_pct": 33.0,
+    "luas_ha": 3.0
+  },
+  "A021B": {
+    "block_code": "A021B",
+    "attack_rate": 0,
+    "sph": 108.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 33.2,
+    "gap_pct": 25.2,
+    "luas_ha": 5.0
+  },
+  "B012A": {
+    "block_code": "B012A",
+    "attack_rate": 0,
+    "sph": 99.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 128.5,
+    "gap_pct": 18.4,
+    "luas_ha": 26.0
+  },
+  "B012B": {
+    "block_code": "B012B",
+    "attack_rate": 0,
+    "sph": 84.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 5.5,
+    "gap_pct": 7.6,
+    "luas_ha": 3.5
+  },
+  "B012C": {
+    "block_code": "B012C",
+    "attack_rate": 0,
+    "sph": 152.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 1.4,
+    "gap_pct": 15.4,
+    "luas_ha": 0.4
+  },
+  "B013A": {
+    "block_code": "B013A",
+    "attack_rate": 0,
+    "sph": 101.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 154.9,
+    "gap_pct": 21.7,
+    "luas_ha": 25.2
+  },
+  "B013B": {
+    "block_code": "B013B",
+    "attack_rate": 0,
+    "sph": 122.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 1.7,
+    "gap_pct": 3.1,
+    "luas_ha": 2.4
+  },
+  "B015B": {
+    "block_code": "B015B",
+    "attack_rate": 0,
+    "sph": 136.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 20.4,
+    "gap_pct": 39.3,
+    "luas_ha": 1.6
+  },
+  "B014B": {
+    "block_code": "B014B",
+    "attack_rate": 0,
+    "sph": 140.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 47.7,
+    "gap_pct": 35.4,
+    "luas_ha": 5.1
+  },
+  "B016B": {
+    "block_code": "B016B",
+    "attack_rate": 0,
+    "sph": 141.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 13.5,
+    "gap_pct": 39.6,
+    "luas_ha": 1.0
+  },
+  "B014C": {
+    "block_code": "B014C",
+    "attack_rate": 0,
+    "sph": 111.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 35.8,
+    "gap_pct": 15.3,
+    "luas_ha": 14.3
+  },
+  "B014D": {
+    "block_code": "B014D",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 6.4,
+    "gap_pct": -101.2,
+    "luas_ha": 0.6
+  },
+  "B021B": {
+    "block_code": "B021B",
+    "attack_rate": 0,
+    "sph": 133.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 21.7,
+    "gap_pct": 47.8,
+    "luas_ha": 1.4
+  },
+  "B014E": {
+    "block_code": "B014E",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 3.9,
+    "gap_pct": 4.9,
+    "luas_ha": 6.9
+  },
+  "B015C": {
+    "block_code": "B015C",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 0.3,
+    "gap_pct": -1.0,
+    "luas_ha": 3.3
+  },
+  "B015D": {
+    "block_code": "B015D",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 0.0,
+    "gap_pct": 0,
+    "luas_ha": 4.3
+  },
+  "B016C": {
+    "block_code": "B016C",
+    "attack_rate": 0,
+    "sph": 126.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 2.9,
+    "gap_pct": 24.0,
+    "luas_ha": 0.5
+  },
+  "B017B": {
+    "block_code": "B017B",
+    "attack_rate": 0,
+    "sph": 52.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 12.5,
+    "gap_pct": -21.0,
+    "luas_ha": 4.2
+  },
+  "B016D": {
+    "block_code": "B016D",
+    "attack_rate": 0,
+    "sph": 110.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 0.9,
+    "gap_pct": -54.1,
+    "luas_ha": 0.1
+  },
+  "B016E": {
+    "block_code": "B016E",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 2.4,
+    "gap_pct": -10.4,
+    "luas_ha": 2.1
+  },
+  "B016F": {
+    "block_code": "B016F",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 1.8,
+    "gap_pct": 14.6,
+    "luas_ha": 1.9
+  },
+  "B016G": {
+    "block_code": "B016G",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 0.0,
+    "gap_pct": 0,
+    "luas_ha": 0.9
+  },
+  "B017C": {
+    "block_code": "B017C",
+    "attack_rate": 0,
+    "sph": 118.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 0.5,
+    "gap_pct": -6.0,
+    "luas_ha": 0.5
+  },
+  "B017D": {
+    "block_code": "B017D",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 1.3,
+    "gap_pct": -117.1,
+    "luas_ha": 0.1
+  },
+  "B017E": {
+    "block_code": "B017E",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 4.7,
+    "gap_pct": 25.7,
+    "luas_ha": 2.9
+  },
+  "B017F": {
+    "block_code": "B017F",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 0.0,
+    "gap_pct": 0,
+    "luas_ha": 3.9
+  },
+  "B024A": {
+    "block_code": "B024A",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 1.5,
+    "gap_pct": 18.9,
+    "luas_ha": 0.6
+  },
+  "G005A": {
+    "block_code": "G005A",
+    "attack_rate": 0,
+    "sph": 124.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 190.0,
+    "gap_pct": -28.0,
+    "luas_ha": 23.4
+  },
+  "G006A": {
+    "block_code": "G006A",
+    "attack_rate": 0,
+    "sph": 126.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 167.3,
+    "gap_pct": -23.9,
+    "luas_ha": 23.7
+  },
+  "G007A": {
+    "block_code": "G007A",
+    "attack_rate": 0,
+    "sph": 127.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 68.0,
+    "gap_pct": -10.4,
+    "luas_ha": 22.1
+  },
+  "G008A": {
+    "block_code": "G008A",
+    "attack_rate": 0,
+    "sph": 131.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 75.2,
+    "gap_pct": -11.1,
+    "luas_ha": 22.2
+  },
+  "G001A": {
+    "block_code": "G001A",
+    "attack_rate": 0,
+    "sph": 144.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 63.5,
+    "gap_pct": -20.9,
+    "luas_ha": 8.2
+  },
+  "G009A": {
+    "block_code": "G009A",
+    "attack_rate": 0,
+    "sph": 119.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 170.5,
+    "gap_pct": -24.7,
+    "luas_ha": 24.2
+  },
+  "G010A": {
+    "block_code": "G010A",
+    "attack_rate": 0,
+    "sph": 147.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 117.3,
+    "gap_pct": 11.2,
+    "luas_ha": 28.0
+  },
+  "G002A": {
+    "block_code": "G002A",
+    "attack_rate": 0,
+    "sph": 126.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 59.1,
+    "gap_pct": 16.7,
+    "luas_ha": 10.7
+  },
+  "G011A": {
+    "block_code": "G011A",
+    "attack_rate": 0,
+    "sph": 131.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 37.2,
+    "gap_pct": 6.1,
+    "luas_ha": 19.9
+  },
+  "G003A": {
+    "block_code": "G003A",
+    "attack_rate": 0,
+    "sph": 144.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 29.0,
+    "gap_pct": 32.1,
+    "luas_ha": 2.4
+  },
+  "G012A": {
+    "block_code": "G012A",
+    "attack_rate": 0,
+    "sph": 138.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 55.4,
+    "gap_pct": -11.3,
+    "luas_ha": 15.2
+  },
+  "H009A": {
+    "block_code": "H009A",
+    "attack_rate": 0,
+    "sph": 129.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 3.4,
+    "gap_pct": -0.3,
+    "luas_ha": 35.1
+  },
+  "H010A": {
+    "block_code": "H010A",
+    "attack_rate": 0,
+    "sph": 132.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 52.5,
+    "gap_pct": -6.5,
+    "luas_ha": 23.7
+  },
+  "H005A": {
+    "block_code": "H005A",
+    "attack_rate": 0,
+    "sph": 136.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 96.0,
+    "gap_pct": 11.2,
+    "luas_ha": 24.4
+  },
+  "H006A": {
+    "block_code": "H006A",
+    "attack_rate": 0,
+    "sph": 134.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 63.1,
+    "gap_pct": 9.5,
+    "luas_ha": 19.3
+  },
+  "H011A": {
+    "block_code": "H011A",
+    "attack_rate": 0,
+    "sph": 139.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 173.7,
+    "gap_pct": 20.5,
+    "luas_ha": 23.9
+  },
+  "H012A": {
+    "block_code": "H012A",
+    "attack_rate": 0,
+    "sph": 140.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 96.8,
+    "gap_pct": 14.5,
+    "luas_ha": 18.7
+  },
+  "I012A": {
+    "block_code": "I012A",
+    "attack_rate": 0,
+    "sph": 127.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 83.7,
+    "gap_pct": 8.3,
+    "luas_ha": 30.6
+  },
+  "I014A": {
+    "block_code": "I014A",
+    "attack_rate": 0,
+    "sph": 121.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 129.1,
+    "gap_pct": 14.7,
+    "luas_ha": 28.1
+  },
+  "I015A": {
+    "block_code": "I015A",
+    "attack_rate": 0,
+    "sph": 101.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 141.2,
+    "gap_pct": 17.5,
+    "luas_ha": 30.4
+  },
+  "J012A": {
+    "block_code": "J012A",
+    "attack_rate": 0,
+    "sph": 130.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 117.0,
+    "gap_pct": 12.0,
+    "luas_ha": 28.7
+  },
+  "J013A": {
+    "block_code": "J013A",
+    "attack_rate": 0,
+    "sph": 142.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 269.7,
+    "gap_pct": 24.5,
+    "luas_ha": 29.7
+  },
+  "H007A": {
+    "block_code": "H007A",
+    "attack_rate": 0,
+    "sph": 130.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 116.7,
+    "gap_pct": 20.6,
+    "luas_ha": 16.6
+  },
+  "J014A": {
+    "block_code": "J014A",
+    "attack_rate": 0,
+    "sph": 131.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 163.2,
+    "gap_pct": 16.2,
+    "luas_ha": 30.3
+  },
+  "H008A": {
+    "block_code": "H008A",
+    "attack_rate": 0,
+    "sph": 138.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 72.1,
+    "gap_pct": 19.5,
+    "luas_ha": 10.2
+  },
+  "J015A": {
+    "block_code": "J015A",
+    "attack_rate": 0,
+    "sph": 117.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 32.3,
+    "gap_pct": 3.5,
+    "luas_ha": 30.5
+  },
+  "I010A": {
+    "block_code": "I010A",
+    "attack_rate": 0,
+    "sph": 118.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 34.5,
+    "gap_pct": 5.6,
+    "luas_ha": 19.2
+  },
+  "J011A": {
+    "block_code": "J011A",
+    "attack_rate": 0,
+    "sph": 129.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 105.1,
+    "gap_pct": 29.9,
+    "luas_ha": 10.4
+  },
+  "I011A": {
+    "block_code": "I011A",
+    "attack_rate": 0,
+    "sph": 119.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 260.7,
+    "gap_pct": 26.2,
+    "luas_ha": 31.1
+  },
+  "K012A": {
+    "block_code": "K012A",
+    "attack_rate": 0,
+    "sph": 115.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 7.3,
+    "gap_pct": 6.7,
+    "luas_ha": 3.6
+  },
+  "I013A": {
+    "block_code": "I013A",
+    "attack_rate": 0,
+    "sph": 124.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 443.4,
+    "gap_pct": 43.4,
+    "luas_ha": 30.5
+  },
+  "K013A": {
+    "block_code": "K013A",
+    "attack_rate": 0,
+    "sph": 123.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 119.4,
+    "gap_pct": 23.8,
+    "luas_ha": 15.1
+  },
+  "K014A": {
+    "block_code": "K014A",
+    "attack_rate": 0,
+    "sph": 121.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 180.9,
+    "gap_pct": 21.7,
+    "luas_ha": 25.6
+  },
+  "K015A": {
+    "block_code": "K015A",
+    "attack_rate": 0,
+    "sph": 117.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 313.9,
+    "gap_pct": 26.8,
+    "luas_ha": 36.4
+  },
+  "F013A": {
+    "block_code": "F013A",
+    "attack_rate": 0,
+    "sph": 116.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 15.3,
+    "gap_pct": 2.1,
+    "luas_ha": 24.6
+  },
+  "F014A": {
+    "block_code": "F014A",
+    "attack_rate": 0,
+    "sph": 122.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 63.4,
+    "gap_pct": 7.9,
+    "luas_ha": 25.4
+  },
+  "F016A": {
+    "block_code": "F016A",
+    "attack_rate": 0,
+    "sph": 110.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 47.2,
+    "gap_pct": 7.1,
+    "luas_ha": 24.7
+  },
+  "G013A": {
+    "block_code": "G013A",
+    "attack_rate": 0,
+    "sph": 123.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 109.1,
+    "gap_pct": 15.0,
+    "luas_ha": 24.9
+  },
+  "G014A": {
+    "block_code": "G014A",
+    "attack_rate": 0,
+    "sph": 127.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 147.3,
+    "gap_pct": 18.5,
+    "luas_ha": 24.9
+  },
+  "G015A": {
+    "block_code": "G015A",
+    "attack_rate": 0,
+    "sph": 112.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 22.5,
+    "gap_pct": 18.0,
+    "luas_ha": 4.8
+  },
+  "G016A": {
+    "block_code": "G016A",
+    "attack_rate": 0,
+    "sph": 129.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 38.8,
+    "gap_pct": 15.9,
+    "luas_ha": 7.7
+  },
+  "G017A": {
+    "block_code": "G017A",
+    "attack_rate": 0,
+    "sph": 111.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 58.3,
+    "gap_pct": 9.1,
+    "luas_ha": 24.1
+  },
+  "G018A": {
+    "block_code": "G018A",
+    "attack_rate": 0,
+    "sph": 115.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 0.7,
+    "gap_pct": 0.1,
+    "luas_ha": 24.9
+  },
+  "F015A": {
+    "block_code": "F015A",
+    "attack_rate": 0,
+    "sph": 130.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 99.2,
+    "gap_pct": 15.0,
+    "luas_ha": 19.8
+  },
+  "H013A": {
+    "block_code": "H013A",
+    "attack_rate": 0,
+    "sph": 113.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 84.4,
+    "gap_pct": 8.4,
+    "luas_ha": 36.5
+  },
+  "H014A": {
+    "block_code": "H014A",
+    "attack_rate": 0,
+    "sph": 112.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 16.6,
+    "gap_pct": -2.3,
+    "luas_ha": 24.9
+  },
+  "F017A": {
+    "block_code": "F017A",
+    "attack_rate": 0,
+    "sph": 111.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 49.6,
+    "gap_pct": 7.7,
+    "luas_ha": 22.3
+  },
+  "H015A": {
+    "block_code": "H015A",
+    "attack_rate": 0,
+    "sph": 122.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 41.2,
+    "gap_pct": 5.6,
+    "luas_ha": 24.7
+  },
+  "F018A": {
+    "block_code": "F018A",
+    "attack_rate": 0,
+    "sph": 108.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 62.3,
+    "gap_pct": 9.6,
+    "luas_ha": 23.8
+  },
+  "H017A": {
+    "block_code": "H017A",
+    "attack_rate": 0,
+    "sph": 104.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 32.0,
+    "gap_pct": -5.1,
+    "luas_ha": 24.6
+  },
+  "F019A": {
+    "block_code": "F019A",
+    "attack_rate": 0,
+    "sph": 106.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 92.2,
+    "gap_pct": 14.2,
+    "luas_ha": 23.8
+  },
+  "H018A": {
+    "block_code": "H018A",
+    "attack_rate": 0,
+    "sph": 104.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 0.6,
+    "gap_pct": 0.1,
+    "luas_ha": 24.8
+  },
+  "F020A": {
+    "block_code": "F020A",
+    "attack_rate": 0,
+    "sph": 127.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 191.0,
+    "gap_pct": 24.9,
+    "luas_ha": 23.9
+  },
+  "H019A": {
+    "block_code": "H019A",
+    "attack_rate": 0,
+    "sph": 110.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 34.4,
+    "gap_pct": 5.3,
+    "luas_ha": 24.6
+  },
+  "F021A": {
+    "block_code": "F021A",
+    "attack_rate": 0,
+    "sph": 131.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 282.1,
+    "gap_pct": 29.8,
+    "luas_ha": 28.7
+  },
+  "F022A": {
+    "block_code": "F022A",
+    "attack_rate": 0,
+    "sph": 126.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 281.2,
+    "gap_pct": 28.3,
+    "luas_ha": 30.3
+  },
+  "F023A": {
+    "block_code": "F023A",
+    "attack_rate": 0,
+    "sph": 130.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 345.4,
+    "gap_pct": 35.8,
+    "luas_ha": 28.4
+  },
+  "F024A": {
+    "block_code": "F024A",
+    "attack_rate": 0,
+    "sph": 104.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 41.7,
+    "gap_pct": 14.8,
+    "luas_ha": 9.5
+  },
+  "G015B": {
+    "block_code": "G015B",
+    "attack_rate": 0,
+    "sph": 122.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 0.4,
+    "gap_pct": -2.5,
+    "luas_ha": 0.5
+  },
+  "G019A": {
+    "block_code": "G019A",
+    "attack_rate": 0,
+    "sph": 112.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 106.4,
+    "gap_pct": 15.0,
+    "luas_ha": 24.6
+  },
+  "G020A": {
+    "block_code": "G020A",
+    "attack_rate": 0,
+    "sph": 114.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 182.8,
+    "gap_pct": 25.1,
+    "luas_ha": 24.9
+  },
+  "G016B": {
+    "block_code": "G016B",
+    "attack_rate": 0,
+    "sph": 150.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 2.5,
+    "gap_pct": -32.1,
+    "luas_ha": 0.2
+  },
+  "H016A": {
+    "block_code": "H016A",
+    "attack_rate": 0,
+    "sph": 128.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 160.6,
+    "gap_pct": 25.7,
+    "luas_ha": 19.0
+  },
+  "G016C": {
+    "block_code": "G016C",
+    "attack_rate": 0,
+    "sph": 128.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 8.2,
+    "gap_pct": 18.8,
+    "luas_ha": 1.3
+  },
+  "H020A": {
+    "block_code": "H020A",
+    "attack_rate": 0,
+    "sph": 117.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 100.7,
+    "gap_pct": 15.0,
+    "luas_ha": 23.1
+  },
+  "H021A": {
+    "block_code": "H021A",
+    "attack_rate": 0,
+    "sph": 101.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 13.0,
+    "gap_pct": 2.2,
+    "luas_ha": 23.0
+  },
+  "H022A": {
+    "block_code": "H022A",
+    "attack_rate": 0,
+    "sph": 132.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 280.8,
+    "gap_pct": 35.7,
+    "luas_ha": 22.8
+  },
+  "G021A": {
+    "block_code": "G021A",
+    "attack_rate": 0,
+    "sph": 98.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 91.5,
+    "gap_pct": 43.7,
+    "luas_ha": 8.1
+  },
+  "G022A": {
+    "block_code": "G022A",
+    "attack_rate": 0,
+    "sph": 120.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 80.7,
+    "gap_pct": 25.1,
+    "luas_ha": 10.2
+  },
+  "G021B": {
+    "block_code": "G021B",
+    "attack_rate": 0,
+    "sph": 99.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 26.9,
+    "gap_pct": 32.3,
+    "luas_ha": 3.1
+  },
+  "G023A": {
+    "block_code": "G023A",
+    "attack_rate": 0,
+    "sph": 137.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 326.3,
+    "gap_pct": 32.9,
+    "luas_ha": 27.7
+  },
+  "H022B": {
+    "block_code": "H022B",
+    "attack_rate": 0,
+    "sph": 122.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 98.2,
+    "gap_pct": 58.5,
+    "luas_ha": 5.2
+  },
+  "G022B": {
+    "block_code": "G022B",
+    "attack_rate": 0,
+    "sph": 111.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 27.6,
+    "gap_pct": 27.8,
+    "luas_ha": 3.6
+  },
+  "H023A": {
+    "block_code": "H023A",
+    "attack_rate": 0,
+    "sph": 111.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 66.3,
+    "gap_pct": 19.9,
+    "luas_ha": 11.3
+  },
+  "G023B": {
+    "block_code": "G023B",
+    "attack_rate": 0,
+    "sph": 74.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 27.5,
+    "gap_pct": 28.0,
+    "luas_ha": 4.7
+  },
+  "G023C": {
+    "block_code": "G023C",
+    "attack_rate": 0,
+    "sph": 119.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 2.8,
+    "gap_pct": -16.1,
+    "luas_ha": 0.9
+  },
+  "G023D": {
+    "block_code": "G023D",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 3.7,
+    "gap_pct": -167.6,
+    "luas_ha": 0.3
+  },
+  "H023B": {
+    "block_code": "H023B",
+    "attack_rate": 0,
+    "sph": 68.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 0.6,
+    "gap_pct": -13.1,
+    "luas_ha": 0.25
+  },
+  "I016A": {
+    "block_code": "I016A",
+    "attack_rate": 0,
+    "sph": 112.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 77.4,
+    "gap_pct": 9.0,
+    "luas_ha": 29.9
+  },
+  "I017A": {
+    "block_code": "I017A",
+    "attack_rate": 0,
+    "sph": 97.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 11.7,
+    "gap_pct": 2.1,
+    "luas_ha": 21.9
+  },
+  "I018A": {
+    "block_code": "I018A",
+    "attack_rate": 0,
+    "sph": 115.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 152.1,
+    "gap_pct": 13.9,
+    "luas_ha": 37.4
+  },
+  "I019A": {
+    "block_code": "I019A",
+    "attack_rate": 0,
+    "sph": 112.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 98.9,
+    "gap_pct": 11.8,
+    "luas_ha": 29.9
+  },
+  "I020A": {
+    "block_code": "I020A",
+    "attack_rate": 0,
+    "sph": 120.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 130.2,
+    "gap_pct": 14.2,
+    "luas_ha": 29.7
+  },
+  "I021A": {
+    "block_code": "I021A",
+    "attack_rate": 0,
+    "sph": 120.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 67.0,
+    "gap_pct": 7.3,
+    "luas_ha": 29.6
+  },
+  "J016A": {
+    "block_code": "J016A",
+    "attack_rate": 0,
+    "sph": 109.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 80.7,
+    "gap_pct": 9.6,
+    "luas_ha": 29.8
+  },
+  "J017A": {
+    "block_code": "J017A",
+    "attack_rate": 0,
+    "sph": 117.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 154.9,
+    "gap_pct": 23.1,
+    "luas_ha": 22.4
+  },
+  "J018A": {
+    "block_code": "J018A",
+    "attack_rate": 0,
+    "sph": 128.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 252.6,
+    "gap_pct": 21.1,
+    "luas_ha": 37.9
+  },
+  "J019A": {
+    "block_code": "J019A",
+    "attack_rate": 0,
+    "sph": 131.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 223.5,
+    "gap_pct": 22.2,
+    "luas_ha": 31.5
+  },
+  "J020A": {
+    "block_code": "J020A",
+    "attack_rate": 0,
+    "sph": 137.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 220.0,
+    "gap_pct": 20.6,
+    "luas_ha": 30.9
+  },
+  "L022B": {
+    "block_code": "L022B",
+    "attack_rate": 0,
+    "sph": 113.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 172.9,
+    "gap_pct": 44.0,
+    "luas_ha": 14.3
+  },
+  "L023B": {
+    "block_code": "L023B",
+    "attack_rate": 0,
+    "sph": 123.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 306.2,
+    "gap_pct": 54.4,
+    "luas_ha": 19.0
+  },
+  "I023A": {
+    "block_code": "I023A",
+    "attack_rate": 0,
+    "sph": 127.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 107.3,
+    "gap_pct": 19.6,
+    "luas_ha": 16.4
+  },
+  "I022A": {
+    "block_code": "I022A",
+    "attack_rate": 0,
+    "sph": 127.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 342.9,
+    "gap_pct": 40.3,
+    "luas_ha": 25.4
+  },
+  "I022B": {
+    "block_code": "I022B",
+    "attack_rate": 0,
+    "sph": 103.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 135.4,
+    "gap_pct": 73.3,
+    "luas_ha": 6.7
+  },
+  "J022A": {
+    "block_code": "J022A",
+    "attack_rate": 0,
+    "sph": 129.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 170.5,
+    "gap_pct": 22.8,
+    "luas_ha": 21.8
+  },
+  "J023A": {
+    "block_code": "J023A",
+    "attack_rate": 0,
+    "sph": 138.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 290.5,
+    "gap_pct": 28.1,
+    "luas_ha": 28.5
+  },
+  "I023B": {
+    "block_code": "I023B",
+    "attack_rate": 0,
+    "sph": 135.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 71.9,
+    "gap_pct": 78.8,
+    "luas_ha": 2.8
+  },
+  "K018A": {
+    "block_code": "K018A",
+    "attack_rate": 0,
+    "sph": 139.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 342.0,
+    "gap_pct": 24.2,
+    "luas_ha": 38.9
+  },
+  "K016A": {
+    "block_code": "K016A",
+    "attack_rate": 0,
+    "sph": 123.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 397.7,
+    "gap_pct": 34.1,
+    "luas_ha": 35.8
+  },
+  "K017A": {
+    "block_code": "K017A",
+    "attack_rate": 0,
+    "sph": 132.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 273.8,
+    "gap_pct": 30.1,
+    "luas_ha": 26.2
+  },
+  "K019A": {
+    "block_code": "K019A",
+    "attack_rate": 0,
+    "sph": 102.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 112.4,
+    "gap_pct": 14.3,
+    "luas_ha": 27.3
+  },
+  "K020A": {
+    "block_code": "K020A",
+    "attack_rate": 0,
+    "sph": 127.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 115.4,
+    "gap_pct": 27.2,
+    "luas_ha": 12.7
+  },
+  "K023A": {
+    "block_code": "K023A",
+    "attack_rate": 0,
+    "sph": 121.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 114.9,
+    "gap_pct": 43.0,
+    "luas_ha": 8.4
+  },
+  "J021A": {
+    "block_code": "J021A",
+    "attack_rate": 0,
+    "sph": 134.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 0.0,
+    "gap_pct": 0,
+    "luas_ha": 29.2
+  },
+  "L021B": {
+    "block_code": "L021B",
+    "attack_rate": 0,
+    "sph": 100.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 14.3,
+    "gap_pct": 13.3,
+    "luas_ha": 4.0
+  },
+  "J022B": {
+    "block_code": "J022B",
+    "attack_rate": 0,
+    "sph": 138.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 75.5,
+    "gap_pct": 54.9,
+    "luas_ha": 3.69
+  },
+  "K019B": {
+    "block_code": "K019B",
+    "attack_rate": 0,
+    "sph": 130.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 26.3,
+    "gap_pct": 35.2,
+    "luas_ha": 2.3
+  },
+  "K020B": {
+    "block_code": "K020B",
+    "attack_rate": 0,
+    "sph": 115.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 171.8,
+    "gap_pct": 39.2,
+    "luas_ha": 15.83
+  },
+  "K021A": {
+    "block_code": "K021A",
+    "attack_rate": 0,
+    "sph": 112.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 216.3,
+    "gap_pct": 26.4,
+    "luas_ha": 30.3
+  },
+  "K022A": {
+    "block_code": "K022A",
+    "attack_rate": 0,
+    "sph": 132.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 407.4,
+    "gap_pct": 41.1,
+    "luas_ha": 31.2
+  },
+  "K023B": {
+    "block_code": "K023B",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 316.0,
+    "gap_pct": 52.7,
+    "luas_ha": 21.7
+  },
+  "L020A": {
+    "block_code": "L020A",
+    "attack_rate": 0,
+    "sph": 104.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 77.3,
+    "gap_pct": 49.8,
+    "luas_ha": 6.2
+  },
+  "L021A": {
+    "block_code": "L021A",
+    "attack_rate": 0,
+    "sph": 121.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 124.5,
+    "gap_pct": 52.6,
+    "luas_ha": 7.8
+  },
+  "L022A": {
+    "block_code": "L022A",
+    "attack_rate": 0,
+    "sph": 127.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 101.4,
+    "gap_pct": 40.1,
+    "luas_ha": 8.23
+  },
+  "L023A": {
+    "block_code": "L023A",
+    "attack_rate": 0,
+    "sph": 117.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 92.0,
+    "gap_pct": 42.2,
+    "luas_ha": 7.7
+  },
+  "H026A": {
+    "block_code": "H026A",
+    "attack_rate": 0,
+    "sph": 133.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 220.9,
+    "gap_pct": 21.7,
+    "luas_ha": 29.7
+  },
+  "L024B": {
+    "block_code": "L024B",
+    "attack_rate": 0,
+    "sph": 98.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 165.1,
+    "gap_pct": 53.4,
+    "luas_ha": 12.9
+  },
+  "H025A": {
+    "block_code": "H025A",
+    "attack_rate": 0,
+    "sph": 118.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 217.0,
+    "gap_pct": 25.0,
+    "luas_ha": 28.0
+  },
+  "H027A": {
+    "block_code": "H027A",
+    "attack_rate": 0,
+    "sph": 119.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 202.1,
+    "gap_pct": 22.2,
+    "luas_ha": 29.2
+  },
+  "H028A": {
+    "block_code": "H028A",
+    "attack_rate": 0,
+    "sph": 125.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 359.2,
+    "gap_pct": 38.6,
+    "luas_ha": 28.5
+  },
+  "H029A": {
+    "block_code": "H029A",
+    "attack_rate": 0,
+    "sph": 86.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 175.7,
+    "gap_pct": 26.8,
+    "luas_ha": 29.2
+  },
+  "H030A": {
+    "block_code": "H030A",
+    "attack_rate": 0,
+    "sph": 112.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 331.3,
+    "gap_pct": 37.3,
+    "luas_ha": 30.2
+  },
+  "I025A": {
+    "block_code": "I025A",
+    "attack_rate": 0,
+    "sph": 121.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 203.9,
+    "gap_pct": 22.9,
+    "luas_ha": 28.1
+  },
+  "I026A": {
+    "block_code": "I026A",
+    "attack_rate": 0,
+    "sph": 127.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 297.1,
+    "gap_pct": 28.7,
+    "luas_ha": 31.2
+  },
+  "I027A": {
+    "block_code": "I027A",
+    "attack_rate": 0,
+    "sph": 127.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 317.6,
+    "gap_pct": 32.2,
+    "luas_ha": 29.7
+  },
+  "H024A": {
+    "block_code": "H024A",
+    "attack_rate": 0,
+    "sph": 131.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 122.2,
+    "gap_pct": 26.2,
+    "luas_ha": 13.5
+  },
+  "I028A": {
+    "block_code": "I028A",
+    "attack_rate": 0,
+    "sph": 121.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 286.1,
+    "gap_pct": 30.4,
+    "luas_ha": 29.6
+  },
+  "H024B": {
+    "block_code": "H024B",
+    "attack_rate": 0,
+    "sph": 90.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 12.5,
+    "gap_pct": 40.8,
+    "luas_ha": 1.3
+  },
+  "I029A": {
+    "block_code": "I029A",
+    "attack_rate": 0,
+    "sph": 120.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 286.8,
+    "gap_pct": 31.4,
+    "luas_ha": 29.0
+  },
+  "I030A": {
+    "block_code": "I030A",
+    "attack_rate": 0,
+    "sph": 91.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 64.6,
+    "gap_pct": 9.1,
+    "luas_ha": 29.9
+  },
+  "H025B": {
+    "block_code": "H025B",
+    "attack_rate": 0,
+    "sph": 100.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 0.4,
+    "gap_pct": 5.0,
+    "luas_ha": 0.3
+  },
+  "J024A": {
+    "block_code": "J024A",
+    "attack_rate": 0,
+    "sph": 130.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 340.3,
+    "gap_pct": 30.6,
+    "luas_ha": 32.6
+  },
+  "J025A": {
+    "block_code": "J025A",
+    "attack_rate": 0,
+    "sph": 123.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 210.5,
+    "gap_pct": 24.7,
+    "luas_ha": 26.4
+  },
+  "J026A": {
+    "block_code": "J026A",
+    "attack_rate": 0,
+    "sph": 124.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 389.3,
+    "gap_pct": 37.9,
+    "luas_ha": 31.5
+  },
+  "J027A": {
+    "block_code": "J027A",
+    "attack_rate": 0,
+    "sph": 117.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 270.6,
+    "gap_pct": 28.9,
+    "luas_ha": 30.5
+  },
+  "K024A": {
+    "block_code": "K024A",
+    "attack_rate": 0,
+    "sph": 140.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 456.6,
+    "gap_pct": 43.7,
+    "luas_ha": 28.5
+  },
+  "K025A": {
+    "block_code": "K025A",
+    "attack_rate": 0,
+    "sph": 120.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 300.2,
+    "gap_pct": 39.8,
+    "luas_ha": 23.7
+  },
+  "I024A": {
+    "block_code": "I024A",
+    "attack_rate": 0,
+    "sph": 139.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 263.7,
+    "gap_pct": 38.8,
+    "luas_ha": 18.7
+  },
+  "I024B": {
+    "block_code": "I024B",
+    "attack_rate": 0,
+    "sph": 119.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 175.9,
+    "gap_pct": 59.2,
+    "luas_ha": 10.2
+  },
+  "J028A": {
+    "block_code": "J028A",
+    "attack_rate": 0,
+    "sph": 116.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 266.3,
+    "gap_pct": 30.2,
+    "luas_ha": 28.7
+  },
+  "J029A": {
+    "block_code": "J029A",
+    "attack_rate": 0,
+    "sph": 110.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 271.6,
+    "gap_pct": 30.4,
+    "luas_ha": 29.5
+  },
+  "J030A": {
+    "block_code": "J030A",
+    "attack_rate": 0,
+    "sph": 108.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 229.3,
+    "gap_pct": 26.0,
+    "luas_ha": 29.5
+  },
+  "K026A": {
+    "block_code": "K026A",
+    "attack_rate": 0,
+    "sph": 106.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 461.9,
+    "gap_pct": 47.3,
+    "luas_ha": 32.7
+  },
+  "K027A": {
+    "block_code": "K027A",
+    "attack_rate": 0,
+    "sph": 110.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 344.2,
+    "gap_pct": 43.7,
+    "luas_ha": 26.2
+  },
+  "K028A": {
+    "block_code": "K028A",
+    "attack_rate": 0,
+    "sph": 120.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 362.9,
+    "gap_pct": 41.7,
+    "luas_ha": 26.6
+  },
+  "K029A": {
+    "block_code": "K029A",
+    "attack_rate": 0,
+    "sph": 110.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 382.1,
+    "gap_pct": 43.0,
+    "luas_ha": 29.3
+  },
+  "K030A": {
+    "block_code": "K030A",
+    "attack_rate": 0,
+    "sph": 122.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 381.5,
+    "gap_pct": 40.2,
+    "luas_ha": 29.4
+  },
+  "L025B": {
+    "block_code": "L025B",
+    "attack_rate": 0,
+    "sph": 109.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 155.7,
+    "gap_pct": 58.8,
+    "luas_ha": 8.9
+  },
+  "L028A": {
+    "block_code": "L028A",
+    "attack_rate": 0,
+    "sph": 97.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 19.3,
+    "gap_pct": 24.6,
+    "luas_ha": 2.8
+  },
+  "L029A": {
+    "block_code": "L029A",
+    "attack_rate": 0,
+    "sph": 87.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 134.4,
+    "gap_pct": 40.2,
+    "luas_ha": 12.9
+  },
+  "L030A": {
+    "block_code": "L030A",
+    "attack_rate": 0,
+    "sph": 129.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 353.3,
+    "gap_pct": 43.9,
+    "luas_ha": 23.8
+  },
+  "K024B": {
+    "block_code": "K024B",
+    "attack_rate": 0,
+    "sph": 78.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 49.5,
+    "gap_pct": 49.7,
+    "luas_ha": 5.0
+  },
+  "L024A": {
+    "block_code": "L024A",
+    "attack_rate": 0,
+    "sph": 98.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 74.4,
+    "gap_pct": 34.4,
+    "luas_ha": 9.1
+  },
+  "F026A": {
+    "block_code": "F026A",
+    "attack_rate": 0,
+    "sph": 135.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 172.4,
+    "gap_pct": 17.2,
+    "luas_ha": 28.2
+  },
+  "F032A": {
+    "block_code": "F032A",
+    "attack_rate": 0,
+    "sph": 126.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 162.0,
+    "gap_pct": 16.3,
+    "luas_ha": 30.0
+  },
+  "F033A": {
+    "block_code": "F033A",
+    "attack_rate": 0,
+    "sph": 125.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 109.0,
+    "gap_pct": 12.0,
+    "luas_ha": 27.7
+  },
+  "G025A": {
+    "block_code": "G025A",
+    "attack_rate": 0,
+    "sph": 126.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 108.4,
+    "gap_pct": -14.3,
+    "luas_ha": 22.9
+  },
+  "G026A": {
+    "block_code": "G026A",
+    "attack_rate": 0,
+    "sph": 131.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 140.5,
+    "gap_pct": 14.1,
+    "luas_ha": 29.1
+  },
+  "G031A": {
+    "block_code": "G031A",
+    "attack_rate": 0,
+    "sph": 127.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 171.5,
+    "gap_pct": 16.0,
+    "luas_ha": 32.3
+  },
+  "E026A": {
+    "block_code": "E026A",
+    "attack_rate": 0,
+    "sph": 128.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 232.8,
+    "gap_pct": 40.1,
+    "luas_ha": 17.21
+  },
+  "E027A": {
+    "block_code": "E027A",
+    "attack_rate": 0,
+    "sph": 118.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 172.0,
+    "gap_pct": 22.5,
+    "luas_ha": 24.6
+  },
+  "F025A": {
+    "block_code": "F025A",
+    "attack_rate": 0,
+    "sph": 119.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 90.6,
+    "gap_pct": 38.1,
+    "luas_ha": 7.6
+  },
+  "F027A": {
+    "block_code": "F027A",
+    "attack_rate": 0,
+    "sph": 135.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 360.8,
+    "gap_pct": 34.8,
+    "luas_ha": 29.2
+  },
+  "G027A": {
+    "block_code": "G027A",
+    "attack_rate": 0,
+    "sph": 138.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 306.9,
+    "gap_pct": 28.3,
+    "luas_ha": 30.0
+  },
+  "G030A": {
+    "block_code": "G030A",
+    "attack_rate": 0,
+    "sph": 127.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 220.3,
+    "gap_pct": 22.4,
+    "luas_ha": 29.6
+  },
+  "G032A": {
+    "block_code": "G032A",
+    "attack_rate": 0,
+    "sph": 123.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 238.6,
+    "gap_pct": 24.2,
+    "luas_ha": 30.5
+  },
+  "G033A": {
+    "block_code": "G033A",
+    "attack_rate": 0,
+    "sph": 109.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 138.6,
+    "gap_pct": 16.9,
+    "luas_ha": 28.8
+  },
+  "E033A": {
+    "block_code": "E033A",
+    "attack_rate": 0,
+    "sph": 97.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 116.9,
+    "gap_pct": 15.5,
+    "luas_ha": 27.3
+  },
+  "C027A": {
+    "block_code": "C027A",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 3.5,
+    "gap_pct": 24.5,
+    "luas_ha": 2.3
+  },
+  "G025B": {
+    "block_code": "G025B",
+    "attack_rate": 0,
+    "sph": 102.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 47.5,
+    "gap_pct": 26.7,
+    "luas_ha": 6.2
+  },
+  "C027B": {
+    "block_code": "C027B",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 0.0,
+    "gap_pct": 0,
+    "luas_ha": 0.7
+  },
+  "G028A": {
+    "block_code": "G028A",
+    "attack_rate": 0,
+    "sph": 113.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 198.0,
+    "gap_pct": 21.6,
+    "luas_ha": 30.0
+  },
+  "C028A": {
+    "block_code": "C028A",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 0.3,
+    "gap_pct": 1.6,
+    "luas_ha": 3.2
+  },
+  "G029A": {
+    "block_code": "G029A",
+    "attack_rate": 0,
+    "sph": 119.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 221.3,
+    "gap_pct": 26.5,
+    "luas_ha": 26.0
+  },
+  "D027A": {
+    "block_code": "D027A",
+    "attack_rate": 0,
+    "sph": 103.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 74.7,
+    "gap_pct": 37.7,
+    "luas_ha": 6.3
+  },
+  "D026A": {
+    "block_code": "D026A",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 4.5,
+    "gap_pct": 46.6,
+    "luas_ha": 0.8
+  },
+  "E027B": {
+    "block_code": "E027B",
+    "attack_rate": 0,
+    "sph": 113.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 28.2,
+    "gap_pct": 21.0,
+    "luas_ha": 4.4
+  },
+  "D027B": {
+    "block_code": "D027B",
+    "attack_rate": 0,
+    "sph": 17.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 3.5,
+    "gap_pct": 8.5,
+    "luas_ha": 2.2
+  },
+  "D028A": {
+    "block_code": "D028A",
+    "attack_rate": 0,
+    "sph": 135.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 22.8,
+    "gap_pct": 63.7,
+    "luas_ha": 1.0
+  },
+  "D027C": {
+    "block_code": "D027C",
+    "attack_rate": 0,
+    "sph": 113.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 8.8,
+    "gap_pct": 46.3,
+    "luas_ha": 0.6
+  },
+  "F025B": {
+    "block_code": "F025B",
+    "attack_rate": 0,
+    "sph": 102.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 6.3,
+    "gap_pct": 47.0,
+    "luas_ha": 0.6
+  },
+  "D027D": {
+    "block_code": "D027D",
+    "attack_rate": 0,
+    "sph": 106.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 14.0,
+    "gap_pct": 19.9,
+    "luas_ha": 3.5
+  },
+  "D027E": {
+    "block_code": "D027E",
+    "attack_rate": 0,
+    "sph": 100.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 19.1,
+    "gap_pct": -24.7,
+    "luas_ha": 5.2
+  },
+  "D028B": {
+    "block_code": "D028B",
+    "attack_rate": 0,
+    "sph": 44.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 8.7,
+    "gap_pct": 39.6,
+    "luas_ha": 1.0
+  },
+  "D027F": {
+    "block_code": "D027F",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 13.3,
+    "gap_pct": -22.2,
+    "luas_ha": 5.2
+  },
+  "E026B": {
+    "block_code": "E026B",
+    "attack_rate": 0,
+    "sph": 196.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 23.3,
+    "gap_pct": 70.6,
+    "luas_ha": 0.7
+  },
+  "D027G": {
+    "block_code": "D027G",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 1.1,
+    "gap_pct": 19.3,
+    "luas_ha": 0.5
+  },
+  "F025C": {
+    "block_code": "F025C",
+    "attack_rate": 0,
+    "sph": 124.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 140.1,
+    "gap_pct": 50.7,
+    "luas_ha": 9.2
+  },
+  "D027H": {
+    "block_code": "D027H",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 2.1,
+    "gap_pct": -41.5,
+    "luas_ha": 1.0
+  },
+  "F029A": {
+    "block_code": "F029A",
+    "attack_rate": 0,
+    "sph": 138.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 76.3,
+    "gap_pct": 73.9,
+    "luas_ha": 3.1
+  },
+  "D027I": {
+    "block_code": "D027I",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 0.0,
+    "gap_pct": 0,
+    "luas_ha": 3.7
+  },
+  "F030A": {
+    "block_code": "F030A",
+    "attack_rate": 0,
+    "sph": 117.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 66.8,
+    "gap_pct": 60.7,
+    "luas_ha": 3.9
+  },
+  "G025C": {
+    "block_code": "G025C",
+    "attack_rate": 0,
+    "sph": 121.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 46.9,
+    "gap_pct": 63.2,
+    "luas_ha": 2.5
+  },
+  "D028C": {
+    "block_code": "D028C",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 17.0,
+    "gap_pct": 36.6,
+    "luas_ha": 3.8
+  },
+  "F029B": {
+    "block_code": "F029B",
+    "attack_rate": 0,
+    "sph": 106.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 40.7,
+    "gap_pct": 61.7,
+    "luas_ha": 3.3
+  },
+  "D028D": {
+    "block_code": "D028D",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 8.9,
+    "gap_pct": 26.5,
+    "luas_ha": 2.6
+  },
+  "F030B": {
+    "block_code": "F030B",
+    "attack_rate": 0,
+    "sph": 80.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 28.5,
+    "gap_pct": 23.2,
+    "luas_ha": 8.0
+  },
+  "D028E": {
+    "block_code": "D028E",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 2.0,
+    "gap_pct": -16.9,
+    "luas_ha": 2.2
+  },
+  "F031A": {
+    "block_code": "F031A",
+    "attack_rate": 0,
+    "sph": 107.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 87.2,
+    "gap_pct": 41.4,
+    "luas_ha": 10.2
+  },
+  "D028F": {
+    "block_code": "D028F",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 0.0,
+    "gap_pct": 0,
+    "luas_ha": 3.0
+  },
+  "F028A": {
+    "block_code": "F028A",
+    "attack_rate": 0,
+    "sph": 115.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 6.1,
+    "gap_pct": -12.0,
+    "luas_ha": 3.0
+  },
+  "D029A": {
+    "block_code": "D029A",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 1.3,
+    "gap_pct": -83.0,
+    "luas_ha": 0.2
+  },
+  "F029C": {
+    "block_code": "F029C",
+    "attack_rate": 0,
+    "sph": 136.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 9.6,
+    "gap_pct": 43.7,
+    "luas_ha": 1.1
+  },
+  "D029B": {
+    "block_code": "D029B",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 0.0,
+    "gap_pct": 0,
+    "luas_ha": 0.5
+  },
+  "D033A": {
+    "block_code": "D033A",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 0.0,
+    "gap_pct": 0,
+    "luas_ha": 2.3
+  },
+  "D034A": {
+    "block_code": "D034A",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 0.0,
+    "gap_pct": 0,
+    "luas_ha": 0.1
+  },
+  "E026C": {
+    "block_code": "E026C",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 6.6,
+    "gap_pct": 46.9,
+    "luas_ha": 1.1
+  },
+  "E032A": {
+    "block_code": "E032A",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 0.5,
+    "gap_pct": -1.9,
+    "luas_ha": 2.3
+  },
+  "F029D": {
+    "block_code": "F029D",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 1.3,
+    "gap_pct": -13.4,
+    "luas_ha": 0.7
+  },
+  "F030C": {
+    "block_code": "F030C",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 11.6,
+    "gap_pct": 43.9,
+    "luas_ha": 2.8
+  },
+  "E026D": {
+    "block_code": "E026D",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 10.1,
+    "gap_pct": 50.5,
+    "luas_ha": 1.6
+  },
+  "F031B": {
+    "block_code": "F031B",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 28.9,
+    "gap_pct": 50.3,
+    "luas_ha": 5.4
+  },
+  "E028A": {
+    "block_code": "E028A",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 5.2,
+    "gap_pct": 47.2,
+    "luas_ha": 0.9
+  },
+  "E032B": {
+    "block_code": "E032B",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 0.0,
+    "gap_pct": 0,
+    "luas_ha": 4.5
+  },
+  "F025D": {
+    "block_code": "F025D",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 1.1,
+    "gap_pct": 27.6,
+    "luas_ha": 0.2
+  },
+  "F028B": {
+    "block_code": "F028B",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 12.3,
+    "gap_pct": 38.4,
+    "luas_ha": 2.7
+  },
+  "E034A": {
+    "block_code": "E034A",
+    "attack_rate": 0,
+    "sph": 112.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 263.5,
+    "gap_pct": 28.7,
+    "luas_ha": 30.0
+  },
+  "F029E": {
+    "block_code": "F029E",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 5.3,
+    "gap_pct": 32.1,
+    "luas_ha": 1.7
+  },
+  "F030D": {
+    "block_code": "F030D",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 19.2,
+    "gap_pct": 35.5,
+    "luas_ha": 5.9
+  },
+  "F031C": {
+    "block_code": "F031C",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 21.6,
+    "gap_pct": 43.3,
+    "luas_ha": 4.2
+  },
+  "F028C": {
+    "block_code": "F028C",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 2.5,
+    "gap_pct": 31.2,
+    "luas_ha": 1.3
+  },
+  "F029F": {
+    "block_code": "F029F",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 2.4,
+    "gap_pct": -35.7,
+    "luas_ha": 1.4
+  },
+  "F030E": {
+    "block_code": "F030E",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 10.3,
+    "gap_pct": -144.2,
+    "luas_ha": 3.3
+  },
+  "F031D": {
+    "block_code": "F031D",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 6.8,
+    "gap_pct": 27.7,
+    "luas_ha": 3.9
+  },
+  "F029G": {
+    "block_code": "F029G",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 0.0,
+    "gap_pct": 0,
+    "luas_ha": 0.8
+  },
+  "F030F": {
+    "block_code": "F030F",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 0.0,
+    "gap_pct": 0,
+    "luas_ha": 1.3
+  },
+  "F031E": {
+    "block_code": "F031E",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 0.0,
+    "gap_pct": 0,
+    "luas_ha": 1.4
+  },
+  "K032B": {
+    "block_code": "K032B",
+    "attack_rate": 0,
+    "sph": 114.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 130.0,
+    "gap_pct": 14.0,
+    "luas_ha": 35.2
+  },
+  "K035B": {
+    "block_code": "K035B",
+    "attack_rate": 0,
+    "sph": 112.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 234.7,
+    "gap_pct": 37.4,
+    "luas_ha": 24.3
+  },
+  "K033B": {
+    "block_code": "K033B",
+    "attack_rate": 0,
+    "sph": 117.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 283.2,
+    "gap_pct": 34.7,
+    "luas_ha": 28.97
+  },
+  "F034A": {
+    "block_code": "F034A",
+    "attack_rate": 0,
+    "sph": 127.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 256.6,
+    "gap_pct": 25.3,
+    "luas_ha": 30.4
+  },
+  "K034B": {
+    "block_code": "K034B",
+    "attack_rate": 0,
+    "sph": 115.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 338.1,
+    "gap_pct": 41.2,
+    "luas_ha": 29.32
+  },
+  "H031A": {
+    "block_code": "H031A",
+    "attack_rate": 0,
+    "sph": 101.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 156.6,
+    "gap_pct": 19.3,
+    "luas_ha": 30.7
+  },
+  "H034A": {
+    "block_code": "H034A",
+    "attack_rate": 0,
+    "sph": 114.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 173.4,
+    "gap_pct": 19.4,
+    "luas_ha": 29.8
+  },
+  "J031A": {
+    "block_code": "J031A",
+    "attack_rate": 0,
+    "sph": 114.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 328.4,
+    "gap_pct": 35.3,
+    "luas_ha": 31.2
+  },
+  "J032A": {
+    "block_code": "J032A",
+    "attack_rate": 0,
+    "sph": 106.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 264.9,
+    "gap_pct": 33.0,
+    "luas_ha": 28.8
+  },
+  "J033A": {
+    "block_code": "J033A",
+    "attack_rate": 0,
+    "sph": 80.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 14.4,
+    "gap_pct": 2.3,
+    "luas_ha": 29.8
+  },
+  "J034A": {
+    "block_code": "J034A",
+    "attack_rate": 0,
+    "sph": 101.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 168.3,
+    "gap_pct": 20.9,
+    "luas_ha": 30.3
+  },
+  "K032A": {
+    "block_code": "K032A",
+    "attack_rate": 0,
+    "sph": 100.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 54.8,
+    "gap_pct": 36.6,
+    "luas_ha": 5.7
+  },
+  "K033A": {
+    "block_code": "K033A",
+    "attack_rate": 0,
+    "sph": 94.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 26.6,
+    "gap_pct": 19.0,
+    "luas_ha": 5.7
+  },
+  "K035A": {
+    "block_code": "K035A",
+    "attack_rate": 0,
+    "sph": 119.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 98.1,
+    "gap_pct": 56.1,
+    "luas_ha": 5.6
+  },
+  "G034A": {
+    "block_code": "G034A",
+    "attack_rate": 0,
+    "sph": 118.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 273.9,
+    "gap_pct": 28.1,
+    "luas_ha": 31.5
+  },
+  "G035A": {
+    "block_code": "G035A",
+    "attack_rate": 0,
+    "sph": 108.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 216.0,
+    "gap_pct": 25.7,
+    "luas_ha": 29.8
+  },
+  "H032A": {
+    "block_code": "H032A",
+    "attack_rate": 0,
+    "sph": 113.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 198.3,
+    "gap_pct": 23.8,
+    "luas_ha": 28.1
+  },
+  "I032A": {
+    "block_code": "I032A",
+    "attack_rate": 0,
+    "sph": 102.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 132.4,
+    "gap_pct": 17.4,
+    "luas_ha": 28.4
+  },
+  "G036A": {
+    "block_code": "G036A",
+    "attack_rate": 0,
+    "sph": 80.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 142.5,
+    "gap_pct": 18.0,
+    "luas_ha": 31.6
+  },
+  "H033A": {
+    "block_code": "H033A",
+    "attack_rate": 0,
+    "sph": 105.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 159.6,
+    "gap_pct": 20.6,
+    "luas_ha": 28.2
+  },
+  "H035A": {
+    "block_code": "H035A",
+    "attack_rate": 0,
+    "sph": 109.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 196.1,
+    "gap_pct": 22.4,
+    "luas_ha": 29.5
+  },
+  "I031A": {
+    "block_code": "I031A",
+    "attack_rate": 0,
+    "sph": 121.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 232.3,
+    "gap_pct": 23.4,
+    "luas_ha": 31.2
+  },
+  "I033A": {
+    "block_code": "I033A",
+    "attack_rate": 0,
+    "sph": 103.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 378.0,
+    "gap_pct": 40.0,
+    "luas_ha": 28.6
+  },
+  "I034A": {
+    "block_code": "I034A",
+    "attack_rate": 0,
+    "sph": 101.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 264.5,
+    "gap_pct": 30.4,
+    "luas_ha": 30.5
+  },
+  "I035A": {
+    "block_code": "I035A",
+    "attack_rate": 0,
+    "sph": 120.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 370.7,
+    "gap_pct": 40.3,
+    "luas_ha": 29.3
+  },
+  "H036A": {
+    "block_code": "H036A",
+    "attack_rate": 0,
+    "sph": 105.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 194.2,
+    "gap_pct": 23.6,
+    "luas_ha": 29.8
+  },
+  "J035A": {
+    "block_code": "J035A",
+    "attack_rate": 0,
+    "sph": 109.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 299.2,
+    "gap_pct": 34.9,
+    "luas_ha": 29.8
+  },
+  "K031A": {
+    "block_code": "K031A",
+    "attack_rate": 0,
+    "sph": 111.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 276.9,
+    "gap_pct": 51.8,
+    "luas_ha": 18.1
+  },
+  "K034A": {
+    "block_code": "K034A",
+    "attack_rate": 0,
+    "sph": 93.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 20.6,
+    "gap_pct": 14.2,
+    "luas_ha": 5.7
+  },
+  "L032B": {
+    "block_code": "L032B",
+    "attack_rate": 0,
+    "sph": 125.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 212.3,
+    "gap_pct": 22.4,
+    "luas_ha": 32.94
+  },
+  "L033B": {
+    "block_code": "L033B",
+    "attack_rate": 0,
+    "sph": 120.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 238.8,
+    "gap_pct": 28.3,
+    "luas_ha": 30.44
+  },
+  "L034B": {
+    "block_code": "L034B",
+    "attack_rate": 0,
+    "sph": 115.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 241.1,
+    "gap_pct": 30.6,
+    "luas_ha": 29.64
+  },
+  "I036A": {
+    "block_code": "I036A",
+    "attack_rate": 0,
+    "sph": 126.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 411.1,
+    "gap_pct": 42.6,
+    "luas_ha": 29.1
+  },
+  "L035B": {
+    "block_code": "L035B",
+    "attack_rate": 0,
+    "sph": 112.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 138.5,
+    "gap_pct": 21.4,
+    "luas_ha": 24.98
+  },
+  "L036B": {
+    "block_code": "L036B",
+    "attack_rate": 0,
+    "sph": 121.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 199.9,
+    "gap_pct": 22.9,
+    "luas_ha": 31.37
+  },
+  "L039A": {
+    "block_code": "L039A",
+    "attack_rate": 0,
+    "sph": 118.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 259.4,
+    "gap_pct": 46.8,
+    "luas_ha": 20.24
+  },
+  "M032B": {
+    "block_code": "M032B",
+    "attack_rate": 0,
+    "sph": 123.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 56.7,
+    "gap_pct": 26.6,
+    "luas_ha": 7.5
+  },
+  "M033B": {
+    "block_code": "M033B",
+    "attack_rate": 0,
+    "sph": 120.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 267.9,
+    "gap_pct": 38.8,
+    "luas_ha": 24.88
+  },
+  "J036A": {
+    "block_code": "J036A",
+    "attack_rate": 0,
+    "sph": 99.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 157.9,
+    "gap_pct": 20.4,
+    "luas_ha": 29.9
+  },
+  "M034B": {
+    "block_code": "M034B",
+    "attack_rate": 0,
+    "sph": 116.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 152.3,
+    "gap_pct": 26.3,
+    "luas_ha": 21.67
+  },
+  "M035B": {
+    "block_code": "M035B",
+    "attack_rate": 0,
+    "sph": 123.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 191.9,
+    "gap_pct": 34.7,
+    "luas_ha": 19.56
+  },
+  "M036B": {
+    "block_code": "M036B",
+    "attack_rate": 0,
+    "sph": 117.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 199.9,
+    "gap_pct": 28.1,
+    "luas_ha": 26.3
+  },
+  "M037B": {
+    "block_code": "M037B",
+    "attack_rate": 0,
+    "sph": 126.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 370.5,
+    "gap_pct": 43.3,
+    "luas_ha": 29.45
+  },
+  "M038B": {
+    "block_code": "M038B",
+    "attack_rate": 0,
+    "sph": 142.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 465.9,
+    "gap_pct": 50.7,
+    "luas_ha": 27.96
+  },
+  "M039B": {
+    "block_code": "M039B",
+    "attack_rate": 0,
+    "sph": 126.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 227.4,
+    "gap_pct": 47.4,
+    "luas_ha": 16.46
+  },
+  "M040B": {
+    "block_code": "M040B",
+    "attack_rate": 0,
+    "sph": 117.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 249.6,
+    "gap_pct": 42.3,
+    "luas_ha": 21.15
+  },
+  "M041B": {
+    "block_code": "M041B",
+    "attack_rate": 0,
+    "sph": 116.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 260.0,
+    "gap_pct": 40.0,
+    "luas_ha": 24.06
+  },
+  "M042B": {
+    "block_code": "M042B",
+    "attack_rate": 0,
+    "sph": 109.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 288.6,
+    "gap_pct": 39.5,
+    "luas_ha": 29.13
+  },
+  "M043B": {
+    "block_code": "M043B",
+    "attack_rate": 0,
+    "sph": 112.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 57.4,
+    "gap_pct": 18.4,
+    "luas_ha": 11.53
+  },
+  "K036A": {
+    "block_code": "K036A",
+    "attack_rate": 0,
+    "sph": 129.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 75.4,
+    "gap_pct": 39.5,
+    "luas_ha": 5.63
+  },
+  "N037C": {
+    "block_code": "N037C",
+    "attack_rate": 0,
+    "sph": 120.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 85.2,
+    "gap_pct": 33.5,
+    "luas_ha": 9.2
+  },
+  "K036B": {
+    "block_code": "K036B",
+    "attack_rate": 0,
+    "sph": 116.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 278.6,
+    "gap_pct": 33.5,
+    "luas_ha": 30.96
+  },
+  "N038C": {
+    "block_code": "N038C",
+    "attack_rate": 0,
+    "sph": 124.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 232.9,
+    "gap_pct": 41.5,
+    "luas_ha": 19.58
+  },
+  "L031A": {
+    "block_code": "L031A",
+    "attack_rate": 0,
+    "sph": 133.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 281.7,
+    "gap_pct": 46.4,
+    "luas_ha": 17.4
+  },
+  "N039C": {
+    "block_code": "N039C",
+    "attack_rate": 0,
+    "sph": 128.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 315.1,
+    "gap_pct": 48.6,
+    "luas_ha": 22.0
+  },
+  "N040C": {
+    "block_code": "N040C",
+    "attack_rate": 0,
+    "sph": 120.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 187.1,
+    "gap_pct": 38.6,
+    "luas_ha": 17.51
+  },
+  "N041C": {
+    "block_code": "N041C",
+    "attack_rate": 0,
+    "sph": 121.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 197.2,
+    "gap_pct": 55.3,
+    "luas_ha": 12.77
+  },
+  "N042C": {
+    "block_code": "N042C",
+    "attack_rate": 0,
+    "sph": 120.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 161.2,
+    "gap_pct": 46.2,
+    "luas_ha": 11.53
+  },
+  "N043C": {
+    "block_code": "N043C",
+    "attack_rate": 0,
+    "sph": 136.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 24.2,
+    "gap_pct": 34.2,
+    "luas_ha": 2.26
+  },
+  "L037B": {
+    "block_code": "L037B",
+    "attack_rate": 0,
+    "sph": 123.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 211.0,
+    "gap_pct": 24.1,
+    "luas_ha": 30.8
+  },
+  "L039B": {
+    "block_code": "L039B",
+    "attack_rate": 0,
+    "sph": 128.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 222.0,
+    "gap_pct": 34.9,
+    "luas_ha": 18.9
+  },
+  "L038A": {
+    "block_code": "L038A",
+    "attack_rate": 0,
+    "sph": 130.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 260.1,
+    "gap_pct": 49.7,
+    "luas_ha": 15.39
+  },
+  "L040A": {
+    "block_code": "L040A",
+    "attack_rate": 0,
+    "sph": 122.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 201.4,
+    "gap_pct": 56.5,
+    "luas_ha": 10.7
+  },
+  "L038B": {
+    "block_code": "L038B",
+    "attack_rate": 0,
+    "sph": 121.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 139.7,
+    "gap_pct": 31.2,
+    "luas_ha": 15.69
+  },
+  "M038A": {
+    "block_code": "M038A",
+    "attack_rate": 0,
+    "sph": 132.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 222.6,
+    "gap_pct": 59.7,
+    "luas_ha": 10.8
+  },
+  "M039A": {
+    "block_code": "M039A",
+    "attack_rate": 0,
+    "sph": 136.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 257.0,
+    "gap_pct": 51.4,
+    "luas_ha": 13.7
+  },
+  "M040A": {
+    "block_code": "M040A",
+    "attack_rate": 0,
+    "sph": 137.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 119.2,
+    "gap_pct": 38.5,
+    "luas_ha": 8.6
+  },
+  "M041A": {
+    "block_code": "M041A",
+    "attack_rate": 0,
+    "sph": 138.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 116.6,
+    "gap_pct": 53.7,
+    "luas_ha": 6.0
+  },
+  "M043A": {
+    "block_code": "M043A",
+    "attack_rate": 0,
+    "sph": 133.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 140.0,
+    "gap_pct": 37.6,
+    "luas_ha": 10.7
+  },
+  "M044A": {
+    "block_code": "M044A",
+    "attack_rate": 0,
+    "sph": 147.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 65.3,
+    "gap_pct": 70.6,
+    "luas_ha": 2.4
+  },
+  "N043A": {
+    "block_code": "N043A",
+    "attack_rate": 0,
+    "sph": 89.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 309.9,
+    "gap_pct": 43.3,
+    "luas_ha": 26.6
+  },
+  "N044A": {
+    "block_code": "N044A",
+    "attack_rate": 0,
+    "sph": 181.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 24.2,
+    "gap_pct": 63.7,
+    "luas_ha": 0.8
+  },
+  "M039C": {
+    "block_code": "M039C",
+    "attack_rate": 0,
+    "sph": 124.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 36.9,
+    "gap_pct": 40.1,
+    "luas_ha": 2.87
+  },
+  "M040C": {
+    "block_code": "M040C",
+    "attack_rate": 0,
+    "sph": 120.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 58.8,
+    "gap_pct": 36.3,
+    "luas_ha": 5.6
+  },
+  "M041C": {
+    "block_code": "M041C",
+    "attack_rate": 0,
+    "sph": 112.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 2.8,
+    "gap_pct": 25.2,
+    "luas_ha": 0.4
+  },
+  "K037B": {
+    "block_code": "K037B",
+    "attack_rate": 0,
+    "sph": 124.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 339.2,
+    "gap_pct": 37.8,
+    "luas_ha": 29.27
+  },
+  "K038B": {
+    "block_code": "K038B",
+    "attack_rate": 0,
+    "sph": 129.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 193.1,
+    "gap_pct": 36.0,
+    "luas_ha": 16.94
+  },
+  "K039B": {
+    "block_code": "K039B",
+    "attack_rate": 0,
+    "sph": 127.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 48.9,
+    "gap_pct": 19.2,
+    "luas_ha": 8.4
+  },
+  "I039A": {
+    "block_code": "I039A",
+    "attack_rate": 0,
+    "sph": 118.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 220.6,
+    "gap_pct": 25.6,
+    "luas_ha": 30.0
+  },
+  "I040A": {
+    "block_code": "I040A",
+    "attack_rate": 0,
+    "sph": 121.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 268.4,
+    "gap_pct": 31.6,
+    "luas_ha": 28.5
+  },
+  "I041A": {
+    "block_code": "I041A",
+    "attack_rate": 0,
+    "sph": 126.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 303.6,
+    "gap_pct": 33.7,
+    "luas_ha": 29.3
+  },
+  "I042A": {
+    "block_code": "I042A",
+    "attack_rate": 0,
+    "sph": 104.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 99.6,
+    "gap_pct": 20.6,
+    "luas_ha": 19.2
+  },
+  "J039A": {
+    "block_code": "J039A",
+    "attack_rate": 0,
+    "sph": 121.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 195.0,
+    "gap_pct": 22.1,
+    "luas_ha": 29.2
+  },
+  "J040A": {
+    "block_code": "J040A",
+    "attack_rate": 0,
+    "sph": 104.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 85.4,
+    "gap_pct": 11.2,
+    "luas_ha": 29.8
+  },
+  "J041A": {
+    "block_code": "J041A",
+    "attack_rate": 0,
+    "sph": 113.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 172.0,
+    "gap_pct": 20.0,
+    "luas_ha": 30.2
+  },
+  "K039A": {
+    "block_code": "K039A",
+    "attack_rate": 0,
+    "sph": 121.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 247.9,
+    "gap_pct": 30.1,
+    "luas_ha": 28.1
+  },
+  "I043A": {
+    "block_code": "I043A",
+    "attack_rate": 0,
+    "sph": 111.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 281.4,
+    "gap_pct": 50.4,
+    "luas_ha": 19.2
+  },
+  "J037A": {
+    "block_code": "J037A",
+    "attack_rate": 0,
+    "sph": 123.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 464.4,
+    "gap_pct": 45.8,
+    "luas_ha": 31.4
+  },
+  "J038A": {
+    "block_code": "J038A",
+    "attack_rate": 0,
+    "sph": 129.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 359.0,
+    "gap_pct": 37.0,
+    "luas_ha": 28.6
+  },
+  "K037A": {
+    "block_code": "K037A",
+    "attack_rate": 0,
+    "sph": 134.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 319.1,
+    "gap_pct": 60.8,
+    "luas_ha": 14.9
+  },
+  "K038A": {
+    "block_code": "K038A",
+    "attack_rate": 0,
+    "sph": 124.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 384.4,
+    "gap_pct": 49.3,
+    "luas_ha": 24.0
+  },
+  "J042A": {
+    "block_code": "J042A",
+    "attack_rate": 0,
+    "sph": 97.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 17.6,
+    "gap_pct": 4.9,
+    "luas_ha": 14.3
+  },
+  "J043A": {
+    "block_code": "J043A",
+    "attack_rate": 0,
+    "sph": 115.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 68.4,
+    "gap_pct": 29.3,
+    "luas_ha": 9.2
+  },
+  "J044A": {
+    "block_code": "J044A",
+    "attack_rate": 0,
+    "sph": 103.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 17.9,
+    "gap_pct": 19.8,
+    "luas_ha": 3.8
+  },
+  "K040A": {
+    "block_code": "K040A",
+    "attack_rate": 0,
+    "sph": 106.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 394.5,
+    "gap_pct": 52.1,
+    "luas_ha": 25.9
+  },
+  "K041A": {
+    "block_code": "K041A",
+    "attack_rate": 0,
+    "sph": 111.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 132.1,
+    "gap_pct": 52.5,
+    "luas_ha": 8.2
+  },
+  "I045B": {
+    "block_code": "I045B",
+    "attack_rate": 0,
+    "sph": 78.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 27.4,
+    "gap_pct": 65.0,
+    "luas_ha": 1.89
+  },
+  "J042B": {
+    "block_code": "J042B",
+    "attack_rate": 0,
+    "sph": 108.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 31.2,
+    "gap_pct": 73.4,
+    "luas_ha": 1.5
+  },
+  "J043B": {
+    "block_code": "J043B",
+    "attack_rate": 0,
+    "sph": 124.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 76.1,
+    "gap_pct": 86.3,
+    "luas_ha": 2.7
+  },
+  "J044B": {
+    "block_code": "J044B",
+    "attack_rate": 0,
+    "sph": 132.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 9.0,
+    "gap_pct": 63.7,
+    "luas_ha": 0.4
+  },
+  "G037A": {
+    "block_code": "G037A",
+    "attack_rate": 0,
+    "sph": 90.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 386.5,
+    "gap_pct": 48.8,
+    "luas_ha": 30.5
+  },
+  "I044A": {
+    "block_code": "I044A",
+    "attack_rate": 0,
+    "sph": 90.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 297.9,
+    "gap_pct": 60.1,
+    "luas_ha": 19.6
+  },
+  "G038A": {
+    "block_code": "G038A",
+    "attack_rate": 0,
+    "sph": 109.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 364.6,
+    "gap_pct": 42.7,
+    "luas_ha": 29.3
+  },
+  "I045A": {
+    "block_code": "I045A",
+    "attack_rate": 0,
+    "sph": 83.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 103.9,
+    "gap_pct": 65.3,
+    "luas_ha": 6.7
+  },
+  "G039A": {
+    "block_code": "G039A",
+    "attack_rate": 0,
+    "sph": 103.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 409.1,
+    "gap_pct": 47.0,
+    "luas_ha": 29.7
+  },
+  "J042C": {
+    "block_code": "J042C",
+    "attack_rate": 0,
+    "sph": 84.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 13.4,
+    "gap_pct": 74.9,
+    "luas_ha": 0.8
+  },
+  "G040A": {
+    "block_code": "G040A",
+    "attack_rate": 0,
+    "sph": 61.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 304.7,
+    "gap_pct": 50.7,
+    "luas_ha": 29.1
+  },
+  "J042D": {
+    "block_code": "J042D",
+    "attack_rate": 0,
+    "sph": 101.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 193.7,
+    "gap_pct": 60.1,
+    "luas_ha": 12.9
+  },
+  "G041A": {
+    "block_code": "G041A",
+    "attack_rate": 0,
+    "sph": 36.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 129.0,
+    "gap_pct": 32.3,
+    "luas_ha": 23.61
+  },
+  "J043C": {
+    "block_code": "J043C",
+    "attack_rate": 0,
+    "sph": 131.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 219.1,
+    "gap_pct": 71.0,
+    "luas_ha": 9.8
+  },
+  "G042A": {
+    "block_code": "G042A",
+    "attack_rate": 0,
+    "sph": 69.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 57.4,
+    "gap_pct": 61.1,
+    "luas_ha": 5.2
+  },
+  "J044C": {
+    "block_code": "J044C",
+    "attack_rate": 0,
+    "sph": 60.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 1.4,
+    "gap_pct": 49.7,
+    "luas_ha": 0.2
+  },
+  "G043A": {
+    "block_code": "G043A",
+    "attack_rate": 0,
+    "sph": 117.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 7.1,
+    "gap_pct": 77.3,
+    "luas_ha": 0.3
+  },
+  "K041B": {
+    "block_code": "K041B",
+    "attack_rate": 0,
+    "sph": 148.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 14.3,
+    "gap_pct": 84.9,
+    "luas_ha": 0.6
+  },
+  "H037A": {
+    "block_code": "H037A",
+    "attack_rate": 0,
+    "sph": 114.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 436.9,
+    "gap_pct": 46.3,
+    "luas_ha": 31.5
+  },
+  "K042A": {
+    "block_code": "K042A",
+    "attack_rate": 0,
+    "sph": 109.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 11.5,
+    "gap_pct": 69.9,
+    "luas_ha": 0.8
+  },
+  "H038A": {
+    "block_code": "H038A",
+    "attack_rate": 0,
+    "sph": 104.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 357.1,
+    "gap_pct": 45.6,
+    "luas_ha": 28.8
+  },
+  "H039A": {
+    "block_code": "H039A",
+    "attack_rate": 0,
+    "sph": 111.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 151.2,
+    "gap_pct": 16.9,
+    "luas_ha": 31.4
+  },
+  "H040A": {
+    "block_code": "H040A",
+    "attack_rate": 0,
+    "sph": 108.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 196.4,
+    "gap_pct": 26.7,
+    "luas_ha": 27.1
+  },
+  "H041A": {
+    "block_code": "H041A",
+    "attack_rate": 0,
+    "sph": 104.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 89.2,
+    "gap_pct": 11.8,
+    "luas_ha": 28.3
+  },
+  "I038A": {
+    "block_code": "I038A",
+    "attack_rate": 0,
+    "sph": 117.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 198.0,
+    "gap_pct": 22.8,
+    "luas_ha": 29.0
+  },
+  "I037A": {
+    "block_code": "I037A",
+    "attack_rate": 0,
+    "sph": 116.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 339.8,
+    "gap_pct": 44.5,
+    "luas_ha": 25.1
+  },
+  "I037B": {
+    "block_code": "I037B",
+    "attack_rate": 0,
+    "sph": 118.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 6.9,
+    "gap_pct": 56.2,
+    "luas_ha": 0.4
+  },
+  "E036A": {
+    "block_code": "E036A",
+    "attack_rate": 0,
+    "sph": 111.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 246.9,
+    "gap_pct": 27.8,
+    "luas_ha": 30.5
+  },
+  "C038A": {
+    "block_code": "C038A",
+    "attack_rate": 0,
+    "sph": 114.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 7.4,
+    "gap_pct": 1.0,
+    "luas_ha": 24.5
+  },
+  "D035A": {
+    "block_code": "D035A",
+    "attack_rate": 0,
+    "sph": 112.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 148.3,
+    "gap_pct": 20.0,
+    "luas_ha": 24.1
+  },
+  "D036A": {
+    "block_code": "D036A",
+    "attack_rate": 0,
+    "sph": 121.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 209.8,
+    "gap_pct": 21.4,
+    "luas_ha": 32.8
+  },
+  "D037A": {
+    "block_code": "D037A",
+    "attack_rate": 0,
+    "sph": 126.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 311.5,
+    "gap_pct": 29.8,
+    "luas_ha": 31.6
+  },
+  "D038A": {
+    "block_code": "D038A",
+    "attack_rate": 0,
+    "sph": 101.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 5.9,
+    "gap_pct": 0.7,
+    "luas_ha": 32.1
+  },
+  "D039A": {
+    "block_code": "D039A",
+    "attack_rate": 0,
+    "sph": 86.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 157.7,
+    "gap_pct": -25.7,
+    "luas_ha": 27.5
+  },
+  "E035A": {
+    "block_code": "E035A",
+    "attack_rate": 0,
+    "sph": 91.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 161.7,
+    "gap_pct": 21.6,
+    "luas_ha": 28.6
+  },
+  "E036B": {
+    "block_code": "E036B",
+    "attack_rate": 0,
+    "sph": 124.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 11.3,
+    "gap_pct": 48.2,
+    "luas_ha": 0.7
+  },
+  "C039A": {
+    "block_code": "C039A",
+    "attack_rate": 0,
+    "sph": 85.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 183.5,
+    "gap_pct": 41.4,
+    "luas_ha": 17.7
+  },
+  "D040A": {
+    "block_code": "D040A",
+    "attack_rate": 0,
+    "sph": 88.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 203.8,
+    "gap_pct": 36.1,
+    "luas_ha": 21.7
+  },
+  "D041A": {
+    "block_code": "D041A",
+    "attack_rate": 0,
+    "sph": 99.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 218.7,
+    "gap_pct": 46.3,
+    "luas_ha": 18.2
+  },
+  "D042A": {
+    "block_code": "D042A",
+    "attack_rate": 0,
+    "sph": 101.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 362.2,
+    "gap_pct": 56.7,
+    "luas_ha": 22.7
+  },
+  "D043A": {
+    "block_code": "D043A",
+    "attack_rate": 0,
+    "sph": 32.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 38.6,
+    "gap_pct": 18.3,
+    "luas_ha": 15.08
+  },
+  "D043B": {
+    "block_code": "D043B",
+    "attack_rate": 0,
+    "sph": 110,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 0.3,
+    "gap_pct": -5.1,
+    "luas_ha": 1.0
+  },
+  "E037A": {
+    "block_code": "E037A",
+    "attack_rate": 0,
+    "sph": 130.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 216.2,
+    "gap_pct": 34.6,
+    "luas_ha": 18.3
+  },
+  "E037B": {
+    "block_code": "E037B",
+    "attack_rate": 0,
+    "sph": 56.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 25.5,
+    "gap_pct": 21.9,
+    "luas_ha": 6.6
+  },
+  "E038A": {
+    "block_code": "E038A",
+    "attack_rate": 0,
+    "sph": 129.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 421.6,
+    "gap_pct": 41.9,
+    "luas_ha": 29.6
+  },
+  "E039A": {
+    "block_code": "E039A",
+    "attack_rate": 0,
+    "sph": 94.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 126.5,
+    "gap_pct": 18.7,
+    "luas_ha": 27.5
+  },
+  "E040A": {
+    "block_code": "E040A",
+    "attack_rate": 0,
+    "sph": 93.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 299.9,
+    "gap_pct": 35.1,
+    "luas_ha": 30.4
+  },
+  "E041A": {
+    "block_code": "E041A",
+    "attack_rate": 0,
+    "sph": 110.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 283.9,
+    "gap_pct": 33.9,
+    "luas_ha": 29.0
+  },
+  "E042A": {
+    "block_code": "E042A",
+    "attack_rate": 0,
+    "sph": 99.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 480.7,
+    "gap_pct": 58.3,
+    "luas_ha": 30.2
+  },
+  "E043A": {
+    "block_code": "E043A",
+    "attack_rate": 0,
+    "sph": 99.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 121.3,
+    "gap_pct": 37.7,
+    "luas_ha": 12.4
+  },
+  "E043B": {
+    "block_code": "E043B",
+    "attack_rate": 0,
+    "sph": 50.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 14.3,
+    "gap_pct": 61.6,
+    "luas_ha": 1.14
+  },
+  "E044A": {
+    "block_code": "E044A",
+    "attack_rate": 0,
+    "sph": 98.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 94.5,
+    "gap_pct": 72.6,
+    "luas_ha": 4.8
+  },
+  "F035A": {
+    "block_code": "F035A",
+    "attack_rate": 0,
+    "sph": 119.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 310.6,
+    "gap_pct": 35.4,
+    "luas_ha": 29.0
+  },
+  "F036A": {
+    "block_code": "F036A",
+    "attack_rate": 0,
+    "sph": 119.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 281.2,
+    "gap_pct": 29.1,
+    "luas_ha": 31.0
+  },
+  "F037A": {
+    "block_code": "F037A",
+    "attack_rate": 0,
+    "sph": 115.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 287.9,
+    "gap_pct": 33.4,
+    "luas_ha": 28.6
+  },
+  "F038A": {
+    "block_code": "F038A",
+    "attack_rate": 0,
+    "sph": 136.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 515.8,
+    "gap_pct": 48.5,
+    "luas_ha": 29.8
+  },
+  "F039A": {
+    "block_code": "F039A",
+    "attack_rate": 0,
+    "sph": 105.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 307.3,
+    "gap_pct": 41.7,
+    "luas_ha": 28.4
+  },
+  "F040A": {
+    "block_code": "F040A",
+    "attack_rate": 0,
+    "sph": 100.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 244.0,
+    "gap_pct": 33.5,
+    "luas_ha": 30.6
+  },
+  "F041A": {
+    "block_code": "F041A",
+    "attack_rate": 0,
+    "sph": 83.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 160.2,
+    "gap_pct": 27.5,
+    "luas_ha": 29.4
+  },
+  "F042A": {
+    "block_code": "F042A",
+    "attack_rate": 0,
+    "sph": 104.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 350.8,
+    "gap_pct": 45.4,
+    "luas_ha": 28.7
+  },
+  "F043A": {
+    "block_code": "F043A",
+    "attack_rate": 0,
+    "sph": 127.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 591.1,
+    "gap_pct": 75.0,
+    "luas_ha": 23.7
+  },
+  "F044A": {
+    "block_code": "F044A",
+    "attack_rate": 0,
+    "sph": 71.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 268.6,
+    "gap_pct": 54.5,
+    "luas_ha": 24.5
+  },
+  "F045A": {
+    "block_code": "F045A",
+    "attack_rate": 0,
+    "sph": 77.0,
+    "stadium": 1,
+    "stress_class": "",
+    "loss_value_juta": 265.6,
+    "gap_pct": 69.6,
+    "luas_ha": 17.1
+  }
+}
