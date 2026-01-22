@@ -1,0 +1,39 @@
+Module No,Module Name,Module Purpose,Function Name,Function Description
+1,DIVISION SELECTOR,Toggle antar 14 divisi untuk melihat blok-blok,filterByDivision(division),Filter dan tampilkan blok berdasarkan kode divisi yang dipilih (AME01 AME02 dll)
+1,DIVISION SELECTOR,Toggle antar 14 divisi untuk melihat blok-blok,getBlocksByDivision(divisionCode),Mengambil array blok yang termasuk dalam divisi tertentu
+2,DIVISION METRICS,Menghitung dan menampilkan metrik level divisi,calculateDivisionMetrics(divisionCode),Menghitung metrik komprehensif (total loss attack rate avg SPH jumlah blok kritis dll) untuk sebuah divisi
+2,DIVISION METRICS,Menghitung dan menampilkan metrik level divisi,getAllDivisionMetrics(),Mengambil metrik untuk semua 14 divisi sekaligus
+2,DIVISION METRICS,Menghitung dan menampilkan metrik level divisi,getDivisionMetrics(divisionCode),Mengambil metrik dari cache atau hitung jika belum ada
+2,DIVISION METRICS,Menghitung dan menampilkan metrik level divisi,updateDivisionSummary(divisionCode),Update tampilan UI summary divisi (grafik bar statistik dll)
+3,HISTORICAL TRENDS CHART,Menampilkan chart tren historis 6 tahun (2023-2028) dengan proyeksi,renderHistoricalTrendsChart(divisionCode metrics),Render chart dual Y-axis dengan Loss (Miliar Rp) + Attack Rate (%) untuk divisi tertentu
+3,HISTORICAL TRENDS CHART,Menampilkan chart tren historis 6 tahun (2023-2028) dengan proyeksi,showHistoricalDataModal(year),Menampilkan popup modal dengan tabel detail data ketika klik pada titik chart
+3,HISTORICAL TRENDS CHART,Menampilkan chart tren historis 6 tahun (2023-2028) dengan proyeksi,closeHistoricalDataModal(),Menutup popup modal historical data
+4,PAPARAN RISIKO,Menampilkan ringkasan risiko dan blok-blok kritis,updatePaparanRisiko(metrics),Update section paparan risiko dengan data metrik
+4,PAPARAN RISIKO,Menampilkan ringkasan risiko dan blok-blok kritis,renderPaparanRisk(divisionCode),Render visualisasi risiko untuk divisi
+4,PAPARAN RISIKO,Menampilkan ringkasan risiko dan blok-blok kritis,openPaparanRisikoModal(divisionCode),Membuka modal detail paparan risiko
+4,PAPARAN RISIKO,Menampilkan ringkasan risiko dan blok-blok kritis,closePaparanRisikoModal(),Menutup modal paparan risiko
+4,PAPARAN RISIKO,Menampilkan ringkasan risiko dan blok-blok kritis,renderModalChart(blocks sortBy),Render chart dalam modal (bar chart blok-blok kritis)
+4,PAPARAN RISIKO,Menampilkan ringkasan risiko dan blok-blok kritis,sortModalChart(sortBy),Sort ulang chart modal berdasarkan metrik (AR Loss Gap)
+5,BLOCK BREAKDOWN,Analisis detail per-blok individual,openBlockBreakdownModal(divisionCode),Membuka modal kategorisasi blok untuk divisi
+5,BLOCK BREAKDOWN,Analisis detail per-blok individual,closeBlockBreakdownModal(),Menutup modal breakdown blok
+5,BLOCK BREAKDOWN,Analisis detail per-blok individual,loadBlockData(blockCode),Memuat data lengkap untuk blok spesifik (attack rate SPH loss dll)
+5,BLOCK BREAKDOWN,Analisis detail per-blok individual,populateBlockSelector(divisionCode),Mengisi dropdown selector dengan daftar blok dari divisi
+5,BLOCK BREAKDOWN,Analisis detail per-blok individual,switchBlock(blockCode),Beralih tampilan ke blok yang berbeda
+6,BLOCK CATEGORIZATION,Klasifikasi blok ke CRITICAL HIGH MEDIUM LOW,getGanodermaStadium(attackRate gapPct),Menentukan stadium (1-4) dan tingkat keparahan berdasarkan attack rate dan gap %
+6,BLOCK CATEGORIZATION,Klasifikasi blok ke CRITICAL HIGH MEDIUM LOW,getStadium(attackRate gapPct),Mendapatkan klasifikasi stadium (simplified version)
+6,BLOCK CATEGORIZATION,Klasifikasi blok ke CRITICAL HIGH MEDIUM LOW,getSeverityClass(stadium),Mendapatkan CSS class untuk warna berdasarkan severity
+6,BLOCK CATEGORIZATION,Klasifikasi blok ke CRITICAL HIGH MEDIUM LOW,getPriorityBadge(priority),Mendapatkan HTML badge untuk priority level
+7,YIELD TREND MODAL,Menampilkan analisis tren produksi,openYieldTrendModal(blockCode),Membuka modal tren yield untuk blok tertentu
+7,YIELD TREND MODAL,Menampilkan analisis tren produksi,closeYieldTrendModal(),Menutup modal yield trend
+7,YIELD TREND MODAL,Menampilkan analisis tren produksi,renderYieldTrendModal(blockCode),Render chart tren yield (Realisasi vs Potensi 2023-2025)
+8,ANALYSIS MODAL,Analisis dampak treatment dan perhitungan ROI,openAnalysisModal(blockCode),Membuka modal analisis treatment untuk blok/divisi
+8,ANALYSIS MODAL,Analisis dampak treatment dan perhitungan ROI,closeAnalysisModal(),Menutup modal analisis
+8,ANALYSIS MODAL,Analisis dampak treatment dan perhitungan ROI,renderTotalAnalysis(),Render analisis agregat (total semua blok)
+8,ANALYSIS MODAL,Analisis dampak treatment dan perhitungan ROI,renderModalCharts(data),Render chart-chart dalam modal
+8,ANALYSIS MODAL,Analisis dampak treatment dan perhitungan ROI,renderComparisonChart(metric),Render chart perbandingan No Treatment vs With Treatment untuk metrik tertentu (AR/Gap/SPH/Loss)
+9,DEGRADATION MODEL CHART,Menampilkan proyeksi degradasi 3 tahun ke depan,renderDegradationModelChart(blockCode),Render chart proyeksi 3 tahun degradation model untuk blok tertentu
+10,DIVISION COMPARISON,Perbandingan metrik antar divisi,renderDivisionComparison(),Render chart perbandingan semua divisi (bar/line chart)
+10,DIVISION COMPARISON,Perbandingan metrik antar divisi,renderCategoryDistributionChart(divisionCode),Render pie/doughnut chart distribusi kategori blok (Critical/High/Medium/Low)
+11,CHART DEMO,Demo dan showcase fitur chart,showChartDemo(chartType),Menampilkan demo chart berdasarkan tipe yang dipilih
+12,UTILITY FUNCTIONS,Helper functions untuk formatting dan mode switching,formatLossMiliar(value),Format nilai loss ke format Rp X.XX M (Miliar)
+12,UTILITY FUNCTIONS,Helper functions untuk formatting dan mode switching,switchViewMode(mode),Switch antara mode tampilan (summary/detail/comparison)
