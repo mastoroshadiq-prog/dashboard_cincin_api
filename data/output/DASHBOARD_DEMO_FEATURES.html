@@ -19613,7 +19613,6 @@
                     ).join('');
                     tbmList.innerHTML = html || '<div class="text-slate-500 text-center py-4 text-xs">Tidak ada</div>';
                     document.getElementById('tbmCount').textContent = tbmBlocks.length;
-                renderTbmPlantingYearStats(tbmBlocks);
                 }
 
                 // Update TM vs TBM summary badges
@@ -19712,26 +19711,7 @@
             }
 
 
-            // TBM Planting Year Chart instance
-            let tbmPlantingYearChartInstance = null;
             
-            function renderTbmPlantingYearStats(tbmBlocks) {
-                // Count planting years for TBM blocks
-                const yearCounts = {};
-                const recentBlocks = [];
-                
-                tbmBlocks.forEach(block => {
-                    const blockCode = block.block_code;
-                    const plantingYear = PLANTING_YEAR_DATA[blockCode] || 0;
-                    
-                    if (plantingYear > 2000) {
-                        yearCounts[plantingYear] = (yearCounts[plantingYear] || 0) + 1;
-                        
-                        // Collect recent blocks (2023-2025)
-                        if (plantingYear >= 2023) {
-                            recentBlocks.push({code: blockCode, year: plantingYear});
-                        }
-                    }
                 });
                 
                 // Update stats badges
@@ -20388,6 +20368,121 @@
                 panel.classList.remove('hidden');
             }
 
+            
+            // Render TBM block detail (for blocks without production history)
+            function renderTbmBlockDetail(blockCode, plantingYear, blockData) {
+                const panel = document.getElementById('blockDetailPanel');
+                if (!panel) return;
+                
+                // Calculate age of plantation
+                const currentYear = 2025;
+                const age = plantingYear > 0 ? (currentYear - plantingYear) : 'N/A';
+                const yearsToProduction = plantingYear > 0 ? Math.max(0, 4 - (currentYear - plantingYear)) : 'N/A';
+                
+                // Determine TBM stage
+                let tbmStage = 'TBM-0';
+                let stageDesc = 'Baru tanam';
+                let stageColor = 'text-emerald-400';
+                
+                if (plantingYear > 0) {
+                    const ageYears = currentYear - plantingYear;
+                    if (ageYears === 0) { tbmStage = 'TBM-0'; stageDesc = 'Baru tanam (tahun ini)'; stageColor = 'text-emerald-400'; }
+                    else if (ageYears === 1) { tbmStage = 'TBM-1'; stageDesc = 'Tahun pertama pertumbuhan'; stageColor = 'text-green-400'; }
+                    else if (ageYears === 2) { tbmStage = 'TBM-2'; stageDesc = 'Tahun kedua pertumbuhan'; stageColor = 'text-lime-400'; }
+                    else if (ageYears === 3) { tbmStage = 'TBM-3'; stageDesc = 'Tahun ketiga, menjelang produksi'; stageColor = 'text-yellow-400'; }
+                    else { tbmStage = 'Transisi'; stageDesc = 'Mulai berproduksi'; stageColor = 'text-orange-400'; }
+                }
+                
+                // Get area if available from blockData
+                const area = blockData?.luas_ha || 'N/A';
+                
+                // Update header
+                document.getElementById('detailBlockCode').textContent = blockCode;
+                document.getElementById('detailDivision').textContent = blockData?.division || 'N/A';
+                
+                // Replace chart container with TBM info
+                const chartContainer = document.getElementById('blockTrendChartContainer');
+                if (chartContainer) {
+                    chartContainer.innerHTML = `
+                        <div class="bg-gradient-to-br from-emerald-900/30 to-green-800/20 rounded-xl p-6 border border-emerald-500/30">
+                            <div class="text-center mb-6">
+                                <div class="text-6xl mb-3">🌱</div>
+                                <div class="text-2xl font-bold text-emerald-400">Tanaman Belum Menghasilkan</div>
+                                <div class="text-sm text-slate-400 mt-1">${stageDesc}</div>
+                            </div>
+                            
+                            <!-- TBM Stats Grid -->
+                            <div class="grid grid-cols-2 gap-4 mb-6">
+                                <div class="bg-slate-800/50 rounded-lg p-4 text-center border border-slate-600/30">
+                                    <div class="text-xs text-slate-400 mb-1">📅 Tahun Tanam</div>
+                                    <div class="text-3xl font-bold text-cyan-400">${plantingYear > 0 ? plantingYear : 'N/A'}</div>
+                                </div>
+                                <div class="bg-slate-800/50 rounded-lg p-4 text-center border border-slate-600/30">
+                                    <div class="text-xs text-slate-400 mb-1">🌴 Umur Tanaman</div>
+                                    <div class="text-3xl font-bold text-amber-400">${age} ${age !== 'N/A' ? 'tahun' : ''}</div>
+                                </div>
+                                <div class="bg-slate-800/50 rounded-lg p-4 text-center border border-slate-600/30">
+                                    <div class="text-xs text-slate-400 mb-1">🏷️ Stadium</div>
+                                    <div class="text-2xl font-bold ${stageColor}">${tbmStage}</div>
+                                </div>
+                                <div class="bg-slate-800/50 rounded-lg p-4 text-center border border-slate-600/30">
+                                    <div class="text-xs text-slate-400 mb-1">⏳ Estimasi Produksi</div>
+                                    <div class="text-2xl font-bold text-purple-400">${yearsToProduction} ${yearsToProduction !== 'N/A' ? 'tahun lagi' : ''}</div>
+                                </div>
+                            </div>
+                            
+                            <!-- TBM Growth Timeline -->
+                            <div class="bg-slate-900/50 rounded-lg p-4">
+                                <div class="text-sm font-semibold text-slate-300 mb-3">📈 Timeline Pertumbuhan</div>
+                                <div class="flex items-center justify-between">
+                                    ${[0, 1, 2, 3, 4].map(yr => {
+                                        const targetYear = plantingYear > 0 ? plantingYear + yr : 2025 + yr;
+                                        const isComplete = plantingYear > 0 && (currentYear - plantingYear) >= yr;
+                                        const isCurrent = plantingYear > 0 && (currentYear - plantingYear) === yr;
+                                        const label = yr === 0 ? 'Tanam' : yr === 4 ? 'Produksi' : 'TBM-' + yr;
+                                        return \`
+                                            <div class="flex flex-col items-center">
+                                                <div class="\${isCurrent ? 'w-8 h-8 bg-emerald-500 animate-pulse' : isComplete ? 'w-6 h-6 bg-emerald-600' : 'w-6 h-6 bg-slate-600'} rounded-full flex items-center justify-center text-xs text-white font-bold">
+                                                    \${isComplete ? '✓' : yr}
+                                                </div>
+                                                <div class="text-xs text-slate-400 mt-1">\${label}</div>
+                                                <div class="text-xs text-slate-500">\${targetYear}</div>
+                                            </div>
+                                        \`;
+                                    }).join('<div class="flex-1 h-1 bg-slate-700 mx-1"></div>')}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }
+                
+                // Update info metrics for TBM
+                document.getElementById('detailLuas').textContent = area !== 'N/A' ? area.toFixed(2) + ' Ha' : 'N/A';
+                document.getElementById('detailYield2023').textContent = '-';
+                if (document.getElementById('detailYield2024')) {
+                    document.getElementById('detailYield2024').textContent = '-';
+                }
+                document.getElementById('detailYield2025').textContent = '-';
+                document.getElementById('detailChange').textContent = 'TBM';
+                document.getElementById('detailChange').className = 'text-xl font-bold text-emerald-400';
+                
+                // Update risk metrics
+                document.getElementById('detailAttackRate').textContent = '-';
+                document.getElementById('detailStadium').textContent = tbmStage;
+                document.getElementById('detailSPH').textContent = '-';
+                document.getElementById('detailLoss').textContent = '-';
+                
+                // Update yield gap for TBM
+                document.getElementById('gapPotential').textContent = '-';
+                document.getElementById('gapActual').textContent = '-';
+                document.getElementById('gapPercent').textContent = 'TBM';
+                
+                // Show panel
+                panel.classList.remove('hidden');
+                panel.classList.add('flex');
+            }
+
+
             function closeBlockDetail() {
                 const panel = document.getElementById('blockDetailPanel');
                 if (panel) {
@@ -20852,46 +20947,7 @@
                         </div>
 
 
-                    <!-- TBM PLANTING YEAR STATISTICS -->
-                    <div id="tbmStatsSection" class="mt-6 bg-gradient-to-br from-slate-800/50 to-slate-700/30 rounded-xl p-6 border border-slate-600/50">
-                        <h4 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
-                            <span class="text-2xl">🌱</span>
-                            Statistik Tahun Tanam TBM
-                        </h4>
-                        
-                        <!-- Stats Summary -->
-                        <div class="grid grid-cols-4 gap-3 mb-4">
-                            <div class="bg-slate-800/50 rounded-lg p-3 text-center border border-slate-600/30">
-                                <div class="text-xs text-slate-400 mb-1">Total TBM</div>
-                                <div class="text-2xl font-bold text-cyan-400" id="tbmTotalStats">0</div>
-                            </div>
-                            <div class="bg-slate-800/50 rounded-lg p-3 text-center border border-slate-600/30">
-                                <div class="text-xs text-slate-400 mb-1">Tanam 2023</div>
-                                <div class="text-2xl font-bold text-emerald-400" id="tbm2023Stats">0</div>
-                            </div>
-                            <div class="bg-slate-800/50 rounded-lg p-3 text-center border border-slate-600/30">
-                                <div class="text-xs text-slate-400 mb-1">Tanam 2024</div>
-                                <div class="text-2xl font-bold text-blue-400" id="tbm2024Stats">0</div>
-                            </div>
-                            <div class="bg-slate-800/50 rounded-lg p-3 text-center border border-slate-600/30">
-                                <div class="text-xs text-slate-400 mb-1">Tanam 2025</div>
-                                <div class="text-2xl font-bold text-purple-400" id="tbm2025Stats">0</div>
-                            </div>
-                        </div>
-                        
-                        <!-- Chart Container -->
-                        <div class="bg-slate-900/50 rounded-lg p-4">
-                            <canvas id="tbmPlantingYearChart" height="200"></canvas>
-                        </div>
-                        
-                        <!-- Recent TBM Blocks List -->
-                        <div class="mt-4">
-                            <div class="text-sm font-semibold text-slate-300 mb-2">📋 Blok TBM Terbaru (2023-2025)</div>
-                            <div id="recentTbmList" class="grid grid-cols-3 gap-2 max-h-32 overflow-y-auto">
-                                <!-- Filled dynamically -->
-                            </div>
-                        </div>
-                    </div>
+                    
 
 
 
