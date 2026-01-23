@@ -18839,7 +18839,7 @@
                     declining: [],   // Produksi turun > 5%
                     stable: [],      // Perubahan -5% s/d +5%
                     increasing: [],  // Produksi naik > 5%
-                    nodata: []       // Tidak ada data historis
+                    tbm: []       // Tidak ada data historis
                 };
 
                 mergedBlocks.forEach(block => {
@@ -18847,7 +18847,7 @@
                     const historical = typeof HISTORICAL_YIELDS !== 'undefined' ? HISTORICAL_YIELDS[blockCode] : null;
 
                     if (!historical || !historical.yields) {
-                        categories.nodata.push({ ...block, prodChangePct: 0, prod2023: 0, prod2025: 0 });
+                        categories.tbm.push({ ...block, prodChangePct: 0, prod2023: 0, prod2025: 0 });
                         return;
                     }
 
@@ -18857,7 +18857,7 @@
                     const prod2025 = y2025.real_ton_ha || 0;
 
                     if (prod2023 === 0 && prod2025 === 0) {
-                        categories.nodata.push({ ...block, prodChangePct: 0, prod2023: 0, prod2025: 0 });
+                        categories.tbm.push({ ...block, prodChangePct: 0, prod2023: 0, prod2025: 0 });
                         return;
                     }
 
@@ -18881,7 +18881,7 @@
                     declining: categories.declining.length,
                     stable: categories.stable.length,
                     increasing: categories.increasing.length,
-                    nodata: categories.nodata.length
+                    nodata: categories.tbm.length
                 });
 
                 // Update modal content
@@ -18892,7 +18892,7 @@
                 document.getElementById('categoryCount_declining').textContent = categories.declining.length;
                 document.getElementById('categoryCount_stable').textContent = categories.stable.length;
                 document.getElementById('categoryCount_increasing').textContent = categories.increasing.length;
-                document.getElementById('categoryCount_nodata').textContent = categories.nodata.length;
+                document.getElementById('categoryCount_tbm').textContent = categories.tbm.length;
 
                 // Calculate stats for DECLINING BLOCKS
                 const decliningBlocks = categories.declining;
@@ -18957,6 +18957,26 @@
                     document.getElementById('stableCount').textContent = stableBlocks.length;
                 }
 
+                // Populate TBM block list
+                const tbmBlocks = categories.tbm || [];
+                const tbmList = document.getElementById('tbmBlocksList');
+                if (tbmList) {
+                    let html = tbmBlocks.map(b =>
+                        '<div onclick="showBlockDetail(\'' + b.block_code + '\')" data-block="' + b.block_code.toLowerCase() + '" class="block-item flex justify-between items-center py-2 px-2 bg-slate-700/30 rounded cursor-pointer border border-transparent hover:border-slate-500/50 hover:bg-slate-700/50 transition-all text-sm">' +
+                        '<span class="text-white font-medium">' + b.block_code + '</span>' +
+                        '<span class="text-slate-400 text-xs">🌱 TBM</span>' +
+                        '</div>'
+                    ).join('');
+                    tbmList.innerHTML = html || '<div class="text-slate-500 text-center py-4 text-xs">Tidak ada</div>';
+                    document.getElementById('tbmCount').textContent = tbmBlocks.length;
+                }
+
+                // Update TM vs TBM summary badges
+                const tmCount = (categories.declining?.length || 0) + (categories.stable?.length || 0) + (categories.increasing?.length || 0);
+                const tbmCountVal = categories.tbm?.length || 0;
+                document.getElementById('tmBlockCount').textContent = tmCount;
+                document.getElementById('tbmBlockCountBadge').textContent = tbmCountVal;
+
                 // Render distribution chart
                 renderCategoryDistributionChart(categories);
 
@@ -18988,26 +19008,26 @@
                 }
 
                 const data = {
-                    labels: ['📉 Penurunan', '➡️ Stabil', '📈 Kenaikan', '❓ No Data'],
+                    labels: ['📉 Penurunan', '➡️ Stabil', '📈 Kenaikan', '🌱 TBM'],
                     datasets: [{
                         label: 'Number of Blocks',
                         data: [
                             categories.declining.length,
                             categories.stable.length,
                             categories.increasing.length,
-                            categories.nodata.length
+                            categories.tbm.length
                         ],
                         backgroundColor: [
                             'rgba(239, 68, 68, 0.8)',
-                            'rgba(251, 146, 60, 0.8)',
                             'rgba(251, 191, 36, 0.8)',
-                            'rgba(34, 197, 94, 0.8)'
+                            'rgba(34, 197, 94, 0.8)',
+                            'rgba(100, 116, 139, 0.8)'
                         ],
                         borderColor: [
                             'rgb(239, 68, 68)',
-                            'rgb(251, 146, 60)',
                             'rgb(251, 191, 36)',
-                            'rgb(34, 197, 94)'
+                            'rgb(34, 197, 94)',
+                            'rgb(100, 116, 139)'
                         ],
                         borderWidth: 2
                     }]
@@ -19968,7 +19988,7 @@
                             class="bg-gradient-to-br from-green-900/40 to-green-800/20 rounded-xl p-6 border-2 border-green-500/40">
                             <div class="text-4xl mb-2">❓</div>
                             <div class="text-slate-200 text-xs font-bold uppercase mb-2">NO DATA</div>
-                            <div class="text-5xl font-black text-green-400 mb-2" id="categoryCount_nodata">0</div>
+                            <div class="text-5xl font-black text-green-400 mb-2" id="categoryCount_tbm">0</div>
                             <div class="text-xs text-green-300/70">Tidak ada data historis</div>
                         </div>
                     </div>
@@ -19994,170 +20014,203 @@
                                 <div class="text-2xl font-bold text-cyan-400" id="totalArea_declining">0 Ha</div>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- Distribution Chart -->
-                    <!-- Search Box -->
-                    <div class="mb-4">
-                        <div class="relative">
-                            <input type="text" id="blockSearchInput"
-                                placeholder="🔍 Cari blok (contoh: D001A, E002A...)"
-                                class="w-full bg-slate-800/50 border border-slate-600 rounded-xl px-4 py-3 text-white placeholder-slate-400 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 outline-none"
-                                onkeyup="filterBlockLists(this.value)">
-                            <div class="absolute right-3 top-3 text-slate-400 text-sm" id="searchResultCount"></div>
+                        <!-- TM vs TBM Summary -->
+                        <div
+                            class="flex items-center justify-between bg-slate-800/30 rounded-lg px-4 py-2 mb-4 border border-slate-700/50">
+                            <div class="flex items-center gap-6">
+                                <span class="text-slate-400 text-sm">Status Tanaman:</span>
+                                <div class="flex items-center gap-2">
+                                    <span
+                                        class="inline-flex items-center gap-1 bg-green-500/20 text-green-400 px-3 py-1 rounded-full text-sm font-medium">
+                                        🌴 TM <span id="tmBlockCount" class="font-bold">0</span> blok
+                                    </span>
+                                    <span
+                                        class="inline-flex items-center gap-1 bg-slate-600/40 text-slate-300 px-3 py-1 rounded-full text-sm font-medium">
+                                        🌱 TBM <span id="tbmBlockCountBadge" class="font-bold">0</span> blok
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="text-xs text-slate-500">TM = Tanaman Menghasilkan | TBM = Tanaman Belum
+                                Menghasilkan</div>
                         </div>
-                    </div>
 
-                    <!-- Three Column Layout: Block Lists -->
-                    <div class="grid grid-cols-3 gap-4 mb-6">
-                        <!-- DECLINING BLOCKS LIST -->
-                        <div class="bg-black/20 rounded-xl p-4 border border-red-700/30">
-                            <h3 class="text-md font-bold text-red-400 mb-3 flex items-center gap-2">
-                                📉 Penurunan <span id="decliningCount"
-                                    class="text-xs bg-red-500/20 px-2 py-1 rounded-full">0</span>
-                            </h3>
-                            <div id="decliningBlocksList" class="max-h-80 overflow-y-auto custom-scrollbar space-y-1">
-                                <div class="text-slate-500 text-center py-4 text-sm">Loading...</div>
+                        <!-- Distribution Chart -->
+                        <!-- Search Box -->
+                        <div class="mb-4">
+                            <div class="relative">
+                                <input type="text" id="blockSearchInput"
+                                    placeholder="🔍 Cari blok (contoh: D001A, E002A...)"
+                                    class="w-full bg-slate-800/50 border border-slate-600 rounded-xl px-4 py-3 text-white placeholder-slate-400 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 outline-none"
+                                    onkeyup="filterBlockLists(this.value)">
+                                <div class="absolute right-3 top-3 text-slate-400 text-sm" id="searchResultCount"></div>
                             </div>
                         </div>
 
-                        <!-- STABLE BLOCKS LIST -->
-                        <div class="bg-black/20 rounded-xl p-4 border border-yellow-700/30">
-                            <h3 class="text-md font-bold text-yellow-400 mb-3 flex items-center gap-2">
-                                ➡️ Stabil <span id="stableCount"
-                                    class="text-xs bg-yellow-500/20 px-2 py-1 rounded-full">0</span>
-                            </h3>
-                            <div id="stableBlocksList" class="max-h-80 overflow-y-auto custom-scrollbar space-y-1">
-                                <div class="text-slate-500 text-center py-4 text-sm">Loading...</div>
+                        <!-- Four Column Layout: Block Lists -->
+                        <div class="grid grid-cols-4 gap-3 mb-6">
+                            <!-- DECLINING BLOCKS LIST -->
+                            <div class="bg-black/20 rounded-xl p-3 border border-red-700/30">
+                                <h3 class="text-sm font-bold text-red-400 mb-2 flex items-center gap-2">
+                                    📉 Penurunan <span id="decliningCount"
+                                        class="text-xs bg-red-500/20 px-2 py-0.5 rounded-full">0</span>
+                                </h3>
+                                <div id="decliningBlocksList"
+                                    class="max-h-72 overflow-y-auto custom-scrollbar space-y-1">
+                                    <div class="text-slate-500 text-center py-4 text-xs">Loading...</div>
+                                </div>
+                            </div>
+
+                            <!-- STABLE BLOCKS LIST -->
+                            <div class="bg-black/20 rounded-xl p-3 border border-yellow-700/30">
+                                <h3 class="text-sm font-bold text-yellow-400 mb-2 flex items-center gap-2">
+                                    ➡️ Stabil <span id="stableCount"
+                                        class="text-xs bg-yellow-500/20 px-2 py-0.5 rounded-full">0</span>
+                                </h3>
+                                <div id="stableBlocksList" class="max-h-72 overflow-y-auto custom-scrollbar space-y-1">
+                                    <div class="text-slate-500 text-center py-4 text-xs">Loading...</div>
+                                </div>
+                            </div>
+
+                            <!-- INCREASING BLOCKS LIST -->
+                            <div class="bg-black/20 rounded-xl p-3 border border-green-700/30">
+                                <h3 class="text-sm font-bold text-green-400 mb-2 flex items-center gap-2">
+                                    📈 Kenaikan <span id="increasingCount"
+                                        class="text-xs bg-green-500/20 px-2 py-0.5 rounded-full">0</span>
+                                </h3>
+                                <div id="increasingBlocksList"
+                                    class="max-h-72 overflow-y-auto custom-scrollbar space-y-1">
+                                    <div class="text-slate-500 text-center py-4 text-xs">Loading...</div>
+                                </div>
+                            </div>
+
+                            <!-- TBM BLOCKS LIST -->
+                            <div class="bg-black/20 rounded-xl p-3 border border-slate-600/50">
+                                <h3 class="text-sm font-bold text-slate-400 mb-2 flex items-center gap-2">
+                                    🌱 TBM <span id="tbmCount"
+                                        class="text-xs bg-slate-500/20 px-2 py-0.5 rounded-full">0</span>
+                                </h3>
+                                <div id="tbmBlocksList" class="max-h-72 overflow-y-auto custom-scrollbar space-y-1">
+                                    <div class="text-slate-500 text-center py-4 text-xs">Loading...</div>
+                                </div>
                             </div>
                         </div>
 
-                        <!-- INCREASING BLOCKS LIST -->
-                        <div class="bg-black/20 rounded-xl p-4 border border-green-700/30">
-                            <h3 class="text-md font-bold text-green-400 mb-3 flex items-center gap-2">
-                                📈 Kenaikan <span id="increasingCount"
-                                    class="text-xs bg-green-500/20 px-2 py-1 rounded-full">0</span>
-                            </h3>
-                            <div id="increasingBlocksList" class="max-h-80 overflow-y-auto custom-scrollbar space-y-1">
-                                <div class="text-slate-500 text-center py-4 text-sm">Loading...</div>
+                        <div class="bg-black/20 rounded-xl p-6 border border-slate-700">
+                            <h3 class="text-xl font-bold text-white mb-4">📊 Distribusi Tren Produksi (2023-2025)</h3>
+                            <div style="height: 300px;">
+                                <canvas id="categoryDistributionChart"></canvas>
                             </div>
-                        </div>
-                    </div>
-
-                    <div class="bg-black/20 rounded-xl p-6 border border-slate-700">
-                        <h3 class="text-xl font-bold text-white mb-4">📊 Distribusi Tren Produksi (2023-2025)</h3>
-                        <div style="height: 300px;">
-                            <canvas id="categoryDistributionChart"></canvas>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
 
-        <!-- BLOCK DETAIL PANEL (Hidden by default) -->
-        <div id="blockDetailPanel"
-            class="hidden fixed inset-0 bg-black/80 z-[100] flex items-center justify-center p-4">
-            <div
-                class="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto border-2 border-cyan-500/30 shadow-2xl">
-                <!-- Header -->
+            <!-- BLOCK DETAIL PANEL (Hidden by default) -->
+            <div id="blockDetailPanel"
+                class="hidden fixed inset-0 bg-black/80 z-[100] flex items-center justify-center p-4">
                 <div
-                    class="bg-gradient-to-r from-cyan-900 to-blue-900 p-4 rounded-t-2xl flex justify-between items-center border-b border-cyan-500/30">
-                    <div>
-                        <h3 class="text-2xl font-black text-white flex items-center gap-2">
-                            📊 Detail Blok <span id="detailBlockCode" class="text-cyan-400">-</span>
-                        </h3>
-                        <p class="text-slate-300 text-sm">Analisis tren produksi dan risiko</p>
-                    </div>
-                    <button onclick="closeBlockDetail()"
-                        class="text-3xl text-slate-400 hover:text-white transition-colors">&times;</button>
-                </div>
-
-                <!-- Content -->
-                <div class="p-6 space-y-6">
-                    <!-- Trend Chart -->
-                    <div class="bg-black/30 rounded-xl p-4 border border-cyan-700/30">
-                        <h4 class="text-lg font-bold text-cyan-400 mb-3">📈 Tren Produksi 2023-2025</h4>
-                        <div class="h-64">
-                            <canvas id="blockDetailChart"></canvas>
+                    class="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto border-2 border-cyan-500/30 shadow-2xl">
+                    <!-- Header -->
+                    <div
+                        class="bg-gradient-to-r from-cyan-900 to-blue-900 p-4 rounded-t-2xl flex justify-between items-center border-b border-cyan-500/30">
+                        <div>
+                            <h3 class="text-2xl font-black text-white flex items-center gap-2">
+                                📊 Detail Blok <span id="detailBlockCode" class="text-cyan-400">-</span>
+                            </h3>
+                            <p class="text-slate-300 text-sm">Analisis tren produksi dan risiko</p>
                         </div>
+                        <button onclick="closeBlockDetail()"
+                            class="text-3xl text-slate-400 hover:text-white transition-colors">&times;</button>
                     </div>
 
-                    <!-- Metrics Grid -->
-                    <div class="grid grid-cols-2 gap-4">
-                        <!-- Left Column: Production Metrics -->
-                        <div class="space-y-3">
-                            <h4 class="text-md font-bold text-white flex items-center gap-2">
-                                🌾 Metrik Produksi
-                            </h4>
-                            <div class="bg-black/30 rounded-lg p-3 border border-slate-700">
-                                <div class="text-xs text-slate-400">Luas Area</div>
-                                <div class="text-xl font-bold text-white" id="detailLuas">- Ha</div>
-                            </div>
-                            <div class="bg-black/30 rounded-lg p-3 border border-slate-700">
-                                <div class="text-xs text-slate-400">Yield 2023</div>
-                                <div class="text-xl font-bold text-cyan-400" id="detailYield2023">- T/Ha</div>
-                            </div>
-                            <div class="bg-black/30 rounded-lg p-3 border border-slate-700">
-                                <div class="text-xs text-slate-400">Yield 2024</div>
-                                <div class="text-xl font-bold text-blue-400" id="detailYield2024">- T/Ha</div>
-                            </div>
-                            <div class="bg-black/30 rounded-lg p-3 border border-slate-700">
-                                <div class="text-xs text-slate-400">Yield 2025</div>
-                                <div class="text-xl font-bold text-cyan-400" id="detailYield2025">- T/Ha</div>
-                            </div>
-                            <div class="bg-black/30 rounded-lg p-3 border border-slate-700">
-                                <div class="text-xs text-slate-400">Perubahan Produksi</div>
-                                <div class="text-xl font-bold" id="detailChange">-%</div>
+                    <!-- Content -->
+                    <div class="p-6 space-y-6">
+                        <!-- Trend Chart -->
+                        <div class="bg-black/30 rounded-xl p-4 border border-cyan-700/30">
+                            <h4 class="text-lg font-bold text-cyan-400 mb-3">📈 Tren Produksi 2023-2025</h4>
+                            <div class="h-64">
+                                <canvas id="blockDetailChart"></canvas>
                             </div>
                         </div>
 
-                        <!-- Right Column: Risk Metrics -->
-                        <div class="space-y-3">
-                            <h4 class="text-md font-bold text-white flex items-center gap-2">
-                                ⚠️ Metrik Risiko
-                            </h4>
-                            <div class="bg-black/30 rounded-lg p-3 border border-red-700/30">
-                                <div class="text-xs text-slate-400">Attack Rate</div>
-                                <div class="text-xl font-bold text-red-400" id="detailAttackRate">- %</div>
+                        <!-- Metrics Grid -->
+                        <div class="grid grid-cols-2 gap-4">
+                            <!-- Left Column: Production Metrics -->
+                            <div class="space-y-3">
+                                <h4 class="text-md font-bold text-white flex items-center gap-2">
+                                    🌾 Metrik Produksi
+                                </h4>
+                                <div class="bg-black/30 rounded-lg p-3 border border-slate-700">
+                                    <div class="text-xs text-slate-400">Luas Area</div>
+                                    <div class="text-xl font-bold text-white" id="detailLuas">- Ha</div>
+                                </div>
+                                <div class="bg-black/30 rounded-lg p-3 border border-slate-700">
+                                    <div class="text-xs text-slate-400">Yield 2023</div>
+                                    <div class="text-xl font-bold text-cyan-400" id="detailYield2023">- T/Ha</div>
+                                </div>
+                                <div class="bg-black/30 rounded-lg p-3 border border-slate-700">
+                                    <div class="text-xs text-slate-400">Yield 2024</div>
+                                    <div class="text-xl font-bold text-blue-400" id="detailYield2024">- T/Ha</div>
+                                </div>
+                                <div class="bg-black/30 rounded-lg p-3 border border-slate-700">
+                                    <div class="text-xs text-slate-400">Yield 2025</div>
+                                    <div class="text-xl font-bold text-cyan-400" id="detailYield2025">- T/Ha</div>
+                                </div>
+                                <div class="bg-black/30 rounded-lg p-3 border border-slate-700">
+                                    <div class="text-xs text-slate-400">Perubahan Produksi</div>
+                                    <div class="text-xl font-bold" id="detailChange">-%</div>
+                                </div>
                             </div>
-                            <div class="bg-black/30 rounded-lg p-3 border border-orange-700/30">
-                                <div class="text-xs text-slate-400">Pohon Terinfeksi</div>
-                                <div class="text-lg font-bold text-orange-400" id="detailInfected">-</div>
-                                <div class="text-xs text-slate-500" id="detailInfectedBreakdown"></div>
-                            </div>
-                            <div class="bg-black/30 rounded-lg p-3 border border-yellow-700/30">
-                                <div class="text-xs text-slate-400">SPH (Stands/Ha)</div>
-                                <div class="text-xl font-bold text-yellow-400" id="detailSPH">-</div>
-                            </div>
-                            <div class="bg-black/30 rounded-lg p-3 border border-rose-700/30">
-                                <div class="text-xs text-slate-400">Estimasi Kerugian</div>
-                                <div class="text-xl font-bold text-rose-400" id="detailLoss">Rp - Juta</div>
+
+                            <!-- Right Column: Risk Metrics -->
+                            <div class="space-y-3">
+                                <h4 class="text-md font-bold text-white flex items-center gap-2">
+                                    ⚠️ Metrik Risiko
+                                </h4>
+                                <div class="bg-black/30 rounded-lg p-3 border border-red-700/30">
+                                    <div class="text-xs text-slate-400">Attack Rate</div>
+                                    <div class="text-xl font-bold text-red-400" id="detailAttackRate">- %</div>
+                                </div>
+                                <div class="bg-black/30 rounded-lg p-3 border border-orange-700/30">
+                                    <div class="text-xs text-slate-400">Pohon Terinfeksi</div>
+                                    <div class="text-lg font-bold text-orange-400" id="detailInfected">-</div>
+                                    <div class="text-xs text-slate-500" id="detailInfectedBreakdown"></div>
+                                </div>
+                                <div class="bg-black/30 rounded-lg p-3 border border-yellow-700/30">
+                                    <div class="text-xs text-slate-400">SPH (Stands/Ha)</div>
+                                    <div class="text-xl font-bold text-yellow-400" id="detailSPH">-</div>
+                                </div>
+                                <div class="bg-black/30 rounded-lg p-3 border border-rose-700/30">
+                                    <div class="text-xs text-slate-400">Estimasi Kerugian</div>
+                                    <div class="text-xl font-bold text-rose-400" id="detailLoss">Rp - Juta</div>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- Yield Gap Analysis -->
-                    <div class="bg-gradient-to-r from-slate-800 to-slate-900 rounded-xl p-4 border border-slate-600">
-                        <h4 class="text-md font-bold text-white mb-3">📉 Analisis Gap Yield</h4>
-                        <div class="grid grid-cols-3 gap-4 text-center">
-                            <div>
-                                <div class="text-xs text-slate-400">Potensi</div>
-                                <div class="text-lg font-bold text-green-400" id="detailPotential">- T/Ha</div>
-                            </div>
-                            <div>
-                                <div class="text-xs text-slate-400">Realisasi</div>
-                                <div class="text-lg font-bold text-blue-400" id="detailActual">- T/Ha</div>
-                            </div>
-                            <div>
-                                <div class="text-xs text-slate-400">Gap</div>
-                                <div class="text-lg font-bold text-red-400" id="detailGap">- %</div>
+                        <!-- Yield Gap Analysis -->
+                        <div
+                            class="bg-gradient-to-r from-slate-800 to-slate-900 rounded-xl p-4 border border-slate-600">
+                            <h4 class="text-md font-bold text-white mb-3">📉 Analisis Gap Yield</h4>
+                            <div class="grid grid-cols-3 gap-4 text-center">
+                                <div>
+                                    <div class="text-xs text-slate-400">Potensi</div>
+                                    <div class="text-lg font-bold text-green-400" id="detailPotential">- T/Ha</div>
+                                </div>
+                                <div>
+                                    <div class="text-xs text-slate-400">Realisasi</div>
+                                    <div class="text-lg font-bold text-blue-400" id="detailActual">- T/Ha</div>
+                                </div>
+                                <div>
+                                    <div class="text-xs text-slate-400">Gap</div>
+                                    <div class="text-lg font-bold text-red-400" id="detailGap">- %</div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 </body>
 
 </html>
