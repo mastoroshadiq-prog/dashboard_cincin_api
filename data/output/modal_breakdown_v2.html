@@ -1,0 +1,188 @@
+<!-- ====== BLOCK BREAKDOWN MODAL V2 (5 CATEGORIES) ====== -->
+<div id="blockBreakdownModal"
+    class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+    <div
+        class="bg-gradient-to-br from-slate-900 via-cyan-900 to-slate-900 rounded-2xl max-w-6xl w-full max-h-[90vh] overflow-hidden border-2 border-cyan-500/30 shadow-2xl shadow-cyan-500/20">
+
+        <!-- Header -->
+        <div
+            class="bg-gradient-to-r from-cyan-900 to-blue-800 p-6 border-b-2 border-cyan-500/30 flex justify-between items-center">
+            <div>
+                <h2 class="text-3xl font-black text-white flex items-center gap-3">
+                    <span class="text-4xl">📊</span>
+                    TREN PRODUKSI PER BLOK
+                </h2>
+                <p class="text-cyan-200 text-sm mt-1" id="breakdownDivisionSubtitle">Analisis Kinerja & Pemanfaatan
+                    Lahan</p>
+            </div>
+            <button onclick="closeBlockBreakdownModal()" class="text-white hover:text-cyan-200 transition-colors">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+
+        <!-- Content -->
+        <div class="p-6 overflow-y-auto max-h-[calc(90vh-120px)]">
+
+            <!-- Category Cards Grid (Top Row - Production) -->
+            <div class="grid grid-cols-3 gap-4 mb-4">
+                <!-- CRITICAL -->
+                <div
+                    class="bg-gradient-to-br from-red-900/40 to-red-800/20 rounded-xl p-6 border-2 border-red-500/40 transform hover:scale-[1.02] transition-all">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <div class="text-4xl mb-2">📉</div>
+                            <div class="text-red-200 text-xs font-bold uppercase mb-2">TREN PENURUNAN</div>
+                        </div>
+                        <div class="text-5xl font-black text-red-400" id="categoryCount_declining">0</div>
+                    </div>
+                    <div class="text-xs text-red-300/70 mt-2">Produksi turun > 5%</div>
+                </div>
+
+                <!-- STABLE -->
+                <div
+                    class="bg-gradient-to-br from-orange-900/40 to-orange-800/20 rounded-xl p-6 border-2 border-orange-500/40 transform hover:scale-[1.02] transition-all">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <div class="text-4xl mb-2">➡️</div>
+                            <div class="text-yellow-200 text-xs font-bold uppercase mb-2">STABIL</div>
+                        </div>
+                        <div class="text-5xl font-black text-orange-400" id="categoryCount_stable">0</div>
+                    </div>
+                    <div class="text-xs text-orange-300/70 mt-2">Perubahan -5% s/d +5%</div>
+                </div>
+
+                <!-- INCREASING -->
+                <div
+                    class="bg-gradient-to-br from-yellow-900/40 to-yellow-800/20 rounded-xl p-6 border-2 border-yellow-500/40 transform hover:scale-[1.02] transition-all">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <div class="text-4xl mb-2">📈</div>
+                            <div class="text-green-200 text-xs font-bold uppercase mb-2">KENAIKAN</div>
+                        </div>
+                        <div class="text-5xl font-black text-yellow-400" id="categoryCount_increasing">0</div>
+                    </div>
+                    <div class="text-xs text-yellow-300/70 mt-2">Produksi naik > 5%</div>
+                </div>
+            </div>
+
+            <!-- Category Cards Grid (Bottom Row - Non-Production) -->
+            <div class="grid grid-cols-2 gap-4 mb-6">
+                <!-- TBM -->
+                <div
+                    class="bg-gradient-to-br from-emerald-900/40 to-emerald-800/20 rounded-xl p-6 border-2 border-emerald-500/40 flex items-center justify-between transform hover:scale-[1.02] transition-all">
+                    <div>
+                        <div class="flex items-center gap-3 mb-2">
+                            <div class="text-4xl">🌱</div>
+                            <div class="text-emerald-200 text-xs font-bold uppercase">TBM (TANAMAN BELUM MENGHASILKAN)
+                            </div>
+                        </div>
+                        <div class="text-xs text-emerald-300/70">Blok muda / replanting aktif</div>
+                    </div>
+                    <div class="text-5xl font-black text-emerald-400" id="categoryCount_tbm">0</div>
+                </div>
+
+                <!-- EMPTY -->
+                <div
+                    class="bg-gradient-to-br from-slate-900/60 to-slate-800/40 rounded-xl p-6 border-2 border-slate-500/40 flex items-center justify-between transform hover:scale-[1.02] transition-all">
+                    <div>
+                        <div class="flex items-center gap-3 mb-2">
+                            <div class="text-4xl">⚫</div>
+                            <div class="text-slate-200 text-xs font-bold uppercase">BLOK KOSONG (ZERO ACTIVITY)</div>
+                        </div>
+                        <div class="text-xs text-slate-300/70">Area tanpa tanaman / data kosong</div>
+                    </div>
+                    <div class="text-5xl font-black text-slate-400" id="categoryCount_empty">0</div>
+                </div>
+            </div>
+
+            <!-- Lists Container -->
+            <div class="bg-black/20 rounded-xl p-6 border border-slate-700">
+                <h3 class="text-xl font-bold text-white mb-4">📋 Daftar Blok per Kategori</h3>
+
+                <!-- Search Box -->
+                <div class="mb-4">
+                    <div class="relative">
+                        <input type="text" id="blockSearchInput" placeholder="🔍 Cari blok (contoh: D001A, E002A...)"
+                            class="w-full bg-slate-800/50 border border-slate-600 rounded-xl px-4 py-3 text-white placeholder-slate-400 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 outline-none"
+                            onkeyup="filterBlockLists(this.value)">
+                    </div>
+                </div>
+
+                <!-- Five Column Layout: Block Lists -->
+                <div class="grid grid-cols-5 gap-3 mb-6 h-[400px]">
+                    <!-- DECLINING LIST -->
+                    <div class="bg-black/20 rounded-xl flex flex-col border border-red-700/30 overflow-hidden">
+                        <div class="p-3 bg-red-900/20 border-b border-red-700/30">
+                            <h3 class="text-xs font-bold text-red-400 flex items-center justify-between">
+                                PENURUNAN <span id="decliningCount" class="bg-red-500/20 px-2 rounded-full">0</span>
+                            </h3>
+                        </div>
+                        <div id="decliningBlocksList" class="flex-1 overflow-y-auto custom-scrollbar p-2 space-y-1">
+                        </div>
+                    </div>
+
+                    <!-- STABLE LIST -->
+                    <div class="bg-black/20 rounded-xl flex flex-col border border-orange-700/30 overflow-hidden">
+                        <div class="p-3 bg-orange-900/20 border-b border-orange-700/30">
+                            <h3 class="text-xs font-bold text-orange-400 flex items-center justify-between">
+                                STABIL <span id="stableCount" class="bg-orange-500/20 px-2 rounded-full">0</span>
+                            </h3>
+                        </div>
+                        <div id="stableBlocksList" class="flex-1 overflow-y-auto custom-scrollbar p-2 space-y-1"></div>
+                    </div>
+
+                    <!-- INCREASING LIST -->
+                    <div class="bg-black/20 rounded-xl flex flex-col border border-yellow-700/30 overflow-hidden">
+                        <div class="p-3 bg-yellow-900/20 border-b border-yellow-700/30">
+                            <h3 class="text-xs font-bold text-yellow-400 flex items-center justify-between">
+                                KENAIKAN <span id="increasingCount" class="bg-yellow-500/20 px-2 rounded-full">0</span>
+                            </h3>
+                        </div>
+                        <div id="increasingBlocksList" class="flex-1 overflow-y-auto custom-scrollbar p-2 space-y-1">
+                        </div>
+                    </div>
+
+                    <!-- TBM LIST -->
+                    <div class="bg-black/20 rounded-xl flex flex-col border border-emerald-700/30 overflow-hidden">
+                        <div class="p-3 bg-emerald-900/20 border-b border-emerald-700/30">
+                            <h3 class="text-xs font-bold text-emerald-400 flex items-center justify-between">
+                                TBM <span id="tbmCount" class="bg-emerald-500/20 px-2 rounded-full">0</span>
+                            </h3>
+                        </div>
+                        <div id="tbmBlocksList" class="flex-1 overflow-y-auto custom-scrollbar p-2 space-y-1"></div>
+                    </div>
+
+                    <!-- EMPTY LIST -->
+                    <div class="bg-black/20 rounded-xl flex flex-col border border-slate-600/50 overflow-hidden">
+                        <div class="p-3 bg-slate-800/50 border-b border-slate-600/50">
+                            <h3 class="text-xs font-bold text-slate-400 flex items-center justify-between">
+                                KOSONG <span id="emptyCount" class="bg-slate-500/20 px-2 rounded-full">0</span>
+                            </h3>
+                        </div>
+                        <div id="emptyBlocksList" class="flex-1 overflow-y-auto custom-scrollbar p-2 space-y-1"></div>
+                    </div>
+                </div>
+
+                <!-- Analysis Footer -->
+                <div class="bg-slate-800/50 rounded-lg p-4 flex items-center gap-6">
+                    <div class="text-sm text-slate-400">Analisis Penurunan:</div>
+                    <div>
+                        <div class="text-xs text-slate-500">Rata-rata Drop</div>
+                        <div class="text-lg font-bold text-red-400" id="avgChange_declining">0%</div>
+                    </div>
+                    <div>
+                        <div class="text-xs text-slate-500">Luas Terdampak</div>
+                        <div class="text-lg font-bold text-white" id="totalArea_declining">0 Ha</div>
+                    </div>
+                    <div class="h-8 w-px bg-slate-600 mx-2"></div>
+                    <div>
+                        <div class="text-xs text-slate-500">Total Luas Kosong</div>
+                        <div class="text-lg font-bold text-slate-400" id="totalArea_empty">0 Ha</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
