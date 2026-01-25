@@ -25,11 +25,13 @@ try:
     re_luas = re.compile(r'luas_ha:\s*([\d\.]+)')
     re_yield_23 = re.compile(r'2023:\s*\{\s*real_ton_ha:\s*([\d\.]+)')
     re_yield_25 = re.compile(r'2025:\s*\{\s*real_ton_ha:\s*([\d\.]+)')
+    re_is_tbm = re.compile(r'is_tbm:\s*(true|false)')
     
     # Temp vars
     temp_luas = 0
     temp_y23 = 0
     temp_y25 = 0
+    temp_is_tbm = False
     
     for line in lines:
         line = line.strip()
@@ -49,6 +51,7 @@ try:
             temp_luas = 0
             temp_y23 = 0
             temp_y25 = 0
+            temp_is_tbm = False
             continue
             
         if current_block:
@@ -61,6 +64,9 @@ try:
             
             m_y25 = re_yield_25.search(line)
             if m_y25: temp_y25 = float(m_y25.group(1))
+
+            m_tbm = re_is_tbm.search(line)
+            if m_tbm: temp_is_tbm = (m_tbm.group(1) == 'true')
             
             # Check block end (simplified logic: keys are usually "XXXX", so if we see "},", we define it as end of block IF indent suggests it)
             # Or just save whatever we have collected so far to the dictionary, overwriting is fine.
@@ -70,6 +76,7 @@ try:
                 "luas": temp_luas,
                 "y23": temp_y23,
                 "y25": temp_y25,
+                "is_tbm": temp_is_tbm,
                 "total_yield": temp_y23 + temp_y25 # Simplifikasi indikator
             }
             
@@ -80,11 +87,12 @@ try:
 
     print(f"Sukses Extract Historical Data: {len(extracted_data)} blok.")
     
-    # Debug B003A
-    if "B003A" in extracted_data:
-        print(f"[DEBUG] B003A Extracted: {extracted_data['B003A']}")
-    else:
-        print("[DEBUG] B003A NOT FOUND in Extraction!")
+    # Debug Blocks
+    for dbg_code in ["B003A", "F025E", "B006D", "C003A"]:
+        if dbg_code in extracted_data:
+            print(f"[DEBUG] {dbg_code} Extracted: {extracted_data[dbg_code]}")
+        else:
+            print(f"[DEBUG] {dbg_code} NOT FOUND in Extraction!")
 
     # 2. READ TBM DATA (Filtered)
     with open(tbm_path, 'r') as f:
@@ -114,6 +122,8 @@ try:
         
         y23 = yd['y23'] if yd else 0
         y25 = yd['y25'] if yd else 0
+        is_tbm_html = yd['is_tbm'] if yd else False
+
         # total yield approximation (jika salah satu tahun ada, anggap produktif)
         has_production = (y23 > 0 or y25 > 0)
         
@@ -143,21 +153,32 @@ try:
                 categories["stable"].append(item)
                 
         # LOGIC 2: TBM
-        elif block_code in tbm_data:
-             categories["tbm"].append({
-                "block_code": block_code, 
-                "val": 0, 
-                "desc": "Tahun Tanam: " + str(tbm_data[block_code].get('year', '-'))
-            })
-            
-        # LOGIC 3: EMPTY
         else:
-            categories["empty"].append({
-                "block_code": block_code,
-                "val": 0,
-                "desc": f"Luas: {luas} Ha (Tanpa Tanaman)"
-            })
-            summary_stats["empty"]["total_area"] += luas
+            # Check TBM Stats
+            has_tbm_stats = (block_code in tbm_data and tbm_data[block_code].get('total_tbm_3th', 0) > 0)
+            
+            if has_tbm_stats:
+                 categories["tbm"].append({
+                    "block_code": block_code, 
+                    "val": 0, 
+                    "desc": "Tahun Tanam: " + str(tbm_data[block_code].get('year', '-'))
+                })
+            elif is_tbm_html:
+                 # Fallback: Marked as TBM in HTML but no stats
+                 year = tbm_data[block_code].get('year', '?') if block_code in tbm_data else '?'
+                 categories["tbm"].append({
+                    "block_code": block_code, 
+                    "val": 0, 
+                    "desc": f"Tahun Tanam: {year}" # (No Data) implisit
+                })
+            else:
+                # LOGIC 3: EMPTY
+                categories["empty"].append({
+                    "block_code": block_code,
+                    "val": 0,
+                    "desc": f"Luas: {luas} Ha (Tanpa Tanaman)"
+                })
+                summary_stats["empty"]["total_area"] += luas
 
     # Finalize Stats
     decl_count = len(categories["declining"])
