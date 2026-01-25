@@ -4,7 +4,7 @@ try:
     file_path = r'poac_sim\data\input\data_gabungan.xlsx'
     df = pd.read_excel(file_path, header=None, skiprows=8)
     
-    blocks_to_check = ["B012D", "F025E", "B006D"]
+    blocks_to_check = ["B016G"]
     print(f"=== AUDIT RAW DATA SPECIFIC BLOCKS: {blocks_to_check} ===")
     
     for code in blocks_to_check:

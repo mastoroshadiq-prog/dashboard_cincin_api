@@ -19,17 +19,17 @@ try:
             
         # Index Mapping
         # Tahun Tanam: Index 1 (Col B)
-        # Realisasi Tanam (Pokok) - REVISED AUDIT 2026-01-24
-        # 2023: Index 36 (sebelumnya 37)
-        # 2024: Index 40 (sebelumnya 41)
-        # 2025: Index 44 (sebelumnya 45)
+        # Realisasi Tanam (Pokok) - REVISED AUDIT 2026-01-25 (Header Row Check)
+        # 2023: Index 40 (Col 41)
+        # 2024: Index 43 (Col 44)
+        # 2025: Index 47 (Col 48)
         
         try:
             thn_tanam = int(row[1]) if pd.notna(row[1]) and str(row[1]).replace('.','').isdigit() else 0
             
-            t23 = float(row[36]) if pd.notna(row[36]) else 0
-            t24 = float(row[40]) if pd.notna(row[40]) else 0
-            t25 = float(row[44]) if pd.notna(row[44]) else 0
+            t23 = float(row[40]) if pd.notna(row[40]) else 0
+            t24 = float(row[43]) if pd.notna(row[43]) else 0
+            t25 = float(row[47]) if pd.notna(row[47]) else 0
             
             total_3th = t23 + t24 + t25
             

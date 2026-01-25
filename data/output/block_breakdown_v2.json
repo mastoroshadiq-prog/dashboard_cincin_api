@@ -2,259 +2,14 @@
     "categories": {
         "declining": [
             {
-                "block_code": "D023A",
-                "val": -9.4,
-                "desc": "17.1 \u279d 15.5 T/Ha"
+                "block_code": "M040B",
+                "val": -23.9,
+                "desc": "14.1 \u279d 10.7 T/Ha"
             },
             {
-                "block_code": "G017A",
-                "val": -14.2,
-                "desc": "18.8 \u279d 16.1 T/Ha"
-            },
-            {
-                "block_code": "C008A",
-                "val": -12.7,
-                "desc": "22.9 \u279d 20.0 T/Ha"
-            },
-            {
-                "block_code": "I036A",
-                "val": -15.6,
-                "desc": "15.0 \u279d 12.7 T/Ha"
-            },
-            {
-                "block_code": "L036B",
-                "val": -7.7,
-                "desc": "15.5 \u279d 14.3 T/Ha"
-            },
-            {
-                "block_code": "E012A",
-                "val": -13.2,
-                "desc": "18.4 \u279d 15.9 T/Ha"
-            },
-            {
-                "block_code": "L037B",
-                "val": -18.0,
-                "desc": "17.5 \u279d 14.4 T/Ha"
-            },
-            {
-                "block_code": "H017A",
-                "val": -7.8,
-                "desc": "19.4 \u279d 17.9 T/Ha"
-            },
-            {
-                "block_code": "D014A",
-                "val": -13.8,
-                "desc": "17.8 \u279d 15.3 T/Ha"
-            },
-            {
-                "block_code": "D010A",
-                "val": -19.7,
-                "desc": "18.9 \u279d 15.2 T/Ha"
-            },
-            {
-                "block_code": "E011A",
-                "val": -8.1,
-                "desc": "17.8 \u279d 16.3 T/Ha"
-            },
-            {
-                "block_code": "F004A",
-                "val": -20.4,
-                "desc": "20.3 \u279d 16.1 T/Ha"
-            },
-            {
-                "block_code": "K040A",
-                "val": -5.9,
-                "desc": "9.9 \u279d 9.3 T/Ha"
-            },
-            {
-                "block_code": "H015A",
-                "val": -13.7,
-                "desc": "21.7 \u279d 18.7 T/Ha"
-            },
-            {
-                "block_code": "G015A",
-                "val": -11.3,
-                "desc": "16.0 \u279d 14.2 T/Ha"
-            },
-            {
-                "block_code": "G020A",
-                "val": -15.1,
-                "desc": "17.2 \u279d 14.6 T/Ha"
-            },
-            {
-                "block_code": "F011A",
-                "val": -8.3,
-                "desc": "19.1 \u279d 17.5 T/Ha"
-            },
-            {
-                "block_code": "J011A",
-                "val": -5.7,
-                "desc": "16.8 \u279d 15.8 T/Ha"
-            },
-            {
-                "block_code": "L035B",
-                "val": -16.7,
-                "desc": "16.3 \u279d 13.6 T/Ha"
-            },
-            {
-                "block_code": "L028A",
-                "val": -5.0,
-                "desc": "14.8 \u279d 14.1 T/Ha"
-            },
-            {
-                "block_code": "I013A",
+                "block_code": "D005A",
                 "val": -11.9,
-                "desc": "14.3 \u279d 12.6 T/Ha"
-            },
-            {
-                "block_code": "M038A",
-                "val": -39.7,
-                "desc": "15.4 \u279d 9.3 T/Ha"
-            },
-            {
-                "block_code": "G014A",
-                "val": -12.5,
-                "desc": "19.8 \u279d 17.4 T/Ha"
-            },
-            {
-                "block_code": "G011A",
-                "val": -6.2,
-                "desc": "20.5 \u279d 19.2 T/Ha"
-            },
-            {
-                "block_code": "L038A",
-                "val": -26.5,
-                "desc": "15.5 \u279d 11.4 T/Ha"
-            },
-            {
-                "block_code": "N039C",
-                "val": -26.0,
-                "desc": "13.7 \u279d 10.1 T/Ha"
-            },
-            {
-                "block_code": "I044A",
-                "val": -23.6,
-                "desc": "8.8 \u279d 6.7 T/Ha"
-            },
-            {
-                "block_code": "M041B",
-                "val": -23.7,
-                "desc": "14.2 \u279d 10.8 T/Ha"
-            },
-            {
-                "block_code": "E019A",
-                "val": -20.3,
-                "desc": "16.7 \u279d 13.3 T/Ha"
-            },
-            {
-                "block_code": "N043A",
-                "val": -19.0,
-                "desc": "12.6 \u279d 10.2 T/Ha"
-            },
-            {
-                "block_code": "L023B",
-                "val": -37.0,
-                "desc": "14.3 \u279d 9.0 T/Ha"
-            },
-            {
-                "block_code": "L032B",
-                "val": -18.6,
-                "desc": "18.3 \u279d 14.9 T/Ha"
-            },
-            {
-                "block_code": "N042C",
-                "val": -18.7,
-                "desc": "13.3 \u279d 10.8 T/Ha"
-            },
-            {
-                "block_code": "G035A",
-                "val": -9.6,
-                "desc": "15.4 \u279d 14.0 T/Ha"
-            },
-            {
-                "block_code": "K036B",
-                "val": -11.4,
-                "desc": "13.4 \u279d 11.9 T/Ha"
-            },
-            {
-                "block_code": "H016A",
-                "val": -6.1,
-                "desc": "17.3 \u279d 16.3 T/Ha"
-            },
-            {
-                "block_code": "C023A",
-                "val": -16.8,
-                "desc": "11.2 \u279d 9.3 T/Ha"
-            },
-            {
-                "block_code": "H022B",
-                "val": -23.0,
-                "desc": "11.6 \u279d 8.9 T/Ha"
-            },
-            {
-                "block_code": "A004A",
-                "val": -15.2,
-                "desc": "19.5 \u279d 16.6 T/Ha"
-            },
-            {
-                "block_code": "C004B",
-                "val": -66.7,
-                "desc": "15.1 \u279d 5.0 T/Ha"
-            },
-            {
-                "block_code": "N041C",
-                "val": -20.9,
-                "desc": "10.5 \u279d 8.3 T/Ha"
-            },
-            {
-                "block_code": "M038B",
-                "val": -19.7,
-                "desc": "13.5 \u279d 10.8 T/Ha"
-            },
-            {
-                "block_code": "K037A",
-                "val": -29.0,
-                "desc": "12.9 \u279d 9.2 T/Ha"
-            },
-            {
-                "block_code": "H033A",
-                "val": -7.3,
-                "desc": "15.7 \u279d 14.6 T/Ha"
-            },
-            {
-                "block_code": "G003A",
-                "val": -22.7,
-                "desc": "22.1 \u279d 17.1 T/Ha"
-            },
-            {
-                "block_code": "E013A",
-                "val": -13.0,
-                "desc": "17.7 \u279d 15.4 T/Ha"
-            },
-            {
-                "block_code": "K038B",
-                "val": -23.8,
-                "desc": "17.8 \u279d 13.5 T/Ha"
-            },
-            {
-                "block_code": "F037A",
-                "val": -8.5,
-                "desc": "14.6 \u279d 13.4 T/Ha"
-            },
-            {
-                "block_code": "C005A",
-                "val": -11.3,
-                "desc": "19.8 \u279d 17.5 T/Ha"
-            },
-            {
-                "block_code": "D012A",
-                "val": -15.6,
-                "desc": "18.6 \u279d 15.7 T/Ha"
-            },
-            {
-                "block_code": "B022A",
-                "val": -5.1,
-                "desc": "13.0 \u279d 12.3 T/Ha"
+                "desc": "18.1 \u279d 16.0 T/Ha"
             },
             {
                 "block_code": "J037A",
@@ -262,19 +17,49 @@
                 "desc": "13.1 \u279d 11.7 T/Ha"
             },
             {
-                "block_code": "A002A",
-                "val": -19.5,
-                "desc": "20.6 \u279d 16.6 T/Ha"
+                "block_code": "E018A",
+                "val": -7.9,
+                "desc": "15.1 \u279d 13.9 T/Ha"
             },
             {
-                "block_code": "D019A",
-                "val": -24.8,
-                "desc": "13.8 \u279d 10.4 T/Ha"
+                "block_code": "D021A",
+                "val": -13.6,
+                "desc": "14.7 \u279d 12.7 T/Ha"
             },
             {
-                "block_code": "M039A",
-                "val": -19.5,
-                "desc": "14.7 \u279d 11.8 T/Ha"
+                "block_code": "E010A",
+                "val": -9.6,
+                "desc": "17.8 \u279d 16.1 T/Ha"
+            },
+            {
+                "block_code": "G015A",
+                "val": -11.3,
+                "desc": "16.0 \u279d 14.2 T/Ha"
+            },
+            {
+                "block_code": "K034B",
+                "val": -22.8,
+                "desc": "14.2 \u279d 11.0 T/Ha"
+            },
+            {
+                "block_code": "D016A",
+                "val": -19.9,
+                "desc": "17.8 \u279d 14.2 T/Ha"
+            },
+            {
+                "block_code": "M033B",
+                "val": -30.4,
+                "desc": "16.3 \u279d 11.3 T/Ha"
+            },
+            {
+                "block_code": "G018A",
+                "val": -11.2,
+                "desc": "20.8 \u279d 18.5 T/Ha"
+            },
+            {
+                "block_code": "M038B",
+                "val": -19.7,
+                "desc": "13.5 \u279d 10.8 T/Ha"
             },
             {
                 "block_code": "E014A",
@@ -282,14 +67,154 @@
                 "desc": "17.4 \u279d 14.9 T/Ha"
             },
             {
-                "block_code": "L040A",
-                "val": -26.4,
-                "desc": "13.1 \u279d 9.7 T/Ha"
+                "block_code": "B022A",
+                "val": -5.1,
+                "desc": "13.0 \u279d 12.3 T/Ha"
             },
             {
-                "block_code": "L034B",
-                "val": -32.8,
-                "desc": "18.3 \u279d 12.3 T/Ha"
+                "block_code": "F039A",
+                "val": -18.0,
+                "desc": "12.3 \u279d 10.1 T/Ha"
+            },
+            {
+                "block_code": "F016A",
+                "val": -12.7,
+                "desc": "19.1 \u279d 16.7 T/Ha"
+            },
+            {
+                "block_code": "G013A",
+                "val": -18.1,
+                "desc": "20.2 \u279d 16.6 T/Ha"
+            },
+            {
+                "block_code": "D019A",
+                "val": -24.8,
+                "desc": "13.8 \u279d 10.4 T/Ha"
+            },
+            {
+                "block_code": "I036A",
+                "val": -15.6,
+                "desc": "15.0 \u279d 12.7 T/Ha"
+            },
+            {
+                "block_code": "I011A",
+                "val": -6.2,
+                "desc": "16.8 \u279d 15.8 T/Ha"
+            },
+            {
+                "block_code": "F037A",
+                "val": -8.5,
+                "desc": "14.6 \u279d 13.4 T/Ha"
+            },
+            {
+                "block_code": "N043A",
+                "val": -19.0,
+                "desc": "12.6 \u279d 10.2 T/Ha"
+            },
+            {
+                "block_code": "D011A",
+                "val": -10.9,
+                "desc": "16.9 \u279d 15.0 T/Ha"
+            },
+            {
+                "block_code": "H032A",
+                "val": -21.3,
+                "desc": "19.1 \u279d 15.1 T/Ha"
+            },
+            {
+                "block_code": "L036B",
+                "val": -7.7,
+                "desc": "15.5 \u279d 14.3 T/Ha"
+            },
+            {
+                "block_code": "M041A",
+                "val": -22.9,
+                "desc": "14.5 \u279d 11.2 T/Ha"
+            },
+            {
+                "block_code": "M041B",
+                "val": -23.7,
+                "desc": "14.2 \u279d 10.8 T/Ha"
+            },
+            {
+                "block_code": "L035B",
+                "val": -16.7,
+                "desc": "16.3 \u279d 13.6 T/Ha"
+            },
+            {
+                "block_code": "C009A",
+                "val": -5.0,
+                "desc": "20.8 \u279d 19.7 T/Ha"
+            },
+            {
+                "block_code": "I013A",
+                "val": -11.9,
+                "desc": "14.3 \u279d 12.6 T/Ha"
+            },
+            {
+                "block_code": "J042B",
+                "val": -12.1,
+                "desc": "5.7 \u279d 5.0 T/Ha"
+            },
+            {
+                "block_code": "J031A",
+                "val": -15.3,
+                "desc": "15.2 \u279d 12.9 T/Ha"
+            },
+            {
+                "block_code": "G011A",
+                "val": -6.2,
+                "desc": "20.5 \u279d 19.2 T/Ha"
+            },
+            {
+                "block_code": "E021A",
+                "val": -7.5,
+                "desc": "14.4 \u279d 13.4 T/Ha"
+            },
+            {
+                "block_code": "L024B",
+                "val": -23.9,
+                "desc": "9.8 \u279d 7.5 T/Ha"
+            },
+            {
+                "block_code": "H022B",
+                "val": -23.0,
+                "desc": "11.6 \u279d 8.9 T/Ha"
+            },
+            {
+                "block_code": "F021A",
+                "val": -5.7,
+                "desc": "16.4 \u279d 15.4 T/Ha"
+            },
+            {
+                "block_code": "G003A",
+                "val": -22.7,
+                "desc": "22.1 \u279d 17.1 T/Ha"
+            },
+            {
+                "block_code": "H021A",
+                "val": -6.6,
+                "desc": "17.9 \u279d 16.7 T/Ha"
+            },
+            {
+                "block_code": "H038A",
+                "val": -9.0,
+                "desc": "10.8 \u279d 9.9 T/Ha"
+            },
+            {
+                "block_code": "H019A",
+                "val": -13.1,
+                "desc": "19.1 \u279d 16.6 T/Ha"
+            },
+            {
+                "block_code": "D027B",
+                "val": -5.6,
+                "desc": "12.0 \u279d 11.3 T/Ha"
+            },
+            {
+                "block_code": "E023A",
+                "val": -17.2,
+                "desc": "17.6 \u279d 14.5 T/Ha"
             },
             {
                 "block_code": "F007A",
@@ -297,9 +222,94 @@
                 "desc": "21.6 \u279d 19.5 T/Ha"
             },
             {
-                "block_code": "F017A",
-                "val": -5.1,
-                "desc": "18.7 \u279d 17.8 T/Ha"
+                "block_code": "L038A",
+                "val": -26.5,
+                "desc": "15.5 \u279d 11.4 T/Ha"
+            },
+            {
+                "block_code": "B004A",
+                "val": -27.6,
+                "desc": "20.9 \u279d 15.2 T/Ha"
+            },
+            {
+                "block_code": "F002A",
+                "val": -6.1,
+                "desc": "16.0 \u279d 15.0 T/Ha"
+            },
+            {
+                "block_code": "I045A",
+                "val": -36.4,
+                "desc": "8.7 \u279d 5.5 T/Ha"
+            },
+            {
+                "block_code": "H033A",
+                "val": -7.3,
+                "desc": "15.7 \u279d 14.6 T/Ha"
+            },
+            {
+                "block_code": "M036B",
+                "val": -22.0,
+                "desc": "16.6 \u279d 13.0 T/Ha"
+            },
+            {
+                "block_code": "H013A",
+                "val": -9.2,
+                "desc": "18.5 \u279d 16.8 T/Ha"
+            },
+            {
+                "block_code": "L025B",
+                "val": -24.4,
+                "desc": "10.8 \u279d 8.2 T/Ha"
+            },
+            {
+                "block_code": "L022B",
+                "val": -19.7,
+                "desc": "12.8 \u279d 10.3 T/Ha"
+            },
+            {
+                "block_code": "L032B",
+                "val": -18.6,
+                "desc": "18.3 \u279d 14.9 T/Ha"
+            },
+            {
+                "block_code": "M034B",
+                "val": -22.3,
+                "desc": "16.9 \u279d 13.1 T/Ha"
+            },
+            {
+                "block_code": "H020A",
+                "val": -17.4,
+                "desc": "20.0 \u279d 16.5 T/Ha"
+            },
+            {
+                "block_code": "M042B",
+                "val": -38.9,
+                "desc": "16.6 \u279d 10.1 T/Ha"
+            },
+            {
+                "block_code": "E011A",
+                "val": -8.1,
+                "desc": "17.8 \u279d 16.3 T/Ha"
+            },
+            {
+                "block_code": "L031A",
+                "val": -21.9,
+                "desc": "15.9 \u279d 12.5 T/Ha"
+            },
+            {
+                "block_code": "J011A",
+                "val": -5.7,
+                "desc": "16.8 \u279d 15.8 T/Ha"
+            },
+            {
+                "block_code": "D010A",
+                "val": -19.7,
+                "desc": "18.9 \u279d 15.2 T/Ha"
+            },
+            {
+                "block_code": "E012A",
+                "val": -13.2,
+                "desc": "18.4 \u279d 15.9 T/Ha"
             },
             {
                 "block_code": "E037A",
@@ -307,14 +317,219 @@
                 "desc": "15.7 \u279d 14.9 T/Ha"
             },
             {
-                "block_code": "G009A",
-                "val": -10.3,
-                "desc": "26.4 \u279d 23.7 T/Ha"
+                "block_code": "K040A",
+                "val": -5.9,
+                "desc": "9.9 \u279d 9.3 T/Ha"
             },
             {
-                "block_code": "E008A",
-                "val": -6.6,
-                "desc": "19.5 \u279d 18.3 T/Ha"
+                "block_code": "I045B",
+                "val": -13.2,
+                "desc": "6.0 \u279d 5.2 T/Ha"
+            },
+            {
+                "block_code": "J032A",
+                "val": -20.1,
+                "desc": "15.6 \u279d 12.4 T/Ha"
+            },
+            {
+                "block_code": "F025A",
+                "val": -9.3,
+                "desc": "14.2 \u279d 12.9 T/Ha"
+            },
+            {
+                "block_code": "L040A",
+                "val": -26.4,
+                "desc": "13.1 \u279d 9.7 T/Ha"
+            },
+            {
+                "block_code": "A004A",
+                "val": -15.2,
+                "desc": "19.5 \u279d 16.6 T/Ha"
+            },
+            {
+                "block_code": "B002D",
+                "val": -67.0,
+                "desc": "17.3 \u279d 5.7 T/Ha"
+            },
+            {
+                "block_code": "N042C",
+                "val": -18.7,
+                "desc": "13.3 \u279d 10.8 T/Ha"
+            },
+            {
+                "block_code": "F011A",
+                "val": -8.3,
+                "desc": "19.1 \u279d 17.5 T/Ha"
+            },
+            {
+                "block_code": "G035A",
+                "val": -9.6,
+                "desc": "15.4 \u279d 14.0 T/Ha"
+            },
+            {
+                "block_code": "E022A",
+                "val": -16.1,
+                "desc": "16.4 \u279d 13.7 T/Ha"
+            },
+            {
+                "block_code": "N040C",
+                "val": -10.4,
+                "desc": "12.6 \u279d 11.3 T/Ha"
+            },
+            {
+                "block_code": "H031A",
+                "val": -27.0,
+                "desc": "19.5 \u279d 14.2 T/Ha"
+            },
+            {
+                "block_code": "I041A",
+                "val": -7.6,
+                "desc": "14.7 \u279d 13.6 T/Ha"
+            },
+            {
+                "block_code": "E019A",
+                "val": -20.3,
+                "desc": "16.7 \u279d 13.3 T/Ha"
+            },
+            {
+                "block_code": "F003A",
+                "val": -12.1,
+                "desc": "18.5 \u279d 16.3 T/Ha"
+            },
+            {
+                "block_code": "H030A",
+                "val": -7.4,
+                "desc": "13.3 \u279d 12.3 T/Ha"
+            },
+            {
+                "block_code": "D020A",
+                "val": -20.0,
+                "desc": "13.8 \u279d 11.0 T/Ha"
+            },
+            {
+                "block_code": "G019A",
+                "val": -14.5,
+                "desc": "19.1 \u279d 16.3 T/Ha"
+            },
+            {
+                "block_code": "F004A",
+                "val": -20.4,
+                "desc": "20.3 \u279d 16.1 T/Ha"
+            },
+            {
+                "block_code": "G020A",
+                "val": -15.1,
+                "desc": "17.2 \u279d 14.6 T/Ha"
+            },
+            {
+                "block_code": "D008A",
+                "val": -13.7,
+                "desc": "18.2 \u279d 15.7 T/Ha"
+            },
+            {
+                "block_code": "F027A",
+                "val": -10.8,
+                "desc": "17.3 \u279d 15.4 T/Ha"
+            },
+            {
+                "block_code": "M039A",
+                "val": -19.5,
+                "desc": "14.7 \u279d 11.8 T/Ha"
+            },
+            {
+                "block_code": "F018A",
+                "val": -9.4,
+                "desc": "18.1 \u279d 16.4 T/Ha"
+            },
+            {
+                "block_code": "L034B",
+                "val": -32.8,
+                "desc": "18.3 \u279d 12.3 T/Ha"
+            },
+            {
+                "block_code": "B008B",
+                "val": -44.6,
+                "desc": "74.5 \u279d 41.2 T/Ha"
+            },
+            {
+                "block_code": "N037C",
+                "val": -34.6,
+                "desc": "18.8 \u279d 12.3 T/Ha"
+            },
+            {
+                "block_code": "H018A",
+                "val": -12.5,
+                "desc": "19.4 \u279d 16.9 T/Ha"
+            },
+            {
+                "block_code": "K036B",
+                "val": -11.4,
+                "desc": "13.4 \u279d 11.9 T/Ha"
+            },
+            {
+                "block_code": "D013A",
+                "val": -10.8,
+                "desc": "17.0 \u279d 15.2 T/Ha"
+            },
+            {
+                "block_code": "M039B",
+                "val": -22.2,
+                "desc": "13.2 \u279d 10.2 T/Ha"
+            },
+            {
+                "block_code": "G017A",
+                "val": -14.2,
+                "desc": "18.8 \u279d 16.1 T/Ha"
+            },
+            {
+                "block_code": "H028A",
+                "val": -17.7,
+                "desc": "16.2 \u279d 13.4 T/Ha"
+            },
+            {
+                "block_code": "H015A",
+                "val": -13.7,
+                "desc": "21.7 \u279d 18.7 T/Ha"
+            },
+            {
+                "block_code": "M038A",
+                "val": -39.7,
+                "desc": "15.4 \u279d 9.3 T/Ha"
+            },
+            {
+                "block_code": "C005A",
+                "val": -11.3,
+                "desc": "19.8 \u279d 17.5 T/Ha"
+            },
+            {
+                "block_code": "N038C",
+                "val": -18.1,
+                "desc": "13.6 \u279d 11.2 T/Ha"
+            },
+            {
+                "block_code": "D017A",
+                "val": -5.3,
+                "desc": "15.8 \u279d 14.9 T/Ha"
+            },
+            {
+                "block_code": "L037B",
+                "val": -18.0,
+                "desc": "17.5 \u279d 14.4 T/Ha"
+            },
+            {
+                "block_code": "A001A",
+                "val": -25.4,
+                "desc": "23.6 \u279d 17.6 T/Ha"
+            },
+            {
+                "block_code": "E007A",
+                "val": -14.3,
+                "desc": "19.4 \u279d 16.6 T/Ha"
+            },
+            {
+                "block_code": "L023B",
+                "val": -37.0,
+                "desc": "14.3 \u279d 9.0 T/Ha"
             },
             {
                 "block_code": "F022A",
@@ -327,19 +542,39 @@
                 "desc": "10.6 \u279d 9.6 T/Ha"
             },
             {
-                "block_code": "H019A",
-                "val": -13.1,
-                "desc": "19.1 \u279d 16.6 T/Ha"
+                "block_code": "N041C",
+                "val": -20.9,
+                "desc": "10.5 \u279d 8.3 T/Ha"
             },
             {
-                "block_code": "H028A",
-                "val": -17.7,
-                "desc": "16.2 \u279d 13.4 T/Ha"
+                "block_code": "H017A",
+                "val": -7.8,
+                "desc": "19.4 \u279d 17.9 T/Ha"
             },
             {
-                "block_code": "M041A",
-                "val": -22.9,
-                "desc": "14.5 \u279d 11.2 T/Ha"
+                "block_code": "L028A",
+                "val": -5.0,
+                "desc": "14.8 \u279d 14.1 T/Ha"
+            },
+            {
+                "block_code": "I044A",
+                "val": -23.6,
+                "desc": "8.8 \u279d 6.7 T/Ha"
+            },
+            {
+                "block_code": "K038B",
+                "val": -23.8,
+                "desc": "17.8 \u279d 13.5 T/Ha"
+            },
+            {
+                "block_code": "C004B",
+                "val": -66.7,
+                "desc": "15.1 \u279d 5.0 T/Ha"
+            },
+            {
+                "block_code": "K037A",
+                "val": -29.0,
+                "desc": "12.9 \u279d 9.2 T/Ha"
             },
             {
                 "block_code": "B001A",
@@ -347,204 +582,9 @@
                 "desc": "16.1 \u279d 15.2 T/Ha"
             },
             {
-                "block_code": "E018A",
-                "val": -7.9,
-                "desc": "15.1 \u279d 13.9 T/Ha"
-            },
-            {
-                "block_code": "M039B",
-                "val": -22.2,
-                "desc": "13.2 \u279d 10.2 T/Ha"
-            },
-            {
-                "block_code": "K036A",
-                "val": -27.0,
-                "desc": "18.7 \u279d 13.7 T/Ha"
-            },
-            {
-                "block_code": "J032A",
-                "val": -20.1,
-                "desc": "15.6 \u279d 12.4 T/Ha"
-            },
-            {
-                "block_code": "H013A",
-                "val": -9.2,
-                "desc": "18.5 \u279d 16.8 T/Ha"
-            },
-            {
-                "block_code": "D005A",
-                "val": -11.9,
-                "desc": "18.1 \u279d 16.0 T/Ha"
-            },
-            {
-                "block_code": "G013A",
-                "val": -18.1,
-                "desc": "20.2 \u279d 16.6 T/Ha"
-            },
-            {
-                "block_code": "M034B",
-                "val": -22.3,
-                "desc": "16.9 \u279d 13.1 T/Ha"
-            },
-            {
-                "block_code": "H021A",
+                "block_code": "E008A",
                 "val": -6.6,
-                "desc": "17.9 \u279d 16.7 T/Ha"
-            },
-            {
-                "block_code": "I011A",
-                "val": -6.2,
-                "desc": "16.8 \u279d 15.8 T/Ha"
-            },
-            {
-                "block_code": "C004A",
-                "val": -32.2,
-                "desc": "15.0 \u279d 10.2 T/Ha"
-            },
-            {
-                "block_code": "E007A",
-                "val": -14.3,
-                "desc": "19.4 \u279d 16.6 T/Ha"
-            },
-            {
-                "block_code": "F039A",
-                "val": -18.0,
-                "desc": "12.3 \u279d 10.1 T/Ha"
-            },
-            {
-                "block_code": "H038A",
-                "val": -9.0,
-                "desc": "10.8 \u279d 9.9 T/Ha"
-            },
-            {
-                "block_code": "M037B",
-                "val": -26.5,
-                "desc": "14.9 \u279d 11.0 T/Ha"
-            },
-            {
-                "block_code": "L031A",
-                "val": -21.9,
-                "desc": "15.9 \u279d 12.5 T/Ha"
-            },
-            {
-                "block_code": "K031A",
-                "val": -27.8,
-                "desc": "13.2 \u279d 9.5 T/Ha"
-            },
-            {
-                "block_code": "H030A",
-                "val": -7.4,
-                "desc": "13.3 \u279d 12.3 T/Ha"
-            },
-            {
-                "block_code": "M042B",
-                "val": -38.9,
-                "desc": "16.6 \u279d 10.1 T/Ha"
-            },
-            {
-                "block_code": "D022A",
-                "val": -23.1,
-                "desc": "16.9 \u279d 13.0 T/Ha"
-            },
-            {
-                "block_code": "I041A",
-                "val": -7.6,
-                "desc": "14.7 \u279d 13.6 T/Ha"
-            },
-            {
-                "block_code": "M033B",
-                "val": -30.4,
-                "desc": "16.3 \u279d 11.3 T/Ha"
-            },
-            {
-                "block_code": "L024B",
-                "val": -23.9,
-                "desc": "9.8 \u279d 7.5 T/Ha"
-            },
-            {
-                "block_code": "E022A",
-                "val": -16.1,
-                "desc": "16.4 \u279d 13.7 T/Ha"
-            },
-            {
-                "block_code": "F025A",
-                "val": -9.3,
-                "desc": "14.2 \u279d 12.9 T/Ha"
-            },
-            {
-                "block_code": "A001A",
-                "val": -25.4,
-                "desc": "23.6 \u279d 17.6 T/Ha"
-            },
-            {
-                "block_code": "F045A",
-                "val": -42.1,
-                "desc": "7.8 \u279d 4.5 T/Ha"
-            },
-            {
-                "block_code": "K034B",
-                "val": -22.8,
-                "desc": "14.2 \u279d 11.0 T/Ha"
-            },
-            {
-                "block_code": "I045A",
-                "val": -36.4,
-                "desc": "8.7 \u279d 5.5 T/Ha"
-            },
-            {
-                "block_code": "D021A",
-                "val": -13.6,
-                "desc": "14.7 \u279d 12.7 T/Ha"
-            },
-            {
-                "block_code": "D027B",
-                "val": -5.6,
-                "desc": "12.0 \u279d 11.3 T/Ha"
-            },
-            {
-                "block_code": "N037C",
-                "val": -34.6,
-                "desc": "18.8 \u279d 12.3 T/Ha"
-            },
-            {
-                "block_code": "D009A",
-                "val": -16.7,
-                "desc": "20.5 \u279d 17.1 T/Ha"
-            },
-            {
-                "block_code": "L033B",
-                "val": -11.2,
-                "desc": "14.9 \u279d 13.2 T/Ha"
-            },
-            {
-                "block_code": "F016A",
-                "val": -12.7,
-                "desc": "19.1 \u279d 16.7 T/Ha"
-            },
-            {
-                "block_code": "N043C",
-                "val": -27.1,
-                "desc": "18.9 \u279d 13.8 T/Ha"
-            },
-            {
-                "block_code": "F021A",
-                "val": -5.7,
-                "desc": "16.4 \u279d 15.4 T/Ha"
-            },
-            {
-                "block_code": "G005A",
-                "val": -5.4,
-                "desc": "26.1 \u279d 24.7 T/Ha"
-            },
-            {
-                "block_code": "N038C",
-                "val": -18.1,
-                "desc": "13.6 \u279d 11.2 T/Ha"
-            },
-            {
-                "block_code": "F018A",
-                "val": -9.4,
-                "desc": "18.1 \u279d 16.4 T/Ha"
+                "desc": "19.5 \u279d 18.3 T/Ha"
             },
             {
                 "block_code": "C005B",
@@ -552,184 +592,29 @@
                 "desc": "8.1 \u279d 6.7 T/Ha"
             },
             {
-                "block_code": "E010A",
-                "val": -9.6,
-                "desc": "17.8 \u279d 16.1 T/Ha"
-            },
-            {
-                "block_code": "H032A",
-                "val": -21.3,
-                "desc": "19.1 \u279d 15.1 T/Ha"
-            },
-            {
-                "block_code": "G018A",
-                "val": -11.2,
-                "desc": "20.8 \u279d 18.5 T/Ha"
-            },
-            {
-                "block_code": "D020A",
-                "val": -20.0,
-                "desc": "13.8 \u279d 11.0 T/Ha"
-            },
-            {
-                "block_code": "H031A",
-                "val": -27.0,
-                "desc": "19.5 \u279d 14.2 T/Ha"
-            },
-            {
-                "block_code": "E020A",
-                "val": -8.9,
-                "desc": "15.4 \u279d 14.1 T/Ha"
-            },
-            {
-                "block_code": "L025B",
-                "val": -24.4,
-                "desc": "10.8 \u279d 8.2 T/Ha"
-            },
-            {
-                "block_code": "B004A",
-                "val": -27.6,
-                "desc": "20.9 \u279d 15.2 T/Ha"
-            },
-            {
-                "block_code": "D011A",
-                "val": -10.9,
-                "desc": "16.9 \u279d 15.0 T/Ha"
-            },
-            {
-                "block_code": "E021A",
-                "val": -7.5,
-                "desc": "14.4 \u279d 13.4 T/Ha"
-            },
-            {
-                "block_code": "L039A",
-                "val": -23.1,
-                "desc": "12.6 \u279d 9.7 T/Ha"
-            },
-            {
-                "block_code": "C009A",
-                "val": -5.0,
-                "desc": "20.8 \u279d 19.7 T/Ha"
-            },
-            {
-                "block_code": "H029A",
-                "val": -8.3,
-                "desc": "11.9 \u279d 11.0 T/Ha"
-            },
-            {
-                "block_code": "M036B",
-                "val": -22.0,
-                "desc": "16.6 \u279d 13.0 T/Ha"
-            },
-            {
-                "block_code": "F027A",
-                "val": -10.8,
-                "desc": "17.3 \u279d 15.4 T/Ha"
-            },
-            {
-                "block_code": "J031A",
-                "val": -15.3,
-                "desc": "15.2 \u279d 12.9 T/Ha"
-            },
-            {
-                "block_code": "F002A",
-                "val": -6.1,
-                "desc": "16.0 \u279d 15.0 T/Ha"
-            },
-            {
-                "block_code": "H020A",
-                "val": -17.4,
-                "desc": "20.0 \u279d 16.5 T/Ha"
-            },
-            {
-                "block_code": "L038B",
-                "val": -22.7,
-                "desc": "16.9 \u279d 13.1 T/Ha"
-            },
-            {
-                "block_code": "F003A",
-                "val": -12.1,
-                "desc": "18.5 \u279d 16.3 T/Ha"
-            },
-            {
-                "block_code": "B002D",
-                "val": -67.0,
-                "desc": "17.3 \u279d 5.7 T/Ha"
-            },
-            {
-                "block_code": "J042B",
-                "val": -12.1,
-                "desc": "5.7 \u279d 5.0 T/Ha"
-            },
-            {
-                "block_code": "D016A",
-                "val": -19.9,
-                "desc": "17.8 \u279d 14.2 T/Ha"
-            },
-            {
-                "block_code": "D008A",
-                "val": -13.7,
-                "desc": "18.2 \u279d 15.7 T/Ha"
-            },
-            {
-                "block_code": "M040B",
-                "val": -23.9,
-                "desc": "14.1 \u279d 10.7 T/Ha"
-            },
-            {
-                "block_code": "M035B",
-                "val": -32.5,
-                "desc": "18.2 \u279d 12.3 T/Ha"
-            },
-            {
-                "block_code": "D013A",
-                "val": -10.8,
-                "desc": "17.0 \u279d 15.2 T/Ha"
-            },
-            {
-                "block_code": "E024A",
-                "val": -26.3,
-                "desc": "11.0 \u279d 8.1 T/Ha"
-            },
-            {
-                "block_code": "D017A",
-                "val": -5.3,
-                "desc": "15.8 \u279d 14.9 T/Ha"
-            },
-            {
-                "block_code": "B008B",
-                "val": -44.6,
-                "desc": "74.5 \u279d 41.2 T/Ha"
-            },
-            {
-                "block_code": "K035B",
-                "val": -6.3,
-                "desc": "11.5 \u279d 10.8 T/Ha"
-            },
-            {
                 "block_code": "J043B",
                 "val": -25.7,
                 "desc": "4.0 \u279d 3.0 T/Ha"
             },
             {
-                "block_code": "K037B",
-                "val": -17.0,
-                "desc": "15.3 \u279d 12.7 T/Ha"
+                "block_code": "C008A",
+                "val": -12.7,
+                "desc": "22.9 \u279d 20.0 T/Ha"
             },
             {
-                "block_code": "G019A",
-                "val": -14.5,
-                "desc": "19.1 \u279d 16.3 T/Ha"
+                "block_code": "N039C",
+                "val": -26.0,
+                "desc": "13.7 \u279d 10.1 T/Ha"
             },
             {
-                "block_code": "I045B",
-                "val": -13.2,
-                "desc": "6.0 \u279d 5.2 T/Ha"
+                "block_code": "N043C",
+                "val": -27.1,
+                "desc": "18.9 \u279d 13.8 T/Ha"
             },
             {
-                "block_code": "N040C",
-                "val": -10.4,
-                "desc": "12.6 \u279d 11.3 T/Ha"
+                "block_code": "C023A",
+                "val": -16.8,
+                "desc": "11.2 \u279d 9.3 T/Ha"
             },
             {
                 "block_code": "D018A",
@@ -737,346 +622,141 @@
                 "desc": "15.4 \u279d 12.1 T/Ha"
             },
             {
-                "block_code": "H018A",
+                "block_code": "M035B",
+                "val": -32.5,
+                "desc": "18.2 \u279d 12.3 T/Ha"
+            },
+            {
+                "block_code": "C004A",
+                "val": -32.2,
+                "desc": "15.0 \u279d 10.2 T/Ha"
+            },
+            {
+                "block_code": "D022A",
+                "val": -23.1,
+                "desc": "16.9 \u279d 13.0 T/Ha"
+            },
+            {
+                "block_code": "D009A",
+                "val": -16.7,
+                "desc": "20.5 \u279d 17.1 T/Ha"
+            },
+            {
+                "block_code": "E020A",
+                "val": -8.9,
+                "desc": "15.4 \u279d 14.1 T/Ha"
+            },
+            {
+                "block_code": "G009A",
+                "val": -10.3,
+                "desc": "26.4 \u279d 23.7 T/Ha"
+            },
+            {
+                "block_code": "G014A",
                 "val": -12.5,
-                "desc": "19.4 \u279d 16.9 T/Ha"
+                "desc": "19.8 \u279d 17.4 T/Ha"
             },
             {
-                "block_code": "L022B",
-                "val": -19.7,
-                "desc": "12.8 \u279d 10.3 T/Ha"
+                "block_code": "E024A",
+                "val": -26.3,
+                "desc": "11.0 \u279d 8.1 T/Ha"
             },
             {
-                "block_code": "E023A",
-                "val": -17.2,
-                "desc": "17.6 \u279d 14.5 T/Ha"
+                "block_code": "A002A",
+                "val": -19.5,
+                "desc": "20.6 \u279d 16.6 T/Ha"
+            },
+            {
+                "block_code": "K031A",
+                "val": -27.8,
+                "desc": "13.2 \u279d 9.5 T/Ha"
+            },
+            {
+                "block_code": "D012A",
+                "val": -15.6,
+                "desc": "18.6 \u279d 15.7 T/Ha"
+            },
+            {
+                "block_code": "H029A",
+                "val": -8.3,
+                "desc": "11.9 \u279d 11.0 T/Ha"
+            },
+            {
+                "block_code": "L039A",
+                "val": -23.1,
+                "desc": "12.6 \u279d 9.7 T/Ha"
+            },
+            {
+                "block_code": "F045A",
+                "val": -42.1,
+                "desc": "7.8 \u279d 4.5 T/Ha"
+            },
+            {
+                "block_code": "D023A",
+                "val": -9.4,
+                "desc": "17.1 \u279d 15.5 T/Ha"
+            },
+            {
+                "block_code": "M037B",
+                "val": -26.5,
+                "desc": "14.9 \u279d 11.0 T/Ha"
+            },
+            {
+                "block_code": "D014A",
+                "val": -13.8,
+                "desc": "17.8 \u279d 15.3 T/Ha"
+            },
+            {
+                "block_code": "K035B",
+                "val": -6.3,
+                "desc": "11.5 \u279d 10.8 T/Ha"
+            },
+            {
+                "block_code": "K037B",
+                "val": -17.0,
+                "desc": "15.3 \u279d 12.7 T/Ha"
+            },
+            {
+                "block_code": "F017A",
+                "val": -5.1,
+                "desc": "18.7 \u279d 17.8 T/Ha"
+            },
+            {
+                "block_code": "G005A",
+                "val": -5.4,
+                "desc": "26.1 \u279d 24.7 T/Ha"
+            },
+            {
+                "block_code": "L038B",
+                "val": -22.7,
+                "desc": "16.9 \u279d 13.1 T/Ha"
+            },
+            {
+                "block_code": "H016A",
+                "val": -6.1,
+                "desc": "17.3 \u279d 16.3 T/Ha"
+            },
+            {
+                "block_code": "L033B",
+                "val": -11.2,
+                "desc": "14.9 \u279d 13.2 T/Ha"
+            },
+            {
+                "block_code": "K036A",
+                "val": -27.0,
+                "desc": "18.7 \u279d 13.7 T/Ha"
+            },
+            {
+                "block_code": "E013A",
+                "val": -13.0,
+                "desc": "17.7 \u279d 15.4 T/Ha"
             }
         ],
         "stable": [
             {
-                "block_code": "E040A",
-                "val": -3.3,
-                "desc": "12.6 \u279d 12.2 T/Ha"
-            },
-            {
-                "block_code": "I019A",
-                "val": -2.2,
-                "desc": "16.8 \u279d 16.5 T/Ha"
-            },
-            {
-                "block_code": "H040A",
-                "val": 3.0,
-                "desc": "12.9 \u279d 13.3 T/Ha"
-            },
-            {
-                "block_code": "J026A",
-                "val": 1.0,
-                "desc": "13.4 \u279d 13.5 T/Ha"
-            },
-            {
-                "block_code": "G002A",
-                "val": -3.1,
-                "desc": "18.9 \u279d 18.4 T/Ha"
-            },
-            {
-                "block_code": "E001A",
-                "val": 1.1,
-                "desc": "16.9 \u279d 17.0 T/Ha"
-            },
-            {
-                "block_code": "J013A",
-                "val": 4.4,
-                "desc": "17.9 \u279d 18.7 T/Ha"
-            },
-            {
-                "block_code": "E015A",
-                "val": 0.5,
-                "desc": "15.1 \u279d 15.2 T/Ha"
-            },
-            {
-                "block_code": "C010A",
-                "val": -2.3,
-                "desc": "19.1 \u279d 18.6 T/Ha"
-            },
-            {
-                "block_code": "I017A",
-                "val": -1.1,
-                "desc": "16.7 \u279d 16.5 T/Ha"
-            },
-            {
-                "block_code": "M032B",
-                "val": 2.5,
-                "desc": "13.6 \u279d 13.9 T/Ha"
-            },
-            {
-                "block_code": "I028A",
-                "val": 2.5,
-                "desc": "14.4 \u279d 14.8 T/Ha"
-            },
-            {
-                "block_code": "C011A",
-                "val": -1.7,
-                "desc": "19.4 \u279d 19.0 T/Ha"
-            },
-            {
-                "block_code": "E038A",
-                "val": 1.9,
-                "desc": "12.9 \u279d 13.2 T/Ha"
-            },
-            {
-                "block_code": "F023A",
-                "val": 3.0,
-                "desc": "14.1 \u279d 14.6 T/Ha"
-            },
-            {
-                "block_code": "F012A",
-                "val": -4.6,
-                "desc": "19.2 \u279d 18.3 T/Ha"
-            },
-            {
-                "block_code": "H022A",
-                "val": -4.2,
-                "desc": "15.4 \u279d 14.8 T/Ha"
-            },
-            {
-                "block_code": "B002A",
-                "val": 2.6,
-                "desc": "14.6 \u279d 15.0 T/Ha"
-            },
-            {
-                "block_code": "C007A",
-                "val": -4.3,
-                "desc": "22.7 \u279d 21.8 T/Ha"
-            },
-            {
-                "block_code": "B009B",
-                "val": 4.7,
-                "desc": "8.8 \u279d 9.2 T/Ha"
-            },
-            {
-                "block_code": "L029A",
-                "val": -1.2,
-                "desc": "10.5 \u279d 10.3 T/Ha"
-            },
-            {
-                "block_code": "C005D",
-                "val": 1.7,
-                "desc": "5.8 \u279d 5.8 T/Ha"
-            },
-            {
                 "block_code": "E009A",
                 "val": -0.1,
                 "desc": "15.7 \u279d 15.7 T/Ha"
-            },
-            {
-                "block_code": "B012A",
-                "val": 2.5,
-                "desc": "14.3 \u279d 14.6 T/Ha"
-            },
-            {
-                "block_code": "K038A",
-                "val": -1.2,
-                "desc": "11.1 \u279d 11.0 T/Ha"
-            },
-            {
-                "block_code": "I018A",
-                "val": -2.9,
-                "desc": "17.3 \u279d 16.8 T/Ha"
-            },
-            {
-                "block_code": "E034A",
-                "val": -2.4,
-                "desc": "14.9 \u279d 14.6 T/Ha"
-            },
-            {
-                "block_code": "F009A",
-                "val": -4.7,
-                "desc": "18.1 \u279d 17.2 T/Ha"
-            },
-            {
-                "block_code": "I026A",
-                "val": -0.2,
-                "desc": "15.8 \u279d 15.8 T/Ha"
-            },
-            {
-                "block_code": "I025A",
-                "val": -4.1,
-                "desc": "17.0 \u279d 16.3 T/Ha"
-            },
-            {
-                "block_code": "A020A",
-                "val": 1.6,
-                "desc": "16.0 \u279d 16.3 T/Ha"
-            },
-            {
-                "block_code": "H036A",
-                "val": -2.0,
-                "desc": "14.3 \u279d 14.1 T/Ha"
-            },
-            {
-                "block_code": "C014A",
-                "val": 0.7,
-                "desc": "19.5 \u279d 19.6 T/Ha"
-            },
-            {
-                "block_code": "A003A",
-                "val": -4.8,
-                "desc": "18.8 \u279d 17.9 T/Ha"
-            },
-            {
-                "block_code": "F035A",
-                "val": -4.1,
-                "desc": "13.6 \u279d 13.0 T/Ha"
-            },
-            {
-                "block_code": "D003A",
-                "val": 0.9,
-                "desc": "16.4 \u279d 16.5 T/Ha"
-            },
-            {
-                "block_code": "F036A",
-                "val": -3.2,
-                "desc": "15.2 \u279d 14.7 T/Ha"
-            },
-            {
-                "block_code": "B018A",
-                "val": -0.2,
-                "desc": "16.1 \u279d 16.1 T/Ha"
-            },
-            {
-                "block_code": "J019A",
-                "val": 2.0,
-                "desc": "16.2 \u279d 16.6 T/Ha"
-            },
-            {
-                "block_code": "D015A",
-                "val": -3.7,
-                "desc": "16.4 \u279d 15.8 T/Ha"
-            },
-            {
-                "block_code": "I035A",
-                "val": -1.6,
-                "desc": "12.7 \u279d 12.5 T/Ha"
-            },
-            {
-                "block_code": "G010A",
-                "val": -2.3,
-                "desc": "22.7 \u279d 22.1 T/Ha"
-            },
-            {
-                "block_code": "A019A",
-                "val": -2.7,
-                "desc": "15.7 \u279d 15.3 T/Ha"
-            },
-            {
-                "block_code": "F010A",
-                "val": -2.5,
-                "desc": "17.6 \u279d 17.1 T/Ha"
-            },
-            {
-                "block_code": "I029A",
-                "val": -2.4,
-                "desc": "14.8 \u279d 14.4 T/Ha"
-            },
-            {
-                "block_code": "K041A",
-                "val": 5.0,
-                "desc": "9.2 \u279d 9.7 T/Ha"
-            },
-            {
-                "block_code": "G016A",
-                "val": -3.5,
-                "desc": "18.4 \u279d 17.8 T/Ha"
-            },
-            {
-                "block_code": "C017A",
-                "val": 2.8,
-                "desc": "17.4 \u279d 17.9 T/Ha"
-            },
-            {
-                "block_code": "G021A",
-                "val": -4.2,
-                "desc": "10.1 \u279d 9.7 T/Ha"
-            },
-            {
-                "block_code": "B019A",
-                "val": 2.4,
-                "desc": "17.3 \u279d 17.8 T/Ha"
-            },
-            {
-                "block_code": "F014A",
-                "val": 1.7,
-                "desc": "19.1 \u279d 19.4 T/Ha"
-            },
-            {
-                "block_code": "I032A",
-                "val": 4.3,
-                "desc": "14.2 \u279d 14.8 T/Ha"
-            },
-            {
-                "block_code": "H035A",
-                "val": 1.1,
-                "desc": "15.2 \u279d 15.3 T/Ha"
-            },
-            {
-                "block_code": "K016A",
-                "val": 0.7,
-                "desc": "14.2 \u279d 14.3 T/Ha"
-            },
-            {
-                "block_code": "G023A",
-                "val": 2.4,
-                "desc": "15.6 \u279d 16.0 T/Ha"
-            },
-            {
-                "block_code": "I033A",
-                "val": -2.3,
-                "desc": "13.5 \u279d 13.2 T/Ha"
-            },
-            {
-                "block_code": "L020A",
-                "val": 0.1,
-                "desc": "8.4 \u279d 8.4 T/Ha"
-            },
-            {
-                "block_code": "H012A",
-                "val": 2.6,
-                "desc": "19.8 \u279d 20.4 T/Ha"
-            },
-            {
-                "block_code": "F019A",
-                "val": -3.6,
-                "desc": "16.2 \u279d 15.6 T/Ha"
-            },
-            {
-                "block_code": "H026A",
-                "val": -1.5,
-                "desc": "18.2 \u279d 17.9 T/Ha"
-            },
-            {
-                "block_code": "E017A",
-                "val": 0.1,
-                "desc": "15.2 \u279d 15.2 T/Ha"
-            },
-            {
-                "block_code": "B008A",
-                "val": 2.6,
-                "desc": "11.0 \u279d 11.3 T/Ha"
-            },
-            {
-                "block_code": "E006A",
-                "val": -0.2,
-                "desc": "18.2 \u279d 18.2 T/Ha"
-            },
-            {
-                "block_code": "G025B",
-                "val": -0.7,
-                "desc": "14.1 \u279d 14.0 T/Ha"
-            },
-            {
-                "block_code": "H025A",
-                "val": -1.5,
-                "desc": "15.7 \u279d 15.5 T/Ha"
             },
             {
                 "block_code": "F015A",
@@ -1084,44 +764,34 @@
                 "desc": "19.4 \u279d 18.9 T/Ha"
             },
             {
-                "block_code": "F020A",
-                "val": -4.5,
-                "desc": "16.8 \u279d 16.1 T/Ha"
-            },
-            {
-                "block_code": "E042A",
-                "val": -3.9,
-                "desc": "7.9 \u279d 7.6 T/Ha"
-            },
-            {
-                "block_code": "H007A",
-                "val": 1.9,
-                "desc": "17.7 \u279d 18.1 T/Ha"
-            },
-            {
                 "block_code": "K032B",
                 "val": 0.5,
                 "desc": "15.0 \u279d 15.1 T/Ha"
             },
             {
-                "block_code": "J017A",
+                "block_code": "C018B",
+                "val": 4.3,
+                "desc": "13.5 \u279d 14.1 T/Ha"
+            },
+            {
+                "block_code": "L029A",
+                "val": -1.2,
+                "desc": "10.5 \u279d 10.3 T/Ha"
+            },
+            {
+                "block_code": "H022A",
                 "val": -4.2,
-                "desc": "16.0 \u279d 15.3 T/Ha"
+                "desc": "15.4 \u279d 14.8 T/Ha"
             },
             {
-                "block_code": "F013A",
+                "block_code": "D015A",
+                "val": -3.7,
+                "desc": "16.4 \u279d 15.8 T/Ha"
+            },
+            {
+                "block_code": "I025A",
                 "val": -4.1,
-                "desc": "20.1 \u279d 19.3 T/Ha"
-            },
-            {
-                "block_code": "H014A",
-                "val": -1.6,
-                "desc": "20.1 \u279d 19.8 T/Ha"
-            },
-            {
-                "block_code": "J033A",
-                "val": -2.2,
-                "desc": "14.0 \u279d 13.7 T/Ha"
+                "desc": "17.0 \u279d 16.3 T/Ha"
             },
             {
                 "block_code": "C012A",
@@ -1129,29 +799,84 @@
                 "desc": "18.3 \u279d 18.2 T/Ha"
             },
             {
-                "block_code": "H008A",
-                "val": 2.1,
-                "desc": "19.1 \u279d 19.4 T/Ha"
-            },
-            {
-                "block_code": "B021A",
-                "val": -1.1,
-                "desc": "15.7 \u279d 15.5 T/Ha"
-            },
-            {
                 "block_code": "D024A",
                 "val": -3.8,
                 "desc": "8.7 \u279d 8.4 T/Ha"
             },
             {
-                "block_code": "E003A",
-                "val": 0.5,
+                "block_code": "F020A",
+                "val": -4.5,
+                "desc": "16.8 \u279d 16.1 T/Ha"
+            },
+            {
+                "block_code": "B012A",
+                "val": 2.5,
+                "desc": "14.3 \u279d 14.6 T/Ha"
+            },
+            {
+                "block_code": "C013A",
+                "val": -3.2,
+                "desc": "18.9 \u279d 18.3 T/Ha"
+            },
+            {
+                "block_code": "H036A",
+                "val": -2.0,
+                "desc": "14.3 \u279d 14.1 T/Ha"
+            },
+            {
+                "block_code": "D042A",
+                "val": -1.2,
+                "desc": "8.2 \u279d 8.1 T/Ha"
+            },
+            {
+                "block_code": "C011A",
+                "val": -1.7,
+                "desc": "19.4 \u279d 19.0 T/Ha"
+            },
+            {
+                "block_code": "H014A",
+                "val": -1.6,
+                "desc": "20.1 \u279d 19.8 T/Ha"
+            },
+            {
+                "block_code": "C019A",
+                "val": 3.2,
+                "desc": "16.4 \u279d 16.9 T/Ha"
+            },
+            {
+                "block_code": "G010A",
+                "val": -2.3,
+                "desc": "22.7 \u279d 22.1 T/Ha"
+            },
+            {
+                "block_code": "A020A",
+                "val": 1.6,
+                "desc": "16.0 \u279d 16.3 T/Ha"
+            },
+            {
+                "block_code": "E001A",
+                "val": 1.1,
+                "desc": "16.9 \u279d 17.0 T/Ha"
+            },
+            {
+                "block_code": "J029A",
+                "val": 0.4,
                 "desc": "14.0 \u279d 14.1 T/Ha"
             },
             {
-                "block_code": "C018B",
-                "val": 4.3,
-                "desc": "13.5 \u279d 14.1 T/Ha"
+                "block_code": "B009B",
+                "val": 4.7,
+                "desc": "8.8 \u279d 9.2 T/Ha"
+            },
+            {
+                "block_code": "F014A",
+                "val": 1.7,
+                "desc": "19.1 \u279d 19.4 T/Ha"
+            },
+            {
+                "block_code": "B018A",
+                "val": -0.2,
+                "desc": "16.1 \u279d 16.1 T/Ha"
             },
             {
                 "block_code": "I015A",
@@ -1164,14 +889,14 @@
                 "desc": "16.4 \u279d 16.9 T/Ha"
             },
             {
-                "block_code": "G043A",
-                "val": 0.7,
-                "desc": "4.6 \u279d 4.6 T/Ha"
+                "block_code": "I016A",
+                "val": -1.6,
+                "desc": "17.8 \u279d 17.5 T/Ha"
             },
             {
-                "block_code": "I027A",
-                "val": -1.7,
-                "desc": "15.3 \u279d 15.0 T/Ha"
+                "block_code": "J017A",
+                "val": -4.2,
+                "desc": "16.0 \u279d 15.3 T/Ha"
             },
             {
                 "block_code": "J035A",
@@ -1179,64 +904,94 @@
                 "desc": "12.6 \u279d 12.5 T/Ha"
             },
             {
-                "block_code": "D042A",
-                "val": -1.2,
-                "desc": "8.2 \u279d 8.1 T/Ha"
+                "block_code": "D003A",
+                "val": 0.9,
+                "desc": "16.4 \u279d 16.5 T/Ha"
             },
             {
-                "block_code": "F038A",
-                "val": 1.2,
-                "desc": "12.1 \u279d 12.2 T/Ha"
+                "block_code": "F009A",
+                "val": -4.7,
+                "desc": "18.1 \u279d 17.2 T/Ha"
             },
             {
-                "block_code": "C022A",
-                "val": 4.0,
-                "desc": "10.7 \u279d 11.1 T/Ha"
-            },
-            {
-                "block_code": "B001D",
-                "val": 0.3,
-                "desc": "11.8 \u279d 11.9 T/Ha"
-            },
-            {
-                "block_code": "J029A",
-                "val": 0.4,
-                "desc": "14.0 \u279d 14.1 T/Ha"
-            },
-            {
-                "block_code": "J034A",
-                "val": 0.1,
-                "desc": "14.0 \u279d 14.0 T/Ha"
-            },
-            {
-                "block_code": "F006A",
+                "block_code": "J026A",
                 "val": 1.0,
-                "desc": "19.4 \u279d 19.6 T/Ha"
+                "desc": "13.4 \u279d 13.5 T/Ha"
             },
             {
-                "block_code": "I016A",
+                "block_code": "H035A",
+                "val": 1.1,
+                "desc": "15.2 \u279d 15.3 T/Ha"
+            },
+            {
+                "block_code": "I019A",
+                "val": -2.2,
+                "desc": "16.8 \u279d 16.5 T/Ha"
+            },
+            {
+                "block_code": "C017A",
+                "val": 2.8,
+                "desc": "17.4 \u279d 17.9 T/Ha"
+            },
+            {
+                "block_code": "A003A",
+                "val": -4.8,
+                "desc": "18.8 \u279d 17.9 T/Ha"
+            },
+            {
+                "block_code": "E038A",
+                "val": 1.9,
+                "desc": "12.9 \u279d 13.2 T/Ha"
+            },
+            {
+                "block_code": "K038A",
+                "val": -1.2,
+                "desc": "11.1 \u279d 11.0 T/Ha"
+            },
+            {
+                "block_code": "H012A",
+                "val": 2.6,
+                "desc": "19.8 \u279d 20.4 T/Ha"
+            },
+            {
+                "block_code": "C014A",
+                "val": 0.7,
+                "desc": "19.5 \u279d 19.6 T/Ha"
+            },
+            {
+                "block_code": "G016A",
+                "val": -3.5,
+                "desc": "18.4 \u279d 17.8 T/Ha"
+            },
+            {
+                "block_code": "E034A",
+                "val": -2.4,
+                "desc": "14.9 \u279d 14.6 T/Ha"
+            },
+            {
+                "block_code": "I035A",
                 "val": -1.6,
-                "desc": "17.8 \u279d 17.5 T/Ha"
+                "desc": "12.7 \u279d 12.5 T/Ha"
             },
             {
-                "block_code": "M040A",
-                "val": -1.0,
-                "desc": "14.9 \u279d 14.8 T/Ha"
+                "block_code": "E042A",
+                "val": -3.9,
+                "desc": "7.9 \u279d 7.6 T/Ha"
             },
             {
-                "block_code": "C013A",
-                "val": -3.2,
-                "desc": "18.9 \u279d 18.3 T/Ha"
+                "block_code": "F023A",
+                "val": 3.0,
+                "desc": "14.1 \u279d 14.6 T/Ha"
             },
             {
-                "block_code": "C019A",
-                "val": 3.2,
-                "desc": "16.4 \u279d 16.9 T/Ha"
+                "block_code": "I018A",
+                "val": -2.9,
+                "desc": "17.3 \u279d 16.8 T/Ha"
             },
             {
-                "block_code": "I034A",
-                "val": -2.7,
-                "desc": "13.6 \u279d 13.2 T/Ha"
+                "block_code": "F019A",
+                "val": -3.6,
+                "desc": "16.2 \u279d 15.6 T/Ha"
             },
             {
                 "block_code": "E016A",
@@ -1244,696 +999,261 @@
                 "desc": "16.8 \u279d 17.6 T/Ha"
             },
             {
+                "block_code": "L020A",
+                "val": 0.1,
+                "desc": "8.4 \u279d 8.4 T/Ha"
+            },
+            {
+                "block_code": "G023A",
+                "val": 2.4,
+                "desc": "15.6 \u279d 16.0 T/Ha"
+            },
+            {
+                "block_code": "G021A",
+                "val": -4.2,
+                "desc": "10.1 \u279d 9.7 T/Ha"
+            },
+            {
+                "block_code": "M040A",
+                "val": -1.0,
+                "desc": "14.9 \u279d 14.8 T/Ha"
+            },
+            {
+                "block_code": "H040A",
+                "val": 3.0,
+                "desc": "12.9 \u279d 13.3 T/Ha"
+            },
+            {
+                "block_code": "G043A",
+                "val": 0.7,
+                "desc": "4.6 \u279d 4.6 T/Ha"
+            },
+            {
+                "block_code": "I029A",
+                "val": -2.4,
+                "desc": "14.8 \u279d 14.4 T/Ha"
+            },
+            {
+                "block_code": "F010A",
+                "val": -2.5,
+                "desc": "17.6 \u279d 17.1 T/Ha"
+            },
+            {
+                "block_code": "I028A",
+                "val": 2.5,
+                "desc": "14.4 \u279d 14.8 T/Ha"
+            },
+            {
+                "block_code": "I034A",
+                "val": -2.7,
+                "desc": "13.6 \u279d 13.2 T/Ha"
+            },
+            {
+                "block_code": "F036A",
+                "val": -3.2,
+                "desc": "15.2 \u279d 14.7 T/Ha"
+            },
+            {
+                "block_code": "C005D",
+                "val": 1.7,
+                "desc": "5.8 \u279d 5.8 T/Ha"
+            },
+            {
+                "block_code": "E003A",
+                "val": 0.5,
+                "desc": "14.0 \u279d 14.1 T/Ha"
+            },
+            {
+                "block_code": "E006A",
+                "val": -0.2,
+                "desc": "18.2 \u279d 18.2 T/Ha"
+            },
+            {
+                "block_code": "H008A",
+                "val": 2.1,
+                "desc": "19.1 \u279d 19.4 T/Ha"
+            },
+            {
+                "block_code": "B019A",
+                "val": 2.4,
+                "desc": "17.3 \u279d 17.8 T/Ha"
+            },
+            {
+                "block_code": "B008A",
+                "val": 2.6,
+                "desc": "11.0 \u279d 11.3 T/Ha"
+            },
+            {
+                "block_code": "M032B",
+                "val": 2.5,
+                "desc": "13.6 \u279d 13.9 T/Ha"
+            },
+            {
+                "block_code": "K041A",
+                "val": 5.0,
+                "desc": "9.2 \u279d 9.7 T/Ha"
+            },
+            {
+                "block_code": "G025B",
+                "val": -0.7,
+                "desc": "14.1 \u279d 14.0 T/Ha"
+            },
+            {
+                "block_code": "J013A",
+                "val": 4.4,
+                "desc": "17.9 \u279d 18.7 T/Ha"
+            },
+            {
+                "block_code": "B021A",
+                "val": -1.1,
+                "desc": "15.7 \u279d 15.5 T/Ha"
+            },
+            {
+                "block_code": "B001D",
+                "val": 0.3,
+                "desc": "11.8 \u279d 11.9 T/Ha"
+            },
+            {
+                "block_code": "B002A",
+                "val": 2.6,
+                "desc": "14.6 \u279d 15.0 T/Ha"
+            },
+            {
+                "block_code": "C022A",
+                "val": 4.0,
+                "desc": "10.7 \u279d 11.1 T/Ha"
+            },
+            {
+                "block_code": "C010A",
+                "val": -2.3,
+                "desc": "19.1 \u279d 18.6 T/Ha"
+            },
+            {
                 "block_code": "G034A",
                 "val": 0.4,
                 "desc": "14.8 \u279d 14.8 T/Ha"
+            },
+            {
+                "block_code": "I033A",
+                "val": -2.3,
+                "desc": "13.5 \u279d 13.2 T/Ha"
+            },
+            {
+                "block_code": "E017A",
+                "val": 0.1,
+                "desc": "15.2 \u279d 15.2 T/Ha"
+            },
+            {
+                "block_code": "F012A",
+                "val": -4.6,
+                "desc": "19.2 \u279d 18.3 T/Ha"
+            },
+            {
+                "block_code": "A019A",
+                "val": -2.7,
+                "desc": "15.7 \u279d 15.3 T/Ha"
+            },
+            {
+                "block_code": "C007A",
+                "val": -4.3,
+                "desc": "22.7 \u279d 21.8 T/Ha"
+            },
+            {
+                "block_code": "E040A",
+                "val": -3.3,
+                "desc": "12.6 \u279d 12.2 T/Ha"
+            },
+            {
+                "block_code": "K016A",
+                "val": 0.7,
+                "desc": "14.2 \u279d 14.3 T/Ha"
+            },
+            {
+                "block_code": "H007A",
+                "val": 1.9,
+                "desc": "17.7 \u279d 18.1 T/Ha"
+            },
+            {
+                "block_code": "I027A",
+                "val": -1.7,
+                "desc": "15.3 \u279d 15.0 T/Ha"
+            },
+            {
+                "block_code": "G002A",
+                "val": -3.1,
+                "desc": "18.9 \u279d 18.4 T/Ha"
+            },
+            {
+                "block_code": "H025A",
+                "val": -1.5,
+                "desc": "15.7 \u279d 15.5 T/Ha"
+            },
+            {
+                "block_code": "J019A",
+                "val": 2.0,
+                "desc": "16.2 \u279d 16.6 T/Ha"
+            },
+            {
+                "block_code": "I032A",
+                "val": 4.3,
+                "desc": "14.2 \u279d 14.8 T/Ha"
+            },
+            {
+                "block_code": "E015A",
+                "val": 0.5,
+                "desc": "15.1 \u279d 15.2 T/Ha"
+            },
+            {
+                "block_code": "J034A",
+                "val": 0.1,
+                "desc": "14.0 \u279d 14.0 T/Ha"
+            },
+            {
+                "block_code": "I017A",
+                "val": -1.1,
+                "desc": "16.7 \u279d 16.5 T/Ha"
+            },
+            {
+                "block_code": "H026A",
+                "val": -1.5,
+                "desc": "18.2 \u279d 17.9 T/Ha"
+            },
+            {
+                "block_code": "F013A",
+                "val": -4.1,
+                "desc": "20.1 \u279d 19.3 T/Ha"
+            },
+            {
+                "block_code": "F038A",
+                "val": 1.2,
+                "desc": "12.1 \u279d 12.2 T/Ha"
+            },
+            {
+                "block_code": "I026A",
+                "val": -0.2,
+                "desc": "15.8 \u279d 15.8 T/Ha"
+            },
+            {
+                "block_code": "F035A",
+                "val": -4.1,
+                "desc": "13.6 \u279d 13.0 T/Ha"
+            },
+            {
+                "block_code": "J033A",
+                "val": -2.2,
+                "desc": "14.0 \u279d 13.7 T/Ha"
+            },
+            {
+                "block_code": "F006A",
+                "val": 1.0,
+                "desc": "19.4 \u279d 19.6 T/Ha"
             }
         ],
         "increasing": [
             {
-                "block_code": "I037A",
-                "val": 6.2,
-                "desc": "10.6 \u279d 11.2 T/Ha"
-            },
-            {
-                "block_code": "B010A",
-                "val": 21.2,
-                "desc": "9.2 \u279d 11.2 T/Ha"
-            },
-            {
-                "block_code": "A020B",
-                "val": 64.2,
-                "desc": "8.5 \u279d 14.0 T/Ha"
-            },
-            {
-                "block_code": "E028A",
-                "val": 100,
-                "desc": "0.0 \u279d 4.3 T/Ha"
-            },
-            {
-                "block_code": "J028A",
-                "val": 10.1,
-                "desc": "13.0 \u279d 14.3 T/Ha"
-            },
-            {
-                "block_code": "H037A",
-                "val": 28.4,
-                "desc": "8.3 \u279d 10.7 T/Ha"
-            },
-            {
-                "block_code": "B001E",
-                "val": 188.1,
-                "desc": "1.8 \u279d 5.1 T/Ha"
-            },
-            {
-                "block_code": "G023C",
-                "val": 97.9,
-                "desc": "7.6 \u279d 15.1 T/Ha"
-            },
-            {
-                "block_code": "K023A",
-                "val": 36.6,
-                "desc": "8.8 \u279d 12.1 T/Ha"
-            },
-            {
-                "block_code": "I020A",
-                "val": 8.0,
-                "desc": "16.3 \u279d 17.6 T/Ha"
-            },
-            {
-                "block_code": "B020A",
-                "val": 9.8,
-                "desc": "16.1 \u279d 17.7 T/Ha"
-            },
-            {
-                "block_code": "E002A",
-                "val": 5.3,
-                "desc": "14.8 \u279d 15.6 T/Ha"
-            },
-            {
-                "block_code": "G040A",
-                "val": 29.6,
-                "desc": "5.2 \u279d 6.8 T/Ha"
-            },
-            {
-                "block_code": "D027D",
-                "val": 91.8,
-                "desc": "5.6 \u279d 10.7 T/Ha"
-            },
-            {
-                "block_code": "E041A",
-                "val": 36.3,
-                "desc": "9.3 \u279d 12.7 T/Ha"
-            },
-            {
-                "block_code": "E024C",
-                "val": 100,
-                "desc": "0.0 \u279d 5.2 T/Ha"
-            },
-            {
-                "block_code": "E044A",
-                "val": 76.2,
-                "desc": "2.8 \u279d 5.0 T/Ha"
-            },
-            {
-                "block_code": "A005B",
-                "val": 100,
-                "desc": "0.0 \u279d 1.5 T/Ha"
-            },
-            {
-                "block_code": "D043B",
-                "val": 151.4,
-                "desc": "1.8 \u279d 4.5 T/Ha"
-            },
-            {
-                "block_code": "B014D",
-                "val": 216.2,
-                "desc": "4.5 \u279d 14.1 T/Ha"
-            },
-            {
-                "block_code": "B017D",
-                "val": 100,
-                "desc": "0.0 \u279d 16.4 T/Ha"
-            },
-            {
-                "block_code": "K024B",
-                "val": 73.5,
-                "desc": "3.9 \u279d 6.7 T/Ha"
-            },
-            {
-                "block_code": "F029D",
-                "val": 97.3,
-                "desc": "5.2 \u279d 10.2 T/Ha"
-            },
-            {
-                "block_code": "F030C",
-                "val": 1203.7,
-                "desc": "0.3 \u279d 3.5 T/Ha"
-            },
-            {
-                "block_code": "J022A",
-                "val": 24.2,
-                "desc": "14.2 \u279d 17.6 T/Ha"
-            },
-            {
-                "block_code": "K025A",
-                "val": 12.7,
-                "desc": "11.3 \u279d 12.8 T/Ha"
-            },
-            {
-                "block_code": "M043B",
-                "val": 6.4,
-                "desc": "13.8 \u279d 14.7 T/Ha"
-            },
-            {
-                "block_code": "I021A",
-                "val": 6.0,
-                "desc": "18.1 \u279d 19.2 T/Ha"
-            },
-            {
-                "block_code": "G036A",
-                "val": 14.7,
-                "desc": "11.9 \u279d 13.7 T/Ha"
-            },
-            {
-                "block_code": "J020A",
-                "val": 8.7,
-                "desc": "16.8 \u279d 18.3 T/Ha"
-            },
-            {
-                "block_code": "F028C",
-                "val": 100,
-                "desc": "0.0 \u279d 2.8 T/Ha"
-            },
-            {
-                "block_code": "K014A",
-                "val": 11.2,
-                "desc": "15.3 \u279d 17.0 T/Ha"
-            },
-            {
-                "block_code": "A014B",
-                "val": 77.0,
-                "desc": "7.1 \u279d 12.6 T/Ha"
-            },
-            {
-                "block_code": "D024D",
-                "val": 119.6,
-                "desc": "1.4 \u279d 3.1 T/Ha"
-            },
-            {
-                "block_code": "D024E",
-                "val": 59.2,
-                "desc": "1.7 \u279d 2.8 T/Ha"
-            },
-            {
-                "block_code": "K017A",
-                "val": 18.4,
-                "desc": "13.7 \u279d 16.2 T/Ha"
-            },
-            {
-                "block_code": "F025D",
-                "val": 100,
-                "desc": "0.0 \u279d 9.8 T/Ha"
-            },
-            {
-                "block_code": "E024D",
-                "val": 100,
-                "desc": "0.0 \u279d 3.1 T/Ha"
-            },
-            {
-                "block_code": "K034A",
-                "val": 24.3,
-                "desc": "11.7 \u279d 14.6 T/Ha"
-            },
-            {
-                "block_code": "F033A",
-                "val": 12.3,
-                "desc": "17.1 \u279d 19.2 T/Ha"
-            },
-            {
-                "block_code": "I023A",
-                "val": 29.1,
-                "desc": "13.9 \u279d 17.9 T/Ha"
-            },
-            {
-                "block_code": "D024B",
-                "val": 63.5,
-                "desc": "3.9 \u279d 6.4 T/Ha"
-            },
-            {
-                "block_code": "D006A",
-                "val": 5.5,
-                "desc": "16.4 \u279d 17.3 T/Ha"
-            },
-            {
-                "block_code": "I040A",
-                "val": 15.5,
-                "desc": "11.8 \u279d 13.6 T/Ha"
-            },
-            {
-                "block_code": "L030A",
-                "val": 12.5,
-                "desc": "11.2 \u279d 12.6 T/Ha"
-            },
-            {
-                "block_code": "K028A",
-                "val": 35.2,
-                "desc": "9.4 \u279d 12.7 T/Ha"
-            },
-            {
-                "block_code": "G033A",
-                "val": 11.6,
-                "desc": "14.1 \u279d 15.8 T/Ha"
-            },
-            {
-                "block_code": "D038A",
-                "val": 44.6,
-                "desc": "11.9 \u279d 17.2 T/Ha"
-            },
-            {
-                "block_code": "I024B",
-                "val": 82.9,
-                "desc": "4.3 \u279d 7.9 T/Ha"
-            },
-            {
-                "block_code": "A005A",
-                "val": 100,
-                "desc": "0.0 \u279d 2.6 T/Ha"
-            },
-            {
-                "block_code": "L039B",
-                "val": 5.7,
-                "desc": "13.8 \u279d 14.6 T/Ha"
-            },
-            {
-                "block_code": "F005A",
-                "val": 5.3,
-                "desc": "17.2 \u279d 18.1 T/Ha"
-            },
-            {
-                "block_code": "C005C",
-                "val": 12.0,
-                "desc": "3.2 \u279d 3.6 T/Ha"
-            },
-            {
-                "block_code": "B013B",
-                "val": 68.4,
-                "desc": "8.9 \u279d 14.9 T/Ha"
-            },
-            {
-                "block_code": "F026A",
-                "val": 13.2,
-                "desc": "17.3 \u279d 19.6 T/Ha"
-            },
-            {
-                "block_code": "B003A",
-                "val": 5.6,
-                "desc": "15.8 \u279d 16.7 T/Ha"
-            },
-            {
-                "block_code": "B016A",
-                "val": 59.6,
-                "desc": "10.7 \u279d 17.1 T/Ha"
-            },
-            {
-                "block_code": "K019B",
-                "val": 8.2,
-                "desc": "13.0 \u279d 14.1 T/Ha"
-            },
-            {
-                "block_code": "E024B",
-                "val": 114.8,
-                "desc": "3.2 \u279d 6.8 T/Ha"
-            },
-            {
-                "block_code": "D028D",
-                "val": 100,
-                "desc": "0.0 \u279d 6.3 T/Ha"
-            },
-            {
-                "block_code": "M040C",
-                "val": 46.7,
-                "desc": "8.4 \u279d 12.3 T/Ha"
-            },
-            {
-                "block_code": "B006B",
-                "val": 47.8,
-                "desc": "6.0 \u279d 8.9 T/Ha"
-            },
-            {
-                "block_code": "F031A",
-                "val": 7.9,
-                "desc": "7.5 \u279d 8.1 T/Ha"
-            },
-            {
-                "block_code": "J027A",
-                "val": 6.4,
-                "desc": "13.7 \u279d 14.6 T/Ha"
-            },
-            {
-                "block_code": "A011A",
-                "val": 130.6,
-                "desc": "4.4 \u279d 10.2 T/Ha"
-            },
-            {
-                "block_code": "D028A",
-                "val": 69.9,
-                "desc": "5.1 \u279d 8.7 T/Ha"
-            },
-            {
-                "block_code": "J039A",
-                "val": 8.8,
-                "desc": "14.4 \u279d 15.7 T/Ha"
-            },
-            {
-                "block_code": "F001A",
-                "val": 16.9,
-                "desc": "19.4 \u279d 22.7 T/Ha"
-            },
-            {
-                "block_code": "F042A",
-                "val": 6.6,
-                "desc": "9.2 \u279d 9.8 T/Ha"
-            },
-            {
-                "block_code": "C039A",
-                "val": 33.7,
-                "desc": "7.3 \u279d 9.8 T/Ha"
-            },
-            {
-                "block_code": "D004A",
-                "val": 5.8,
-                "desc": "16.5 \u279d 17.4 T/Ha"
-            },
-            {
-                "block_code": "M041C",
-                "val": 37.3,
-                "desc": "10.2 \u279d 14.0 T/Ha"
-            },
-            {
-                "block_code": "D028B",
-                "val": 15.2,
-                "desc": "7.6 \u279d 8.8 T/Ha"
-            },
-            {
-                "block_code": "B016B",
-                "val": 63.6,
-                "desc": "8.4 \u279d 13.7 T/Ha"
-            },
-            {
-                "block_code": "D036A",
-                "val": 37.6,
-                "desc": "11.4 \u279d 15.7 T/Ha"
-            },
-            {
-                "block_code": "B016E",
-                "val": 100,
-                "desc": "0.0 \u279d 8.1 T/Ha"
-            },
-            {
-                "block_code": "E026A",
-                "val": 13.9,
-                "desc": "11.8 \u279d 13.5 T/Ha"
-            },
-            {
-                "block_code": "J014A",
-                "val": 13.5,
-                "desc": "16.4 \u279d 18.6 T/Ha"
-            },
-            {
-                "block_code": "A003B",
-                "val": 10.1,
-                "desc": "3.9 \u279d 4.3 T/Ha"
-            },
-            {
-                "block_code": "B007B",
-                "val": 100,
-                "desc": "0.0 \u279d 4.8 T/Ha"
-            },
-            {
-                "block_code": "I043A",
-                "val": 33.6,
-                "desc": "7.2 \u279d 9.6 T/Ha"
-            },
-            {
-                "block_code": "G027A",
-                "val": 10.7,
-                "desc": "15.6 \u279d 17.3 T/Ha"
-            },
-            {
-                "block_code": "M039C",
-                "val": 50.2,
-                "desc": "8.5 \u279d 12.8 T/Ha"
-            },
-            {
-                "block_code": "G039A",
-                "val": 29.0,
-                "desc": "8.0 \u279d 10.4 T/Ha"
-            },
-            {
-                "block_code": "E026D",
-                "val": 100,
-                "desc": "0.0 \u279d 4.1 T/Ha"
-            },
-            {
-                "block_code": "F031D",
-                "val": 100,
-                "desc": "0.0 \u279d 3.0 T/Ha"
-            },
-            {
-                "block_code": "B002E",
-                "val": 100,
-                "desc": "0.0 \u279d 2.8 T/Ha"
-            },
-            {
-                "block_code": "D037A",
-                "val": 17.8,
-                "desc": "13.1 \u279d 15.5 T/Ha"
-            },
-            {
-                "block_code": "E027A",
-                "val": 16.3,
-                "desc": "13.8 \u279d 16.1 T/Ha"
-            },
-            {
-                "block_code": "B012B",
-                "val": 112.3,
-                "desc": "6.0 \u279d 12.8 T/Ha"
-            },
-            {
-                "block_code": "G029A",
-                "val": 21.0,
-                "desc": "13.0 \u279d 15.8 T/Ha"
-            },
-            {
-                "block_code": "C016A",
-                "val": 11.0,
-                "desc": "17.0 \u279d 18.8 T/Ha"
-            },
-            {
-                "block_code": "D007A",
-                "val": 12.2,
-                "desc": "15.6 \u279d 17.5 T/Ha"
-            },
-            {
-                "block_code": "A004C",
-                "val": 34.3,
-                "desc": "3.7 \u279d 4.9 T/Ha"
-            },
-            {
-                "block_code": "E033A",
-                "val": 31.5,
-                "desc": "11.8 \u279d 15.6 T/Ha"
-            },
-            {
-                "block_code": "D039A",
-                "val": 69.6,
-                "desc": "11.0 \u279d 18.7 T/Ha"
-            },
-            {
-                "block_code": "C021A",
-                "val": 5.3,
-                "desc": "18.1 \u279d 19.0 T/Ha"
-            },
-            {
-                "block_code": "F040A",
-                "val": 10.9,
-                "desc": "9.5 \u279d 10.6 T/Ha"
-            },
-            {
-                "block_code": "B011C",
-                "val": 138.6,
-                "desc": "3.0 \u279d 7.0 T/Ha"
-            },
-            {
-                "block_code": "B001B",
-                "val": 68.9,
-                "desc": "5.3 \u279d 8.9 T/Ha"
-            },
-            {
-                "block_code": "G025C",
-                "val": 11.5,
-                "desc": "6.5 \u279d 7.3 T/Ha"
-            },
-            {
-                "block_code": "F029B",
-                "val": 13.4,
-                "desc": "4.5 \u279d 5.1 T/Ha"
-            },
-            {
-                "block_code": "G012A",
-                "val": 7.5,
-                "desc": "22.3 \u279d 23.9 T/Ha"
-            },
-            {
-                "block_code": "M043A",
-                "val": 51.2,
-                "desc": "9.6 \u279d 14.5 T/Ha"
-            },
-            {
-                "block_code": "G023D",
-                "val": 169.0,
-                "desc": "4.9 \u279d 13.1 T/Ha"
-            },
-            {
-                "block_code": "B007C",
-                "val": 100,
-                "desc": "0.0 \u279d 3.1 T/Ha"
-            },
-            {
-                "block_code": "D028E",
-                "val": 100,
-                "desc": "0.0 \u279d 4.3 T/Ha"
-            },
-            {
-                "block_code": "B003D",
-                "val": 73.1,
-                "desc": "2.3 \u279d 4.0 T/Ha"
-            },
-            {
-                "block_code": "I037B",
-                "val": 126.1,
-                "desc": "4.0 \u279d 9.0 T/Ha"
-            },
-            {
-                "block_code": "H034A",
-                "val": 5.4,
-                "desc": "15.3 \u279d 16.1 T/Ha"
-            },
-            {
-                "block_code": "F043A",
-                "val": 25.9,
-                "desc": "4.4 \u279d 5.5 T/Ha"
-            },
-            {
-                "block_code": "B015A",
-                "val": 80.1,
-                "desc": "11.3 \u279d 20.3 T/Ha"
-            },
-            {
-                "block_code": "H023B",
-                "val": 33.3,
-                "desc": "10.1 \u279d 13.4 T/Ha"
-            },
-            {
-                "block_code": "G025A",
-                "val": 52.5,
-                "desc": "16.5 \u279d 25.2 T/Ha"
-            },
-            {
-                "block_code": "F029F",
-                "val": 100,
-                "desc": "0.0 \u279d 4.4 T/Ha"
-            },
-            {
-                "block_code": "E032A",
-                "val": 571.3,
-                "desc": "1.1 \u279d 7.7 T/Ha"
-            },
-            {
-                "block_code": "B009C",
-                "val": 55.3,
-                "desc": "6.4 \u279d 9.9 T/Ha"
-            },
-            {
-                "block_code": "E005A",
-                "val": 6.5,
-                "desc": "17.2 \u279d 18.3 T/Ha"
-            },
-            {
-                "block_code": "J036A",
-                "val": 5.5,
-                "desc": "13.0 \u279d 13.7 T/Ha"
-            },
-            {
-                "block_code": "K039B",
-                "val": 31.3,
-                "desc": "12.4 \u279d 16.3 T/Ha"
-            },
-            {
-                "block_code": "E004A",
-                "val": 12.5,
-                "desc": "15.4 \u279d 17.3 T/Ha"
-            },
-            {
-                "block_code": "K018A",
-                "val": 25.4,
-                "desc": "14.6 \u279d 18.4 T/Ha"
-            },
-            {
-                "block_code": "F028A",
-                "val": 43.6,
-                "desc": "8.8 \u279d 12.6 T/Ha"
-            },
-            {
-                "block_code": "G015B",
-                "val": 133.0,
-                "desc": "9.4 \u279d 21.9 T/Ha"
-            },
-            {
-                "block_code": "G006A",
-                "val": 17.4,
-                "desc": "20.8 \u279d 24.4 T/Ha"
-            },
-            {
-                "block_code": "J025A",
-                "val": 27.1,
-                "desc": "12.8 \u279d 16.2 T/Ha"
-            },
-            {
-                "block_code": "C020A",
-                "val": 7.2,
-                "desc": "10.3 \u279d 11.0 T/Ha"
-            },
-            {
-                "block_code": "B015C",
-                "val": 100,
-                "desc": "0.0 \u279d 6.9 T/Ha"
-            },
-            {
-                "block_code": "I024A",
-                "val": 9.7,
-                "desc": "13.5 \u279d 14.8 T/Ha"
-            },
-            {
-                "block_code": "B014E",
-                "val": 100,
-                "desc": "0.0 \u279d 7.3 T/Ha"
-            },
-            {
-                "block_code": "K042A",
-                "val": 57.3,
-                "desc": "2.6 \u279d 4.1 T/Ha"
-            },
-            {
-                "block_code": "K035A",
-                "val": 49.3,
-                "desc": "6.1 \u279d 9.2 T/Ha"
-            },
-            {
-                "block_code": "B010B",
-                "val": 121.9,
-                "desc": "3.8 \u279d 8.4 T/Ha"
-            },
-            {
-                "block_code": "A019B",
-                "val": 51.2,
-                "desc": "9.5 \u279d 14.4 T/Ha"
-            },
-            {
-                "block_code": "A010B",
-                "val": 100,
-                "desc": "0.0 \u279d 5.1 T/Ha"
-            },
-            {
-                "block_code": "A018A",
-                "val": 19.1,
-                "desc": "13.7 \u279d 16.3 T/Ha"
-            },
-            {
-                "block_code": "E037B",
-                "val": 64.2,
-                "desc": "5.6 \u279d 9.2 T/Ha"
+                "block_code": "B006A",
+                "val": 23.8,
+                "desc": "11.7 \u279d 14.5 T/Ha"
             },
             {
                 "block_code": "B009F",
@@ -1941,44 +1261,44 @@
                 "desc": "0.0 \u279d 4.8 T/Ha"
             },
             {
-                "block_code": "L022A",
-                "val": 60.1,
-                "desc": "7.7 \u279d 12.3 T/Ha"
+                "block_code": "F026A",
+                "val": 13.2,
+                "desc": "17.3 \u279d 19.6 T/Ha"
             },
             {
-                "block_code": "B002C",
-                "val": 117.1,
-                "desc": "2.5 \u279d 5.3 T/Ha"
+                "block_code": "G022A",
+                "val": 17.5,
+                "desc": "13.4 \u279d 15.7 T/Ha"
             },
             {
-                "block_code": "B017A",
-                "val": 73.7,
-                "desc": "10.9 \u279d 18.9 T/Ha"
+                "block_code": "A020C",
+                "val": 140.3,
+                "desc": "5.4 \u279d 12.9 T/Ha"
             },
             {
-                "block_code": "G026A",
-                "val": 26.7,
-                "desc": "15.5 \u279d 19.6 T/Ha"
+                "block_code": "F029A",
+                "val": 23.2,
+                "desc": "4.7 \u279d 5.8 T/Ha"
             },
             {
-                "block_code": "J038A",
-                "val": 10.5,
-                "desc": "12.9 \u279d 14.2 T/Ha"
+                "block_code": "K017A",
+                "val": 18.4,
+                "desc": "13.7 \u279d 16.2 T/Ha"
             },
             {
-                "block_code": "F030E",
-                "val": 100,
-                "desc": "0.0 \u279d 3.5 T/Ha"
+                "block_code": "J044A",
+                "val": 35.2,
+                "desc": "9.4 \u279d 12.8 T/Ha"
             },
             {
-                "block_code": "K039A",
-                "val": 35.4,
-                "desc": "10.1 \u279d 13.7 T/Ha"
+                "block_code": "J043C",
+                "val": 9.2,
+                "desc": "5.6 \u279d 6.1 T/Ha"
             },
             {
-                "block_code": "G030A",
-                "val": 7.3,
-                "desc": "16.0 \u279d 17.2 T/Ha"
+                "block_code": "H011A",
+                "val": 8.7,
+                "desc": "17.3 \u279d 18.8 T/Ha"
             },
             {
                 "block_code": "G007A",
@@ -1986,164 +1306,9 @@
                 "desc": "20.6 \u279d 21.8 T/Ha"
             },
             {
-                "block_code": "B011A",
-                "val": 24.3,
-                "desc": "9.6 \u279d 11.9 T/Ha"
-            },
-            {
-                "block_code": "A018C",
-                "val": 100,
-                "desc": "0.0 \u279d 4.0 T/Ha"
-            },
-            {
-                "block_code": "E026B",
-                "val": 63.6,
-                "desc": "5.7 \u279d 9.3 T/Ha"
-            },
-            {
-                "block_code": "H006A",
-                "val": 9.0,
-                "desc": "19.1 \u279d 20.8 T/Ha"
-            },
-            {
-                "block_code": "K029A",
-                "val": 11.1,
-                "desc": "10.4 \u279d 11.5 T/Ha"
-            },
-            {
-                "block_code": "J016A",
-                "val": 11.1,
-                "desc": "15.3 \u279d 17.0 T/Ha"
-            },
-            {
                 "block_code": "J044C",
                 "val": 49.2,
                 "desc": "3.2 \u279d 4.8 T/Ha"
-            },
-            {
-                "block_code": "N044A",
-                "val": 30.4,
-                "desc": "8.8 \u279d 11.5 T/Ha"
-            },
-            {
-                "block_code": "B024A",
-                "val": 100,
-                "desc": "0.0 \u279d 7.2 T/Ha"
-            },
-            {
-                "block_code": "G042A",
-                "val": 29.3,
-                "desc": "3.6 \u279d 4.7 T/Ha"
-            },
-            {
-                "block_code": "K027A",
-                "val": 12.2,
-                "desc": "10.1 \u279d 11.3 T/Ha"
-            },
-            {
-                "block_code": "J015A",
-                "val": 19.4,
-                "desc": "16.3 \u279d 19.5 T/Ha"
-            },
-            {
-                "block_code": "F031B",
-                "val": 48.3,
-                "desc": "2.4 \u279d 3.5 T/Ha"
-            },
-            {
-                "block_code": "F032A",
-                "val": 15.1,
-                "desc": "16.1 \u279d 18.5 T/Ha"
-            },
-            {
-                "block_code": "K030A",
-                "val": 14.1,
-                "desc": "11.3 \u279d 12.9 T/Ha"
-            },
-            {
-                "block_code": "J044B",
-                "val": 34.3,
-                "desc": "6.3 \u279d 8.5 T/Ha"
-            },
-            {
-                "block_code": "F008A",
-                "val": 8.2,
-                "desc": "19.6 \u279d 21.2 T/Ha"
-            },
-            {
-                "block_code": "E026C",
-                "val": 113.7,
-                "desc": "2.1 \u279d 4.5 T/Ha"
-            },
-            {
-                "block_code": "D024F",
-                "val": 100,
-                "desc": "0.0 \u279d 4.9 T/Ha"
-            },
-            {
-                "block_code": "J018A",
-                "val": 8.3,
-                "desc": "15.3 \u279d 16.6 T/Ha"
-            },
-            {
-                "block_code": "E027B",
-                "val": 42.0,
-                "desc": "11.3 \u279d 16.1 T/Ha"
-            },
-            {
-                "block_code": "E036B",
-                "val": 47.1,
-                "desc": "7.8 \u279d 11.5 T/Ha"
-            },
-            {
-                "block_code": "L024A",
-                "val": 74.0,
-                "desc": "6.0 \u279d 10.4 T/Ha"
-            },
-            {
-                "block_code": "J040A",
-                "val": 21.8,
-                "desc": "12.4 \u279d 15.1 T/Ha"
-            },
-            {
-                "block_code": "F025B",
-                "val": 17.1,
-                "desc": "6.7 \u279d 7.9 T/Ha"
-            },
-            {
-                "block_code": "B002B",
-                "val": 60.3,
-                "desc": "4.6 \u279d 7.4 T/Ha"
-            },
-            {
-                "block_code": "B021B",
-                "val": 56.2,
-                "desc": "7.2 \u279d 11.3 T/Ha"
-            },
-            {
-                "block_code": "H010A",
-                "val": 20.8,
-                "desc": "20.0 \u279d 24.2 T/Ha"
-            },
-            {
-                "block_code": "A012A",
-                "val": 59.2,
-                "desc": "8.8 \u279d 14.1 T/Ha"
-            },
-            {
-                "block_code": "J042D",
-                "val": 16.5,
-                "desc": "5.7 \u279d 6.7 T/Ha"
-            },
-            {
-                "block_code": "D026A",
-                "val": 100,
-                "desc": "0.0 \u279d 4.3 T/Ha"
-            },
-            {
-                "block_code": "H005A",
-                "val": 15.2,
-                "desc": "18.1 \u279d 20.8 T/Ha"
             },
             {
                 "block_code": "A013C",
@@ -2151,44 +1316,9 @@
                 "desc": "6.1 \u279d 24.0 T/Ha"
             },
             {
-                "block_code": "I039A",
-                "val": 13.1,
-                "desc": "12.6 \u279d 14.3 T/Ha"
-            },
-            {
-                "block_code": "G031A",
-                "val": 15.7,
-                "desc": "16.1 \u279d 18.6 T/Ha"
-            },
-            {
-                "block_code": "K019A",
-                "val": 26.0,
-                "desc": "13.1 \u279d 16.5 T/Ha"
-            },
-            {
-                "block_code": "F024A",
-                "val": 23.5,
-                "desc": "13.6 \u279d 16.8 T/Ha"
-            },
-            {
-                "block_code": "K012A",
-                "val": 13.0,
-                "desc": "16.6 \u279d 18.7 T/Ha"
-            },
-            {
-                "block_code": "I010A",
-                "val": 12.9,
-                "desc": "17.9 \u279d 20.2 T/Ha"
-            },
-            {
-                "block_code": "B007A",
-                "val": 21.1,
-                "desc": "14.2 \u279d 17.2 T/Ha"
-            },
-            {
-                "block_code": "A013D",
-                "val": 100,
-                "desc": "0.0 \u279d 7.2 T/Ha"
+                "block_code": "J038A",
+                "val": 10.5,
+                "desc": "12.9 \u279d 14.2 T/Ha"
             },
             {
                 "block_code": "L021A",
@@ -2196,94 +1326,69 @@
                 "desc": "7.9 \u279d 9.6 T/Ha"
             },
             {
-                "block_code": "C007B",
-                "val": 105.3,
-                "desc": "3.0 \u279d 6.2 T/Ha"
+                "block_code": "M041C",
+                "val": 37.3,
+                "desc": "10.2 \u279d 14.0 T/Ha"
             },
             {
-                "block_code": "A004E",
+                "block_code": "C018A",
+                "val": 6.4,
+                "desc": "15.7 \u279d 16.7 T/Ha"
+            },
+            {
+                "block_code": "D027C",
+                "val": 50.1,
+                "desc": "7.5 \u279d 11.3 T/Ha"
+            },
+            {
+                "block_code": "K021A",
+                "val": 55.1,
+                "desc": "8.6 \u279d 13.3 T/Ha"
+            },
+            {
+                "block_code": "M043A",
+                "val": 51.2,
+                "desc": "9.6 \u279d 14.5 T/Ha"
+            },
+            {
+                "block_code": "M040C",
+                "val": 46.7,
+                "desc": "8.4 \u279d 12.3 T/Ha"
+            },
+            {
+                "block_code": "E037B",
+                "val": 64.2,
+                "desc": "5.6 \u279d 9.2 T/Ha"
+            },
+            {
+                "block_code": "E044A",
+                "val": 76.2,
+                "desc": "2.8 \u279d 5.0 T/Ha"
+            },
+            {
+                "block_code": "L039B",
+                "val": 5.7,
+                "desc": "13.8 \u279d 14.6 T/Ha"
+            },
+            {
+                "block_code": "G041A",
+                "val": 74.4,
+                "desc": "4.4 \u279d 7.6 T/Ha"
+            },
+            {
+                "block_code": "I023A",
+                "val": 29.1,
+                "desc": "13.9 \u279d 17.9 T/Ha"
+            },
+            {
+                "block_code": "H037A",
+                "val": 28.4,
+                "desc": "8.3 \u279d 10.7 T/Ha"
+            },
+            {
+                "block_code": "B015C",
                 "val": 100,
-                "desc": "0.0 \u279d 2.2 T/Ha"
-            },
-            {
-                "block_code": "H039A",
-                "val": 15.9,
-                "desc": "13.6 \u279d 15.8 T/Ha"
-            },
-            {
-                "block_code": "J024A",
-                "val": 14.4,
-                "desc": "13.8 \u279d 15.8 T/Ha"
-            },
-            {
-                "block_code": "F025C",
-                "val": 52.2,
-                "desc": "6.5 \u279d 9.9 T/Ha"
-            },
-            {
-                "block_code": "B006A",
-                "val": 23.8,
-                "desc": "11.7 \u279d 14.5 T/Ha"
-            },
-            {
-                "block_code": "B016C",
-                "val": 172.9,
-                "desc": "4.4 \u279d 12.1 T/Ha"
-            },
-            {
-                "block_code": "I030A",
-                "val": 16.6,
-                "desc": "12.3 \u279d 14.4 T/Ha"
-            },
-            {
-                "block_code": "L023A",
-                "val": 74.2,
-                "desc": "6.3 \u279d 10.9 T/Ha"
-            },
-            {
-                "block_code": "D041A",
-                "val": 14.7,
-                "desc": "8.1 \u279d 9.3 T/Ha"
-            },
-            {
-                "block_code": "I014A",
-                "val": 9.1,
-                "desc": "16.3 \u279d 17.8 T/Ha"
-            },
-            {
-                "block_code": "F029E",
-                "val": 100,
-                "desc": "0.0 \u279d 4.4 T/Ha"
-            },
-            {
-                "block_code": "D043A",
-                "val": 222.9,
-                "desc": "2.4 \u279d 7.6 T/Ha"
-            },
-            {
-                "block_code": "B016F",
-                "val": 100,
-                "desc": "0.0 \u279d 3.6 T/Ha"
-            },
-            {
-                "block_code": "B017B",
-                "val": 82.5,
-                "desc": "6.3 \u279d 11.5 T/Ha"
-            },
-            {
-                "block_code": "F030A",
-                "val": 33.2,
-                "desc": "5.5 \u279d 7.4 T/Ha"
-            },
-            {
-                "block_code": "A014A",
-                "val": 43.2,
-                "desc": "8.4 \u279d 12.1 T/Ha"
-            },
-            {
-                "block_code": "G022B",
-                "val": 14.6,
-                "desc": "11.6 \u279d 13.3 T/Ha"
+                "desc": "0.0 \u279d 6.9 T/Ha"
             },
             {
                 "block_code": "F044A",
@@ -2291,39 +1396,154 @@
                 "desc": "5.7 \u279d 6.1 T/Ha"
             },
             {
-                "block_code": "E043A",
-                "val": 70.8,
-                "desc": "6.3 \u279d 10.8 T/Ha"
+                "block_code": "L023A",
+                "val": 74.2,
+                "desc": "6.3 \u279d 10.9 T/Ha"
             },
             {
-                "block_code": "A018B",
-                "val": 108.5,
-                "desc": "7.1 \u279d 14.8 T/Ha"
+                "block_code": "G036A",
+                "val": 14.7,
+                "desc": "11.9 \u279d 13.7 T/Ha"
             },
             {
-                "block_code": "G028A",
-                "val": 20.3,
-                "desc": "13.3 \u279d 16.0 T/Ha"
+                "block_code": "E026C",
+                "val": 113.7,
+                "desc": "2.1 \u279d 4.5 T/Ha"
             },
             {
-                "block_code": "M044A",
-                "val": 17.6,
-                "desc": "6.4 \u279d 7.5 T/Ha"
+                "block_code": "J039A",
+                "val": 8.8,
+                "desc": "14.4 \u279d 15.7 T/Ha"
             },
             {
-                "block_code": "D027A",
-                "val": 27.3,
-                "desc": "10.3 \u279d 13.1 T/Ha"
+                "block_code": "F032A",
+                "val": 15.1,
+                "desc": "16.1 \u279d 18.5 T/Ha"
             },
             {
-                "block_code": "A010A",
-                "val": 60.7,
-                "desc": "3.5 \u279d 5.6 T/Ha"
+                "block_code": "B016A",
+                "val": 59.6,
+                "desc": "10.7 \u279d 17.1 T/Ha"
             },
             {
-                "block_code": "F034A",
-                "val": 8.6,
-                "desc": "15.3 \u279d 16.6 T/Ha"
+                "block_code": "I022A",
+                "val": 10.2,
+                "desc": "12.1 \u279d 13.3 T/Ha"
+            },
+            {
+                "block_code": "J016A",
+                "val": 11.1,
+                "desc": "15.3 \u279d 17.0 T/Ha"
+            },
+            {
+                "block_code": "I039A",
+                "val": 13.1,
+                "desc": "12.6 \u279d 14.3 T/Ha"
+            },
+            {
+                "block_code": "B012C",
+                "val": 152.4,
+                "desc": "5.0 \u279d 12.6 T/Ha"
+            },
+            {
+                "block_code": "I030A",
+                "val": 16.6,
+                "desc": "12.3 \u279d 14.4 T/Ha"
+            },
+            {
+                "block_code": "B003A",
+                "val": 5.6,
+                "desc": "15.8 \u279d 16.7 T/Ha"
+            },
+            {
+                "block_code": "D043B",
+                "val": 151.4,
+                "desc": "1.8 \u279d 4.5 T/Ha"
+            },
+            {
+                "block_code": "E026D",
+                "val": 100,
+                "desc": "0.0 \u279d 4.1 T/Ha"
+            },
+            {
+                "block_code": "G006A",
+                "val": 17.4,
+                "desc": "20.8 \u279d 24.4 T/Ha"
+            },
+            {
+                "block_code": "H024B",
+                "val": 55.1,
+                "desc": "6.0 \u279d 9.3 T/Ha"
+            },
+            {
+                "block_code": "C021A",
+                "val": 5.3,
+                "desc": "18.1 \u279d 19.0 T/Ha"
+            },
+            {
+                "block_code": "K012A",
+                "val": 13.0,
+                "desc": "16.6 \u279d 18.7 T/Ha"
+            },
+            {
+                "block_code": "B008C",
+                "val": 224.0,
+                "desc": "2.6 \u279d 8.5 T/Ha"
+            },
+            {
+                "block_code": "B016D",
+                "val": 155.4,
+                "desc": "6.5 \u279d 16.6 T/Ha"
+            },
+            {
+                "block_code": "K019B",
+                "val": 8.2,
+                "desc": "13.0 \u279d 14.1 T/Ha"
+            },
+            {
+                "block_code": "B001E",
+                "val": 188.1,
+                "desc": "1.8 \u279d 5.1 T/Ha"
+            },
+            {
+                "block_code": "B017B",
+                "val": 82.5,
+                "desc": "6.3 \u279d 11.5 T/Ha"
+            },
+            {
+                "block_code": "D024D",
+                "val": 119.6,
+                "desc": "1.4 \u279d 3.1 T/Ha"
+            },
+            {
+                "block_code": "A021B",
+                "val": 67.0,
+                "desc": "7.9 \u279d 13.2 T/Ha"
+            },
+            {
+                "block_code": "C005C",
+                "val": 12.0,
+                "desc": "3.2 \u279d 3.6 T/Ha"
+            },
+            {
+                "block_code": "F028B",
+                "val": 100,
+                "desc": "0.0 \u279d 4.8 T/Ha"
+            },
+            {
+                "block_code": "F031A",
+                "val": 7.9,
+                "desc": "7.5 \u279d 8.1 T/Ha"
+            },
+            {
+                "block_code": "F005A",
+                "val": 5.3,
+                "desc": "17.2 \u279d 18.1 T/Ha"
+            },
+            {
+                "block_code": "D001A",
+                "val": 11.7,
+                "desc": "15.6 \u279d 17.4 T/Ha"
             },
             {
                 "block_code": "C015A",
@@ -2331,39 +1551,179 @@
                 "desc": "17.6 \u279d 19.9 T/Ha"
             },
             {
+                "block_code": "K041B",
+                "val": 46.9,
+                "desc": "1.9 \u279d 2.8 T/Ha"
+            },
+            {
+                "block_code": "I038A",
+                "val": 11.8,
+                "desc": "13.8 \u279d 15.4 T/Ha"
+            },
+            {
+                "block_code": "D038A",
+                "val": 44.6,
+                "desc": "11.9 \u279d 17.2 T/Ha"
+            },
+            {
+                "block_code": "D029A",
+                "val": 100,
+                "desc": "0.0 \u279d 9.6 T/Ha"
+            },
+            {
+                "block_code": "E041A",
+                "val": 36.3,
+                "desc": "9.3 \u279d 12.7 T/Ha"
+            },
+            {
                 "block_code": "I042A",
                 "val": 35.3,
                 "desc": "9.9 \u279d 13.3 T/Ha"
             },
             {
-                "block_code": "K026A",
-                "val": 7.7,
-                "desc": "9.7 \u279d 10.5 T/Ha"
-            },
-            {
-                "block_code": "D002A",
-                "val": 14.0,
-                "desc": "15.4 \u279d 17.5 T/Ha"
-            },
-            {
-                "block_code": "A012B",
-                "val": 121.7,
-                "desc": "5.6 \u279d 12.5 T/Ha"
-            },
-            {
-                "block_code": "E035A",
-                "val": 34.5,
-                "desc": "10.2 \u279d 13.7 T/Ha"
-            },
-            {
-                "block_code": "H009A",
-                "val": 15.6,
-                "desc": "18.7 \u279d 21.6 T/Ha"
-            },
-            {
-                "block_code": "C027A",
+                "block_code": "C028A",
                 "val": 100,
-                "desc": "0.0 \u279d 3.1 T/Ha"
+                "desc": "0.0 \u279d 3.8 T/Ha"
+            },
+            {
+                "block_code": "B020A",
+                "val": 9.8,
+                "desc": "16.1 \u279d 17.7 T/Ha"
+            },
+            {
+                "block_code": "E036A",
+                "val": 19.0,
+                "desc": "11.8 \u279d 14.0 T/Ha"
+            },
+            {
+                "block_code": "H039A",
+                "val": 15.9,
+                "desc": "13.6 \u279d 15.8 T/Ha"
+            },
+            {
+                "block_code": "I031A",
+                "val": 6.4,
+                "desc": "15.3 \u279d 16.2 T/Ha"
+            },
+            {
+                "block_code": "B016B",
+                "val": 63.6,
+                "desc": "8.4 \u279d 13.7 T/Ha"
+            },
+            {
+                "block_code": "A013D",
+                "val": 100,
+                "desc": "0.0 \u279d 7.2 T/Ha"
+            },
+            {
+                "block_code": "A004E",
+                "val": 100,
+                "desc": "0.0 \u279d 2.2 T/Ha"
+            },
+            {
+                "block_code": "I010A",
+                "val": 12.9,
+                "desc": "17.9 \u279d 20.2 T/Ha"
+            },
+            {
+                "block_code": "M043B",
+                "val": 6.4,
+                "desc": "13.8 \u279d 14.7 T/Ha"
+            },
+            {
+                "block_code": "B015B",
+                "val": 20.5,
+                "desc": "10.9 \u279d 13.2 T/Ha"
+            },
+            {
+                "block_code": "B015A",
+                "val": 80.1,
+                "desc": "11.3 \u279d 20.3 T/Ha"
+            },
+            {
+                "block_code": "B016F",
+                "val": 100,
+                "desc": "0.0 \u279d 3.6 T/Ha"
+            },
+            {
+                "block_code": "B021B",
+                "val": 56.2,
+                "desc": "7.2 \u279d 11.3 T/Ha"
+            },
+            {
+                "block_code": "H023A",
+                "val": 12.3,
+                "desc": "14.0 \u279d 15.8 T/Ha"
+            },
+            {
+                "block_code": "E026A",
+                "val": 13.9,
+                "desc": "11.8 \u279d 13.5 T/Ha"
+            },
+            {
+                "block_code": "K039B",
+                "val": 31.3,
+                "desc": "12.4 \u279d 16.3 T/Ha"
+            },
+            {
+                "block_code": "A012A",
+                "val": 59.2,
+                "desc": "8.8 \u279d 14.1 T/Ha"
+            },
+            {
+                "block_code": "K033A",
+                "val": 23.4,
+                "desc": "10.8 \u279d 13.3 T/Ha"
+            },
+            {
+                "block_code": "E026B",
+                "val": 63.6,
+                "desc": "5.7 \u279d 9.3 T/Ha"
+            },
+            {
+                "block_code": "A018A",
+                "val": 19.1,
+                "desc": "13.7 \u279d 16.3 T/Ha"
+            },
+            {
+                "block_code": "D027F",
+                "val": 15550.0,
+                "desc": "0.1 \u279d 9.4 T/Ha"
+            },
+            {
+                "block_code": "B006B",
+                "val": 47.8,
+                "desc": "6.0 \u279d 8.9 T/Ha"
+            },
+            {
+                "block_code": "B024A",
+                "val": 100,
+                "desc": "0.0 \u279d 7.2 T/Ha"
+            },
+            {
+                "block_code": "E036B",
+                "val": 47.1,
+                "desc": "7.8 \u279d 11.5 T/Ha"
+            },
+            {
+                "block_code": "G022B",
+                "val": 14.6,
+                "desc": "11.6 \u279d 13.3 T/Ha"
+            },
+            {
+                "block_code": "G029A",
+                "val": 21.0,
+                "desc": "13.0 \u279d 15.8 T/Ha"
+            },
+            {
+                "block_code": "D027G",
+                "val": 100,
+                "desc": "0.0 \u279d 6.4 T/Ha"
+            },
+            {
+                "block_code": "H024A",
+                "val": 29.2,
+                "desc": "13.2 \u279d 17.0 T/Ha"
             },
             {
                 "block_code": "B014B",
@@ -2376,364 +1736,14 @@
                 "desc": "14.6 \u279d 15.4 T/Ha"
             },
             {
-                "block_code": "B005A",
-                "val": 24.1,
-                "desc": "13.4 \u279d 16.6 T/Ha"
+                "block_code": "B017A",
+                "val": 73.7,
+                "desc": "10.9 \u279d 18.9 T/Ha"
             },
             {
-                "block_code": "J043A",
-                "val": 43.1,
-                "desc": "8.4 \u279d 12.0 T/Ha"
-            },
-            {
-                "block_code": "E039A",
-                "val": 11.9,
-                "desc": "11.9 \u279d 13.3 T/Ha"
-            },
-            {
-                "block_code": "I031A",
-                "val": 6.4,
-                "desc": "15.3 \u279d 16.2 T/Ha"
-            },
-            {
-                "block_code": "K024A",
-                "val": 19.3,
-                "desc": "11.5 \u279d 13.8 T/Ha"
-            },
-            {
-                "block_code": "K023B",
-                "val": 63.9,
-                "desc": "5.3 \u279d 8.7 T/Ha"
-            },
-            {
-                "block_code": "J042C",
-                "val": 26.3,
-                "desc": "3.0 \u279d 3.8 T/Ha"
-            },
-            {
-                "block_code": "A004B",
-                "val": 15.3,
-                "desc": "6.1 \u279d 7.0 T/Ha"
-            },
-            {
-                "block_code": "K041B",
-                "val": 46.9,
-                "desc": "1.9 \u279d 2.8 T/Ha"
-            },
-            {
-                "block_code": "A004D",
-                "val": 117.9,
-                "desc": "1.1 \u279d 2.4 T/Ha"
-            },
-            {
-                "block_code": "K032A",
-                "val": 37.0,
-                "desc": "8.1 \u279d 11.1 T/Ha"
-            },
-            {
-                "block_code": "B016D",
-                "val": 155.4,
-                "desc": "6.5 \u279d 16.6 T/Ha"
-            },
-            {
-                "block_code": "J044A",
-                "val": 35.2,
-                "desc": "9.4 \u279d 12.8 T/Ha"
-            },
-            {
-                "block_code": "B015B",
-                "val": 20.5,
-                "desc": "10.9 \u279d 13.2 T/Ha"
-            },
-            {
-                "block_code": "I038A",
-                "val": 11.8,
-                "desc": "13.8 \u279d 15.4 T/Ha"
-            },
-            {
-                "block_code": "I012A",
-                "val": 9.6,
-                "desc": "18.4 \u279d 20.1 T/Ha"
-            },
-            {
-                "block_code": "B009A",
-                "val": 40.9,
-                "desc": "6.5 \u279d 9.1 T/Ha"
-            },
-            {
-                "block_code": "G023B",
-                "val": 9.9,
-                "desc": "9.1 \u279d 10.0 T/Ha"
-            },
-            {
-                "block_code": "A013A",
-                "val": 111.0,
-                "desc": "7.6 \u279d 16.1 T/Ha"
-            },
-            {
-                "block_code": "H025B",
-                "val": 117.6,
-                "desc": "7.6 \u279d 16.6 T/Ha"
-            },
-            {
-                "block_code": "E043B",
-                "val": 335.0,
-                "desc": "1.2 \u279d 5.2 T/Ha"
-            },
-            {
-                "block_code": "F030B",
-                "val": 24.4,
-                "desc": "6.3 \u279d 7.9 T/Ha"
-            },
-            {
-                "block_code": "B014A",
-                "val": 21.2,
-                "desc": "13.1 \u279d 15.9 T/Ha"
-            },
-            {
-                "block_code": "G016C",
-                "val": 17.5,
-                "desc": "15.4 \u279d 18.1 T/Ha"
-            },
-            {
-                "block_code": "B017E",
+                "block_code": "D028D",
                 "val": 100,
-                "desc": "0.0 \u279d 3.1 T/Ha"
-            },
-            {
-                "block_code": "F030D",
-                "val": 100,
-                "desc": "0.0 \u279d 3.9 T/Ha"
-            },
-            {
-                "block_code": "J023A",
-                "val": 7.4,
-                "desc": "16.2 \u279d 17.4 T/Ha"
-            },
-            {
-                "block_code": "C004E",
-                "val": 100,
-                "desc": "0.0 \u279d 8.5 T/Ha"
-            },
-            {
-                "block_code": "G038A",
-                "val": 10.5,
-                "desc": "10.1 \u279d 11.1 T/Ha"
-            },
-            {
-                "block_code": "H024B",
-                "val": 55.1,
-                "desc": "6.0 \u279d 9.3 T/Ha"
-            },
-            {
-                "block_code": "K020B",
-                "val": 37.8,
-                "desc": "8.1 \u279d 11.2 T/Ha"
-            },
-            {
-                "block_code": "B009E",
-                "val": 192.5,
-                "desc": "2.0 \u279d 5.9 T/Ha"
-            },
-            {
-                "block_code": "C024A",
-                "val": 100,
-                "desc": "0.0 \u279d 2.2 T/Ha"
-            },
-            {
-                "block_code": "D024G",
-                "val": 100,
-                "desc": "0.0 \u279d 3.1 T/Ha"
-            },
-            {
-                "block_code": "A020C",
-                "val": 140.3,
-                "desc": "5.4 \u279d 12.9 T/Ha"
-            },
-            {
-                "block_code": "D024C",
-                "val": 53.4,
-                "desc": "1.9 \u279d 2.9 T/Ha"
-            },
-            {
-                "block_code": "G016B",
-                "val": 31.2,
-                "desc": "26.4 \u279d 34.6 T/Ha"
-            },
-            {
-                "block_code": "D029A",
-                "val": 100,
-                "desc": "0.0 \u279d 9.6 T/Ha"
-            },
-            {
-                "block_code": "I022B",
-                "val": 63.1,
-                "desc": "3.0 \u279d 4.9 T/Ha"
-            },
-            {
-                "block_code": "G021B",
-                "val": 24.5,
-                "desc": "9.8 \u279d 12.1 T/Ha"
-            },
-            {
-                "block_code": "J042A",
-                "val": 63.9,
-                "desc": "9.7 \u279d 15.9 T/Ha"
-            },
-            {
-                "block_code": "B013A",
-                "val": 6.6,
-                "desc": "13.9 \u279d 14.8 T/Ha"
-            },
-            {
-                "block_code": "A021B",
-                "val": 67.0,
-                "desc": "7.9 \u279d 13.2 T/Ha"
-            },
-            {
-                "block_code": "C004C",
-                "val": 88.5,
-                "desc": "3.0 \u279d 5.8 T/Ha"
-            },
-            {
-                "block_code": "I022A",
-                "val": 10.2,
-                "desc": "12.1 \u279d 13.3 T/Ha"
-            },
-            {
-                "block_code": "J041A",
-                "val": 20.5,
-                "desc": "12.6 \u279d 15.2 T/Ha"
-            },
-            {
-                "block_code": "E036A",
-                "val": 19.0,
-                "desc": "11.8 \u279d 14.0 T/Ha"
-            },
-            {
-                "block_code": "G041A",
-                "val": 74.4,
-                "desc": "4.4 \u279d 7.6 T/Ha"
-            },
-            {
-                "block_code": "A011B",
-                "val": 1569.6,
-                "desc": "0.2 \u279d 3.8 T/Ha"
-            },
-            {
-                "block_code": "B008C",
-                "val": 224.0,
-                "desc": "2.6 \u279d 8.5 T/Ha"
-            },
-            {
-                "block_code": "G037A",
-                "val": 7.1,
-                "desc": "8.3 \u279d 8.9 T/Ha"
-            },
-            {
-                "block_code": "A014C",
-                "val": 85.9,
-                "desc": "3.4 \u279d 6.3 T/Ha"
-            },
-            {
-                "block_code": "B009D",
-                "val": 180.8,
-                "desc": "2.9 \u279d 8.2 T/Ha"
-            },
-            {
-                "block_code": "D040A",
-                "val": 29.0,
-                "desc": "8.6 \u279d 11.1 T/Ha"
-            },
-            {
-                "block_code": "B003B",
-                "val": 250.7,
-                "desc": "2.2 \u279d 7.7 T/Ha"
-            },
-            {
-                "block_code": "J022B",
-                "val": 6.8,
-                "desc": "10.5 \u279d 11.2 T/Ha"
-            },
-            {
-                "block_code": "A013B",
-                "val": 77.6,
-                "desc": "6.9 \u279d 12.3 T/Ha"
-            },
-            {
-                "block_code": "D027E",
-                "val": 72.0,
-                "desc": "7.2 \u279d 12.3 T/Ha"
-            },
-            {
-                "block_code": "H024A",
-                "val": 29.2,
-                "desc": "13.2 \u279d 17.0 T/Ha"
-            },
-            {
-                "block_code": "K020A",
-                "val": 19.5,
-                "desc": "13.6 \u279d 16.2 T/Ha"
-            },
-            {
-                "block_code": "J012A",
-                "val": 11.0,
-                "desc": "17.9 \u279d 19.9 T/Ha"
-            },
-            {
-                "block_code": "D027G",
-                "val": 100,
-                "desc": "0.0 \u279d 6.4 T/Ha"
-            },
-            {
-                "block_code": "B003C",
-                "val": 58.7,
-                "desc": "2.8 \u279d 4.4 T/Ha"
-            },
-            {
-                "block_code": "C006A",
-                "val": 8.7,
-                "desc": "19.6 \u279d 21.3 T/Ha"
-            },
-            {
-                "block_code": "F031C",
-                "val": 100,
-                "desc": "0.0 \u279d 4.5 T/Ha"
-            },
-            {
-                "block_code": "I023B",
-                "val": 412.2,
-                "desc": "0.9 \u279d 4.6 T/Ha"
-            },
-            {
-                "block_code": "F028B",
-                "val": 100,
-                "desc": "0.0 \u279d 4.8 T/Ha"
-            },
-            {
-                "block_code": "D001A",
-                "val": 11.7,
-                "desc": "15.6 \u279d 17.4 T/Ha"
-            },
-            {
-                "block_code": "B014C",
-                "val": 94.3,
-                "desc": "4.8 \u279d 9.2 T/Ha"
-            },
-            {
-                "block_code": "K022A",
-                "val": 67.8,
-                "desc": "7.4 \u279d 12.5 T/Ha"
-            },
-            {
-                "block_code": "K033A",
-                "val": 23.4,
-                "desc": "10.8 \u279d 13.3 T/Ha"
-            },
-            {
-                "block_code": "G022A",
-                "val": 17.5,
-                "desc": "13.4 \u279d 15.7 T/Ha"
+                "desc": "0.0 \u279d 6.3 T/Ha"
             },
             {
                 "block_code": "B008D",
@@ -2741,59 +1751,109 @@
                 "desc": "1.6 \u279d 5.9 T/Ha"
             },
             {
-                "block_code": "C038A",
-                "val": 19.3,
-                "desc": "16.8 \u279d 20.1 T/Ha"
+                "block_code": "K026A",
+                "val": 7.7,
+                "desc": "9.7 \u279d 10.5 T/Ha"
             },
             {
-                "block_code": "C004D",
-                "val": 81.9,
-                "desc": "3.4 \u279d 6.1 T/Ha"
+                "block_code": "B009C",
+                "val": 55.3,
+                "desc": "6.4 \u279d 9.9 T/Ha"
             },
             {
-                "block_code": "D027F",
-                "val": 15550.0,
-                "desc": "0.1 \u279d 9.4 T/Ha"
+                "block_code": "J044B",
+                "val": 34.3,
+                "desc": "6.3 \u279d 8.5 T/Ha"
             },
             {
-                "block_code": "G032A",
-                "val": 8.9,
-                "desc": "15.0 \u279d 16.3 T/Ha"
+                "block_code": "B017D",
+                "val": 100,
+                "desc": "0.0 \u279d 16.4 T/Ha"
             },
             {
-                "block_code": "H011A",
-                "val": 8.7,
-                "desc": "17.3 \u279d 18.8 T/Ha"
+                "block_code": "F008A",
+                "val": 8.2,
+                "desc": "19.6 \u279d 21.2 T/Ha"
             },
             {
-                "block_code": "B001C",
-                "val": 97.3,
-                "desc": "3.3 \u279d 6.6 T/Ha"
+                "block_code": "J042A",
+                "val": 63.9,
+                "desc": "9.7 \u279d 15.9 T/Ha"
             },
             {
-                "block_code": "K015A",
-                "val": 6.9,
-                "desc": "14.7 \u279d 15.7 T/Ha"
+                "block_code": "G042A",
+                "val": 29.3,
+                "desc": "3.6 \u279d 4.7 T/Ha"
             },
             {
-                "block_code": "D035A",
-                "val": 14.5,
-                "desc": "14.3 \u279d 16.4 T/Ha"
+                "block_code": "B014E",
+                "val": 100,
+                "desc": "0.0 \u279d 7.3 T/Ha"
             },
             {
-                "block_code": "H041A",
-                "val": 29.7,
-                "desc": "12.1 \u279d 15.7 T/Ha"
+                "block_code": "E039A",
+                "val": 11.9,
+                "desc": "11.9 \u279d 13.3 T/Ha"
             },
             {
-                "block_code": "F029A",
-                "val": 23.2,
-                "desc": "4.7 \u279d 5.8 T/Ha"
+                "block_code": "E028A",
+                "val": 100,
+                "desc": "0.0 \u279d 4.3 T/Ha"
             },
             {
-                "block_code": "J030A",
-                "val": 12.3,
-                "desc": "13.1 \u279d 14.7 T/Ha"
+                "block_code": "F029E",
+                "val": 100,
+                "desc": "0.0 \u279d 4.4 T/Ha"
+            },
+            {
+                "block_code": "F031C",
+                "val": 100,
+                "desc": "0.0 \u279d 4.5 T/Ha"
+            },
+            {
+                "block_code": "B013A",
+                "val": 6.6,
+                "desc": "13.9 \u279d 14.8 T/Ha"
+            },
+            {
+                "block_code": "E024C",
+                "val": 100,
+                "desc": "0.0 \u279d 5.2 T/Ha"
+            },
+            {
+                "block_code": "B009A",
+                "val": 40.9,
+                "desc": "6.5 \u279d 9.1 T/Ha"
+            },
+            {
+                "block_code": "C024A",
+                "val": 100,
+                "desc": "0.0 \u279d 2.2 T/Ha"
+            },
+            {
+                "block_code": "F030B",
+                "val": 24.4,
+                "desc": "6.3 \u279d 7.9 T/Ha"
+            },
+            {
+                "block_code": "J022B",
+                "val": 6.8,
+                "desc": "10.5 \u279d 11.2 T/Ha"
+            },
+            {
+                "block_code": "J024A",
+                "val": 14.4,
+                "desc": "13.8 \u279d 15.8 T/Ha"
+            },
+            {
+                "block_code": "J042C",
+                "val": 26.3,
+                "desc": "3.0 \u279d 3.8 T/Ha"
+            },
+            {
+                "block_code": "J022A",
+                "val": 24.2,
+                "desc": "14.2 \u279d 17.6 T/Ha"
             },
             {
                 "block_code": "G008A",
@@ -2801,49 +1861,29 @@
                 "desc": "20.6 \u279d 22.6 T/Ha"
             },
             {
-                "block_code": "B003E",
-                "val": 100,
-                "desc": "0.0 \u279d 3.3 T/Ha"
+                "block_code": "J023A",
+                "val": 7.4,
+                "desc": "16.2 \u279d 17.4 T/Ha"
             },
             {
-                "block_code": "L021B",
-                "val": 34.5,
-                "desc": "11.5 \u279d 15.5 T/Ha"
+                "block_code": "C020A",
+                "val": 7.2,
+                "desc": "10.3 \u279d 11.0 T/Ha"
             },
             {
-                "block_code": "B012C",
-                "val": 152.4,
-                "desc": "5.0 \u279d 12.6 T/Ha"
+                "block_code": "I020A",
+                "val": 8.0,
+                "desc": "16.3 \u279d 17.6 T/Ha"
             },
             {
-                "block_code": "D027H",
-                "val": 100,
-                "desc": "0.0 \u279d 4.7 T/Ha"
+                "block_code": "L022A",
+                "val": 60.1,
+                "desc": "7.7 \u279d 12.3 T/Ha"
             },
             {
-                "block_code": "G001A",
-                "val": 21.3,
-                "desc": "24.6 \u279d 29.9 T/Ha"
-            },
-            {
-                "block_code": "K021A",
-                "val": 55.1,
-                "desc": "8.6 \u279d 13.3 T/Ha"
-            },
-            {
-                "block_code": "K033B",
-                "val": 7.9,
-                "desc": "11.4 \u279d 12.3 T/Ha"
-            },
-            {
-                "block_code": "J043C",
-                "val": 9.2,
-                "desc": "5.6 \u279d 6.1 T/Ha"
-            },
-            {
-                "block_code": "D027C",
-                "val": 50.1,
-                "desc": "7.5 \u279d 11.3 T/Ha"
+                "block_code": "G025C",
+                "val": 11.5,
+                "desc": "6.5 \u279d 7.3 T/Ha"
             },
             {
                 "block_code": "B006C",
@@ -2851,24 +1891,139 @@
                 "desc": "1.8 \u279d 4.3 T/Ha"
             },
             {
-                "block_code": "H027A",
-                "val": 5.1,
-                "desc": "15.4 \u279d 16.2 T/Ha"
+                "block_code": "A013B",
+                "val": 77.6,
+                "desc": "6.9 \u279d 12.3 T/Ha"
             },
             {
-                "block_code": "H023A",
-                "val": 12.3,
-                "desc": "14.0 \u279d 15.8 T/Ha"
+                "block_code": "J020A",
+                "val": 8.7,
+                "desc": "16.8 \u279d 18.3 T/Ha"
             },
             {
-                "block_code": "C028A",
+                "block_code": "J025A",
+                "val": 27.1,
+                "desc": "12.8 \u279d 16.2 T/Ha"
+            },
+            {
+                "block_code": "D024E",
+                "val": 59.2,
+                "desc": "1.7 \u279d 2.8 T/Ha"
+            },
+            {
+                "block_code": "B016E",
                 "val": 100,
-                "desc": "0.0 \u279d 3.8 T/Ha"
+                "desc": "0.0 \u279d 8.1 T/Ha"
             },
             {
-                "block_code": "D028C",
-                "val": 1814.8,
-                "desc": "0.3 \u279d 5.2 T/Ha"
+                "block_code": "G001A",
+                "val": 21.3,
+                "desc": "24.6 \u279d 29.9 T/Ha"
+            },
+            {
+                "block_code": "C007B",
+                "val": 105.3,
+                "desc": "3.0 \u279d 6.2 T/Ha"
+            },
+            {
+                "block_code": "D037A",
+                "val": 17.8,
+                "desc": "13.1 \u279d 15.5 T/Ha"
+            },
+            {
+                "block_code": "D041A",
+                "val": 14.7,
+                "desc": "8.1 \u279d 9.3 T/Ha"
+            },
+            {
+                "block_code": "D027A",
+                "val": 27.3,
+                "desc": "10.3 \u279d 13.1 T/Ha"
+            },
+            {
+                "block_code": "K033B",
+                "val": 7.9,
+                "desc": "11.4 \u279d 12.3 T/Ha"
+            },
+            {
+                "block_code": "C004D",
+                "val": 81.9,
+                "desc": "3.4 \u279d 6.1 T/Ha"
+            },
+            {
+                "block_code": "G023C",
+                "val": 97.9,
+                "desc": "7.6 \u279d 15.1 T/Ha"
+            },
+            {
+                "block_code": "K029A",
+                "val": 11.1,
+                "desc": "10.4 \u279d 11.5 T/Ha"
+            },
+            {
+                "block_code": "J014A",
+                "val": 13.5,
+                "desc": "16.4 \u279d 18.6 T/Ha"
+            },
+            {
+                "block_code": "F030D",
+                "val": 100,
+                "desc": "0.0 \u279d 3.9 T/Ha"
+            },
+            {
+                "block_code": "C016A",
+                "val": 11.0,
+                "desc": "17.0 \u279d 18.8 T/Ha"
+            },
+            {
+                "block_code": "J012A",
+                "val": 11.0,
+                "desc": "17.9 \u279d 19.9 T/Ha"
+            },
+            {
+                "block_code": "N044A",
+                "val": 30.4,
+                "desc": "8.8 \u279d 11.5 T/Ha"
+            },
+            {
+                "block_code": "L024A",
+                "val": 74.0,
+                "desc": "6.0 \u279d 10.4 T/Ha"
+            },
+            {
+                "block_code": "J040A",
+                "val": 21.8,
+                "desc": "12.4 \u279d 15.1 T/Ha"
+            },
+            {
+                "block_code": "F025D",
+                "val": 100,
+                "desc": "0.0 \u279d 9.8 T/Ha"
+            },
+            {
+                "block_code": "A018C",
+                "val": 100,
+                "desc": "0.0 \u279d 4.0 T/Ha"
+            },
+            {
+                "block_code": "B007A",
+                "val": 21.1,
+                "desc": "14.2 \u279d 17.2 T/Ha"
+            },
+            {
+                "block_code": "A004C",
+                "val": 34.3,
+                "desc": "3.7 \u279d 4.9 T/Ha"
+            },
+            {
+                "block_code": "F043A",
+                "val": 25.9,
+                "desc": "4.4 \u279d 5.5 T/Ha"
+            },
+            {
+                "block_code": "B003E",
+                "val": 100,
+                "desc": "0.0 \u279d 3.3 T/Ha"
             },
             {
                 "block_code": "F029C",
@@ -2876,14 +2031,79 @@
                 "desc": "5.3 \u279d 7.5 T/Ha"
             },
             {
-                "block_code": "B017C",
-                "val": 127.5,
-                "desc": "5.4 \u279d 12.2 T/Ha"
+                "block_code": "K022A",
+                "val": 67.8,
+                "desc": "7.4 \u279d 12.5 T/Ha"
             },
             {
-                "block_code": "A012C",
+                "block_code": "H027A",
+                "val": 5.1,
+                "desc": "15.4 \u279d 16.2 T/Ha"
+            },
+            {
+                "block_code": "H025B",
+                "val": 117.6,
+                "desc": "7.6 \u279d 16.6 T/Ha"
+            },
+            {
+                "block_code": "E024D",
                 "val": 100,
-                "desc": "0.0 \u279d 10.5 T/Ha"
+                "desc": "0.0 \u279d 3.1 T/Ha"
+            },
+            {
+                "block_code": "I024B",
+                "val": 82.9,
+                "desc": "4.3 \u279d 7.9 T/Ha"
+            },
+            {
+                "block_code": "G021B",
+                "val": 24.5,
+                "desc": "9.8 \u279d 12.1 T/Ha"
+            },
+            {
+                "block_code": "K018A",
+                "val": 25.4,
+                "desc": "14.6 \u279d 18.4 T/Ha"
+            },
+            {
+                "block_code": "G033A",
+                "val": 11.6,
+                "desc": "14.1 \u279d 15.8 T/Ha"
+            },
+            {
+                "block_code": "E004A",
+                "val": 12.5,
+                "desc": "15.4 \u279d 17.3 T/Ha"
+            },
+            {
+                "block_code": "L021B",
+                "val": 34.5,
+                "desc": "11.5 \u279d 15.5 T/Ha"
+            },
+            {
+                "block_code": "H010A",
+                "val": 20.8,
+                "desc": "20.0 \u279d 24.2 T/Ha"
+            },
+            {
+                "block_code": "G026A",
+                "val": 26.7,
+                "desc": "15.5 \u279d 19.6 T/Ha"
+            },
+            {
+                "block_code": "F001A",
+                "val": 16.9,
+                "desc": "19.4 \u279d 22.7 T/Ha"
+            },
+            {
+                "block_code": "B014D",
+                "val": 216.2,
+                "desc": "4.5 \u279d 14.1 T/Ha"
+            },
+            {
+                "block_code": "F029D",
+                "val": 97.3,
+                "desc": "5.2 \u279d 10.2 T/Ha"
             },
             {
                 "block_code": "B011B",
@@ -2891,79 +2111,814 @@
                 "desc": "0.7 \u279d 6.3 T/Ha"
             },
             {
-                "block_code": "C018A",
-                "val": 6.4,
-                "desc": "15.7 \u279d 16.7 T/Ha"
+                "block_code": "F025C",
+                "val": 52.2,
+                "desc": "6.5 \u279d 9.9 T/Ha"
+            },
+            {
+                "block_code": "A019B",
+                "val": 51.2,
+                "desc": "9.5 \u279d 14.4 T/Ha"
+            },
+            {
+                "block_code": "C027A",
+                "val": 100,
+                "desc": "0.0 \u279d 3.1 T/Ha"
+            },
+            {
+                "block_code": "F031D",
+                "val": 100,
+                "desc": "0.0 \u279d 3.0 T/Ha"
+            },
+            {
+                "block_code": "I037A",
+                "val": 6.2,
+                "desc": "10.6 \u279d 11.2 T/Ha"
+            },
+            {
+                "block_code": "D004A",
+                "val": 5.8,
+                "desc": "16.5 \u279d 17.4 T/Ha"
+            },
+            {
+                "block_code": "D007A",
+                "val": 12.2,
+                "desc": "15.6 \u279d 17.5 T/Ha"
+            },
+            {
+                "block_code": "J028A",
+                "val": 10.1,
+                "desc": "13.0 \u279d 14.3 T/Ha"
+            },
+            {
+                "block_code": "I022B",
+                "val": 63.1,
+                "desc": "3.0 \u279d 4.9 T/Ha"
+            },
+            {
+                "block_code": "A004D",
+                "val": 117.9,
+                "desc": "1.1 \u279d 2.4 T/Ha"
+            },
+            {
+                "block_code": "F031B",
+                "val": 48.3,
+                "desc": "2.4 \u279d 3.5 T/Ha"
+            },
+            {
+                "block_code": "E043A",
+                "val": 70.8,
+                "desc": "6.3 \u279d 10.8 T/Ha"
+            },
+            {
+                "block_code": "D002A",
+                "val": 14.0,
+                "desc": "15.4 \u279d 17.5 T/Ha"
+            },
+            {
+                "block_code": "D024F",
+                "val": 100,
+                "desc": "0.0 \u279d 4.9 T/Ha"
+            },
+            {
+                "block_code": "A014A",
+                "val": 43.2,
+                "desc": "8.4 \u279d 12.1 T/Ha"
+            },
+            {
+                "block_code": "D040A",
+                "val": 29.0,
+                "desc": "8.6 \u279d 11.1 T/Ha"
+            },
+            {
+                "block_code": "J042D",
+                "val": 16.5,
+                "desc": "5.7 \u279d 6.7 T/Ha"
+            },
+            {
+                "block_code": "C038A",
+                "val": 19.3,
+                "desc": "16.8 \u279d 20.1 T/Ha"
+            },
+            {
+                "block_code": "K020B",
+                "val": 37.8,
+                "desc": "8.1 \u279d 11.2 T/Ha"
+            },
+            {
+                "block_code": "F030E",
+                "val": 100,
+                "desc": "0.0 \u279d 3.5 T/Ha"
+            },
+            {
+                "block_code": "F024A",
+                "val": 23.5,
+                "desc": "13.6 \u279d 16.8 T/Ha"
+            },
+            {
+                "block_code": "B017E",
+                "val": 100,
+                "desc": "0.0 \u279d 3.1 T/Ha"
+            },
+            {
+                "block_code": "D028C",
+                "val": 1814.8,
+                "desc": "0.3 \u279d 5.2 T/Ha"
+            },
+            {
+                "block_code": "D036A",
+                "val": 37.6,
+                "desc": "11.4 \u279d 15.7 T/Ha"
+            },
+            {
+                "block_code": "D043A",
+                "val": 222.9,
+                "desc": "2.4 \u279d 7.6 T/Ha"
+            },
+            {
+                "block_code": "C006A",
+                "val": 8.7,
+                "desc": "19.6 \u279d 21.3 T/Ha"
+            },
+            {
+                "block_code": "D027H",
+                "val": 100,
+                "desc": "0.0 \u279d 4.7 T/Ha"
+            },
+            {
+                "block_code": "B014A",
+                "val": 21.2,
+                "desc": "13.1 \u279d 15.9 T/Ha"
+            },
+            {
+                "block_code": "D028A",
+                "val": 69.9,
+                "desc": "5.1 \u279d 8.7 T/Ha"
+            },
+            {
+                "block_code": "K024B",
+                "val": 73.5,
+                "desc": "3.9 \u279d 6.7 T/Ha"
+            },
+            {
+                "block_code": "K023B",
+                "val": 63.9,
+                "desc": "5.3 \u279d 8.7 T/Ha"
+            },
+            {
+                "block_code": "A020B",
+                "val": 64.2,
+                "desc": "8.5 \u279d 14.0 T/Ha"
+            },
+            {
+                "block_code": "G012A",
+                "val": 7.5,
+                "desc": "22.3 \u279d 23.9 T/Ha"
+            },
+            {
+                "block_code": "A004B",
+                "val": 15.3,
+                "desc": "6.1 \u279d 7.0 T/Ha"
+            },
+            {
+                "block_code": "G016C",
+                "val": 17.5,
+                "desc": "15.4 \u279d 18.1 T/Ha"
+            },
+            {
+                "block_code": "F025B",
+                "val": 17.1,
+                "desc": "6.7 \u279d 7.9 T/Ha"
+            },
+            {
+                "block_code": "F028C",
+                "val": 100,
+                "desc": "0.0 \u279d 2.8 T/Ha"
+            },
+            {
+                "block_code": "F034A",
+                "val": 8.6,
+                "desc": "15.3 \u279d 16.6 T/Ha"
+            },
+            {
+                "block_code": "C039A",
+                "val": 33.7,
+                "desc": "7.3 \u279d 9.8 T/Ha"
+            },
+            {
+                "block_code": "G038A",
+                "val": 10.5,
+                "desc": "10.1 \u279d 11.1 T/Ha"
+            },
+            {
+                "block_code": "A012C",
+                "val": 100,
+                "desc": "0.0 \u279d 10.5 T/Ha"
+            },
+            {
+                "block_code": "F030A",
+                "val": 33.2,
+                "desc": "5.5 \u279d 7.4 T/Ha"
+            },
+            {
+                "block_code": "B009E",
+                "val": 192.5,
+                "desc": "2.0 \u279d 5.9 T/Ha"
+            },
+            {
+                "block_code": "B011A",
+                "val": 24.3,
+                "desc": "9.6 \u279d 11.9 T/Ha"
+            },
+            {
+                "block_code": "D035A",
+                "val": 14.5,
+                "desc": "14.3 \u279d 16.4 T/Ha"
+            },
+            {
+                "block_code": "A003B",
+                "val": 10.1,
+                "desc": "3.9 \u279d 4.3 T/Ha"
+            },
+            {
+                "block_code": "G027A",
+                "val": 10.7,
+                "desc": "15.6 \u279d 17.3 T/Ha"
+            },
+            {
+                "block_code": "E033A",
+                "val": 31.5,
+                "desc": "11.8 \u279d 15.6 T/Ha"
+            },
+            {
+                "block_code": "B010B",
+                "val": 121.9,
+                "desc": "3.8 \u279d 8.4 T/Ha"
+            },
+            {
+                "block_code": "H041A",
+                "val": 29.7,
+                "desc": "12.1 \u279d 15.7 T/Ha"
+            },
+            {
+                "block_code": "G025A",
+                "val": 52.5,
+                "desc": "16.5 \u279d 25.2 T/Ha"
+            },
+            {
+                "block_code": "B010A",
+                "val": 21.2,
+                "desc": "9.2 \u279d 11.2 T/Ha"
+            },
+            {
+                "block_code": "F029B",
+                "val": 13.4,
+                "desc": "4.5 \u279d 5.1 T/Ha"
+            },
+            {
+                "block_code": "I024A",
+                "val": 9.7,
+                "desc": "13.5 \u279d 14.8 T/Ha"
+            },
+            {
+                "block_code": "B014C",
+                "val": 94.3,
+                "desc": "4.8 \u279d 9.2 T/Ha"
+            },
+            {
+                "block_code": "B012B",
+                "val": 112.3,
+                "desc": "6.0 \u279d 12.8 T/Ha"
+            },
+            {
+                "block_code": "E035A",
+                "val": 34.5,
+                "desc": "10.2 \u279d 13.7 T/Ha"
+            },
+            {
+                "block_code": "I014A",
+                "val": 9.1,
+                "desc": "16.3 \u279d 17.8 T/Ha"
+            },
+            {
+                "block_code": "K020A",
+                "val": 19.5,
+                "desc": "13.6 \u279d 16.2 T/Ha"
+            },
+            {
+                "block_code": "F042A",
+                "val": 6.6,
+                "desc": "9.2 \u279d 9.8 T/Ha"
+            },
+            {
+                "block_code": "G016B",
+                "val": 31.2,
+                "desc": "26.4 \u279d 34.6 T/Ha"
+            },
+            {
+                "block_code": "A010B",
+                "val": 100,
+                "desc": "0.0 \u279d 5.1 T/Ha"
+            },
+            {
+                "block_code": "B002E",
+                "val": 100,
+                "desc": "0.0 \u279d 2.8 T/Ha"
+            },
+            {
+                "block_code": "D024G",
+                "val": 100,
+                "desc": "0.0 \u279d 3.1 T/Ha"
+            },
+            {
+                "block_code": "B001B",
+                "val": 68.9,
+                "desc": "5.3 \u279d 8.9 T/Ha"
+            },
+            {
+                "block_code": "A005B",
+                "val": 100,
+                "desc": "0.0 \u279d 1.5 T/Ha"
+            },
+            {
+                "block_code": "B011C",
+                "val": 138.6,
+                "desc": "3.0 \u279d 7.0 T/Ha"
+            },
+            {
+                "block_code": "J041A",
+                "val": 20.5,
+                "desc": "12.6 \u279d 15.2 T/Ha"
+            },
+            {
+                "block_code": "D024B",
+                "val": 63.5,
+                "desc": "3.9 \u279d 6.4 T/Ha"
+            },
+            {
+                "block_code": "H023B",
+                "val": 33.3,
+                "desc": "10.1 \u279d 13.4 T/Ha"
+            },
+            {
+                "block_code": "I040A",
+                "val": 15.5,
+                "desc": "11.8 \u279d 13.6 T/Ha"
+            },
+            {
+                "block_code": "B003C",
+                "val": 58.7,
+                "desc": "2.8 \u279d 4.4 T/Ha"
+            },
+            {
+                "block_code": "D028E",
+                "val": 100,
+                "desc": "0.0 \u279d 4.3 T/Ha"
+            },
+            {
+                "block_code": "G023D",
+                "val": 169.0,
+                "desc": "4.9 \u279d 13.1 T/Ha"
+            },
+            {
+                "block_code": "K025A",
+                "val": 12.7,
+                "desc": "11.3 \u279d 12.8 T/Ha"
+            },
+            {
+                "block_code": "K028A",
+                "val": 35.2,
+                "desc": "9.4 \u279d 12.7 T/Ha"
+            },
+            {
+                "block_code": "K014A",
+                "val": 11.2,
+                "desc": "15.3 \u279d 17.0 T/Ha"
+            },
+            {
+                "block_code": "G023B",
+                "val": 9.9,
+                "desc": "9.1 \u279d 10.0 T/Ha"
+            },
+            {
+                "block_code": "B009D",
+                "val": 180.8,
+                "desc": "2.9 \u279d 8.2 T/Ha"
+            },
+            {
+                "block_code": "A018B",
+                "val": 108.5,
+                "desc": "7.1 \u279d 14.8 T/Ha"
+            },
+            {
+                "block_code": "A014C",
+                "val": 85.9,
+                "desc": "3.4 \u279d 6.3 T/Ha"
+            },
+            {
+                "block_code": "D024C",
+                "val": 53.4,
+                "desc": "1.9 \u279d 2.9 T/Ha"
+            },
+            {
+                "block_code": "A011B",
+                "val": 1569.6,
+                "desc": "0.2 \u279d 3.8 T/Ha"
+            },
+            {
+                "block_code": "G030A",
+                "val": 7.3,
+                "desc": "16.0 \u279d 17.2 T/Ha"
+            },
+            {
+                "block_code": "H005A",
+                "val": 15.2,
+                "desc": "18.1 \u279d 20.8 T/Ha"
+            },
+            {
+                "block_code": "I037B",
+                "val": 126.1,
+                "desc": "4.0 \u279d 9.0 T/Ha"
+            },
+            {
+                "block_code": "B005A",
+                "val": 24.1,
+                "desc": "13.4 \u279d 16.6 T/Ha"
+            },
+            {
+                "block_code": "E027B",
+                "val": 42.0,
+                "desc": "11.3 \u279d 16.1 T/Ha"
+            },
+            {
+                "block_code": "J036A",
+                "val": 5.5,
+                "desc": "13.0 \u279d 13.7 T/Ha"
+            },
+            {
+                "block_code": "F040A",
+                "val": 10.9,
+                "desc": "9.5 \u279d 10.6 T/Ha"
+            },
+            {
+                "block_code": "K023A",
+                "val": 36.6,
+                "desc": "8.8 \u279d 12.1 T/Ha"
+            },
+            {
+                "block_code": "D006A",
+                "val": 5.5,
+                "desc": "16.4 \u279d 17.3 T/Ha"
+            },
+            {
+                "block_code": "D026A",
+                "val": 100,
+                "desc": "0.0 \u279d 4.3 T/Ha"
+            },
+            {
+                "block_code": "K035A",
+                "val": 49.3,
+                "desc": "6.1 \u279d 9.2 T/Ha"
+            },
+            {
+                "block_code": "M044A",
+                "val": 17.6,
+                "desc": "6.4 \u279d 7.5 T/Ha"
+            },
+            {
+                "block_code": "B007B",
+                "val": 100,
+                "desc": "0.0 \u279d 4.8 T/Ha"
+            },
+            {
+                "block_code": "B003D",
+                "val": 73.1,
+                "desc": "2.3 \u279d 4.0 T/Ha"
+            },
+            {
+                "block_code": "I021A",
+                "val": 6.0,
+                "desc": "18.1 \u279d 19.2 T/Ha"
+            },
+            {
+                "block_code": "F028A",
+                "val": 43.6,
+                "desc": "8.8 \u279d 12.6 T/Ha"
+            },
+            {
+                "block_code": "H009A",
+                "val": 15.6,
+                "desc": "18.7 \u279d 21.6 T/Ha"
+            },
+            {
+                "block_code": "H034A",
+                "val": 5.4,
+                "desc": "15.3 \u279d 16.1 T/Ha"
+            },
+            {
+                "block_code": "E005A",
+                "val": 6.5,
+                "desc": "17.2 \u279d 18.3 T/Ha"
+            },
+            {
+                "block_code": "B007C",
+                "val": 100,
+                "desc": "0.0 \u279d 3.1 T/Ha"
+            },
+            {
+                "block_code": "E002A",
+                "val": 5.3,
+                "desc": "14.8 \u279d 15.6 T/Ha"
+            },
+            {
+                "block_code": "K015A",
+                "val": 6.9,
+                "desc": "14.7 \u279d 15.7 T/Ha"
+            },
+            {
+                "block_code": "G028A",
+                "val": 20.3,
+                "desc": "13.3 \u279d 16.0 T/Ha"
+            },
+            {
+                "block_code": "C004E",
+                "val": 100,
+                "desc": "0.0 \u279d 8.5 T/Ha"
+            },
+            {
+                "block_code": "B003B",
+                "val": 250.7,
+                "desc": "2.2 \u279d 7.7 T/Ha"
+            },
+            {
+                "block_code": "I012A",
+                "val": 9.6,
+                "desc": "18.4 \u279d 20.1 T/Ha"
+            },
+            {
+                "block_code": "J043A",
+                "val": 43.1,
+                "desc": "8.4 \u279d 12.0 T/Ha"
+            },
+            {
+                "block_code": "L030A",
+                "val": 12.5,
+                "desc": "11.2 \u279d 12.6 T/Ha"
+            },
+            {
+                "block_code": "D027D",
+                "val": 91.8,
+                "desc": "5.6 \u279d 10.7 T/Ha"
+            },
+            {
+                "block_code": "B002C",
+                "val": 117.1,
+                "desc": "2.5 \u279d 5.3 T/Ha"
+            },
+            {
+                "block_code": "E032A",
+                "val": 571.3,
+                "desc": "1.1 \u279d 7.7 T/Ha"
+            },
+            {
+                "block_code": "A012B",
+                "val": 121.7,
+                "desc": "5.6 \u279d 12.5 T/Ha"
+            },
+            {
+                "block_code": "J030A",
+                "val": 12.3,
+                "desc": "13.1 \u279d 14.7 T/Ha"
+            },
+            {
+                "block_code": "J018A",
+                "val": 8.3,
+                "desc": "15.3 \u279d 16.6 T/Ha"
+            },
+            {
+                "block_code": "I043A",
+                "val": 33.6,
+                "desc": "7.2 \u279d 9.6 T/Ha"
+            },
+            {
+                "block_code": "K039A",
+                "val": 35.4,
+                "desc": "10.1 \u279d 13.7 T/Ha"
+            },
+            {
+                "block_code": "A013A",
+                "val": 111.0,
+                "desc": "7.6 \u279d 16.1 T/Ha"
+            },
+            {
+                "block_code": "J015A",
+                "val": 19.4,
+                "desc": "16.3 \u279d 19.5 T/Ha"
+            },
+            {
+                "block_code": "G032A",
+                "val": 8.9,
+                "desc": "15.0 \u279d 16.3 T/Ha"
+            },
+            {
+                "block_code": "K027A",
+                "val": 12.2,
+                "desc": "10.1 \u279d 11.3 T/Ha"
+            },
+            {
+                "block_code": "M039C",
+                "val": 50.2,
+                "desc": "8.5 \u279d 12.8 T/Ha"
+            },
+            {
+                "block_code": "B017C",
+                "val": 127.5,
+                "desc": "5.4 \u279d 12.2 T/Ha"
             },
             {
                 "block_code": "A019C",
                 "val": 69.0,
                 "desc": "6.1 \u279d 10.3 T/Ha"
+            },
+            {
+                "block_code": "G037A",
+                "val": 7.1,
+                "desc": "8.3 \u279d 8.9 T/Ha"
+            },
+            {
+                "block_code": "D027E",
+                "val": 72.0,
+                "desc": "7.2 \u279d 12.3 T/Ha"
+            },
+            {
+                "block_code": "B013B",
+                "val": 68.4,
+                "desc": "8.9 \u279d 14.9 T/Ha"
+            },
+            {
+                "block_code": "A005A",
+                "val": 100,
+                "desc": "0.0 \u279d 2.6 T/Ha"
+            },
+            {
+                "block_code": "H006A",
+                "val": 9.0,
+                "desc": "19.1 \u279d 20.8 T/Ha"
+            },
+            {
+                "block_code": "F030C",
+                "val": 1203.7,
+                "desc": "0.3 \u279d 3.5 T/Ha"
+            },
+            {
+                "block_code": "B001C",
+                "val": 97.3,
+                "desc": "3.3 \u279d 6.6 T/Ha"
+            },
+            {
+                "block_code": "K019A",
+                "val": 26.0,
+                "desc": "13.1 \u279d 16.5 T/Ha"
+            },
+            {
+                "block_code": "A014B",
+                "val": 77.0,
+                "desc": "7.1 \u279d 12.6 T/Ha"
+            },
+            {
+                "block_code": "G015B",
+                "val": 133.0,
+                "desc": "9.4 \u279d 21.9 T/Ha"
+            },
+            {
+                "block_code": "D028B",
+                "val": 15.2,
+                "desc": "7.6 \u279d 8.8 T/Ha"
+            },
+            {
+                "block_code": "D039A",
+                "val": 69.6,
+                "desc": "11.0 \u279d 18.7 T/Ha"
+            },
+            {
+                "block_code": "F029F",
+                "val": 100,
+                "desc": "0.0 \u279d 4.4 T/Ha"
+            },
+            {
+                "block_code": "F033A",
+                "val": 12.3,
+                "desc": "17.1 \u279d 19.2 T/Ha"
+            },
+            {
+                "block_code": "K030A",
+                "val": 14.1,
+                "desc": "11.3 \u279d 12.9 T/Ha"
+            },
+            {
+                "block_code": "C004C",
+                "val": 88.5,
+                "desc": "3.0 \u279d 5.8 T/Ha"
+            },
+            {
+                "block_code": "G040A",
+                "val": 29.6,
+                "desc": "5.2 \u279d 6.8 T/Ha"
+            },
+            {
+                "block_code": "B002B",
+                "val": 60.3,
+                "desc": "4.6 \u279d 7.4 T/Ha"
+            },
+            {
+                "block_code": "E024B",
+                "val": 114.8,
+                "desc": "3.2 \u279d 6.8 T/Ha"
+            },
+            {
+                "block_code": "J027A",
+                "val": 6.4,
+                "desc": "13.7 \u279d 14.6 T/Ha"
+            },
+            {
+                "block_code": "A011A",
+                "val": 130.6,
+                "desc": "4.4 \u279d 10.2 T/Ha"
+            },
+            {
+                "block_code": "K024A",
+                "val": 19.3,
+                "desc": "11.5 \u279d 13.8 T/Ha"
+            },
+            {
+                "block_code": "A010A",
+                "val": 60.7,
+                "desc": "3.5 \u279d 5.6 T/Ha"
+            },
+            {
+                "block_code": "K034A",
+                "val": 24.3,
+                "desc": "11.7 \u279d 14.6 T/Ha"
+            },
+            {
+                "block_code": "I023B",
+                "val": 412.2,
+                "desc": "0.9 \u279d 4.6 T/Ha"
+            },
+            {
+                "block_code": "G031A",
+                "val": 15.7,
+                "desc": "16.1 \u279d 18.6 T/Ha"
+            },
+            {
+                "block_code": "K032A",
+                "val": 37.0,
+                "desc": "8.1 \u279d 11.1 T/Ha"
+            },
+            {
+                "block_code": "B016C",
+                "val": 172.9,
+                "desc": "4.4 \u279d 12.1 T/Ha"
+            },
+            {
+                "block_code": "K042A",
+                "val": 57.3,
+                "desc": "2.6 \u279d 4.1 T/Ha"
+            },
+            {
+                "block_code": "E027A",
+                "val": 16.3,
+                "desc": "13.8 \u279d 16.1 T/Ha"
+            },
+            {
+                "block_code": "E043B",
+                "val": 335.0,
+                "desc": "1.2 \u279d 5.2 T/Ha"
+            },
+            {
+                "block_code": "G039A",
+                "val": 29.0,
+                "desc": "8.0 \u279d 10.4 T/Ha"
             }
         ],
         "tbm": [
-            {
-                "block_code": "B016G",
-                "val": 0,
-                "desc": "Tahun Tanam: 2023"
-            },
-            {
-                "block_code": "D028F",
-                "val": 0,
-                "desc": "Tahun Tanam: 2023"
-            },
-            {
-                "block_code": "F029G",
-                "val": 0,
-                "desc": "Tahun Tanam: 2023"
-            },
-            {
-                "block_code": "B017F",
-                "val": 0,
-                "desc": "Tahun Tanam: 2023"
-            },
-            {
-                "block_code": "B008E",
-                "val": 0,
-                "desc": "Tahun Tanam: 2023"
-            },
-            {
-                "block_code": "F030F",
-                "val": 0,
-                "desc": "Tahun Tanam: 2023"
-            },
             {
                 "block_code": "D029B",
                 "val": 0,
                 "desc": "Tahun Tanam: 2023"
             },
             {
-                "block_code": "C027B",
+                "block_code": "D028G",
                 "val": 0,
-                "desc": "Tahun Tanam: 2023"
+                "desc": "Tahun Tanam: 2025"
             },
             {
-                "block_code": "A005C",
+                "block_code": "B013C",
                 "val": 0,
-                "desc": "Tahun Tanam: 2023"
+                "desc": "Tahun Tanam: 2025"
             },
             {
-                "block_code": "A006A",
-                "val": 0,
-                "desc": "Tahun Tanam: 2023"
-            },
-            {
-                "block_code": "D034A",
-                "val": 0,
-                "desc": "Tahun Tanam: 2023"
-            },
-            {
-                "block_code": "J021A",
-                "val": 0,
-                "desc": "Tahun Tanam: ?"
-            },
-            {
-                "block_code": "D027I",
+                "block_code": "B015D",
                 "val": 0,
                 "desc": "Tahun Tanam: 2023"
             },
@@ -2973,7 +2928,12 @@
                 "desc": "Tahun Tanam: 2023"
             },
             {
-                "block_code": "B015D",
+                "block_code": "B008E",
+                "val": 0,
+                "desc": "Tahun Tanam: 2023"
+            },
+            {
+                "block_code": "D028F",
                 "val": 0,
                 "desc": "Tahun Tanam: 2023"
             },
@@ -2983,9 +2943,49 @@
                 "desc": "Tahun Tanam: 2023"
             },
             {
+                "block_code": "B007D",
+                "val": 0,
+                "desc": "Tahun Tanam: 2023"
+            },
+            {
+                "block_code": "B017F",
+                "val": 0,
+                "desc": "Tahun Tanam: 2023"
+            },
+            {
                 "block_code": "D033A",
                 "val": 0,
                 "desc": "Tahun Tanam: 2023"
+            },
+            {
+                "block_code": "F029G",
+                "val": 0,
+                "desc": "Tahun Tanam: 2023"
+            },
+            {
+                "block_code": "B016G",
+                "val": 0,
+                "desc": "Tahun Tanam: 2023"
+            },
+            {
+                "block_code": "B015E",
+                "val": 0,
+                "desc": "Tahun Tanam: 2025"
+            },
+            {
+                "block_code": "C027B",
+                "val": 0,
+                "desc": "Tahun Tanam: 2023"
+            },
+            {
+                "block_code": "F030F",
+                "val": 0,
+                "desc": "Tahun Tanam: 2023"
+            },
+            {
+                "block_code": "B017G",
+                "val": 0,
+                "desc": "Tahun Tanam: 2025"
             },
             {
                 "block_code": "F031E",
@@ -2993,7 +2993,22 @@
                 "desc": "Tahun Tanam: 2023"
             },
             {
-                "block_code": "B007D",
+                "block_code": "C024B",
+                "val": 0,
+                "desc": "Tahun Tanam: 2025"
+            },
+            {
+                "block_code": "B016H",
+                "val": 0,
+                "desc": "Tahun Tanam: 2025"
+            },
+            {
+                "block_code": "D027I",
+                "val": 0,
+                "desc": "Tahun Tanam: 2023"
+            },
+            {
+                "block_code": "A006A",
                 "val": 0,
                 "desc": "Tahun Tanam: 2023"
             },
@@ -3001,11 +3016,31 @@
                 "block_code": "E032B",
                 "val": 0,
                 "desc": "Tahun Tanam: 2023"
+            },
+            {
+                "block_code": "B012D",
+                "val": 0,
+                "desc": "Tahun Tanam: 2025"
+            },
+            {
+                "block_code": "J021A",
+                "val": 0,
+                "desc": "Tahun Tanam: ?"
+            },
+            {
+                "block_code": "A005C",
+                "val": 0,
+                "desc": "Tahun Tanam: 2023"
+            },
+            {
+                "block_code": "D034A",
+                "val": 0,
+                "desc": "Tahun Tanam: 2023"
             }
         ],
         "empty": [
             {
-                "block_code": "B006D",
+                "block_code": "F025E",
                 "val": 0,
                 "desc": "Luas: 0 Ha (Tanpa Tanaman)"
             },
@@ -3015,42 +3050,7 @@
                 "desc": "Luas: 0 Ha (Tanpa Tanaman)"
             },
             {
-                "block_code": "B017G",
-                "val": 0,
-                "desc": "Luas: 0 Ha (Tanpa Tanaman)"
-            },
-            {
-                "block_code": "F025E",
-                "val": 0,
-                "desc": "Luas: 0 Ha (Tanpa Tanaman)"
-            },
-            {
-                "block_code": "C024B",
-                "val": 0,
-                "desc": "Luas: 0 Ha (Tanpa Tanaman)"
-            },
-            {
-                "block_code": "B016H",
-                "val": 0,
-                "desc": "Luas: 0 Ha (Tanpa Tanaman)"
-            },
-            {
-                "block_code": "B012D",
-                "val": 0,
-                "desc": "Luas: 0 Ha (Tanpa Tanaman)"
-            },
-            {
-                "block_code": "D028G",
-                "val": 0,
-                "desc": "Luas: 0 Ha (Tanpa Tanaman)"
-            },
-            {
-                "block_code": "B015E",
-                "val": 0,
-                "desc": "Luas: 0 Ha (Tanpa Tanaman)"
-            },
-            {
-                "block_code": "B013C",
+                "block_code": "B006D",
                 "val": 0,
                 "desc": "Luas: 0 Ha (Tanpa Tanaman)"
             }
@@ -3071,10 +3071,10 @@
             "count": 330
         },
         "tbm": {
-            "count": 20
+            "count": 27
         },
         "empty": {
-            "count": 10,
+            "count": 3,
             "total_area": 0
         }
     }

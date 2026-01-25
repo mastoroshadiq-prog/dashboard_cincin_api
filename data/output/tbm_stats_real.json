@@ -8,10 +8,10 @@
     },
     "A005A": {
         "year": 2021,
-        "tanam_2023": 1411,
+        "tanam_2023": 0,
         "tanam_2024": 0,
-        "tanam_2025": 33,
-        "total_tbm_3th": 1444
+        "tanam_2025": 0,
+        "total_tbm_3th": 0
     },
     "A005B": {
         "year": 2022,
@@ -22,38 +22,31 @@
     },
     "A005C": {
         "year": 2023,
-        "tanam_2023": 0,
-        "tanam_2024": 115,
+        "tanam_2023": 115,
+        "tanam_2024": 0,
         "tanam_2025": 0,
         "total_tbm_3th": 115
     },
     "A006A": {
         "year": 2023,
-        "tanam_2023": 0,
-        "tanam_2024": 564,
+        "tanam_2023": 564,
+        "tanam_2024": 0,
         "tanam_2025": 0,
         "total_tbm_3th": 564
     },
     "A007A": {
         "year": 2023,
-        "tanam_2023": 0,
-        "tanam_2024": 127,
+        "tanam_2023": 127,
+        "tanam_2024": 0,
         "tanam_2025": 0,
         "total_tbm_3th": 127
     },
     "A010B": {
         "year": 2021,
-        "tanam_2023": 364,
-        "tanam_2024": 0,
-        "tanam_2025": 0,
-        "total_tbm_3th": 364
-    },
-    "A011B": {
-        "year": 2018,
         "tanam_2023": 0,
         "tanam_2024": 0,
-        "tanam_2025": 94,
-        "total_tbm_3th": 94
+        "tanam_2025": 0,
+        "total_tbm_3th": 0
     },
     "B002E": {
         "year": 2022,
@@ -78,10 +71,10 @@
     },
     "B007B": {
         "year": 2021,
-        "tanam_2023": 226,
+        "tanam_2023": 0,
         "tanam_2024": 0,
         "tanam_2025": 0,
-        "total_tbm_3th": 226
+        "total_tbm_3th": 0
     },
     "B007C": {
         "year": 2022,
@@ -92,59 +85,59 @@
     },
     "B007D": {
         "year": 2023,
-        "tanam_2023": 0,
-        "tanam_2024": 60,
+        "tanam_2023": 60,
+        "tanam_2024": 0,
         "tanam_2025": 0,
         "total_tbm_3th": 60
     },
     "B008E": {
         "year": 2023,
-        "tanam_2023": 0,
-        "tanam_2024": 251,
+        "tanam_2023": 251,
+        "tanam_2024": 0,
         "tanam_2025": 0,
         "total_tbm_3th": 251
     },
     "B009F": {
         "year": 2021,
-        "tanam_2023": 87,
-        "tanam_2024": 0,
-        "tanam_2025": 0,
-        "total_tbm_3th": 87
-    },
-    "B009G": {
-        "year": 2023,
-        "tanam_2023": 0,
-        "tanam_2024": 140,
-        "tanam_2025": 0,
-        "total_tbm_3th": 140
-    },
-    "C004E": {
-        "year": 2021,
-        "tanam_2023": 5,
-        "tanam_2024": 0,
-        "tanam_2025": 0,
-        "total_tbm_3th": 5
-    },
-    "C024A": {
-        "year": 2021,
-        "tanam_2023": 866,
-        "tanam_2024": 0,
-        "tanam_2025": 0,
-        "total_tbm_3th": 866
-    },
-    "C024B": {
-        "year": 2025,
         "tanam_2023": 0,
         "tanam_2024": 0,
         "tanam_2025": 0,
         "total_tbm_3th": 0
     },
-    "D024F": {
-        "year": 2021,
-        "tanam_2023": 157,
+    "B009G": {
+        "year": 2023,
+        "tanam_2023": 140,
         "tanam_2024": 0,
         "tanam_2025": 0,
-        "total_tbm_3th": 157
+        "total_tbm_3th": 140
+    },
+    "C004E": {
+        "year": 2021,
+        "tanam_2023": 0,
+        "tanam_2024": 0,
+        "tanam_2025": 0,
+        "total_tbm_3th": 0
+    },
+    "C024A": {
+        "year": 2021,
+        "tanam_2023": 0,
+        "tanam_2024": 0,
+        "tanam_2025": 0,
+        "total_tbm_3th": 0
+    },
+    "C024B": {
+        "year": 2025,
+        "tanam_2023": 0,
+        "tanam_2024": 0,
+        "tanam_2025": 138,
+        "total_tbm_3th": 138
+    },
+    "D024F": {
+        "year": 2021,
+        "tanam_2023": 0,
+        "tanam_2024": 0,
+        "tanam_2025": 0,
+        "total_tbm_3th": 0
     },
     "D024G": {
         "year": 2022,
@@ -155,10 +148,10 @@
     },
     "E024C": {
         "year": 2021,
-        "tanam_2023": 360,
+        "tanam_2023": 0,
         "tanam_2024": 0,
         "tanam_2025": 0,
-        "total_tbm_3th": 360
+        "total_tbm_3th": 0
     },
     "E024D": {
         "year": 2022,
@@ -167,47 +160,19 @@
         "tanam_2025": 0,
         "total_tbm_3th": 0
     },
-    "A012A": {
-        "year": 2016,
-        "tanam_2023": 0,
-        "tanam_2024": 0,
-        "tanam_2025": 97,
-        "total_tbm_3th": 97
-    },
-    "A012B": {
-        "year": 2018,
-        "tanam_2023": 0,
-        "tanam_2024": 0,
-        "tanam_2025": 62,
-        "total_tbm_3th": 62
-    },
     "A012C": {
         "year": 2021,
-        "tanam_2023": 37,
+        "tanam_2023": 0,
         "tanam_2024": 0,
         "tanam_2025": 0,
-        "total_tbm_3th": 37
-    },
-    "A013A": {
-        "year": 2016,
-        "tanam_2023": 0,
-        "tanam_2024": 0,
-        "tanam_2025": 10,
-        "total_tbm_3th": 10
-    },
-    "A013B": {
-        "year": 2018,
-        "tanam_2023": 0,
-        "tanam_2024": 0,
-        "tanam_2025": 49,
-        "total_tbm_3th": 49
+        "total_tbm_3th": 0
     },
     "A013D": {
         "year": 2021,
-        "tanam_2023": 205,
+        "tanam_2023": 0,
         "tanam_2024": 0,
-        "tanam_2025": 2,
-        "total_tbm_3th": 207
+        "tanam_2025": 0,
+        "total_tbm_3th": 0
     },
     "A018C": {
         "year": 2022,
@@ -220,34 +185,34 @@
         "year": 2025,
         "tanam_2023": 0,
         "tanam_2024": 0,
-        "tanam_2025": 0,
-        "total_tbm_3th": 0
+        "tanam_2025": 149,
+        "total_tbm_3th": 149
     },
     "B013C": {
         "year": 2025,
         "tanam_2023": 0,
         "tanam_2024": 0,
-        "tanam_2025": 0,
-        "total_tbm_3th": 0
+        "tanam_2025": 134,
+        "total_tbm_3th": 134
     },
     "B014E": {
         "year": 2021,
-        "tanam_2023": 847,
+        "tanam_2023": 0,
         "tanam_2024": 0,
         "tanam_2025": 0,
-        "total_tbm_3th": 847
+        "total_tbm_3th": 0
     },
     "B015C": {
         "year": 2021,
-        "tanam_2023": 356,
+        "tanam_2023": 0,
         "tanam_2024": 0,
         "tanam_2025": 0,
-        "total_tbm_3th": 356
+        "total_tbm_3th": 0
     },
     "B015D": {
         "year": 2023,
-        "tanam_2023": 0,
-        "tanam_2024": 589,
+        "tanam_2023": 589,
+        "tanam_2024": 0,
         "tanam_2025": 0,
         "total_tbm_3th": 589
     },
@@ -255,15 +220,15 @@
         "year": 2025,
         "tanam_2023": 0,
         "tanam_2024": 0,
-        "tanam_2025": 0,
-        "total_tbm_3th": 0
+        "tanam_2025": 139,
+        "total_tbm_3th": 139
     },
     "B016E": {
         "year": 2021,
-        "tanam_2023": 245,
+        "tanam_2023": 0,
         "tanam_2024": 0,
         "tanam_2025": 0,
-        "total_tbm_3th": 245
+        "total_tbm_3th": 0
     },
     "B016F": {
         "year": 2022,
@@ -274,8 +239,8 @@
     },
     "B016G": {
         "year": 2023,
-        "tanam_2023": 0,
-        "tanam_2024": 127,
+        "tanam_2023": 127,
+        "tanam_2024": 0,
         "tanam_2025": 0,
         "total_tbm_3th": 127
     },
@@ -283,15 +248,15 @@
         "year": 2025,
         "tanam_2023": 0,
         "tanam_2024": 0,
-        "tanam_2025": 0,
-        "total_tbm_3th": 0
+        "tanam_2025": 177,
+        "total_tbm_3th": 177
     },
     "B017D": {
         "year": 2021,
-        "tanam_2023": 12,
+        "tanam_2023": 0,
         "tanam_2024": 0,
         "tanam_2025": 0,
-        "total_tbm_3th": 12
+        "total_tbm_3th": 0
     },
     "B017E": {
         "year": 2022,
@@ -302,8 +267,8 @@
     },
     "B017F": {
         "year": 2023,
-        "tanam_2023": 0,
-        "tanam_2024": 551,
+        "tanam_2023": 551,
+        "tanam_2024": 0,
         "tanam_2025": 0,
         "total_tbm_3th": 551
     },
@@ -311,36 +276,15 @@
         "year": 2025,
         "tanam_2023": 0,
         "tanam_2024": 0,
-        "tanam_2025": 0,
-        "total_tbm_3th": 0
+        "tanam_2025": 515,
+        "total_tbm_3th": 515
     },
     "B024A": {
         "year": 2021,
-        "tanam_2023": 84,
+        "tanam_2023": 0,
         "tanam_2024": 0,
         "tanam_2025": 0,
-        "total_tbm_3th": 84
-    },
-    "K022A": {
-        "year": 2017,
-        "tanam_2023": 0,
-        "tanam_2024": 0,
-        "tanam_2025": 146,
-        "total_tbm_3th": 146
-    },
-    "K024B": {
-        "year": 2017,
-        "tanam_2023": 0,
-        "tanam_2024": 0,
-        "tanam_2025": 22,
-        "total_tbm_3th": 22
-    },
-    "L024A": {
-        "year": 2017,
-        "tanam_2023": 0,
-        "tanam_2024": 0,
-        "tanam_2025": 7,
-        "total_tbm_3th": 7
+        "total_tbm_3th": 0
     },
     "C027A": {
         "year": 2022,
@@ -351,8 +295,8 @@
     },
     "C027B": {
         "year": 2023,
-        "tanam_2023": 0,
-        "tanam_2024": 88,
+        "tanam_2023": 88,
+        "tanam_2024": 0,
         "tanam_2025": 0,
         "total_tbm_3th": 88
     },
@@ -365,17 +309,17 @@
     },
     "D026A": {
         "year": 2021,
-        "tanam_2023": 103,
+        "tanam_2023": 0,
         "tanam_2024": 0,
         "tanam_2025": 0,
-        "total_tbm_3th": 103
+        "total_tbm_3th": 0
     },
     "D027G": {
         "year": 2021,
-        "tanam_2023": 63,
+        "tanam_2023": 0,
         "tanam_2024": 0,
         "tanam_2025": 0,
-        "total_tbm_3th": 63
+        "total_tbm_3th": 0
     },
     "D027H": {
         "year": 2022,
@@ -386,17 +330,17 @@
     },
     "D027I": {
         "year": 2023,
-        "tanam_2023": 0,
-        "tanam_2024": 463,
+        "tanam_2023": 463,
+        "tanam_2024": 0,
         "tanam_2025": 0,
         "total_tbm_3th": 463
     },
     "D028D": {
         "year": 2021,
-        "tanam_2023": 356,
+        "tanam_2023": 0,
         "tanam_2024": 0,
         "tanam_2025": 0,
-        "total_tbm_3th": 356
+        "total_tbm_3th": 0
     },
     "D028E": {
         "year": 2022,
@@ -407,8 +351,8 @@
     },
     "D028F": {
         "year": 2023,
-        "tanam_2023": 0,
-        "tanam_2024": 339,
+        "tanam_2023": 339,
+        "tanam_2024": 0,
         "tanam_2025": 0,
         "total_tbm_3th": 339
     },
@@ -416,15 +360,8 @@
         "year": 2025,
         "tanam_2023": 0,
         "tanam_2024": 0,
-        "tanam_2025": 0,
-        "total_tbm_3th": 0
-    },
-    "F028A": {
-        "year": 2019,
-        "tanam_2023": 0,
-        "tanam_2024": 0,
-        "tanam_2025": 52,
-        "total_tbm_3th": 52
+        "tanam_2025": 606,
+        "total_tbm_3th": 606
     },
     "D029A": {
         "year": 2022,
@@ -433,40 +370,33 @@
         "tanam_2025": 0,
         "total_tbm_3th": 0
     },
-    "F029C": {
-        "year": 2019,
-        "tanam_2023": 0,
-        "tanam_2024": 0,
-        "tanam_2025": 5,
-        "total_tbm_3th": 5
-    },
     "D029B": {
         "year": 2023,
-        "tanam_2023": 0,
-        "tanam_2024": 47,
+        "tanam_2023": 47,
+        "tanam_2024": 0,
         "tanam_2025": 0,
         "total_tbm_3th": 47
     },
     "D033A": {
         "year": 2023,
-        "tanam_2023": 0,
-        "tanam_2024": 302,
+        "tanam_2023": 302,
+        "tanam_2024": 0,
         "tanam_2025": 0,
         "total_tbm_3th": 302
     },
     "D034A": {
         "year": 2023,
-        "tanam_2023": 0,
-        "tanam_2024": 11,
+        "tanam_2023": 11,
+        "tanam_2024": 0,
         "tanam_2025": 0,
         "total_tbm_3th": 11
     },
     "E026D": {
         "year": 2021,
-        "tanam_2023": 211,
+        "tanam_2023": 0,
         "tanam_2024": 0,
         "tanam_2025": 0,
-        "total_tbm_3th": 211
+        "total_tbm_3th": 0
     },
     "E026E": {
         "year": 2022,
@@ -477,52 +407,52 @@
     },
     "E028A": {
         "year": 2021,
-        "tanam_2023": 117,
+        "tanam_2023": 0,
         "tanam_2024": 0,
         "tanam_2025": 0,
-        "total_tbm_3th": 117
+        "total_tbm_3th": 0
     },
     "E032B": {
         "year": 2023,
-        "tanam_2023": 0,
-        "tanam_2024": 545,
+        "tanam_2023": 545,
+        "tanam_2024": 0,
         "tanam_2025": 0,
         "total_tbm_3th": 545
     },
     "F025D": {
         "year": 2021,
-        "tanam_2023": 43,
+        "tanam_2023": 0,
         "tanam_2024": 0,
         "tanam_2025": 0,
-        "total_tbm_3th": 43
+        "total_tbm_3th": 0
     },
     "F028B": {
         "year": 2021,
-        "tanam_2023": 338,
+        "tanam_2023": 0,
         "tanam_2024": 0,
-        "tanam_2025": 10,
-        "total_tbm_3th": 348
+        "tanam_2025": 0,
+        "total_tbm_3th": 0
     },
     "F029E": {
         "year": 2021,
-        "tanam_2023": 175,
+        "tanam_2023": 0,
         "tanam_2024": 0,
-        "tanam_2025": 41,
-        "total_tbm_3th": 216
+        "tanam_2025": 0,
+        "total_tbm_3th": 0
     },
     "F030D": {
         "year": 2021,
-        "tanam_2023": 572,
+        "tanam_2023": 0,
         "tanam_2024": 0,
         "tanam_2025": 0,
-        "total_tbm_3th": 572
+        "total_tbm_3th": 0
     },
     "F031C": {
         "year": 2021,
-        "tanam_2023": 527,
+        "tanam_2023": 0,
         "tanam_2024": 0,
         "tanam_2025": 0,
-        "total_tbm_3th": 527
+        "total_tbm_3th": 0
     },
     "F025E": {
         "year": 2023,
@@ -535,15 +465,15 @@
         "year": 2022,
         "tanam_2023": 0,
         "tanam_2024": 0,
-        "tanam_2025": 10,
-        "total_tbm_3th": 10
+        "tanam_2025": 0,
+        "total_tbm_3th": 0
     },
     "F029F": {
         "year": 2022,
         "tanam_2023": 0,
         "tanam_2024": 0,
-        "tanam_2025": 26,
-        "total_tbm_3th": 26
+        "tanam_2025": 0,
+        "total_tbm_3th": 0
     },
     "F030E": {
         "year": 2022,
@@ -561,30 +491,23 @@
     },
     "F029G": {
         "year": 2023,
-        "tanam_2023": 0,
-        "tanam_2024": 65,
-        "tanam_2025": 5,
-        "total_tbm_3th": 70
+        "tanam_2023": 65,
+        "tanam_2024": 0,
+        "tanam_2025": 0,
+        "total_tbm_3th": 65
     },
     "F030F": {
         "year": 2023,
-        "tanam_2023": 0,
-        "tanam_2024": 148,
+        "tanam_2023": 148,
+        "tanam_2024": 0,
         "tanam_2025": 0,
         "total_tbm_3th": 148
     },
     "F031E": {
         "year": 2023,
-        "tanam_2023": 0,
-        "tanam_2024": 177,
+        "tanam_2023": 177,
+        "tanam_2024": 0,
         "tanam_2025": 0,
         "total_tbm_3th": 177
-    },
-    "F039A": {
-        "year": 2013,
-        "tanam_2023": 0,
-        "tanam_2024": 0,
-        "tanam_2025": 190,
-        "total_tbm_3th": 190
     }
 }
