@@ -1,0 +1,24 @@
+﻿Reading Excel file...
+python : Traceback (most recent call last):
+At line:1 char:1
++ python analyze_tbm.py 2>&1 | Out-File -FilePath 
+analyze_tbm_output.tx ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Traceback 
+    (most recent call last)::String) [], RemoteExcept  
+  ion
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  File 
+"F:\PythonProjects\poac_cincin_api\analyze_tbm.py", 
+line 10, in <module>
+    print(f"\n\U0001f4ca Total rows: {len(df)}")
+  File "C:\Python312\Lib\encodings\cp1252.py", line 
+19, in encode
+    return codecs.charmap_encode(input,self.errors,enco
+ding_table)[0]
+           
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode 
+character '\U0001f4ca' in position 2: character maps 
+to <undefined>
