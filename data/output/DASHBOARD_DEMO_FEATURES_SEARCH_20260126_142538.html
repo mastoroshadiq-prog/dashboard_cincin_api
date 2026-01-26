@@ -16727,26 +16727,6 @@
                     stableList.innerHTML = '<div class="text-slate-500 text-center py-4">Tidak ada data</div>';
                 }
 
-                // Populate TBM block list (NEW)
-                const tbmBlocks = categories.tbm;
-                const tbmList = document.getElementById('tbmBlocksList');
-                if (tbmList && tbmBlocks.length > 0) {
-                    let html = tbmBlocks.map(b => {
-                        // For TBM blocks, show tahun_tanam if available, or indicate recent planting
-                        const tahunTanam = b.tahun_tanam || 'Unknown';
-                        const potInfo = b.pot2025 ? b.pot2025.toFixed(1) + ' T/Ha (Potensi)' : 'Produksi: 0 T/Ha';
-
-                        return '<div class="block-item-tbm flex justify-between items-center py-2 px-3 bg-yellow-900/20 rounded mb-1 border border-transparent hover:border-yellow-500/50" data-block-code="' + b.block_code + '">' +
-                            '<span class="text-white font-medium">' + b.block_code + '</span>' +
-                            '<span class="text-yellow-400 font-bold">TBM</span>' +
-                            '<span class="text-slate-400 text-sm">' + potInfo + '</span>' +
-                            '</div>';
-                    }).join('');
-                    tbmList.innerHTML = html;
-                } else if (tbmList) {
-                    tbmList.innerHTML = '<div class="text-slate-500 text-center py-4">Tidak ada data TBM</div>';
-                }
-
                 // Render distribution chart
                 renderCategoryDistributionChart(categories);
 
@@ -16777,12 +16757,11 @@
             function filterBlockLists(searchTerm) {
                 const term = searchTerm.toLowerCase().trim();
 
-                // Filter all FOUR categories (added TBM)
+                // Filter all three categories
                 const categories = [
                     { selector: '.block-item-declining', listId: 'decliningBlocksList' },
                     { selector: '.block-item-stable', listId: 'stableBlocksList' },
-                    { selector: '.block-item-increasing', listId: 'increasingBlocksList' },
-                    { selector: '.block-item-tbm', listId: 'tbmBlocksList' }
+                    { selector: '.block-item-increasing', listId: 'increasingBlocksList' }
                 ];
 
                 categories.forEach(category => {
@@ -17569,8 +17548,8 @@
                     </div>
 
                     <!-- Distribution Chart -->
-                    <!-- Four Column Layout: Block Lists (Added TBM) -->
-                    <div class="grid grid-cols-4 gap-4 mb-6">
+                    <!-- Three Column Layout: Block Lists -->
+                    <div class="grid grid-cols-3 gap-4 mb-6">
                         <!-- DECLINING BLOCKS LIST -->
                         <div class="bg-black/20 rounded-xl p-4 border border-red-700/30">
                             <h3 class="text-lg font-bold text-red-400 mb-3 flex items-center gap-2">
@@ -17597,16 +17576,6 @@
                                 📈 Blok dengan Kenaikan Produksi
                             </h3>
                             <div id="increasingBlocksList" class="max-h-[500px] overflow-y-auto custom-scrollbar">
-                                <div class="text-slate-500 text-center py-4">Loading...</div>
-                            </div>
-                        </div>
-
-                        <!-- TBM BLOCKS LIST (NEW) -->
-                        <div class="bg-black/20 rounded-xl p-4 border border-yellow-700/30">
-                            <h3 class="text-lg font-bold text-yellow-400 mb-3 flex items-center gap-2">
-                                🌱 Blok TBM (Belum Menghasilkan)
-                            </h3>
-                            <div id="tbmBlocksList" class="max-h-[500px] overflow-y-auto custom-scrollbar">
                                 <div class="text-slate-500 text-center py-4">Loading...</div>
                             </div>
                         </div>

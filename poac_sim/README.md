@@ -30,7 +30,7 @@ Algoritma Cincin Api adalah sistem deteksi kluster serangan Ganoderma pada perke
 
 ```bash
 # Clone repository
-git clone https://github.com/mastoroshadiq/dashboard-cincin-api.git
+git clone https://github.com/mastoroshadiq-prog/dashboard-cincin-api.git
 cd dashboard-cincin-api
 
 # Install dependencies

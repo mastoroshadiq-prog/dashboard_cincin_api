@@ -1,0 +1,50 @@
+﻿63c7502 Hide dashboard sections: Impact, Comparison, 3-Year Model, Features 1 & 3
+674456f Fix TBM chart inconsistency: Corrected Excel column indices for TBM years (2023-2025) based on header audit
+8dc0edf Refine TBM vs Empty logic: Strict planting stats check (F025E fix), update B012D status, and refresh breakdown JSON in dashboard
+463a838 Fix TBM logic, SPH fallback, and categorize empty blocks properly in dashboard breakdown
+995a5e9 fix: Correct SPH data source to Index 54 and fix Risk Metrics display N/A issues
+d151f56 feat: Implement TBM Statistics popup with real 3-year planting data
+0ccef33 fix: Fix syntax error in TBM block detail - replace nested template literals with string concat
+bd700fa fix: Move TBM stats to Block Detail Panel - show planting year, age, stage when clicking TBM block
+a5156ed feat: Add TBM planting year statistics with chart and recent blocks list
+d36a045 fix: Update summary card from NO DATA to TBM with proper styling
+2186aff feat: Update Block Trend Modal with TBM labels
+ba2d8d6 feat: Enhance Block Trend Modal and Risk Data Display - Add 3-column layout: Penurunan | Stabil | Kenaikan - Add search box for filtering blocks - Show all blocks without 10-item limit - Use ground truth attack rate from data_gabungan.xlsx (393 blocks) - Replace Stadium with Pohon Terinfeksi showing actual infected counts - Add stadium breakdown: S1-S2 vs S3-S4 counts
+fbc1c0b feat: Complete risk data integration and analysis - Extract attack rate from NDRE stress class (tabelNDREnew.csv) - Add Yield 2024 to block detail panel - Update BLOCKS_DATA with 599 blocks complete risk metrics - Add inventory scripts for data coverage analysis - Generate INVENTORY_DATA_COVERAGE.txt report - Identify 20 blocks without yield data, 563 blocks without NDRE
+7838dd6 feat: Block Detail Panel with chart and metrics - Add clickable blocks in declining/increasing lists - Show production trend line chart (2023-2025) - Display production metrics (luas, yield, change%) - Display risk metrics (attack rate, stadium, SPH, loss) - Show yield gap analysis (potential vs actual) - Move panel to body level for proper z-index
+eceefa5 feat: Dynamic division for Block Trend Modal - Add currentSelectedDivision global variable - Update onclick to use dynamic division - Track division changes in updateDivisionSummary
+188bc8e feat: Block Trend Modal - Production trend analysis (2023-2025) - Fix script tags with external src - Add HISTORICAL_YIELDS with 599 blocks - Update modal from risk categorization to production trend - Add declining/stable/increasing/nodata categories - Add block lists with trend percentages
+c195838 docs: Added checkpoint document for Historical Trends Chart and Data Validation Analysis
+0535716 feat: Enhanced Historical Trends Chart with click-to-popup modal and multi-division support - Added 6-year historical trends chart (2023-2028) with dual Y-axis - Implemented click-on-point to show detailed data in table format popup - Fixed data aggregation to support all divisions using COMPLETE_BLOCKS_DATA - Added proxy attack rate calculation for non-NDRE divisions - Stored tooltip data globally for click handler access - Created showHistoricalDataModal function with comparison table
+e506cf1 fix: INLINE stadium logic - no function dependency
+0ade25e fix: CRITICAL - Use getGanodermaStadium() for filtering
+eea9dc9 fix: ACTUAL ROOT CAUSE - Modal HTML was MISSING!
+647791e fix: Chart not rendering - wrong field name in renderModalChart
+c9ce5c4 fix: Use calculateDivisionMetrics() from working PAPARAN RISIKO code
+eadfd0c fix: FINAL FIX - Use EXACT same Stadium 3+ logic as working code
+febda47 fix: ACTUAL FIX - Use real fields (attack_rate, loss_value_juta)
+3e5f6c4 fix: CRITICAL FIX - Division code mapping for modal data
+61914c6 fix: Modal now uses correct currentDivision variable with debug logs
+c2935ee fix: Modal data source - use BLOCKS_DATA object properly
+f75b2c3 docs: Add comprehensive checkpoint for Session 2
+b0caa7d feat: PAPARAN RISIKO double bar chart - Attack Rate + Loss
+d2f736e fix: Use correct data source - window.blocks instead of window.blocksData
+adca6b5 fix: Make CRITICAL BLOCKS card actually clickable
+f9fb3af feat: Larger numbers + PAPARAN RISIKO popup modal
+75747e4 fix: Remove JavaScript updates for deleted HTML elements
+80dabfe feat: Remove redundant old treatment boxes
+aab81fe fix: Remove obsolete WITH TREATMENT code causing year1Loss error
+293fda5 fix: Remove duplicate variable declaration causing JS error
+8a58c7a feat: Side-by-side 3-year comparison with Savings highlight
+72f0616 feat: Full 3-year projection table in Treatment Impact Analysis
+a454d7c feat: Add dual-metric approach - Baseline 2025 + Projected 2026
+a7afca0 fix: Sync Paparan Risiko loss data with Treatment Impact Analysis
+65b1c18 feat: Move Analisis Dampak Finansial above Division Comparison
+674fc8b feat: Dynamic division titles, Miliar loss format, and 3-Year Degradation Chart
+9497788 Phase 3 Session 1: Division aggregation engine + interactive comparison table
+4ecaf48 Checkpoint: Phase 3 Session 1 End - Division aggregation complete
+33b27f4 Phase 3 Prep: Checkpoint system + Ganoderma focus documentation
+4314708 fix: FINAL - removed ALL duplicate currentDivision (9388 removed, kept 9424)
+9c9fc7b fix: removed duplicate filterByDivision function causing syntax errors
+550557e feat: PHASE 2 COMPLETE! - Full division selector (14 divisions organized in 3 rows)
+17ccbc6 wip: Phase 2 (80%) - functional filter logic added, working on complete division selector

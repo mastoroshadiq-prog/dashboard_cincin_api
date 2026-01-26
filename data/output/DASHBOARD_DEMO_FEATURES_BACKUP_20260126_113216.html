@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id">
 
 <head>
@@ -155,7 +155,7 @@
 
                     <!-- Quick Metrics Grid -->
                     <div class="grid grid-cols-4 gap-4 mb-6">
-                        <div onclick="openBlockBreakdownModal(typeof currentDivision !== 'undefined' ? currentDivision : 'AME02')"
+                        <div onclick="openBlockBreakdownModal('AME02')"
                             class="bg-black/30 rounded-xl p-4 border border-cyan-500/20 cursor-pointer hover:border-cyan-400 hover:scale-105 hover:shadow-lg hover:shadow-cyan-500/20 transition-all duration-200 group">
                             <div class="text-xs text-cyan-300 font-bold uppercase mb-1 flex items-center gap-2">
                                 Total Blocks
@@ -16679,14 +16679,15 @@
                     // Populate declining block list
                     const decliningList = document.getElementById('decliningBlocksList');
                     if (decliningList) {
-                        let html = decliningBlocks.map(b =>
-                            '<div class="block-item-declining flex justify-between items-center py-2 px-3 bg-red-900/20 rounded mb-1 border border-transparent hover:border-red-500/50" data-block-code="' + b.block_code + '">' +
+                        let html = decliningBlocks.slice(0, 10).map(b =>
+                            '<div class="flex justify-between items-center py-2 px-3 bg-red-900/20 rounded mb-1 border border-transparent hover:border-red-500/50">' +
                             '<span class="text-white font-medium">' + b.block_code + '</span>' +
                             '<span class="text-red-400 font-bold">' + b.prodChangePct.toFixed(1) + '%</span>' +
                             '<span class="text-slate-400 text-sm">' + b.prod2023.toFixed(1) + ' → ' + b.prod2025.toFixed(1) + ' T/Ha</span>' +
                             '</div>'
                         ).join('');
-                        decliningList.innerHTML = html || '<div class="text-slate-500 text-center py-4">Tidak ada data</div>';
+                        if (decliningBlocks.length > 10) html += '<div class="text-slate-400 text-sm text-center mt-2">+' + (decliningBlocks.length - 10) + ' blok lainnya...</div>';
+                        decliningList.innerHTML = html;
                     }
                 } else {
                     document.getElementById('avgChange_declining').textContent = '0%';
@@ -16699,62 +16700,21 @@
                 const increasingBlocks = categories.increasing;
                 const increasingList = document.getElementById('increasingBlocksList');
                 if (increasingList && increasingBlocks.length > 0) {
-                    let html = increasingBlocks.map(b =>
-                        '<div class="block-item-increasing flex justify-between items-center py-2 px-3 bg-green-900/20 rounded mb-1 border border-transparent hover:border-green-500/50" data-block-code="' + b.block_code + '">' +
+                    let html = increasingBlocks.slice(0, 10).map(b =>
+                        '<div class="flex justify-between items-center py-2 px-3 bg-green-900/20 rounded mb-1 border border-transparent hover:border-green-500/50">' +
                         '<span class="text-white font-medium">' + b.block_code + '</span>' +
                         '<span class="text-green-400 font-bold">+' + b.prodChangePct.toFixed(1) + '%</span>' +
                         '<span class="text-slate-400 text-sm">' + b.prod2023.toFixed(1) + ' → ' + b.prod2025.toFixed(1) + ' T/Ha</span>' +
                         '</div>'
                     ).join('');
+                    if (increasingBlocks.length > 10) html += '<div class="text-slate-400 text-sm text-center mt-2">+' + (increasingBlocks.length - 10) + ' blok lainnya...</div>';
                     increasingList.innerHTML = html;
                 } else if (increasingList) {
                     increasingList.innerHTML = '<div class="text-slate-500 text-center py-4">Tidak ada data</div>';
                 }
 
-                // Populate stable block list
-                const stableBlocks = categories.stable;
-                const stableList = document.getElementById('stableBlocksList');
-                if (stableList && stableBlocks.length > 0) {
-                    let html = stableBlocks.map(b =>
-                        '<div class="block-item-stable flex justify-between items-center py-2 px-3 bg-orange-900/20 rounded mb-1 border border-transparent hover:border-orange-500/50" data-block-code="' + b.block_code + '">' +
-                        '<span class="text-white font-medium">' + b.block_code + '</span>' +
-                        '<span class="text-orange-400 font-bold">' + (b.prodChangePct >= 0 ? '+' : '') + b.prodChangePct.toFixed(1) + '%</span>' +
-                        '<span class="text-slate-400 text-sm">' + b.prod2023.toFixed(1) + ' → ' + b.prod2025.toFixed(1) + ' T/Ha</span>' +
-                        '</div>'
-                    ).join('');
-                    stableList.innerHTML = html;
-                } else if (stableList) {
-                    stableList.innerHTML = '<div class="text-slate-500 text-center py-4">Tidak ada data</div>';
-                }
-
-                // Populate TBM block list (NEW)
-                const tbmBlocks = categories.tbm;
-                const tbmList = document.getElementById('tbmBlocksList');
-                if (tbmList && tbmBlocks.length > 0) {
-                    let html = tbmBlocks.map(b => {
-                        // For TBM blocks, show tahun_tanam if available, or indicate recent planting
-                        const tahunTanam = b.tahun_tanam || 'Unknown';
-                        const potInfo = b.pot2025 ? b.pot2025.toFixed(1) + ' T/Ha (Potensi)' : 'Produksi: 0 T/Ha';
-
-                        return '<div class="block-item-tbm flex justify-between items-center py-2 px-3 bg-yellow-900/20 rounded mb-1 border border-transparent hover:border-yellow-500/50" data-block-code="' + b.block_code + '">' +
-                            '<span class="text-white font-medium">' + b.block_code + '</span>' +
-                            '<span class="text-yellow-400 font-bold">TBM</span>' +
-                            '<span class="text-slate-400 text-sm">' + potInfo + '</span>' +
-                            '</div>';
-                    }).join('');
-                    tbmList.innerHTML = html;
-                } else if (tbmList) {
-                    tbmList.innerHTML = '<div class="text-slate-500 text-center py-4">Tidak ada data TBM</div>';
-                }
-
                 // Render distribution chart
                 renderCategoryDistributionChart(categories);
-
-                // Reset search input
-                const searchInput = document.getElementById('blockSearchInput');
-                if (searchInput) {
-                    searchInput.value = '';
-                }
 
                 // Show modal
                 const modal = document.getElementById('blockBreakdownModal');
@@ -16772,49 +16732,6 @@
                     categoryDistributionChart.destroy();
                     categoryDistributionChart = null;
                 }
-            }
-
-            function filterBlockLists(searchTerm) {
-                const term = searchTerm.toLowerCase().trim();
-
-                // Filter all FOUR categories (added TBM)
-                const categories = [
-                    { selector: '.block-item-declining', listId: 'decliningBlocksList' },
-                    { selector: '.block-item-stable', listId: 'stableBlocksList' },
-                    { selector: '.block-item-increasing', listId: 'increasingBlocksList' },
-                    { selector: '.block-item-tbm', listId: 'tbmBlocksList' }
-                ];
-
-                categories.forEach(category => {
-                    const items = document.querySelectorAll(category.selector);
-                    let visibleCount = 0;
-
-                    items.forEach(item => {
-                        const blockCode = item.getAttribute('data-block-code').toLowerCase();
-                        if (term === '' || blockCode.includes(term)) {
-                            item.style.display = 'flex';
-                            visibleCount++;
-                        } else {
-                            item.style.display = 'none';
-                        }
-                    });
-
-                    // Show "no results" message if no items visible
-                    const listElement = document.getElementById(category.listId);
-                    if (listElement) {
-                        const noResultMsg = listElement.querySelector('.no-results-message');
-                        if (visibleCount === 0 && items.length > 0) {
-                            if (!noResultMsg) {
-                                const msg = document.createElement('div');
-                                msg.className = 'no-results-message text-slate-400 text-center py-4 text-sm';
-                                msg.textContent = '🔍 Tidak ada blok yang cocok dengan pencarian "' + searchTerm + '"';
-                                listElement.appendChild(msg);
-                            }
-                        } else if (noResultMsg) {
-                            noResultMsg.remove();
-                        }
-                    }
-                });
             }
 
             function renderCategoryDistributionChart(categories) {
@@ -17556,37 +17473,15 @@
                         </div>
                     </div>
 
-                    <!-- Search Box -->
-                    <div class="mb-4">
-                        <div class="relative">
-                            <input type="text" id="blockSearchInput" placeholder="🔍 Cari blok (contoh: D010, E004)..."
-                                oninput="filterBlockLists(this.value)"
-                                class="w-full px-4 py-3 pl-12 bg-slate-800/50 border-2 border-cyan-500/30 rounded-xl text-white placeholder-slate-400 focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-500/20 transition-all" />
-                            <div class="absolute left-4 top-1/2 transform -translate-y-1/2 text-cyan-400 text-xl">
-                                🔍
-                            </div>
-                        </div>
-                    </div>
-
                     <!-- Distribution Chart -->
-                    <!-- Four Column Layout: Block Lists (Added TBM) -->
-                    <div class="grid grid-cols-4 gap-4 mb-6">
+                    <!-- Two Column Layout: Block Lists -->
+                    <div class="grid grid-cols-2 gap-4 mb-6">
                         <!-- DECLINING BLOCKS LIST -->
                         <div class="bg-black/20 rounded-xl p-4 border border-red-700/30">
                             <h3 class="text-lg font-bold text-red-400 mb-3 flex items-center gap-2">
                                 📉 Blok dengan Penurunan Produksi
                             </h3>
-                            <div id="decliningBlocksList" class="max-h-[500px] overflow-y-auto custom-scrollbar">
-                                <div class="text-slate-500 text-center py-4">Loading...</div>
-                            </div>
-                        </div>
-
-                        <!-- STABLE BLOCKS LIST -->
-                        <div class="bg-black/20 rounded-xl p-4 border border-orange-700/30">
-                            <h3 class="text-lg font-bold text-orange-400 mb-3 flex items-center gap-2">
-                                ➡️ Blok dengan Tren Stabil
-                            </h3>
-                            <div id="stableBlocksList" class="max-h-[500px] overflow-y-auto custom-scrollbar">
+                            <div id="decliningBlocksList" class="max-h-64 overflow-y-auto custom-scrollbar">
                                 <div class="text-slate-500 text-center py-4">Loading...</div>
                             </div>
                         </div>
@@ -17596,17 +17491,7 @@
                             <h3 class="text-lg font-bold text-green-400 mb-3 flex items-center gap-2">
                                 📈 Blok dengan Kenaikan Produksi
                             </h3>
-                            <div id="increasingBlocksList" class="max-h-[500px] overflow-y-auto custom-scrollbar">
-                                <div class="text-slate-500 text-center py-4">Loading...</div>
-                            </div>
-                        </div>
-
-                        <!-- TBM BLOCKS LIST (NEW) -->
-                        <div class="bg-black/20 rounded-xl p-4 border border-yellow-700/30">
-                            <h3 class="text-lg font-bold text-yellow-400 mb-3 flex items-center gap-2">
-                                🌱 Blok TBM (Belum Menghasilkan)
-                            </h3>
-                            <div id="tbmBlocksList" class="max-h-[500px] overflow-y-auto custom-scrollbar">
+                            <div id="increasingBlocksList" class="max-h-64 overflow-y-auto custom-scrollbar">
                                 <div class="text-slate-500 text-center py-4">Loading...</div>
                             </div>
                         </div>
