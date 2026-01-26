@@ -16603,7 +16603,7 @@
                 const blocksData = BLOCKS_DATA; // keyed by block_code
                 // Filter by division from COMPLETE_BLOCKS_DATA
                 const divisionBlocks = completeBlocks.filter(block => block.division === mappedCode);
-                console.log('[BREAKDOWN] Division blocks from COMPLETE_BLOCKS_DATA:', divisionBlocks.length);                const tbmInDivision = divisionBlocks.filter(b => b.is_tbm === true);                if (tbmInDivision.length > 0) {
+                console.log('[BREAKDOWN] Division blocks from COMPLETE_BLOCKS_DATA:', divisionBlocks.length); const tbmInDivision = divisionBlocks.filter(b => b.is_tbm === true); if (tbmInDivision.length > 0) {
                     console.log('[DEBUG] TBM blocks in this division:', tbmInDivision.map(b => b.block_code));
                 }
 
@@ -16656,7 +16656,7 @@
                     // Jika Realisasi 0 semua TAPI Potensi > 0, indikasi TBM
                     // Atau gunakan logika tahun_tanam jika field tersebut nanti ada
                     const tahunTanam = block.tahun_tanam || 0;
-                    const isTBM = (tahunTanam >= 2023) || (pot2025 > 0 && isTotalZeroYield);                    if (tahunTanam > 0) {                    }
+                    const isTBM = (tahunTanam >= 2023) || (pot2025 > 0 && isTotalZeroYield); if (tahunTanam > 0) { }
 
                     if (isTBM) {
                         categories.tbm.push({ ...block, pot2025 });
@@ -16717,33 +16717,16 @@
                     `${divisionCode} Division - ${metrics.totalBlocks} blok total`;
 
                 // Update STANDARD category counts
+                // Update category counts
                 document.getElementById('categoryCount_declining').textContent = categories.declining.length;
                 document.getElementById('categoryCount_stable').textContent = categories.stable.length;
                 document.getElementById('categoryCount_increasing').textContent = categories.increasing.length;
 
-                // --- DYNAMIC CARD UPDATE FOR TBM / EMPTY ---
-                // Kita akan memanipulasi kartu ke-4 (No Data) untuk menampilkan info gabungan atau prioritas
+                // Update EMPTY card (card 4)
+                document.getElementById('categoryCount_empty').textContent = categories.empty.length;
 
-                const noDataCardLabel = document.querySelector('#categoryCount_nodata').parentNode.querySelector('.text-xs');
-                const noDataCardValue = document.getElementById('categoryCount_nodata');
-                const noDataCardIcon = document.querySelector('#categoryCount_nodata').parentNode.parentNode.querySelector('.text-2xl'); // Icon placeholder
-
-                // Prioritize displaying TBM count if sensitive, otherwise Empty, otherwise No Data
-                if (categories.tbm.length > 0) {
-                    noDataCardValue.textContent = categories.tbm.length;
-                    noDataCardLabel.textContent = 'BLOK TBM (Masa Vegetatif)';
-                    noDataCardValue.className = 'text-5xl font-black text-emerald-400';
-                    // Update icon visually if possible via ID manipulation
-                    // (Assuming generic structure, we rely on text update)
-                } else if (categories.empty.length > 0) {
-                    noDataCardValue.textContent = categories.empty.length;
-                    noDataCardLabel.textContent = 'BLOK KOSONG / NO CROP';
-                    noDataCardValue.className = 'text-5xl font-black text-slate-400';
-                } else {
-                    noDataCardValue.textContent = categories.nodata.length;
-                    noDataCardLabel.textContent = 'NO DATA (Error/Missing)';
-                    noDataCardValue.className = 'text-5xl font-black text-slate-500';
-                }
+                // Update TBM card (card 5 - NEW!)
+                document.getElementById('categoryCount_tbm').textContent = categories.tbm.length;
 
                 // Append detailed stats for TBM/Empty below the cards if needed
                 // (Optional: for now we stick to cards update)
@@ -16817,7 +16800,7 @@
 
                 // Populate TBM block list (NEW)
                 const tbmBlocks = categories.tbm;
-                const tbmList = document.getElementById('tbmBlocksList');                if (tbmList && tbmBlocks.length > 0) {
+                const tbmList = document.getElementById('tbmBlocksList'); if (tbmList && tbmBlocks.length > 0) {
                     let html = tbmBlocks.map(b => {
                         // For TBM blocks, show tahun_tanam if available, or indicate recent planting
                         const tahunTanam = b.tahun_tanam || 'Unknown';
@@ -16828,7 +16811,9 @@
                             '<span class="text-yellow-400 font-bold">TBM</span>' +
                             '<span class="text-slate-400 text-sm">' + potInfo + '</span>' +
                             '</div>';
-                    }).join('');                    tbmList.innerHTML = html;                } else if (tbmList) {                    tbmList.innerHTML = '<div class="text-slate-500 text-center py-4">Tidak ada data TBM</div>';
+                    }).join(''); tbmList.innerHTML = html;
+                } else if (tbmList) {
+                    tbmList.innerHTML = '<div class="text-slate-500 text-center py-4">Tidak ada data TBM</div>';
                 } else {
                     console.error('[DEBUG RENDER] ❌ tbmBlocksList element NOT FOUND in DOM!');
                 }
@@ -17556,7 +17541,7 @@
         <div id="blockBreakdownModal"
             class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
             <div
-                class="bg-gradient-to-br from-slate-900 via-cyan-900 to-slate-900 rounded-2xl max-w-5xl w-full max-h-[90vh] overflow-hidden border-2 border-cyan-500/30 shadow-2xl shadow-cyan-500/20">
+                class="bg-gradient-to-br from-slate-900 via-cyan-900 to-slate-900 rounded-2xl max-w-7xl w-full max-h-[90vh] overflow-hidden border-2 border-cyan-500/30 shadow-2xl shadow-cyan-500/20">
 
                 <!-- Header -->
                 <div
@@ -17580,11 +17565,11 @@
                 <!-- Content -->
                 <div class="p-6 overflow-y-auto max-h-[calc(90vh-120px)]">
 
-                    <!-- Category Cards Grid -->
-                    <div class="grid grid-cols-4 gap-4 mb-6">
+                    <!-- Category Cards Grid - 5 COLUMNS -->
+                    <div class="grid grid-cols-5 gap-3 mb-6">
                         <!-- CRITICAL -->
                         <div
-                            class="bg-gradient-to-br from-red-900/40 to-red-800/20 rounded-xl p-6 border-2 border-red-500/40">
+                            class="bg-gradient-to-br from-red-900/40 to-red-800/20 rounded-xl p-4 border-2 border-red-500/40">
                             <div class="text-4xl mb-2">📉</div>
                             <div class="text-red-200 text-xs font-bold uppercase mb-2">TREN PENURUNAN</div>
                             <div class="text-5xl font-black text-red-400 mb-2" id="categoryCount_declining">0</div>
@@ -17593,7 +17578,7 @@
 
                         <!-- HIGH -->
                         <div
-                            class="bg-gradient-to-br from-orange-900/40 to-orange-800/20 rounded-xl p-6 border-2 border-orange-500/40">
+                            class="bg-gradient-to-br from-orange-900/40 to-orange-800/20 rounded-xl p-4 border-2 border-orange-500/40">
                             <div class="text-4xl mb-2">➡️</div>
                             <div class="text-yellow-200 text-xs font-bold uppercase mb-2">TREN STABIL</div>
                             <div class="text-5xl font-black text-orange-400 mb-2" id="categoryCount_stable">0</div>
@@ -17602,20 +17587,29 @@
 
                         <!-- MEDIUM -->
                         <div
-                            class="bg-gradient-to-br from-yellow-900/40 to-yellow-800/20 rounded-xl p-6 border-2 border-yellow-500/40">
+                            class="bg-gradient-to-br from-yellow-900/40 to-yellow-800/20 rounded-xl p-4 border-2 border-yellow-500/40">
                             <div class="text-4xl mb-2">📈</div>
                             <div class="text-green-200 text-xs font-bold uppercase mb-2">TREN KENAIKAN</div>
                             <div class="text-5xl font-black text-yellow-400 mb-2" id="categoryCount_increasing">0</div>
                             <div class="text-xs text-yellow-300/70">Produksi naik > 5%</div>
                         </div>
 
-                        <!-- LOW -->
+                        <!-- EMPTY / NO DATA -->
                         <div
-                            class="bg-gradient-to-br from-green-900/40 to-green-800/20 rounded-xl p-6 border-2 border-green-500/40">
-                            <div class="text-4xl mb-2">❓</div>
-                            <div class="text-slate-200 text-xs font-bold uppercase mb-2">NO DATA</div>
-                            <div class="text-5xl font-black text-green-400 mb-2" id="categoryCount_nodata">0</div>
-                            <div class="text-xs text-green-300/70">Tidak ada data historis</div>
+                            class="bg-gradient-to-br from-slate-900/40 to-slate-800/20 rounded-xl p-4 border-2 border-slate-500/40">
+                            <div class="text-4xl mb-2">❌</div>
+                            <div class="text-slate-200 text-xs font-bold uppercase mb-2">BLOK KOSONG</div>
+                            <div class="text-5xl font-black text-slate-400 mb-2" id="categoryCount_empty">0</div>
+                            <div class="text-xs text-slate-300/70">Tidak ada tanaman</div>
+                        </div>
+
+                        <!-- TBM (NEW CARD) -->
+                        <div
+                            class="bg-gradient-to-br from-emerald-900/40 to-emerald-800/20 rounded-xl p-4 border-2 border-emerald-500/40">
+                            <div class="text-4xl mb-2">🌱</div>
+                            <div class="text-emerald-200 text-xs font-bold uppercase mb-2">BLOK TBM</div>
+                            <div class="text-5xl font-black text-emerald-400 mb-2" id="categoryCount_tbm">0</div>
+                            <div class="text-xs text-emerald-300/70">Masa vegetatif</div>
                         </div>
                     </div>
 
