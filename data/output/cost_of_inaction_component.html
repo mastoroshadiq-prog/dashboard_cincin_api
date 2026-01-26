@@ -1,0 +1,170 @@
+
+<!-- COST OF INACTION WARNING PANEL -->
+<div class="mt-8 p-6 bg-gradient-to-br from-rose-900/40 to-orange-900/40 rounded-2xl border-2 border-rose-500 shadow-2xl relative overflow-hidden">
+    <!-- Background Pattern -->
+    <div class="absolute inset-0 opacity-5">
+        <div class="absolute inset-0" style="background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, currentColor 10px, currentColor 20px);"></div>
+    </div>
+    
+    <div class="relative z-10">
+        <div class="flex items-center gap-3 mb-4">
+            <div class="w-12 h-12 bg-rose-600 rounded-xl flex items-center justify-center shadow-lg animate-pulse">
+                <span class="text-2xl">⚠️</span>
+            </div>
+            <div>
+                <h3 class="text-xl font-black text-white uppercase tracking-wider">URGENT: Cost of Inaction</h3>
+                <p class="text-rose-300 text-sm font-semibold">8 Critical Blocks Require Immediate Attention</p>
+            </div>
+        </div>
+        
+        <!-- Financial Impact Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+            <!-- Current Loss -->
+            <div class="bg-black/30 backdrop-blur-sm p-4 rounded-xl border border-rose-500/30">
+                <div class="text-xs text-rose-300 font-bold uppercase mb-1">Current Loss (This Year)</div>
+                <div class="text-3xl font-black text-white">Rp 1,353</div>
+                <div class="text-xs text-rose-400 mt-1">Juta / year</div>
+            </div>
+            
+            <!-- 3-Year Projection -->
+            <div class="bg-black/30 backdrop-blur-sm p-4 rounded-xl border border-orange-500/30">
+                <div class="text-xs text-orange-300 font-bold uppercase mb-1">3-Year Projected Loss</div>
+                <div class="text-3xl font-black text-white">Rp 5,597</div>
+                <div class="text-xs text-orange-400 mt-1">Juta (if NO treatment)</div>
+            </div>
+            
+            <!-- Treatment Cost -->
+            <div class="bg-black/30 backdrop-blur-sm p-4 rounded-xl border border-emerald-500/30">
+                <div class="text-xs text-emerald-300 font-bold uppercase mb-1">Treatment Investment</div>
+                <div class="text-3xl font-black text-white">Rp 400</div>
+                <div class="text-xs text-emerald-400 mt-1">Juta (one-time)</div>
+            </div>
+            
+            <!-- Potential Savings -->
+            <div class="bg-black/30 backdrop-blur-sm p-4 rounded-xl border border-cyan-500/30">
+                <div class="text-xs text-cyan-300 font-bold uppercase mb-1">Potential Savings</div>
+                <div class="text-3xl font-black text-white">Rp 3,918</div>
+                <div class="text-xs text-cyan-400 mt-1">Juta (3-year prevented)</div>
+            </div>
+        </div>
+        
+        <!-- ROI Metrics -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+            <div class="bg-gradient-to-r from-rose-600/20 to-orange-600/20 p-4 rounded-xl border border-yellow-500/50">
+                <div class="text-xs text-yellow-300 font-bold uppercase mb-1">Return on Investment</div>
+                <div class="text-4xl font-black text-yellow-400">880%</div>
+                <div class="text-xs text-yellow-300 mt-1">Over 3 years</div>
+            </div>
+            
+            <div class="bg-gradient-to-r from-orange-600/20 to-rose-600/20 p-4 rounded-xl border border-green-500/50">
+                <div class="text-xs text-green-300 font-bold uppercase mb-1">Payback Period</div>
+                <div class="text-4xl font-black text-green-400">3.7</div>
+                <div class="text-xs text-green-300 mt-1">Months</div>
+            </div>
+            
+            <div class="bg-gradient-to-r from-rose-600/20 to-purple-600/20 p-4 rounded-xl border border-red-500/50">
+                <div class="text-xs text-red-300 font-bold uppercase mb-1">Action Window</div>
+                <div class="text-4xl font-black text-red-400">6</div>
+                <div class="text-xs text-red-300 mt-1">Months before irreversible damage</div>
+            </div>
+        </div>
+        
+        <!-- Comparison Bar -->
+        <div class="bg-black/40 p-5 rounded-xl border border-white/10">
+            <div class="flex items-center justify-between mb-3">
+                <span class="text-sm font-bold text-white uppercase">Financial Impact Comparison</span>
+                <span class="text-xs text-gray-400">3-Year Projection</span>
+            </div>
+            
+            <div class="space-y-3">
+                <!-- With Treatment -->
+                <div>
+                    <div class="flex justify-between text-xs mb-1">
+                        <span class="text-emerald-400 font-semibold">✓ With Treatment</span>
+                        <span class="text-white font-bold">Rp 2,079 Juta</span>
+                    </div>
+                    <div class="w-full bg-gray-700 rounded-full h-6 overflow-hidden">
+                        <div class="bg-gradient-to-r from-emerald-500 to-green-600 h-6 flex items-center justify-end pr-2 rounded-full" 
+                             style="width: 37%">
+                            <span class="text-xs font-bold text-white">37%</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Without Treatment -->
+                <div>
+                    <div class="flex justify-between text-xs mb-1">
+                        <span class="text-rose-400 font-semibold">✗ Without Treatment</span>
+                        <span class="text-white font-bold">Rp 5,597 Juta</span>
+                    </div>
+                    <div class="w-full bg-gray-700 rounded-full h-6 overflow-hidden">
+                        <div class="bg-gradient-to-r from-rose-500 to-red-600 h-6 flex items-center justify-end pr-2 rounded-full animate-pulse" 
+                             style="width: 100%">
+                            <span class="text-xs font-bold text-white">100%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-4 p-3 bg-yellow-900/30 border border-yellow-600/50 rounded-lg">
+                <p class="text-sm text-yellow-200 font-semibold">
+                    💰 <strong>Savings:</strong> Rp 3,518 Juta over 3 years by treating now!
+                </p>
+            </div>
+        </div>
+        
+        <!-- Critical Blocks List -->
+        <div class="mt-6">
+            <div class="text-sm font-bold text-white uppercase mb-3">🔥 Critical Blocks Breakdown:</div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
+
+                <div class="bg-rose-900/30 border border-rose-600/50 rounded-lg p-2 hover:bg-rose-800/40 transition-all cursor-pointer">
+                    <div class="text-xs font-black text-white">D003A</div>
+                    <div class="text-[10px] text-rose-300">Rp 177 Jt/yr</div>
+                </div>
+
+                <div class="bg-rose-900/30 border border-rose-600/50 rounded-lg p-2 hover:bg-rose-800/40 transition-all cursor-pointer">
+                    <div class="text-xs font-black text-white">D004A</div>
+                    <div class="text-[10px] text-rose-300">Rp 146 Jt/yr</div>
+                </div>
+
+                <div class="bg-rose-900/30 border border-rose-600/50 rounded-lg p-2 hover:bg-rose-800/40 transition-all cursor-pointer">
+                    <div class="text-xs font-black text-white">D001A</div>
+                    <div class="text-[10px] text-rose-300">Rp 182 Jt/yr</div>
+                </div>
+
+                <div class="bg-rose-900/30 border border-rose-600/50 rounded-lg p-2 hover:bg-rose-800/40 transition-all cursor-pointer">
+                    <div class="text-xs font-black text-white">E003A</div>
+                    <div class="text-[10px] text-rose-300">Rp 209 Jt/yr</div>
+                </div>
+
+                <div class="bg-rose-900/30 border border-rose-600/50 rounded-lg p-2 hover:bg-rose-800/40 transition-all cursor-pointer">
+                    <div class="text-xs font-black text-white">E001A</div>
+                    <div class="text-[10px] text-rose-300">Rp 179 Jt/yr</div>
+                </div>
+
+                <div class="bg-rose-900/30 border border-rose-600/50 rounded-lg p-2 hover:bg-rose-800/40 transition-all cursor-pointer">
+                    <div class="text-xs font-black text-white">E002A</div>
+                    <div class="text-[10px] text-rose-300">Rp 190 Jt/yr</div>
+                </div>
+
+                <div class="bg-rose-900/30 border border-rose-600/50 rounded-lg p-2 hover:bg-rose-800/40 transition-all cursor-pointer">
+                    <div class="text-xs font-black text-white">F002A</div>
+                    <div class="text-[10px] text-rose-300">Rp 168 Jt/yr</div>
+                </div>
+
+                <div class="bg-rose-900/30 border border-rose-600/50 rounded-lg p-2 hover:bg-rose-800/40 transition-all cursor-pointer">
+                    <div class="text-xs font-black text-white">F004A</div>
+                    <div class="text-[10px] text-rose-300">Rp 103 Jt/yr</div>
+                </div>
+
+            </div>
+        </div>
+        
+        <!-- Action CTA -->
+        <div class="mt-6 p-4 bg-gradient-to-r from-rose-600 to-orange-600 rounded-xl text-center">
+            <p class="text-white font-black text-lg mb-2">⏰ Immediate Action Required</p>
+            <p class="text-white/90 text-sm">Treatment decision must be made within 30 days to prevent exponential loss escalation</p>
+        </div>
+    </div>
+</div>

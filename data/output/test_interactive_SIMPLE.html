@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Interactive Test - SIMPLE PROOF</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="p-8 bg-slate-100">
+    <div class="max-w-4xl mx-auto bg-white p-8 rounded-xl shadow-lg">
+        <h1 class="text-2xl font-bold mb-4">🧪 Interactive Test - Proof of Concept</h1>
+
+        <!-- Dropdown -->
+        <div class="mb-6">
+            <label class="font-bold mb-2 block">Select Block:</label>
+            <select id="blockSelector" class="border-2 p-3 rounded w-full">
+                <option value="">-- Select --</option>
+            </select>
+        </div>
+
+        <!-- Stats Display -->
+        <div class="grid grid-cols-2 gap-4">
+            <div class="bg-blue-50 p-4 rounded">
+                <p class="text-sm font-bold text-blue-900">Block Code</p>
+                <p id="displayBlock" class="text-2xl font-black">--</p>
+            </div>
+            <div class="bg-red-50 p-4 rounded">
+                <p class="text-sm font-bold text-red-900">Attack Rate</p>
+                <p id="displayAttack" class="text-2xl font-black">--</p>
+            </div>
+            <div class="bg-red-50 p-4 rounded">
+                <p class="text-sm font-bold text-red-900">🔴 Merah</p>
+                <p id="displayMerah" class="text-2xl font-black">--</p>
+            </div>
+            <div class="bg-orange-50 p-4 rounded">
+                <p class="text-sm font-bold text-orange-900">🔥 Oranye</p>
+                <p id="displayOranye" class="text-2xl font-black">--</p>
+            </div>
+            <div class="bg-yellow-50 p-4 rounded">
+                <p class="text-sm font-bold text-yellow-900">🟡 Kuning</p>
+                <p id="displayKuning" class="text-2xl font-black">--</p>
+            </div>
+            <div class="bg-green-50 p-4 rounded">
+                <p class="text-sm font-bold text-green-900">🟢 Hijau</p>
+                <p id="displayHijau" class="text-2xl font-black">--</p>
+            </div>
+        </div>
+
+        <!-- Debug Console -->
+        <div class="mt-6 bg-slate-800 text-white p-4 rounded font-mono text-xs" id="debugLog">
+            <p class="font-bold text-green-400 mb-2">Debug Log:</p>
+            <div id="debugOutput">Waiting for selection...</div>
+        </div>
+    </div>
+
+    <script>
+        // EMBEDDED DATA
+        const BLOCKS_DATA = {
+            "E009A": { "block_code": "E009A", "total_pohon": 2671, "merah": 55, "oranye": 281, "kuning": 258, "hijau": 2077, "attack_rate": 12.6, "rank": 1 },
+            "D004A": { "block_code": "D004A", "total_pohon": 2861, "merah": 122, "oranye": 183, "kuning": 147, "hijau": 2409, "attack_rate": 10.7, "rank": 2 },
+            "F008A": { "block_code": "F008A", "total_pohon": 3770, "merah": 90, "oranye": 210, "kuning": 299, "hijau": 3171, "attack_rate": 8.0, "rank": 7 },
+            "D001A": { "block_code": "D001A", "total_pohon": 3486, "merah": 87, "oranye": 176, "kuning": 286, "hijau": 2937, "attack_rate": 7.5, "rank": 10 },
+            "D011A": { "block_code": "D011A", "total_pohon": 2145, "merah": 46, "oranye": 112, "kuning": 161, "hijau": 1826, "attack_rate": 7.4, "rank": 11 }
+        };
+
+        function log(msg) {
+            const output = document.getElementById('debugOutput');
+            output.innerHTML += '<br>' + msg;
+        }
+
+        // Populate dropdown
+        function init() {
+            log('✅ Script loaded');
+            log('✅ BLOCKS_DATA has ' + Object.keys(BLOCKS_DATA).length + ' blocks');
+
+            const selector = document.getElementById('blockSelector');
+            const sorted = Object.entries(BLOCKS_DATA).sort((a, b) => a[1].rank - b[1].rank);
+
+            sorted.forEach(([code, data]) => {
+                const opt = document.createElement('option');
+                opt.value = code;
+                opt.textContent = `#${data.rank} - ${code} (${data.attack_rate}%)`;
+                selector.appendChild(opt);
+            });
+
+            log('✅ Dropdown populated with ' + sorted.length + ' options');
+
+            // Add event listener
+            selector.addEventListener('change', function () {
+                const selected = this.value;
+                log('🔄 Dropdown changed to: ' + selected);
+                updateDisplay(selected);
+            });
+
+            log('✅ Event listener attached');
+        }
+
+        function updateDisplay(blockCode) {
+            if (!blockCode) {
+                log('⚠️ Empty selection');
+                return;
+            }
+
+            const data = BLOCKS_DATA[blockCode];
+            if (!data) {
+                log('❌ Data not found for: ' + blockCode);
+                return;
+            }
+
+            log('📊 Updating display with data: ' + JSON.stringify(data));
+
+            document.getElementById('displayBlock').textContent = blockCode;
+            document.getElementById('displayAttack').textContent = data.attack_rate + '%';
+            document.getElementById('displayMerah').textContent = data.merah;
+            document.getElementById('displayOranye').textContent = data.oranye;
+            document.getElementById('displayKuning').textContent = data.kuning;
+            document.getElementById('displayHijau').textContent = data.hijau;
+
+            log('✅ Display updated successfully!');
+        }
+
+        // Run on load
+        window.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+
+</html>

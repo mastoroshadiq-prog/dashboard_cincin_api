@@ -1,0 +1,2570 @@
+[
+  {
+    "block_code": "A001A",
+    "planting_year": 2012
+  },
+  {
+    "block_code": "C006A",
+    "planting_year": 2010
+  },
+  {
+    "block_code": "A002A",
+    "planting_year": 2012
+  },
+  {
+    "block_code": "C007A",
+    "planting_year": 2010
+  },
+  {
+    "block_code": "A003A",
+    "planting_year": 2012
+  },
+  {
+    "block_code": "C008A",
+    "planting_year": 2010
+  },
+  {
+    "block_code": "A003B",
+    "planting_year": 2019
+  },
+  {
+    "block_code": "B003A",
+    "planting_year": 2011
+  },
+  {
+    "block_code": "A004A",
+    "planting_year": 2012
+  },
+  {
+    "block_code": "B004A",
+    "planting_year": 2011
+  },
+  {
+    "block_code": "A004B",
+    "planting_year": 2017
+  },
+  {
+    "block_code": "B005A",
+    "planting_year": 2011
+  },
+  {
+    "block_code": "A004C",
+    "planting_year": 2019
+  },
+  {
+    "block_code": "C005A",
+    "planting_year": 2011
+  },
+  {
+    "block_code": "A004D",
+    "planting_year": 2020
+  },
+  {
+    "block_code": "C009A",
+    "planting_year": 2011
+  },
+  {
+    "block_code": "A004E",
+    "planting_year": 2022
+  },
+  {
+    "block_code": "A005A",
+    "planting_year": 2021
+  },
+  {
+    "block_code": "A005B",
+    "planting_year": 2022
+  },
+  {
+    "block_code": "A005C",
+    "planting_year": 2023
+  },
+  {
+    "block_code": "A006A",
+    "planting_year": 2023
+  },
+  {
+    "block_code": "B001A",
+    "planting_year": 2012
+  },
+  {
+    "block_code": "A007A",
+    "planting_year": 2023
+  },
+  {
+    "block_code": "B002A",
+    "planting_year": 2012
+  },
+  {
+    "block_code": "A010A",
+    "planting_year": 2018
+  },
+  {
+    "block_code": "B006A",
+    "planting_year": 2012
+  },
+  {
+    "block_code": "A010B",
+    "planting_year": 2021
+  },
+  {
+    "block_code": "B007A",
+    "planting_year": 2012
+  },
+  {
+    "block_code": "A011A",
+    "planting_year": 2016
+  },
+  {
+    "block_code": "C010A",
+    "planting_year": 2012
+  },
+  {
+    "block_code": "A011B",
+    "planting_year": 2018
+  },
+  {
+    "block_code": "C011A",
+    "planting_year": 2012
+  },
+  {
+    "block_code": "C004A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "B001B",
+    "planting_year": 2016
+  },
+  {
+    "block_code": "C004B",
+    "planting_year": 2015
+  },
+  {
+    "block_code": "B001C",
+    "planting_year": 2017
+  },
+  {
+    "block_code": "C005B",
+    "planting_year": 2015
+  },
+  {
+    "block_code": "B001D",
+    "planting_year": 2018
+  },
+  {
+    "block_code": "C007B",
+    "planting_year": 2015
+  },
+  {
+    "block_code": "B001E",
+    "planting_year": 2019
+  },
+  {
+    "block_code": "B001F",
+    "planting_year": 0
+  },
+  {
+    "block_code": "B002B",
+    "planting_year": 2016
+  },
+  {
+    "block_code": "B009A",
+    "planting_year": 2016
+  },
+  {
+    "block_code": "B002C",
+    "planting_year": 2018
+  },
+  {
+    "block_code": "B010A",
+    "planting_year": 2016
+  },
+  {
+    "block_code": "B002D",
+    "planting_year": 2020
+  },
+  {
+    "block_code": "B011A",
+    "planting_year": 2016
+  },
+  {
+    "block_code": "B002E",
+    "planting_year": 2022
+  },
+  {
+    "block_code": "C004C",
+    "planting_year": 2016
+  },
+  {
+    "block_code": "B003B",
+    "planting_year": 2018
+  },
+  {
+    "block_code": "B003C",
+    "planting_year": 2019
+  },
+  {
+    "block_code": "B008A",
+    "planting_year": 2017
+  },
+  {
+    "block_code": "B003D",
+    "planting_year": 2020
+  },
+  {
+    "block_code": "B009B",
+    "planting_year": 2017
+  },
+  {
+    "block_code": "B003E",
+    "planting_year": 2022
+  },
+  {
+    "block_code": "B006B",
+    "planting_year": 2019
+  },
+  {
+    "block_code": "B006C",
+    "planting_year": 2020
+  },
+  {
+    "block_code": "B008B",
+    "planting_year": 2018
+  },
+  {
+    "block_code": "B006D",
+    "planting_year": 2023
+  },
+  {
+    "block_code": "B009C",
+    "planting_year": 2018
+  },
+  {
+    "block_code": "B010B",
+    "planting_year": 2018
+  },
+  {
+    "block_code": "B007B",
+    "planting_year": 2021
+  },
+  {
+    "block_code": "B011B",
+    "planting_year": 2018
+  },
+  {
+    "block_code": "B007C",
+    "planting_year": 2022
+  },
+  {
+    "block_code": "C005C",
+    "planting_year": 2018
+  },
+  {
+    "block_code": "B007D",
+    "planting_year": 2023
+  },
+  {
+    "block_code": "B008C",
+    "planting_year": 2019
+  },
+  {
+    "block_code": "B008D",
+    "planting_year": 2020
+  },
+  {
+    "block_code": "B008E",
+    "planting_year": 2023
+  },
+  {
+    "block_code": "B009D",
+    "planting_year": 2019
+  },
+  {
+    "block_code": "B011C",
+    "planting_year": 2019
+  },
+  {
+    "block_code": "C004D",
+    "planting_year": 2019
+  },
+  {
+    "block_code": "C005D",
+    "planting_year": 2019
+  },
+  {
+    "block_code": "B009E",
+    "planting_year": 2020
+  },
+  {
+    "block_code": "B009F",
+    "planting_year": 2021
+  },
+  {
+    "block_code": "B009G",
+    "planting_year": 2023
+  },
+  {
+    "block_code": "C003A",
+    "planting_year": 0
+  },
+  {
+    "block_code": "C004E",
+    "planting_year": 2021
+  },
+  {
+    "block_code": "C004F",
+    "planting_year": 0
+  },
+  {
+    "block_code": "C005E",
+    "planting_year": 0
+  },
+  {
+    "block_code": "D001A",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "D002A",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "F006A",
+    "planting_year": 2008
+  },
+  {
+    "block_code": "D003A",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "F007A",
+    "planting_year": 2008
+  },
+  {
+    "block_code": "D004A",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "F008A",
+    "planting_year": 2008
+  },
+  {
+    "block_code": "D005A",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "D006A",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "D007A",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "D008A",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "D009A",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "D010A",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "D011A",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "D012A",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "E001A",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "E002A",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "E003A",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "E004A",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "E005A",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "E006A",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "E007A",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "E008A",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "E009A",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "E010A",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "E011A",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "E012A",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "F001A",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "F002A",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "F003A",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "F004A",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "F005A",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "F005A",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "F009A",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "F010A",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "F011A",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "F012A",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "C020A",
+    "planting_year": 2011
+  },
+  {
+    "block_code": "C021A",
+    "planting_year": 2010
+  },
+  {
+    "block_code": "E016A",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "C022A",
+    "planting_year": 2011
+  },
+  {
+    "block_code": "C023A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "D013A",
+    "planting_year": 2010
+  },
+  {
+    "block_code": "C024A",
+    "planting_year": 2021
+  },
+  {
+    "block_code": "D014A",
+    "planting_year": 2010
+  },
+  {
+    "block_code": "C024B",
+    "planting_year": 2025
+  },
+  {
+    "block_code": "D015A",
+    "planting_year": 2010
+  },
+  {
+    "block_code": "D016A",
+    "planting_year": 2010
+  },
+  {
+    "block_code": "D017A",
+    "planting_year": 2010
+  },
+  {
+    "block_code": "D018A",
+    "planting_year": 2010
+  },
+  {
+    "block_code": "D019A",
+    "planting_year": 2010
+  },
+  {
+    "block_code": "D020A",
+    "planting_year": 2010
+  },
+  {
+    "block_code": "D021A",
+    "planting_year": 2010
+  },
+  {
+    "block_code": "D022A",
+    "planting_year": 2010
+  },
+  {
+    "block_code": "D023A",
+    "planting_year": 2010
+  },
+  {
+    "block_code": "E013A",
+    "planting_year": 2010
+  },
+  {
+    "block_code": "E014A",
+    "planting_year": 2010
+  },
+  {
+    "block_code": "E015A",
+    "planting_year": 2010
+  },
+  {
+    "block_code": "D024A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "E017A",
+    "planting_year": 2010
+  },
+  {
+    "block_code": "D024B",
+    "planting_year": 2016
+  },
+  {
+    "block_code": "E018A",
+    "planting_year": 2010
+  },
+  {
+    "block_code": "D024C",
+    "planting_year": 2018
+  },
+  {
+    "block_code": "E019A",
+    "planting_year": 2010
+  },
+  {
+    "block_code": "D024D",
+    "planting_year": 2019
+  },
+  {
+    "block_code": "E020A",
+    "planting_year": 2010
+  },
+  {
+    "block_code": "D024E",
+    "planting_year": 2020
+  },
+  {
+    "block_code": "E021A",
+    "planting_year": 2010
+  },
+  {
+    "block_code": "D024F",
+    "planting_year": 2021
+  },
+  {
+    "block_code": "E022A",
+    "planting_year": 2010
+  },
+  {
+    "block_code": "D024G",
+    "planting_year": 2022
+  },
+  {
+    "block_code": "E023A",
+    "planting_year": 2010
+  },
+  {
+    "block_code": "E024A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "E024B",
+    "planting_year": 2018
+  },
+  {
+    "block_code": "E024C",
+    "planting_year": 2021
+  },
+  {
+    "block_code": "E024D",
+    "planting_year": 2022
+  },
+  {
+    "block_code": "A012A",
+    "planting_year": 2016
+  },
+  {
+    "block_code": "B019A",
+    "planting_year": 2011
+  },
+  {
+    "block_code": "A012B",
+    "planting_year": 2018
+  },
+  {
+    "block_code": "B020A",
+    "planting_year": 2011
+  },
+  {
+    "block_code": "A012C",
+    "planting_year": 2021
+  },
+  {
+    "block_code": "C012A",
+    "planting_year": 2011
+  },
+  {
+    "block_code": "A012D",
+    "planting_year": 0
+  },
+  {
+    "block_code": "C019A",
+    "planting_year": 2011
+  },
+  {
+    "block_code": "A013A",
+    "planting_year": 2016
+  },
+  {
+    "block_code": "A020A",
+    "planting_year": 2012
+  },
+  {
+    "block_code": "A013B",
+    "planting_year": 2018
+  },
+  {
+    "block_code": "B018A",
+    "planting_year": 2012
+  },
+  {
+    "block_code": "A013C",
+    "planting_year": 2020
+  },
+  {
+    "block_code": "C014A",
+    "planting_year": 2012
+  },
+  {
+    "block_code": "A013D",
+    "planting_year": 2021
+  },
+  {
+    "block_code": "C018A",
+    "planting_year": 2012
+  },
+  {
+    "block_code": "A013E",
+    "planting_year": 0
+  },
+  {
+    "block_code": "A018A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "A014A",
+    "planting_year": 2017
+  },
+  {
+    "block_code": "A019A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "A014B",
+    "planting_year": 2018
+  },
+  {
+    "block_code": "A021A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "A014C",
+    "planting_year": 2020
+  },
+  {
+    "block_code": "B014A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "A014D",
+    "planting_year": 0
+  },
+  {
+    "block_code": "B015A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "B016A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "A018B",
+    "planting_year": 2018
+  },
+  {
+    "block_code": "B017A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "A018C",
+    "planting_year": 2022
+  },
+  {
+    "block_code": "B021A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "B022A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "A019B",
+    "planting_year": 2017
+  },
+  {
+    "block_code": "B022B",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "A019C",
+    "planting_year": 2019
+  },
+  {
+    "block_code": "C013A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "C015A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "A020B",
+    "planting_year": 2017
+  },
+  {
+    "block_code": "C016A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "A020C",
+    "planting_year": 2019
+  },
+  {
+    "block_code": "C017A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "C018B",
+    "planting_year": 2015
+  },
+  {
+    "block_code": "A021B",
+    "planting_year": 2017
+  },
+  {
+    "block_code": "B012A",
+    "planting_year": 2016
+  },
+  {
+    "block_code": "B012B",
+    "planting_year": 2018
+  },
+  {
+    "block_code": "B012C",
+    "planting_year": 2019
+  },
+  {
+    "block_code": "B013A",
+    "planting_year": 2016
+  },
+  {
+    "block_code": "B012D",
+    "planting_year": 2025
+  },
+  {
+    "block_code": "B013B",
+    "planting_year": 2018
+  },
+  {
+    "block_code": "B013C",
+    "planting_year": 2025
+  },
+  {
+    "block_code": "B015B",
+    "planting_year": 2017
+  },
+  {
+    "block_code": "B014B",
+    "planting_year": 2018
+  },
+  {
+    "block_code": "B016B",
+    "planting_year": 2017
+  },
+  {
+    "block_code": "B014C",
+    "planting_year": 2019
+  },
+  {
+    "block_code": "B020B",
+    "planting_year": 2017
+  },
+  {
+    "block_code": "B014D",
+    "planting_year": 2020
+  },
+  {
+    "block_code": "B021B",
+    "planting_year": 2017
+  },
+  {
+    "block_code": "B014E",
+    "planting_year": 2021
+  },
+  {
+    "block_code": "B015C",
+    "planting_year": 2021
+  },
+  {
+    "block_code": "B015D",
+    "planting_year": 2023
+  },
+  {
+    "block_code": "B015E",
+    "planting_year": 2025
+  },
+  {
+    "block_code": "B016C",
+    "planting_year": 2018
+  },
+  {
+    "block_code": "B017B",
+    "planting_year": 2018
+  },
+  {
+    "block_code": "B016D",
+    "planting_year": 2019
+  },
+  {
+    "block_code": "B016E",
+    "planting_year": 2021
+  },
+  {
+    "block_code": "B016F",
+    "planting_year": 2022
+  },
+  {
+    "block_code": "B016G",
+    "planting_year": 2023
+  },
+  {
+    "block_code": "B016H",
+    "planting_year": 2025
+  },
+  {
+    "block_code": "B017C",
+    "planting_year": 2019
+  },
+  {
+    "block_code": "B017D",
+    "planting_year": 2021
+  },
+  {
+    "block_code": "B017E",
+    "planting_year": 2022
+  },
+  {
+    "block_code": "B017F",
+    "planting_year": 2023
+  },
+  {
+    "block_code": "B017G",
+    "planting_year": 2025
+  },
+  {
+    "block_code": "B024A",
+    "planting_year": 2021
+  },
+  {
+    "block_code": "B023A",
+    "planting_year": 0
+  },
+  {
+    "block_code": "B024B",
+    "planting_year": 0
+  },
+  {
+    "block_code": "G005A",
+    "planting_year": 2008
+  },
+  {
+    "block_code": "G006A",
+    "planting_year": 2008
+  },
+  {
+    "block_code": "G007A",
+    "planting_year": 2008
+  },
+  {
+    "block_code": "G008A",
+    "planting_year": 2008
+  },
+  {
+    "block_code": "G001A",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "G009A",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "G010A",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "G002A",
+    "planting_year": 2011
+  },
+  {
+    "block_code": "G011A",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "G003A",
+    "planting_year": 2011
+  },
+  {
+    "block_code": "G012A",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "G004A",
+    "planting_year": 0
+  },
+  {
+    "block_code": "H009A",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "H010A",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "H005A",
+    "planting_year": 2010
+  },
+  {
+    "block_code": "H006A",
+    "planting_year": 2010
+  },
+  {
+    "block_code": "H011A",
+    "planting_year": 2010
+  },
+  {
+    "block_code": "H012A",
+    "planting_year": 2010
+  },
+  {
+    "block_code": "I012A",
+    "planting_year": 2010
+  },
+  {
+    "block_code": "I014A",
+    "planting_year": 2010
+  },
+  {
+    "block_code": "I015A",
+    "planting_year": 2010
+  },
+  {
+    "block_code": "J012A",
+    "planting_year": 2010
+  },
+  {
+    "block_code": "J013A",
+    "planting_year": 2010
+  },
+  {
+    "block_code": "H007A",
+    "planting_year": 2011
+  },
+  {
+    "block_code": "J014A",
+    "planting_year": 2010
+  },
+  {
+    "block_code": "H008A",
+    "planting_year": 2011
+  },
+  {
+    "block_code": "J015A",
+    "planting_year": 2010
+  },
+  {
+    "block_code": "I010A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "J011A",
+    "planting_year": 2011
+  },
+  {
+    "block_code": "I011A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "K012A",
+    "planting_year": 2011
+  },
+  {
+    "block_code": "I013A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "K013A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "K014A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "K015A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "F013A",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "F014A",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "F016A",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "G013A",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "G014A",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "G015A",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "G016A",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "G017A",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "G018A",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "F015A",
+    "planting_year": 2010
+  },
+  {
+    "block_code": "H013A",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "H014A",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "F017A",
+    "planting_year": 2010
+  },
+  {
+    "block_code": "H015A",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "F018A",
+    "planting_year": 2010
+  },
+  {
+    "block_code": "H017A",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "F019A",
+    "planting_year": 2010
+  },
+  {
+    "block_code": "H018A",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "F020A",
+    "planting_year": 2010
+  },
+  {
+    "block_code": "H019A",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "F021A",
+    "planting_year": 2010
+  },
+  {
+    "block_code": "F022A",
+    "planting_year": 2010
+  },
+  {
+    "block_code": "F023A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "F024A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "G015B",
+    "planting_year": 2015
+  },
+  {
+    "block_code": "G019A",
+    "planting_year": 2010
+  },
+  {
+    "block_code": "G020A",
+    "planting_year": 2010
+  },
+  {
+    "block_code": "G016B",
+    "planting_year": 2015
+  },
+  {
+    "block_code": "H016A",
+    "planting_year": 2010
+  },
+  {
+    "block_code": "G016C",
+    "planting_year": 2016
+  },
+  {
+    "block_code": "H020A",
+    "planting_year": 2010
+  },
+  {
+    "block_code": "H021A",
+    "planting_year": 2010
+  },
+  {
+    "block_code": "H022A",
+    "planting_year": 2011
+  },
+  {
+    "block_code": "G021A",
+    "planting_year": 2014
+  },
+  {
+    "block_code": "G022A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "G021B",
+    "planting_year": 2015
+  },
+  {
+    "block_code": "G023A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "H022B",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "G022B",
+    "planting_year": 2015
+  },
+  {
+    "block_code": "H023A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "G023B",
+    "planting_year": 2016
+  },
+  {
+    "block_code": "G023C",
+    "planting_year": 2019
+  },
+  {
+    "block_code": "G023D",
+    "planting_year": 2020
+  },
+  {
+    "block_code": "H023B",
+    "planting_year": 2016
+  },
+  {
+    "block_code": "I016A",
+    "planting_year": 2010
+  },
+  {
+    "block_code": "I017A",
+    "planting_year": 2010
+  },
+  {
+    "block_code": "I018A",
+    "planting_year": 2010
+  },
+  {
+    "block_code": "I019A",
+    "planting_year": 2010
+  },
+  {
+    "block_code": "I020A",
+    "planting_year": 2010
+  },
+  {
+    "block_code": "I021A",
+    "planting_year": 2010
+  },
+  {
+    "block_code": "J016A",
+    "planting_year": 2010
+  },
+  {
+    "block_code": "H023C",
+    "planting_year": 0
+  },
+  {
+    "block_code": "J017A",
+    "planting_year": 2010
+  },
+  {
+    "block_code": "J018A",
+    "planting_year": 2010
+  },
+  {
+    "block_code": "J019A",
+    "planting_year": 2010
+  },
+  {
+    "block_code": "J020A",
+    "planting_year": 2010
+  },
+  {
+    "block_code": "L022B",
+    "planting_year": 2010
+  },
+  {
+    "block_code": "L023B",
+    "planting_year": 2010
+  },
+  {
+    "block_code": "I023A",
+    "planting_year": 2011
+  },
+  {
+    "block_code": "I022A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "I022B",
+    "planting_year": 2017
+  },
+  {
+    "block_code": "J022A",
+    "planting_year": 2011
+  },
+  {
+    "block_code": "J023A",
+    "planting_year": 2011
+  },
+  {
+    "block_code": "I023B",
+    "planting_year": 2017
+  },
+  {
+    "block_code": "K018A",
+    "planting_year": 2011
+  },
+  {
+    "block_code": "I023C",
+    "planting_year": 0
+  },
+  {
+    "block_code": "K016A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "K017A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "K019A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "K020A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "K023A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "J021A",
+    "planting_year": 2011
+  },
+  {
+    "block_code": "L021B",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "J022B",
+    "planting_year": 2016
+  },
+  {
+    "block_code": "K019B",
+    "planting_year": 2017
+  },
+  {
+    "block_code": "K020B",
+    "planting_year": 2017
+  },
+  {
+    "block_code": "K021A",
+    "planting_year": 2017
+  },
+  {
+    "block_code": "K022A",
+    "planting_year": 2017
+  },
+  {
+    "block_code": "K023B",
+    "planting_year": 2017
+  },
+  {
+    "block_code": "L020A",
+    "planting_year": 2017
+  },
+  {
+    "block_code": "L021A",
+    "planting_year": 2017
+  },
+  {
+    "block_code": "L022A",
+    "planting_year": 2017
+  },
+  {
+    "block_code": "L023A",
+    "planting_year": 2017
+  },
+  {
+    "block_code": "H026A",
+    "planting_year": 2010
+  },
+  {
+    "block_code": "L024B",
+    "planting_year": 2010
+  },
+  {
+    "block_code": "H025A",
+    "planting_year": 2011
+  },
+  {
+    "block_code": "H027A",
+    "planting_year": 2011
+  },
+  {
+    "block_code": "H028A",
+    "planting_year": 2011
+  },
+  {
+    "block_code": "H029A",
+    "planting_year": 2011
+  },
+  {
+    "block_code": "H030A",
+    "planting_year": 2011
+  },
+  {
+    "block_code": "I025A",
+    "planting_year": 2011
+  },
+  {
+    "block_code": "I026A",
+    "planting_year": 2011
+  },
+  {
+    "block_code": "I027A",
+    "planting_year": 2011
+  },
+  {
+    "block_code": "H024A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "I028A",
+    "planting_year": 2011
+  },
+  {
+    "block_code": "H024B",
+    "planting_year": 2016
+  },
+  {
+    "block_code": "I029A",
+    "planting_year": 2011
+  },
+  {
+    "block_code": "I030A",
+    "planting_year": 2011
+  },
+  {
+    "block_code": "H025B",
+    "planting_year": 2016
+  },
+  {
+    "block_code": "J024A",
+    "planting_year": 2011
+  },
+  {
+    "block_code": "H025C",
+    "planting_year": 0
+  },
+  {
+    "block_code": "J025A",
+    "planting_year": 2011
+  },
+  {
+    "block_code": "J026A",
+    "planting_year": 2011
+  },
+  {
+    "block_code": "J027A",
+    "planting_year": 2011
+  },
+  {
+    "block_code": "K024A",
+    "planting_year": 2011
+  },
+  {
+    "block_code": "K025A",
+    "planting_year": 2011
+  },
+  {
+    "block_code": "I024A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "I024B",
+    "planting_year": 2017
+  },
+  {
+    "block_code": "J028A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "J029A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "J030A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "K026A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "K027A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "K028A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "K029A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "K030A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "L025B",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "L028A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "L029A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "L030A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "K024B",
+    "planting_year": 2017
+  },
+  {
+    "block_code": "L024A",
+    "planting_year": 2017
+  },
+  {
+    "block_code": "F026A",
+    "planting_year": 2011
+  },
+  {
+    "block_code": "F032A",
+    "planting_year": 2011
+  },
+  {
+    "block_code": "K027B",
+    "planting_year": 0
+  },
+  {
+    "block_code": "F033A",
+    "planting_year": 2011
+  },
+  {
+    "block_code": "G025A",
+    "planting_year": 2011
+  },
+  {
+    "block_code": "G026A",
+    "planting_year": 2011
+  },
+  {
+    "block_code": "G031A",
+    "planting_year": 2011
+  },
+  {
+    "block_code": "E026A",
+    "planting_year": 2012
+  },
+  {
+    "block_code": "E027A",
+    "planting_year": 2012
+  },
+  {
+    "block_code": "F025A",
+    "planting_year": 2012
+  },
+  {
+    "block_code": "F027A",
+    "planting_year": 2012
+  },
+  {
+    "block_code": "L028B",
+    "planting_year": 0
+  },
+  {
+    "block_code": "G027A",
+    "planting_year": 2012
+  },
+  {
+    "block_code": "G030A",
+    "planting_year": 2012
+  },
+  {
+    "block_code": "L029B",
+    "planting_year": 0
+  },
+  {
+    "block_code": "G032A",
+    "planting_year": 2012
+  },
+  {
+    "block_code": "G033A",
+    "planting_year": 2012
+  },
+  {
+    "block_code": "L030B",
+    "planting_year": 0
+  },
+  {
+    "block_code": "E033A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "C027A",
+    "planting_year": 2022
+  },
+  {
+    "block_code": "G025B",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "C027B",
+    "planting_year": 2023
+  },
+  {
+    "block_code": "G028A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "C028A",
+    "planting_year": 2022
+  },
+  {
+    "block_code": "G029A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "C029A",
+    "planting_year": 0
+  },
+  {
+    "block_code": "D027A",
+    "planting_year": 2015
+  },
+  {
+    "block_code": "D026A",
+    "planting_year": 2021
+  },
+  {
+    "block_code": "E027B",
+    "planting_year": 2015
+  },
+  {
+    "block_code": "D027B",
+    "planting_year": 2016
+  },
+  {
+    "block_code": "D028A",
+    "planting_year": 2016
+  },
+  {
+    "block_code": "D027C",
+    "planting_year": 2017
+  },
+  {
+    "block_code": "F025B",
+    "planting_year": 2016
+  },
+  {
+    "block_code": "D027D",
+    "planting_year": 2018
+  },
+  {
+    "block_code": "D027E",
+    "planting_year": 2019
+  },
+  {
+    "block_code": "D028B",
+    "planting_year": 2017
+  },
+  {
+    "block_code": "D027F",
+    "planting_year": 2020
+  },
+  {
+    "block_code": "E026B",
+    "planting_year": 2017
+  },
+  {
+    "block_code": "D027G",
+    "planting_year": 2021
+  },
+  {
+    "block_code": "F025C",
+    "planting_year": 2017
+  },
+  {
+    "block_code": "D027H",
+    "planting_year": 2022
+  },
+  {
+    "block_code": "F029A",
+    "planting_year": 2017
+  },
+  {
+    "block_code": "D027I",
+    "planting_year": 2023
+  },
+  {
+    "block_code": "F030A",
+    "planting_year": 2017
+  },
+  {
+    "block_code": "G025C",
+    "planting_year": 2017
+  },
+  {
+    "block_code": "D028C",
+    "planting_year": 2020
+  },
+  {
+    "block_code": "F029B",
+    "planting_year": 2018
+  },
+  {
+    "block_code": "D028D",
+    "planting_year": 2021
+  },
+  {
+    "block_code": "F030B",
+    "planting_year": 2018
+  },
+  {
+    "block_code": "D028E",
+    "planting_year": 2022
+  },
+  {
+    "block_code": "F031A",
+    "planting_year": 2018
+  },
+  {
+    "block_code": "D028F",
+    "planting_year": 2023
+  },
+  {
+    "block_code": "D028G",
+    "planting_year": 2025
+  },
+  {
+    "block_code": "F028A",
+    "planting_year": 2019
+  },
+  {
+    "block_code": "D029A",
+    "planting_year": 2022
+  },
+  {
+    "block_code": "F029C",
+    "planting_year": 2019
+  },
+  {
+    "block_code": "D029B",
+    "planting_year": 2023
+  },
+  {
+    "block_code": "D033A",
+    "planting_year": 2023
+  },
+  {
+    "block_code": "D034A",
+    "planting_year": 2023
+  },
+  {
+    "block_code": "E026C",
+    "planting_year": 2020
+  },
+  {
+    "block_code": "E032A",
+    "planting_year": 2020
+  },
+  {
+    "block_code": "F029D",
+    "planting_year": 2020
+  },
+  {
+    "block_code": "F030C",
+    "planting_year": 2020
+  },
+  {
+    "block_code": "E026D",
+    "planting_year": 2021
+  },
+  {
+    "block_code": "F031B",
+    "planting_year": 2020
+  },
+  {
+    "block_code": "E026E",
+    "planting_year": 2022
+  },
+  {
+    "block_code": "E028A",
+    "planting_year": 2021
+  },
+  {
+    "block_code": "E032B",
+    "planting_year": 2023
+  },
+  {
+    "block_code": "F025D",
+    "planting_year": 2021
+  },
+  {
+    "block_code": "F028B",
+    "planting_year": 2021
+  },
+  {
+    "block_code": "E034A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "F029E",
+    "planting_year": 2021
+  },
+  {
+    "block_code": "F030D",
+    "planting_year": 2021
+  },
+  {
+    "block_code": "F031C",
+    "planting_year": 2021
+  },
+  {
+    "block_code": "F025E",
+    "planting_year": 2023
+  },
+  {
+    "block_code": "F028C",
+    "planting_year": 2022
+  },
+  {
+    "block_code": "F029F",
+    "planting_year": 2022
+  },
+  {
+    "block_code": "F030E",
+    "planting_year": 2022
+  },
+  {
+    "block_code": "F031D",
+    "planting_year": 2022
+  },
+  {
+    "block_code": "F029G",
+    "planting_year": 2023
+  },
+  {
+    "block_code": "F030F",
+    "planting_year": 2023
+  },
+  {
+    "block_code": "F031E",
+    "planting_year": 2023
+  },
+  {
+    "block_code": "K032B",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "K035B",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "K033B",
+    "planting_year": 2010
+  },
+  {
+    "block_code": "F034A",
+    "planting_year": 2012
+  },
+  {
+    "block_code": "K034B",
+    "planting_year": 2010
+  },
+  {
+    "block_code": "H031A",
+    "planting_year": 2011
+  },
+  {
+    "block_code": "H034A",
+    "planting_year": 2011
+  },
+  {
+    "block_code": "J031A",
+    "planting_year": 2011
+  },
+  {
+    "block_code": "J032A",
+    "planting_year": 2011
+  },
+  {
+    "block_code": "J033A",
+    "planting_year": 2011
+  },
+  {
+    "block_code": "J034A",
+    "planting_year": 2011
+  },
+  {
+    "block_code": "K032A",
+    "planting_year": 2011
+  },
+  {
+    "block_code": "K033A",
+    "planting_year": 2011
+  },
+  {
+    "block_code": "K035A",
+    "planting_year": 2011
+  },
+  {
+    "block_code": "G034A",
+    "planting_year": 2012
+  },
+  {
+    "block_code": "G035A",
+    "planting_year": 2012
+  },
+  {
+    "block_code": "H032A",
+    "planting_year": 2012
+  },
+  {
+    "block_code": "I032A",
+    "planting_year": 2012
+  },
+  {
+    "block_code": "G036A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "H033A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "H035A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "I031A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "I033A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "I034A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "I035A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "H036A",
+    "planting_year": 2012
+  },
+  {
+    "block_code": "J035A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "K031A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "K034A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "L032B",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "L033B",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "L034B",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "I036A",
+    "planting_year": 2011
+  },
+  {
+    "block_code": "L035B",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "L036B",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "L039A",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "M031B",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "M032B",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "M033B",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "J036A",
+    "planting_year": 2011
+  },
+  {
+    "block_code": "M034B",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "M035B",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "M036B",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "M037B",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "M038B",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "M039B",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "M040B",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "M041B",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "M042B",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "M043B",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "K036A",
+    "planting_year": 2011
+  },
+  {
+    "block_code": "N037C",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "K036B",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "N038C",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "L031A",
+    "planting_year": 2011
+  },
+  {
+    "block_code": "N039C",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "N040C",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "N041C",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "N042C",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "N043C",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "L037B",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "L039B",
+    "planting_year": 2011
+  },
+  {
+    "block_code": "L038A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "L040A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "L038B",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "M038A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "M039A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "M040A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "M041A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "M043A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "M044A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "N043A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "M034A",
+    "planting_year": 0
+  },
+  {
+    "block_code": "N044A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "M039C",
+    "planting_year": 2017
+  },
+  {
+    "block_code": "M035A",
+    "planting_year": 0
+  },
+  {
+    "block_code": "M040C",
+    "planting_year": 2017
+  },
+  {
+    "block_code": "M041C",
+    "planting_year": 2017
+  },
+  {
+    "block_code": "M036A",
+    "planting_year": 0
+  },
+  {
+    "block_code": "M036C",
+    "planting_year": 0
+  },
+  {
+    "block_code": "K037B",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "K038B",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "K039B",
+    "planting_year": 2009
+  },
+  {
+    "block_code": "I039A",
+    "planting_year": 2010
+  },
+  {
+    "block_code": "I040A",
+    "planting_year": 2010
+  },
+  {
+    "block_code": "I041A",
+    "planting_year": 2010
+  },
+  {
+    "block_code": "I042A",
+    "planting_year": 2010
+  },
+  {
+    "block_code": "J039A",
+    "planting_year": 2010
+  },
+  {
+    "block_code": "J040A",
+    "planting_year": 2010
+  },
+  {
+    "block_code": "J041A",
+    "planting_year": 2010
+  },
+  {
+    "block_code": "K039A",
+    "planting_year": 2010
+  },
+  {
+    "block_code": "I043A",
+    "planting_year": 2011
+  },
+  {
+    "block_code": "J037A",
+    "planting_year": 2011
+  },
+  {
+    "block_code": "J038A",
+    "planting_year": 2011
+  },
+  {
+    "block_code": "N037A",
+    "planting_year": 0
+  },
+  {
+    "block_code": "K037A",
+    "planting_year": 2011
+  },
+  {
+    "block_code": "K038A",
+    "planting_year": 2011
+  },
+  {
+    "block_code": "J042A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "J043A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "J044A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "N042A",
+    "planting_year": 0
+  },
+  {
+    "block_code": "K040A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "K041A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "I045B",
+    "planting_year": 2015
+  },
+  {
+    "block_code": "J042B",
+    "planting_year": 2015
+  },
+  {
+    "block_code": "N043D",
+    "planting_year": 0
+  },
+  {
+    "block_code": "J043B",
+    "planting_year": 2015
+  },
+  {
+    "block_code": "J044B",
+    "planting_year": 2015
+  },
+  {
+    "block_code": "G037A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "I044A",
+    "planting_year": 2016
+  },
+  {
+    "block_code": "G038A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "I045A",
+    "planting_year": 2016
+  },
+  {
+    "block_code": "G039A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "J042C",
+    "planting_year": 2016
+  },
+  {
+    "block_code": "G040A",
+    "planting_year": 2016
+  },
+  {
+    "block_code": "J042D",
+    "planting_year": 2017
+  },
+  {
+    "block_code": "G041A",
+    "planting_year": 2016
+  },
+  {
+    "block_code": "J043C",
+    "planting_year": 2017
+  },
+  {
+    "block_code": "G042A",
+    "planting_year": 2016
+  },
+  {
+    "block_code": "J044C",
+    "planting_year": 2017
+  },
+  {
+    "block_code": "G043A",
+    "planting_year": 2016
+  },
+  {
+    "block_code": "K041B",
+    "planting_year": 2018
+  },
+  {
+    "block_code": "H037A",
+    "planting_year": 2011
+  },
+  {
+    "block_code": "K042A",
+    "planting_year": 2018
+  },
+  {
+    "block_code": "H038A",
+    "planting_year": 2011
+  },
+  {
+    "block_code": "H039A",
+    "planting_year": 2010
+  },
+  {
+    "block_code": "H040A",
+    "planting_year": 2010
+  },
+  {
+    "block_code": "H041A",
+    "planting_year": 2010
+  },
+  {
+    "block_code": "I038A",
+    "planting_year": 2010
+  },
+  {
+    "block_code": "I037A",
+    "planting_year": 2011
+  },
+  {
+    "block_code": "I037B",
+    "planting_year": 2015
+  },
+  {
+    "block_code": "E036A",
+    "planting_year": 2012
+  },
+  {
+    "block_code": "C038A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "J044D",
+    "planting_year": 0
+  },
+  {
+    "block_code": "D035A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "D036A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "D037A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "D038A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "D039A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "E035A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "K041C",
+    "planting_year": 0
+  },
+  {
+    "block_code": "E036B",
+    "planting_year": 2015
+  },
+  {
+    "block_code": "C036A",
+    "planting_year": 0
+  },
+  {
+    "block_code": "C037A",
+    "planting_year": 0
+  },
+  {
+    "block_code": "C039A",
+    "planting_year": 2016
+  },
+  {
+    "block_code": "D040A",
+    "planting_year": 2016
+  },
+  {
+    "block_code": "D041A",
+    "planting_year": 2016
+  },
+  {
+    "block_code": "D042A",
+    "planting_year": 2016
+  },
+  {
+    "block_code": "D043A",
+    "planting_year": 2016
+  },
+  {
+    "block_code": "D043B",
+    "planting_year": 2017
+  },
+  {
+    "block_code": "E037A",
+    "planting_year": 2011
+  },
+  {
+    "block_code": "E037B",
+    "planting_year": 2015
+  },
+  {
+    "block_code": "E038A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "E039A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "E040A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "E041A",
+    "planting_year": 2012
+  },
+  {
+    "block_code": "E042A",
+    "planting_year": 2016
+  },
+  {
+    "block_code": "E043A",
+    "planting_year": 2016
+  },
+  {
+    "block_code": "E043B",
+    "planting_year": 2017
+  },
+  {
+    "block_code": "E044A",
+    "planting_year": 2016
+  },
+  {
+    "block_code": "F035A",
+    "planting_year": 2011
+  },
+  {
+    "block_code": "F036A",
+    "planting_year": 2011
+  },
+  {
+    "block_code": "F037A",
+    "planting_year": 2011
+  },
+  {
+    "block_code": "F038A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "F039A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "F040A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "F041A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "F042A",
+    "planting_year": 2013
+  },
+  {
+    "block_code": "F043A",
+    "planting_year": 2016
+  },
+  {
+    "block_code": "F044A",
+    "planting_year": 2016
+  },
+  {
+    "block_code": "F045A",
+    "planting_year": 2016
+  }
+]

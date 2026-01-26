@@ -1,0 +1,326 @@
+{
+  "D001A": {
+    "luas_ha": 25.8,
+    "realisasi_ton_total": 449.32,
+    "potensi_ton_total": 570.96,
+    "realisasi_ton_ha": 17.42,
+    "potensi_ton_ha": 22.13,
+    "gap_ton_ha": -4.71,
+    "gap_pct": -21.3
+  },
+  "D002A": {
+    "luas_ha": 23.7,
+    "realisasi_ton_total": 415.73,
+    "potensi_ton_total": 538.91,
+    "realisasi_ton_ha": 17.54,
+    "potensi_ton_ha": 22.74,
+    "gap_ton_ha": -5.2,
+    "gap_pct": -22.9
+  },
+  "D003A": {
+    "luas_ha": 25.3,
+    "realisasi_ton_total": 417.73,
+    "potensi_ton_total": 535.73,
+    "realisasi_ton_ha": 16.51,
+    "potensi_ton_ha": 21.18,
+    "gap_ton_ha": -4.66,
+    "gap_pct": -22.0
+  },
+  "D004A": {
+    "luas_ha": 22,
+    "realisasi_ton_total": 383.92,
+    "potensi_ton_total": 481.44,
+    "realisasi_ton_ha": 17.45,
+    "potensi_ton_ha": 21.88,
+    "gap_ton_ha": -4.43,
+    "gap_pct": -20.3
+  },
+  "D005A": {
+    "luas_ha": 24.1,
+    "realisasi_ton_total": 385.13,
+    "potensi_ton_total": 364.52,
+    "realisasi_ton_ha": 15.98,
+    "potensi_ton_ha": 15.13,
+    "gap_ton_ha": 0.86,
+    "gap_pct": 5.7
+  },
+  "D006A": {
+    "luas_ha": 23,
+    "realisasi_ton_total": 397.9,
+    "potensi_ton_total": 373.14,
+    "realisasi_ton_ha": 17.3,
+    "potensi_ton_ha": 16.22,
+    "gap_ton_ha": 1.08,
+    "gap_pct": 6.6
+  },
+  "D007A": {
+    "luas_ha": 24.7,
+    "realisasi_ton_total": 433.03,
+    "potensi_ton_total": 413.62,
+    "realisasi_ton_ha": 17.53,
+    "potensi_ton_ha": 16.75,
+    "gap_ton_ha": 0.79,
+    "gap_pct": 4.7
+  },
+  "D008A": {
+    "luas_ha": 25.3,
+    "realisasi_ton_total": 397.66,
+    "potensi_ton_total": 393.59,
+    "realisasi_ton_ha": 15.72,
+    "potensi_ton_ha": 15.56,
+    "gap_ton_ha": 0.16,
+    "gap_pct": 1.0
+  },
+  "D009A": {
+    "luas_ha": 24.4,
+    "realisasi_ton_total": 416.35,
+    "potensi_ton_total": 412.64,
+    "realisasi_ton_ha": 17.06,
+    "potensi_ton_ha": 16.91,
+    "gap_ton_ha": 0.15,
+    "gap_pct": 0.9
+  },
+  "D010A": {
+    "luas_ha": 23.7,
+    "realisasi_ton_total": 359.54,
+    "potensi_ton_total": 409.25,
+    "realisasi_ton_ha": 15.17,
+    "potensi_ton_ha": 17.27,
+    "gap_ton_ha": -2.1,
+    "gap_pct": -12.1
+  },
+  "D011A": {
+    "luas_ha": 24,
+    "realisasi_ton_total": 360.65,
+    "potensi_ton_total": 336.61,
+    "realisasi_ton_ha": 15.03,
+    "potensi_ton_ha": 14.03,
+    "gap_ton_ha": 1.0,
+    "gap_pct": 7.1
+  },
+  "D012A": {
+    "luas_ha": 26.7,
+    "realisasi_ton_total": 419.94,
+    "potensi_ton_total": 409.9,
+    "realisasi_ton_ha": 15.73,
+    "potensi_ton_ha": 15.35,
+    "gap_ton_ha": 0.38,
+    "gap_pct": 2.5
+  },
+  "E001A": {
+    "luas_ha": 22.5,
+    "realisasi_ton_total": 383.28,
+    "potensi_ton_total": 502.46,
+    "realisasi_ton_ha": 17.03,
+    "potensi_ton_ha": 22.33,
+    "gap_ton_ha": -5.3,
+    "gap_pct": -23.7
+  },
+  "E002A": {
+    "luas_ha": 22.2,
+    "realisasi_ton_total": 346.98,
+    "potensi_ton_total": 473.2,
+    "realisasi_ton_ha": 15.63,
+    "potensi_ton_ha": 21.32,
+    "gap_ton_ha": -5.69,
+    "gap_pct": -26.7
+  },
+  "E003A": {
+    "luas_ha": 21.6,
+    "realisasi_ton_total": 303.66,
+    "potensi_ton_total": 442.87,
+    "realisasi_ton_ha": 14.06,
+    "potensi_ton_ha": 20.5,
+    "gap_ton_ha": -6.45,
+    "gap_pct": -31.4
+  },
+  "E004A": {
+    "luas_ha": 19.9,
+    "realisasi_ton_total": 344.33,
+    "potensi_ton_total": 393.47,
+    "realisasi_ton_ha": 17.3,
+    "potensi_ton_ha": 19.77,
+    "gap_ton_ha": -2.47,
+    "gap_pct": -12.5
+  },
+  "E005A": {
+    "luas_ha": 24,
+    "realisasi_ton_total": 439.02,
+    "potensi_ton_total": 407.17,
+    "realisasi_ton_ha": 18.29,
+    "potensi_ton_ha": 16.97,
+    "gap_ton_ha": 1.33,
+    "gap_pct": 7.8
+  },
+  "E006A": {
+    "luas_ha": 24.3,
+    "realisasi_ton_total": 442.54,
+    "potensi_ton_total": 418.42,
+    "realisasi_ton_ha": 18.21,
+    "potensi_ton_ha": 17.22,
+    "gap_ton_ha": 0.99,
+    "gap_pct": 5.8
+  },
+  "E007A": {
+    "luas_ha": 24.2,
+    "realisasi_ton_total": 403.04,
+    "potensi_ton_total": 390.54,
+    "realisasi_ton_ha": 16.65,
+    "potensi_ton_ha": 16.14,
+    "gap_ton_ha": 0.52,
+    "gap_pct": 3.2
+  },
+  "E008A": {
+    "luas_ha": 24.7,
+    "realisasi_ton_total": 451.05,
+    "potensi_ton_total": 423.94,
+    "realisasi_ton_ha": 18.26,
+    "potensi_ton_ha": 17.16,
+    "gap_ton_ha": 1.1,
+    "gap_pct": 6.4
+  },
+  "E009A": {
+    "luas_ha": 23.7,
+    "realisasi_ton_total": 370.94,
+    "potensi_ton_total": 345.52,
+    "realisasi_ton_ha": 15.65,
+    "potensi_ton_ha": 14.58,
+    "gap_ton_ha": 1.07,
+    "gap_pct": 7.4
+  },
+  "E010A": {
+    "luas_ha": 25.6,
+    "realisasi_ton_total": 412.2,
+    "potensi_ton_total": 396.36,
+    "realisasi_ton_ha": 16.1,
+    "potensi_ton_ha": 15.48,
+    "gap_ton_ha": 0.62,
+    "gap_pct": 4.0
+  },
+  "E011A": {
+    "luas_ha": 24.3,
+    "realisasi_ton_total": 396.81,
+    "potensi_ton_total": 424.42,
+    "realisasi_ton_ha": 16.33,
+    "potensi_ton_ha": 17.47,
+    "gap_ton_ha": -1.14,
+    "gap_pct": -6.5
+  },
+  "E012A": {
+    "luas_ha": 25.4,
+    "realisasi_ton_total": 404.86,
+    "potensi_ton_total": 427.64,
+    "realisasi_ton_ha": 15.94,
+    "potensi_ton_ha": 16.84,
+    "gap_ton_ha": -0.9,
+    "gap_pct": -5.3
+  },
+  "F001A": {
+    "luas_ha": 17.9,
+    "realisasi_ton_total": 406.34,
+    "potensi_ton_total": 392.57,
+    "realisasi_ton_ha": 22.7,
+    "potensi_ton_ha": 21.93,
+    "gap_ton_ha": 0.77,
+    "gap_pct": 3.5
+  },
+  "F002A": {
+    "luas_ha": 15.2,
+    "realisasi_ton_total": 227.7,
+    "potensi_ton_total": 339.7,
+    "realisasi_ton_ha": 14.98,
+    "potensi_ton_ha": 22.35,
+    "gap_ton_ha": -7.37,
+    "gap_pct": -33.0
+  },
+  "F003A": {
+    "luas_ha": 12.2,
+    "realisasi_ton_total": 198.55,
+    "potensi_ton_total": 266.52,
+    "realisasi_ton_ha": 16.27,
+    "potensi_ton_ha": 21.85,
+    "gap_ton_ha": -5.57,
+    "gap_pct": -25.5
+  },
+  "F004A": {
+    "luas_ha": 12,
+    "realisasi_ton_total": 193.8,
+    "potensi_ton_total": 262.17,
+    "realisasi_ton_ha": 16.15,
+    "potensi_ton_ha": 21.85,
+    "gap_ton_ha": -5.7,
+    "gap_pct": -26.1
+  },
+  "F005A": {
+    "luas_ha": 20.5,
+    "realisasi_ton_total": 371.9,
+    "potensi_ton_total": 379.63,
+    "realisasi_ton_ha": 18.14,
+    "potensi_ton_ha": 18.52,
+    "gap_ton_ha": -0.38,
+    "gap_pct": -2.0
+  },
+  "F006A": {
+    "luas_ha": 24.9,
+    "realisasi_ton_total": 487.25,
+    "potensi_ton_total": 462.9,
+    "realisasi_ton_ha": 19.57,
+    "potensi_ton_ha": 18.59,
+    "gap_ton_ha": 0.98,
+    "gap_pct": 5.3
+  },
+  "F007A": {
+    "luas_ha": 20.2,
+    "realisasi_ton_total": 394.62,
+    "potensi_ton_total": 381.29,
+    "realisasi_ton_ha": 19.54,
+    "potensi_ton_ha": 18.88,
+    "gap_ton_ha": 0.66,
+    "gap_pct": 3.5
+  },
+  "F008A": {
+    "luas_ha": 29.6,
+    "realisasi_ton_total": 628.16,
+    "potensi_ton_total": 577.66,
+    "realisasi_ton_ha": 21.22,
+    "potensi_ton_ha": 19.52,
+    "gap_ton_ha": 1.71,
+    "gap_pct": 8.7
+  },
+  "F009A": {
+    "luas_ha": 25.2,
+    "realisasi_ton_total": 434.58,
+    "potensi_ton_total": 410.61,
+    "realisasi_ton_ha": 17.25,
+    "potensi_ton_ha": 16.29,
+    "gap_ton_ha": 0.95,
+    "gap_pct": 5.8
+  },
+  "F010A": {
+    "luas_ha": 25,
+    "realisasi_ton_total": 427.88,
+    "potensi_ton_total": 441.08,
+    "realisasi_ton_ha": 17.12,
+    "potensi_ton_ha": 17.64,
+    "gap_ton_ha": -0.53,
+    "gap_pct": -3.0
+  },
+  "F011A": {
+    "luas_ha": 20.5,
+    "realisasi_ton_total": 359.58,
+    "potensi_ton_total": 388.41,
+    "realisasi_ton_ha": 17.54,
+    "potensi_ton_ha": 18.95,
+    "gap_ton_ha": -1.41,
+    "gap_pct": -7.4
+  },
+  "F012A": {
+    "luas_ha": 24.7,
+    "realisasi_ton_total": 452.33,
+    "potensi_ton_total": 472.85,
+    "realisasi_ton_ha": 18.31,
+    "potensi_ton_ha": 19.14,
+    "gap_ton_ha": -0.83,
+    "gap_pct": -4.3
+  }
+}

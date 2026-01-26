@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Analisis Krusialitas - Cincin Api F008A & D001A (Complete)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .animate-pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: .5;
+            }
+        }
+
+        .tab-button {
+            transition: all 0.3s ease;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen bg-slate-50 p-4 md:p-8">
+    <!-- Header -->
+    <div class="max-w-7xl mx-auto mb-8 flex flex-col lg:flex-row lg:items-end justify-between gap-6">
+        <div>
+            <div class="flex items-center gap-2 mb-2">
+                <span
+                    class="bg-red-600 text-white px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest animate-pulse">
+                    Reality Check Briefing
+                </span>
+                <span class="opacity-20 font-black">|</span>
+                <span class="text-xs font-black uppercase tracking-widest flex items-center gap-1">
+                    ⏰ Update 31 Des 2025 • Blok F008A & D001A
+                </span>
+            </div>
+            <h1 class="text-3xl font-black text-black tracking-tighter">Analisis Krusialitas & Eskalasi Dampak</h1>
+            <p class="text-black mt-1 max-w-2xl font-black">
+                Transparansi Data Produksi: Bedah Gap Potensi vs Realisasi Lapangan (Tahun Produksi 2025).
+            </p>
+        </div>
+
+        <div class="flex p-1 bg-white rounded-xl shadow-sm border border-slate-200">
+            <button onclick="showTab('overview')" id="btn-overview"
+                class="tab-button px-6 py-2.5 rounded-lg text-sm font-black transition-all bg-indigo-600 text-white shadow-md">
+                Snapshot & Ekstrapolasi
+            </button>
+            <button onclick="showTab('scenarios')" id="btn-scenarios"
+                class="tab-button px-6 py-2.5 rounded-lg text-sm font-black transition-all text-black hover:bg-slate-50">
+                Reality Check: 3 Skenario
+            </button>
+        </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto space-y-6">
+
+        <!-- ========== TAB OVERVIEW ========== -->
+        <div id="tab-overview" class="space-y-6">
+
+            <!-- Panel Eskalasi Makro -->
+            <div
+                class="bg-slate-900 rounded-[2rem] p-8 text-white shadow-xl relative overflow-hidden border border-white/10">
+                <div class="absolute top-0 right-0 p-8 opacity-10 pointer-events-none text-white font-black">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2">
+                        <path d="M21 21V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v16l3.5-2 3.5 2 3.5-2 3.5 2Z" />
+                        <path d="M12 7v10" />
+                        <path d="M8 11h8" />
+                    </svg>
+                </div>
+                <div class="relative z-10">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+                        <div>
+                            <h2 class="text-xl font-bold flex items-center gap-2 text-white">
+                                ⚡ Potensi Kerugian Skala Makro (Impact Escalation)
+                            </h2>
+                            <p class="text-white opacity-80 text-sm italic">
+                                Ekstrapolasi temuan sampel ke wilayah operasional yang lebih luas.
+                            </p>
+                        <!-- 3 SCALING BUTTONS -->
+                        <div class="flex bg-white/10 p-1 rounded-lg gap-1">
+                            <button onclick="setScale('block')" id="scale-block" class="px-4 py-1.5 rounded-md text-xs font-black transition-all bg-white text-slate-900 shadow-lg">2 Blok Sampel</button>
+                            <button onclick="setScale('division')" id="scale-division" class="px-4 py-1.5 rounded-md text-xs font-black transition-all text-white opacity-60 hover:opacity-100">Skala Divisi</button>
+                            <button onclick="setScale('estate')" id="scale-estate" class="px-4 py-1.5 rounded-md text-xs font-black transition-all text-white opacity-60 hover:opacity-100">Skala Kebun (20%)</button>
+                        </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="bg-white/5 backdrop-blur-sm p-6 rounded-2xl border border-white/10">
+                            <p class="text-indigo-300 text-[10px] font-black uppercase mb-1 tracking-widest">Cakupan
+                                Wilayah</p>
+                            <div class="flex items-baseline gap-2">
+                                <span class="text-4xl" id="area-value">55.4</span>
+                                <span class="text-indigo-300 text-sm uppercase tracking-tighter">HA</span>
+                            </div>
+                            <p class="text-[10px] text-white opacity-90 mt-1 font-black tracking-tighter" id="area-note" style="display: none;"></p>
+                        </div>
+                        <div
+                            class="bg-red-500/10 backdrop-blur-sm p-6 rounded-2xl border border-red-500/30 ring-2 ring-red-500/20">
+                            <p class="text-red-400 text-[10px] font-black uppercase mb-1 tracking-widest">Potensi
+                                Kerugian</p>
+                            <div class="flex items-baseline gap-2">
+                                <span class="text-4xl text-red-400 font-black" id="loss-value">Rp 0.182</span>
+                                <span
+                                    class="text-red-400 text-sm uppercase tracking-tighter font-black">MILAR/THN</span>
+                            </div>
+                        </div>
+                        <div class="bg-emerald-500/10 backdrop-blur-sm p-6 rounded-2xl border border-emerald-500/30">
+                            <p class="text-emerald-400 text-[10px] font-black uppercase mb-1 tracking-widest">Biaya
+                                Mitigasi</p>
+                            <div class="flex items-baseline gap-2">
+                                <span class="text-4xl text-emerald-400 font-black" id="mitigation-value">Rp 0.1</span>
+                                <span
+                                    class="text-emerald-400 text-sm uppercase tracking-tighter font-black">MILAR</span>
+                            </div>
+                            <p class="text-[10px] text-emerald-300 mt-2 font-black italic">Hanya ~0.1% dari risiko aset
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+                    <!-- Warning for Estate Scale -->
+                    <div id="estate-warning" class="mt-8 p-6 bg-red-600/20 border-2 border-red-500/50 rounded-2xl flex items-start gap-4 shadow-xl" style="display: none;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-red-400 shrink-0 mt-1"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/><path d="m9 12 2 2 4-4"/></svg>
+                        <div>
+                            <h4 class="text-lg font-black text-white uppercase tracking-tighter">Peringatan Interpretasi Data:</h4>
+                            <p class="text-base text-white font-bold leading-relaxed">Angka <span class="text-red-400 font-black px-1.5 bg-black/40 rounded">Rp 56.1 Miliar</span> didasarkan pada asumsi bahwa <span class="underline decoration-red-500 decoration-2 underline-offset-4 font-black">HANYA 20% (2.200 Ha)</span> dari total 11.000 Ha kebun yang memiliki kondisi kritis serupa dengan sampel. Laporan ini tidak merepresentasikan kerugian untuk luasan 11.000 Ha secara keseluruhan.</p>
+                        </div>
+                    </div>
+
+            <!-- Kartu Bukti Ilmiah -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 text-black font-black">
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 border-l-8 border-l-indigo-500">
+                    <div class="flex items-center gap-3 mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" class="text-black">
+                            <path d="M6 18h8" />
+                            <path d="M3 22h18" />
+                            <path d="M14 22a7 7 0 1 0 0-14h-1" />
+                            <path d="M9 14h2" />
+                            <path d="M9 12a2 2 0 0 1-2-2V6h6v4a2 2 0 0 1-2 2Z" />
+                            <path d="M12 6V3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3" />
+                        </svg>
+                        <h3 class="text-2xl font-black">1. Kontak Akar</h3>
+                    </div>
+                    <p class="text-xl leading-relaxed font-black text-black">
+                        TT 2008 (Usia 18 Tahun). Sistem perakaran sudah <span
+                            class="underline decoration-indigo-500 decoration-4 font-black">interlocking</span>.
+                        Penularan bawah tanah dipastikan aktif dan masif.
+                    </p>
+                </div>
+
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 border-l-8 border-l-orange-500">
+                    <div class="flex items-center gap-3 mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" class="text-black">
+                            <circle cx="12" cy="12" r="10" />
+                            <circle cx="12" cy="12" r="6" />
+                            <circle cx="12" cy="12" r="2" />
+                        </svg>
+                        <h3 class="text-2xl font-black">2. Rasio Sebar</h3>
+                    </div>
+                    <p class="text-xl leading-relaxed font-black text-black">
+                        <span
+                            class="text-orange-600 underline decoration-orange-600 decoration-2 font-black text-2xl">Cincin
+                            Api &gt; Inti</span>. Rasio 1127x membuktikan penyakit sedang AKTIF MENJALAR.
+                    </p>
+                </div>
+
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 border-l-8 border-l-red-500">
+                    <div class="flex items-center gap-3 mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" class="text-black">
+                            <circle cx="9" cy="12" r="1" />
+                            <circle cx="15" cy="12" r="1" />
+                            <path d="M8 20v2h8v-2" />
+                            <path d="m12.5 17-.5-1-.5 1h1z" />
+                            <path d="M16 20a2 2 0 0 0 1.56-3.25 8 8 0 1 0-11.12 0A2 2 0 0 0 8 20" />
+                        </svg>
+                        <h3 class="text-2xl font-black">3. Symptom Lag</h3>
+                    </div>
+                    <p class="text-xl leading-relaxed font-black text-black">
+                        Gap Produksi <span class="text-red-600 font-black text-2xl">9-21%</span> membuktikan akar
+                        hancur jauh mendahului gejala visual permukaan.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Tabel Snapshot -->
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                <div class="p-8 border-b border-slate-100 bg-slate-50/50 flex justify-between items-center">
+                    <h3
+                        class="text-2xl font-black uppercase tracking-tighter italic underline decoration-indigo-500 decoration-4 underline-offset-8">
+                        Snapshot Faktual & Gap Produktivitas
+                    </h3>
+                    <div class="flex gap-6">
+                        <div class="flex items-center gap-2 text-sm font-black uppercase">
+                            <div class="w-4 h-4 rounded-full bg-red-600"></div> Infeksi Inti
+                        </div>
+                        <div class="flex items-center gap-2 text-sm font-black uppercase">
+                            <div class="w-4 h-4 rounded-full bg-orange-400"></div> Cincin Api
+                        </div>
+                    </div>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left">
+                        <thead
+                            class="bg-slate-100 text-xs font-black uppercase tracking-widest border-b border-slate-300">
+                            <tr>
+                                <th class="px-6 py-6 border-r border-slate-200">ID Blok</th>
+                                <th class="px-6 py-6 text-center border-r border-slate-200">Potensi Standar<br /><span
+                                        class="text-[9px] opacity-60">(Ton/Ha)</span></th>
+                                <th class="px-6 py-6 text-center border-r border-slate-200">Realisasi Aktual<br /><span
+                                        class="text-[9px] opacity-60">(Ton/Ha)</span></th>
+                                <th
+                                    class="px-6 py-6 text-center border-r border-slate-200 underline decoration-red-500">
+                                    Gap Produksi<br /><span class="text-[9px] text-red-600">(Selisih Ton/Ha)</span></th>
+                                <th class="px-6 py-6 text-center border-r border-slate-200">Rasio Sebar</th>
+                                <th class="px-6 py-6 text-right">Kerugian/Tahun</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200">
+                            <tr class="hover:bg-indigo-50/50 transition-colors">
+                                <td class="px-6 py-6 text-xl italic font-black border-r border-slate-100">F008A</td>
+                                <td class="px-6 py-6 text-lg text-center border-r border-slate-100">19.52</td>
+                                <td class="px-6 py-6 text-lg text-center border-r border-slate-100">21.22</td>
+                                <td
+                                    class="px-6 py-6 text-red-600 text-2xl text-center font-black border-r border-slate-100">
+                                    1.71
+                                    <span class="block text-[10px] uppercase opacity-60">(8.7%)</span>
+                                </td>
+                                <td class="px-6 py-6 border-r border-slate-100">
+                                    <div class="flex flex-col gap-1 items-center">
+                                        <span
+                                            class="bg-orange-600 text-white px-3 py-1 rounded-lg text-sm font-black">1127x</span>
+                                        <div class="flex gap-2 text-[9px] uppercase tracking-tighter mt-1">
+                                            <span class="text-red-600 font-black">1 Inti</span>
+                                            <span class="text-orange-600 font-black">1127 Ring</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-6 text-xl font-black tracking-tight text-right uppercase">Rp 0
+                                    Juta</td>
+                            </tr>
+                            <tr class="hover:bg-indigo-50/50 transition-colors">
+                                <td class="px-6 py-6 text-xl italic font-black border-r border-slate-100">D001A</td>
+                                <td class="px-6 py-6 text-lg text-center border-r border-slate-100">22.13</td>
+                                <td class="px-6 py-6 text-lg text-center border-r border-slate-100">17.42</td>
+                                <td
+                                    class="px-6 py-6 text-red-600 text-2xl text-center font-black border-r border-slate-100">
+                                    4.71
+                                    <span class="block text-[10px] uppercase opacity-60">(-21.3%)</span>
+                                </td>
+                                <td class="px-6 py-6 border-r border-slate-100">
+                                    <div class="flex flex-col gap-1 items-center">
+                                        <span
+                                            class="bg-orange-600 text-white px-3 py-1 rounded-lg text-sm font-black">887x</span>
+                                        <div class="flex gap-2 text-[9px] uppercase tracking-tighter mt-1">
+                                            <span class="text-red-600 font-black">1 Inti</span>
+                                            <span class="text-orange-600 font-black">887 Ring</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-6 text-xl font-black tracking-tight text-right uppercase">Rp 182.5
+                                    Juta</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div
+                    class="p-4 bg-slate-50 text-[10px] font-black uppercase tracking-widest text-center border-t border-slate-200 opacity-60">
+                    *Potensi didasarkan pada standar produktivitas tanaman usia 16 tahun (TT 2008).
+                </div>
+            </div>
+
+            <!-- SECTION PETA CINCIN API -->
+            <div
+                class="bg-gradient-to-br from-slate-900 to-slate-800 rounded-[2rem] p-8 text-white shadow-2xl border border-white/10">
+                <div class="flex items-center gap-3 mb-8">
+                    <div class="p-4 bg-orange-500/20 rounded-2xl border border-orange-500/30">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" class="text-orange-400">
+                            <path
+                                d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h2 class="text-3xl font-black uppercase tracking-tighter">🔥 Peta Kluster Cincin Api</h2>
+                        <p class="text-white/80 text-sm italic mt-1">Visualisasi Spatial: Lokasi Infeksi Inti & Zona
+                            Penyebaran Aktif</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Peta F008A -->
+                    <div class="bg-white rounded-3xl overflow-hidden shadow-xl border-4 border-white/20 card-hover">
+                        <div class="bg-gradient-to-r from-slate-800 to-slate-700 p-6 border-b-4 border-orange-500">
+                            <h3
+                                class="text-2xl font-black text-white uppercase tracking-tight flex items-center justify-between">
+                                <span>Blok F008A</span>
+                                <span class="text-sm bg-orange-600 px-4 py-1.5 rounded-full font-black">
+                                    Spread Ratio: 1127x
+                                </span>
+                            </h3>
+                            <div class="flex gap-6 mt-3 text-sm">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-3 h-3 rounded-full bg-red-600"></div>
+                                    <span class="text-white/90">1 Inti</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <div class="w-3 h-3 rounded-full bg-orange-500"></div>
+                                    <span class="text-white/90">1127 Cincin Api</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <div class="w-3 h-3 rounded-full bg-yellow-400"></div>
+                                    <span class="text-white/90">2663 Suspect</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-4 bg-slate-50">
+                            <img src="cincin_api_map_F008A.png" alt="Peta Cincin Api Blok F008A"
+                                class="w-full h-auto rounded-xl shadow-lg border-2 border-slate-200" />
+                        </div>
+                        <div class="p-6 bg-slate-100 border-t-2 border-slate-200">
+                            <p class="text-xs text-slate-600 uppercase tracking-widest font-black mb-2">Interpretasi
+                                Peta:</p>
+                            <p class="text-sm text-slate-800 leading-relaxed">
+                                Cluster <span class="font-black text-red-600">MERAH</span> menunjukkan pusat infeksi
+                                aktif.
+                                Zona <span class="font-black text-orange-600">ORANYE</span> adalah "Ring of Fire" yang
+                                sedang menyebar ke pohon tetangga.
+                                Parit isolasi harus dibuat mengelilingi zona ini untuk menyelamatkan 2 pohon sehat.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Peta D001A -->
+                    <div class="bg-white rounded-3xl overflow-hidden shadow-xl border-4 border-white/20 card-hover">
+                        <div class="bg-gradient-to-r from-slate-800 to-slate-700 p-6 border-b-4 border-orange-500">
+                            <h3
+                                class="text-2xl font-black text-white uppercase tracking-tight flex items-center justify-between">
+                                <span>Blok D001A</span>
+                                <span class="text-sm bg-orange-600 px-4 py-1.5 rounded-full font-black">
+                                    Spread Ratio: 887x
+                                </span>
+                            </h3>
+                            <div class="flex gap-6 mt-3 text-sm">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-3 h-3 rounded-full bg-red-600"></div>
+                                    <span class="text-white/90">1 Inti</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <div class="w-3 h-3 rounded-full bg-orange-500"></div>
+                                    <span class="text-white/90">887 Cincin Api</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <div class="w-3 h-3 rounded-full bg-yellow-400"></div>
+                                    <span class="text-white/90">2586 Suspect</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-4 bg-slate-50">
+                            <img src="cincin_api_map_D001A.png" alt="Peta Cincin Api Blok D001A"
+                                class="w-full h-auto rounded-xl shadow-lg border-2 border-slate-200" />
+                        </div>
+                        <div class="p-6 bg-slate-100 border-t-2 border-slate-200">
+                            <p class="text-xs text-slate-600 uppercase tracking-widest font-black mb-2">Interpretasi
+                                Peta:</p>
+                            <p class="text-sm text-slate-800 leading-relaxed">
+                                Cluster <span class="font-black text-red-600">MERAH</span> menunjukkan pusat infeksi
+                                aktif.
+                                Zona <span class="font-black text-orange-600">ORANYE</span> adalah "Ring of Fire" yang
+                                sedang menyebar ke pohon tetangga.
+                                Parit isolasi harus dibuat mengelilingi zona ini untuk menyelamatkan 12 pohon sehat.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-8 p-6 bg-orange-600/20 border-2 border-orange-500/50 rounded-2xl">
+                    <div class="flex items-start gap-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" class="text-orange-400 shrink-0 mt-1">
+                            <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3" />
+                            <path d="M12 9v4" />
+                            <path d="M12 17h.01" />
+                        </svg>
+                        <div>
+                            <h4 class="text-lg font-black text-white uppercase mb-2">Rekomendasi Mitigasi Berdasarkan
+                                Peta:</h4>
+                            <p class="text-white/90 leading-relaxed">
+                                Peta kluster menunjukkan bahwa infeksi tidak tersebar merata, melainkan membentuk <span
+                                    class="font-black underline decoration-orange-500 decoration-2">cluster
+                                    terlokalisasi</span>.
+                                Strategi parit isolasi harus diprioritaskan pada zona dengan Spread Ratio tertinggi
+                                (F008A: 1127x) untuk memaksimalkan efektivitas biaya mitigasi.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Drilldown Detail Blok -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 pb-8">
+                <!-- Detail F008A -->
+                <div class="bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden">
+                    <div class="p-6 bg-slate-900 text-white flex justify-between items-center">
+                        <h4 class="text-xl font-black uppercase tracking-tighter flex items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" class="text-indigo-400">
+                                <path d="M21 21V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v16l3.5-2 3.5 2 3.5-2 3.5 2Z" />
+                            </svg>
+                            Detail Blok F008A (29.6 Ha)
+                        </h4>
+                        <span
+                            class="bg-red-600 text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest animate-pulse">Status:
+                            Darurat</span>
+                    </div>
+                    <div class="p-8 space-y-8">
+                        <!-- Profil Agronomi -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="p-4 bg-indigo-50 rounded-2xl border border-indigo-100 flex items-center gap-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" class="text-indigo-600">
+                                    <path d="M12 2v20M2 12h20" />
+                                </svg>
+                                <div>
+                                    <p class="text-[10px] font-black uppercase text-indigo-400">Tahun Tanam / Usia</p>
+                                    <p class="text-lg font-black text-indigo-900">2008 (18 Tahun)</p>
+                                </div>
+                            </div>
+                            <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 flex items-center gap-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" class="text-slate-600">
+                                    <path
+                                        d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z" />
+                                    <path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65" />
+                                    <path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65" />
+                                </svg>
+                                <div>
+                                    <p class="text-[10px] font-black uppercase text-slate-400">Kerapatan Tanam (SPH)</p>
+                                    <p class="text-lg font-black text-slate-900">127 Pokok/Ha</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Populasi -->
+                        <div class="p-4 bg-slate-900 text-white rounded-2xl flex items-center justify-between">
+                            <div class="text-left">
+                                <p class="text-[10px] font-black uppercase text-indigo-400">Total Populasi Pohon</p>
+                                <p class="text-2xl font-black text-white">3,770 <span
+                                        class="text-xs uppercase">PKK</span></p>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-[10px] font-black uppercase text-red-400">Tanaman Sisip</p>
+                                <p class="text-2xl font-black text-white">0 <span class="text-xs uppercase">PKK</span>
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Distribusi Pohon -->
+                        <div>
+                            <p
+                                class="text-xs font-black uppercase text-black mb-4 tracking-[0.2em] border-l-4 border-indigo-500 pl-3">
+                                Status Kesehatan Pohon Aktual</p>
+                            <div class="grid grid-cols-3 gap-4">
+                                <div class="bg-red-50 p-4 rounded-2xl border border-red-100 text-center">
+                                    <p class="text-[10px] font-black text-red-600 uppercase mb-1">Infeksi Inti</p>
+                                    <p class="text-2xl font-black text-red-700">37 <span
+                                            class="text-[10px] uppercase text-black">PKK</span></p>
+                                </div>
+                                <div class="bg-orange-50 p-4 rounded-2xl border border-orange-100 text-center">
+                                    <p class="text-[10px] font-black text-orange-600 uppercase mb-1">Cincin Api</p>
+                                    <p class="text-2xl font-black text-orange-700">80 <span
+                                            class="text-[10px] uppercase text-black">PKK</span></p>
+                                </div>
+                                <div class="bg-yellow-50 p-4 rounded-2xl border border-yellow-100 text-center">
+                                    <p class="text-[10px] font-black text-yellow-600 uppercase mb-1">Berisiko</p>
+                                    <p class="text-2xl font-black text-yellow-700">244 <span
+                                            class="text-[10px] uppercase text-black">PKK</span></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Gap Yield & Loss -->
+                        <div class="flex flex-col md:flex-row gap-6">
+                            <div class="flex-1 bg-black text-white p-6 rounded-[2rem] relative overflow-hidden">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2"
+                                    class="absolute right-[-10px] bottom-[-10px] opacity-10">
+                                    <path d="m22 2-7 20-4-9-9-4Z" />
+                                </svg>
+                                <div class="relative z-10">
+                                    <p class="text-[10px] font-black uppercase tracking-widest text-indigo-400 mb-1">
+                                        Yield Gap (Siklus 2025)</p>
+                                    <p class="text-[8px] font-black uppercase text-white/50 mb-2 tracking-tighter">
+                                        Realisasi vs Potensi Tahun 2025</p>
+                                    <div class="flex items-baseline gap-2">
+                                        <span class="text-4xl font-black text-red-500">8.7%</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex-1 bg-slate-50 p-6 rounded-[2rem] border border-slate-200">
+                                <p class="text-[10px] font-black uppercase tracking-widest text-black mb-1 opacity-60">
+                                    Total Loss (1 Blok Penuh)</p>
+                                <p class="text-[8px] font-black uppercase text-black/40 mb-2 italic tracking-tighter">
+                                    Estimasi Kerugian Luas 29.6 Ha</p>
+                                <div class="flex items-baseline gap-1">
+                                    <span class="text-sm font-black uppercase text-black">Rp</span>
+                                    <span class="text-3xl font-black text-black">569.6</span>
+                                    <span
+                                        class="text-sm font-black uppercase tracking-tighter italic text-black">JUTA</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Detail D001A -->
+                <div class="bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden">
+                    <div class="p-6 bg-slate-900 text-white flex justify-between items-center">
+                        <h4 class="text-xl font-black uppercase tracking-tighter flex items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" class="text-indigo-400">
+                                <path d="M21 21V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v16l3.5-2 3.5 2 3.5-2 3.5 2Z" />
+                            </svg>
+                            Detail Blok D001A (25.8 Ha)
+                        </h4>
+                        <span
+                            class="bg-red-600 text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest animate-pulse">Status:
+                            Darurat</span>
+                    </div>
+                    <div class="p-8 space-y-8">
+                        <!-- Profil Agronomi -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="p-4 bg-indigo-50 rounded-2xl border border-indigo-100 flex items-center gap-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" class="text-indigo-600">
+                                    <path d="M12 2v20M2 12h20" />
+                                </svg>
+                                <div>
+                                    <p class="text-[10px] font-black uppercase text-indigo-400">Tahun Tanam / Usia</p>
+                                    <p class="text-lg font-black text-indigo-900">2008 (18 Tahun)</p>
+                                </div>
+                            </div>
+                            <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 flex items-center gap-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" class="text-slate-600">
+                                    <path
+                                        d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z" />
+                                    <path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65" />
+                                    <path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65" />
+                                </svg>
+                                <div>
+                                    <p class="text-[10px] font-black uppercase text-slate-400">Kerapatan Tanam (SPH)</p>
+                                    <p class="text-lg font-black text-slate-900">135 Pokok/Ha</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Populasi -->
+                        <div class="p-4 bg-slate-900 text-white rounded-2xl flex items-center justify-between">
+                            <div class="text-left">
+                                <p class="text-[10px] font-black uppercase text-indigo-400">Total Populasi Pohon</p>
+                                <p class="text-2xl font-black text-white">3,486 <span
+                                        class="text-xs uppercase">PKK</span></p>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-[10px] font-black uppercase text-red-400">Tanaman Sisip</p>
+                                <p class="text-2xl font-black text-white">0 <span class="text-xs uppercase">PKK</span>
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Distribusi Pohon -->
+                        <div>
+                            <p
+                                class="text-xs font-black uppercase text-black mb-4 tracking-[0.2em] border-l-4 border-indigo-500 pl-3">
+                                Status Kesehatan Pohon Aktual</p>
+                            <div class="grid grid-cols-3 gap-4">
+                                <div class="bg-red-50 p-4 rounded-2xl border border-red-100 text-center">
+                                    <p class="text-[10px] font-black text-red-600 uppercase mb-1">Infeksi Inti</p>
+                                    <p class="text-2xl font-black text-red-700">57 <span
+                                            class="text-[10px] uppercase text-black">PKK</span></p>
+                                </div>
+                                <div class="bg-orange-50 p-4 rounded-2xl border border-orange-100 text-center">
+                                    <p class="text-[10px] font-black text-orange-600 uppercase mb-1">Cincin Api</p>
+                                    <p class="text-2xl font-black text-orange-700">107 <span
+                                            class="text-[10px] uppercase text-black">PKK</span></p>
+                                </div>
+                                <div class="bg-yellow-50 p-4 rounded-2xl border border-yellow-100 text-center">
+                                    <p class="text-[10px] font-black text-yellow-600 uppercase mb-1">Berisiko</p>
+                                    <p class="text-2xl font-black text-yellow-700">200 <span
+                                            class="text-[10px] uppercase text-black">PKK</span></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Gap Yield & Loss -->
+                        <div class="flex flex-col md:flex-row gap-6">
+                            <div class="flex-1 bg-black text-white p-6 rounded-[2rem] relative overflow-hidden">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2"
+                                    class="absolute right-[-10px] bottom-[-10px] opacity-10">
+                                    <path d="m22 2-7 20-4-9-9-4Z" />
+                                </svg>
+                                <div class="relative z-10">
+                                    <p class="text-[10px] font-black uppercase tracking-widest text-indigo-400 mb-1">
+                                        Yield Gap (Siklus 2025)</p>
+                                    <p class="text-[8px] font-black uppercase text-white/50 mb-2 tracking-tighter">
+                                        Realisasi vs Potensi Tahun 2025</p>
+                                    <div class="flex items-baseline gap-2">
+                                        <span class="text-4xl font-black text-red-500">-21.3%</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex-1 bg-slate-50 p-6 rounded-[2rem] border border-slate-200">
+                                <p class="text-[10px] font-black uppercase tracking-widest text-black mb-1 opacity-60">
+                                    Total Loss (1 Blok Penuh)</p>
+                                <p class="text-[8px] font-black uppercase text-black/40 mb-2 italic tracking-tighter">
+                                    Estimasi Kerugian Luas 25.8 Ha</p>
+                                <div class="flex items-baseline gap-1">
+                                    <span class="text-sm font-black uppercase text-black">Rp</span>
+                                    <span class="text-3xl font-black text-black">638.4</span>
+                                    <span
+                                        class="text-sm font-black uppercase tracking-tighter italic text-black">JUTA</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ========== TAB SCENARIOS ========== -->
+        <div id="tab-scenarios" class="space-y-6" style="display: none;">
+
+            <!-- Indikator Status Transisi -->
+            <div
+                class="bg-white p-8 rounded-3xl shadow-sm border border-slate-200 flex flex-col md:flex-row items-center justify-between gap-6">
+                <div class="flex items-center gap-6">
+                    <div class="p-5 bg-orange-100 rounded-3xl">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" class="text-orange-600">
+                            <path
+                                d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-black uppercase tracking-tighter italic">Status Transisi Krisis</h3>
+                        <p class="text-lg font-black">Analisis Faktual: <span
+                                class="text-orange-600 underline decoration-4">STANDAR</span> bergerak menuju <span
+                                class="text-red-600 underline decoration-4">AGRESIF</span></p>
+                    </div>
+                </div>
+                <div
+                    class="flex items-center gap-1 w-full md:w-80 bg-slate-100 h-5 rounded-full overflow-hidden border-2 border-slate-200 shadow-inner">
+                    <div class="h-full bg-slate-400" style="width: 33%"></div>
+                    <div class="h-full bg-orange-500 animate-pulse" style="width: 33%"></div>
+                    <div class="h-full bg-slate-200" style="width: 34%"></div>
+                </div>
+            </div>
+
+            <!-- 3 Skenario Cards -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Konservatif -->
+                <div
+                    class="relative p-8 rounded-[2.5rem] border-4 transition-all bg-slate-50 border-slate-200 opacity-60">
+                    <div class="mb-8">
+                        <span class="text-xs font-black uppercase tracking-widest text-black">STATUS QUO</span>
+                        <h4 class="text-2xl font-black text-black mt-1 uppercase tracking-tighter">1. KONSERVATIF</h4>
+                    </div>
+                    <div class="space-y-5 mb-8 text-sm">
+                        <div class="flex justify-between border-b-2 border-slate-200 pb-3">
+                            <span class="uppercase tracking-widest opacity-60 font-black">Asumsi Dasar</span>
+                            <span class="font-black">Penyakit Dianggap Diam</span>
+                        </div>
+                        <div class="flex justify-between border-b-2 border-slate-200 pb-3">
+                            <span class="uppercase tracking-widest opacity-60 font-black">Respons Oleh</span>
+                            <span class="font-black">Asisten Divisi</span>
+                        </div>
+                        <div class="flex justify-between items-center py-4">
+                            <span class="text-xs uppercase tracking-wider opacity-60 font-black">Potensi Dampak</span>
+                            <span class="text-2xl font-black text-black">Rp 0.2 M (Eksisting)</span>
+                        </div>
+                    </div>
+                    <div
+                        class="p-5 rounded-3xl bg-slate-100 text-black text-sm font-black italic border border-slate-300 leading-relaxed shadow-inner">
+                        "Asumsi penyebaran berhenti. Namun kerugian Rp 0.2 M sudah tidak berkelanjutan secara
+                        operasional."
+                    </div>
+                    <div class="mt-8 flex items-center gap-3 text-xs font-black uppercase tracking-widest">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10" />
+                            <path d="M12 16v-4" />
+                            <path d="M12 8h.01" />
+                        </svg>
+                        Status Analisis: TIDAK REALISTIS
+                    </div>
+                </div>
+
+                <!-- Standar -->
+                <div
+                    class="relative p-8 rounded-[2.5rem] border-4 transition-all bg-white border-orange-500 shadow-2xl scale-135 z-10">
+                    <div
+                        class="absolute -top-4 left-1/2 -translate-x-1/2 bg-orange-600 text-white text-[10px] font-black px-6 py-1.5 rounded-full shadow-lg tracking-widest uppercase">
+                        Target Intervensi</div>
+                    <div class="mb-8">
+                        <span class="text-xs font-black uppercase tracking-widest text-orange-600">THE REAL
+                            THREAT</span>
+                        <h4 class="text-2xl font-black text-black mt-1 uppercase tracking-tighter">2. STANDAR</h4>
+                    </div>
+                    <div class="space-y-5 mb-8 text-sm">
+                        <div class="flex justify-between border-b-2 border-slate-200 pb-3">
+                            <span class="uppercase tracking-widest opacity-60 font-black">Asumsi Dasar</span>
+                            <span class="font-black">Cincin Api Menular</span>
+                        </div>
+                        <div class="flex justify-between border-b-2 border-slate-200 pb-3">
+                            <span class="uppercase tracking-widest opacity-60 font-black">Respons Oleh</span>
+                            <span class="font-black">Manajer Kebun</span>
+                        </div>
+                        <div class="flex justify-between items-center py-4">
+                            <span class="text-xs uppercase tracking-wider opacity-60 font-black">Potensi Dampak</span>
+                            <span class="text-2xl font-black text-orange-600">+ Rp 45.3 Juta</span>
+                        </div>
+                    </div>
+                    <div
+                        class="p-5 rounded-3xl bg-slate-100 text-black text-sm font-black italic border border-slate-300 leading-relaxed shadow-inner">
+                        "Zona Ring tertular aktif. Kepadatan (SPH) jatuh di bawah ambang batas ekonomi."
+                    </div>
+                    <div class="mt-8 flex items-center gap-3 text-xs font-black uppercase tracking-widest">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" class="text-orange-600">
+                            <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" />
+                            <path d="m9 12 2 2 4-4" />
+                        </svg>
+                        Status Analisis: POSISI SAAT INI
+                    </div>
+                </div>
+
+                <!-- Agresif -->
+                <div
+                    class="relative p-8 rounded-[2.5rem] border-4 transition-all bg-slate-50 border-slate-200 opacity-60">
+                    <div class="mb-8">
+                        <span class="text-xs font-black uppercase tracking-widest text-black">OUTBREAK</span>
+                        <h4 class="text-2xl font-black text-black mt-1 uppercase tracking-tighter">3. AGRESIF</h4>
+                    </div>
+                    <div class="space-y-5 mb-8 text-sm">
+                        <div class="flex justify-between border-b-2 border-slate-200 pb-3">
+                            <span class="uppercase tracking-widest opacity-60 font-black">Asumsi Dasar</span>
+                            <span class="font-black">Ledakan Infeksi Masif</span>
+                        </div>
+                        <div class="flex justify-between border-b-2 border-slate-200 pb-3">
+                            <span class="uppercase tracking-widest opacity-60 font-black">Respons Oleh</span>
+                            <span class="font-black">Direksi / GM</span>
+                        </div>
+                        <div class="flex justify-between items-center py-4">
+                            <span class="text-xs uppercase tracking-wider opacity-60 font-black">Potensi Dampak</span>
+                            <span class="text-2xl font-black text-black">+ Rp 152.7 Juta</span>
+                        </div>
+                    </div>
+                    <div
+                        class="p-5 rounded-3xl bg-slate-100 text-black text-sm font-black italic border border-slate-300 leading-relaxed shadow-inner">
+                        "Inokulum jenuh. Blok kolaps total. Membutuhkan Replanting darurat dengan biaya katastropik."
+                    </div>
+                    <div class="mt-8 flex items-center gap-3 text-xs font-black uppercase tracking-widest">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10" />
+                            <path d="M12 16v-4" />
+                            <path d="M12 8h.01" />
+                        </svg>
+                        Status Analisis: AMBANG KOLAPS
+                    </div>
+                </div>
+            </div>
+
+            <!-- Panel The Wake Up Call -->
+            <div
+                class="bg-slate-950 rounded-[3rem] p-10 text-white shadow-2xl relative overflow-hidden border border-white/10">
+                <div class="absolute -bottom-10 -right-10 opacity-10 pointer-events-none rotate-12">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10" />
+                        <path d="m9 12 2 2 4-4" />
+                    </svg>
+                </div>
+                <div class="relative z-10 flex items-center gap-8">
+                    <div class="p-6 bg-white/10 rounded-[2rem] backdrop-blur-lg border border-white/20 shadow-xl">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" class="text-indigo-400">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10" />
+                            <path d="m9 12 2 2 4-4" />
+                        </svg>
+                    </div>
+                    <div class="flex-1">
+                        <h4
+                            class="text-4xl font-black uppercase italic tracking-tighter mb-2 underline decoration-indigo-500 decoration-8 underline-offset-8">
+                            The Wake Up Call</h4>
+                        <p class="text-xl text-white max-w-4xl font-black leading-snug mt-6">
+                            Investasi mitigasi <span
+                                class="text-indigo-400 underline underline-offset-4 decoration-4">Rp 100 Juta</span> vs
+                            Risiko kehilangan aset produktif senilai <span
+                                class="text-red-500 underline underline-offset-4 decoration-4">Rp 56.1 Miliar</span>.
+                            Data biologi dan Gap Produksi 95% adalah bukti konkrit bahwa status saat ini berada di
+                            ambang kolaps (Agresif).
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="max-w-7xl mx-auto mt-8 mb-12 text-center">
+        <p class="text-[10px] uppercase tracking-[0.5em] opacity-40 italic font-black">© 2025 Analisis Krusialitas
+            Agronomi • Divisi D • Area Sampel 55.4 Ha</p>
+    </div>
+
+    <script>
+        // Data for 3 scales
+        const scaleData = {
+            block: { area: '55.4', loss: '1.208', mitigation: '0.1', showNote: false, note: '' },
+            division: { area: '750', loss: '19.1', mitigation: '1.57', showNote: false, note: '' },
+            estate: { area: '2,200', loss: '56.1', mitigation: '4.6', showNote: true, note: 'Subset 2.200 Ha dari 11.000 Ha Kebun' }
+        };
+
+        function setScale(scale) {
+            // Update button states
+            document.getElementById('scale-block').className = 'px-4 py-1.5 rounded-md text-xs font-black transition-all ' + (scale === 'block' ? 'bg-white text-slate-900 shadow-lg' : 'text-white opacity-60 hover:opacity-100');
+            document.getElementById('scale-division').className = 'px-4 py-1.5 rounded-md text-xs font-black transition-all ' + (scale === 'division' ? 'bg-white text-slate-900 shadow-lg' : 'text-white opacity-60 hover:opacity-100');
+            document.getElementById('scale-estate').className = 'px-4 py-1.5 rounded-md text-xs font-black transition-all ' + (scale === 'estate' ? 'bg-white text-slate-900 shadow-lg' : 'text-white opacity-60 hover:opacity-100');
+            
+            // Update values
+            const data = scaleData[scale];
+            document.getElementById('area-value').textContent = data.area;
+            document.getElementById('loss-value').textContent = 'Rp ' + data.loss;
+            document.getElementById('mitigation-value').textContent = 'Rp ' + data.mitigation;
+            
+            // Show/hide note and warning
+            const noteEl = document.getElementById('area-note');
+            const warningEl = document.getElementById('estate-warning');
+            if (data.showNote) {
+                noteEl.textContent = data.note;
+                noteEl.style.display = 'block';
+                noteEl.className = 'text-[10px] text-white opacity-90 mt-1 font-black underline decoration-red-500 tracking-tighter';
+                warningEl.style.display = 'flex';
+            } else {
+                noteEl.style.display = 'none';
+                warningEl.style.display = 'none';
+            }
+        }
+
+        function showTab(tabName) {
+            // Hide all tabs
+            document.getElementById('tab-overview').style.display = 'none';
+            document.getElementById('tab-scenarios').style.display = 'none';
+
+            // Remove active class from all buttons
+            document.getElementById('btn-overview').className = 'tab-button px-6 py-2.5 rounded-lg text-sm font-black transition-all text-black hover:bg-slate-50';
+            document.getElementById('btn-scenarios').className = 'tab-button px-6 py-2.5 rounded-lg text-sm font-black transition-all text-black hover:bg-slate-50';
+
+            // Show selected tab and activate button
+            if (tabName === 'overview') {
+                document.getElementById('tab-overview').style.display = 'block';
+                document.getElementById('btn-overview').className = 'tab-button px-6 py-2.5 rounded-lg text-sm font-black transition-all bg-indigo-600 text-white shadow-md';
+            } else if (tabName === 'scenarios') {
+                document.getElementById('tab-scenarios').style.display = 'block';
+                document.getElementById('btn-scenarios').className = 'tab-button px-6 py-2.5 rounded-lg text-sm font-black transition-all bg-indigo-600 text-white shadow-md';
+            }
+        }
+    </script>
+</body>
+
+</html>

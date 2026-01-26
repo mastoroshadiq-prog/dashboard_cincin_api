@@ -1,0 +1,2 @@
+const openBlockModal = (code) => { document.getElementById('modal' + code).classList.remove('hidden'); };
+const closeBlockModal = (code) => { document.getElementById('modal' + code).classList.add('hidden'); };

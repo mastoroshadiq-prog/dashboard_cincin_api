@@ -1,0 +1,82 @@
+const BLOCKS_DATA = {
+        "D004A": {
+                "code": "D004A",
+                "loss_juta": 146.2,
+                "ar": 10.7,
+                "gap": -4.43,
+                "sph": 119,
+                "risk_score": 85.0,
+                "luas_ha": 22,
+                "severity": "CRITICAL"
+        },
+        "E002A": {
+                "code": "E002A",
+                "loss_juta": 189.5,
+                "ar": 8.3,
+                "gap": -5.69,
+                "sph": 133,
+                "risk_score": 75.0,
+                "luas_ha": 22.2,
+                "severity": "CRITICAL"
+        },
+        "F002A": {
+                "code": "F002A",
+                "loss_juta": 168.0,
+                "ar": 8.1,
+                "gap": -7.37,
+                "sph": 132,
+                "risk_score": 75.0,
+                "luas_ha": 15.2,
+                "severity": "CRITICAL"
+        },
+        "D001A": {
+                "code": "D001A",
+                "loss_juta": 182.3,
+                "ar": 7.5,
+                "gap": -4.71,
+                "sph": 108,
+                "risk_score": 82.5,
+                "luas_ha": 25.8,
+                "severity": "CRITICAL"
+        },
+        "F004A": {
+                "code": "F004A",
+                "loss_juta": 102.6,
+                "ar": 7.4,
+                "gap": -5.7,
+                "sph": 127,
+                "risk_score": 71.25,
+                "luas_ha": 12,
+                "severity": "CRITICAL"
+        },
+        "D003A": {
+                "code": "D003A",
+                "loss_juta": 176.8,
+                "ar": 7.2,
+                "gap": -4.66,
+                "sph": 98,
+                "risk_score": 86.25,
+                "luas_ha": 25.3,
+                "severity": "CRITICAL"
+        },
+        "E003A": {
+                "code": "E003A",
+                "loss_juta": 209.0,
+                "ar": 6.8,
+                "gap": -6.45,
+                "sph": 99,
+                "risk_score": 76.25,
+                "luas_ha": 21.6,
+                "severity": "CRITICAL"
+        },
+        "E001A": {
+                "code": "E001A",
+                "loss_juta": 178.9,
+                "ar": 6.4,
+                "gap": -5.3,
+                "sph": 95,
+                "risk_score": 76.25,
+                "luas_ha": 22.5,
+                "severity": "CRITICAL"
+        }
+};

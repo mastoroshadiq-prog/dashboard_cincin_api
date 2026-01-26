@@ -1,0 +1,346 @@
+[
+  {
+    "block": "A005C",
+    "tt_original": 2023,
+    "tt_sisip": "0.1015625",
+    "yearly_data": {
+      "2023": {
+        "tanam": 115,
+        "sisip": 0
+      }
+    },
+    "latest_tanam_year": 2023,
+    "total_tanam": 115,
+    "status": "TBM",
+    "reason": "Tanam baru 2023 (115 pohon), umur 2 tahun"
+  },
+  {
+    "block": "A006A",
+    "tt_original": 2023,
+    "tt_sisip": "0.11737089201877934",
+    "yearly_data": {
+      "2023": {
+        "tanam": 564,
+        "sisip": 0
+      }
+    },
+    "latest_tanam_year": 2023,
+    "total_tanam": 564,
+    "status": "TBM",
+    "reason": "Tanam baru 2023 (564 pohon), umur 2 tahun"
+  },
+  {
+    "block": "A007A",
+    "tt_original": 2023,
+    "tt_sisip": "0.2529411764705882",
+    "yearly_data": {
+      "2023": {
+        "tanam": 127,
+        "sisip": 0
+      }
+    },
+    "latest_tanam_year": 2023,
+    "total_tanam": 127,
+    "status": "TBM",
+    "reason": "Tanam baru 2023 (127 pohon), umur 2 tahun"
+  },
+  {
+    "block": "B007D",
+    "tt_original": 2023,
+    "tt_sisip": "0",
+    "yearly_data": {
+      "2023": {
+        "tanam": 60,
+        "sisip": 0
+      }
+    },
+    "latest_tanam_year": 2023,
+    "total_tanam": 60,
+    "status": "TBM",
+    "reason": "Tanam baru 2023 (60 pohon), umur 2 tahun"
+  },
+  {
+    "block": "B008E",
+    "tt_original": 2023,
+    "tt_sisip": "0",
+    "yearly_data": {
+      "2023": {
+        "tanam": 251,
+        "sisip": 0
+      }
+    },
+    "latest_tanam_year": 2023,
+    "total_tanam": 251,
+    "status": "TBM",
+    "reason": "Tanam baru 2023 (251 pohon), umur 2 tahun"
+  },
+  {
+    "block": "B009G",
+    "tt_original": 2023,
+    "tt_sisip": "0.17647058823529413",
+    "yearly_data": {
+      "2023": {
+        "tanam": 140,
+        "sisip": 0
+      },
+      "2025": {
+        "tanam": 0,
+        "sisip": 7
+      }
+    },
+    "latest_tanam_year": 2023,
+    "total_tanam": 140,
+    "status": "TBM",
+    "reason": "Tanam baru 2023 (140 pohon), umur 2 tahun"
+  },
+  {
+    "block": "B015D",
+    "tt_original": 2023,
+    "tt_sisip": "0.03600654664484452",
+    "yearly_data": {
+      "2023": {
+        "tanam": 589,
+        "sisip": 0
+      },
+      "2025": {
+        "tanam": 0,
+        "sisip": 15
+      }
+    },
+    "latest_tanam_year": 2023,
+    "total_tanam": 589,
+    "status": "TBM",
+    "reason": "Tanam baru 2023 (589 pohon), umur 2 tahun"
+  },
+  {
+    "block": "B016G",
+    "tt_original": 2023,
+    "tt_sisip": "0.0078125",
+    "yearly_data": {
+      "2023": {
+        "tanam": 127,
+        "sisip": 0
+      }
+    },
+    "latest_tanam_year": 2023,
+    "total_tanam": 127,
+    "status": "TBM",
+    "reason": "Tanam baru 2023 (127 pohon), umur 2 tahun"
+  },
+  {
+    "block": "B017F",
+    "tt_original": 2023,
+    "tt_sisip": "0.005415162454873646",
+    "yearly_data": {
+      "2023": {
+        "tanam": 551,
+        "sisip": 0
+      }
+    },
+    "latest_tanam_year": 2023,
+    "total_tanam": 551,
+    "status": "TBM",
+    "reason": "Tanam baru 2023 (551 pohon), umur 2 tahun"
+  },
+  {
+    "block": "C027B",
+    "tt_original": 2023,
+    "tt_sisip": "0.1111111111111111",
+    "yearly_data": {
+      "2023": {
+        "tanam": 88,
+        "sisip": 0
+      },
+      "2025": {
+        "tanam": 0,
+        "sisip": 5
+      }
+    },
+    "latest_tanam_year": 2023,
+    "total_tanam": 88,
+    "status": "TBM",
+    "reason": "Tanam baru 2023 (88 pohon), umur 2 tahun"
+  },
+  {
+    "block": "D027I",
+    "tt_original": 2023,
+    "tt_sisip": "0.12310606060606061",
+    "yearly_data": {
+      "2023": {
+        "tanam": 463,
+        "sisip": 0
+      },
+      "2025": {
+        "tanam": 0,
+        "sisip": 34
+      }
+    },
+    "latest_tanam_year": 2023,
+    "total_tanam": 463,
+    "status": "TBM",
+    "reason": "Tanam baru 2023 (463 pohon), umur 2 tahun"
+  },
+  {
+    "block": "D028F",
+    "tt_original": 2023,
+    "tt_sisip": "0.20422535211267606",
+    "yearly_data": {
+      "2023": {
+        "tanam": 339,
+        "sisip": 0
+      },
+      "2025": {
+        "tanam": 0,
+        "sisip": 31
+      }
+    },
+    "latest_tanam_year": 2023,
+    "total_tanam": 339,
+    "status": "TBM",
+    "reason": "Tanam baru 2023 (339 pohon), umur 2 tahun"
+  },
+  {
+    "block": "D029B",
+    "tt_original": 2023,
+    "tt_sisip": "0.3380281690140845",
+    "yearly_data": {
+      "2023": {
+        "tanam": 47,
+        "sisip": 0
+      }
+    },
+    "latest_tanam_year": 2023,
+    "total_tanam": 47,
+    "status": "TBM",
+    "reason": "Tanam baru 2023 (47 pohon), umur 2 tahun"
+  },
+  {
+    "block": "D033A",
+    "tt_original": 2023,
+    "tt_sisip": "0.09036144578313253",
+    "yearly_data": {
+      "2023": {
+        "tanam": 302,
+        "sisip": 0
+      },
+      "2025": {
+        "tanam": 0,
+        "sisip": 2
+      }
+    },
+    "latest_tanam_year": 2023,
+    "total_tanam": 302,
+    "status": "TBM",
+    "reason": "Tanam baru 2023 (302 pohon), umur 2 tahun"
+  },
+  {
+    "block": "D034A",
+    "tt_original": 2023,
+    "tt_sisip": "0.21428571428571427",
+    "yearly_data": {
+      "2023": {
+        "tanam": 11,
+        "sisip": 0
+      }
+    },
+    "latest_tanam_year": 2023,
+    "total_tanam": 11,
+    "status": "TBM",
+    "reason": "Tanam baru 2023 (11 pohon), umur 2 tahun"
+  },
+  {
+    "block": "E032B",
+    "tt_original": 2023,
+    "tt_sisip": "0.14710485133020346",
+    "yearly_data": {
+      "2023": {
+        "tanam": 545,
+        "sisip": 0
+      },
+      "2025": {
+        "tanam": 0,
+        "sisip": 18
+      }
+    },
+    "latest_tanam_year": 2023,
+    "total_tanam": 545,
+    "status": "TBM",
+    "reason": "Tanam baru 2023 (545 pohon), umur 2 tahun"
+  },
+  {
+    "block": "F029G",
+    "tt_original": 2023,
+    "tt_sisip": "0.4298245614035088",
+    "yearly_data": {
+      "2023": {
+        "tanam": 65,
+        "sisip": 0
+      },
+      "2024": {
+        "tanam": 0,
+        "sisip": 5
+      },
+      "2025": {
+        "tanam": 0,
+        "sisip": 15
+      }
+    },
+    "latest_tanam_year": 2023,
+    "total_tanam": 65,
+    "status": "TBM",
+    "reason": "Tanam baru 2023 (65 pohon), umur 2 tahun"
+  },
+  {
+    "block": "F030F",
+    "tt_original": 2023,
+    "tt_sisip": "0.2",
+    "yearly_data": {
+      "2023": {
+        "tanam": 148,
+        "sisip": 0
+      },
+      "2025": {
+        "tanam": 0,
+        "sisip": 25
+      }
+    },
+    "latest_tanam_year": 2023,
+    "total_tanam": 148,
+    "status": "TBM",
+    "reason": "Tanam baru 2023 (148 pohon), umur 2 tahun"
+  },
+  {
+    "block": "F031E",
+    "tt_original": 2023,
+    "tt_sisip": "0.11055276381909547",
+    "yearly_data": {
+      "2023": {
+        "tanam": 177,
+        "sisip": 0
+      },
+      "2025": {
+        "tanam": 0,
+        "sisip": 13
+      }
+    },
+    "latest_tanam_year": 2023,
+    "total_tanam": 177,
+    "status": "TBM",
+    "reason": "Tanam baru 2023 (177 pohon), umur 2 tahun"
+  },
+  {
+    "block": "J021A",
+    "tt_original": 2011,
+    "tt_sisip": "N/A",
+    "yearly_data": {
+      "2020": {
+        "tanam": 0,
+        "sisip": 3
+      }
+    },
+    "latest_tanam_year": null,
+    "total_tanam": 0,
+    "status": "Perlu Investigasi",
+    "reason": "TT original: 2011, tidak ada tanam baru"
+  }
+]

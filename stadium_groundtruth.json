@@ -1,0 +1,3830 @@
+{
+  "C007A": {
+    "stadium_12": 70,
+    "stadium_34": 10,
+    "total_infected": 80,
+    "attack_rate_ground_truth": 2.6
+  },
+  "A003A": {
+    "stadium_12": 17,
+    "stadium_34": 1,
+    "total_infected": 18,
+    "attack_rate_ground_truth": 0.48
+  },
+  "C008A": {
+    "stadium_12": 157,
+    "stadium_34": 36,
+    "total_infected": 193,
+    "attack_rate_ground_truth": 5.89
+  },
+  "A003B": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "B003A": {
+    "stadium_12": 38,
+    "stadium_34": 4,
+    "total_infected": 42,
+    "attack_rate_ground_truth": 1.48
+  },
+  "A004A": {
+    "stadium_12": 33,
+    "stadium_34": 2,
+    "total_infected": 35,
+    "attack_rate_ground_truth": 1.47
+  },
+  "B004A": {
+    "stadium_12": 166,
+    "stadium_34": 20,
+    "total_infected": 186,
+    "attack_rate_ground_truth": 5.12
+  },
+  "A004B": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "B005A": {
+    "stadium_12": 279,
+    "stadium_34": 43,
+    "total_infected": 322,
+    "attack_rate_ground_truth": 9.9
+  },
+  "A004C": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "C005A": {
+    "stadium_12": 122,
+    "stadium_34": 15,
+    "total_infected": 137,
+    "attack_rate_ground_truth": 5.84
+  },
+  "A004D": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "C009A": {
+    "stadium_12": 216,
+    "stadium_34": 27,
+    "total_infected": 243,
+    "attack_rate_ground_truth": 7.07
+  },
+  "A004E": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "A005A": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "A005B": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "A005C": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "A006A": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "B001A": {
+    "stadium_12": 3,
+    "stadium_34": 0,
+    "total_infected": 3,
+    "attack_rate_ground_truth": 0.27
+  },
+  "A007A": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "B002A": {
+    "stadium_12": 12,
+    "stadium_34": 1,
+    "total_infected": 13,
+    "attack_rate_ground_truth": 1.47
+  },
+  "A010A": {
+    "stadium_12": 1,
+    "stadium_34": 0,
+    "total_infected": 1,
+    "attack_rate_ground_truth": 0.38
+  },
+  "B006A": {
+    "stadium_12": 58,
+    "stadium_34": 10,
+    "total_infected": 68,
+    "attack_rate_ground_truth": 2.32
+  },
+  "A010B": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "B007A": {
+    "stadium_12": 33,
+    "stadium_34": 9,
+    "total_infected": 42,
+    "attack_rate_ground_truth": 2.19
+  },
+  "A011A": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "C010A": {
+    "stadium_12": 180,
+    "stadium_34": 38,
+    "total_infected": 218,
+    "attack_rate_ground_truth": 6.11
+  },
+  "A011B": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "C011A": {
+    "stadium_12": 160,
+    "stadium_34": 25,
+    "total_infected": 186,
+    "attack_rate_ground_truth": 5.7
+  },
+  "C004A": {
+    "stadium_12": 5,
+    "stadium_34": 3,
+    "total_infected": 8,
+    "attack_rate_ground_truth": 1.12
+  },
+  "B001B": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "C004B": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "B001C": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "C005B": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "B001D": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "C007B": {
+    "stadium_12": 3,
+    "stadium_34": 1,
+    "total_infected": 4,
+    "attack_rate_ground_truth": 0.78
+  },
+  "B001E": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "B001F": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "B002B": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "B009A": {
+    "stadium_12": 1,
+    "stadium_34": 0,
+    "total_infected": 1,
+    "attack_rate_ground_truth": 0.29
+  },
+  "B002C": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "B010A": {
+    "stadium_12": 55,
+    "stadium_34": 15,
+    "total_infected": 70,
+    "attack_rate_ground_truth": 2.18
+  },
+  "B002D": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "B011A": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "B002E": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "C004C": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "B003B": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "B003C": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "B008A": {
+    "stadium_12": 1,
+    "stadium_34": 0,
+    "total_infected": 1,
+    "attack_rate_ground_truth": 0.04
+  },
+  "B003D": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "B009B": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "B003E": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "B006B": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "B006C": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "B008B": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "B006D": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "B009C": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "B010B": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "B007B": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "B011B": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "B007C": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "C005C": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "B007D": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "B008C": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "B008D": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "B008E": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "B009D": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "B011C": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "C004D": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "C005D": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "B009E": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "B009F": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "B009G": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "C003A": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "C004E": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "C004F": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "C005E": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "D001A": {
+    "stadium_12": 93,
+    "stadium_34": 13,
+    "total_infected": 106,
+    "attack_rate_ground_truth": 3.04
+  },
+  "D002A": {
+    "stadium_12": 47,
+    "stadium_34": 0,
+    "total_infected": 47,
+    "attack_rate_ground_truth": 1.49
+  },
+  "F006A": {
+    "stadium_12": 146,
+    "stadium_34": 25,
+    "total_infected": 171,
+    "attack_rate_ground_truth": 5.78
+  },
+  "D003A": {
+    "stadium_12": 89,
+    "stadium_34": 11,
+    "total_infected": 100,
+    "attack_rate_ground_truth": 3.19
+  },
+  "F007A": {
+    "stadium_12": 105,
+    "stadium_34": 25,
+    "total_infected": 130,
+    "attack_rate_ground_truth": 5.3
+  },
+  "D004A": {
+    "stadium_12": 51,
+    "stadium_34": 13,
+    "total_infected": 64,
+    "attack_rate_ground_truth": 2.25
+  },
+  "F008A": {
+    "stadium_12": 158,
+    "stadium_34": 46,
+    "total_infected": 204,
+    "attack_rate_ground_truth": 5.45
+  },
+  "D005A": {
+    "stadium_12": 126,
+    "stadium_34": 44,
+    "total_infected": 170,
+    "attack_rate_ground_truth": 7.2
+  },
+  "D006A": {
+    "stadium_12": 128,
+    "stadium_34": 32,
+    "total_infected": 160,
+    "attack_rate_ground_truth": 6.69
+  },
+  "D007A": {
+    "stadium_12": 90,
+    "stadium_34": 29,
+    "total_infected": 119,
+    "attack_rate_ground_truth": 4.58
+  },
+  "D008A": {
+    "stadium_12": 256,
+    "stadium_34": 84,
+    "total_infected": 340,
+    "attack_rate_ground_truth": 13.39
+  },
+  "D009A": {
+    "stadium_12": 95,
+    "stadium_34": 30,
+    "total_infected": 125,
+    "attack_rate_ground_truth": 4.78
+  },
+  "D010A": {
+    "stadium_12": 60,
+    "stadium_34": 21,
+    "total_infected": 81,
+    "attack_rate_ground_truth": 3.15
+  },
+  "D011A": {
+    "stadium_12": 149,
+    "stadium_34": 24,
+    "total_infected": 173,
+    "attack_rate_ground_truth": 8.01
+  },
+  "D012A": {
+    "stadium_12": 115,
+    "stadium_34": 20,
+    "total_infected": 135,
+    "attack_rate_ground_truth": 5.17
+  },
+  "E001A": {
+    "stadium_12": 80,
+    "stadium_34": 19,
+    "total_infected": 99,
+    "attack_rate_ground_truth": 3.28
+  },
+  "E002A": {
+    "stadium_12": 62,
+    "stadium_34": 12,
+    "total_infected": 74,
+    "attack_rate_ground_truth": 2.59
+  },
+  "E003A": {
+    "stadium_12": 109,
+    "stadium_34": 22,
+    "total_infected": 131,
+    "attack_rate_ground_truth": 4.71
+  },
+  "E004A": {
+    "stadium_12": 117,
+    "stadium_34": 30,
+    "total_infected": 147,
+    "attack_rate_ground_truth": 5.78
+  },
+  "E005A": {
+    "stadium_12": 294,
+    "stadium_34": 72,
+    "total_infected": 366,
+    "attack_rate_ground_truth": 14.05
+  },
+  "E006A": {
+    "stadium_12": 247,
+    "stadium_34": 78,
+    "total_infected": 325,
+    "attack_rate_ground_truth": 12.14
+  },
+  "E007A": {
+    "stadium_12": 286,
+    "stadium_34": 68,
+    "total_infected": 354,
+    "attack_rate_ground_truth": 14.26
+  },
+  "E008A": {
+    "stadium_12": 169,
+    "stadium_34": 51,
+    "total_infected": 220,
+    "attack_rate_ground_truth": 8.0
+  },
+  "E009A": {
+    "stadium_12": 86,
+    "stadium_34": 34,
+    "total_infected": 120,
+    "attack_rate_ground_truth": 4.45
+  },
+  "E010A": {
+    "stadium_12": 140,
+    "stadium_34": 67,
+    "total_infected": 207,
+    "attack_rate_ground_truth": 8.29
+  },
+  "E011A": {
+    "stadium_12": 165,
+    "stadium_34": 39,
+    "total_infected": 204,
+    "attack_rate_ground_truth": 7.69
+  },
+  "E012A": {
+    "stadium_12": 233,
+    "stadium_34": 62,
+    "total_infected": 295,
+    "attack_rate_ground_truth": 11.39
+  },
+  "F001A": {
+    "stadium_12": 61,
+    "stadium_34": 9,
+    "total_infected": 70,
+    "attack_rate_ground_truth": 2.8
+  },
+  "F002A": {
+    "stadium_12": 30,
+    "stadium_34": 9,
+    "total_infected": 39,
+    "attack_rate_ground_truth": 1.82
+  },
+  "F003A": {
+    "stadium_12": 47,
+    "stadium_34": 9,
+    "total_infected": 56,
+    "attack_rate_ground_truth": 3.35
+  },
+  "F004A": {
+    "stadium_12": 25,
+    "stadium_34": 2,
+    "total_infected": 27,
+    "attack_rate_ground_truth": 1.59
+  },
+  "F005A": {
+    "stadium_12": 80,
+    "stadium_34": 40,
+    "total_infected": 120,
+    "attack_rate_ground_truth": 4.92
+  },
+  "F009A": {
+    "stadium_12": 225,
+    "stadium_34": 73,
+    "total_infected": 298,
+    "attack_rate_ground_truth": 11.45
+  },
+  "F010A": {
+    "stadium_12": 195,
+    "stadium_34": 48,
+    "total_infected": 243,
+    "attack_rate_ground_truth": 8.73
+  },
+  "F011A": {
+    "stadium_12": 193,
+    "stadium_34": 31,
+    "total_infected": 224,
+    "attack_rate_ground_truth": 9.24
+  },
+  "F012A": {
+    "stadium_12": 181,
+    "stadium_34": 44,
+    "total_infected": 225,
+    "attack_rate_ground_truth": 7.42
+  },
+  "C020A": {
+    "stadium_12": 77,
+    "stadium_34": 17,
+    "total_infected": 94,
+    "attack_rate_ground_truth": 2.81
+  },
+  "C021A": {
+    "stadium_12": 69,
+    "stadium_34": 13,
+    "total_infected": 82,
+    "attack_rate_ground_truth": 2.4
+  },
+  "E016A": {
+    "stadium_12": 205,
+    "stadium_34": 35,
+    "total_infected": 240,
+    "attack_rate_ground_truth": 9.52
+  },
+  "C022A": {
+    "stadium_12": 131,
+    "stadium_34": 26,
+    "total_infected": 157,
+    "attack_rate_ground_truth": 4.28
+  },
+  "C023A": {
+    "stadium_12": 109,
+    "stadium_34": 21,
+    "total_infected": 130,
+    "attack_rate_ground_truth": 3.9
+  },
+  "D013A": {
+    "stadium_12": 129,
+    "stadium_34": 6,
+    "total_infected": 135,
+    "attack_rate_ground_truth": 4.46
+  },
+  "C024A": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "D014A": {
+    "stadium_12": 120,
+    "stadium_34": 29,
+    "total_infected": 149,
+    "attack_rate_ground_truth": 5.25
+  },
+  "C024B": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "D015A": {
+    "stadium_12": 110,
+    "stadium_34": 24,
+    "total_infected": 134,
+    "attack_rate_ground_truth": 4.87
+  },
+  "D016A": {
+    "stadium_12": 152,
+    "stadium_34": 24,
+    "total_infected": 176,
+    "attack_rate_ground_truth": 5.8
+  },
+  "D017A": {
+    "stadium_12": 96,
+    "stadium_34": 18,
+    "total_infected": 114,
+    "attack_rate_ground_truth": 4.24
+  },
+  "D018A": {
+    "stadium_12": 162,
+    "stadium_34": 26,
+    "total_infected": 188,
+    "attack_rate_ground_truth": 6.2
+  },
+  "D019A": {
+    "stadium_12": 206,
+    "stadium_34": 32,
+    "total_infected": 238,
+    "attack_rate_ground_truth": 7.73
+  },
+  "D020A": {
+    "stadium_12": 234,
+    "stadium_34": 33,
+    "total_infected": 267,
+    "attack_rate_ground_truth": 8.54
+  },
+  "D021A": {
+    "stadium_12": 236,
+    "stadium_34": 36,
+    "total_infected": 272,
+    "attack_rate_ground_truth": 7.68
+  },
+  "D022A": {
+    "stadium_12": 150,
+    "stadium_34": 19,
+    "total_infected": 169,
+    "attack_rate_ground_truth": 4.14
+  },
+  "D023A": {
+    "stadium_12": 134,
+    "stadium_34": 20,
+    "total_infected": 154,
+    "attack_rate_ground_truth": 4.06
+  },
+  "E013A": {
+    "stadium_12": 121,
+    "stadium_34": 28,
+    "total_infected": 149,
+    "attack_rate_ground_truth": 5.0
+  },
+  "E014A": {
+    "stadium_12": 114,
+    "stadium_34": 23,
+    "total_infected": 137,
+    "attack_rate_ground_truth": 4.83
+  },
+  "E015A": {
+    "stadium_12": 126,
+    "stadium_34": 19,
+    "total_infected": 145,
+    "attack_rate_ground_truth": 4.94
+  },
+  "D024A": {
+    "stadium_12": 6,
+    "stadium_34": 1,
+    "total_infected": 7,
+    "attack_rate_ground_truth": 0.45
+  },
+  "E017A": {
+    "stadium_12": 136,
+    "stadium_34": 15,
+    "total_infected": 151,
+    "attack_rate_ground_truth": 5.42
+  },
+  "D024B": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "E018A": {
+    "stadium_12": 153,
+    "stadium_34": 19,
+    "total_infected": 172,
+    "attack_rate_ground_truth": 5.89
+  },
+  "D024C": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "E019A": {
+    "stadium_12": 55,
+    "stadium_34": 8,
+    "total_infected": 63,
+    "attack_rate_ground_truth": 2.04
+  },
+  "D024D": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "E020A": {
+    "stadium_12": 206,
+    "stadium_34": 40,
+    "total_infected": 246,
+    "attack_rate_ground_truth": 8.38
+  },
+  "D024E": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "E021A": {
+    "stadium_12": 271,
+    "stadium_34": 20,
+    "total_infected": 291,
+    "attack_rate_ground_truth": 7.6
+  },
+  "D024F": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "E022A": {
+    "stadium_12": 60,
+    "stadium_34": 11,
+    "total_infected": 71,
+    "attack_rate_ground_truth": 1.74
+  },
+  "D024G": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "E023A": {
+    "stadium_12": 48,
+    "stadium_34": 9,
+    "total_infected": 57,
+    "attack_rate_ground_truth": 1.62
+  },
+  "E024A": {
+    "stadium_12": 22,
+    "stadium_34": 2,
+    "total_infected": 24,
+    "attack_rate_ground_truth": 1.97
+  },
+  "E024B": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "E024C": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "E024D": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "A012A": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "B019A": {
+    "stadium_12": 220,
+    "stadium_34": 45,
+    "total_infected": 265,
+    "attack_rate_ground_truth": 7.58
+  },
+  "A012B": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "B020A": {
+    "stadium_12": 200,
+    "stadium_34": 43,
+    "total_infected": 243,
+    "attack_rate_ground_truth": 6.9
+  },
+  "A012C": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "C012A": {
+    "stadium_12": 277,
+    "stadium_34": 88,
+    "total_infected": 365,
+    "attack_rate_ground_truth": 10.14
+  },
+  "A012D": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "C019A": {
+    "stadium_12": 170,
+    "stadium_34": 34,
+    "total_infected": 204,
+    "attack_rate_ground_truth": 6.06
+  },
+  "A013A": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "A020A": {
+    "stadium_12": 58,
+    "stadium_34": 13,
+    "total_infected": 71,
+    "attack_rate_ground_truth": 5.91
+  },
+  "A013B": {
+    "stadium_12": 1,
+    "stadium_34": 0,
+    "total_infected": 1,
+    "attack_rate_ground_truth": 0.08
+  },
+  "B018A": {
+    "stadium_12": 51,
+    "stadium_34": 16,
+    "total_infected": 67,
+    "attack_rate_ground_truth": 1.57
+  },
+  "A013C": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "C014A": {
+    "stadium_12": 151,
+    "stadium_34": 36,
+    "total_infected": 187,
+    "attack_rate_ground_truth": 5.01
+  },
+  "A013D": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "C018A": {
+    "stadium_12": 109,
+    "stadium_34": 21,
+    "total_infected": 130,
+    "attack_rate_ground_truth": 3.85
+  },
+  "A013E": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "A018A": {
+    "stadium_12": 1,
+    "stadium_34": 0,
+    "total_infected": 1,
+    "attack_rate_ground_truth": 0.21
+  },
+  "A014A": {
+    "stadium_12": 1,
+    "stadium_34": 0,
+    "total_infected": 1,
+    "attack_rate_ground_truth": 0.08
+  },
+  "A019A": {
+    "stadium_12": 65,
+    "stadium_34": 22,
+    "total_infected": 87,
+    "attack_rate_ground_truth": 7.03
+  },
+  "A014B": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "A021A": {
+    "stadium_12": 25,
+    "stadium_34": 5,
+    "total_infected": 30,
+    "attack_rate_ground_truth": 3.08
+  },
+  "A014C": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "B014A": {
+    "stadium_12": 50,
+    "stadium_34": 18,
+    "total_infected": 68,
+    "attack_rate_ground_truth": 13.15
+  },
+  "A014D": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "B015A": {
+    "stadium_12": 1,
+    "stadium_34": 0,
+    "total_infected": 1,
+    "attack_rate_ground_truth": 1.64
+  },
+  "B016A": {
+    "stadium_12": 1,
+    "stadium_34": 0,
+    "total_infected": 1,
+    "attack_rate_ground_truth": 0.72
+  },
+  "A018B": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "B017A": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "A018C": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "B021A": {
+    "stadium_12": 174,
+    "stadium_34": 33,
+    "total_infected": 207,
+    "attack_rate_ground_truth": 5.75
+  },
+  "B022A": {
+    "stadium_12": 117,
+    "stadium_34": 21,
+    "total_infected": 138,
+    "attack_rate_ground_truth": 11.4
+  },
+  "A019B": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "B022B": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "A019C": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "C013A": {
+    "stadium_12": 216,
+    "stadium_34": 65,
+    "total_infected": 281,
+    "attack_rate_ground_truth": 7.79
+  },
+  "C015A": {
+    "stadium_12": 119,
+    "stadium_34": 37,
+    "total_infected": 156,
+    "attack_rate_ground_truth": 4.77
+  },
+  "A020B": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "C016A": {
+    "stadium_12": 165,
+    "stadium_34": 47,
+    "total_infected": 212,
+    "attack_rate_ground_truth": 5.65
+  },
+  "A020C": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "C017A": {
+    "stadium_12": 141,
+    "stadium_34": 42,
+    "total_infected": 183,
+    "attack_rate_ground_truth": 5.22
+  },
+  "C018B": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "A021B": {
+    "stadium_12": 6,
+    "stadium_34": 0,
+    "total_infected": 6,
+    "attack_rate_ground_truth": 1.08
+  },
+  "B012A": {
+    "stadium_12": 13,
+    "stadium_34": 1,
+    "total_infected": 14,
+    "attack_rate_ground_truth": 0.39
+  },
+  "B012B": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "B012C": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "B013A": {
+    "stadium_12": 20,
+    "stadium_34": 3,
+    "total_infected": 23,
+    "attack_rate_ground_truth": 0.7
+  },
+  "B012D": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "B013B": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "B013C": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "B015B": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "B014B": {
+    "stadium_12": 1,
+    "stadium_34": 0,
+    "total_infected": 1,
+    "attack_rate_ground_truth": 0.13
+  },
+  "B016B": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "B014C": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "B020B": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "B014D": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "B021B": {
+    "stadium_12": 13,
+    "stadium_34": 4,
+    "total_infected": 17,
+    "attack_rate_ground_truth": 8.95
+  },
+  "B014E": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "B015C": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "B015D": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "B015E": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "B016C": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "B017B": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "B016D": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "B016E": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "B016F": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "B016G": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "B016H": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "B017C": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "B017D": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "B017E": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "B017F": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "B017G": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "B024A": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "B023A": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "B024B": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "G005A": {
+    "stadium_12": 30,
+    "stadium_34": 3,
+    "total_infected": 33,
+    "attack_rate_ground_truth": 1.13
+  },
+  "G006A": {
+    "stadium_12": 29,
+    "stadium_34": 0,
+    "total_infected": 29,
+    "attack_rate_ground_truth": 0.97
+  },
+  "G007A": {
+    "stadium_12": 21,
+    "stadium_34": 2,
+    "total_infected": 23,
+    "attack_rate_ground_truth": 0.82
+  },
+  "G008A": {
+    "stadium_12": 17,
+    "stadium_34": 3,
+    "total_infected": 20,
+    "attack_rate_ground_truth": 0.69
+  },
+  "G001A": {
+    "stadium_12": 3,
+    "stadium_34": 1,
+    "total_infected": 4,
+    "attack_rate_ground_truth": 0.34
+  },
+  "G009A": {
+    "stadium_12": 93,
+    "stadium_34": 24,
+    "total_infected": 117,
+    "attack_rate_ground_truth": 4.08
+  },
+  "G010A": {
+    "stadium_12": 41,
+    "stadium_34": 17,
+    "total_infected": 58,
+    "attack_rate_ground_truth": 1.41
+  },
+  "G002A": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "G011A": {
+    "stadium_12": 23,
+    "stadium_34": 13,
+    "total_infected": 36,
+    "attack_rate_ground_truth": 1.38
+  },
+  "G003A": {
+    "stadium_12": 2,
+    "stadium_34": 0,
+    "total_infected": 2,
+    "attack_rate_ground_truth": 0.58
+  },
+  "G012A": {
+    "stadium_12": 30,
+    "stadium_34": 4,
+    "total_infected": 34,
+    "attack_rate_ground_truth": 1.62
+  },
+  "G004A": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "H009A": {
+    "stadium_12": 64,
+    "stadium_34": 15,
+    "total_infected": 79,
+    "attack_rate_ground_truth": 1.74
+  },
+  "H010A": {
+    "stadium_12": 11,
+    "stadium_34": 1,
+    "total_infected": 12,
+    "attack_rate_ground_truth": 0.38
+  },
+  "H005A": {
+    "stadium_12": 23,
+    "stadium_34": 2,
+    "total_infected": 25,
+    "attack_rate_ground_truth": 0.75
+  },
+  "H006A": {
+    "stadium_12": 39,
+    "stadium_34": 3,
+    "total_infected": 42,
+    "attack_rate_ground_truth": 1.63
+  },
+  "H011A": {
+    "stadium_12": 26,
+    "stadium_34": 0,
+    "total_infected": 26,
+    "attack_rate_ground_truth": 0.78
+  },
+  "H012A": {
+    "stadium_12": 35,
+    "stadium_34": 8,
+    "total_infected": 43,
+    "attack_rate_ground_truth": 1.64
+  },
+  "I012A": {
+    "stadium_12": 8,
+    "stadium_34": 1,
+    "total_infected": 9,
+    "attack_rate_ground_truth": 0.23
+  },
+  "I014A": {
+    "stadium_12": 35,
+    "stadium_34": 14,
+    "total_infected": 49,
+    "attack_rate_ground_truth": 1.35
+  },
+  "I015A": {
+    "stadium_12": 38,
+    "stadium_34": 15,
+    "total_infected": 53,
+    "attack_rate_ground_truth": 1.32
+  },
+  "J012A": {
+    "stadium_12": 11,
+    "stadium_34": 1,
+    "total_infected": 12,
+    "attack_rate_ground_truth": 0.32
+  },
+  "J013A": {
+    "stadium_12": 35,
+    "stadium_34": 3,
+    "total_infected": 38,
+    "attack_rate_ground_truth": 0.9
+  },
+  "H007A": {
+    "stadium_12": 17,
+    "stadium_34": 4,
+    "total_infected": 21,
+    "attack_rate_ground_truth": 0.97
+  },
+  "J014A": {
+    "stadium_12": 19,
+    "stadium_34": 0,
+    "total_infected": 19,
+    "attack_rate_ground_truth": 0.48
+  },
+  "H008A": {
+    "stadium_12": 2,
+    "stadium_34": 0,
+    "total_infected": 2,
+    "attack_rate_ground_truth": 0.14
+  },
+  "J015A": {
+    "stadium_12": 6,
+    "stadium_34": 1,
+    "total_infected": 7,
+    "attack_rate_ground_truth": 0.2
+  },
+  "I010A": {
+    "stadium_12": 4,
+    "stadium_34": 4,
+    "total_infected": 8,
+    "attack_rate_ground_truth": 0.32
+  },
+  "J011A": {
+    "stadium_12": 18,
+    "stadium_34": 0,
+    "total_infected": 18,
+    "attack_rate_ground_truth": 1.34
+  },
+  "I011A": {
+    "stadium_12": 22,
+    "stadium_34": 1,
+    "total_infected": 23,
+    "attack_rate_ground_truth": 0.58
+  },
+  "K012A": {
+    "stadium_12": 2,
+    "stadium_34": 0,
+    "total_infected": 2,
+    "attack_rate_ground_truth": 0.48
+  },
+  "I013A": {
+    "stadium_12": 20,
+    "stadium_34": 6,
+    "total_infected": 26,
+    "attack_rate_ground_truth": 0.64
+  },
+  "K013A": {
+    "stadium_12": 1,
+    "stadium_34": 0,
+    "total_infected": 1,
+    "attack_rate_ground_truth": 0.05
+  },
+  "K014A": {
+    "stadium_12": 3,
+    "stadium_34": 0,
+    "total_infected": 3,
+    "attack_rate_ground_truth": 0.09
+  },
+  "K015A": {
+    "stadium_12": 9,
+    "stadium_34": 0,
+    "total_infected": 9,
+    "attack_rate_ground_truth": 0.19
+  },
+  "F013A": {
+    "stadium_12": 36,
+    "stadium_34": 6,
+    "total_infected": 42,
+    "attack_rate_ground_truth": 1.47
+  },
+  "F014A": {
+    "stadium_12": 43,
+    "stadium_34": 9,
+    "total_infected": 52,
+    "attack_rate_ground_truth": 1.68
+  },
+  "F016A": {
+    "stadium_12": 62,
+    "stadium_34": 13,
+    "total_infected": 75,
+    "attack_rate_ground_truth": 2.76
+  },
+  "G013A": {
+    "stadium_12": 30,
+    "stadium_34": 6,
+    "total_infected": 36,
+    "attack_rate_ground_truth": 1.18
+  },
+  "G014A": {
+    "stadium_12": 81,
+    "stadium_34": 27,
+    "total_infected": 108,
+    "attack_rate_ground_truth": 3.41
+  },
+  "G015A": {
+    "stadium_12": 40,
+    "stadium_34": 6,
+    "total_infected": 46,
+    "attack_rate_ground_truth": 8.53
+  },
+  "G016A": {
+    "stadium_12": 55,
+    "stadium_34": 9,
+    "total_infected": 64,
+    "attack_rate_ground_truth": 6.44
+  },
+  "G017A": {
+    "stadium_12": 62,
+    "stadium_34": 29,
+    "total_infected": 91,
+    "attack_rate_ground_truth": 3.39
+  },
+  "G018A": {
+    "stadium_12": 90,
+    "stadium_34": 32,
+    "total_infected": 122,
+    "attack_rate_ground_truth": 4.25
+  },
+  "F015A": {
+    "stadium_12": 27,
+    "stadium_34": 3,
+    "total_infected": 30,
+    "attack_rate_ground_truth": 1.17
+  },
+  "H013A": {
+    "stadium_12": 78,
+    "stadium_34": 24,
+    "total_infected": 102,
+    "attack_rate_ground_truth": 2.46
+  },
+  "H014A": {
+    "stadium_12": 33,
+    "stadium_34": 7,
+    "total_infected": 40,
+    "attack_rate_ground_truth": 1.44
+  },
+  "F017A": {
+    "stadium_12": 63,
+    "stadium_34": 17,
+    "total_infected": 80,
+    "attack_rate_ground_truth": 3.24
+  },
+  "H015A": {
+    "stadium_12": 92,
+    "stadium_34": 18,
+    "total_infected": 110,
+    "attack_rate_ground_truth": 3.64
+  },
+  "F018A": {
+    "stadium_12": 80,
+    "stadium_34": 26,
+    "total_infected": 106,
+    "attack_rate_ground_truth": 4.12
+  },
+  "H017A": {
+    "stadium_12": 48,
+    "stadium_34": 11,
+    "total_infected": 59,
+    "attack_rate_ground_truth": 2.3
+  },
+  "F019A": {
+    "stadium_12": 93,
+    "stadium_34": 26,
+    "total_infected": 119,
+    "attack_rate_ground_truth": 4.71
+  },
+  "H018A": {
+    "stadium_12": 66,
+    "stadium_34": 10,
+    "total_infected": 76,
+    "attack_rate_ground_truth": 2.96
+  },
+  "F020A": {
+    "stadium_12": 64,
+    "stadium_34": 16,
+    "total_infected": 80,
+    "attack_rate_ground_truth": 2.63
+  },
+  "H019A": {
+    "stadium_12": 54,
+    "stadium_34": 9,
+    "total_infected": 63,
+    "attack_rate_ground_truth": 2.34
+  },
+  "F021A": {
+    "stadium_12": 74,
+    "stadium_34": 13,
+    "total_infected": 87,
+    "attack_rate_ground_truth": 2.31
+  },
+  "F022A": {
+    "stadium_12": 26,
+    "stadium_34": 6,
+    "total_infected": 32,
+    "attack_rate_ground_truth": 0.84
+  },
+  "F023A": {
+    "stadium_12": 38,
+    "stadium_34": 10,
+    "total_infected": 48,
+    "attack_rate_ground_truth": 1.3
+  },
+  "F024A": {
+    "stadium_12": 11,
+    "stadium_34": 0,
+    "total_infected": 11,
+    "attack_rate_ground_truth": 0.92
+  },
+  "G015B": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "G019A": {
+    "stadium_12": 62,
+    "stadium_34": 22,
+    "total_infected": 84,
+    "attack_rate_ground_truth": 3.04
+  },
+  "G020A": {
+    "stadium_12": 72,
+    "stadium_34": 16,
+    "total_infected": 88,
+    "attack_rate_ground_truth": 3.09
+  },
+  "G016B": {
+    "stadium_12": 4,
+    "stadium_34": 0,
+    "total_infected": 4,
+    "attack_rate_ground_truth": 13.33
+  },
+  "H016A": {
+    "stadium_12": 40,
+    "stadium_34": 6,
+    "total_infected": 46,
+    "attack_rate_ground_truth": 1.9
+  },
+  "G016C": {
+    "stadium_12": 1,
+    "stadium_34": 0,
+    "total_infected": 1,
+    "attack_rate_ground_truth": 0.6
+  },
+  "H020A": {
+    "stadium_12": 34,
+    "stadium_34": 3,
+    "total_infected": 37,
+    "attack_rate_ground_truth": 1.37
+  },
+  "H021A": {
+    "stadium_12": 36,
+    "stadium_34": 10,
+    "total_infected": 46,
+    "attack_rate_ground_truth": 1.77
+  },
+  "H022A": {
+    "stadium_12": 49,
+    "stadium_34": 9,
+    "total_infected": 58,
+    "attack_rate_ground_truth": 1.93
+  },
+  "G021A": {
+    "stadium_12": 2,
+    "stadium_34": 0,
+    "total_infected": 2,
+    "attack_rate_ground_truth": 0.18
+  },
+  "G022A": {
+    "stadium_12": 6,
+    "stadium_34": 0,
+    "total_infected": 6,
+    "attack_rate_ground_truth": 0.44
+  },
+  "G021B": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "G023A": {
+    "stadium_12": 32,
+    "stadium_34": 9,
+    "total_infected": 41,
+    "attack_rate_ground_truth": 1.08
+  },
+  "H022B": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "G022B": {
+    "stadium_12": 3,
+    "stadium_34": 0,
+    "total_infected": 3,
+    "attack_rate_ground_truth": 0.68
+  },
+  "H023A": {
+    "stadium_12": 21,
+    "stadium_34": 0,
+    "total_infected": 21,
+    "attack_rate_ground_truth": 1.62
+  },
+  "G023B": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "G023C": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "G023D": {
+    "stadium_12": 12,
+    "stadium_34": 0,
+    "total_infected": 12,
+    "attack_rate_ground_truth": 57.14
+  },
+  "H023B": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "I016A": {
+    "stadium_12": 12,
+    "stadium_34": 3,
+    "total_infected": 15,
+    "attack_rate_ground_truth": 0.45
+  },
+  "I017A": {
+    "stadium_12": 64,
+    "stadium_34": 15,
+    "total_infected": 79,
+    "attack_rate_ground_truth": 3.73
+  },
+  "I018A": {
+    "stadium_12": 66,
+    "stadium_34": 8,
+    "total_infected": 74,
+    "attack_rate_ground_truth": 1.72
+  },
+  "I019A": {
+    "stadium_12": 106,
+    "stadium_34": 17,
+    "total_infected": 123,
+    "attack_rate_ground_truth": 3.68
+  },
+  "I020A": {
+    "stadium_12": 42,
+    "stadium_34": 5,
+    "total_infected": 47,
+    "attack_rate_ground_truth": 1.31
+  },
+  "I021A": {
+    "stadium_12": 48,
+    "stadium_34": 4,
+    "total_infected": 52,
+    "attack_rate_ground_truth": 1.46
+  },
+  "J016A": {
+    "stadium_12": 60,
+    "stadium_34": 17,
+    "total_infected": 77,
+    "attack_rate_ground_truth": 1.86
+  },
+  "H023C": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "J017A": {
+    "stadium_12": 46,
+    "stadium_34": 18,
+    "total_infected": 64,
+    "attack_rate_ground_truth": 2.44
+  },
+  "J018A": {
+    "stadium_12": 130,
+    "stadium_34": 13,
+    "total_infected": 143,
+    "attack_rate_ground_truth": 2.95
+  },
+  "J019A": {
+    "stadium_12": 101,
+    "stadium_34": 23,
+    "total_infected": 124,
+    "attack_rate_ground_truth": 3.0
+  },
+  "J020A": {
+    "stadium_12": 114,
+    "stadium_34": 31,
+    "total_infected": 145,
+    "attack_rate_ground_truth": 3.44
+  },
+  "L022B": {
+    "stadium_12": 1,
+    "stadium_34": 0,
+    "total_infected": 1,
+    "attack_rate_ground_truth": 0.06
+  },
+  "L023B": {
+    "stadium_12": 33,
+    "stadium_34": 9,
+    "total_infected": 42,
+    "attack_rate_ground_truth": 1.8
+  },
+  "I023A": {
+    "stadium_12": 30,
+    "stadium_34": 3,
+    "total_infected": 33,
+    "attack_rate_ground_truth": 1.57
+  },
+  "I022A": {
+    "stadium_12": 32,
+    "stadium_34": 11,
+    "total_infected": 43,
+    "attack_rate_ground_truth": 1.24
+  },
+  "I022B": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "J022A": {
+    "stadium_12": 22,
+    "stadium_34": 0,
+    "total_infected": 22,
+    "attack_rate_ground_truth": 0.76
+  },
+  "J023A": {
+    "stadium_12": 49,
+    "stadium_34": 8,
+    "total_infected": 57,
+    "attack_rate_ground_truth": 1.45
+  },
+  "I023B": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "K018A": {
+    "stadium_12": 114,
+    "stadium_34": 37,
+    "total_infected": 151,
+    "attack_rate_ground_truth": 2.8
+  },
+  "I023C": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "K016A": {
+    "stadium_12": 25,
+    "stadium_34": 3,
+    "total_infected": 28,
+    "attack_rate_ground_truth": 0.62
+  },
+  "K017A": {
+    "stadium_12": 13,
+    "stadium_34": 0,
+    "total_infected": 13,
+    "attack_rate_ground_truth": 0.37
+  },
+  "K019A": {
+    "stadium_12": 41,
+    "stadium_34": 3,
+    "total_infected": 44,
+    "attack_rate_ground_truth": 1.32
+  },
+  "K020A": {
+    "stadium_12": 1,
+    "stadium_34": 0,
+    "total_infected": 1,
+    "attack_rate_ground_truth": 0.06
+  },
+  "K023A": {
+    "stadium_12": 2,
+    "stadium_34": 1,
+    "total_infected": 3,
+    "attack_rate_ground_truth": 0.29
+  },
+  "J021A": {
+    "stadium_12": 64,
+    "stadium_34": 16,
+    "total_infected": 80,
+    "attack_rate_ground_truth": 2.05
+  },
+  "L021B": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "J022B": {
+    "stadium_12": 6,
+    "stadium_34": 0,
+    "total_infected": 6,
+    "attack_rate_ground_truth": 1.09
+  },
+  "K019B": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "K020B": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "K021A": {
+    "stadium_12": 1,
+    "stadium_34": 0,
+    "total_infected": 1,
+    "attack_rate_ground_truth": 0.02
+  },
+  "K022A": {
+    "stadium_12": 1,
+    "stadium_34": 0,
+    "total_infected": 1,
+    "attack_rate_ground_truth": 0.02
+  },
+  "K023B": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "L020A": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "L021A": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "L022A": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "L023A": {
+    "stadium_12": 2,
+    "stadium_34": 0,
+    "total_infected": 2,
+    "attack_rate_ground_truth": 0.19
+  },
+  "H026A": {
+    "stadium_12": 83,
+    "stadium_34": 1,
+    "total_infected": 84,
+    "attack_rate_ground_truth": 2.12
+  },
+  "L024B": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "H025A": {
+    "stadium_12": 36,
+    "stadium_34": 10,
+    "total_infected": 46,
+    "attack_rate_ground_truth": 1.39
+  },
+  "H027A": {
+    "stadium_12": 24,
+    "stadium_34": 6,
+    "total_infected": 30,
+    "attack_rate_ground_truth": 0.86
+  },
+  "H028A": {
+    "stadium_12": 24,
+    "stadium_34": 13,
+    "total_infected": 37,
+    "attack_rate_ground_truth": 1.04
+  },
+  "H029A": {
+    "stadium_12": 22,
+    "stadium_34": 2,
+    "total_infected": 24,
+    "attack_rate_ground_truth": 0.96
+  },
+  "H030A": {
+    "stadium_12": 16,
+    "stadium_34": 8,
+    "total_infected": 24,
+    "attack_rate_ground_truth": 0.71
+  },
+  "I025A": {
+    "stadium_12": 73,
+    "stadium_34": 11,
+    "total_infected": 84,
+    "attack_rate_ground_truth": 2.47
+  },
+  "I026A": {
+    "stadium_12": 39,
+    "stadium_34": 10,
+    "total_infected": 49,
+    "attack_rate_ground_truth": 1.24
+  },
+  "I027A": {
+    "stadium_12": 118,
+    "stadium_34": 80,
+    "total_infected": 198,
+    "attack_rate_ground_truth": 5.26
+  },
+  "H024A": {
+    "stadium_12": 10,
+    "stadium_34": 2,
+    "total_infected": 12,
+    "attack_rate_ground_truth": 0.66
+  },
+  "I028A": {
+    "stadium_12": 25,
+    "stadium_34": 4,
+    "total_infected": 29,
+    "attack_rate_ground_truth": 0.81
+  },
+  "H024B": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "I029A": {
+    "stadium_12": 37,
+    "stadium_34": 1,
+    "total_infected": 38,
+    "attack_rate_ground_truth": 1.09
+  },
+  "I030A": {
+    "stadium_12": 19,
+    "stadium_34": 2,
+    "total_infected": 21,
+    "attack_rate_ground_truth": 0.6
+  },
+  "H025B": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "J024A": {
+    "stadium_12": 109,
+    "stadium_34": 37,
+    "total_infected": 146,
+    "attack_rate_ground_truth": 3.44
+  },
+  "H025C": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "J025A": {
+    "stadium_12": 47,
+    "stadium_34": 21,
+    "total_infected": 68,
+    "attack_rate_ground_truth": 2.04
+  },
+  "J026A": {
+    "stadium_12": 48,
+    "stadium_34": 21,
+    "total_infected": 69,
+    "attack_rate_ground_truth": 1.67
+  },
+  "J027A": {
+    "stadium_12": 9,
+    "stadium_34": 3,
+    "total_infected": 12,
+    "attack_rate_ground_truth": 0.33
+  },
+  "K024A": {
+    "stadium_12": 15,
+    "stadium_34": 4,
+    "total_infected": 19,
+    "attack_rate_ground_truth": 0.48
+  },
+  "K025A": {
+    "stadium_12": 46,
+    "stadium_34": 8,
+    "total_infected": 54,
+    "attack_rate_ground_truth": 1.85
+  },
+  "I024A": {
+    "stadium_12": 40,
+    "stadium_34": 7,
+    "total_infected": 47,
+    "attack_rate_ground_truth": 1.81
+  },
+  "I024B": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "J028A": {
+    "stadium_12": 15,
+    "stadium_34": 1,
+    "total_infected": 16,
+    "attack_rate_ground_truth": 0.45
+  },
+  "J029A": {
+    "stadium_12": 9,
+    "stadium_34": 0,
+    "total_infected": 9,
+    "attack_rate_ground_truth": 0.24
+  },
+  "J030A": {
+    "stadium_12": 25,
+    "stadium_34": 0,
+    "total_infected": 25,
+    "attack_rate_ground_truth": 0.69
+  },
+  "K026A": {
+    "stadium_12": 14,
+    "stadium_34": 2,
+    "total_infected": 16,
+    "attack_rate_ground_truth": 0.38
+  },
+  "K027A": {
+    "stadium_12": 2,
+    "stadium_34": 0,
+    "total_infected": 2,
+    "attack_rate_ground_truth": 0.06
+  },
+  "K028A": {
+    "stadium_12": 3,
+    "stadium_34": 0,
+    "total_infected": 3,
+    "attack_rate_ground_truth": 0.09
+  },
+  "K029A": {
+    "stadium_12": 105,
+    "stadium_34": 2,
+    "total_infected": 107,
+    "attack_rate_ground_truth": 2.92
+  },
+  "K030A": {
+    "stadium_12": 3,
+    "stadium_34": 0,
+    "total_infected": 3,
+    "attack_rate_ground_truth": 0.08
+  },
+  "L025B": {
+    "stadium_12": 1,
+    "stadium_34": 0,
+    "total_infected": 1,
+    "attack_rate_ground_truth": 0.09
+  },
+  "L028A": {
+    "stadium_12": 2,
+    "stadium_34": 0,
+    "total_infected": 2,
+    "attack_rate_ground_truth": 0.58
+  },
+  "L029A": {
+    "stadium_12": 3,
+    "stadium_34": 2,
+    "total_infected": 5,
+    "attack_rate_ground_truth": 0.32
+  },
+  "L030A": {
+    "stadium_12": 5,
+    "stadium_34": 0,
+    "total_infected": 5,
+    "attack_rate_ground_truth": 0.16
+  },
+  "K024B": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "L024A": {
+    "stadium_12": 1,
+    "stadium_34": 0,
+    "total_infected": 1,
+    "attack_rate_ground_truth": 0.08
+  },
+  "F026A": {
+    "stadium_12": 137,
+    "stadium_34": 16,
+    "total_infected": 153,
+    "attack_rate_ground_truth": 4.0
+  },
+  "F032A": {
+    "stadium_12": 36,
+    "stadium_34": 1,
+    "total_infected": 37,
+    "attack_rate_ground_truth": 0.98
+  },
+  "K027B": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "F033A": {
+    "stadium_12": 14,
+    "stadium_34": 0,
+    "total_infected": 14,
+    "attack_rate_ground_truth": 0.4
+  },
+  "G025A": {
+    "stadium_12": 47,
+    "stadium_34": 6,
+    "total_infected": 53,
+    "attack_rate_ground_truth": 1.83
+  },
+  "G026A": {
+    "stadium_12": 133,
+    "stadium_34": 11,
+    "total_infected": 144,
+    "attack_rate_ground_truth": 3.79
+  },
+  "G031A": {
+    "stadium_12": 130,
+    "stadium_34": 19,
+    "total_infected": 149,
+    "attack_rate_ground_truth": 3.65
+  },
+  "E026A": {
+    "stadium_12": 45,
+    "stadium_34": 1,
+    "total_infected": 46,
+    "attack_rate_ground_truth": 2.07
+  },
+  "E027A": {
+    "stadium_12": 48,
+    "stadium_34": 2,
+    "total_infected": 50,
+    "attack_rate_ground_truth": 1.71
+  },
+  "F025A": {
+    "stadium_12": 21,
+    "stadium_34": 2,
+    "total_infected": 23,
+    "attack_rate_ground_truth": 2.54
+  },
+  "F027A": {
+    "stadium_12": 151,
+    "stadium_34": 17,
+    "total_infected": 168,
+    "attack_rate_ground_truth": 4.25
+  },
+  "L028B": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "G027A": {
+    "stadium_12": 61,
+    "stadium_34": 13,
+    "total_infected": 74,
+    "attack_rate_ground_truth": 1.79
+  },
+  "G030A": {
+    "stadium_12": 57,
+    "stadium_34": 6,
+    "total_infected": 63,
+    "attack_rate_ground_truth": 1.68
+  },
+  "L029B": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "G032A": {
+    "stadium_12": 63,
+    "stadium_34": 11,
+    "total_infected": 74,
+    "attack_rate_ground_truth": 1.97
+  },
+  "G033A": {
+    "stadium_12": 95,
+    "stadium_34": 6,
+    "total_infected": 101,
+    "attack_rate_ground_truth": 3.23
+  },
+  "L030B": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "E033A": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "C027A": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "G025B": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "C027B": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "G028A": {
+    "stadium_12": 37,
+    "stadium_34": 2,
+    "total_infected": 39,
+    "attack_rate_ground_truth": 0.96
+  },
+  "C028A": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "G029A": {
+    "stadium_12": 39,
+    "stadium_34": 6,
+    "total_infected": 45,
+    "attack_rate_ground_truth": 1.35
+  },
+  "C029A": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "D027A": {
+    "stadium_12": 1,
+    "stadium_34": 0,
+    "total_infected": 1,
+    "attack_rate_ground_truth": 0.11
+  },
+  "D026A": {
+    "stadium_12": 2,
+    "stadium_34": 0,
+    "total_infected": 2,
+    "attack_rate_ground_truth": 1.94
+  },
+  "E027B": {
+    "stadium_12": 21,
+    "stadium_34": 0,
+    "total_infected": 21,
+    "attack_rate_ground_truth": 3.87
+  },
+  "D027B": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "D028A": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "D027C": {
+    "stadium_12": 1,
+    "stadium_34": 0,
+    "total_infected": 1,
+    "attack_rate_ground_truth": 1.09
+  },
+  "F025B": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "D027D": {
+    "stadium_12": 1,
+    "stadium_34": 1,
+    "total_infected": 2,
+    "attack_rate_ground_truth": 0.41
+  },
+  "D027E": {
+    "stadium_12": 1,
+    "stadium_34": 1,
+    "total_infected": 2,
+    "attack_rate_ground_truth": 0.29
+  },
+  "D028B": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "D027F": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "E026B": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "D027G": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "F025C": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "D027H": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "F029A": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "D027I": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "F030A": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "G025C": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "D028C": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "F029B": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "D028D": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "F030B": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "D028E": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "F031A": {
+    "stadium_12": 1,
+    "stadium_34": 0,
+    "total_infected": 1,
+    "attack_rate_ground_truth": 0.07
+  },
+  "D028F": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "D028G": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "F028A": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "D029A": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "F029C": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "D029B": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "D033A": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "D034A": {
+    "stadium_12": 2,
+    "stadium_34": 2,
+    "total_infected": 4,
+    "attack_rate_ground_truth": 36.36
+  },
+  "E026C": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "E032A": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "F029D": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "F030C": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "E026D": {
+    "stadium_12": 3,
+    "stadium_34": 4,
+    "total_infected": 7,
+    "attack_rate_ground_truth": 3.03
+  },
+  "F031B": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "E026E": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "E028A": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "E032B": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "F025D": {
+    "stadium_12": 2,
+    "stadium_34": 1,
+    "total_infected": 3,
+    "attack_rate_ground_truth": 6.98
+  },
+  "F028B": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "E034A": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "F029E": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "F030D": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "F031C": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "F025E": {
+    "stadium_12": 8,
+    "stadium_34": 6,
+    "total_infected": 14,
+    "attack_rate_ground_truth": 0.0
+  },
+  "F028C": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "F029F": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "F030E": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "F031D": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "F029G": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "F030F": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "F031E": {
+    "stadium_12": 3,
+    "stadium_34": 2,
+    "total_infected": 5,
+    "attack_rate_ground_truth": 2.63
+  },
+  "K032B": {
+    "stadium_12": 94,
+    "stadium_34": 32,
+    "total_infected": 126,
+    "attack_rate_ground_truth": 3.13
+  },
+  "K035B": {
+    "stadium_12": 74,
+    "stadium_34": 26,
+    "total_infected": 100,
+    "attack_rate_ground_truth": 3.68
+  },
+  "K033B": {
+    "stadium_12": 44,
+    "stadium_34": 19,
+    "total_infected": 63,
+    "attack_rate_ground_truth": 1.86
+  },
+  "F034A": {
+    "stadium_12": 86,
+    "stadium_34": 2,
+    "total_infected": 88,
+    "attack_rate_ground_truth": 2.28
+  },
+  "K034B": {
+    "stadium_12": 51,
+    "stadium_34": 25,
+    "total_infected": 76,
+    "attack_rate_ground_truth": 2.25
+  },
+  "H031A": {
+    "stadium_12": 15,
+    "stadium_34": 10,
+    "total_infected": 25,
+    "attack_rate_ground_truth": 0.67
+  },
+  "H034A": {
+    "stadium_12": 49,
+    "stadium_34": 29,
+    "total_infected": 78,
+    "attack_rate_ground_truth": 2.29
+  },
+  "J031A": {
+    "stadium_12": 21,
+    "stadium_34": 5,
+    "total_infected": 26,
+    "attack_rate_ground_truth": 0.73
+  },
+  "J032A": {
+    "stadium_12": 11,
+    "stadium_34": 7,
+    "total_infected": 18,
+    "attack_rate_ground_truth": 0.57
+  },
+  "J033A": {
+    "stadium_12": 6,
+    "stadium_34": 1,
+    "total_infected": 7,
+    "attack_rate_ground_truth": 0.18
+  },
+  "J034A": {
+    "stadium_12": 7,
+    "stadium_34": 13,
+    "total_infected": 20,
+    "attack_rate_ground_truth": 0.53
+  },
+  "K032A": {
+    "stadium_12": 4,
+    "stadium_34": 1,
+    "total_infected": 5,
+    "attack_rate_ground_truth": 0.77
+  },
+  "K033A": {
+    "stadium_12": 3,
+    "stadium_34": 1,
+    "total_infected": 4,
+    "attack_rate_ground_truth": 0.64
+  },
+  "K035A": {
+    "stadium_12": 3,
+    "stadium_34": 1,
+    "total_infected": 4,
+    "attack_rate_ground_truth": 0.56
+  },
+  "G034A": {
+    "stadium_12": 57,
+    "stadium_34": 14,
+    "total_infected": 71,
+    "attack_rate_ground_truth": 1.91
+  },
+  "G035A": {
+    "stadium_12": 35,
+    "stadium_34": 13,
+    "total_infected": 48,
+    "attack_rate_ground_truth": 1.5
+  },
+  "H032A": {
+    "stadium_12": 46,
+    "stadium_34": 11,
+    "total_infected": 57,
+    "attack_rate_ground_truth": 1.79
+  },
+  "I032A": {
+    "stadium_12": 44,
+    "stadium_34": 34,
+    "total_infected": 78,
+    "attack_rate_ground_truth": 2.69
+  },
+  "G036A": {
+    "stadium_12": 26,
+    "stadium_34": 11,
+    "total_infected": 37,
+    "attack_rate_ground_truth": 0.99
+  },
+  "H033A": {
+    "stadium_12": 55,
+    "stadium_34": 16,
+    "total_infected": 71,
+    "attack_rate_ground_truth": 2.4
+  },
+  "H035A": {
+    "stadium_12": 29,
+    "stadium_34": 22,
+    "total_infected": 51,
+    "attack_rate_ground_truth": 1.43
+  },
+  "I031A": {
+    "stadium_12": 64,
+    "stadium_34": 25,
+    "total_infected": 89,
+    "attack_rate_ground_truth": 2.35
+  },
+  "I033A": {
+    "stadium_12": 56,
+    "stadium_34": 32,
+    "total_infected": 88,
+    "attack_rate_ground_truth": 2.9
+  },
+  "I034A": {
+    "stadium_12": 32,
+    "stadium_34": 16,
+    "total_infected": 48,
+    "attack_rate_ground_truth": 1.3
+  },
+  "I035A": {
+    "stadium_12": 7,
+    "stadium_34": 15,
+    "total_infected": 22,
+    "attack_rate_ground_truth": 0.63
+  },
+  "H036A": {
+    "stadium_12": 11,
+    "stadium_34": 6,
+    "total_infected": 17,
+    "attack_rate_ground_truth": 0.54
+  },
+  "J035A": {
+    "stadium_12": 14,
+    "stadium_34": 21,
+    "total_infected": 35,
+    "attack_rate_ground_truth": 0.94
+  },
+  "K031A": {
+    "stadium_12": 3,
+    "stadium_34": 2,
+    "total_infected": 5,
+    "attack_rate_ground_truth": 0.24
+  },
+  "K034A": {
+    "stadium_12": 5,
+    "stadium_34": 1,
+    "total_infected": 6,
+    "attack_rate_ground_truth": 0.94
+  },
+  "L032B": {
+    "stadium_12": 163,
+    "stadium_34": 55,
+    "total_infected": 218,
+    "attack_rate_ground_truth": 5.24
+  },
+  "L033B": {
+    "stadium_12": 154,
+    "stadium_34": 25,
+    "total_infected": 179,
+    "attack_rate_ground_truth": 4.84
+  },
+  "L034B": {
+    "stadium_12": 140,
+    "stadium_34": 21,
+    "total_infected": 161,
+    "attack_rate_ground_truth": 4.72
+  },
+  "I036A": {
+    "stadium_12": 43,
+    "stadium_34": 9,
+    "total_infected": 52,
+    "attack_rate_ground_truth": 1.41
+  },
+  "L035B": {
+    "stadium_12": 49,
+    "stadium_34": 10,
+    "total_infected": 59,
+    "attack_rate_ground_truth": 2.1
+  },
+  "L036B": {
+    "stadium_12": 193,
+    "stadium_34": 27,
+    "total_infected": 220,
+    "attack_rate_ground_truth": 5.82
+  },
+  "L039A": {
+    "stadium_12": 4,
+    "stadium_34": 0,
+    "total_infected": 4,
+    "attack_rate_ground_truth": 0.17
+  },
+  "M031B": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "M032B": {
+    "stadium_12": 18,
+    "stadium_34": 2,
+    "total_infected": 20,
+    "attack_rate_ground_truth": 2.16
+  },
+  "M033B": {
+    "stadium_12": 110,
+    "stadium_34": 34,
+    "total_infected": 144,
+    "attack_rate_ground_truth": 4.81
+  },
+  "J036A": {
+    "stadium_12": 62,
+    "stadium_34": 21,
+    "total_infected": 83,
+    "attack_rate_ground_truth": 2.38
+  },
+  "M034B": {
+    "stadium_12": 62,
+    "stadium_34": 38,
+    "total_infected": 100,
+    "attack_rate_ground_truth": 3.99
+  },
+  "M035B": {
+    "stadium_12": 17,
+    "stadium_34": 9,
+    "total_infected": 26,
+    "attack_rate_ground_truth": 1.08
+  },
+  "M036B": {
+    "stadium_12": 79,
+    "stadium_34": 26,
+    "total_infected": 105,
+    "attack_rate_ground_truth": 3.41
+  },
+  "M037B": {
+    "stadium_12": 90,
+    "stadium_34": 43,
+    "total_infected": 133,
+    "attack_rate_ground_truth": 3.59
+  },
+  "M038B": {
+    "stadium_12": 52,
+    "stadium_34": 18,
+    "total_infected": 70,
+    "attack_rate_ground_truth": 1.76
+  },
+  "M039B": {
+    "stadium_12": 22,
+    "stadium_34": 7,
+    "total_infected": 29,
+    "attack_rate_ground_truth": 1.39
+  },
+  "M040B": {
+    "stadium_12": 59,
+    "stadium_34": 11,
+    "total_infected": 70,
+    "attack_rate_ground_truth": 2.83
+  },
+  "M041B": {
+    "stadium_12": 58,
+    "stadium_34": 20,
+    "total_infected": 78,
+    "attack_rate_ground_truth": 2.78
+  },
+  "M042B": {
+    "stadium_12": 26,
+    "stadium_34": 13,
+    "total_infected": 39,
+    "attack_rate_ground_truth": 1.2
+  },
+  "M043B": {
+    "stadium_12": 6,
+    "stadium_34": 6,
+    "total_infected": 12,
+    "attack_rate_ground_truth": 0.93
+  },
+  "K036A": {
+    "stadium_12": 16,
+    "stadium_34": 8,
+    "total_infected": 24,
+    "attack_rate_ground_truth": 3.3
+  },
+  "N037C": {
+    "stadium_12": 9,
+    "stadium_34": 0,
+    "total_infected": 9,
+    "attack_rate_ground_truth": 0.82
+  },
+  "K036B": {
+    "stadium_12": 81,
+    "stadium_34": 33,
+    "total_infected": 114,
+    "attack_rate_ground_truth": 3.16
+  },
+  "N038C": {
+    "stadium_12": 8,
+    "stadium_34": 0,
+    "total_infected": 8,
+    "attack_rate_ground_truth": 0.33
+  },
+  "L031A": {
+    "stadium_12": 14,
+    "stadium_34": 2,
+    "total_infected": 16,
+    "attack_rate_ground_truth": 0.69
+  },
+  "N039C": {
+    "stadium_12": 22,
+    "stadium_34": 4,
+    "total_infected": 26,
+    "attack_rate_ground_truth": 0.93
+  },
+  "N040C": {
+    "stadium_12": 74,
+    "stadium_34": 17,
+    "total_infected": 91,
+    "attack_rate_ground_truth": 4.33
+  },
+  "N041C": {
+    "stadium_12": 33,
+    "stadium_34": 7,
+    "total_infected": 40,
+    "attack_rate_ground_truth": 2.59
+  },
+  "N042C": {
+    "stadium_12": 8,
+    "stadium_34": 0,
+    "total_infected": 8,
+    "attack_rate_ground_truth": 0.58
+  },
+  "N043C": {
+    "stadium_12": 1,
+    "stadium_34": 0,
+    "total_infected": 1,
+    "attack_rate_ground_truth": 0.33
+  },
+  "L037B": {
+    "stadium_12": 149,
+    "stadium_34": 39,
+    "total_infected": 188,
+    "attack_rate_ground_truth": 4.96
+  },
+  "L039B": {
+    "stadium_12": 20,
+    "stadium_34": 4,
+    "total_infected": 24,
+    "attack_rate_ground_truth": 0.99
+  },
+  "L038A": {
+    "stadium_12": 41,
+    "stadium_34": 12,
+    "total_infected": 53,
+    "attack_rate_ground_truth": 2.66
+  },
+  "L040A": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "L038B": {
+    "stadium_12": 172,
+    "stadium_34": 42,
+    "total_infected": 214,
+    "attack_rate_ground_truth": 11.28
+  },
+  "M038A": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "M039A": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "M040A": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "M041A": {
+    "stadium_12": 13,
+    "stadium_34": 2,
+    "total_infected": 15,
+    "attack_rate_ground_truth": 1.81
+  },
+  "M043A": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "M044A": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "N043A": {
+    "stadium_12": 12,
+    "stadium_34": 11,
+    "total_infected": 23,
+    "attack_rate_ground_truth": 0.66
+  },
+  "M034A": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "N044A": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "M039C": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "M035A": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "M040C": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "M041C": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "M036A": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "M036C": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "K037B": {
+    "stadium_12": 186,
+    "stadium_34": 22,
+    "total_infected": 208,
+    "attack_rate_ground_truth": 5.71
+  },
+  "K038B": {
+    "stadium_12": 15,
+    "stadium_34": 2,
+    "total_infected": 17,
+    "attack_rate_ground_truth": 0.78
+  },
+  "K039B": {
+    "stadium_12": 15,
+    "stadium_34": 1,
+    "total_infected": 16,
+    "attack_rate_ground_truth": 1.5
+  },
+  "I039A": {
+    "stadium_12": 58,
+    "stadium_34": 17,
+    "total_infected": 75,
+    "attack_rate_ground_truth": 2.12
+  },
+  "I040A": {
+    "stadium_12": 44,
+    "stadium_34": 10,
+    "total_infected": 54,
+    "attack_rate_ground_truth": 1.57
+  },
+  "I041A": {
+    "stadium_12": 56,
+    "stadium_34": 6,
+    "total_infected": 62,
+    "attack_rate_ground_truth": 1.69
+  },
+  "I042A": {
+    "stadium_12": 12,
+    "stadium_34": 4,
+    "total_infected": 16,
+    "attack_rate_ground_truth": 0.8
+  },
+  "J039A": {
+    "stadium_12": 35,
+    "stadium_34": 15,
+    "total_infected": 50,
+    "attack_rate_ground_truth": 1.41
+  },
+  "J040A": {
+    "stadium_12": 42,
+    "stadium_34": 19,
+    "total_infected": 61,
+    "attack_rate_ground_truth": 1.97
+  },
+  "J041A": {
+    "stadium_12": 10,
+    "stadium_34": 0,
+    "total_infected": 10,
+    "attack_rate_ground_truth": 0.29
+  },
+  "K039A": {
+    "stadium_12": 9,
+    "stadium_34": 1,
+    "total_infected": 10,
+    "attack_rate_ground_truth": 0.29
+  },
+  "I043A": {
+    "stadium_12": 13,
+    "stadium_34": 1,
+    "total_infected": 14,
+    "attack_rate_ground_truth": 0.66
+  },
+  "J037A": {
+    "stadium_12": 30,
+    "stadium_34": 5,
+    "total_infected": 35,
+    "attack_rate_ground_truth": 0.89
+  },
+  "J038A": {
+    "stadium_12": 33,
+    "stadium_34": 0,
+    "total_infected": 33,
+    "attack_rate_ground_truth": 0.89
+  },
+  "N037A": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "K037A": {
+    "stadium_12": 5,
+    "stadium_34": 0,
+    "total_infected": 5,
+    "attack_rate_ground_truth": 0.25
+  },
+  "K038A": {
+    "stadium_12": 12,
+    "stadium_34": 4,
+    "total_infected": 16,
+    "attack_rate_ground_truth": 0.54
+  },
+  "J042A": {
+    "stadium_12": 1,
+    "stadium_34": 0,
+    "total_infected": 1,
+    "attack_rate_ground_truth": 0.07
+  },
+  "J043A": {
+    "stadium_12": 2,
+    "stadium_34": 0,
+    "total_infected": 2,
+    "attack_rate_ground_truth": 0.18
+  },
+  "J044A": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "N042A": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "K040A": {
+    "stadium_12": 13,
+    "stadium_34": 4,
+    "total_infected": 17,
+    "attack_rate_ground_truth": 0.54
+  },
+  "K041A": {
+    "stadium_12": 10,
+    "stadium_34": 2,
+    "total_infected": 12,
+    "attack_rate_ground_truth": 1.13
+  },
+  "I045B": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "J042B": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "N043D": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "J043B": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "J044B": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "G037A": {
+    "stadium_12": 7,
+    "stadium_34": 4,
+    "total_infected": 11,
+    "attack_rate_ground_truth": 0.29
+  },
+  "I044A": {
+    "stadium_12": 3,
+    "stadium_34": 1,
+    "total_infected": 4,
+    "attack_rate_ground_truth": 0.15
+  },
+  "G038A": {
+    "stadium_12": 6,
+    "stadium_34": 5,
+    "total_infected": 11,
+    "attack_rate_ground_truth": 0.32
+  },
+  "I045A": {
+    "stadium_12": 2,
+    "stadium_34": 0,
+    "total_infected": 2,
+    "attack_rate_ground_truth": 0.25
+  },
+  "G039A": {
+    "stadium_12": 5,
+    "stadium_34": 0,
+    "total_infected": 5,
+    "attack_rate_ground_truth": 0.12
+  },
+  "J042C": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "G040A": {
+    "stadium_12": 0,
+    "stadium_34": 2,
+    "total_infected": 2,
+    "attack_rate_ground_truth": 0.06
+  },
+  "J042D": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "G041A": {
+    "stadium_12": 1,
+    "stadium_34": 7,
+    "total_infected": 8,
+    "attack_rate_ground_truth": 0.3
+  },
+  "J043C": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "G042A": {
+    "stadium_12": 1,
+    "stadium_34": 0,
+    "total_infected": 1,
+    "attack_rate_ground_truth": 0.28
+  },
+  "J044C": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "G043A": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "K041B": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "H037A": {
+    "stadium_12": 27,
+    "stadium_34": 12,
+    "total_infected": 39,
+    "attack_rate_ground_truth": 1.04
+  },
+  "K042A": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "H038A": {
+    "stadium_12": 35,
+    "stadium_34": 9,
+    "total_infected": 44,
+    "attack_rate_ground_truth": 1.34
+  },
+  "H039A": {
+    "stadium_12": 25,
+    "stadium_34": 3,
+    "total_infected": 28,
+    "attack_rate_ground_truth": 0.73
+  },
+  "H040A": {
+    "stadium_12": 18,
+    "stadium_34": 5,
+    "total_infected": 23,
+    "attack_rate_ground_truth": 0.78
+  },
+  "H041A": {
+    "stadium_12": 8,
+    "stadium_34": 2,
+    "total_infected": 10,
+    "attack_rate_ground_truth": 0.34
+  },
+  "I038A": {
+    "stadium_12": 60,
+    "stadium_34": 13,
+    "total_infected": 73,
+    "attack_rate_ground_truth": 2.16
+  },
+  "I037A": {
+    "stadium_12": 21,
+    "stadium_34": 9,
+    "total_infected": 30,
+    "attack_rate_ground_truth": 1.03
+  },
+  "I037B": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "E036A": {
+    "stadium_12": 28,
+    "stadium_34": 7,
+    "total_infected": 35,
+    "attack_rate_ground_truth": 1.03
+  },
+  "C038A": {
+    "stadium_12": 6,
+    "stadium_34": 0,
+    "total_infected": 6,
+    "attack_rate_ground_truth": 0.19
+  },
+  "J044D": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "D035A": {
+    "stadium_12": 17,
+    "stadium_34": 2,
+    "total_infected": 19,
+    "attack_rate_ground_truth": 0.62
+  },
+  "D036A": {
+    "stadium_12": 5,
+    "stadium_34": 0,
+    "total_infected": 5,
+    "attack_rate_ground_truth": 0.13
+  },
+  "D037A": {
+    "stadium_12": 6,
+    "stadium_34": 0,
+    "total_infected": 6,
+    "attack_rate_ground_truth": 0.15
+  },
+  "D038A": {
+    "stadium_12": 4,
+    "stadium_34": 0,
+    "total_infected": 4,
+    "attack_rate_ground_truth": 0.12
+  },
+  "D039A": {
+    "stadium_12": 4,
+    "stadium_34": 0,
+    "total_infected": 4,
+    "attack_rate_ground_truth": 0.11
+  },
+  "E035A": {
+    "stadium_12": 9,
+    "stadium_34": 1,
+    "total_infected": 10,
+    "attack_rate_ground_truth": 0.29
+  },
+  "K041C": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "E036B": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "C036A": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "C037A": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "C039A": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "D040A": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "D041A": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "D042A": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "D043A": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "D043B": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "E037A": {
+    "stadium_12": 17,
+    "stadium_34": 16,
+    "total_infected": 33,
+    "attack_rate_ground_truth": 1.39
+  },
+  "E037B": {
+    "stadium_12": 1,
+    "stadium_34": 0,
+    "total_infected": 1,
+    "attack_rate_ground_truth": 0.17
+  },
+  "E038A": {
+    "stadium_12": 5,
+    "stadium_34": 0,
+    "total_infected": 5,
+    "attack_rate_ground_truth": 0.13
+  },
+  "E039A": {
+    "stadium_12": 3,
+    "stadium_34": 0,
+    "total_infected": 3,
+    "attack_rate_ground_truth": 0.08
+  },
+  "E040A": {
+    "stadium_12": 1,
+    "stadium_34": 1,
+    "total_infected": 2,
+    "attack_rate_ground_truth": 0.05
+  },
+  "E041A": {
+    "stadium_12": 5,
+    "stadium_34": 3,
+    "total_infected": 8,
+    "attack_rate_ground_truth": 0.25
+  },
+  "E042A": {
+    "stadium_12": 1,
+    "stadium_34": 0,
+    "total_infected": 1,
+    "attack_rate_ground_truth": 0.03
+  },
+  "E043A": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "E043B": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "E044A": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "F035A": {
+    "stadium_12": 71,
+    "stadium_34": 12,
+    "total_infected": 83,
+    "attack_rate_ground_truth": 2.4
+  },
+  "F036A": {
+    "stadium_12": 95,
+    "stadium_34": 3,
+    "total_infected": 98,
+    "attack_rate_ground_truth": 2.66
+  },
+  "F037A": {
+    "stadium_12": 44,
+    "stadium_34": 2,
+    "total_infected": 46,
+    "attack_rate_ground_truth": 1.4
+  },
+  "F038A": {
+    "stadium_12": 30,
+    "stadium_34": 0,
+    "total_infected": 30,
+    "attack_rate_ground_truth": 0.74
+  },
+  "F039A": {
+    "stadium_12": 13,
+    "stadium_34": 0,
+    "total_infected": 13,
+    "attack_rate_ground_truth": 0.41
+  },
+  "F040A": {
+    "stadium_12": 45,
+    "stadium_34": 1,
+    "total_infected": 46,
+    "attack_rate_ground_truth": 1.33
+  },
+  "F041A": {
+    "stadium_12": 3,
+    "stadium_34": 0,
+    "total_infected": 3,
+    "attack_rate_ground_truth": 0.08
+  },
+  "F042A": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "F043A": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "F044A": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  },
+  "F045A": {
+    "stadium_12": 0,
+    "stadium_34": 0,
+    "total_infected": 0,
+    "attack_rate_ground_truth": 0.0
+  }
+}
