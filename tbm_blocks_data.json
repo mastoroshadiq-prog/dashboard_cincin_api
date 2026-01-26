@@ -1,0 +1,379 @@
+{
+  "total_tbm_blocks": 28,
+  "by_division": {
+    "AME01": [
+      {
+        "block_code": "A005C",
+        "tahun_tanam": 2023,
+        "estate": "AME",
+        "row_index": 26
+      },
+      {
+        "block_code": "A006A",
+        "tahun_tanam": 2023,
+        "estate": "AME",
+        "row_index": 27
+      },
+      {
+        "block_code": "A007A",
+        "tahun_tanam": 2023,
+        "estate": "AME",
+        "row_index": 29
+      },
+      {
+        "block_code": "B006D",
+        "tahun_tanam": 2023,
+        "estate": "AME",
+        "row_index": 65
+      },
+      {
+        "block_code": "B007D",
+        "tahun_tanam": 2023,
+        "estate": "AME",
+        "row_index": 72
+      },
+      {
+        "block_code": "B008E",
+        "tahun_tanam": 2023,
+        "estate": "AME",
+        "row_index": 75
+      },
+      {
+        "block_code": "B009G",
+        "tahun_tanam": 2023,
+        "estate": "AME",
+        "row_index": 82
+      }
+    ],
+    "AME03": [
+      {
+        "block_code": "C024B",
+        "tahun_tanam": 2025,
+        "estate": "AME",
+        "row_index": 132
+      }
+    ],
+    "AME04": [
+      {
+        "block_code": "B012D",
+        "tahun_tanam": 2025,
+        "estate": "AME",
+        "row_index": 210
+      },
+      {
+        "block_code": "B013C",
+        "tahun_tanam": 2025,
+        "estate": "AME",
+        "row_index": 212
+      },
+      {
+        "block_code": "B015D",
+        "tahun_tanam": 2023,
+        "estate": "AME",
+        "row_index": 222
+      },
+      {
+        "block_code": "B015E",
+        "tahun_tanam": 2025,
+        "estate": "AME",
+        "row_index": 223
+      },
+      {
+        "block_code": "B016G",
+        "tahun_tanam": 2023,
+        "estate": "AME",
+        "row_index": 229
+      },
+      {
+        "block_code": "B016H",
+        "tahun_tanam": 2025,
+        "estate": "AME",
+        "row_index": 230
+      },
+      {
+        "block_code": "B017F",
+        "tahun_tanam": 2023,
+        "estate": "AME",
+        "row_index": 234
+      },
+      {
+        "block_code": "B017G",
+        "tahun_tanam": 2025,
+        "estate": "AME",
+        "row_index": 235
+      }
+    ],
+    "DBE01": [
+      {
+        "block_code": "C027B",
+        "tahun_tanam": 2023,
+        "estate": "DBE",
+        "row_index": 418
+      },
+      {
+        "block_code": "D027I",
+        "tahun_tanam": 2023,
+        "estate": "DBE",
+        "row_index": 439
+      },
+      {
+        "block_code": "D028F",
+        "tahun_tanam": 2023,
+        "estate": "DBE",
+        "row_index": 448
+      },
+      {
+        "block_code": "D028G",
+        "tahun_tanam": 2025,
+        "estate": "DBE",
+        "row_index": 449
+      },
+      {
+        "block_code": "D029B",
+        "tahun_tanam": 2023,
+        "estate": "DBE",
+        "row_index": 453
+      },
+      {
+        "block_code": "D033A",
+        "tahun_tanam": 2023,
+        "estate": "DBE",
+        "row_index": 454
+      },
+      {
+        "block_code": "D034A",
+        "tahun_tanam": 2023,
+        "estate": "DBE",
+        "row_index": 455
+      },
+      {
+        "block_code": "E032B",
+        "tahun_tanam": 2023,
+        "estate": "DBE",
+        "row_index": 464
+      },
+      {
+        "block_code": "F025E",
+        "tahun_tanam": 2023,
+        "estate": "DBE",
+        "row_index": 471
+      },
+      {
+        "block_code": "F029G",
+        "tahun_tanam": 2023,
+        "estate": "DBE",
+        "row_index": 476
+      },
+      {
+        "block_code": "F030F",
+        "tahun_tanam": 2023,
+        "estate": "DBE",
+        "row_index": 477
+      },
+      {
+        "block_code": "F031E",
+        "tahun_tanam": 2023,
+        "estate": "DBE",
+        "row_index": 478
+      }
+    ]
+  },
+  "all_blocks": [
+    {
+      "block_code": "A005C",
+      "tahun_tanam": 2023,
+      "estate": "AME",
+      "division": "AME01",
+      "row_index": 26
+    },
+    {
+      "block_code": "A006A",
+      "tahun_tanam": 2023,
+      "estate": "AME",
+      "division": "AME01",
+      "row_index": 27
+    },
+    {
+      "block_code": "A007A",
+      "tahun_tanam": 2023,
+      "estate": "AME",
+      "division": "AME01",
+      "row_index": 29
+    },
+    {
+      "block_code": "B006D",
+      "tahun_tanam": 2023,
+      "estate": "AME",
+      "division": "AME01",
+      "row_index": 65
+    },
+    {
+      "block_code": "B007D",
+      "tahun_tanam": 2023,
+      "estate": "AME",
+      "division": "AME01",
+      "row_index": 72
+    },
+    {
+      "block_code": "B008E",
+      "tahun_tanam": 2023,
+      "estate": "AME",
+      "division": "AME01",
+      "row_index": 75
+    },
+    {
+      "block_code": "B009G",
+      "tahun_tanam": 2023,
+      "estate": "AME",
+      "division": "AME01",
+      "row_index": 82
+    },
+    {
+      "block_code": "C024B",
+      "tahun_tanam": 2025,
+      "estate": "AME",
+      "division": "AME03",
+      "row_index": 132
+    },
+    {
+      "block_code": "B012D",
+      "tahun_tanam": 2025,
+      "estate": "AME",
+      "division": "AME04",
+      "row_index": 210
+    },
+    {
+      "block_code": "B013C",
+      "tahun_tanam": 2025,
+      "estate": "AME",
+      "division": "AME04",
+      "row_index": 212
+    },
+    {
+      "block_code": "B015D",
+      "tahun_tanam": 2023,
+      "estate": "AME",
+      "division": "AME04",
+      "row_index": 222
+    },
+    {
+      "block_code": "B015E",
+      "tahun_tanam": 2025,
+      "estate": "AME",
+      "division": "AME04",
+      "row_index": 223
+    },
+    {
+      "block_code": "B016G",
+      "tahun_tanam": 2023,
+      "estate": "AME",
+      "division": "AME04",
+      "row_index": 229
+    },
+    {
+      "block_code": "B016H",
+      "tahun_tanam": 2025,
+      "estate": "AME",
+      "division": "AME04",
+      "row_index": 230
+    },
+    {
+      "block_code": "B017F",
+      "tahun_tanam": 2023,
+      "estate": "AME",
+      "division": "AME04",
+      "row_index": 234
+    },
+    {
+      "block_code": "B017G",
+      "tahun_tanam": 2025,
+      "estate": "AME",
+      "division": "AME04",
+      "row_index": 235
+    },
+    {
+      "block_code": "C027B",
+      "tahun_tanam": 2023,
+      "estate": "DBE",
+      "division": "DBE01",
+      "row_index": 418
+    },
+    {
+      "block_code": "D027I",
+      "tahun_tanam": 2023,
+      "estate": "DBE",
+      "division": "DBE01",
+      "row_index": 439
+    },
+    {
+      "block_code": "D028F",
+      "tahun_tanam": 2023,
+      "estate": "DBE",
+      "division": "DBE01",
+      "row_index": 448
+    },
+    {
+      "block_code": "D028G",
+      "tahun_tanam": 2025,
+      "estate": "DBE",
+      "division": "DBE01",
+      "row_index": 449
+    },
+    {
+      "block_code": "D029B",
+      "tahun_tanam": 2023,
+      "estate": "DBE",
+      "division": "DBE01",
+      "row_index": 453
+    },
+    {
+      "block_code": "D033A",
+      "tahun_tanam": 2023,
+      "estate": "DBE",
+      "division": "DBE01",
+      "row_index": 454
+    },
+    {
+      "block_code": "D034A",
+      "tahun_tanam": 2023,
+      "estate": "DBE",
+      "division": "DBE01",
+      "row_index": 455
+    },
+    {
+      "block_code": "E032B",
+      "tahun_tanam": 2023,
+      "estate": "DBE",
+      "division": "DBE01",
+      "row_index": 464
+    },
+    {
+      "block_code": "F025E",
+      "tahun_tanam": 2023,
+      "estate": "DBE",
+      "division": "DBE01",
+      "row_index": 471
+    },
+    {
+      "block_code": "F029G",
+      "tahun_tanam": 2023,
+      "estate": "DBE",
+      "division": "DBE01",
+      "row_index": 476
+    },
+    {
+      "block_code": "F030F",
+      "tahun_tanam": 2023,
+      "estate": "DBE",
+      "division": "DBE01",
+      "row_index": 477
+    },
+    {
+      "block_code": "F031E",
+      "tahun_tanam": 2023,
+      "estate": "DBE",
+      "division": "DBE01",
+      "row_index": 478
+    }
+  ]
+}

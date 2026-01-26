@@ -1,0 +1,650 @@
+﻿================================================================================
+ANALYZING TBM BLOCKS IN EXCEL DATA
+================================================================================
+
+Sheets available: ['Lembar1']
+
+DataFrame shape: (650, 177)
+Rows: 650, Columns: 177
+
+================================================================================
+FIRST 30 ROWS (to understand header structure):
+================================================================================
+
+Row 0: 1 non-null values
+  Col 2: REAL TANAM INTI
+
+Row 1: 1 non-null values
+  Col 2: UPDATE NOVEMBER 2025
+
+Row 3: 27 non-null values
+  Col 3: ESTATE
+  Col 5: DIVISI
+  Col 7: BLOK
+  Col 9: TT
+  Col 10: VARIETAS BIBIT
+  Col 11: HA STATEMENT
+  Col 20: REALISASI TANAM SD NOVEMBER 2025
+  Col 55: SERANGAN GANODERMA (PKK)
+  Col 62: Estate
+  Col 63: BLOK
+
+Row 4: 64 non-null values
+  Col 3: LAMA
+  Col 4: BARU
+  Col 5: LAMA
+  Col 6: BARU
+  Col 7: LAMA
+  Col 8: BARU
+  Col 11: LUAS TANAM
+  Col 14: EMPLS
+  Col 15: BBT
+  Col 16: PKS
+
+Row 5: 144 non-null values
+  Col 11: SD THN 2024
+  Col 12: PENAMBAHAN
+  Col 13: SD 2025
+  Col 20: 2008
+  Col 21: 2009
+  Col 22: 2010
+  Col 23: 2011
+  Col 24: 2012
+  Col 25: 2013
+  Col 26: 2014
+
+Row 6: 175 non-null values
+  Col 0: K001
+  Col 1: K002
+  Col 2: NOMOR
+  Col 3: C001
+  Col 4: C002
+  Col 5: C003
+  Col 6: C004
+  Col 7: C005
+  Col 8: C006
+  Col 9: C007
+
+Row 7: 172 non-null values
+  Col 0: A001A
+  Col 1: 2012
+  Col 2: 1
+  Col 3: AME
+  Col 4: AME
+  Col 5: AME01
+  Col 6: AME001
+  Col 7: A 01
+  Col 8: A001A
+  Col 9: 2012
+
+Row 8: 175 non-null values
+  Col 0: C006A
+  Col 1: 2010
+  Col 2: 74
+  Col 3: AME
+  Col 4: AME
+  Col 5: AME01
+  Col 6: AME001
+  Col 7: C 06
+  Col 8: C006A
+  Col 9: 2010
+
+Row 9: 172 non-null values
+  Col 0: A002A
+  Col 1: 2012
+  Col 2: 2
+  Col 3: AME
+  Col 4: AME
+  Col 5: AME01
+  Col 6: AME001
+  Col 7: A 02
+  Col 8: A002A
+  Col 9: 2012
+
+Row 10: 175 non-null values
+  Col 0: C007A
+  Col 1: 2010
+  Col 2: 75
+  Col 3: AME
+  Col 4: AME
+  Col 5: AME01
+  Col 6: AME001
+  Col 7: C 07A
+  Col 8: C007A
+  Col 9: 2010
+
+Row 11: 172 non-null values
+  Col 0: A003A
+  Col 1: 2012
+  Col 2: 3
+  Col 3: AME
+  Col 4: AME
+  Col 5: AME01
+  Col 6: AME001
+  Col 7: A 03
+  Col 8: A003A
+  Col 9: 2012
+
+Row 12: 175 non-null values
+  Col 0: C008A
+  Col 1: 2010
+  Col 2: 77
+  Col 3: AME
+  Col 4: AME
+  Col 5: AME01
+  Col 6: AME001
+  Col 7: C 08
+  Col 8: C008A
+  Col 9: 2010
+
+Row 13: 151 non-null values
+  Col 0: A003B
+  Col 1: 2019
+  Col 2: 4
+  Col 3: AME
+  Col 4: AME
+  Col 5: AME01
+  Col 6: AME001
+  Col 7: A 03B
+  Col 8: A003B
+  Col 9: 2019
+
+Row 14: 175 non-null values
+  Col 0: B003A
+  Col 1: 2011
+  Col 2: 30
+  Col 3: AME
+  Col 4: AME
+  Col 5: AME01
+  Col 6: AME001
+  Col 7: B 03
+  Col 8: B003A
+  Col 9: 2011
+
+Row 15: 172 non-null values
+  Col 0: A004A
+  Col 1: 2012
+  Col 2: 5
+  Col 3: AME
+  Col 4: AME
+  Col 5: AME01
+  Col 6: AME001
+  Col 7: A 04
+  Col 8: A004A
+  Col 9: 2012
+
+Row 16: 175 non-null values
+  Col 0: B004A
+  Col 1: 2011
+  Col 2: 35
+  Col 3: AME
+  Col 4: AME
+  Col 5: AME01
+  Col 6: AME001
+  Col 7: B 04
+  Col 8: B004A
+  Col 9: 2011
+
+Row 17: 157 non-null values
+  Col 0: A004B
+  Col 1: 2017
+  Col 2: 6
+  Col 3: AME
+  Col 4: AME
+  Col 5: AME01
+  Col 6: AME001
+  Col 7: A 04B
+  Col 8: A004B
+  Col 9: 2017
+
+Row 18: 175 non-null values
+  Col 0: B005A
+  Col 1: 2011
+  Col 2: 36
+  Col 3: AME
+  Col 4: AME
+  Col 5: AME01
+  Col 6: AME001
+  Col 7: B 05
+  Col 8: B005A
+  Col 9: 2011
+
+Row 19: 151 non-null values
+  Col 0: A004C
+  Col 1: 2019
+  Col 2: 7
+  Col 3: AME
+  Col 4: AME
+  Col 5: AME01
+  Col 6: AME001
+  Col 7: A 04C
+  Col 8: A004C
+  Col 9: 2019
+
+Row 20: 175 non-null values
+  Col 0: C005A
+  Col 1: 2011
+  Col 2: 69
+  Col 3: AME
+  Col 4: AME
+  Col 5: AME01
+  Col 6: AME001
+  Col 7: C 05A
+  Col 8: C005A
+  Col 9: 2011
+
+Row 21: 148 non-null values
+  Col 0: A004D
+  Col 1: 2020
+  Col 2: 8
+  Col 3: AME
+  Col 4: AME
+  Col 5: AME01
+  Col 6: AME001
+  Col 7: A 04D
+  Col 8: A004D
+  Col 9: 2020
+
+Row 22: 175 non-null values
+  Col 0: C009A
+  Col 1: 2011
+  Col 2: 78
+  Col 3: AME
+  Col 4: AME
+  Col 5: AME01
+  Col 6: AME001
+  Col 7: C 09
+  Col 8: C009A
+  Col 9: 2011
+
+Row 23: 142 non-null values
+  Col 0: A004E
+  Col 1: 2022
+  Col 2: 9
+  Col 3: AME
+  Col 4: AME
+  Col 5: AME01
+  Col 6: AME001
+  Col 7: A 04D
+  Col 8: A004E
+  Col 9: 2022
+
+Row 24: 145 non-null values
+  Col 0: A005A
+  Col 1: 2021
+  Col 2: 10
+  Col 3: AME
+  Col 4: AME
+  Col 5: AME01
+  Col 6: AME001
+  Col 7: A 05
+  Col 8: A005A
+  Col 9: 2021
+
+Row 25: 142 non-null values
+  Col 0: A005B
+  Col 1: 2022
+  Col 2: 11
+  Col 3: AME
+  Col 4: AME
+  Col 5: AME01
+  Col 6: AME001
+  Col 7: A 05B
+  Col 8: A005B
+  Col 9: 2022
+
+Row 26: 138 non-null values
+  Col 0: A005C
+  Col 1: 2023
+  Col 2: 12
+  Col 3: AME
+  Col 4: AME
+  Col 5: AME01
+  Col 6: AME001
+  Col 8: A005C
+  Col 9: 2023
+  Col 10: PPKS
+
+Row 27: 139 non-null values
+  Col 0: A006A
+  Col 1: 2023
+  Col 2: 13
+  Col 3: AME
+  Col 4: AME
+  Col 5: AME01
+  Col 6: AME001
+  Col 7: A 06
+  Col 8: A006A
+  Col 9: 2023
+
+Row 28: 172 non-null values
+  Col 0: B001A
+  Col 1: 2012
+  Col 2: 19
+  Col 3: AME
+  Col 4: AME
+  Col 5: AME01
+  Col 6: AME001
+  Col 7: B 01A
+  Col 8: B001A
+  Col 9: 2012
+
+Row 29: 139 non-null values
+  Col 0: A007A
+  Col 1: 2023
+  Col 2: 14
+  Col 3: AME
+  Col 4: AME
+  Col 5: AME01
+  Col 6: AME001
+  Col 7: A 07
+  Col 8: A007A
+  Col 9: 2023
+
+================================================================================
+SEARCHING FOR KEY COLUMNS:
+================================================================================
+
+Searching for '2023':
+  Found at Row 3, Col 150: '2023'
+    Context: Row 2: nan
+  Found at Row 4, Col 40: 'THN 2023'
+    Context: Row 3: nan
+  Found at Row 26, Col 1: '2023'
+    Context: Row 25: 2022
+  Found at Row 26, Col 9: '2023'
+    Context: Row 25: 2022
+  Found at Row 26, Col 60: '2023.0'
+    Context: Row 25: 2022.0
+  Found at Row 26, Col 67: '2023'
+    Context: Row 25: 2022
+  Found at Row 27, Col 1: '2023'
+    Context: Row 26: 2023
+  Found at Row 27, Col 9: '2023'
+    Context: Row 26: 2023
+  Found at Row 27, Col 60: '2023.0'
+    Context: Row 26: 2023.0
+  Found at Row 27, Col 67: '2023'
+    Context: Row 26: 2023
+  Found at Row 29, Col 1: '2023'
+    Context: Row 28: 2012
+  Found at Row 29, Col 9: '2023'
+    Context: Row 28: 2012
+  Found at Row 29, Col 60: '2023.0'
+    Context: Row 28: 2012.0
+  Found at Row 29, Col 67: '2023'
+    Context: Row 28: 2012
+  Found at Row 38, Col 58: '0.05702023298589822'
+    Context: Row 37: 0
+  Found at Row 39, Col 171: '14.333202303127116'
+    Context: Row 38: 16.473740746146323
+
+Searching for '2024':
+  Found at Row 3, Col 159: '2024'
+    Context: Row 2: nan
+  Found at Row 4, Col 43: 'THN 2024'
+    Context: Row 3: nan
+  Found at Row 5, Col 11: 'SD THN 2024'
+    Context: Row 4: LUAS TANAM
+  Found at Row 13, Col 166: '-2024'
+    Context: Row 12: 46844
+
+Searching for '2025':
+  Found at Row 1, Col 2: 'UPDATE NOVEMBER 2025'
+    Context: Row 0: REAL TANAM INTI
+  Found at Row 3, Col 20: 'REALISASI TANAM SD NOVEMBER 2025'
+    Context: Row 2: nan
+  Found at Row 3, Col 168: '2025'
+    Context: Row 2: nan
+  Found at Row 4, Col 47: 'THN 2025'
+    Context: Row 3: nan
+  Found at Row 5, Col 13: 'SD 2025'
+    Context: Row 4: nan
+
+Searching for 'tanam':
+  Found at Row 0, Col 2: 'REAL TANAM INTI'
+  Found at Row 3, Col 20: 'REALISASI TANAM SD NOVEMBER 2025'
+  Found at Row 4, Col 11: 'LUAS TANAM'
+  Found at Row 5, Col 34: 'TANAM'
+  Found at Row 5, Col 36: 'TANAM'
+  Found at Row 5, Col 38: 'TANAM'
+  Found at Row 5, Col 40: 'TANAM'
+  Found at Row 5, Col 43: 'TANAM'
+  Found at Row 5, Col 47: 'TANAM'
+  Found at Row 5, Col 50: 'TANAM'
+
+Searching for 'blok':
+  Found at Row 3, Col 7: 'BLOK'
+  Found at Row 3, Col 63: 'BLOK'
+
+Searching for 'afdeling':
+  Not found in first 50 rows
+
+Searching for 'divisi':
+  Found at Row 3, Col 5: 'DIVISI'
+
+Searching for 'AME':
+  Found at Row 7, Col 3: 'AME'
+  Found at Row 7, Col 4: 'AME'
+  Found at Row 7, Col 5: 'AME01'
+  Found at Row 7, Col 6: 'AME001'
+  Found at Row 7, Col 62: 'AME001'
+  Found at Row 8, Col 3: 'AME'
+  Found at Row 8, Col 4: 'AME'
+  Found at Row 8, Col 5: 'AME01'
+  Found at Row 8, Col 6: 'AME001'
+  Found at Row 8, Col 62: 'AME001'
+  Found at Row 9, Col 3: 'AME'
+  Found at Row 9, Col 4: 'AME'
+  Found at Row 9, Col 5: 'AME01'
+  Found at Row 9, Col 6: 'AME001'
+  Found at Row 9, Col 62: 'AME001'
+  Found at Row 10, Col 3: 'AME'
+  Found at Row 10, Col 4: 'AME'
+  Found at Row 10, Col 5: 'AME01'
+  Found at Row 10, Col 6: 'AME001'
+  Found at Row 10, Col 62: 'AME001'
+  Found at Row 11, Col 3: 'AME'
+  Found at Row 11, Col 4: 'AME'
+  Found at Row 11, Col 5: 'AME01'
+  Found at Row 11, Col 6: 'AME001'
+  Found at Row 11, Col 62: 'AME001'
+  Found at Row 12, Col 3: 'AME'
+  Found at Row 12, Col 4: 'AME'
+  Found at Row 12, Col 5: 'AME01'
+  Found at Row 12, Col 6: 'AME001'
+  Found at Row 12, Col 62: 'AME001'
+  Found at Row 13, Col 3: 'AME'
+  Found at Row 13, Col 4: 'AME'
+  Found at Row 13, Col 5: 'AME01'
+  Found at Row 13, Col 6: 'AME001'
+  Found at Row 13, Col 62: 'AME001'
+  Found at Row 14, Col 3: 'AME'
+  Found at Row 14, Col 4: 'AME'
+  Found at Row 14, Col 5: 'AME01'
+  Found at Row 14, Col 6: 'AME001'
+  Found at Row 14, Col 62: 'AME001'
+  Found at Row 15, Col 3: 'AME'
+  Found at Row 15, Col 4: 'AME'
+  Found at Row 15, Col 5: 'AME01'
+  Found at Row 15, Col 6: 'AME001'
+  Found at Row 15, Col 62: 'AME001'
+  Found at Row 16, Col 3: 'AME'
+  Found at Row 16, Col 4: 'AME'
+  Found at Row 16, Col 5: 'AME01'
+  Found at Row 16, Col 6: 'AME001'
+  Found at Row 16, Col 62: 'AME001'
+  Found at Row 17, Col 3: 'AME'
+  Found at Row 17, Col 4: 'AME'
+  Found at Row 17, Col 5: 'AME01'
+  Found at Row 17, Col 6: 'AME001'
+  Found at Row 17, Col 62: 'AME001'
+  Found at Row 18, Col 3: 'AME'
+  Found at Row 18, Col 4: 'AME'
+  Found at Row 18, Col 5: 'AME01'
+  Found at Row 18, Col 6: 'AME001'
+  Found at Row 18, Col 62: 'AME001'
+  Found at Row 19, Col 3: 'AME'
+  Found at Row 19, Col 4: 'AME'
+  Found at Row 19, Col 5: 'AME01'
+  Found at Row 19, Col 6: 'AME001'
+  Found at Row 19, Col 62: 'AME001'
+  Found at Row 20, Col 3: 'AME'
+  Found at Row 20, Col 4: 'AME'
+  Found at Row 20, Col 5: 'AME01'
+  Found at Row 20, Col 6: 'AME001'
+  Found at Row 20, Col 62: 'AME001'
+  Found at Row 21, Col 3: 'AME'
+  Found at Row 21, Col 4: 'AME'
+  Found at Row 21, Col 5: 'AME01'
+  Found at Row 21, Col 6: 'AME001'
+  Found at Row 21, Col 62: 'AME001'
+  Found at Row 22, Col 3: 'AME'
+  Found at Row 22, Col 4: 'AME'
+  Found at Row 22, Col 5: 'AME01'
+  Found at Row 22, Col 6: 'AME001'
+  Found at Row 22, Col 62: 'AME001'
+  Found at Row 23, Col 3: 'AME'
+  Found at Row 23, Col 4: 'AME'
+  Found at Row 23, Col 5: 'AME01'
+  Found at Row 23, Col 6: 'AME001'
+  Found at Row 23, Col 62: 'AME001'
+  Found at Row 24, Col 3: 'AME'
+  Found at Row 24, Col 4: 'AME'
+  Found at Row 24, Col 5: 'AME01'
+  Found at Row 24, Col 6: 'AME001'
+  Found at Row 24, Col 62: 'AME001'
+  Found at Row 25, Col 3: 'AME'
+  Found at Row 25, Col 4: 'AME'
+  Found at Row 25, Col 5: 'AME01'
+  Found at Row 25, Col 6: 'AME001'
+  Found at Row 25, Col 62: 'AME001'
+  Found at Row 26, Col 3: 'AME'
+  Found at Row 26, Col 4: 'AME'
+  Found at Row 26, Col 5: 'AME01'
+  Found at Row 26, Col 6: 'AME001'
+  Found at Row 26, Col 62: 'AME001'
+  Found at Row 27, Col 3: 'AME'
+  Found at Row 27, Col 4: 'AME'
+  Found at Row 27, Col 5: 'AME01'
+  Found at Row 27, Col 6: 'AME001'
+  Found at Row 27, Col 62: 'AME001'
+  Found at Row 28, Col 3: 'AME'
+  Found at Row 28, Col 4: 'AME'
+  Found at Row 28, Col 5: 'AME01'
+  Found at Row 28, Col 6: 'AME001'
+  Found at Row 28, Col 62: 'AME001'
+  Found at Row 29, Col 3: 'AME'
+  Found at Row 29, Col 4: 'AME'
+  Found at Row 29, Col 5: 'AME01'
+  Found at Row 29, Col 6: 'AME001'
+  Found at Row 29, Col 62: 'AME001'
+  Found at Row 30, Col 3: 'AME'
+  Found at Row 30, Col 4: 'AME'
+  Found at Row 30, Col 5: 'AME01'
+  Found at Row 30, Col 6: 'AME001'
+  Found at Row 30, Col 62: 'AME001'
+  Found at Row 31, Col 3: 'AME'
+  Found at Row 31, Col 4: 'AME'
+  Found at Row 31, Col 5: 'AME01'
+  Found at Row 31, Col 6: 'AME001'
+  Found at Row 31, Col 62: 'AME001'
+  Found at Row 32, Col 3: 'AME'
+  Found at Row 32, Col 4: 'AME'
+  Found at Row 32, Col 5: 'AME01'
+  Found at Row 32, Col 6: 'AME001'
+  Found at Row 32, Col 62: 'AME001'
+  Found at Row 33, Col 3: 'AME'
+  Found at Row 33, Col 4: 'AME'
+  Found at Row 33, Col 5: 'AME01'
+  Found at Row 33, Col 6: 'AME001'
+  Found at Row 33, Col 62: 'AME001'
+  Found at Row 34, Col 3: 'AME'
+  Found at Row 34, Col 4: 'AME'
+  Found at Row 34, Col 5: 'AME01'
+  Found at Row 34, Col 6: 'AME001'
+  Found at Row 34, Col 62: 'AME001'
+  Found at Row 35, Col 3: 'AME'
+  Found at Row 35, Col 4: 'AME'
+  Found at Row 35, Col 5: 'AME01'
+  Found at Row 35, Col 6: 'AME001'
+  Found at Row 35, Col 62: 'AME001'
+  Found at Row 36, Col 3: 'AME'
+  Found at Row 36, Col 4: 'AME'
+  Found at Row 36, Col 5: 'AME01'
+  Found at Row 36, Col 6: 'AME001'
+  Found at Row 36, Col 62: 'AME001'
+  Found at Row 37, Col 3: 'AME'
+  Found at Row 37, Col 4: 'AME'
+  Found at Row 37, Col 5: 'AME01'
+  Found at Row 37, Col 6: 'AME001'
+  Found at Row 37, Col 62: 'AME001'
+  Found at Row 38, Col 3: 'AME'
+  Found at Row 38, Col 4: 'AME'
+  Found at Row 38, Col 5: 'AME01'
+  Found at Row 38, Col 6: 'AME001'
+  Found at Row 38, Col 62: 'AME001'
+  Found at Row 39, Col 3: 'AME'
+  Found at Row 39, Col 4: 'AME'
+  Found at Row 39, Col 5: 'AME01'
+  Found at Row 39, Col 6: 'AME001'
+  Found at Row 39, Col 62: 'AME001'
+  Found at Row 40, Col 3: 'AME'
+  Found at Row 40, Col 4: 'AME'
+  Found at Row 40, Col 5: 'AME01'
+  Found at Row 40, Col 6: 'AME001'
+  Found at Row 40, Col 62: 'AME001'
+  Found at Row 41, Col 3: 'AME'
+  Found at Row 41, Col 4: 'AME'
+  Found at Row 41, Col 5: 'AME01'
+  Found at Row 41, Col 6: 'AME001'
+  Found at Row 41, Col 62: 'AME001'
+  Found at Row 42, Col 3: 'AME'
+  Found at Row 42, Col 4: 'AME'
+  Found at Row 42, Col 5: 'AME01'
+  Found at Row 42, Col 6: 'AME001'
+  Found at Row 42, Col 62: 'AME001'
+  Found at Row 43, Col 3: 'AME'
+  Found at Row 43, Col 4: 'AME'
+  Found at Row 43, Col 5: 'AME01'
+  Found at Row 43, Col 6: 'AME001'
+  Found at Row 43, Col 62: 'AME001'
+  Found at Row 44, Col 3: 'AME'
+  Found at Row 44, Col 4: 'AME'
+  Found at Row 44, Col 5: 'AME01'
+  Found at Row 44, Col 6: 'AME001'
+  Found at Row 44, Col 62: 'AME001'
+  Found at Row 45, Col 3: 'AME'
+  Found at Row 45, Col 4: 'AME'
+  Found at Row 45, Col 5: 'AME01'
+  Found at Row 45, Col 6: 'AME001'
+  Found at Row 45, Col 62: 'AME001'
+  Found at Row 46, Col 3: 'AME'
+  Found at Row 46, Col 4: 'AME'
+  Found at Row 46, Col 5: 'AME01'
+  Found at Row 46, Col 6: 'AME001'
+  Found at Row 46, Col 62: 'AME001'
+  Found at Row 47, Col 3: 'AME'
+  Found at Row 47, Col 4: 'AME'
+  Found at Row 47, Col 5: 'AME01'
+  Found at Row 47, Col 6: 'AME001'
+  Found at Row 48, Col 3: 'AME'
+  Found at Row 48, Col 4: 'AME'
+  Found at Row 48, Col 5: 'AME01'
+  Found at Row 48, Col 6: 'AME001'
+  Found at Row 48, Col 62: 'AME001'
+  Found at Row 49, Col 3: 'AME'
+  Found at Row 49, Col 4: 'AME'
+  Found at Row 49, Col 5: 'AME01'
+  Found at Row 49, Col 6: 'AME001'
+  Found at Row 49, Col 62: 'AME001'
+
+Searching for 'TBM':
+  Not found in first 50 rows
+
+
+Raw data saved to: excel_raw_data.csv
+
+================================================================================
+Analysis complete!
+================================================================================
