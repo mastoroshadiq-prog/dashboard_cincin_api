@@ -17754,6 +17754,7 @@
             let trendData = null;
             let trendChartInstance = null;
             let currentTrendMetric = 'production';
+            let currentScenario = 'no-treatment'; // 'no-treatment' or 'treatment'
 
             // Load 5-year trend data
             // EMBEDDED DATA (fixes CORS issue with file:// protocol)
@@ -17787,34 +17788,61 @@
                 const years = ['2023', '2024', '2025', '2026', '2027'];
                 const timeline = trendData.timeline_data;
 
+
                 // LINE 1: Financial Loss (Million Rp)
                 const lossData = years.map(y => timeline[y].loss_million);
 
                 // LINE 2: Ganoderma Attack Rate (%)
-                // Based on current 6.28% and degradation model progression (+15% annually)
                 const baseAttackRate = trendData.current_metrics_2025.ganoderma.avg_attack_pct; // 6.28%
-                const ganoProgressionRate = 0.15; // 15% severity increase per year
 
-                const ganodermaData = [
-                    baseAttackRate / Math.pow(1 + ganoProgressionRate, 2), // 2023 (backfilled)
-                    baseAttackRate / (1 + ganoProgressionRate),              // 2024 (backfilled)
-                    baseAttackRate,                                          // 2025 (actual)
-                    baseAttackRate * (1 + ganoProgressionRate),              // 2026 (forecast)
-                    baseAttackRate * Math.pow(1 + ganoProgressionRate, 2)    // 2027 (forecast)
-                ];
+                let ganodermaData;
+                if (currentScenario === 'no-treatment') {
+                    // NO TREATMENT: +15% severity increase per year
+                    const ganoProgressionRate = 0.15;
+                    ganodermaData = [
+                        baseAttackRate / Math.pow(1 + ganoProgressionRate, 2), // 2023 (backfilled)
+                        baseAttackRate / (1 + ganoProgressionRate),              // 2024 (backfilled)
+                        baseAttackRate,                                          // 2025 (actual)
+                        baseAttackRate * (1 + ganoProgressionRate),              // 2026 (forecast: worse)
+                        baseAttackRate * Math.pow(1 + ganoProgressionRate, 2)    // 2027 (forecast: worse)
+                    ];
+                } else {
+                    // WITH TREATMENT: -20% improvement per year (fungicide + sanitation)
+                    const ganoImprovementRate = 0.20;
+                    ganodermaData = [
+                        baseAttackRate / Math.pow(1 - ganoImprovementRate, 2), // 2023 (backfilled)
+                        baseAttackRate / (1 - ganoImprovementRate),              // 2024 (backfilled)
+                        baseAttackRate,                                          // 2025 (actual)
+                        baseAttackRate * (1 - ganoImprovementRate),              // 2026 (forecast: better)
+                        baseAttackRate * Math.pow(1 - ganoImprovementRate, 2)    // 2027 (forecast: better)
+                    ];
+                }
 
                 // LINE 3: SPH (Pohon/Ha)
-                // Based on current 116.91 and decline model (-1.5% mortality annually)
                 const baseSPH = trendData.current_metrics_2025.sph.avg_sph; // 116.91
-                const sphDeclineRate = 0.015; // 1.5% annual mortality
 
-                const sphData = [
-                    baseSPH / Math.pow(1 - sphDeclineRate, 2), // 2023 (backfilled)
-                    baseSPH / (1 - sphDeclineRate),             // 2024 (backfilled)
-                    baseSPH,                                    // 2025 (actual)
-                    baseSPH * (1 - sphDeclineRate),             // 2026 (forecast)
-                    baseSPH * Math.pow(1 - sphDeclineRate, 2)   // 2027 (forecast)
-                ];
+                let sphData;
+                if (currentScenario === 'no-treatment') {
+                    // NO TREATMENT: -1.5% annual mortality
+                    const sphDeclineRate = 0.015;
+                    sphData = [
+                        baseSPH / Math.pow(1 - sphDeclineRate, 2), // 2023 (backfilled)
+                        baseSPH / (1 - sphDeclineRate),             // 2024 (backfilled)
+                        baseSPH,                                    // 2025 (actual)
+                        baseSPH * (1 - sphDeclineRate),             // 2026 (forecast: decline)
+                        baseSPH * Math.pow(1 - sphDeclineRate, 2)   // 2027 (forecast: decline)
+                    ];
+                } else {
+                    // WITH TREATMENT: +1% annual improvement (replanting + fertilization)
+                    const sphGrowthRate = 0.01;
+                    sphData = [
+                        baseSPH / Math.pow(1 + sphGrowthRate, 2), // 2023 (backfilled)
+                        baseSPH / (1 + sphGrowthRate),             // 2024 (backfilled)
+                        baseSPH,                                   // 2025 (actual)
+                        baseSPH * (1 + sphGrowthRate),             // 2026 (forecast: growth)
+                        baseSPH * Math.pow(1 + sphGrowthRate, 2)   // 2027 (forecast: growth)
+                    ];
+                }
 
                 // Point styles for data source differentiation
                 const pointStyles = ['circle', 'circle', 'rect', 'circle', 'circle'];
@@ -18047,6 +18075,32 @@
 
                 // Re-render chart
                 render5YearTrendChart(metric);
+            }
+
+            // Switch scenario button handler
+            function switchTrendScenario(scenario) {
+                currentScenario = scenario;
+
+                // Update button styles
+                const noTreatmentBtn = document.getElementById('scenarioBtn_notreatment');
+                const treatmentBtn = document.getElementById('scenarioBtn_treatment');
+                const subtitle = document.getElementById('scenarioSubtitle');
+
+                if (scenario === 'no-treatment') {
+                    // Active: No Treatment
+                    noTreatmentBtn.className = 'px-4 py-2 rounded-lg text-xs font-bold bg-red-600 text-white border-2 border-red-400 transition-all hover:scale-105';
+                    treatmentBtn.className = 'px-4 py-2 rounded-lg text-xs font-bold bg-slate-700 text-slate-300 border border-slate-600 transition-all hover:scale-105';
+                    subtitle.textContent = 'Historical + Forecast (No Treatment Scenario)';
+                } else {
+                    // Active: With Treatment
+                    noTreatmentBtn.className = 'px-4 py-2 rounded-lg text-xs font-bold bg-slate-700 text-slate-300 border border-slate-600 transition-all hover:scale-105';
+                    treatmentBtn.className = 'px-4 py-2 rounded-lg text-xs font-bold bg-green-600 text-white border-2 border-green-400 transition-all hover:scale-105';
+                    subtitle.textContent = 'Historical + Forecast (With Treatment Scenario)';
+                }
+
+                // Re-render chart with new scenario
+                render5YearTrendChart(currentTrendMetric);
+                console.log(`[TREND] Switched to scenario: ${scenario}`);
             }
 
             // ======================================
@@ -18563,24 +18617,40 @@
                                 <span class="text-3xl">📊</span>
                                 <div>
                                     <h3 class="text-xl font-bold text-white">5-Year Trend Analysis</h3>
-                                    <p class="text-sm text-slate-400">Historical + Forecast (No Treatment Scenario)</p>
+                                    <p class="text-sm text-slate-400" id="scenarioSubtitle">Historical + Forecast (No
+                                        Treatment Scenario)</p>
                                 </div>
                             </div>
 
-                            <!-- Multi-Line Legend Info -->
-                            <div class="flex gap-2 text-xs">
-                                <span
-                                    class="px-3 py-1.5 rounded-lg bg-red-900/30 text-red-300 border border-red-500/30">
-                                    🔴 Kerugian
-                                </span>
-                                <span
-                                    class="px-3 py-1.5 rounded-lg bg-purple-900/30 text-purple-300 border border-purple-500/30">
-                                    🟣 Ganoderma
-                                </span>
-                                <span
-                                    class="px-3 py-1.5 rounded-lg bg-green-900/30 text-green-300 border border-green-500/30">
-                                    🟢 SPH
-                                </span>
+                            <!-- Scenario Toggle + Legend -->
+                            <div class="flex items-center gap-6">
+                                <!-- Scenario Selector -->
+                                <div class="flex gap-2">
+                                    <button onclick="switchTrendScenario('no-treatment')" id="scenarioBtn_notreatment"
+                                        class="px-4 py-2 rounded-lg text-xs font-bold bg-red-600 text-white border-2 border-red-400 transition-all hover:scale-105">
+                                        ⚠️ No Treatment
+                                    </button>
+                                    <button onclick="switchTrendScenario('treatment')" id="scenarioBtn_treatment"
+                                        class="px-4 py-2 rounded-lg text-xs font-bold bg-slate-700 text-slate-300 border border-slate-600 transition-all hover:scale-105">
+                                        ✅ With Treatment
+                                    </button>
+                                </div>
+
+                                <!-- Multi-Line Legend Info -->
+                                <div class="flex gap-2 text-xs">
+                                    <span
+                                        class="px-3 py-1.5 rounded-lg bg-red-900/30 text-red-300 border border-red-500/30">
+                                        🔴 Kerugian
+                                    </span>
+                                    <span
+                                        class="px-3 py-1.5 rounded-lg bg-purple-900/30 text-purple-300 border border-purple-500/30">
+                                        🟣 Ganoderma
+                                    </span>
+                                    <span
+                                        class="px-3 py-1.5 rounded-lg bg-green-900/30 text-green-300 border border-green-500/30">
+                                        🟢 SPH
+                                    </span>
+                                </div>
                             </div>
                         </div>
 
