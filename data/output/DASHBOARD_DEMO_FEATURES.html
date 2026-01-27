@@ -18058,9 +18058,22 @@
                                     const dataIndex = tooltipModel.dataPoints[0].dataIndex;
                                     const year = tooltipModel.title[0];
                                     let yearType = '';
-                                    if (year === '2023' || year === '2024') yearType = ' (Realisasi)'; // Actual historical data
-                                    else if (year === '2025') yearType = ' (Aktual)'; // Current year actual
-                                    else yearType = ' (Forecast)'; // 2026-2027 predictions
+                                    let dataSourceNote = '';
+
+                                    // Detailed data source classification
+                                    if (year === '2023') {
+                                        yearType = ' (Estimasi)';
+                                        dataSourceNote = '⚠️ Loss: Backfill | SPH & Gano: Reverse model dari 2025';
+                                    } else if (year === '2024') {
+                                        yearType = ' (Mixed Data)';
+                                        dataSourceNote = '📊 Loss: Realisasi Excel | SPH & Gano: Estimasi backward';
+                                    } else if (year === '2025') {
+                                        yearType = ' (Aktual)';
+                                        dataSourceNote = '✅ Semua data dari data_gabungan.xlsx';
+                                    } else {
+                                        yearType = ' (Forecast)';
+                                        dataSourceNote = '🔮 Proyeksi model degradasi (No treatment) & treatment';
+                                    }
 
                                     // Get datasets (all 6: 0-2 no-treatment, 3-5 with-treatment)
                                     const datasets = context.chart.data.datasets;
@@ -18070,7 +18083,8 @@
                                     const withTreatVisible = !datasets[3].hidden;
 
                                     // Build HTML table
-                                    let html = `<div style="font-weight: bold; font-size: 14px; margin-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 8px;">${year}${yearType}</div>`;
+                                    let html = `<div style="font-weight: bold; font-size: 14px; margin-bottom: 4px;">${year}${yearType}</div>`;
+                                    html += `<div style="font-size: 10px; color: #94a3b8; margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.2);">${dataSourceNote}</div>`;
 
                                     if (noTreatVisible && withTreatVisible) {
                                         // BOTH scenarios visible - show comparison table
@@ -18125,8 +18139,9 @@
                                         if (year === '2023' || year === '2024' || year === '2025') {
                                             html += `<div style="margin-top: 8px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.2); font-size: 10px; color: #94a3b8; text-align: center;">📊 Data historis - Treatment belum dimulai</div>`;
                                         } else {
-                                            html += `<div style="margin-top: 8px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.2); font-size: 10px; color: #94a3b8; text-align: center;">💡 Click point for detailed comparison table</div>`;
+                                            html += `<div style="margin-top: 8px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.2); font-size: 10px; color: #94a3b8; text-align: center;">💡 Forecast berdasarkan model degradasi</div>`;
                                         }
+                                        html += `<div style="margin-top: 6px; font-size: 9px; color: #64748b; text-align: center; cursor: pointer;" onclick="showDataMethodology()">ℹ️ Lihat metodologi estimasi</div>`;
                                     } else if (noTreatVisible) {
                                         // Only No Treatment
                                         html += `<div style="font-size: 12px; color: #fca5a5; margin-bottom: 6px;">⚠️ No Treatment Scenario</div>`;
@@ -18281,6 +18296,80 @@
                 }
 
                 console.log(`[TREND] Toggled ${scenario}: ${isVisible ? 'visible' : 'hidden'}`);
+            }
+
+            // ======================================
+            // DATA METHODOLOGY MODAL
+            // ======================================
+            function showDataMethodology() {
+                const modalHTML = `
+                    <div id="methodologyModal" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 9999; display: flex; justify-content: center; align-items: center; padding: 20px;">
+                        <div style="background: linear-gradient(135deg, #1e293b 0%, #334155 100%); border-radius: 16px; padding: 32px; max-width: 800px; max-height: 90vh; overflow-y: auto; box-shadow: 0 20px 60px rgba(0,0,0,0.5); border: 2px solid rgba(99, 102, 241, 0.3);">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+                                <h2 style="color: #818cf8; margin: 0; font-size: 24px;">📊 Metodologi Data & Estimasi</h2>
+                                <button onclick="document.getElementById('methodologyModal').remove()" style="background: rgba(239, 68, 68, 0.2); border: 1px solid #ef4444; color: #fca5a5; padding: 8px 16px; border-radius: 8px; cursor: pointer; font-size: 14px;">✕ Tutup</button>
+                            </div>
+                            
+                            <div style="color: #cbd5e1; line-height: 1.6; font-size: 13px;">
+                                <h3 style="color: #86efac; margin-top: 0; font-size: 18px;">📈 Ringkasan Data Source</h3>
+                                <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px; background: rgba(0,0,0,0.2); border-radius: 8px; overflow: hidden; font-size: 12px;">
+                                    <thead>
+                                        <tr style="background: rgba(99, 102, 241, 0.2);">
+                                            <th style="padding: 10px; text-align: left;">Tahun</th>
+                                            <th style="padding: 10px; text-align: left;">Loss</th>
+                                            <th style="padding: 10px; text-align: left;">SPH</th>
+                                            <th style="padding: 10px; text-align: left;">Ganoderma</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td style="padding: 10px;"><strong>2023</strong></td><td style="padding: 10px;">⚠️ Backfill</td><td style="padding: 10px;">⚠️ Reverse Model</td><td style="padding: 10px;">⚠️ Reverse Model</td></tr>
+                                        <tr><td style="padding: 10px;"><strong>2024</strong></td><td style="padding: 10px;">✅ Realisasi Excel</td><td style="padding: 10px;">⚠️ Estimasi</td><td style="padding: 10px;">⚠️ Estimasi</td></tr>
+                                        <tr style="background: rgba(34, 197, 94, 0.1);"><td style="padding: 10px;"><strong>2025</strong></td><td style="padding: 10px;">✅ Realisasi</td><td style="padding: 10px;">✅ Realisasi</td><td style="padding: 10px;">✅ Realisasi</td></tr>
+                                        <tr><td style="padding: 10px;"><strong>2026</strong></td><td style="padding: 10px;">🔮 Forecast</td><td style="padding: 10px;">🔮 Forecast</td><td style="padding: 10px;">🔮 Forecast</td></tr>
+                                        <tr><td style="padding: 10px;"><strong>2027</strong></td><td style="padding: 10px;">🔮 Forecast</td><td style="padding: 10px;">🔮 Forecast</td><td style="padding: 10px;">🔮 Forecast</td></tr>
+                                    </tbody>
+                                </table>
+
+                                <h3 style="color: #fbbf24; margin-top: 20px; font-size: 18px;">🔬 Penjelasan Metodologi</h3>
+                                
+                                <div style="background: rgba(239, 68, 68, 0.1); border-left: 3px solid #ef4444; padding: 12px; margin-bottom: 12px; border-radius: 4px;">
+                                    <h4 style="color: #fca5a5; margin: 0 0 8px 0; font-size: 15px;">1. Loss (Kerugian) - 2023</h4>
+                                    <p style="margin: 4px 0;"><strong>Mengapa estimasi?</strong> Data produksi 2023 tidak ada di Excel</p>
+                                    <p style="margin: 4px 0;"><strong>Metode:</strong> Reverse dari 2024</p>
+                                    <p style="margin: 4px 0;"><strong>Formula:</strong> Loss_2023 = Loss_2024 / 0.955</p>
+                                </div>
+
+                                <div style="background: rgba(251, 191, 36, 0.1); border-left: 3px solid #fbbf24; padding: 12px; margin-bottom: 12px; border-radius: 4px;">
+                                    <h4 style="color: #fde047; margin: 0 0 8px 0; font-size: 15px;">2. SPH - 2023-2024</h4>
+                                    <p style="margin: 4px 0;"><strong>Mengapa estimasi?</strong> Excel hanya punya SPH 2025</p>
+                                    <p style="margin: 4px 0;"><strong>Baseline:</strong> 116.91 pohon/Ha (2025)</p>
+                                    <p style="margin: 4px 0;"><strong>Formula:</strong> SPH_backward = Baseline / (1 - 0.015)^n</p>
+                                    <p style="margin: 4px 0; font-size: 11px; color: #94a3b8;">Asumsi 1.5% annual mortality</p>
+                                </div>
+
+                                <div style="background: rgba(168, 85, 247, 0.1); border-left: 3px solid #a855f7; padding: 12px; margin-bottom: 12px; border-radius: 4px;">
+                                    <h4 style="color: #c084fc; margin: 0 0 8px 0; font-size: 15px;">3. Ganoderma - 2023-2024</h4>
+                                    <p style="margin: 4px 0;"><strong>Mengapa estimasi?</strong> Excel hanya punya Gano 2025</p>
+                                    <p style="margin: 4px 0;"><strong>Baseline:</strong> 6.28% (2025)</p>
+                                    <p style="margin: 4px 0;"><strong>Formula:</strong> Gano_backward = Baseline / (1 + 0.15)^n</p>
+                                    <p style="margin: 4px 0; font-size: 11px; color: #94a3b8;">Asumsi 15% annual progression (reverse)</p>
+                                </div>
+
+                                <div style="background: rgba(99, 102, 241, 0.1); border-left: 3px solid #6366f1; padding: 12px; border-radius: 4px;">
+                                    <h4 style="color: #818cf8; margin: 0 0 8px 0; font-size: 15px;">4. Forecast 2026-2027</h4>
+                                    <p style="margin: 4px 0;"><strong>No Treatment:</strong> Gano +15%, SPH -1.5%, Loss compound 4.5%</p>
+                                    <p style="margin: 4px 0;"><strong>With Treatment:</strong> Gano -20%, SPH +1%, Loss calculated</p>
+                                </div>
+
+                                <div style="margin-top: 16px; padding: 12px; background: rgba(34, 197, 94, 0.1); border-radius: 8px; border: 1px solid rgba(34, 197, 94, 0.3); font-size: 11px;">
+                                    <strong style="color: #86efac;">📌 Catatan:</strong> <span style="color: #cbd5e1;">2025 = baseline anchor (semua data actual). Estimasi backward dibuat karena keterbatasan data historis.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                document.body.insertAdjacentHTML('beforeend', modalHTML);
             }
 
             // ======================================
