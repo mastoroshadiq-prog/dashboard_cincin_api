@@ -26,6 +26,9 @@
             border-radius: 10px;
         }
     </style>
+
+    <!-- Chart.js für Visual Analytics -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 </head>
 
 <body class="p-8">
@@ -17489,6 +17492,489 @@
                 }
             }
 
+            // ======================================
+            // CHART RENDERING FUNCTIONS
+            // ======================================
+
+            let gapYieldChartInstance = null;
+            let ganodermaChartInstance = null;
+            let sphChartInstance = null;
+
+            function renderAme02Charts() {
+                console.log('[CHARTS] Rendering AME02 charts...');
+
+                // Destroy existing charts
+                if (gapYieldChartInstance) gapYieldChartInstance.destroy();
+                if (ganodermaChartInstance) ganodermaChartInstance.destroy();
+                if (sphChartInstance) sphChartInstance.destroy();
+
+                // 1. GAP YIELD CHART (Bar Chart with gradient)
+                const gapCtx = document.getElementById('gapYieldChart');
+                if (gapCtx) {
+                    const gradient = gapCtx.getContext('2d').createLinearGradient(0, 0, 0, 400);
+                    gradient.addColorStop(0, 'rgba(251, 146, 60, 0.8)');
+                    gradient.addColorStop(1, 'rgba(251, 146, 60, 0.3)');
+
+                    gapYieldChartInstance = new Chart(gapCtx, {
+                        type: 'bar',
+                        data: {
+                            labels: ['Real Ton', 'Potensi Ton', 'Gap (Loss)'],
+                            datasets: [{
+                                label: 'Produksi 2025',
+                                data: [
+                                    ame02Data.gapYieldTon * 0.88,  // Estimated real from gap
+                                    ame02Data.gapYieldTon * 0.88 + ame02Data.gapYieldTon,  // Pot = Real + Gap
+                                    ame02Data.gapYieldTon
+                                ],
+                                backgroundColor: [
+                                    'rgba(34, 197, 94, 0.7)',   // Green
+                                    'rgba(59, 130, 246, 0.7)',  // Blue
+                                    gradient                     // Orange gradient
+                                ],
+                                borderColor: [
+                                    'rgba(34, 197, 94, 1)',
+                                    'rgba(59, 130, 246, 1)',
+                                    'rgba(251, 146, 60, 1)'
+                                ],
+                                borderWidth: 2,
+                                borderRadius: 8
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                legend: {
+                                    display: false
+                                },
+                                tooltip: {
+                                    callbacks: {
+                                        label: function (context) {
+                                            return context.parsed.y.toFixed(2) + ' Ton';
+                                        }
+                                    }
+                                }
+                            },
+                            scales: {
+                                y: {
+                                    beginAtZero: true,
+                                    ticks: {
+                                        color: '#94a3b8',
+                                        callback: function (value) {
+                                            return value.toLocaleString() + ' T';
+                                        }
+                                    },
+                                    grid: {
+                                        color: 'rgba(148, 163, 184, 0.1)'
+                                    }
+                                },
+                                x: {
+                                    ticks: {
+                                        color: '#94a3b8'
+                                    },
+                                    grid: {
+                                        display: false
+                                    }
+                                }
+                            }
+                        }
+                    });
+                }
+
+                // 2. GANODERMA SEVERITY CHART (Stacked Horizontal Bar)
+                const ganoCtx = document.getElementById('ganodermaChart');
+                if (ganoCtx) {
+                    ganodermaChartInstance = new Chart(ganoCtx, {
+                        type: 'bar',
+                        data: {
+                            labels: ['Ganoderma Infection'],
+                            datasets: [{
+                                label: 'Stadium 1&2 (Mild)',
+                                data: [ame02Data.ganoderma.stad12],
+                                backgroundColor: 'rgba(250, 204, 21, 0.7)',
+                                borderColor: 'rgba(250, 204, 21, 1)',
+                                borderWidth: 2,
+                                borderRadius: 6
+                            }, {
+                                label: 'Stadium 3&4 (Severe)',
+                                data: [ame02Data.ganoderma.stad34],
+                                backgroundColor: 'rgba(239, 68, 68, 0.7)',
+                                borderColor: 'rgba(239, 68, 68, 1)',
+                                borderWidth: 2,
+                                borderRadius: 6
+                            }]
+                        },
+                        options: {
+                            indexAxis: 'y',
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                legend: {
+                                    display: true,
+                                    position: 'bottom',
+                                    labels: {
+                                        color: '#94a3b8',
+                                        padding: 15,
+                                        font: {
+                                            size: 11
+                                        }
+                                    }
+                                },
+                                tooltip: {
+                                    callbacks: {
+                                        label: function (context) {
+                                            const total = ame02Data.ganoderma.total;
+                                            const value = context.parsed.x;
+                                            const pct = ((value / total) * 100).toFixed(1);
+                                            return context.dataset.label + ': ' + value.toLocaleString() + ' pohon (' + pct + '%)';
+                                        }
+                                    }
+                                }
+                            },
+                            scales: {
+                                x: {
+                                    stacked: true,
+                                    beginAtZero: true,
+                                    ticks: {
+                                        color: '#94a3b8',
+                                        callback: function (value) {
+                                            return value.toLocaleString();
+                                        }
+                                    },
+                                    grid: {
+                                        color: 'rgba(148, 163, 184, 0.1)'
+                                    }
+                                },
+                                y: {
+                                    stacked: true,
+                                    ticks: {
+                                        color: '#94a3b8'
+                                    },
+                                    grid: {
+                                        display: false
+                                    }
+                                }
+                            }
+                        }
+                    });
+                }
+
+                // 3. SPH DISTRIBUTION CHART (Horizontal Bar)
+                const sphCtx = document.getElementById('sphChart');
+                if (sphCtx) {
+                    sphChartInstance = new Chart(sphCtx, {
+                        type: 'bar',
+                        data: {
+                            labels: ['Below Standard\n(< 130)', 'Within Standard\n(130-143)', 'Above Standard\n(> 143)'],
+                            datasets: [{
+                                label: 'Number of Blocks',
+                                data: [
+                                    ame02Data.sph.below,
+                                    ame02Data.sph.within,
+                                    ame02Data.sph.above
+                                ],
+                                backgroundColor: [
+                                    'rgba(239, 68, 68, 0.7)',     // Red
+                                    'rgba(34, 197, 94, 0.7)',     // Green
+                                    'rgba(59, 130, 246, 0.7)'     // Blue
+                                ],
+                                borderColor: [
+                                    'rgba(239, 68, 68, 1)',
+                                    'rgba(34, 197, 94, 1)',
+                                    'rgba(59, 130, 246, 1)'
+                                ],
+                                borderWidth: 2,
+                                borderRadius: 8
+                            }]
+                        },
+                        options: {
+                            indexAxis: 'y',
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                legend: {
+                                    display: false
+                                },
+                                tooltip: {
+                                    callbacks: {
+                                        label: function (context) {
+                                            const total = ame02Data.totalBlocks;
+                                            const value = context.parsed.x;
+                                            const pct = ((value / total) * 100).toFixed(1);
+                                            return value + ' blok (' + pct + '%)';
+                                        }
+                                    }
+                                }
+                            },
+                            scales: {
+                                x: {
+                                    beginAtZero: true,
+                                    ticks: {
+                                        color: '#94a3b8',
+                                        stepSize: 5
+                                    },
+                                    grid: {
+                                        color: 'rgba(148, 163, 184, 0.1)'
+                                    }
+                                },
+                                y: {
+                                    ticks: {
+                                        color: '#94a3b8',
+                                        font: {
+                                            size: 10
+                                        }
+                                    },
+                                    grid: {
+                                        display: false
+                                    }
+                                }
+                            }
+                        }
+                    });
+                }
+
+                console.log('[CHARTS] All charts rendered successfully!');
+            }
+
+            // Update toggleAme02Analysis to also render charts
+            const originalToggle = toggleAme02Analysis;
+            toggleAme02Analysis = function (divisionCode) {
+                originalToggle(divisionCode);
+
+                if (divisionCode === 'AME02') {
+                    // Render charts after data loads
+                    setTimeout(renderAme02Charts, 200);
+                }
+            };
+
+            // ======================================
+            // 5-YEAR TREND ANALYSIS
+            // ======================================
+
+            let trendData = null;
+            let trendChartInstance = null;
+            let currentTrendMetric = 'production';
+
+            // Load 5-year trend data
+            async function load5YearTrendData() {
+                try {
+                    const response = await fetch('poac_sim/data/output/trend_analysis/ame02_5year_trend_forecast.json');
+                    trendData = await response.json();
+                    console.log('[TREND] 5-year data loaded successfully');
+                    return true;
+                } catch (error) {
+                    console.error('[TREND] Failed to load data:', error);
+                    return false;
+                }
+            }
+
+            // Render 5-year trend chart
+            function render5YearTrendChart(metric = 'production') {
+                if (!trendData) {
+                    console.warn('[TREND] No data available');
+                    return;
+                }
+
+                const ctx = document.getElementById('trendChart');
+                if (!ctx) return;
+
+                // Destroy existing
+                if (trendChartInstance) trendChartInstance.destroy();
+
+                // Prepare data
+                const years = ['2023', '2024', '2025', '2026', '2027'];
+                const timeline = trendData.timeline_data;
+
+                let datasetLabel, yAxisLabel, dataValues, tooltipSuffix;
+
+                if (metric === 'production') {
+                    datasetLabel = 'Real Production (Ton)';
+                    yAxisLabel = 'Production (Ton)';
+                    dataValues = years.map(y => timeline[y].real_ton);
+                    tooltipSuffix = ' Ton';
+                } else if (metric === 'loss') {
+                    datasetLabel = 'Financial Loss (Million Rp)';
+                    yAxisLabel = 'Loss (Million Rp)';
+                    dataValues = years.map(y => timeline[y].loss_million);
+                    tooltipSuffix = ' M';
+                } else {  // efficiency
+                    datasetLabel = 'Efficiency (%)';
+                    yAxisLabel = 'Efficiency (%)';
+                    dataValues = years.map(y => timeline[y].efficiency_pct);
+                    tooltipSuffix = '%';
+                }
+
+                // Point styles: differentiate estimate, actual, forecast
+                const pointBackgroundColors = [
+                    'rgba(234, 179, 8, 0.6)',   // 2023 - yellow (estimate)
+                    'rgba(34, 197, 94, 1)',     // 2024 - green (actual)
+                    'rgba(34, 197, 94, 1)',     // 2025 - green (actual)
+                    'rgba(239, 68, 68, 0.6)',   // 2026 - red (forecast)
+                    'rgba(239, 68, 68, 0.6)'    // 2027 - red (forecast)
+                ];
+
+                const pointBorderColors = [
+                    'rgba(234, 179, 8, 1)',
+                    'rgba(34, 197, 94, 1)',
+                    'rgba(34, 197, 94, 1)',
+                    'rgba(239, 68, 68, 1)',
+                    'rgba(239, 68, 68, 1)'
+                ];
+
+                const pointRadius = [6, 6, 8, 6, 6];  // 2025 larger (current)
+
+                // Create gradient for line
+                const gradient = ctx.getContext('2d').createLinearGradient(0, 0, 0, 400);
+                gradient.addColorStop(0, 'rgba(99, 102, 241, 0.5)');
+                gradient.addColorStop(1, 'rgba(99, 102, 241, 0.1)');
+
+                trendChartInstance = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: years,
+                        datasets: [{
+                            label: datasetLabel,
+                            data: dataValues,
+                            borderColor: 'rgba(99, 102, 241, 1)',
+                            backgroundColor: gradient,
+                            borderWidth: 3,
+                            pointBackgroundColor: pointBackgroundColors,
+                            pointBorderColor: pointBorderColors,
+                            pointBorderWidth: 2,
+                            pointRadius: pointRadius,
+                            pointHoverRadius: 10,
+                            fill: true,
+                            tension: 0.3
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    title: function (context) {
+                                        const year = context[0].label;
+                                        let type = '';
+                                        if (year === '2023') type = ' (Estimate)';
+                                        else if (year === '2024' || year === '2025') type = ' (Actual)';
+                                        else type = ' (Forecast)';
+                                        return year + type;
+                                    },
+                                    label: function (context) {
+                                        return context.parsed.y.toFixed(2) + tooltipSuffix;
+                                    },
+                                    afterLabel: function (context) {
+                                        const year = context.label;
+                                        if (year === '2023') return 'Backfill estimate (reverse modeling)';
+                                        if (year === '2026' || year === '2027') return 'No-treatment scenario';
+                                        return '';
+                                    }
+                                },
+                                backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                                padding: 12,
+                                titleColor: '#fff',
+                                bodyColor: '#cbd5e1',
+                                borderColor: 'rgba(99, 102, 241, 0.5)',
+                                borderWidth: 1
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: false,
+                                ticks: {
+                                    color: '#94a3b8',
+                                    callback: function (value) {
+                                        if (metric === 'efficiency') {
+                                            return value.toFixed(1) + '%';
+                                        } else if (metric === 'loss') {
+                                            return 'Rp ' + value.toFixed(1) + 'M';
+                                        } else {
+                                            return value.toLocaleString() + ' T';
+                                        }
+                                    }
+                                },
+                                grid: {
+                                    color: 'rgba(148, 163, 184, 0.1)'
+                                },
+                                title: {
+                                    display: true,
+                                    text: yAxisLabel,
+                                    color: '#94a3b8',
+                                    font: {
+                                        size: 11
+                                    }
+                                }
+                            },
+                            x: {
+                                ticks: {
+                                    color: '#94a3b8',
+                                    font: {
+                                        size: 12
+                                    }
+                                },
+                                grid: {
+                                    display: false
+                                }
+                            }
+                        }
+                    }
+                });
+
+                console.log(`[TREND] Chart rendered for metric: ${metric}`);
+            }
+
+            // Switch metric button handler
+            function switchTrendMetric(metric) {
+                currentTrendMetric = metric;
+
+                // Update button styles
+                const buttons = ['production', 'loss', 'efficiency'];
+                buttons.forEach(btn => {
+                    const el = document.getElementById(`trendBtn_${btn}`);
+                    if (el) {
+                        if (btn === metric) {
+                            el.className = 'px-4 py-2 rounded-lg text-xs font-bold bg-blue-600 text-white border-2 border-blue-400';
+                        } else {
+                            el.className = 'px-4 py-2 rounded-lg text-xs font-bold bg-slate-700 text-slate-300 border border-slate-600';
+                        }
+                    }
+                });
+
+                // Re-render chart
+                render5YearTrendChart(metric);
+            }
+
+            // Update toggleAme02Analysis to show trend section
+            const originalToggleAme02 = toggleAme02Analysis;
+            toggleAme02Analysis = function (divisionCode) {
+                if (typeof originalToggleAme02 === 'function') {
+                    originalToggleAme02(divisionCode);
+                }
+
+                const trendSection = document.getElementById('ame02TrendSection');
+
+                if (divisionCode === 'AME02') {
+                    if (trendSection) trendSection.style.display = 'block';
+
+                    // Load and render trend data
+                    if (!trendData) {
+                        load5YearTrendData().then(success => {
+                            if (success) {
+                                setTimeout(() => render5YearTrendChart('production'), 300);
+                            }
+                        });
+                    } else {
+                        setTimeout(() => render5YearTrendChart(currentTrendMetric), 300);
+                    }
+                } else {
+                    if (trendSection) trendSection.style.display = 'none';
+                }
+            };
+
         </script>
 
 
@@ -17905,16 +18391,105 @@
                         </div>
                     </div>
 
-                    <!-- Chart Visualization (Placeholder) -->
+                    <!--  VISUAL ANALYTICS CHARTS -->
                     <div class="bg-black/20 rounded-xl p-6 border border-slate-700 mb-6" id="ame02ChartSection"
                         style="display:none;">
-                        <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                        <h3 class="text-xl font-bold text-white mb-6 flex items-center gap-2">
                             <span>📈</span> Visual Analysis
                         </h3>
-                        <div class="bg-slate-800/30 rounded-lg p-8 text-center text-slate-400">
-                            <div class="text-4xl mb-2">📊</div>
-                            <div>Chart visualization will be implemented here</div>
-                            <div class="text-sm mt-2">(Gap Trend, Ganoderma Severity, SPH Distribution)</div>
+
+                        <!-- Charts Grid -->
+                        <div class="grid grid-cols-2 gap-6 mb-6">
+                            <!-- Gap Yield Chart -->
+                            <div class="bg-slate-800/50 rounded-lg p-4 border border-orange-500/20">
+                                <h4 class="text-sm font-bold text-orange-300 mb-3 uppercase">Gap Yield Distribution</h4>
+                                <canvas id="gapYieldChart" height="200"></canvas>
+                            </div>
+
+                            <!-- Ganoderma Severity Chart -->
+                            <div class="bg-slate-800/50 rounded-lg p-4 border border-purple-500/20">
+                                <h4 class="text-sm font-bold text-purple-300 mb-3 uppercase">Ganoderma Severity (By
+                                    Stadium)</h4>
+                                <canvas id="ganodermaChart" height="200"></canvas>
+                            </div>
+                        </div>
+
+                        <!-- SPH Distribution Chart (Full Width) -->
+                        <div class="bg-slate-800/50 rounded-lg p-4 border border-blue-500/20">
+                            <h4 class="text-sm font-bold text-blue-300 mb-3 uppercase">SPH Distribution (Standard:
+                                130-143 pohon/Ha)</h4>
+                            <canvas id="sphChart" height="120"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- 5-YEAR TREND ANALYSIS (2023-2027) -->
+                    <div class="bg-gradient-to-br from-indigo-900/30 to-purple-900/20 rounded-xl p-6 border-2 border-indigo-500/30 mb-6"
+                        id="ame02TrendSection" style="display:none;">
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="flex items-center gap-3">
+                                <span class="text-3xl">📊</span>
+                                <div>
+                                    <h3 class="text-xl font-bold text-white">5-Year Trend Analysis</h3>
+                                    <p class="text-sm text-slate-400">Historical + Forecast (No Treatment Scenario)</p>
+                                </div>
+                            </div>
+
+                            <!-- Metric Selector -->
+                            <div class="flex gap-2">
+                                <button onclick="switchTrendMetric('production')" id="trendBtn_production"
+                                    class="px-4 py-2 rounded-lg text-xs font-bold bg-blue-600 text-white border-2 border-blue-400">
+                                    📈 Production
+                                </button>
+                                <button onclick="switchTrendMetric('loss')" id="trendBtn_loss"
+                                    class="px-4 py-2 rounded-lg text-xs font-bold bg-slate-700 text-slate-300 border border-slate-600">
+                                    💰 Financial Loss
+                                </button>
+                                <button onclick="switchTrendMetric('efficiency')" id="trendBtn_efficiency"
+                                    class="px-4 py-2 rounded-lg text-xs font-bold bg-slate-700 text-slate-300 border border-slate-600">
+                                    ⚡ Efficiency
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Chart Canvas -->
+                        <div class="bg-slate-900/60 rounded-lg p-6 border border-slate-700">
+                            <canvas id="trendChart" height="100"></canvas>
+                        </div>
+
+                        <!-- Data Source Legend -->
+                        <div class="mt-4 flex justify-center gap-6 text-xs">
+                            <div class="flex items-center gap-2">
+                                <div class="w-3 h-3 bg-yellow-500/50 rounded-full border-2 border-yellow-400"></div>
+                                <span class="text-slate-300">2023 (Estimate)</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                                <span class="text-slate-300">2024-2025 (Actual)</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <div class="w-3 h-3 bg-red-500/50 rounded-full border-2 border-red-400 border-dashed">
+                                </div>
+                                <span class="text-slate-300">2026-2027 (Forecast - No Treatment)</span>
+                            </div>
+                        </div>
+
+                        <!-- Key Insights -->
+                        <div class="mt-6 grid grid-cols-3 gap-4">
+                            <div class="bg-green-900/20 border border-green-500/30 rounded-lg p-4">
+                                <div class="text-xs text-green-300 font-bold uppercase mb-1">Historical Trend</div>
+                                <div class="text-lg font-black text-green-400" id="trend_historical">+5.5%</div>
+                                <div class="text-xs text-slate-400">2023-2025 Change</div>
+                            </div>
+                            <div class="bg-red-900/20 border border-red-500/30 rounded-lg p-4">
+                                <div class="text-xs text-red-300 font-bold uppercase mb-1">Forecast Trend</div>
+                                <div class="text-lg font-black text-red-400" id="trend_forecast">-8.8%</div>
+                                <div class="text-xs text-slate-400">2025-2027 Projection</div>
+                            </div>
+                            <div class="bg-purple-900/20 border border-purple-500/30 rounded-lg p-4">
+                                <div class="text-xs text-purple-300 font-bold uppercase mb-1">Degradation Rate</div>
+                                <div class="text-lg font-black text-purple-400">-4.5%/yr</div>
+                                <div class="text-xs text-slate-400">Without Treatment</div>
+                            </div>
                         </div>
                     </div>
 
