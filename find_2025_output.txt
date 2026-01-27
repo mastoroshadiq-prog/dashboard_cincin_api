@@ -1,0 +1,20 @@
+﻿Searching for columns with '2025' in headers...
+================================================================================
+
+Column 2: REAL TANAM INTI
+  Row 0: UPDATE NOVEMBER 2025
+  Row 1: NaN
+  Row 2: NaN
+  AME02 Sample: 81
+
+Column 20: Unnamed: 20
+  Row 0: NaN
+  Row 1: NaN
+  Row 2: REALISASI TANAM SD NOVEMBER 2025
+  AME02 Sample: 0
+
+Column 168: Unnamed: 168
+  Row 0: NaN
+  Row 1: NaN
+  Row 2: 2025
+  AME02 Sample: 9.34798405933397

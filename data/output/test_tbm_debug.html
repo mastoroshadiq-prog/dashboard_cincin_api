@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>TBM Debug Test</title>
+</head>
+
+<body>
+    <h1>TBM Blocks Debug Test</h1>
+    <div id="output"></div>
+
+    <script>
+        // Inline the COMPLETE_BLOCKS_DATA check
+        // Extract B012D specifically
+
+        const testBlock = "B012D";
+        const output = document.getElementById('output');
+
+        // Read from actual HTML file and check
+        fetch('DASHBOARD_DEMO_FEATURES.html')
+            .then(r => r.text())
+            .then(html => {
+                // Extract COMPLETE_BLOCKS_DATA using regex
+                const match = html.match(/const COMPLETE_BLOCKS_DATA = (\{[\s\S]*?\n\s*\});/);
+
+                if (!match) {
+                    output.innerHTML = '<p style="color:red">❌ COMPLETE_BLOCKS_DATA not found in HTML!</p>';
+                    return;
+                }
+
+                // Parse the JavaScript object
+                const dataStr = match[1];
+                const data = eval('(' + dataStr + ')');
+
+                output.innerHTML += `<p>✅ COMPLETE_BLOCKS_DATA found. Total blocks: ${Object.keys(data).length}</p>`;
+
+                // Check if B012D exists
+                if (data[testBlock]) {
+                    output.innerHTML += `<p style="color:green">✅ ${testBlock} found!</p>`;
+                    output.innerHTML += `<pre>${JSON.stringify(data[testBlock], null, 2)}</pre>`;
+
+                    //Check tahun_tanam
+                    if (data[testBlock].tahun_tanam) {
+                        output.innerHTML += `<p style="color:green">✅ tahun_tanam field exists: ${data[testBlock].tahun_tanam}</p>`;
+
+                        if (data[testBlock].tahun_tanam >= 2023) {
+                            output.innerHTML += `<p style="color:green">✅ Should be detected as TBM (tahun_tanam >= 2023)</p>`;
+                        }
+                    } else {
+                        output.innerHTML += `<p style="color:red">❌ tahun_tanam field missing!</p>`;
+                    }
+
+                    // Check is_tbm flag
+                    if (data[testBlock].is_tbm === true) {
+                        output.innerHTML += `<p style="color:green">✅ is_tbm flag is true</p>`;
+                    } else {
+                        output.innerHTML += `<p style="color:orange">⚠️ is_tbm flag: ${data[testBlock].is_tbm}</p>`;
+                    }
+
+                    // Check division
+                    output.innerHTML += `<p>Division: ${data[testBlock].division}</p>`;
+
+                } else {
+                    output.innerHTML += `<p style="color:red">❌ ${testBlock} NOT FOUND in COMPLETE_BLOCKS_DATA!</p>`;
+                }
+
+                // Count all TBM blocks
+                const tbmBlocks = Object.values(data).filter(b => b.is_tbm === true);
+                output.innerHTML += `<p>Total TBM blocks with is_tbm=true: ${tbmBlocks.length}</p>`;
+
+                // Count blocks with tahun_tanam >= 2023
+                const recentBlocks = Object.values(data).filter(b => b.tahun_tanam && b.tahun_tanam >= 2023);
+                output.innerHTML += `<p>Total blocks with tahun_tanam >= 2023: ${recentBlocks.length}</p>`;
+
+                // List all TBM blocks
+                output.innerHTML += '<h2>All TBM Blocks:</h2><ul>';
+                tbmBlocks.forEach(b => {
+                    output.innerHTML += `<li>${b.block_code} (Division: ${b.division}, Tahun: ${b.tahun_tanam})</li>`;
+                });
+                output.innerHTML += '</ul>';
+
+            })
+            .catch(err => {
+                output.innerHTML = `<p style="color:red">Error: ${err.message}</p>`;
+            });
+    </script>
+</body>
+
+</html>

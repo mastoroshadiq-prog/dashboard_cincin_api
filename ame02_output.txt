@@ -1,0 +1,42 @@
+﻿================================================================================
+PILOT ANALYSIS: AME II (AME02)
+================================================================================
+
+[*] Loading data dari: poac_sim\data\input\data_gabungan.xlsx
+[OK] Total data loaded: 649 rows
+
+[INFO] Kolom tersedia (177):
+    1. Unnamed: 0
+    2. Unnamed: 1
+    3. REAL TANAM INTI
+    4. Unnamed: 3
+    5. Unnamed: 4
+    6. Unnamed: 5
+    7. Unnamed: 6
+    8. Unnamed: 7
+    9. Unnamed: 8
+   10. Unnamed: 9
+   11. Unnamed: 10
+   12. Unnamed: 11
+   13. Unnamed: 12
+   14. Unnamed: 13
+   15. Unnamed: 14
+   16. Unnamed: 15
+   17. Unnamed: 16
+   18. Unnamed: 17
+   19. Unnamed: 18
+   20. Unnamed: 19
+   ... dan 157 kolom lainnya
+
+================================================================================
+SAMPLE DATA (First Row):
+================================================================================
+REAL TANAM INTI: UPDATE NOVEMBER 2025
+
+================================================================================
+MENCARI KOLOM DIVISI...
+================================================================================
+
+================================================================================
+[INFO] Silakan periksa output di atas untuk identifikasi kolom yang benar
+================================================================================

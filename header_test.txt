@@ -1,0 +1,409 @@
+﻿================================================================================
+TRYING WITH SKIPROWS=0
+================================================================================
+
+[OK] Loaded: 649 rows, 177 columns
+
+[INFO] First 30 columns:
+     1. Unnamed: 0
+     2. Unnamed: 1
+     3. REAL TANAM INTI
+     4. Unnamed: 3
+     5. Unnamed: 4
+     6. Unnamed: 5
+     7. Unnamed: 6
+     8. Unnamed: 7
+     9. Unnamed: 8
+    10. Unnamed: 9
+    11. Unnamed: 10
+    12. Unnamed: 11
+    13. Unnamed: 12
+    14. Unnamed: 13
+    15. Unnamed: 14
+    16. Unnamed: 15
+    17. Unnamed: 16
+    18. Unnamed: 17
+    19. Unnamed: 18
+    20. Unnamed: 19
+    21. Unnamed: 20
+    22. Unnamed: 21
+    23. Unnamed: 22
+    24. Unnamed: 23
+    25. Unnamed: 24
+    26. Unnamed: 25
+    27. Unnamed: 26
+    28. Unnamed: 27
+    29. Unnamed: 28
+    30. Unnamed: 29
+
+[INFO] Sample data (first row):
+                                    0
+Unnamed: 0                        NaN
+Unnamed: 1                        NaN
+REAL TANAM INTI  UPDATE NOVEMBER 2025
+Unnamed: 3                        NaN
+Unnamed: 4                        NaN
+...                               ...
+Unnamed: 172                      NaN
+Unnamed: 173                      NaN
+Unnamed: 174                      NaN
+Unnamed: 175                      NaN
+Unnamed: 176                      NaN
+
+[177 rows x 1 columns]
+
+================================================================================
+[FOUND] Potential division column: 'Unnamed: 0'
+        Unique values (643): [nan, 'K001', 'A001A', 'C006A', 'A002A', 'C007A', 'A003A', 'C008A', 'A003B', 'B003A']
+[FOUND] Potential division column: 'Unnamed: 1'
+        Unique values (20): [nan, 'K002', 2012, 2010, 2019, 2011, 2017, 2020, 2022, 2021]
+[FOUND] Potential division column: 'Unnamed: 3'
+        Unique values (7): [nan, 'ESTATE', 'LAMA', 'C001', 'AME', 'OLE', 'DBE']
+[FOUND] Potential division column: 'Unnamed: 4'
+        Unique values (6): [nan, 'BARU', 'C002', 'AME', 'OLE', 'DBE']
+[FOUND] Potential division column: 'Unnamed: 5'
+        Unique values (17): [nan, 'DIVISI', 'LAMA', 'C003', 'AME01', 'AME02', 'AME03', 'AME04', 'OLE01', 'OLE02']
+[FOUND] Potential division column: 'Unnamed: 6'
+        Unique values (16): [nan, 'BARU', 'C004', 'AME001', 'AME002', 'AME003', 'AME004', 'OLE001', 'OLE002', 'OLE003']
+[FOUND] Potential division column: 'Unnamed: 7'
+        Unique values (595): [nan, 'BLOK', 'LAMA', 'C005', 'A 01', 'C 06', 'A 02', 'C 07A', 'A 03', 'C 08']
+[FOUND] Potential division column: 'Unnamed: 8'
+        Unique values (644): [nan, 'BARU', 'C006', 'A001A', 'C006A', 'A002A', 'C007A', 'A003A', 'C008A', 'A003B']
+[FOUND] Potential division column: 'Unnamed: 9'
+        Unique values (21): [nan, 'TT', 'C007', 2012, 2010, 2019, 2011, 2017, 2020, 2022]
+[FOUND] Potential division column: 'Unnamed: 10'
+        Unique values (23): [nan, 'VARIETAS BIBIT', 'C008', 'Topaz', 'PPKS', 'Slpn. Jaya', 'Socfin', 'SRIWIJAYA', 'Lonsum', 'Topaz/Lonsum']
+[FOUND] Potential division column: 'Unnamed: 11'
+        Unique values (316): [nan, 'HA STATEMENT', 'LUAS TANAM', 'SD THN 2024', 'C009', 7.7, 30, 22.6, 25.4, 29.7]
+[FOUND] Potential division column: 'Unnamed: 12'
+        Unique values (9): [nan, 'PENAMBAHAN', 'C010', 0.8, 1.1, 0.9, 1.3, 3.5, 4]
+[FOUND] Potential division column: 'Unnamed: 13'
+        Unique values (314): [nan, 'SD 2025', 'C011', 7.7, 30, 22.6, 25.4, 29.7, 29.1, 6]
+[FOUND] Potential division column: 'Unnamed: 14'
+        Unique values (17): [nan, 'EMPLS', 'C012', 0, 0.9, 3.9, 1, 0.2, 2.8, 2.5]
+[FOUND] Potential division column: 'Unnamed: 15'
+        Unique values (6): [nan, 'BBT', 'C013', 0, 18, 7]
+[FOUND] Potential division column: 'Unnamed: 16'
+        Unique values (6): [nan, 'PKS', 'C014', 0, 4, 20]
+[FOUND] Potential division column: 'Unnamed: 17'
+        Unique values (340): [nan, 'JLN/PARIT', 'C015', 1.9, 1.4002, 3.5, 1.2, 1.4, 1.47, 1]
+[FOUND] Potential division column: 'Unnamed: 18'
+        Unique values (57): [nan, 'AREAL CDG', 'C016', 0, 1.3, 27.5500000000001, 10.9, 0.3, 1.8, 8.700000000000001]
+[FOUND] Potential division column: 'Unnamed: 19'
+        Unique values (530): [nan, 'TOTAL', 'C017', 9.6, 31.400199999999998, 26.1, 26.599999999999998, 31.099999999999998, 30.57, 7]
+[FOUND] Potential division column: 'Unnamed: 20'
+        Unique values (13): [nan, 'REALISASI TANAM SD NOVEMBER 2025', 'KOMPOSISI POKOK', 2008, 'C018', 0, 2493, 2212, 3603, 2639]
+[FOUND] Potential division column: 'Unnamed: 21'
+        Unique values (92): [nan, 2009, 'C019', 0, 641, 562, 555, 153, 2200, 2070]
+[FOUND] Potential division column: 'Unnamed: 22'
+        Unique values (120): [nan, 2010, 'C020', 0, 1226, 21, 779, 1765, 138, 107]
+[FOUND] Potential division column: 'Unnamed: 23'
+        Unique values (171): [nan, 2011, 'C021', 0, 1471, 1004, 1343, 1015, 1825, 2144]
+[FOUND] Potential division column: 'Unnamed: 24'
+        Unique values (189): [nan, 2012, 'C022', 787, 655, 2530, 1026, 3041, 768, 0]
+[FOUND] Potential division column: 'Unnamed: 25'
+        Unique values (257): [nan, 2013, 'C023', 189, 361, 491, 378, 584, 370, 0]
+[FOUND] Potential division column: 'Unnamed: 26'
+        Unique values (135): [nan, 2014, 'C024', 26, 51, 65, 19, 18, 16, 0]
+[FOUND] Potential division column: 'Unnamed: 27'
+        Unique values (125): [nan, 2015, 'C025', 0, 593, 116, 1041, 42, 201, 188]
+[FOUND] Potential division column: 'Unnamed: 28'
+        Unique values (59): [nan, 2016, 'C026', 0, 354, 422, 286, 213, 2612, 1490]
+[FOUND] Potential division column: 'Unnamed: 29'
+        Unique values (59): [nan, 2017, 'C027', 0, 1613, 46, 62, 38, 2407, 1838]
+[FOUND] Potential division column: 'Unnamed: 30'
+        Unique values (54): [nan, 2018, 'C028', 0, 109, 47, 416, 48, 612, 262]
+[FOUND] Potential division column: 'Unnamed: 31'
+        Unique values (24): [nan, 2019, 'C029', 0, 496, 8, 73, 64, 14, 192]
+[FOUND] Potential division column: 'Unnamed: 32'
+        Unique values (479): [nan, 'SD THN 2019', 'PKK', 'C030', 1002, 3764, 3086, 3041, 3759, 3276]
+[FOUND] Potential division column: 'Unnamed: 33'
+        Unique values (507): [nan, 'SPH', 'C031', 130.1298701298701, 125.46666666666667, 136.54867256637166, 119.7244094488189, 126.56565656565657, 112.57731958762886, 82.66666666666667]
+[FOUND] Potential division column: 'Unnamed: 34'
+        Unique values (22): [nan, 'THN 2020', 'TANAM', 'C032', 0, 88, 34, 187, 563, 405]
+[FOUND] Potential division column: 'Unnamed: 35'
+        Unique values (74): [nan, 'SISIP', 'C033', 0, 25, 10, 23, 11, 72, 59]
+[FOUND] Potential division column: 'Unnamed: 36'
+        Unique values (29): [nan, 'THN 2021', 'TANAM', 'C034', 0, 1411, 364, 226, 87, 5]
+[FOUND] Potential division column: 'Unnamed: 37'
+        Unique values (74): [nan, 'SISIP', 'C035', 0, 7, 36, 10, 1, 21, 2]
+[FOUND] Potential division column: 'Unnamed: 38'
+        Unique values (22): [nan, 'THN 2022', 'TANAM', 'C036', 0, 119, 1166, 63, 43, 187]
+[FOUND] Potential division column: 'Unnamed: 39'
+        Unique values (22): [nan, 'SISIP', 'C037', 0, 8, 63, 26, 5, 33, 55]
+[FOUND] Potential division column: 'Unnamed: 40'
+        Unique values (23): [nan, 'THN 2023', 'TANAM', 'C038', 0, 115, 564, 127, 60, 251]
+[FOUND] Potential division column: 'Unnamed: 41'
+        Unique values (88): [nan, 'SISIP', 'C039', 0, 394, 293, 361, 383, 771, 91]
+[FOUND] Potential division column: 'Unnamed: 42'
+        Unique values (12): [nan, 'SISIP KENTOSAN', 'C040', 0, 13, 28, 3, 4, 12, 56]
+[FOUND] Potential division column: 'Unnamed: 43'
+        Unique values (5): [nan, 'THN 2024', 'TANAM', 'C041', 0]
+[FOUND] Potential division column: 'Unnamed: 44'
+        Unique values (19): [nan, 'SISIP', 'C042', 0, 33, 94, 97, 62, 10, 49]
+[FOUND] Potential division column: 'Unnamed: 45'
+        Unique values (15): [nan, 'SISIP KENTOSAN', 'C043', 0, 12, 50, 17, 5, 3, 6]
+[FOUND] Potential division column: 'Unnamed: 46'
+        Unique values (3): [nan, 'SISIP KENTOSAN', 'C044']
+[FOUND] Potential division column: 'Unnamed: 47'
+        Unique values (12): [nan, 'THN 2025', 'TANAM', 'C045', 0, 138, 149, 134, 139, 177]
+[FOUND] Potential division column: 'Unnamed: 48'
+        Unique values (66): [nan, 'SISIP', 'C046', 0, 135, 601, 158, 16, 175, 9]
+[FOUND] Potential division column: 'Unnamed: 49'
+        Unique values (4): [nan, 'SISIP KENTOSAN', 'C047', 0]
+[FOUND] Potential division column: 'Unnamed: 50'
+        Unique values (521): [nan, 'TOTAL', 'TANAM', 'C048', 787, 1226, 2530, 21, 3041, 779]
+[FOUND] Potential division column: 'Unnamed: 51'
+        Unique values (427): [nan, 'SISIP', 'C049', 215, 2538, 556, 3052, 718, 2497, 394]
+[FOUND] Potential division column: 'Unnamed: 52'
+        Unique values (21): [nan, 'SISIP KENTOSAN', 'C050', 0, 13, 12, 50, 17, 5, 3]
+[FOUND] Potential division column: 'Unnamed: 53'
+        Unique values (541): [nan, 'TOTAL PKK', 'C051', 1002, 3764, 3086, 3073, 3759, 3276, 890]
+[FOUND] Potential division column: 'Unnamed: 54'
+        Unique values (582): [nan, 'SPH', 'C052', 130.1298701298701, 125.46666666666667, 136.54867256637166, 120.98425196850394, 126.56565656565657, 112.57731958762886, 148.33333333333334]
+[FOUND] Potential division column: 'Unnamed: 55'
+        Unique values (152): [nan, 'SERANGAN GANODERMA (PKK)', 'STADIUM 1&2', 'C053', 11, 52, 9, 70, 17, 157]
+[FOUND] Potential division column: 'Unnamed: 56'
+        Unique values (64): [nan, 'STADIUM 3&4', 'C054', 0, 9, 10, 1, 36, 4, 2]
+[FOUND] Potential division column: 'Unnamed: 57'
+        Unique values (166): [nan, 'TOTAL', 'C055', 11, 61, 9, 80, 18, 193, 0]
+[FOUND] Potential division column: 'Unnamed: 58'
+        Unique values (400): [nan, '%SERANGAN', 'C056', 0.010978043912175649, 0.016206163655685443, 0.002916396629941672, 0.026033192320208266, 0.004788507581803671, 0.05891330891330891, 0]
+[FOUND] Potential division column: 'Unnamed: 59'
+        Unique values (609): [nan, 'A001A', 'C006A', 'A002A', 'C007A', 'A003A', 'C008A', 'A003B', 'B003A', 'A004A']
+[FOUND] Potential division column: 'Unnamed: 60'
+        Unique values (18): [np.float64(nan), np.float64(2012.0), np.float64(2010.0), np.float64(2019.0), np.float64(2011.0), np.float64(2017.0), np.float64(2020.0), np.float64(2022.0), np.float64(2021.0), np.float64(2023.0)]
+[FOUND] Potential division column: 'Unnamed: 61'
+        Unique values (611): [nan, 'NOMOR', 9, 1, 10, 2, 11, 3, 44, 4]
+[FOUND] Potential division column: 'Unnamed: 62'
+        Unique values (17): [nan, 'Estate', 'P001', 'AME001', 'AME002', 'OLE003', 'AME003', 'AME004', 'OLE001', 'OLE002']
+[FOUND] Potential division column: 'Unnamed: 63'
+        Unique values (611): [nan, 'BLOK', 'P002', 'A001A', 'C006A', 'A002A', 'C007A', 'A003A', 'C008A', 'A003B']
+[FOUND] Potential division column: 'Unnamed: 64'
+        Unique values (314): [nan, 'Ha', 'P003', 7.7, 30, 22.6, 25.4, 29.7, 29.1, 6]
+[FOUND] Potential division column: 'Unnamed: 65'
+        Unique values (551): [nan, 'TT SISIP', 'P004', 0.2145708582834331, 0.6780462184873949, 0.18016850291639663, 0.993288590604027, 0.20099842354177613, 0.7694584196507843, 0.44269662921348313]
+[FOUND] Potential division column: 'Unnamed: 66'
+        Unique values (525): [nan, 'Pokok', 'P005', 1002, 3808, 3086, 3129, 3806, 3379, 890]
+[FOUND] Potential division column: 'Unnamed: 67'
+        Unique values (20): [nan, 'TT', 'P006', 2012, 2010, 2019, 2011, 2017, 2020, 2022]
+[FOUND] Potential division column: 'Unnamed: 68'
+        Unique values (522): [nan, 'SPH', 'P007', 130.1298701298701, 126.93333333333334, 136.54867256637166, 123.18897637795277, 128.14814814814815, 116.1168384879725, 148.33333333333334]
+[FOUND] Potential division column: 'Unnamed: 69'
+        Unique values (236): [nan, 2014, 'Real', 'BJR Kg', 'P008', 2.938799863291047, 2.950859099618013, 3.1302778156271067, 2.557389358749006, 2.6322947838076756]
+[FOUND] Potential division column: 'Unnamed: 70'
+        Unique values (233): [nan, 'Jum JJg', 'P009', 0, 34496, 19942, 21779, 4817, 6492, 8686]
+[FOUND] Potential division column: 'Unnamed: 71'
+        Unique values (235): [nan, 'Ton', 'P010', 0, 101.37684008408796, 58.84603216458241, 68.17432054654276, 12.318944541093963, 17.08885773647943, 23.72028841381971]
+[FOUND] Potential division column: 'Unnamed: 72'
+        Unique values (132): [nan, 'Potensi', 'BJR Kg', 'P011', 3.0142610659229665, 2.5236645023259965, 2.924263160675542, 2.4975024975024973, 2.4975024975024978, 3.709824654002068]
+[FOUND] Potential division column: 'Unnamed: 73'
+        Unique values (247): [nan, 'Jum JJg', 'P012', 0, 42662, 14434, 32824, 14210, 25550, 30016]
+[FOUND] Potential division column: 'Unnamed: 74'
+        Unique values (248): [nan, 'Ton', 'P013', 0, 128.5944055944056, 36.426573426573434, 95.98601398601399, 35.48951048951049, 63.81118881118881, 74.96503496503497]
+[FOUND] Potential division column: 'Unnamed: 75'
+        Unique values (236): [nan, 'Real vs Potensi', 'BJR Kg', 'P014', -0.07546120263191947, 0.42719459729201636, 0.20601465495156468, 0.05988686124650888, 0.13479228630517825, 0.23336192960085356]
+[FOUND] Potential division column: 'Unnamed: 76'
+        Unique values (248): [nan, 'Jum JJg', 'P015', 0, -8166, 5508, -11045, -9393, -19058, -21330]
+[FOUND] Potential division column: 'Unnamed: 77'
+        Unique values (249): [nan, 'Ton', 'P016', 0, -27.21756551031764, 22.419458738008977, -27.811693439471227, -23.170565948416524, -46.72233107470939, -51.244746551215265]
+[FOUND] Potential division column: 'Unnamed: 78'
+        Unique values (326): [nan, 2015, 'Real', 'BJR Kg', 'P017', 3.3299159319253637, 3.980585584165905, 3.097008371875183, 3.8345489276721367, 3.040819699223269]
+[FOUND] Potential division column: 'Unnamed: 79'
+        Unique values (325): [nan, 'Jum JJg', 'P018', 4877, 63458, 17081, 46068, 18153, 45303, 0]
+[FOUND] Potential division column: 'Unnamed: 80'
+        Unique values (326): [nan, 'Ton', 'P019', 16.24, 252.6, 52.9, 176.65, 55.2, 170.6, 0]
+[FOUND] Potential division column: 'Unnamed: 81'
+        Unique values (206): [nan, 'Potensi', 'BJR Kg', 'P020', 2.4975024975024973, 3.641010119006645, 2.4975024975024978, 3.067602481736499, 3.499749880842938, 2.9412384756156027]
+[FOUND] Potential division column: 'Unnamed: 82'
+        Unique values (277): [nan, 'Jum JJg', 'P021', 11018, 55264, 35420, 32772, 42574, 47390, 0]
+[FOUND] Potential division column: 'Unnamed: 83'
+        Unique values (278): [nan, 'Ton', 'P022', 27.517482517482517, 201.21678321678323, 88.46153846153847, 100.53146853146855, 106.32867132867133, 165.85314685314685, 0]
+[FOUND] Potential division column: 'Unnamed: 84'
+        Unique values (274): [nan, 'Real vs Potensi', 'BJR Kg', 'P023', 0.8324134344228664, 0.33957546515925996, 0.5995058743726851, 0.7669464459356377, 0.5433172017207712, 0.2660051464179496]
+[FOUND] Potential division column: 'Unnamed: 85'
+        Unique values (330): [nan, 'Jum JJg', 'P024', -6141, 8194, -18339, 13296, -24421, -2087, 0]
+[FOUND] Potential division column: 'Unnamed: 86'
+        Unique values (332): [nan, 'Ton', 'P025', -11.277482517482518, 51.38321678321677, -35.56153846153847, 76.11853146853146, -51.12867132867133, 4.746853146853141, 0]
+[FOUND] Potential division column: 'Unnamed: 87'
+        Unique values (351): [nan, 2016, 'Real', 'BJR Kg', 'P026', 3.307174109313147, 4.316289710148346, 3.504489983882109, 4.144848266096566, 3.0775207565599607]
+[FOUND] Potential division column: 'Unnamed: 88'
+        Unique values (350): [nan, 'Jum JJg', 'P027', 14399, 84802, 30401, 72034, 45046, 67140, 0]
+[FOUND] Potential division column: 'Unnamed: 89'
+        Unique values (347): [nan, 'Ton', 'P028', 47.62, 366.03, 106.54, 298.57, 138.63, 267.61, 0]
+[FOUND] Potential division column: 'Unnamed: 90'
+        Unique values (254): [nan, 'Potensi', 'BJR Kg', 'P029', 3.3392731465536603, 4.612661823142521, 3.365486347132472, 3.736452790237651, 3.366678144946893, 4.370695397207974]
+[FOUND] Potential division column: 'Unnamed: 91'
+        Unique values (371): [nan, 'Jum JJg', 'P030', 16812, 59996, 52414, 40160, 62914, 52956, 0]
+[FOUND] Potential division column: 'Unnamed: 92'
+        Unique values (375): [nan, 'Ton', 'P031', 56.13986013986014, 276.7412587412587, 176.39860139860136, 150.05594405594408, 211.81118881118883, 231.45454545454544, 0]
+[FOUND] Potential division column: 'Unnamed: 93'
+        Unique values (351): [nan, 'Real vs Potensi', 'BJR Kg', 'P032', -0.03209903724051344, -0.29637211299417565, 0.13900363674963723, 0.40839547585891456, -0.2891573883869323, -0.384844935486198]
+[FOUND] Potential division column: 'Unnamed: 94'
+        Unique values (375): [nan, 'Jum JJg', 'P033', -2413, 24806, -22013, 31874, -17868, 14184, 0]
+[FOUND] Potential division column: 'Unnamed: 95'
+        Unique values (377): [nan, 'Ton', 'P034', -8.519860139860143, 89.28874125874125, -69.85860139860135, 148.5140559440559, -73.18118881118883, 36.155454545454575, 0]
+[FOUND] Potential division column: 'Unnamed: 96'
+        Unique values (369): [nan, 2017, 'Real', 'BJR Kg', 'P035', 5.0094128721026, 4.868789912054326, 4.786605515611544, 4.9334772537081735, 4.803183767458159]
+[FOUND] Potential division column: 'Unnamed: 97'
+        Unique values (367): [nan, 'Jum JJg', 'P036', 16998, 98811, 49931, 82453, 59929, 76745, 0]
+[FOUND] Potential division column: 'Unnamed: 98'
+        Unique values (367): [nan, 'Ton', 'P037', 85.15, 481.09, 239, 406.78, 287.85, 402.81, 0]
+[FOUND] Potential division column: 'Unnamed: 99'
+        Unique values (295): [nan, 'Potensi', 'BJR Kg', 'P038', 4.147154960212791, 6.183423741879241, 4.182884090505338, 4.945186507960872, 4.208043723358433, 5.86667129794458]
+[FOUND] Potential division column: 'Unnamed: 100'
+        Unique values (376): [nan, 'Jum JJg', 'P039', 16358, 59618, 50228, 39865, 59420, 52345, 0]
+[FOUND] Potential division column: 'Unnamed: 101'
+        Unique values (376): [nan, 'Ton', 'P040', 67.83916083916083, 368.64335664335664, 210.0979020979021, 197.13986013986016, 250.04195804195805, 307.09090909090907, 0]
+[FOUND] Potential division column: 'Unnamed: 102'
+        Unique values (369): [nan, 'Real vs Potensi', 'BJR Kg', 'P041', 0.8622579118898095, -1.3146338298249152, 0.6037214251062064, -0.011709254252698642, 0.5951400440997263, -0.6179906021337782]
+[FOUND] Potential division column: 'Unnamed: 103'
+        Unique values (378): [nan, 'Jum JJg', 'P042', 640, 39193, -297, 42588, 509, 24400, 0]
+[FOUND] Potential division column: 'Unnamed: 104'
+        Unique values (378): [nan, 'Ton', 'P043', 17.31083916083918, 112.44664335664334, 28.902097902097893, 209.6401398601398, 37.80804195804197, 95.71909090909094, 0]
+[FOUND] Potential division column: 'Unnamed: 105'
+        Unique values (389): [nan, 2018, 'Real', 'BJR Kg', 'P044', 6.0768218889765855, 6.218615333006477, 6.026510879813648, 5.98042877418391, 5.78365262954197]
+[FOUND] Potential division column: 'Unnamed: 106'
+        Unique values (387): [nan, 'Jum JJg', 'P045', 19005, 77506, 54091, 66935, 67179, 72277, 0]
+[FOUND] Potential division column: 'Unnamed: 107'
+        Unique values (386): [nan, 'Ton', 'P046', 115.49, 481.98, 325.98, 400.3, 388.54, 439.96, 0]
+[FOUND] Potential division column: 'Unnamed: 108'
+        Unique values (328): [nan, 'Potensi', 'BJR Kg', 'P047', 5.713883231913573, 8.420298032552699, 5.779478873649277, 5.9955756008444245, 5.734107088614329, 8.0007384385046]
+[FOUND] Potential division column: 'Unnamed: 109'
+        Unique values (392): [nan, 'Jum JJg', 'P048', 16084, 56403, 49506, 46462, 59948, 49547, 0]
+[FOUND] Potential division column: 'Unnamed: 110'
+        Unique values (393): [nan, 'Ton', 'P049', 91.90209790209789, 474.9300699300699, 286.1188811188811, 278.56643356643366, 343.7482517482518, 396.41258741258736, 0]
+[FOUND] Potential division column: 'Unnamed: 111'
+        Unique values (388): [nan, 'Real vs Potensi', 'BJR Kg', 'P050', 0.36293865706301265, -2.2016826995462218, 0.24703200616437115, -0.015146826660514812, 0.04954554092764063, -1.9136014516346416]
+[FOUND] Potential division column: 'Unnamed: 112'
+        Unique values (393): [nan, 'Jum JJg', 'P051', 2921, 21103, 4585, 20473, 7231, 22730, 0]
+[FOUND] Potential division column: 'Unnamed: 113'
+        Unique values (396): [nan, 'Ton', 'P052', 23.587902097902102, 7.049930069930099, 39.8611188811189, 121.73356643356635, 44.79174825174823, 43.54741258741262, 0]
+[FOUND] Potential division column: 'Unnamed: 114'
+        Unique values (423): [nan, 2019, 'Real', 'BJR Kg', 'P053', 6.488697626028563, 7.062186546879188, 6.511073731426969, 6.757543319729711, 6.700443972447158]
+[FOUND] Potential division column: 'Unnamed: 115'
+        Unique values (421): [nan, 'Jum JJg', 'P054', 21146, 78361, 57072, 59788, 67797, 70159, 0]
+[FOUND] Potential division column: 'Unnamed: 116'
+        Unique values (421): [nan, 'Ton', 'P055', 137.21, 553.4, 371.6, 404.02, 454.27, 469.02, 0]
+[FOUND] Potential division column: 'Unnamed: 117'
+        Unique values (340): [nan, 'Potensi', 'BJR Kg', 'P056', 7.831066932411636, 10.808262918784365, 7.921208279830147, 7.9143874630022895, 7.822751940655491, 10.428092015223381]
+[FOUND] Potential division column: 'Unnamed: 118'
+        Unique values (432): [nan, 'Jum JJg', 'P057', 15245, 52949, 46846, 46745, 57335, 46625, 0]
+[FOUND] Potential division column: 'Unnamed: 119'
+        Unique values (433): [nan, 'Ton', 'P058', 119.38461538461539, 572.2867132867134, 371.07692307692304, 369.95804195804203, 448.51748251748256, 486.2097902097901, 0]
+[FOUND] Potential division column: 'Unnamed: 120'
+        Unique values (421): [nan, 'Real vs Potensi', 'BJR Kg', 'P059', -1.3423693063830724, -3.7460763719051773, -1.4101345484031773, -1.1568441432725782, -1.1223079682083323, -3.7429910303176666]
+[FOUND] Potential division column: 'Unnamed: 121'
+        Unique values (430): [nan, 'Jum JJg', 'P060', 5901, 25412, 10226, 13043, 10462, 23534, 0]
+[FOUND] Potential division column: 'Unnamed: 122'
+        Unique values (435): [nan, 'Ton', 'P061', 17.82538461538462, -18.886713286713416, 0.5230769230769852, 34.06195804195795, 5.752517482517419, -17.189790209790146, 0]
+[FOUND] Potential division column: 'Unnamed: 123'
+        Unique values (472): [nan, 2020, 'Real', 'BJR Kg', 'P062', 7.042081026796649, 6.897176011062168, 7.065063912009513, 6.737203230311494, 6.966350005722788]
+[FOUND] Potential division column: 'Unnamed: 124'
+        Unique values (470): [nan, 'Jum JJg', 'P063', 20413, 70149, 53824, 65876, 69896, 62379, 0]
+[FOUND] Potential division column: 'Unnamed: 125'
+        Unique values (466): [nan, 'Ton', 'P064', 143.75, 483.83, 380.27, 443.82, 486.92, 438.9, 0]
+[FOUND] Potential division column: 'Unnamed: 126'
+        Unique values (350): [nan, 'Potensi', 'BJR Kg', 'P065', 10.716664371440455, 12.740407695318737, 10.840636830368716, 10.088705637047859, 10.705271391908889, 12.513394595719053]
+[FOUND] Potential division column: 'Unnamed: 127'
+        Unique values (467): [nan, 'Jum JJg', 'P066', 14269, 49236, 43825, 43130, 53478, 43365, 0]
+[FOUND] Potential division column: 'Unnamed: 128'
+        Unique values (471): [nan, 'Ton', 'P067', 152.91608391608386, 627.2867132867134, 475.090909090909, 435.12587412587413, 572.4965034965036, 542.6433566433567, 0]
+[FOUND] Potential division column: 'Unnamed: 129'
+        Unique values (469): [nan, 'Real vs Potensi', 'BJR Kg', 'P068', -3.674583344643806, -5.843231684256569, -3.7755729183592033, -3.3515024067363646, -3.7389213861861013, -5.47737285763412]
+[FOUND] Potential division column: 'Unnamed: 130'
+        Unique values (472): [nan, 'Jum JJg', 'P069', 6144, 20913, 9999, 22746, 16418, 19014, 0]
+[FOUND] Potential division column: 'Unnamed: 131'
+        Unique values (475): [nan, 'Ton', 'P070', -9.166083916083863, -143.4567132867134, -94.82090909090903, 8.69412587412586, -85.57650349650356, -103.74335664335672, 0]
+[FOUND] Potential division column: 'Unnamed: 132'
+        Unique values (500): [nan, 2021, 'Real', 'BJR Kg', 'P071', 10.868456696677555, 10.581632268045126, 9.442553080901272, 9.305627037227655, 9.354519374520182]
+[FOUND] Potential division column: 'Unnamed: 133'
+        Unique values (498): [nan, 'Jum JJg', 'P072', 12551, 53006, 38479, 46632, 49498, 49652, 0]
+[FOUND] Potential division column: 'Unnamed: 134'
+        Unique values (498): [nan, 'Ton', 'P073', 136.41, 560.89, 363.34, 433.94, 463.03, 466.43, 0]
+[FOUND] Potential division column: 'Unnamed: 135'
+        Unique values (369): [nan, 'Potensi', 'BJR Kg', 'P074', 12.90862600879937, 14.115146001877042, 12.996429427858772, 11.791145513575938, 12.826242684775844, 14.001735014124307]
+[FOUND] Potential division column: 'Unnamed: 136'
+        Unique values (498): [nan, 'Jum JJg', 'P075', 13267, 46085, 40739, 40692.5, 49835, 40478.5, 0]
+[FOUND] Potential division column: 'Unnamed: 137'
+        Unique values (499): [nan, 'Ton', 'P076', 171.25874125874125, 650.4965034965035, 529.4615384615385, 479.81118881118886, 639.1958041958042, 566.7692307692307, 0]
+[FOUND] Potential division column: 'Unnamed: 138'
+        Unique values (499): [nan, 'Real vs Potensi', 'BJR Kg', 'P077', -2.040169312121815, -3.5335137338319154, -3.5538763469575, -2.4855184763482825, -3.471723310255662, -4.6077528986002605]
+[FOUND] Potential division column: 'Unnamed: 139'
+        Unique values (498): [nan, 'Jum JJg', 'P078', -716, 6921, -2260, 5939.5, -337, 9173.5, 0]
+[FOUND] Potential division column: 'Unnamed: 140'
+        Unique values (502): [nan, 'Ton', 'P079', -34.848741258741256, -89.60650349650348, -166.12153846153848, -45.87118881118886, -176.16580419580418, -100.33923076923071, 0]
+[FOUND] Potential division column: 'Unnamed: 141'
+        Unique values (522): [nan, 2022, 'Real', 'BJR Kg', 'P080', 8.129963538284802, 7.896029929085935, 8.085413804538348, 7.624091716454061, 8.532985345724514]
+[FOUND] Potential division column: 'Unnamed: 142'
+        Unique values (520): [nan, 'Jum JJg', 'P081', 20021, 71636, 42218, 61930, 56707, 77231, 1808]
+[FOUND] Potential division column: 'Unnamed: 143'
+        Unique values (517): [nan, 'Ton', 'P082', 162.77, 565.64, 341.35, 472.16, 483.88, 587.13, 3.7]
+[FOUND] Potential division column: 'Unnamed: 144'
+        Unique values (373): [nan, 'Potensi', 'BJR Kg', 'P083', 14.252848659697415, 15.052351671731332, 14.3043422463389, 13.162919252427692, 14.133990846379074, 14.962130921204187]
+[FOUND] Potential division column: 'Unnamed: 145'
+        Unique values (517): [nan, 'Jum JJg', 'P084', 12265, 43669.5, 37653, 38164, 46076, 38263.5, 6944]
+[FOUND] Potential division column: 'Unnamed: 146'
+        Unique values (519): [nan, 'Ton', 'P085', 174.8111888111888, 657.3286713286714, 538.6013986013986, 502.3496503496504, 651.2377622377622, 572.5034965034964, 17.342657342657343]
+[FOUND] Potential division column: 'Unnamed: 147'
+        Unique values (521): [nan, 'Real vs Potensi', 'BJR Kg', 'P086', -6.122885121412613, -7.156321742645397, -6.218928441800552, -5.53882753597363, -5.60100550065456, -7.359872760621001]
+[FOUND] Potential division column: 'Unnamed: 148'
+        Unique values (516): [nan, 'Jum JJg', 'P087', 7756, 27966.5, 4565, 23766, 10631, 38967.5, -5136]
+[FOUND] Potential division column: 'Unnamed: 149'
+        Unique values (522): [nan, 'Ton', 'P088', -12.041188811188789, -91.68867132867138, -197.2513986013986, -30.18965034965038, -167.35776223776224, 14.626503496503574, -13.642657342657344]
+[FOUND] Potential division column: 'Unnamed: 150'
+        Unique values (540): [nan, 2023, 'Real', 'BJR Kg', 'P089', 7.056174540937148, 7.376717916535927, 7.4028828541849165, 7.311976480427813, 7.792566549472626]
+[FOUND] Potential division column: 'Unnamed: 151'
+        Unique values (539): [nan, 'Jum JJg', 'P090', 25759, 79675, 62785, 78913, 71676, 87652, 6680]
+[FOUND] Potential division column: 'Unnamed: 152'
+        Unique values (533): [nan, 'Ton', 'P091', 181.76, 587.74, 464.79, 577.01, 558.54, 666.64, 23.24]
+[FOUND] Potential division column: 'Unnamed: 153'
+        Unique values (417): [nan, 'Potensi', 'BJR Kg', 'P092', 15.02808091406727, 15.825354016616958, 15.056666932085552, 14.362885494575842, 14.953988127640821, 15.72022981478824]
+[FOUND] Potential division column: 'Unnamed: 154'
+        Unique values (529): [nan, 'Jum JJg', 'P093', 11656.5, 41581.5, 35832, 36498.5, 43837.5, 36432.5, 8928]
+[FOUND] Potential division column: 'Unnamed: 155'
+        Unique values (533): [nan, 'Ton', 'P094', 175.17482517482514, 658.0419580419581, 539.5104895104895, 524.2237762237763, 655.5454545454545, 572.7272727272726, 31.21678321678322]
+[FOUND] Potential division column: 'Unnamed: 156'
+        Unique values (539): [nan, 'Real vs Potensi', 'BJR Kg', 'P095', -7.971906373130123, -8.44863610008103, -7.653784077900635, -7.050909014148029, -7.161421578168195, -8.114698851433154]
+[FOUND] Potential division column: 'Unnamed: 157'
+        Unique values (537): [nan, 'Jum JJg', 'P096', 14102.5, 38093.5, 26953, 42414.5, 27838.5, 51219.5, -2248]
+[FOUND] Potential division column: 'Unnamed: 158'
+        Unique values (540): [nan, 'Ton', 'P097', 6.585174825174846, -70.30195804195807, -74.72048951048947, 52.786223776223665, -97.00545454545454, 93.91272727272735, -7.976783216783222]
+[FOUND] Potential division column: 'Unnamed: 159'
+        Unique values (565): [nan, 2024, 'Real', 'BJR Kg', 'P098', 7.281917077175698, 7.941216622071752, 7.4387380610453855, 7.8023231694669155, 7.2079187147824]
+[FOUND] Potential division column: 'Unnamed: 160'
+        Unique values (563): [nan, 'Jum JJg', 'P099', 19488, 73252, 43869, 67494, 66728, 81241, 5912]
+[FOUND] Potential division column: 'Unnamed: 161'
+        Unique values (558): [nan, 'Ton', 'P100', 141.91, 581.71, 326.33, 526.61, 480.97, 634.84, 25.52]
+[FOUND] Potential division column: 'Unnamed: 162'
+        Unique values (451): [nan, 'Potensi', 'BJR Kg', 'P101', 15.721321532405218, 16.846521032281764, 15.749142192298965, 15.303189617221664, 15.68756611605911, 16.650500704342605]
+[FOUND] Potential division column: 'Unnamed: 163'
+        Unique values (557): [nan, 'Jum JJg', 'P102', 11142.5, 39061, 34256.5, 34859.5, 41891, 34397, 7936]
+[FOUND] Potential division column: 'Unnamed: 164'
+        Unique values (560): [nan, 'Ton', 'P103', 175.17482517482514, 658.0419580419581, 539.5104895104895, 533.4615384615386, 657.1678321678322, 572.7272727272726, 34.68531468531469]
+[FOUND] Potential division column: 'Unnamed: 165'
+        Unique values (565): [nan, 'Real vs Potensi', 'BJR Kg', 'P104', -8.439404455229521, -8.905304410210011, -8.31040413125358, -7.500866447754748, -8.47964740127671, -8.836219737835545]
+[FOUND] Potential division column: 'Unnamed: 166'
+        Unique values (562): [nan, 'Jum JJg', 'P105', 8345.5, 34191, 9612.5, 32634.5, 24837, 46844, -2024]
+[FOUND] Potential division column: 'Unnamed: 167'
+        Unique values (565): [nan, 'Ton', 'P106', -33.26482517482515, -76.33195804195805, -213.1804895104895, -6.851538461538553, -176.1978321678322, 62.1127272727274, -9.165314685314687]
+[FOUND] Potential division column: 'Unnamed: 168'
+        Unique values (584): [nan, 2025, 'Real', 'BJR Kg', 'P107', 9.589162240320857, 9.847117364626305, 9.287560488556213, 9.758721953405091, 9.02226004662589]
+[FOUND] Potential division column: 'Unnamed: 169'
+        Unique values (583): [nan, 'Jum JJg', 'P108', 14143.049893320203, 64892.087332631265, 40305.52484274507, 56599.6246882793, 58938.66916403785, 61214.29523809524, 4366.27652733119]
+[FOUND] Potential division column: 'Unnamed: 170'
+        Unique values (574): [nan, 'Ton', 'P109', 135.62, 639, 374.34, 552.34, 531.76, 582.4, 25.59]
+[FOUND] Potential division column: 'Unnamed: 171'
+        Unique values (465): [nan, 'Potensi', 'BJR Kg', 'P110', 16.461478661356495, 18.1981998976391, 16.491983111268727, 16.417830957410928, 16.44831697267654, 17.94503626274551]
+[FOUND] Potential division column: 'Unnamed: 172'
+        Unique values (575): [nan, 'Jum JJg', 'P111', 10641.5, 35217.5, 32713.5, 32497.5, 39953.5, 31308.5, 7936]
+[FOUND] Potential division column: 'Unnamed: 173'
+        Unique values (583): [nan, 'Ton', 'P112', 175.17482517482514, 640.895104895105, 539.5104895104895, 533.5384615384617, 657.1678321678322, 561.8321678321678, 48.55944055944056]
+[FOUND] Potential division column: 'Unnamed: 174'
+        Unique values (583): [nan, 'Real vs Potensi', 'BJR Kg', 'P113', -6.872316421035638, -8.351082533012795, -7.204422622712514, -6.6591090040058365, -7.42605692605065, -8.430918723129414]
+[FOUND] Potential division column: 'Unnamed: 175'
+        Unique values (584): [nan, 'Jum JJg', 'P114', 3501.5498933202034, 29674.587332631265, 7592.0248427450715, 24102.1246882793, 18985.16916403785, 29905.79523809524, -3569.7234726688102]
+[FOUND] Potential division column: 'Unnamed: 176'
+        Unique values (584): [nan, 'Ton', 'P115', -39.55482517482514, -1.8951048951049643, -165.17048951048952, 18.80153846153837, -125.40783216783223, 20.567832167832194, -22.96944055944056]
+
+[SUCCESS] Found division-related columns with skiprows=0
