@@ -17948,6 +17948,30 @@
                 render5YearTrendChart(metric);
             }
 
+            // ======================================
+            // AUTO-INITIALIZE TREND CHART
+            // ======================================
+            function initializeTrendChart() {
+                const trendSection = document.getElementById('ame02TrendSection');
+                if (trendSection && window.getComputedStyle(trendSection).display !== 'none') {
+                    console.log('[TREND INIT] Section visible, loading data...');
+                    if (!trendData) {
+                        load5YearTrendData().then(success => {
+                            if (success) {
+                                console.log('[TREND INIT] Rendering chart...');
+                                setTimeout(() => render5YearTrendChart('production'), 100);
+                            }
+                        });
+                    } else {
+                        render5YearTrendChart(currentTrendMetric);
+                    }
+                }
+            }
+
+            // Auto-run on load and clicks
+            setTimeout(initializeTrendChart, 1000);
+            document.addEventListener('click', () => setTimeout(initializeTrendChart, 500), { passive: true });
+
             // Update toggleAme02Analysis to show trend section
             const originalToggleAme02 = toggleAme02Analysis;
             toggleAme02Analysis = function (divisionCode) {
