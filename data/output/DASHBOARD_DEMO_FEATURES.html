@@ -17770,7 +17770,7 @@
                 }
             }
 
-            // Render 5-year trend chart
+            // Render 5-year trend chart with 3 LINES SIMULTANEOUSLY
             function render5YearTrendChart(metric = 'production') {
                 if (!trendData) {
                     console.warn('[TREND] No data available');
@@ -17787,96 +17787,149 @@
                 const years = ['2023', '2024', '2025', '2026', '2027'];
                 const timeline = trendData.timeline_data;
 
-                let datasetLabel, yAxisLabel, dataValues, tooltipSuffix;
+                // LINE 1: Financial Loss (Million Rp)
+                const lossData = years.map(y => timeline[y].loss_million);
 
-                if (metric === 'production') {
-                    datasetLabel = 'Real Production (Ton)';
-                    yAxisLabel = 'Production (Ton)';
-                    dataValues = years.map(y => timeline[y].real_ton);
-                    tooltipSuffix = ' Ton';
-                } else if (metric === 'loss') {
-                    datasetLabel = 'Financial Loss (Million Rp)';
-                    yAxisLabel = 'Loss (Million Rp)';
-                    dataValues = years.map(y => timeline[y].loss_million);
-                    tooltipSuffix = ' M';
-                } else {  // efficiency
-                    datasetLabel = 'Efficiency (%)';
-                    yAxisLabel = 'Efficiency (%)';
-                    dataValues = years.map(y => timeline[y].efficiency_pct);
-                    tooltipSuffix = '%';
-                }
+                // LINE 2: Ganoderma Attack Rate (%)
+                // Based on current 6.28% and degradation model progression (+15% annually)
+                const baseAttackRate = trendData.current_metrics_2025.ganoderma.avg_attack_pct; // 6.28%
+                const ganoProgressionRate = 0.15; // 15% severity increase per year
 
-                // Point styles: differentiate estimate, actual, forecast
-                const pointBackgroundColors = [
-                    'rgba(234, 179, 8, 0.6)',   // 2023 - yellow (estimate)
-                    'rgba(34, 197, 94, 1)',     // 2024 - green (actual)
-                    'rgba(34, 197, 94, 1)',     // 2025 - green (actual)
-                    'rgba(239, 68, 68, 0.6)',   // 2026 - red (forecast)
-                    'rgba(239, 68, 68, 0.6)'    // 2027 - red (forecast)
+                const ganodermaData = [
+                    baseAttackRate / Math.pow(1 + ganoProgressionRate, 2), // 2023 (backfilled)
+                    baseAttackRate / (1 + ganoProgressionRate),              // 2024 (backfilled)
+                    baseAttackRate,                                          // 2025 (actual)
+                    baseAttackRate * (1 + ganoProgressionRate),              // 2026 (forecast)
+                    baseAttackRate * Math.pow(1 + ganoProgressionRate, 2)    // 2027 (forecast)
                 ];
 
-                const pointBorderColors = [
-                    'rgba(234, 179, 8, 1)',
-                    'rgba(34, 197, 94, 1)',
-                    'rgba(34, 197, 94, 1)',
-                    'rgba(239, 68, 68, 1)',
-                    'rgba(239, 68, 68, 1)'
+                // LINE 3: SPH (Pohon/Ha)
+                // Based on current 116.91 and decline model (-1.5% mortality annually)
+                const baseSPH = trendData.current_metrics_2025.sph.avg_sph; // 116.91
+                const sphDeclineRate = 0.015; // 1.5% annual mortality
+
+                const sphData = [
+                    baseSPH / Math.pow(1 - sphDeclineRate, 2), // 2023 (backfilled)
+                    baseSPH / (1 - sphDeclineRate),             // 2024 (backfilled)
+                    baseSPH,                                    // 2025 (actual)
+                    baseSPH * (1 - sphDeclineRate),             // 2026 (forecast)
+                    baseSPH * Math.pow(1 - sphDeclineRate, 2)   // 2027 (forecast)
                 ];
 
-                const pointRadius = [6, 6, 8, 6, 6];  // 2025 larger (current)
-
-                // Create gradient for line
-                const gradient = ctx.getContext('2d').createLinearGradient(0, 0, 0, 400);
-                gradient.addColorStop(0, 'rgba(99, 102, 241, 0.5)');
-                gradient.addColorStop(1, 'rgba(99, 102, 241, 0.1)');
+                // Point styles for data source differentiation
+                const pointStyles = ['circle', 'circle', 'rect', 'circle', 'circle'];
+                const pointSizes = [5, 5, 8, 5, 5]; // 2025 larger
 
                 trendChartInstance = new Chart(ctx, {
                     type: 'line',
                     data: {
                         labels: years,
-                        datasets: [{
-                            label: datasetLabel,
-                            data: dataValues,
-                            borderColor: 'rgba(99, 102, 241, 1)',
-                            backgroundColor: gradient,
-                            borderWidth: 3,
-                            pointBackgroundColor: pointBackgroundColors,
-                            pointBorderColor: pointBorderColors,
-                            pointBorderWidth: 2,
-                            pointRadius: pointRadius,
-                            pointHoverRadius: 10,
-                            fill: true,
-                            tension: 0.3
-                        }]
+                        datasets: [
+                            // Dataset 1: Financial Loss (Left Y-axis)
+                            {
+                                label: 'Kerugian (Rp Million)',
+                                data: lossData,
+                                borderColor: 'rgba(239, 68, 68, 1)', // Red
+                                backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                                borderWidth: 3,
+                                pointRadius: pointSizes,
+                                pointStyle: pointStyles,
+                                pointBackgroundColor: 'rgba(239, 68, 68, 0.8)',
+                                pointBorderColor: 'rgba(239, 68, 68, 1)',
+                                pointBorderWidth: 2,
+                                pointHoverRadius: 8,
+                                fill: false,
+                                tension: 0.3,
+                                yAxisID: 'y-left'
+                            },
+                            // Dataset 2: Ganoderma Attack Rate (Right Y-axis)
+                            {
+                                label: 'Ganoderma Attack Rate (%)',
+                                data: ganodermaData,
+                                borderColor: 'rgba(168, 85, 247, 1)', // Purple
+                                backgroundColor: 'rgba(168, 85, 247, 0.1)',
+                                borderWidth: 3,
+                                pointRadius: pointSizes,
+                                pointStyle: pointStyles,
+                                pointBackgroundColor: 'rgba(168, 85, 247, 0.8)',
+                                pointBorderColor: 'rgba(168, 85, 247, 1)',
+                                pointBorderWidth: 2,
+                                pointHoverRadius: 8,
+                                fill: false,
+                                tension: 0.3,
+                                yAxisID: 'y-right'
+                            },
+                            // Dataset 3: SPH (Left Y-axis)
+                            {
+                                label: 'SPH (Pohon/Ha)',
+                                data: sphData,
+                                borderColor: 'rgba(34, 197, 94, 1)', // Green
+                                backgroundColor: 'rgba(34, 197, 94, 0.1)',
+                                borderWidth: 3,
+                                pointRadius: pointSizes,
+                                pointStyle: pointStyles,
+                                pointBackgroundColor: 'rgba(34, 197, 94, 0.8)',
+                                pointBorderColor: 'rgba(34, 197, 94, 1)',
+                                pointBorderWidth: 2,
+                                pointHoverRadius: 8,
+                                fill: false,
+                                tension: 0.3,
+                                yAxisID: 'y-left'
+                            }
+                        ]
                     },
                     options: {
                         responsive: true,
                         maintainAspectRatio: false,
+                        interaction: {
+                            mode: 'index',
+                            intersect: false
+                        },
                         plugins: {
                             legend: {
-                                display: false
+                                display: true,
+                                position: 'top',
+                                labels: {
+                                    color: '#cbd5e1',
+                                    font: {
+                                        size: 11
+                                    },
+                                    usePointStyle: true,
+                                    padding: 15
+                                }
                             },
                             tooltip: {
                                 callbacks: {
                                     title: function (context) {
                                         const year = context[0].label;
                                         let type = '';
-                                        if (year === '2023') type = ' (Estimate)';
-                                        else if (year === '2024' || year === '2025') type = ' (Actual)';
+                                        if (year === '2023' || year === '2024') type = ' (Estimate)';
+                                        else if (year === '2025') type = ' (Aktual)';
                                         else type = ' (Forecast)';
                                         return year + type;
                                     },
                                     label: function (context) {
-                                        return context.parsed.y.toFixed(2) + tooltipSuffix;
+                                        const label = context.dataset.label || '';
+                                        const value = context.parsed.y;
+
+                                        if (label.includes('Kerugian')) {
+                                            return label + ': Rp ' + value.toFixed(2) + ' M';
+                                        } else if (label.includes('Attack')) {
+                                            return label + ': ' + value.toFixed(2) + '%';
+                                        } else if (label.includes('SPH')) {
+                                            return label + ': ' + value.toFixed(1) + ' pohon/Ha';
+                                        }
+                                        return label + ': ' + value;
                                     },
                                     afterLabel: function (context) {
                                         const year = context.label;
-                                        if (year === '2023') return 'Backfill estimate (reverse modeling)';
-                                        if (year === '2026' || year === '2027') return 'No-treatment scenario';
+                                        if (year === '2026' || year === '2027') {
+                                            return 'Tanpa treatment';
+                                        }
                                         return '';
                                     }
                                 },
-                                backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                                backgroundColor: 'rgba(0, 0, 0, 0.9)',
                                 padding: 12,
                                 titleColor: '#fff',
                                 bodyColor: '#cbd5e1',
@@ -17885,18 +17938,15 @@
                             }
                         },
                         scales: {
-                            y: {
+                            // LEFT Y-AXIS: Loss (Rp M) & SPH
+                            'y-left': {
+                                type: 'linear',
+                                position: 'left',
                                 beginAtZero: false,
                                 ticks: {
                                     color: '#94a3b8',
-                                    callback: function (value) {
-                                        if (metric === 'efficiency') {
-                                            return value.toFixed(1) + '%';
-                                        } else if (metric === 'loss') {
-                                            return 'Rp ' + value.toFixed(1) + 'M';
-                                        } else {
-                                            return value.toLocaleString() + ' T';
-                                        }
+                                    font: {
+                                        size: 10
                                     }
                                 },
                                 grid: {
@@ -17904,8 +17954,34 @@
                                 },
                                 title: {
                                     display: true,
-                                    text: yAxisLabel,
+                                    text: 'Loss (Rp M) & SPH',
                                     color: '#94a3b8',
+                                    font: {
+                                        size: 11
+                                    }
+                                }
+                            },
+                            // RIGHT Y-AXIS: Ganoderma Attack Rate (%)
+                            'y-right': {
+                                type: 'linear',
+                                position: 'right',
+                                beginAtZero: false,
+                                ticks: {
+                                    color: '#a78bfa',
+                                    font: {
+                                        size: 10
+                                    },
+                                    callback: function (value) {
+                                        return value.toFixed(1) + '%';
+                                    }
+                                },
+                                grid: {
+                                    display: false
+                                },
+                                title: {
+                                    display: true,
+                                    text: 'Attack Rate (%)',
+                                    color: '#a78bfa',
                                     font: {
                                         size: 11
                                     }
@@ -17915,7 +17991,8 @@
                                 ticks: {
                                     color: '#94a3b8',
                                     font: {
-                                        size: 12
+                                        size: 12,
+                                        weight: 'bold'
                                     }
                                 },
                                 grid: {
@@ -17926,7 +18003,7 @@
                     }
                 });
 
-                console.log(`[TREND] Chart rendered for metric: ${metric}`);
+                console.log('[TREND] Multi-line chart rendered (Loss, Ganoderma, SPH)');
             }
 
             // Switch metric button handler
@@ -18468,20 +18545,20 @@
                                 </div>
                             </div>
 
-                            <!-- Metric Selector -->
-                            <div class="flex gap-2">
-                                <button onclick="switchTrendMetric('production')" id="trendBtn_production"
-                                    class="px-4 py-2 rounded-lg text-xs font-bold bg-blue-600 text-white border-2 border-blue-400">
-                                    📈 Production
-                                </button>
-                                <button onclick="switchTrendMetric('loss')" id="trendBtn_loss"
-                                    class="px-4 py-2 rounded-lg text-xs font-bold bg-slate-700 text-slate-300 border border-slate-600">
-                                    💰 Financial Loss
-                                </button>
-                                <button onclick="switchTrendMetric('efficiency')" id="trendBtn_efficiency"
-                                    class="px-4 py-2 rounded-lg text-xs font-bold bg-slate-700 text-slate-300 border border-slate-600">
-                                    ⚡ Efficiency
-                                </button>
+                            <!-- Multi-Line Legend Info -->
+                            <div class="flex gap-2 text-xs">
+                                <span
+                                    class="px-3 py-1.5 rounded-lg bg-red-900/30 text-red-300 border border-red-500/30">
+                                    🔴 Kerugian
+                                </span>
+                                <span
+                                    class="px-3 py-1.5 rounded-lg bg-purple-900/30 text-purple-300 border border-purple-500/30">
+                                    🟣 Ganoderma
+                                </span>
+                                <span
+                                    class="px-3 py-1.5 rounded-lg bg-green-900/30 text-green-300 border border-green-500/30">
+                                    🟢 SPH
+                                </span>
                             </div>
                         </div>
 
