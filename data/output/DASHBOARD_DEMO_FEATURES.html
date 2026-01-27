@@ -18179,6 +18179,13 @@
                 const trendSection = document.getElementById('ame02TrendSection');
                 if (trendSection && window.getComputedStyle(trendSection).display !== 'none') {
                     console.log('[TREND INIT] Section visible, loading data...');
+
+                    // Prevent re-rendering if chart already exists
+                    if (trendChartInstance) {
+                        console.log('[TREND INIT] Chart already exists, skipping re-render');
+                        return;
+                    }
+
                     if (!trendData) {
                         load5YearTrendData().then(success => {
                             if (success) {
