@@ -17793,20 +17793,11 @@
 
 
                 // LINE 1: Financial Loss (Million Rp)
+                // Loss is DERIVED from Ganoderma severity and SPH
+                // Formula: Higher Ganoderma% = Higher Loss, Lower SPH = Higher Loss
+
                 // No Treatment: Use actual timeline data
                 const lossNoTreatment = years.map(y => timeline[y].loss_million);
-
-                // With Treatment: Simulate 30% reduction impact (based on improved Ganoderma + SPH)
-                // This is a simplified model: treatment reduces disease → reduces loss
-                const treatmentReductionRate = 0.30; // 30% loss reduction from treatment
-                const lossWithTreatment = lossNoTreatment.map((loss, idx) => {
-                    // No reduction for historical data (2023-2024) and current (2025)
-                    if (idx <= 2) return loss;
-                    // Progressive reduction for forecast years (2026-2027)
-                    const yearsSinceTreatment = idx - 2; // 0 for 2025, 1 for 2026, 2 for 2027
-                    const reduction = Math.min(treatmentReductionRate * yearsSinceTreatment / 2, treatmentReductionRate);
-                    return loss * (1 - reduction);
-                });
 
                 // Calculate BOTH scenarios for Ganoderma
                 const baseAttackRate = trendData.current_metrics_2025.ganoderma.avg_attack_pct; // 6.28%
@@ -17853,6 +17844,44 @@
                     baseSPH * (1 + sphGrowthRate),
                     baseSPH * Math.pow(1 + sphGrowthRate, 2)
                 ];
+
+                // Calculate Loss WITH TREATMENT based on Ganoderma and SPH improvements
+                // Loss Model: Loss is influenced by disease severity and tree density
+                // Baseline (2025): Gano 6.28%, SPH 116.91, Loss 3.09M
+                //
+                // Impact factors:
+                // 1. Ganoderma reduction: Each 1% reduction in Gano = ~0.5M loss reduction
+                // 2. SPH increase: Each 1 pohon/Ha increase = ~0.01M loss reduction
+                //
+                // This creates realistic correlation between biological metrics and financial loss
+
+                const baseline2025 = {
+                    gano: baseAttackRate, // 6.28%
+                    sph: baseSPH, // 116.91
+                    loss: lossNoTreatment[2] // 3.09M at index 2 (2025)
+                };
+
+                const lossWithTreatment = ganodermaWithTreatment.map((gano, idx) => {
+                    // Use same loss for historical years (0-1) and baseline year (2)
+                    if (idx <= 2) return lossNoTreatment[idx];
+
+                    // For forecast years (3-4), calculate based on biological improvements
+                    const sph = sphWithTreatment[idx];
+
+                    // Calculate impact of Ganoderma reduction
+                    const ganoDelta = baseline2025.gano - gano; // Positive = improvement
+                    const ganoImpact = ganoDelta * 0.5; // Each 1% Gano reduction = 0.5M loss reduction
+
+                    // Calculate impact of SPH increase
+                    const sphDelta = sph - baseline2025.sph; // Positive = improvement
+                    const sphImpact = sphDelta * 0.01; // Each 1 pohon/Ha increase = 0.01M loss reduction
+
+                    // Total loss = baseline loss - improvements
+                    const calculatedLoss = baseline2025.loss - ganoImpact - sphImpact;
+
+                    // Ensure loss doesn't go negative
+                    return Math.max(calculatedLoss, 0.5);
+                });
 
                 // Point styles
                 const pointStyles = ['circle', 'circle', 'rect', 'circle', 'circle'];
@@ -18029,9 +18058,9 @@
                                     const dataIndex = tooltipModel.dataPoints[0].dataIndex;
                                     const year = tooltipModel.title[0];
                                     let yearType = '';
-                                    if (year === '2023' || year === '2024') yearType = ' (Estimate)';
-                                    else if (year === '2025') yearType = ' (Aktual)';
-                                    else yearType = ' (Forecast)';
+                                    if (year === '2023' || year === '2024') yearType = ' (Realisasi)'; // Actual historical data
+                                    else if (year === '2025') yearType = ' (Aktual)'; // Current year actual
+                                    else yearType = ' (Forecast)'; // 2026-2027 predictions
 
                                     // Get datasets (all 6: 0-2 no-treatment, 3-5 with-treatment)
                                     const datasets = context.chart.data.datasets;
@@ -18091,7 +18120,13 @@
                                         </tr>`;
 
                                         html += `</tbody></table>`;
-                                        html += `<div style="margin-top: 8px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.2); font-size: 10px; color: #94a3b8; text-align: center;">💡 Click point for detailed comparison table</div>`;
+
+                                        // Add contextual note for historical vs forecast years
+                                        if (year === '2023' || year === '2024' || year === '2025') {
+                                            html += `<div style="margin-top: 8px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.2); font-size: 10px; color: #94a3b8; text-align: center;">📊 Data historis - Treatment belum dimulai</div>`;
+                                        } else {
+                                            html += `<div style="margin-top: 8px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.2); font-size: 10px; color: #94a3b8; text-align: center;">💡 Click point for detailed comparison table</div>`;
+                                        }
                                     } else if (noTreatVisible) {
                                         // Only No Treatment
                                         html += `<div style="font-size: 12px; color: #fca5a5; margin-bottom: 6px;">⚠️ No Treatment Scenario</div>`;
