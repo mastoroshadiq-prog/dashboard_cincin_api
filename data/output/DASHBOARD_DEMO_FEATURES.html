@@ -17789,77 +17789,74 @@
                 const timeline = trendData.timeline_data;
 
 
-                // LINE 1: Financial Loss (Million Rp)
+
+                // LINE 1: Financial Loss (Million Rp) - SAME for both scenarios
                 const lossData = years.map(y => timeline[y].loss_million);
 
-                // LINE 2: Ganoderma Attack Rate (%)
+                // Calculate BOTH scenarios for Ganoderma
                 const baseAttackRate = trendData.current_metrics_2025.ganoderma.avg_attack_pct; // 6.28%
 
-                let ganodermaData;
-                if (currentScenario === 'no-treatment') {
-                    // NO TREATMENT: +15% severity increase per year
-                    const ganoProgressionRate = 0.15;
-                    ganodermaData = [
-                        baseAttackRate / Math.pow(1 + ganoProgressionRate, 2), // 2023 (backfilled)
-                        baseAttackRate / (1 + ganoProgressionRate),              // 2024 (backfilled)
-                        baseAttackRate,                                          // 2025 (actual)
-                        baseAttackRate * (1 + ganoProgressionRate),              // 2026 (forecast: worse)
-                        baseAttackRate * Math.pow(1 + ganoProgressionRate, 2)    // 2027 (forecast: worse)
-                    ];
-                } else {
-                    // WITH TREATMENT: -20% improvement per year (fungicide + sanitation)
-                    const ganoImprovementRate = 0.20;
-                    ganodermaData = [
-                        baseAttackRate / Math.pow(1 - ganoImprovementRate, 2), // 2023 (backfilled)
-                        baseAttackRate / (1 - ganoImprovementRate),              // 2024 (backfilled)
-                        baseAttackRate,                                          // 2025 (actual)
-                        baseAttackRate * (1 - ganoImprovementRate),              // 2026 (forecast: better)
-                        baseAttackRate * Math.pow(1 - ganoImprovementRate, 2)    // 2027 (forecast: better)
-                    ];
-                }
+                // NO TREATMENT: +15% severity increase per year
+                const ganoProgressionRate = 0.15;
+                const ganodermaNoTreatment = [
+                    baseAttackRate / Math.pow(1 + ganoProgressionRate, 2),
+                    baseAttackRate / (1 + ganoProgressionRate),
+                    baseAttackRate,
+                    baseAttackRate * (1 + ganoProgressionRate),
+                    baseAttackRate * Math.pow(1 + ganoProgressionRate, 2)
+                ];
 
-                // LINE 3: SPH (Pohon/Ha)
+                // WITH TREATMENT: -20% improvement per year
+                const ganoImprovementRate = 0.20;
+                const ganodermaWithTreatment = [
+                    baseAttackRate / Math.pow(1 - ganoImprovementRate, 2),
+                    baseAttackRate / (1 - ganoImprovementRate),
+                    baseAttackRate,
+                    baseAttackRate * (1 - ganoImprovementRate),
+                    baseAttackRate * Math.pow(1 - ganoImprovementRate, 2)
+                ];
+
+                // Calculate BOTH scenarios for SPH
                 const baseSPH = trendData.current_metrics_2025.sph.avg_sph; // 116.91
 
-                let sphData;
-                if (currentScenario === 'no-treatment') {
-                    // NO TREATMENT: -1.5% annual mortality
-                    const sphDeclineRate = 0.015;
-                    sphData = [
-                        baseSPH / Math.pow(1 - sphDeclineRate, 2), // 2023 (backfilled)
-                        baseSPH / (1 - sphDeclineRate),             // 2024 (backfilled)
-                        baseSPH,                                    // 2025 (actual)
-                        baseSPH * (1 - sphDeclineRate),             // 2026 (forecast: decline)
-                        baseSPH * Math.pow(1 - sphDeclineRate, 2)   // 2027 (forecast: decline)
-                    ];
-                } else {
-                    // WITH TREATMENT: +1% annual improvement (replanting + fertilization)
-                    const sphGrowthRate = 0.01;
-                    sphData = [
-                        baseSPH / Math.pow(1 + sphGrowthRate, 2), // 2023 (backfilled)
-                        baseSPH / (1 + sphGrowthRate),             // 2024 (backfilled)
-                        baseSPH,                                   // 2025 (actual)
-                        baseSPH * (1 + sphGrowthRate),             // 2026 (forecast: growth)
-                        baseSPH * Math.pow(1 + sphGrowthRate, 2)   // 2027 (forecast: growth)
-                    ];
-                }
+                // NO TREATMENT: -1.5% annual mortality
+                const sphDeclineRate = 0.015;
+                const sphNoTreatment = [
+                    baseSPH / Math.pow(1 - sphDeclineRate, 2),
+                    baseSPH / (1 - sphDeclineRate),
+                    baseSPH,
+                    baseSPH * (1 - sphDeclineRate),
+                    baseSPH * Math.pow(1 - sphDeclineRate, 2)
+                ];
 
-                // Point styles for data source differentiation
+                // WITH TREATMENT: +1% annual growth
+                const sphGrowthRate = 0.01;
+                const sphWithTreatment = [
+                    baseSPH / Math.pow(1 + sphGrowthRate, 2),
+                    baseSPH / (1 + sphGrowthRate),
+                    baseSPH,
+                    baseSPH * (1 + sphGrowthRate),
+                    baseSPH * Math.pow(1 + sphGrowthRate, 2)
+                ];
+
+                // Point styles
                 const pointStyles = ['circle', 'circle', 'rect', 'circle', 'circle'];
-                const pointSizes = [5, 5, 8, 5, 5]; // 2025 larger
+                const pointSizes = [5, 5, 8, 5, 5];
 
                 trendChartInstance = new Chart(ctx, {
                     type: 'line',
                     data: {
                         labels: years,
                         datasets: [
-                            // Dataset 1: Financial Loss (Left Y-axis)
+                            // ===== NO TREATMENT LINES (Solid) =====
+                            // Dataset 1: Kerugian - No Treatment (Left Y-axis)
                             {
-                                label: 'Kerugian (Rp Million)',
+                                label: 'Kerugian (No Treatment)',
                                 data: lossData,
                                 borderColor: 'rgba(239, 68, 68, 1)', // Red
                                 backgroundColor: 'rgba(239, 68, 68, 0.1)',
                                 borderWidth: 3,
+                                borderDash: [], // Solid line
                                 pointRadius: pointSizes,
                                 pointStyle: pointStyles,
                                 pointBackgroundColor: 'rgba(239, 68, 68, 0.8)',
@@ -17868,15 +17865,17 @@
                                 pointHoverRadius: 8,
                                 fill: false,
                                 tension: 0.3,
-                                yAxisID: 'y-left'
+                                yAxisID: 'y-left',
+                                hidden: false // No Treatment visible by default
                             },
-                            // Dataset 2: Ganoderma Attack Rate (Right Y-axis)
+                            // Dataset 2: Ganoderma - No Treatment (Right Y-axis)
                             {
-                                label: 'Ganoderma Attack Rate (%)',
-                                data: ganodermaData,
+                                label: 'Ganoderma % (No Treatment)',
+                                data: ganodermaNoTreatment,
                                 borderColor: 'rgba(168, 85, 247, 1)', // Purple
                                 backgroundColor: 'rgba(168, 85, 247, 0.1)',
                                 borderWidth: 3,
+                                borderDash: [], // Solid line
                                 pointRadius: pointSizes,
                                 pointStyle: pointStyles,
                                 pointBackgroundColor: 'rgba(168, 85, 247, 0.8)',
@@ -17885,15 +17884,17 @@
                                 pointHoverRadius: 8,
                                 fill: false,
                                 tension: 0.3,
-                                yAxisID: 'y-right'
+                                yAxisID: 'y-right',
+                                hidden: false // No Treatment visible by default
                             },
-                            // Dataset 3: SPH (Left Y-axis)
+                            // Dataset 3: SPH - No Treatment (Left Y-axis)
                             {
-                                label: 'SPH (Pohon/Ha)',
-                                data: sphData,
+                                label: 'SPH (No Treatment)',
+                                data: sphNoTreatment,
                                 borderColor: 'rgba(34, 197, 94, 1)', // Green
                                 backgroundColor: 'rgba(34, 197, 94, 0.1)',
                                 borderWidth: 3,
+                                borderDash: [], // Solid line
                                 pointRadius: pointSizes,
                                 pointStyle: pointStyles,
                                 pointBackgroundColor: 'rgba(34, 197, 94, 0.8)',
@@ -17902,7 +17903,66 @@
                                 pointHoverRadius: 8,
                                 fill: false,
                                 tension: 0.3,
-                                yAxisID: 'y-left'
+                                yAxisID: 'y-left',
+                                hidden: false // No Treatment visible by default
+                            },
+                            // ===== WITH TREATMENT LINES (Dashed) =====
+                            // Dataset 4: Kerugian - With Treatment (Left Y-axis)
+                            {
+                                label: 'Kerugian (With Treatment)',
+                                data: lossData, // Same as no-treatment (not yet modeled)
+                                borderColor: 'rgba(239, 68, 68, 0.6)', // Red (lighter)
+                                backgroundColor: 'rgba(239, 68, 68, 0.05)',
+                                borderWidth: 3,
+                                borderDash: [10, 5], // Dashed line
+                                pointRadius: pointSizes,
+                                pointStyle: pointStyles,
+                                pointBackgroundColor: 'rgba(239, 68, 68, 0.5)',
+                                pointBorderColor: 'rgba(239, 68, 68, 0.8)',
+                                pointBorderWidth: 2,
+                                pointHoverRadius: 8,
+                                fill: false,
+                                tension: 0.3,
+                                yAxisID: 'y-left',
+                                hidden: true // With Treatment hidden by default
+                            },
+                            // Dataset 5: Ganoderma - With Treatment (Right Y-axis)
+                            {
+                                label: 'Ganoderma % (With Treatment)',
+                                data: ganodermaWithTreatment,
+                                borderColor: 'rgba(168, 85, 247, 0.6)', // Purple (lighter)
+                                backgroundColor: 'rgba(168, 85, 247, 0.05)',
+                                borderWidth: 3,
+                                borderDash: [10, 5], // Dashed line
+                                pointRadius: pointSizes,
+                                pointStyle: pointStyles,
+                                pointBackgroundColor: 'rgba(168, 85, 247, 0.5)',
+                                pointBorderColor: 'rgba(168, 85, 247, 0.8)',
+                                pointBorderWidth: 2,
+                                pointHoverRadius: 8,
+                                fill: false,
+                                tension: 0.3,
+                                yAxisID: 'y-right',
+                                hidden: true // With Treatment hidden by default
+                            },
+                            // Dataset 6: SPH - With Treatment (Left Y-axis)
+                            {
+                                label: 'SPH (With Treatment)',
+                                data: sphWithTreatment,
+                                borderColor: 'rgba(34, 197, 94, 0.6)', // Green (lighter)
+                                backgroundColor: 'rgba(34, 197, 94, 0.05)',
+                                borderWidth: 3,
+                                borderDash: [10, 5], // Dashed line
+                                pointRadius: pointSizes,
+                                pointStyle: pointStyles,
+                                pointBackgroundColor: 'rgba(34, 197, 94, 0.5)',
+                                pointBorderColor: 'rgba(34, 197, 94, 0.8)',
+                                pointBorderWidth: 2,
+                                pointHoverRadius: 8,
+                                fill: false,
+                                tension: 0.3,
+                                yAxisID: 'y-left',
+                                hidden: true // With Treatment hidden by default
                             }
                         ]
                     },
@@ -18077,30 +18137,39 @@
                 render5YearTrendChart(metric);
             }
 
-            // Switch scenario button handler
-            function switchTrendScenario(scenario) {
-                currentScenario = scenario;
+            // Toggle scenario visibility (checkbox handler)
+            function toggleScenarioVisibility(scenario, isVisible) {
+                if (!trendChartInstance) return;
 
-                // Update button styles
-                const noTreatmentBtn = document.getElementById('scenarioBtn_notreatment');
-                const treatmentBtn = document.getElementById('scenarioBtn_treatment');
+                // Dataset indices: 0-2 = No Treatment, 3-5 = With Treatment
+                const datasetIndices = scenario === 'no-treatment' ? [0, 1, 2] : [3, 4, 5];
+
+                // Toggle visibility
+                datasetIndices.forEach(index => {
+                    if (trendChartInstance.data.datasets[index]) {
+                        trendChartInstance.data.datasets[index].hidden = !isVisible;
+                    }
+                });
+
+                // Update chart
+                trendChartInstance.update();
+
+                // Update subtitle based on what's visible
                 const subtitle = document.getElementById('scenarioSubtitle');
+                const noTreatmentChecked = document.getElementById('toggleNoTreatment').checked;
+                const withTreatmentChecked = document.getElementById('toggleWithTreatment').checked;
 
-                if (scenario === 'no-treatment') {
-                    // Active: No Treatment
-                    noTreatmentBtn.className = 'px-4 py-2 rounded-lg text-xs font-bold bg-red-600 text-white border-2 border-red-400 transition-all hover:scale-105';
-                    treatmentBtn.className = 'px-4 py-2 rounded-lg text-xs font-bold bg-slate-700 text-slate-300 border border-slate-600 transition-all hover:scale-105';
+                if (noTreatmentChecked && withTreatmentChecked) {
+                    subtitle.textContent = 'Historical + Forecast (Comparing Both Scenarios)';
+                } else if (noTreatmentChecked) {
                     subtitle.textContent = 'Historical + Forecast (No Treatment Scenario)';
-                } else {
-                    // Active: With Treatment
-                    noTreatmentBtn.className = 'px-4 py-2 rounded-lg text-xs font-bold bg-slate-700 text-slate-300 border border-slate-600 transition-all hover:scale-105';
-                    treatmentBtn.className = 'px-4 py-2 rounded-lg text-xs font-bold bg-green-600 text-white border-2 border-green-400 transition-all hover:scale-105';
+                } else if (withTreatmentChecked) {
                     subtitle.textContent = 'Historical + Forecast (With Treatment Scenario)';
+                } else {
+                    subtitle.textContent = 'Historical + Forecast (Select a scenario above)';
                 }
 
-                // Re-render chart with new scenario
-                render5YearTrendChart(currentTrendMetric);
-                console.log(`[TREND] Switched to scenario: ${scenario}`);
+                console.log(`[TREND] Toggled ${scenario}: ${isVisible ? 'visible' : 'hidden'}`);
             }
 
             // ======================================
@@ -18624,16 +18693,22 @@
 
                             <!-- Scenario Toggle + Legend -->
                             <div class="flex items-center gap-6">
-                                <!-- Scenario Selector -->
-                                <div class="flex gap-2">
-                                    <button onclick="switchTrendScenario('no-treatment')" id="scenarioBtn_notreatment"
-                                        class="px-4 py-2 rounded-lg text-xs font-bold bg-red-600 text-white border-2 border-red-400 transition-all hover:scale-105">
-                                        ⚠️ No Treatment
-                                    </button>
-                                    <button onclick="switchTrendScenario('treatment')" id="scenarioBtn_treatment"
-                                        class="px-4 py-2 rounded-lg text-xs font-bold bg-slate-700 text-slate-300 border border-slate-600 transition-all hover:scale-105">
-                                        ✅ With Treatment
-                                    </button>
+                                <!--  Scenario Visibility Toggles -->
+                                <div class="flex gap-3">
+                                    <label
+                                        class="flex items-center gap-2 px-4 py-2 rounded-lg bg-red-900/30 border-2 border-red-500/50 cursor-pointer hover:bg-red-900/50 transition-all">
+                                        <input type="checkbox" id="toggleNoTreatment"
+                                            onchange="toggleScenarioVisibility('no-treatment', this.checked)" checked
+                                            class="w-4 h-4 accent-red-500 cursor-pointer">
+                                        <span class="text-xs font-bold text-red-300">⚠️ No Treatment (Solid)</span>
+                                    </label>
+                                    <label
+                                        class="flex items-center gap-2 px-4 py-2 rounded-lg bg-green-900/30 border-2 border-green-500/50 cursor-pointer hover:bg-green-900/50 transition-all">
+                                        <input type="checkbox" id="toggleWithTreatment"
+                                            onchange="toggleScenarioVisibility('with-treatment', this.checked)"
+                                            class="w-4 h-4 accent-green-500 cursor-pointer">
+                                        <span class="text-xs font-bold text-green-300">✅ With Treatment (Dashed)</span>
+                                    </label>
                                 </div>
 
                                 <!-- Multi-Line Legend Info -->
