@@ -17790,8 +17790,23 @@
 
 
 
-                // LINE 1: Financial Loss (Million Rp) - SAME for both scenarios
-                const lossData = years.map(y => timeline[y].loss_million);
+
+
+                // LINE 1: Financial Loss (Million Rp)
+                // No Treatment: Use actual timeline data
+                const lossNoTreatment = years.map(y => timeline[y].loss_million);
+
+                // With Treatment: Simulate 30% reduction impact (based on improved Ganoderma + SPH)
+                // This is a simplified model: treatment reduces disease → reduces loss
+                const treatmentReductionRate = 0.30; // 30% loss reduction from treatment
+                const lossWithTreatment = lossNoTreatment.map((loss, idx) => {
+                    // No reduction for historical data (2023-2024) and current (2025)
+                    if (idx <= 2) return loss;
+                    // Progressive reduction for forecast years (2026-2027)
+                    const yearsSinceTreatment = idx - 2; // 0 for 2025, 1 for 2026, 2 for 2027
+                    const reduction = Math.min(treatmentReductionRate * yearsSinceTreatment / 2, treatmentReductionRate);
+                    return loss * (1 - reduction);
+                });
 
                 // Calculate BOTH scenarios for Ganoderma
                 const baseAttackRate = trendData.current_metrics_2025.ganoderma.avg_attack_pct; // 6.28%
@@ -17852,7 +17867,7 @@
                             // Dataset 1: Kerugian - No Treatment (Left Y-axis)
                             {
                                 label: 'Kerugian (No Treatment)',
-                                data: lossData,
+                                data: lossNoTreatment,
                                 borderColor: 'rgba(239, 68, 68, 1)', // Red
                                 backgroundColor: 'rgba(239, 68, 68, 0.1)',
                                 borderWidth: 3,
@@ -17910,7 +17925,7 @@
                             // Dataset 4: Kerugian - With Treatment (Left Y-axis)
                             {
                                 label: 'Kerugian (With Treatment)',
-                                data: lossData, // Same as no-treatment (not yet modeled)
+                                data: lossWithTreatment,
                                 borderColor: 'rgba(239, 68, 68, 0.6)', // Red (lighter)
                                 backgroundColor: 'rgba(239, 68, 68, 0.05)',
                                 borderWidth: 3,
@@ -17990,130 +18005,196 @@
                                 }
                             },
                             tooltip: {
-                                callbacks: {
-                                    title: function (context) {
-                                        const year = context[0].label;
-                                        let type = '';
-                                        if (year === '2023' || year === '2024') type = ' (Estimate)';
-                                        else if (year === '2025') type = ' (Aktual)';
-                                        else type = ' (Forecast)';
-                                        return year + type;
-                                    },
-                                    label: function (context) {
-                                        const label = context.dataset.label || '';
-                                        const value = context.parsed.y;
+                                enabled: false, // Disable default tooltip
+                                external: function (context) {
+                                    // Custom HTML Tooltip for side-by-side comparison
+                                    let tooltipEl = document.getElementById('chartjs-tooltip');
 
-                                        if (label.includes('Kerugian')) {
-                                            return label + ': Rp ' + value.toFixed(2) + ' M';
-                                        } else if (label.includes('Attack')) {
-                                            return label + ': ' + value.toFixed(2) + '%';
-                                        } else if (label.includes('SPH')) {
-                                            return label + ': ' + value.toFixed(1) + ' pohon/Ha';
-                                        }
-                                        return label + ': ' + value;
-                                    },
-                                    afterLabel: function (context) {
-                                        const year = context.label;
-                                        if (year === '2026' || year === '2027') {
-                                            return 'Tanpa treatment';
-                                        }
-                                        return '';
+                                    // Create tooltip element on first render
+                                    if (!tooltipEl) {
+                                        tooltipEl = document.createElement('div');
+                                        tooltipEl.id = 'chartjs-tooltip';
+                                        tooltipEl.style.cssText = 'background: rgba(0, 0, 0, 0.95); color: white; border-radius: 8px; padding: 12px; position: absolute; pointer-events: none; transition: all 0.2s ease; border: 2px solid rgba(99, 102, 241, 0.6); box-shadow: 0 8px 24px rgba(0,0,0,0.4); z-index: 10000; font-size: 12px; min-width: 400px;';
+                                        document.body.appendChild(tooltipEl);
                                     }
-                                },
-                                backgroundColor: 'rgba(0, 0, 0, 0.95)',
-                                padding: 16,
-                                titleColor: '#fff',
-                                titleFont: {
-                                    size: 14,
-                                    weight: 'bold'
-                                },
-                                bodyColor: '#cbd5e1',
-                                bodyFont: {
+
+                                    // Hide if no tooltip
+                                    const tooltipModel = context.tooltip;
+                                    if (tooltipModel.opacity === 0) {
+                                        tooltipEl.style.opacity = 0;
+                                        return;
+                                    }
+
+                                    // Get year and data
+                                    const dataIndex = tooltipModel.dataPoints[0].dataIndex;
+                                    const year = tooltipModel.title[0];
+                                    let yearType = '';
+                                    if (year === '2023' || year === '2024') yearType = ' (Estimate)';
+                                    else if (year === '2025') yearType = ' (Aktual)';
+                                    else yearType = ' (Forecast)';
+
+                                    // Get datasets (all 6: 0-2 no-treatment, 3-5 with-treatment)
+                                    const datasets = context.chart.data.datasets;
+
+                                    // Check which scenarios are visible
+                                    const noTreatVisible = !datasets[0].hidden;
+                                    const withTreatVisible = !datasets[3].hidden;
+
+                                    // Build HTML table
+                                    let html = `<div style="font-weight: bold; font-size: 14px; margin-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 8px;">${year}${yearType}</div>`;
+
+                                    if (noTreatVisible && withTreatVisible) {
+                                        // BOTH scenarios visible - show comparison table
+                                        html += `<table style="width: 100%; border-collapse: collapse;">
+                                            <thead>
+                                                <tr style="border-bottom: 1px solid rgba(255,255,255,0.3);">
+                                                    <th style="text-align: left; padding: 6px 8px; font-size: 11px; color: #94a3b8;">Metric</th>
+                                                    <th style="text-align: right; padding: 6px 8px; font-size: 11px; color: #fca5a5;">⚠️ No Treatment</th>
+                                                    <th style="text-align: right; padding: 6px 8px; font-size: 11px; color: #86efac;">✅ Treatment</th>
+                                                    <th style="text-align: right; padding: 6px 8px; font-size: 11px; color: #fbbf24;">Δ Delta</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody style="font-size: 12px;">`;
+
+                                        // Kerugian row
+                                        const lossNo = datasets[0].data[dataIndex];
+                                        const lossWith = datasets[3].data[dataIndex];
+                                        const lossDelta = lossNo - lossWith;
+                                        const lossPct = ((lossDelta / lossNo) * 100);
+                                        html += `<tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+                                            <td style="padding: 6px 8px;"><span style="color: #ef4444;">●</span> Kerugian</td>
+                                            <td style="text-align: right; padding: 6px 8px; color: #fca5a5;">Rp ${lossNo.toFixed(2)}M</td>
+                                            <td style="text-align: right; padding: 6px 8px; color: #86efac;">Rp ${lossWith.toFixed(2)}M</td>
+                                            <td style="text-align: right; padding: 6px 8px; color: ${lossDelta > 0 ? '#86efac' : '#fca5a5'};">-Rp ${lossDelta.toFixed(2)}M (${lossPct.toFixed(1)}%)</td>
+                                        </tr>`;
+
+                                        // Ganoderma row
+                                        const ganoNo = datasets[1].data[dataIndex];
+                                        const ganoWith = datasets[4].data[dataIndex];
+                                        const ganoDelta = ganoNo - ganoWith;
+                                        html += `<tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+                                            <td style="padding: 6px 8px;"><span style="color: #a855f7;">●</span> Ganoderma</td>
+                                            <td style="text-align: right; padding: 6px 8px; color: #fca5a5;">${ganoNo.toFixed(2)}%</td>
+                                            <td style="text-align: right; padding: 6px 8px; color: #86efac;">${ganoWith.toFixed(2)}%</td>
+                                            <td style="text-align: right; padding: 6px 8px; color: ${ganoDelta > 0 ? '#86efac' : '#fca5a5'};">${ganoDelta > 0 ? '-' : '+'}${Math.abs(ganoDelta).toFixed(2)}%</td>
+                                        </tr>`;
+
+                                        // SPH row
+                                        const sphNo = datasets[2].data[dataIndex];
+                                        const sphWith = datasets[5].data[dataIndex];
+                                        const sphDelta = sphWith - sphNo;
+                                        html += `<tr>
+                                            <td style="padding: 6px 8px;"><span style="color: #22c55e;">●</span> SPH</td>
+                                            <td style="text-align: right; padding: 6px 8px; color: #fca5a5;">${sphNo.toFixed(1)} pohon/Ha</td>
+                                            <td style="text-align: right; padding: 6px 8px; color: #86efac;">${sphWith.toFixed(1)} pohon/Ha</td>
+                                            <td style="text-align: right; padding: 6px 8px; color: ${sphDelta > 0 ? '#86efac' : '#fca5a5'};">+${sphDelta.toFixed(1)} pohon/Ha</td>
+                                        </tr>`;
+
+                                        html += `</tbody></table>`;
+                                        html += `<div style="margin-top: 8px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.2); font-size: 10px; color: #94a3b8; text-align: center;">💡 Click point for detailed comparison table</div>`;
+                                    } else if (noTreatVisible) {
+                                        // Only No Treatment
+                                        html += `<div style="font-size: 12px; color: #fca5a5; margin-bottom: 6px;">⚠️ No Treatment Scenario</div>`;
+                                        html += `<div style="padding-left: 12px;">`;
+                                        html += `<div style="margin-bottom: 4px;"><span style="color: #ef4444;">●</span> Kerugian: <strong>Rp ${datasets[0].data[dataIndex].toFixed(2)} M</strong></div>`;
+                                        html += `<div style="margin-bottom: 4px;"><span style="color: #a855f7;">●</span> Ganoderma: <strong>${datasets[1].data[dataIndex].toFixed(2)}%</strong></div>`;
+                                        html += `<div><span style="color: #22c55e;">●</span> SPH: <strong>${datasets[2].data[dataIndex].toFixed(1)} pohon/Ha</strong></div>`;
+                                        html += `</div>`;
+                                    } else if (withTreatVisible) {
+                                        // Only With Treatment
+                                        html += `<div style="font-size: 12px; color: #86efac; margin-bottom: 6px;">✅ With Treatment Scenario</div>`;
+                                        html += `<div style="padding-left: 12px;">`;
+                                        html += `<div style="margin-bottom: 4px;"><span style="color: #ef4444;">●</span> Kerugian: <strong>Rp ${datasets[3].data[dataIndex].toFixed(2)} M</strong></div>`;
+                                        html += `<div style="margin-bottom: 4px;"><span style="color: #a855f7;">●</span> Ganoderma: <strong>${datasets[4].data[dataIndex].toFixed(2)}%</strong></div>`;
+                                        html += `<div><span style="color: #22c55e;">●</span> SPH: <strong>${datasets[5].data[dataIndex].toFixed(1)} pohon/Ha</strong></div>`;
+                                        html += `</div>`;
+                                    }
+
+                                    tooltipEl.innerHTML = html;
+
+                                    // Position tooltip
+                                    const position = context.chart.canvas.getBoundingClientRect();
+                                    tooltipEl.style.opacity = 1;
+                                    tooltipEl.style.left = position.left + window.pageXOffset + tooltipModel.caretX + 'px';
+                                    tooltipEl.style.top = position.top + window.pageYOffset + tooltipModel.caretY - tooltipEl.offsetHeight - 10 + 'px';
+                                }
+                            },
+                            boxHeight: 12,
+                            boxPadding: 6,
+                            usePointStyle: true,
+                            caretSize: 8,
+                            caretPadding: 12
+                        }
+                    },
+                    scales: {
+                        // LEFT Y-AXIS: Loss (Rp M) & SPH
+                        'y-left': {
+                            type: 'linear',
+                            position: 'left',
+                            beginAtZero: false,
+                            ticks: {
+                                color: '#94a3b8',
+                                font: {
+                                    size: 12
+                                }
+                            },
+                            grid: {
+                                color: 'rgba(148, 163, 184, 0.1)'
+                            },
+                            title: {
+                                display: true,
+                                text: 'Loss (Rp M) & SPH',
+                                color: '#94a3b8',
+                                font: {
                                     size: 13,
-                                    weight: 'normal'
-                                },
-                                bodySpacing: 6,
-                                borderColor: 'rgba(99, 102, 241, 0.6)',
-                                borderWidth: 2,
-                                cornerRadius: 8,
-                                displayColors: true,
-                                boxWidth: 12,
-                                boxHeight: 12,
-                                boxPadding: 6,
-                                usePointStyle: true,
-                                caretSize: 8,
-                                caretPadding: 12
+                                    weight: 'bold'
+                                }
                             }
                         },
-                        scales: {
-                            // LEFT Y-AXIS: Loss (Rp M) & SPH
-                            'y-left': {
-                                type: 'linear',
-                                position: 'left',
-                                beginAtZero: false,
-                                ticks: {
-                                    color: '#94a3b8',
-                                    font: {
-                                        size: 12
-                                    }
+                        // RIGHT Y-AXIS: Ganoderma Attack Rate (%)
+                        'y-right': {
+                            type: 'linear',
+                            position: 'right',
+                            beginAtZero: false,
+                            ticks: {
+                                color: '#a78bfa',
+                                font: {
+                                    size: 12
                                 },
-                                grid: {
-                                    color: 'rgba(148, 163, 184, 0.1)'
-                                },
-                                title: {
-                                    display: true,
-                                    text: 'Loss (Rp M) & SPH',
-                                    color: '#94a3b8',
-                                    font: {
-                                        size: 13,
-                                        weight: 'bold'
-                                    }
+                                callback: function (value) {
+                                    return value.toFixed(1) + '%';
                                 }
                             },
-                            // RIGHT Y-AXIS: Ganoderma Attack Rate (%)
-                            'y-right': {
-                                type: 'linear',
-                                position: 'right',
-                                beginAtZero: false,
-                                ticks: {
-                                    color: '#a78bfa',
-                                    font: {
-                                        size: 12
-                                    },
-                                    callback: function (value) {
-                                        return value.toFixed(1) + '%';
-                                    }
-                                },
-                                grid: {
-                                    display: false
-                                },
-                                title: {
-                                    display: true,
-                                    text: 'Attack Rate (%)',
-                                    color: '#a78bfa',
-                                    font: {
-                                        size: 13,
-                                        weight: 'bold'
-                                    }
+                            grid: {
+                                display: false
+                            },
+                            title: {
+                                display: true,
+                                text: 'Attack Rate (%)',
+                                color: '#a78bfa',
+                                font: {
+                                    size: 13,
+                                    weight: 'bold'
+                                }
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                color: '#94a3b8',
+                                font: {
+                                    size: 14,
+                                    weight: 'bold'
                                 }
                             },
-                            x: {
-                                ticks: {
-                                    color: '#94a3b8',
-                                    font: {
-                                        size: 14,
-                                        weight: 'bold'
-                                    }
-                                },
-                                grid: {
-                                    display: false
-                                }
+                            grid: {
+                                display: false
                             }
                         }
                     }
+                }
                 });
 
-                console.log('[TREND] Multi-line chart rendered (Loss, Ganoderma, SPH)');
+            console.log('[TREND] Multi-line chart rendered (Loss, Ganoderma, SPH)');
             }
 
             // Switch metric button handler
