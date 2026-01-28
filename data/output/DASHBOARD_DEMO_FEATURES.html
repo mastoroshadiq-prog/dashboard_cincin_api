@@ -19735,7 +19735,8 @@ If AME II achieved 130 SPH (minimum optimal):<br>
                     'trend5Year': {
                         title: '📊 5-Year Trend Analysis - Historical + Forecast (2023-2027)',
                         content: `<strong>Comprehensive 5-Year Analysis Overview</strong><br>
-Menggabungkan data historis (2023-2025) dengan proyeksi forecast (2026-2027) untuk decision support<br><br>
+Menggabungkan data historis aktual (2023-2025) dari Excel dengan proyeksi forecast (2026-2027) untuk decision support<br>
+<strong>Note:</strong> Loss & Production data tersedia untuk 2023-2025. SPH & Ganoderma 2023 may be reverse-modeled jika tidak ada survey data.<br><br>
 
 <strong>📅 Timeline Breakdown:</strong><br><br>
 
@@ -19745,11 +19746,12 @@ Menggabungkan data historis (2023-2025) dengan proyeksi forecast (2026-2027) unt
 • Ganoderma: ⚠️ Reverse-modeled dari 2025<br>
 • Status: BASELINE estimation (pre-treatment era)<br><br>
 
-<span style="color: #fbbf24">2024 (Historical - ESTIMATE):</span><br>
-• Loss: ⚠️ Estimasi from 2025 data<br>
-• SPH: ⚠️ Reverse-modeled (-1.5%/year decay)<br>
-• Ganoderma: ⚠️ Reverse-modeled (-15% natural progression)<br>
-• Status: Transition year estimation<br><br>
+<span style="color: #4ade80">2024 (Historical - ACTUAL):</span><br>
+• Loss: ✅ Realisasi Excel (gap yield from actual vs potensi)<br>
+• Produksi: ✅ Realisasi Excel (actual production data)<br>
+• Gap Yield: ✅ Calculated from Excel (Potensi - Realisasi 2024)<br>
+• Status: ACTUAL DATA available in data_gabungan.xlsx<br>
+• Note: SPH & Ganoderma may be estimated if not surveyed in 2024<br><br>
 
 <span style="color: #4ade80">2025 (Historical - ACTUAL):</span><br>
 • Loss: ✅ Realisasi Excel (GOLD STANDARD)<br>
