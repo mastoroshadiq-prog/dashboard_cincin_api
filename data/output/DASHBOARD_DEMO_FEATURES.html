@@ -18826,7 +18826,14 @@
                             <!-- Gap Yield -->
                             <div
                                 class="bg-gradient-to-br from-orange-900/30 to-orange-800/10 rounded-lg p-4 border border-orange-500/30">
-                                <div class="text-xs text-orange-200 mb-1 uppercase font-bold">Gap Yield</div>
+                                <div
+                                    class="text-xs text-orange-200 mb-1 uppercase font-bold flex items-center gap-2 justify-center">
+                                    Gap Yield
+                                    <span
+                                        class="cursor-pointer hover:scale-125 transition-transform opacity-70 hover:opacity-100"
+                                        onclick="showInfoModal('metricGapYield')"
+                                        title="Klik untuk penjelasan">ℹ️</span>
+                                </div>
                                 <div class="text-3xl font-black text-orange-400 mb-1" id="gapYieldTon">0</div>
                                 <div class="text-xs text-orange-300/70">Ton (Potensi - Realisasi)</div>
                             </div>
@@ -18834,7 +18841,14 @@
                             <!-- Financial Loss -->
                             <div
                                 class="bg-gradient-to-br from-red-900/30 to-red-800/10 rounded-lg p-4 border border-red-500/30">
-                                <div class="text-xs text-red-200 mb-1 uppercase font-bold">Kerugian</div>
+                                <div
+                                    class="text-xs text-red-200 mb-1 uppercase font-bold flex items-center gap-2 justify-center">
+                                    Kerugian
+                                    <span
+                                        class="cursor-pointer hover:scale-125 transition-transform opacity-70 hover:opacity-100"
+                                        onclick="showInfoModal('metricKerugian')"
+                                        title="Klik untuk penjelasan">ℹ️</span>
+                                </div>
                                 <div class="text-3xl font-black text-red-400 mb-1" id="financialLossMillions">Rp 0</div>
                                 <div class="text-xs text-red-300/70">Juta Rupiah</div>
                             </div>
@@ -18842,7 +18856,14 @@
                             <!-- Ganoderma Attack -->
                             <div
                                 class="bg-gradient-to-br from-purple-900/30 to-purple-800/10 rounded-lg p-4 border border-purple-500/30">
-                                <div class="text-xs text-purple-200 mb-1 uppercase font-bold">Ganoderma</div>
+                                <div
+                                    class="text-xs text-purple-200 mb-1 uppercase font-bold flex items-center gap-2 justify-center">
+                                    Ganoderma
+                                    <span
+                                        class="cursor-pointer hover:scale-125 transition-transform opacity-70 hover:opacity-100"
+                                        onclick="showInfoModal('metricGanoderma')"
+                                        title="Klik untuk penjelasan">ℹ️</span>
+                                </div>
                                 <div class="text-3xl font-black text-purple-400 mb-1" id="ganodermaRate">0%</div>
                                 <div class="text-xs text-purple-300/70">Avg Attack Rate</div>
                             </div>
@@ -18850,7 +18871,13 @@
                             <!-- SPH Status -->
                             <div
                                 class="bg-gradient-to-br from-blue-900/30 to-blue-800/10 rounded-lg p-4 border border-blue-500/30">
-                                <div class="text-xs text-blue-200 mb-1 uppercase font-bold">SPH</div>
+                                <div
+                                    class="text-xs text-blue-200 mb-1 uppercase font-bold flex items-center gap-2 justify-center">
+                                    SPH
+                                    <span
+                                        class="cursor-pointer hover:scale-125 transition-transform opacity-70 hover:opacity-100"
+                                        onclick="showInfoModal('metricSPH')" title="Klik untuk penjelasan">ℹ️</span>
+                                </div>
                                 <div class="text-3xl font-black text-blue-400 mb-1" id="avgSph">0</div>
                                 <div class="text-xs text-blue-300/70">pohon/Ha (Std: 130-143)</div>
                             </div>
@@ -18862,6 +18889,10 @@
                             <div class="bg-slate-800/50 rounded-lg p-4 border border-purple-500/20">
                                 <h4 class="text-lg font-bold text-purple-300 mb-3 flex items-center gap-2">
                                     <span>🦠</span> Ganoderma Breakdown
+                                    <span
+                                        class="cursor-pointer hover:scale-125 transition-transform opacity-70 hover:opacity-100"
+                                        onclick="showInfoModal('breakdownGanoderma')"
+                                        title="Klik untuk penjelasan">ℹ️</span>
                                 </h4>
                                 <div class="space-y-2">
                                     <div class="flex justify-between">
@@ -18887,6 +18918,9 @@
                             <div class="bg-slate-800/50 rounded-lg p-4 border border-blue-500/20">
                                 <h4 class="text-lg font-bold text-blue-300 mb-3 flex items-center gap-2">
                                     <span>📏</span> SPH Distribution
+                                    <span
+                                        class="cursor-pointer hover:scale-125 transition-transform opacity-70 hover:opacity-100"
+                                        onclick="showInfoModal('breakdownSPH')" title="Klik untuk penjelasan">ℹ️</span>
                                 </h4>
                                 <div class="space-y-2">
                                     <div class="flex justify-between">
@@ -19458,6 +19492,239 @@ Adjust slider untuk simulasi:<br>
 <strong>Impact pada Decision:</strong><br>
 Higher TBS price → Higher loss impact<br>
 → More justification untuk treatment!`
+                    },
+                    'metricGapYield': {
+                        title: '📊 Gap Yield - Selisih Produksi Potensial',
+                        content: `<strong>Definisi:</strong><br>
+Gap Yield = Potensi Produksi - Realisasi Produksi<br><br>
+
+<strong>Formula Perhitungan:</strong><br>
+1. <span style="color: #4ade80">Potensi Produksi:</span><br>
+   = SPH × Expected Yield per Tree<br>
+   • Industry standard: ~130 kg/pohon/tahun<br>
+   • Depends on: Umur pohon, varietas, kondisi tanah<br><br>
+
+2. <span style="color: #fb923c">Realisasi Produksi:</span><br>
+   = Actual production recorded (2025 data)<br>
+   • From Excel data_gabungan.xlsx<br><br>
+
+3. <span style="color: #ef4444">Gap (Ton):</span><br>
+   = (Potensi - Realisasi) / 1000<br><br>
+
+<strong>Contoh Kalkulasi AME II:</strong><br>
+• Total pohon: 98,621 pohon<br>
+• Potensi: 98,621 × 130 kg = 12,821 ton<br>
+• Realisasi: 14,505 ton (2025 actual)<br>
+• Gap: 12,821 - 14,505 = <span style="color: #4ade80">+1,684 ton</span> ✅<br>
+(Note: Negative gap = SURPLUS! Good performance)<br><br>
+
+<strong>Interpretasi:</strong><br>
+🟢 Negative gap (<0): <span style="color: #4ade80">SURPLUS</span> - Produksi melebihi potensi!<br>
+🟡 Small gap (0-500 ton): Normal variance<br>
+🔴 Large gap (>500 ton): <span style="color: #ef4444">Significant underperformance</span><br><br>
+
+<strong>Penyebab Gap Positif (Loss):</strong><br>
+• Ganoderma attack (yield reduction per tree)<br>
+• Low SPH (missing trees)<br>
+• Poor tree health (nutrient deficiency)<br>
+• Suboptimal harvesting practices`
+                    },
+                    'metricKerugian': {
+                        title: '💸 Kerugian - Financial Loss Impact',
+                        content: `<strong>Definisi:</strong><br>
+Nilai finansial kerugian produksi dalam Juta Rupiah<br><br>
+
+<strong>Formula:</strong><br>
+Kerugian (Rp M) = Gap Yield (Ton) × Harga TBS (Rp/kg) / 1,000,000<br><br>
+
+<strong>Komponen:</strong><br>
+1. <span style="color: #fb923c">Gap Yield:</span> Production shortfall (Ton)<br>
+2. <span style="color: #60a5fa">Harga TBS:</span> Market price per kg<br>
+   • Default: Rp 2,500/kg<br>
+   • Adjustable via slider (Rp 1,000 - 5,000)<br>
+   • Real market: varies with CPO price<br><br>
+
+<strong>Contoh AME II (2025):</strong><br>
+• Gap Yield: 1,253.36 Ton<br>
+• Harga TBS: Rp 2,500/kg<br>
+• Kerugian: 1,253.36 × 2,500,000 / 1,000,000<br>
+  = <span style="color: #ef4444">Rp 3,133.40 Juta</span> (≈ Rp 3.1 Miliar)<br><br>
+
+<strong>Breakdown by Root Cause:</strong><br>
+<span style="color: #a855f7">🦠 Ganoderma Loss:</span><br>
+• Stadium 1-2: 10-30% yield reduction<br>
+• Stadium 3-4: 30-50%+ yield reduction<br>
+• Estimated contribution: ~60-70% of total loss<br><br>
+
+<span style="color: #3b82f6">🌴 SPH Gap Loss:</span><br>
+• Missing trees vs optimal (130-143)<br>
+• Current AME II: 116.9 pohon/Ha (suboptimal)<br>
+• Estimated contribution: ~20-30% of total loss<br><br>
+
+<span style="color: #f97316">⚠️ Other Factors:</span><br>
+• Umur pohon, pemupukan, soil quality<br>
+• Estimated: ~10% of total loss<br><br>
+
+<strong>ROI Treatment:</strong><br>
+💰 Investment: Rp 10-15 juta/blok/year<br>
+💵 Potential savings: Rp 50-80 juta/blok/year<br>
+📈 ROI: <span style="color: #4ade80">5-8x return</span> dalam 1-2 tahun!<br><br>
+
+<strong>Decision Support:</strong><br>
+Gunakan angka ini untuk:<br>
+✅ Justify treatment budget ke management<br>
+✅ Prioritize high-loss blocks for intervention<br>
+✅ Calculate break-even for replanting decisions`
+                    },
+                    'metricGanoderma': {
+                        title: '🦠 Ganoderma - Attack Rate Metric',
+                        content: `<strong>Attack Rate = Persentase Pohon Terinfeksi</strong><br>
+Metric utama untuk assess Ganoderma severity di division<br><br>
+
+<strong>Formula:</strong><br>
+Attack Rate = (Total Pohon Terinfeksi / Total Pohon) × 100%<br><br>
+
+<strong>AME II Current Status:</strong><br>
+• Total pohon: 98,621 pohon<br>
+• Terinfeksi: 6,089 pohon (stadium 1-4)<br>
+• Attack Rate: <span style="color: #a855f7">6.28%</span><br>
+• Status: <span style="color: #fbbf24">Sedang</span> (5-15% range)<br><br>
+
+<strong>Klasifikasi Severity:</strong><br>
+🟢 <span style="color: #4ade80">Rendah:</span> < 5% attack rate<br>
+   → Monitoring + preventive treatment<br><br>
+🟡 <span style="color: #fbbf24">Sedang:</span> 5-15% attack rate<br>
+   → Active treatment required<br>
+   → AME II berada di sini (6.28%)<br><br>
+🔴 <span style="color: #ef4444">Tinggi:</span> > 15% attack rate<br>
+   → Aggressive intervention + replanting plan<br><br>
+
+<strong>Trend Projection (Without Treatment):</strong><br>
+📈 Natural progression: +15% increase/year<br>
+• Year 1: 6.28% → 7.22%<br>
+• Year 2: 7.22% → 8.30%<br>
+• Year 5: Critical threshold (>15%)<br><br>
+
+<strong>Treatment Impact:</strong><br>
+✅ With fungisida + sanitasi program:<br>
+• Attack rate reduction: -20%/year<br>
+• Cost: Rp 10-15 juta/blok<br>
+• ROI: Rp 1 → Rp 5.64 saved`
+                    },
+                    'metricSPH': {
+                        title: '🌴 SPH - Stand Per Hectare (Kepadatan Pohon)',
+                        content: `<strong>SPH = Jumlah Pohon per Hektar</strong><br>
+Metric density pohon yang directly impact produktivitas<br><br>
+
+<strong>Formula:</strong><br>
+Average SPH = Total Pohon / Total Area (Ha)<br><br>
+
+<strong>AME II Current Status:</strong><br>
+• Total pohon: 98,621 pohon<br>
+• Total area: 844 Ha<br>
+• Average SPH: <span style="color: #60a5fa">116.9 pohon/Ha</span><br>
+• Status: <span style="color: #fb923c">Sub-optimal</span> (di bawah standard)<br><br>
+
+<strong>Klasifikasi Industry:</strong><br>
+🔴 <span style="color: #ef4444">Rendah:</span> < 110 pohon/Ha<br>
+   → Significant yield loss<br>
+   → Urgent replanting needed<br><br>
+🟡 <span style="color: #fbbf24">Sub-optimal:</span> 110-130 pohon/Ha<br>
+   → Moderately productive<br>
+   → AME II berada di sini (116.9)<br>
+   → Infill planting recommended<br><br>
+🟢 <span style="color: #4ade80">Optimal:</span> 130-143 pohon/Ha<br>
+   → Maximum productivity<br>
+   → Standard industry best practice<br><br>
+
+<strong>Impact on Yield:</strong><br>
+Rule of thumb: -10 SPH = ~-5% yield potential<br><br>
+
+AME II gap to optimal:<br>
+• Current: 116.9 pohon/Ha<br>
+• Optimal: 130-143 range (avg 136.5)<br>
+• Gap: ~20 pohon/Ha<br>
+• Estimated yield loss: <span style="color: #ef4444">~10%</span><br><br>
+
+<strong>Solusi:</strong><br>
+✅ Infill planting program:<br>
+• Target: Close gap to 130 pohon/Ha minimum<br>
+• Timeline: 3-5 years for new trees to produce<br>
+• ROI: High, if combined with Ganoderma treatment`
+                    },
+                    'breakdownGanoderma': {
+                        title: '🦠 Ganoderma Breakdown - Detail Infeksi per Stadium',
+                        content: `<strong>Breakdown Ganoderma by Severity Level</strong><br>
+Distribusi pohon terinfeksi berdasarkan stadium penyakit<br><br>
+
+<span style="color: #fbbf24">Stadium 1 & 2 (Ringan):</span><br>
+• <strong>Symptoms:</strong><br>
+  - Stadium 1: Asymptomatic (internal infection only)<br>
+  - Stadium 2: Mild frond yellowing, slight wilting<br>
+• <strong>Yield Impact:</strong> 10-30% loss per tree<br>
+• <strong>Treatment:</strong> <span style="color: #4ade80">Highly treatable</span><br>
+• <strong>Prognosis:</strong> Good, can recover with treatment<br><br>
+
+<span style="color: #ef4444">Stadium 3 & 4 (Parah):</span><br>
+• <strong>Symptoms:</strong><br>
+  - Stadium 3: Severe frond yellowing, fruiting body visible<br>
+  - Stadium 4: Tree death imminent, non-productive<br>
+• <strong>Yield Impact:</strong> 30-50%+ loss per tree<br>
+• <strong>Treatment:</strong> <span style="color: #ef4444">Difficult, eradication often needed</span><br>
+• <strong>Prognosis:</strong> Poor, unlikely to recover<br><br>
+
+<strong>Current AME II Distribution:</strong><br>
+📊 Stadium 1-2: 4,813 pohon (79% of infected)<br>
+   → <span style="color: #4ade80">Good news!</span> Majority still treatable<br><br>
+📊 Stadium 3-4: 1,276 pohon (21% of infected)<br>
+   → <span style="color: #ef4444">Priority for eradication</span><br><br>
+
+<strong>Action Priority:</strong><br>
+🔴 Immediate (< 3 months):<br>
+• Eradicate all Stadium 4 trees<br>
+• Heavy treatment for Stadium 3<br><br>
+
+🟡 Short-term (3-6 months):<br>
+• Treat Stadium 1-2 with fungisida + sanitasi<br>
+• Monitor untreated trees for progression`
+                    },
+                    'breakdownSPH': {
+                        title: '📏 SPH Distribution - Sebaran Kepadatan Pohon',
+                        content: `<strong>SPH Distribution per Kategori</strong><br>
+Breakdown blok berdasarkan kepadatan pohon (trees/Ha)<br><br>
+
+🔴 <span style="color: #ef4444">< 130 (Below Standard):</span><br>
+• <strong>AME II:</strong> 30 blok (81% of blocks)<br>
+• <strong>Problem:</strong> Significantly underperforming<br>
+• <strong>Impact:</strong> ~10-15% yield loss vs optimal<br>
+• <strong>Root Causes:</strong><br>
+  - High Ganoderma mortality<br>
+  - Incomplete replanting<br>
+  - Old age mortality<br>
+• <strong>Action Required:</strong><br>
+  ✅ Immediate infill planting program<br>
+  ✅ Address Ganoderma to prevent further loss<br>
+  ✅ Priority: HIGH (majority of estate)<br><br>
+
+🟢 <span style="color: #4ade80">130-143 (Standard/Optimal):</span><br>
+• <strong>AME II:</strong> 7 blok (19% of blocks)<br>
+• <strong>Status:</strong> <span style="color: #4ade80">Good density</span>, meeting industry standard<br>
+• <strong>Impact:</strong> Optimal productivity potential<br>
+• <strong>Action Required:</strong><br>
+  ✅ Maintain current density<br>
+  ✅ Monitor for Ganoderma to prevent decline<br>
+  ✅ These blocks are BENCHMARKS for others<br><br>
+
+<strong>Average SPH Status:</strong><br>
+Division avg: <span style="color: #60a5fa">116.9 pohon/Ha</span><br>
+Industry optimal: 130-143 pohon/Ha<br>
+Gap to minimum: <span style="color: #ef4444">~13 pohon/Ha</span><br><br>
+
+<strong>Financial Impact of Gap:</strong><br>
+If AME II achieved 130 SPH (minimum optimal):<br>
+• Additional trees: 844 Ha × 13 = ~11,000 pohon<br>
+• Additional yield: 11,000 × 130 kg = 1,430 ton/year<br>
+• Financial gain: 1,430 × Rp 2,500,000 = <span style="color: #4ade80">Rp 3.58 Miliar/year</span>!`
                     }
                 }
 
