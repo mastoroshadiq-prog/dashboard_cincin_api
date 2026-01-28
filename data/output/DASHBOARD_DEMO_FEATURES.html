@@ -163,6 +163,10 @@
                             <div class="text-xs text-cyan-300 font-bold uppercase mb-1 flex items-center gap-2">
                                 Total Blocks
                                 <span
+                                    class="cursor-pointer hover:scale-125 transition-transform opacity-70 hover:opacity-100"
+                                    onclick="event.stopPropagation(); showInfoModal('totalBlocks')"
+                                    title="Klik untuk penjelasan">ℹ️</span>
+                                <span
                                     class="text-cyan-400 opacity-0 group-hover:opacity-100 transition-opacity">📊</span>
                             </div>
                             <div class="text-3xl font-black text-white" id="divMetric_totalBlocks">37</div>
@@ -172,12 +176,22 @@
                             </div>
                         </div>
                         <div class="bg-black/30 rounded-xl p-4 border border-blue-500/20">
-                            <div class="text-xs text-blue-300 font-bold uppercase mb-1">Total Area</div>
+                            <div class="text-xs text-blue-300 font-bold uppercase mb-1 flex items-center gap-2">
+                                Total Area
+                                <span
+                                    class="cursor-pointer hover:scale-125 transition-transform opacity-70 hover:opacity-100"
+                                    onclick="showInfoModal('totalArea')" title="Klik untuk penjelasan">ℹ️</span>
+                            </div>
                             <div class="text-3xl font-black text-white" id="divMetric_totalArea">844<span
                                     class="text-sm text-slate-400 ml-1">Ha</span></div>
                         </div>
                         <div class="bg-black/30 rounded-xl p-4 border border-yellow-500/20">
-                            <div class="text-xs text-yellow-300 font-bold uppercase mb-1">Avg Yield 2025</div>
+                            <div class="text-xs text-yellow-300 font-bold uppercase mb-1 flex items-center gap-2">
+                                Avg Yield 2025
+                                <span
+                                    class="cursor-pointer hover:scale-125 transition-transform opacity-70 hover:opacity-100"
+                                    onclick="showInfoModal('avgYield')" title="Klik untuk penjelasan">ℹ️</span>
+                            </div>
                             <div class="text-3xl font-black text-white" id="divMetric_avgYield">17.18<span
                                     class="text-sm text-slate-400 ml-1">T/Ha</span></div>
                         </div>
@@ -185,6 +199,10 @@
                             class="bg-black/30 rounded-xl p-4 border border-red-500/20 cursor-pointer hover:border-red-400 hover:scale-105 hover:shadow-lg hover:shadow-red-500/20 transition-all duration-200 group">
                             <div class="text-xs text-red-300 font-bold uppercase mb-1 flex items-center gap-2">
                                 Critical Blocks
+                                <span
+                                    class="cursor-pointer hover:scale-125 transition-transform opacity-70 hover:opacity-100"
+                                    onclick="event.stopPropagation(); showInfoModal('criticalBlocks')"
+                                    title="Klik untuk penjelasan">ℹ️</span>
                                 <span
                                     class="text-red-400 opacity-0 group-hover:opacity-100 transition-opacity">🔍</span>
                             </div>
@@ -368,14 +386,24 @@
                         <!-- HISTORICAL TRENDS CHART: 6 YEARS (2023-2028) -->
                         <div
                             class="mt-6 bg-gradient-to-r from-slate-900/60 to-indigo-900/60 rounded-2xl border-2 border-indigo-500/30 p-6">
-                            <div class="flex items-center gap-3 mb-4">
-                                <div class="text-3xl">📈</div>
-                                <h3 class="text-xl font-black text-white">Historical Trends & Projection:
-                                    <span class="text-cyan-400">Loss</span> +
-                                    <span class="text-orange-400">Attack Rate</span>
-                                    <span id="historicalChartDivision"
-                                        class="text-sm font-normal text-slate-400 ml-2">(Division: AME02)</span>
-                                </h3>
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="flex items-center gap-3">
+                                    <div class="text-3xl">📈</div>
+                                    <h3 class="text-xl font-black text-white">Historical Trends & Projection:
+                                        <span class="text-cyan-400">Loss</span> +
+                                        <span class="text-orange-400">Attack Rate</span>
+                                        <span id="historicalChartDivision"
+                                            class="text-sm font-normal text-slate-400 ml-2">(Division: AME02)</span>
+                                    </h3>
+                                </div>
+
+                                <!-- METHODOLOGY BUTTON (ALWAYS ACCESSIBLE) -->
+                                <button onclick="showDataMethodology()"
+                                    class="flex items-center gap-2 px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg border border-indigo-400 transition-all hover:scale-105 hover:shadow-lg hover:shadow-indigo-500/50"
+                                    title="Lihat metodologi data & estimasi lengkap">
+                                    <span class="text-lg">ℹ️</span>
+                                    <span class="text-sm font-bold">Metodologi</span>
+                                </button>
                             </div>
 
                             <div class="flex items-center gap-2 mb-4 flex-wrap">
@@ -19045,6 +19073,192 @@
                 </div>
             </div>
         </div>
+
+        <!-- INFO MODAL SYSTEM -->
+        <script>
+            function showInfoModal(metricId) {
+                const infoContent = {
+                    'totalBlocks': {
+                        title: '📊 Total Blocks - Jumlah Blok Produktif',
+                        content: `<strong>Pengertian:</strong><br>
+1 blok = unit lahan produktif dengan batas geografis jelas<br>
+Range: 15-30 Ha per blok (rata-rata ~23 Ha)<br><br>
+
+<strong>Kategorisasi Risiko:</strong><br>
+✅ <span style="color: #86efac">Rendah:</span> Gap < 15%, Ganoderma < 10%<br>
+⚠️ <span style="color: #fbbf24">Sedang:</span> Gap 15-25%, Ganoderma 10-20%<br>
+🔴 <span style="color: #ef4444">Tinggi:</span> Gap > 25%, Ganoderma > 20%<br><br>
+
+<strong>Baseline AME II:</strong><br>
+• Total: 37 blok (844 Ha)<br>
+• Critical: 6 blok (16.2%)<br>
+• Perlu monitoring ketat`
+                    },
+                    'totalArea': {
+                        title: '🌍 Total Area - Luas Lahan',
+                        content: `<strong>Pengertian:</strong><br>
+Total luas lahan produktif dalam hektar (Ha)<br><br>
+
+<strong>Komposisi:</strong><br>
+• Lahan produktif: Area dengan pohon produktif<br>
+• Exclude: Jalan, parit, bangunan, TBM<br><br>
+
+<strong>AME II Current:</strong><br>
+• Total Area: 844 Ha<br>
+• Average per blok: ~23 Ha<br>
+• Density: 116.91 pohon/Ha<br><br>
+
+<strong>Benchmark:</strong><br>
+Industry standard: 130-143 pohon/Ha optimal`
+                    },
+                    'avgYield': {
+                        title: '🌾 Average Yield - Produktivitas Rata-rata',
+                        content: `<strong>Formula:</strong><br>
+Total Produksi (Ton) / Total Area (Ha)<br><br>
+
+<strong>Benchmark Industry:</strong><br>
+🌟 <span style="color: #86efac">Excellent:</span> > 20 T/Ha<br>
+✅ <span style="color: #fbbf24">Good:</span> 17-20 T/Ha<br>
+⚠️ <span style="color: #fb923c">Fair:</span> 14-17 T/Ha<br>
+🔴 <span style="color: #ef4444">Poor:</span> < 14 T/Ha<br><br>
+
+<strong>AME II Current: 17.18 T/Ha</strong><br>
+Status: Fair category<br>
+Target: 20 T/Ha dengan treatment<br><br>
+
+<strong>Faktor Pengaruh:</strong><br>
+• SPH (130-143 optimal)<br>
+• Ganoderma severity<br>
+• Umur tanaman<br>
+• Manajemen pemupukan`
+                    },
+                    'criticalBlocks': {
+                        title: '🔴 Critical Blocks - Blok Prioritas Tinggi',
+                        content: `<strong>Kriteria Klasifikasi:</strong><br><br>
+
+<span style="color: #ef4444">Stadium 4 (Kritis):</span><br>
+• Ganoderma Attack Rate ≥ 30%, ATAU<br>
+• Production Gap ≥ 40%<br><br>
+
+<span style="color: #fb923c">Stadium 3 (Perhatian):</span><br>
+• Ganoderma Attack Rate ≥ 15%, ATAU<br>
+• Production Gap ≥ 20%<br><br>
+
+<strong>Current Status AME II:</strong><br>
+6 dari 37 blok (16.2%)<br><br>
+
+<strong>Urgensi Tindakan:</strong><br>
+🔴 Stadium 4: Immediate action (< 6 bulan)<br>
+⚠️ Stadium 3: Preventive action (< 12 bulan)<br><br>
+
+<strong>Dampak Finansial:</strong><br>
+Rata-rata loss: Rp 50-80 juta/blok/tahun`
+                    },
+                    'sph': {
+                        title: '🌴 SPH - Stand Per Hectare<br>(Kepadatan Pohon)',
+                        content: `<strong>Formula:</strong><br>
+Jumlah Pokok Produktif / Luas (Ha)<br><br>
+
+<strong>Klasifikasi:</strong><br>
+🔴 <span style="color: #ef4444">Rendah:</span> < 115 pohon/Ha<br>
+   → Perlu replanting urgent<br><br>
+⚠️ <span style="color: #fb923c">Di Bawah Optimal:</span> 115-129 pohon/Ha<br>
+   → Perlu monitoring ketat<br><br>
+✅ <span style="color: #86efac">Optimal:</span> 130-143 pohon/Ha<br>
+   → Produktivitas maksimal<br><br>
+⚠️ <span style="color: #fbbf24">Over-dense:</span> > 143 pohon/Ha<br>
+   → Risk kompetisi resources<br><br>
+
+<strong>AME II Current: 116.91 pohon/Ha</strong><br>
+Status: Di Bawah Optimal<br>
+Gap to Optimal: ~13 pohon/Ha<br><br>
+
+<strong>Impact:</strong> Tiap -10 SPH = ~-5% yield`
+                    },
+                    'ganoderma': {
+                        title: '🍄 Ganoderma - Penyakit Busuk Akar',
+                        content: `<strong>Pengertian:</strong><br>
+Penyakit jamur yang menginfeksi akar sawit, menyebabkan penurunan produksi hingga kematian pohon.<br><br>
+
+<strong>Stadium Infeksi:</strong><br>
+• Stadium 1: Asymptomatic (0-10% yield loss)<br>
+• Stadium 2: Mild symptoms (10-30% loss)<br>
+• Stadium 3: Severe symptoms (30-50% loss)<br>
+• Stadium 4: Non-productive (> 50% loss)<br><br>
+
+<strong>Formula Attack Rate:</strong><br>
+(Total Pohon Terinfeksi / Total Pohon) × 100%<br><br>
+
+<strong>Klasifikasi Severity:</strong><br>
+✅ <span style="color: #86efac">Rendah:</span> < 5% attack rate<br>
+⚠️ <span style="color: #fbbf24">Sedang:</span> 5-15% attack rate<br>
+🔴 <span style="color: #ef4444">Tinggi:</span> > 15% attack rate<br><br>
+
+<strong>AME II Current: 6.28%</strong><br>
+Status: Sedang<br>
+Trend: +15% progression/year tanpa treatment<br><br>
+
+<strong>Treatment Impact:</strong><br>
+Dengan fungisida + sanitasi:<br>
+• -20% attack rate/year<br>
+• ROI: Rp 1 invested → Rp 5.64 saved`
+                    },
+                    'dataMethodology': {
+                        title: '📊 Metodologi Data & Estimasi',
+                        content: `<strong>Data Source Summary:</strong><br><br>
+
+<strong style="color: #86efac">2025 (Aktual):</strong><br>
+✅ Loss: Realisasi Excel<br>
+✅ SPH: Realisasi Excel<br>
+✅ Ganoderma: Realisasi Excel<br>
+Status: GOLD STANDARD (baseline)<br><br>
+
+<strong style="color: #fbbf24">2023-2024 (Estimasi):</strong><br>
+⚠️ Loss 2023: Backfill dari 2024<br>
+⚠️ SPH: Reverse model dari 2025<br>
+⚠️ Ganoderma: Reverse model dari 2025<br><br>
+
+<strong style="color: #60a5fa">2026-2027 (Forecast):</strong><br>
+🔮 Model degradasi + treatment<br>
+• No Treatment: Gano +15%, SPH -1.5%<br>
+• With Treatment: Gano -20%, SPH +1%<br><br>
+
+<strong>Mengapa Estimasi?</strong><br>
+Excel data_gabungan.xlsx hanya punya:<br>
+• Loss: 2024-2025<br>
+• SPH: 2025 saja<br>
+• Ganoderma: 2025 saja<br><br>
+
+Klik "Metodologi Lengkap" untuk formula detail`
+                    }
+                };
+
+                const info = infoContent[metricId];
+                if (!info) {
+                    console.warn('No info content for:', metricId);
+                    return;
+                }
+
+                const modalHTML = `
+                <div id="infoModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4" 
+                     onclick="document.getElementById('infoModal').remove()" style="z-index: 99999;">
+                    <div class="bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl p-6 max-w-lg w-full border-2 border-indigo-500/50 shadow-2xl max-h-[90vh] overflow-y-auto custom-scrollbar" 
+                         onclick="event.stopPropagation()">
+                        <h3 class="text-xl font-bold text-white mb-4" style="line-height: 1.3;">${info.title}</h3>
+                        <div class="text-sm text-slate-300 leading-relaxed" style="line-height: 1.8;">
+                            ${info.content}
+                        </div>
+                        <button onclick="document.getElementById('infoModal').remove()" 
+                                class="mt-6 px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg w-full font-bold transition-all">
+                            Mengerti ✓
+                        </button>
+                    </div>
+                </div>
+            `;
+
+                document.body.insertAdjacentHTML('beforeend', modalHTML);
+            }
+        </script>
 
 </body>
 
