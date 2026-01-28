@@ -18700,7 +18700,13 @@
                         <div
                             class="bg-gradient-to-br from-red-900/40 to-red-800/20 rounded-xl p-4 border-2 border-red-500/40">
                             <div class="text-4xl mb-2">📉</div>
-                            <div class="text-red-200 text-xs font-bold uppercase mb-2">TREN PENURUNAN</div>
+                            <div
+                                class="text-red-200 text-xs font-bold uppercase mb-2 flex items-center gap-2 justify-center">
+                                TREN PENURUNAN
+                                <span
+                                    class="cursor-pointer hover:scale-125 transition-transform opacity-70 hover:opacity-100"
+                                    onclick="showInfoModal('trenPenurunan')" title="Klik untuk penjelasan">ℹ️</span>
+                            </div>
                             <div class="text-5xl font-black text-red-400 mb-2" id="categoryCount_declining">0</div>
                             <div class="text-xs text-red-300/70">Produksi turun > 5%</div>
                         </div>
@@ -18709,7 +18715,13 @@
                         <div
                             class="bg-gradient-to-br from-orange-900/40 to-orange-800/20 rounded-xl p-4 border-2 border-orange-500/40">
                             <div class="text-4xl mb-2">➡️</div>
-                            <div class="text-yellow-200 text-xs font-bold uppercase mb-2">TREN STABIL</div>
+                            <div
+                                class="text-yellow-200 text-xs font-bold uppercase mb-2 flex items-center gap-2 justify-center">
+                                TREN STABIL
+                                <span
+                                    class="cursor-pointer hover:scale-125 transition-transform opacity-70 hover:opacity-100"
+                                    onclick="showInfoModal('trenStabil')" title="Klik untuk penjelasan">ℹ️</span>
+                            </div>
                             <div class="text-5xl font-black text-orange-400 mb-2" id="categoryCount_stable">0</div>
                             <div class="text-xs text-orange-300/70">Perubahan -5% s/d +5%</div>
                         </div>
@@ -18718,7 +18730,13 @@
                         <div
                             class="bg-gradient-to-br from-yellow-900/40 to-yellow-800/20 rounded-xl p-4 border-2 border-yellow-500/40">
                             <div class="text-4xl mb-2">📈</div>
-                            <div class="text-green-200 text-xs font-bold uppercase mb-2">TREN KENAIKAN</div>
+                            <div
+                                class="text-green-200 text-xs font-bold uppercase mb-2 flex items-center gap-2 justify-center">
+                                TREN KENAIKAN
+                                <span
+                                    class="cursor-pointer hover:scale-125 transition-transform opacity-70 hover:opacity-100"
+                                    onclick="showInfoModal('trenKenaikan')" title="Klik untuk penjelasan">ℹ️</span>
+                            </div>
                             <div class="text-5xl font-black text-yellow-400 mb-2" id="categoryCount_increasing">0</div>
                             <div class="text-xs text-yellow-300/70">Produksi naik > 5%</div>
                         </div>
@@ -18727,7 +18745,13 @@
                         <div
                             class="bg-gradient-to-br from-slate-900/40 to-slate-800/20 rounded-xl p-4 border-2 border-slate-500/40">
                             <div class="text-4xl mb-2">❌</div>
-                            <div class="text-slate-200 text-xs font-bold uppercase mb-2">BLOK KOSONG</div>
+                            <div
+                                class="text-slate-200 text-xs font-bold uppercase mb-2 flex items-center gap-2 justify-center">
+                                BLOK KOSONG
+                                <span
+                                    class="cursor-pointer hover:scale-125 transition-transform opacity-70 hover:opacity-100"
+                                    onclick="showInfoModal('blokKosong')" title="Klik untuk penjelasan">ℹ️</span>
+                            </div>
                             <div class="text-5xl font-black text-slate-400 mb-2" id="categoryCount_empty">0</div>
                             <div class="text-xs text-slate-300/70">Tidak ada tanaman</div>
                         </div>
@@ -18736,7 +18760,13 @@
                         <div
                             class="bg-gradient-to-br from-emerald-900/40 to-emerald-800/20 rounded-xl p-4 border-2 border-emerald-500/40">
                             <div class="text-4xl mb-2">🌱</div>
-                            <div class="text-emerald-200 text-xs font-bold uppercase mb-2">BLOK TBM</div>
+                            <div
+                                class="text-emerald-200 text-xs font-bold uppercase mb-2 flex items-center gap-2 justify-center">
+                                BLOK TBM
+                                <span
+                                    class="cursor-pointer hover:scale-125 transition-transform opacity-70 hover:opacity-100"
+                                    onclick="showInfoModal('blokTBM')" title="Klik untuk penjelasan">ℹ️</span>
+                            </div>
                             <div class="text-5xl font-black text-emerald-400 mb-2" id="categoryCount_tbm">0</div>
                             <div class="text-xs text-emerald-300/70">Masa vegetatif</div>
                         </div>
@@ -18754,6 +18784,9 @@
                             <h3 class="text-2xl font-bold text-white flex items-center gap-3">
                                 <span class="text-3xl">💰</span>
                                 ANALISA KERUGIAN PRODUKSI - AME II
+                                <span
+                                    class="cursor-pointer hover:scale-125 transition-transform opacity-70 hover:opacity-100"
+                                    onclick="showInfoModal('lossAnalysis')" title="Klik untuk penjelasan">ℹ️</span>
                             </h3>
                             <div class="px-4 py-2 bg-red-900/40 rounded-lg border border-red-500/40">
                                 <div class="text-xs text-red-200">Total Loss (2025)</div>
@@ -18764,8 +18797,12 @@
                         <!-- TBS Price Slider -->
                         <div class="bg-slate-800/50 rounded-lg p-6 mb-6 border border-cyan-500/20">
                             <div class="flex justify-between items-center mb-4">
-                                <label class="text-sm font-bold text-cyan-300 uppercase">Harga TBS (Rupiah per
-                                    KG)</label>
+                                <label class="text-sm font-bold text-cyan-300 uppercase flex items-center gap-2">
+                                    HARGA TBS (Rupiah per KG)
+                                    <span
+                                        class="cursor-pointer hover:scale-125 transition-transform opacity-70 hover:opacity-100"
+                                        onclick="showInfoModal('hargaTBS')" title="Klik untuk penjelasan">ℹ️</span>
+                                </label>
                                 <div class="flex items-center gap-3">
                                     <span class="text-3xl font-black text-cyan-400" id="tbsPriceValue">Rp 2,500</span>
                                     <button onclick="resetTbsPrice()"
@@ -19230,8 +19267,199 @@ Excel data_gabungan.xlsx hanya punya:<br>
 • Ganoderma: 2025 saja<br><br>
 
 Klik "Metodologi Lengkap" untuk formula detail`
+                    },
+                    'trenPenurunan': {
+                        title: '📉 Tren Penurunan - Declining Production',
+                        content: `<strong>Kriteria:</strong><br>
+Produksi turun > 5%<br><br>
+
+<strong>Formula:</strong><br>
+((Produksi 2025 - Produksi 2024) / Produksi 2024) × 100%<br><br>
+
+<strong>Contoh:</strong><br>
+Blok 2024: 100 ton, 2025: 92 ton<br>
+Perubahan: (92-100)/100 = -8%<br>
+Status: <span style="color: #ef4444">TURUN</span> (karena < -5%)<br><br>
+
+<strong>Penyebab Umum:</strong><br>
+• Ganoderma attack meningkat<br>
+• SPH menurun (pohon mati)<br>
+• Pemupukan tidak optimal<br>
+• Umur pohon melewati peak production<br><br>
+
+<strong>Tindakan Dibutuhkan:</strong><br>
+🔴 Prioritas tinggi untuk investigasi<br>
+⚠️ Analisis penyebab spesifik per blok<br>
+📊 Rencana treatment disesuaikan`
+                    },
+                    'trenStabil': {
+                        title: '➡️ Tren Stabil - Stable Production',
+                        content: `<strong>Kriteria:</strong><br>
+Perubahan -5% s/d +5%<br><br>
+
+<strong>Formula:</strong><br>
+-5% ≤ ((Prod_2025 - Prod_2024) / Prod_2024) × 100% ≤ +5%<br><br>
+
+<strong>Interpretasi:</strong><br>
+✅ Produksi relatif konsisten<br>
+✅ Fluktuasi dalam batas wajar<br>
+✅ Tidak ada degradasi signifikan<br><br>
+
+<strong>Maintenance Required:</strong><br>
+• Monitor berkala untuk early warning<br>
+• Pemupukan rutin tetap optimal<br>
+• Treatment preventif Ganoderma<br>
+• Replanting program untuk pohon tua<br><br>
+
+<strong>Target:</strong><br>
+Upgrade ke <span style="color: #4ade80">KENAIKAN</span> dengan:<br>
+• Intensifikasi pemupukan<br>
+• Treatment Ganoderma lebih agresif<br>
+• Optimasi manajemen air`
+                    },
+                    'trenKenaikan': {
+                        title: '📈 Tren Kenaikan - Increasing Production',
+                        content: `<strong>Kriteria:</strong><br>
+Produksi naik > 5%<br><br>
+
+<strong>Formula:</strong><br>
+((Produksi 2025 - Produksi 2024) / Produksi 2024) × 100% > 5%<br><br>
+
+<strong>Contoh:</strong><br>
+Blok 2024: 100 ton, 2025: 108 ton<br>
+Perubahan: (108-100)/100 = +8%<br>
+Status: <span style="color: #4ade80">NAIK</span> ✅<br><br>
+
+<strong>Faktor Sukses:</strong><br>
+🌟 Treatment Ganoderma efektif<br>
+🌟 Replanting pohon muda produktif<br>
+🌟 Pemupukan optimal<br>
+🌟 Manajemen SPH baik<br><br>
+
+<strong>Best Practices:</strong><br>
+Dokumentasi strategi blok ini sebagai:<br>
+• Case study untuk blok lain<br>
+• Template treatment plan<br>
+• Benchmark performance division`
+                    },
+                    'blokKosong': {
+                        title: '❌ Blok Kosong - Empty Block',
+                        content: `<strong>Definisi:</strong><br>
+Blok tanpa data produksi tahun berjalan<br><br>
+
+<strong>Kemungkinan Penyebab:</strong><br>
+• Area tidak ditanam (clearing, reserve)<br>
+• Infrastruktur (jalan, kantor, gudang)<br>
+• Area konservasi / buffer zone<br>
+• Blok rusak total (perlu replanting complete)<br><br>
+
+<strong>Status Lahan:</strong><br>
+⚠️ Tidak menghasilkan revenue 2025<br>
+⚠️ Potensi loss opportunity<br><br>
+
+<strong>Action Required:</strong><br>
+1. Survey kondisi lapangan<br>
+2. Cek rencana tata guna lahan<br>
+3. Evaluasi feasibility replanting<br>
+4. Timeline rencana penanaman<br><br>
+
+<strong>Catatan:</strong><br>
+Jika blok ini seharusnya produktif,<br>
+prioritas TINGGI untuk investigasi!`
+                    },
+                    'blokTBM': {
+                        title: '🌱 Blok TBM - Tanaman Belum Menghasilkan',
+                        content: `<strong>TBM = Tanaman Belum Menghasilkan</strong><br>
+Kelapa sawit biasanya mulai produksi tahun ke-3 atau ke-4<br><br>
+
+<strong>Fase TBM (0-3 tahun):</strong><br>
+Tahun 1-2: Vegetative growth phase<br>
+• Fokus: Pertumbuhan daun, batang, akar<br>
+• Produksi: 0 ton<br>
+• Biaya: Pemupukan, maintenance<br><br>
+
+Tahun 3-4: Early production phase<br>
+• Mulai berbunga dan berbuah<br>
+• Produksi: <25% peak capacity<br>
+• Status transition TBM → TM<br><br>
+
+<strong>Investment Period:</strong><br>
+⚠️ Pure cost, no revenue yet<br>
+🌟 Critical for future productivity<br><br>
+
+<strong>Key Care Activities:</strong><br>
+• Pemupukan intensif (NPK balanced)<br>
+• Pengendalian gulma<br>
+• Pest & disease prevention<br>
+• Pruning untuk bentuk tajuk optimal<br><br>
+
+<strong>Timeline Produktif:</strong><br>
+<span style="color: #4ade80">Tahun 5+:</span> Peak production (15-25 T/Ha/year)`
+                    },
+                    'lossAnalysis': {
+                        title: '💰 Analisa Kerugian Produksi',
+                        content: `<strong>Metodologi Perhitungan:</strong><br><br>
+
+<strong>1. Gap Yield (Ton):</strong><br>
+Potensi - Realisasi = Production Gap<br>
+• Potensi = SPH × Expected yield per tree<br>
+• Realisasi = Actual production 2025<br><br>
+
+<strong>2. Financial Loss (Rp):</strong><br>
+Gap Yield × Harga TBS = Kerugian<br>
+• Default TBS: Rp 2,500/kg<br>
+• Adjustable via slider<br><br>
+
+<strong>3. Root Cause Analysis:</strong><br>
+Loss diatribusikan ke:<br>
+• <span style="color: #a855f7">Ganoderma</span>: Yield loss per stadium<br>
+• <span style="color: #3b82f6">SPH Gap</span>: Missing trees vs optimal<br>
+• <span style="color: #f97316">Other factors</span>: Age, soil, etc.<br><br>
+
+<strong>Value Proposition:</strong><br>
+Treatment cost vs Loss prevention:<br>
+• Treatment: ~Rp 10-15 juta/blok/year<br>
+• Potential loss: Rp 50-80 juta/blok/year<br>
+• ROI: Up to 5-8x return on investment<br><br>
+
+<strong>Decision Support:</strong><br>
+Gunakan data ini untuk:<br>
+✅ Prioritas treatment allocation<br>
+✅ Budget justification<br>
+✅ Performance benchmarking`
+                    },
+                    'hargaTBS': {
+                        title: '💵 Harga TBS - Fresh Fruit Bunch Price',
+                        content: `<strong>TBS = Tandan Buah Segar</strong><br>
+Harga per kilogram untuk menghitung kerugian finansial<br><br>
+
+<strong>Range Slider:</strong><br>
+Rp 1,000 - Rp 5,000 per kg<br>
+Default: Rp 2,500/kg<br><br>
+
+<strong>Real Market Price Factors:</strong><br>
+• CPO (Crude Palm Oil) international price<br>
+• Musim panen (peak season vs low season)<br>
+• Kualitas TBS (oil extraction rate)<br>
+• Lokasi kebun (transport cost)<br>
+• Kontrak buyer (spot vs long-term)<br><br>
+
+<strong>Typical Ranges (2024-2025):</strong><br>
+<span style="color: #ef4444">Low:</span> Rp 1,200-1,800 (market down)<br>
+<span style="color: #fbbf24">Mid:</span> Rp 2,000-2,800 (normal)<br>
+<span style="color: #4ade80">High:</span> Rp 3,500-5,000+ (peak market)<br><br>
+
+<strong>Sensitivity Analysis:</strong><br>
+Adjust slider untuk simulasi:<br>
+• Best case scenario (high price)<br>
+• Worst case scenario (low price)<br>
+• Current market condition<br><br>
+
+<strong>Impact pada Decision:</strong><br>
+Higher TBS price → Higher loss impact<br>
+→ More justification untuk treatment!`
                     }
-                };
+                }
 
                 const info = infoContent[metricId];
                 if (!info) {
