@@ -18991,7 +18991,13 @@
                             <div class="flex items-center gap-3">
                                 <span class="text-3xl">📊</span>
                                 <div>
-                                    <h3 class="text-xl font-bold text-white">5-Year Trend Analysis</h3>
+                                    <h3 class="text-xl font-bold text-white flex items-center gap-2">
+                                        5-Year Trend Analysis
+                                        <span
+                                            class="cursor-pointer hover:scale-125 transition-transform opacity-70 hover:opacity-100"
+                                            onclick="showInfoModal('trend5Year')"
+                                            title="Klik untuk penjelasan">ℹ️</span>
+                                    </h3>
                                     <p class="text-sm text-slate-400" id="scenarioSubtitle">Historical + Forecast (No
                                         Treatment Scenario)</p>
                                 </div>
@@ -19725,6 +19731,126 @@ If AME II achieved 130 SPH (minimum optimal):<br>
 • Additional trees: 844 Ha × 13 = ~11,000 pohon<br>
 • Additional yield: 11,000 × 130 kg = 1,430 ton/year<br>
 • Financial gain: 1,430 × Rp 2,500,000 = <span style="color: #4ade80">Rp 3.58 Miliar/year</span>!`
+                    },
+                    'trend5Year': {
+                        title: '📊 5-Year Trend Analysis - Historical + Forecast (2023-2027)',
+                        content: `<strong>Comprehensive 5-Year Analysis Overview</strong><br>
+Menggabungkan data historis (2023-2025) dengan proyeksi forecast (2026-2027) untuk decision support<br><br>
+
+<strong>📅 Timeline Breakdown:</strong><br><br>
+
+<span style="color: #fbbf24">2023 (Historical - ESTIMATE):</span><br>
+• Loss: ✅ Realisasi Excel (backfilled)<br>
+• SPH: ⚠️ Reverse-modeled dari 2025<br>
+• Ganoderma: ⚠️ Reverse-modeled dari 2025<br>
+• Status: BASELINE estimation (pre-treatment era)<br><br>
+
+<span style="color: #fbbf24">2024 (Historical - ESTIMATE):</span><br>
+• Loss: ⚠️ Estimasi from 2025 data<br>
+• SPH: ⚠️ Reverse-modeled (-1.5%/year decay)<br>
+• Ganoderma: ⚠️ Reverse-modeled (-15% natural progression)<br>
+• Status: Transition year estimation<br><br>
+
+<span style="color: #4ade80">2025 (Historical - ACTUAL):</span><br>
+• Loss: ✅ Realisasi Excel (GOLD STANDARD)<br>
+• SPH: ✅ Realisasi Excel (actual count)<br>
+• Ganoderma: ✅ Realisasi Excel (field survey)<br>
+• Status: <span style="color: #4ade80">BASELINE TRUTH</span> - All projections start here!<br><br>
+
+<span style="color: #60a5fa">2026-2027 (Forecast - PROJECTION):</span><br>
+• Loss: 🔮 Model-driven projection<br>
+• SPH: 🔮 Degradation model applied<br>
+• Ganoderma: 🔮 Progression model applied<br>
+• Status: DECISION SCENARIOS (with/without treatment)<br><br>
+
+<strong>🎯 Dual Scenario System:</strong><br><br>
+
+<span style="color: #ef4444">⚠️ No Treatment (RED - Solid Lines):</span><br>
+• <strong>Assumption:</strong> Business as usual, no intervention<br>
+• <strong>Ganoderma:</strong> +15% attack rate increase/year<br>
+• <strong>SPH:</strong> -1.5% decline/year (mortality + aging)<br>
+• <strong>Yield Impact:</strong> Compounding -4.5% degradation/year<br>
+• <strong>Financial:</strong> Kerugian meningkat (Rp 4.2M → Rp 5.3M by 2027)<br>
+• <strong>Purpose:</strong> Show worst-case if no action taken<br><br>
+
+<span style="color: #4ade80">✅ With Treatment (GREEN - Dashed Lines):</span><br>
+• <strong>Assumption:</strong> Active Ganoderma treatment + infill planting<br>
+• <strong>Ganoderma:</strong> -20% attack rate reduction/year (fungisida + sanitasi)<br>
+• <strong>SPH:</strong> +1% improvement/year (replanting + management)<br>
+• <strong>Yield Impact:</strong> Recovery trajectory (+3-5% improvement/year)<br>
+• <strong>Financial:</strong> Kerugian menurun (savings realized)<br>
+• <strong>Purpose:</strong> Demonstrate treatment ROI potential<br><br>
+
+<strong>📈 Multi-Metric Tracking:</strong><br>
+Chart menampilkan 3 metrics secara bersamaan:<br><br>
+
+1. <span style="color: #ef4444">🔴 Kerugian (Juta Rp):</span><br>
+   • Y-axis primary (left): Financial loss scale<br>
+   • Most critical metric for management decisions<br>
+   • Direct ROI calculation basis<br><br>
+
+2. <span style="color: #a855f7">🟣 Ganoderma (% Attack Rate):</span><br>
+   • Y-axis secondary (right): Percentage scale<br>
+   • Leading indicator of future losses<br>
+   • Treatment efficacy monitor<br><br>
+
+3. <span style="color: #4ade80">🟢 SPH (pohon/Ha):</span><br>
+   • Y-axis secondary (right): Density scale<br>
+   • Infrastructure health indicator<br>
+   • Replanting program success metric<br><br>
+
+<strong>🔬 Degradation Model Explained:</strong><br><br>
+
+<strong>Formula (No Treatment):</strong><br>
+Total Degradation = Ganoderma Impact + SPH Impact + Aging<br><br>
+
+• Ganoderma contribution: -2.5%/year<br>
+  (from +15% attack rate × yield loss correlation)<br>
+• SPH contribution: -1.5%/year<br>
+  (from tree mortality compounding)<br>
+• Natural aging: -0.5%/year<br>
+  (oil palm approaching peak production decline)<br>
+<strong>= -4.5% total degradation/year</strong><br><br>
+
+<strong>Key Insights Display:</strong><br>
+3 metric cards below chart show:<br><br>
+
+1. <span style="color: #4ade80">Historical Trend (2023-2025):</span><br>
+   Actual performance over past 3 years<br>
+   • AME II: +5.5% improvement (good baseline)<br><br>
+
+2. <span style="color: #ef4444">Forecast Trend (2025-2027):</span><br>
+   Projected change if no treatment<br>
+   • AME II: -8.8% decline (critical warning)<br><br>
+
+3. <span style="color: #a855f7">Degradation Rate:</span><br>
+   Annual compound decline rate<br>
+   • -4.5%/year without intervention<br><br>
+
+<strong>💡 How to Use This Chart:</strong><br><br>
+
+✅ <strong>Compare Scenarios:</strong><br>
+Toggle checkboxes to show/hide treatment scenarios<br>
+Visually compare trajectories side-by-side<br><br>
+
+✅ <strong>Identify Critical Years:</strong><br>
+2026-2027 show divergence between scenarios<br>
+Earlier intervention = better outcomes<br><br>
+
+✅ <strong>Justify Budget:</strong><br>
+Gap between scenarios = treatment value<br>
+Green - Red = ROI potential<br><br>
+
+✅ <strong>Monitor Leading Indicators:</strong><br>
+Ganoderma & SPH predict future kerugian<br>
+Watch for early warning signs!<br><br>
+
+<strong>⚠️ Important Caveats:</strong><br>
+• 2023-2024: Estimates with ±10-15% uncertainty<br>
+• 2025: Actual data (reliable baseline)<br>
+• 2026-2027: Forecasts assume linear models<br>
+• Treatment impact may vary by block conditions<br>
+• External factors (weather, CPO price) not modeled`
                     }
                 }
 
