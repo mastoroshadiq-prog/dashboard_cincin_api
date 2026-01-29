@@ -14666,7 +14666,7 @@
             function renderDegradationModelChart(metrics) {
                 const canvas = document.getElementById('degradationModelChart');
                 if (!canvas) {
-                    console.error('[CHART] Canvas degradationModelChart not found');
+                    // Canvas removed in v9.1 (Treatment Comparison section) - silently skip
                     return;
                 }
 
@@ -14799,7 +14799,7 @@
             function renderHistoricalTrendsChart(divisionCode, metrics) {
                 const canvas = document.getElementById('historicalTrendsChart');
                 if (!canvas) {
-                    console.error('[HISTORICAL CHART] Canvas not found');
+                    // Canvas removed in v9.0.1 (Historical Trends section) - silently skip
                     return;
                 }
 
