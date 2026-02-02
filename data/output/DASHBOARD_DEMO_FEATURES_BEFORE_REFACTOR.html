@@ -19961,14 +19961,15 @@ Watch for early warning signs!<br><br>
 
                     let yield2023, yield2024;
 
-                    if (gap < -5) {
-                        // Declining trend: 2023 was higher, declined to 2025
-                        yield2023 = yield2025 * 1.15;  // 15% higher in 2023
-                        yield2024 = yield2025 * 1.07;  // 7% higher in 2024
-                    } else if (gap > 5) {
-                        // Increasing trend: 2023 was lower, improved to 2025
-                        yield2023 = yield2025 * 0.85;  // 15% lower in 2023
-                        yield2024 = yield2025 * 0.93;  // 7% lower in 2024
+                    if (gap > 5) {
+                        // DECLINING: Positive gap > 5% = underperforming, downward trend
+                        // E003A: gap=31.4%, D010A: gap=12.2% should both be declining
+                        yield2023 = yield2025 * 1.35;  // 35% higher in 2023
+                        yield2024 = yield2025 * 1.17;  // 17% higher in 2024
+                    } else if (gap < -5) {
+                        // INCREASING: Negative gap < -5% = overperforming, upward trend
+                        yield2023 = yield2025 * 0.75;  // 25% lower in 2023
+                        yield2024 = yield2025 * 0.88;  // 12% lower in 2024
                     } else {
                         // Stable trend: minor fluctuations
                         yield2023 = yield2025 * 0.97;  // Slightly lower
